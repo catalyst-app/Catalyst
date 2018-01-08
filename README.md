@@ -1,6 +1,7 @@
 # Redacted - commissions, simplified
 
-## https://<redacted>/
+# WE ARE GOING THROUGH A REBRANDING
+# INFORMATION AND CODE MAY/WILL BE BROKEN
 
 # Table of Contents
 
