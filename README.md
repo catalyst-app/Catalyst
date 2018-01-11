@@ -275,6 +275,22 @@ Here are some, however I'm open to anything you want to do!
 - [ ] Attributes
 - [ ] Commission type name
 
+**Text things**
+
+- [ ] About Page
+  - [ ] Staff
+  - [ ] Social medias
+  - [ ] story?
+- [ ] ToS
+- [ ] Help center?
+  - [ ] Support desk
+  - [ ] reporting
+  - [ ] DMCA
+  - [ ] Getting started
+  - [ ] Glossary/vocabulary
+- [ ] FAQ
+  - [ ] What does it cost?
+
 **Universal**  
 
 - [ ] Messages
