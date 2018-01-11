@@ -279,17 +279,26 @@ Here are some, however I'm open to anything you want to do!
 
 - [ ] About Page
   - [ ] Staff
+  - [ ] Official accounts of staff
   - [ ] Social medias
   - [ ] story?
+  - [ ] helpers/testers
 - [ ] ToS
 - [ ] Help center?
   - [ ] Support desk
   - [ ] reporting
   - [ ] DMCA
+  - [ ] General rules + code of conduct
+  - [ ] Explaination of all features
+  - [ ] Verification of artists
   - [ ] Getting started
   - [ ] Glossary/vocabulary
 - [ ] FAQ
   - [ ] What does it cost?
+  - [ ] What sets us apart?
+  - [ ] How can we be free?
+  - [ ] Encryption/security
+  - [ ] Paying artists
 
 **Universal**  
 
@@ -462,8 +471,6 @@ Discord
   - Beta tester
 - **@Tony [Tony’s Turkey Time Tony]#2115**
   - Beta tester
-- **@Cleric (insert name here)**
-  - Server assistant
 - **@Discombobulation#5558**
   - Beta tester
   - Suggestions
