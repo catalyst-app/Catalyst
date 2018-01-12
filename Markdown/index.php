@@ -511,23 +511,21 @@ MD
 			</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
-				<div class="pushpin toc">
-					<ul class="browser-default">
-						<li><p class="no-margin"><a href="#playground">Playground</a></p></li>
-						<li><p class="no-margin"><a href="#headings">Headings</a></p></li>
-						<li><p class="no-margin"><a href="#basic-formatting">Basic Formatting</a></p></li>
-						<li><p class="no-margin"><a href="#escaping">Escaping</a></p></li>
-						<li><p class="no-margin"><a href="#superscripts">Superscripts</a></p></li>
-						<li><p class="no-margin"><a href="#dividers">Dividers</a></p></li>
-						<li><p class="no-margin"><a href="#links">Links</a></p></li>
-						<li><p class="no-margin"><a href="#images">Images</a></p></li>
-						<li><p class="no-margin"><a href="#lists">Lists</a></p></li>
-						<li><p class="no-margin"><a href="#checklists">Checklists</a></p></li>
-						<li><p class="no-margin"><a href="#tables">Tables</a></p></li>
-						<li><p class="no-margin"><a href="#emoji">Emoji</a></p></li>
-						<li><p class="no-margin"><a href="#containers">Containters</a></p></li>
-					</ul>
-				</div>
+<?= Values::createTOC([
+	["playground", "Playground"],
+	["headings", "Headings"],
+	["basic-formatting", "Basic Formatting"],
+	["escaping", "Escaping"],
+	["superscripts", "Superscripts"],
+	["dividers", "Dividers"],
+	["links", "Links"],
+	["images", "Images"],
+	["lists", "Lists"],
+	["checklists", "Checklists"],
+	["tables", "Tables"],
+	["emoji", "Emoji"],
+	["containers", "Containters"],
+]) ?>
 			</div>
 		</div>
 <?php
