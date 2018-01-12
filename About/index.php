@@ -7,6 +7,7 @@ require_once REAL_ROOTDIR."includes/init.php";
 use \Redacted\Page\UniversalFunctions;
 use \Redacted\Page\Values;
 use \Redacted\User\User;
+use \Redacted\Integrations\SocialMedia;
 
 
 define("PAGE_KEYWORD", Values::ABOUT_US[0]);
@@ -197,6 +198,50 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="section" id="our-staff">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Our Staff</h4>
 					
+					<div class="row">
+						<div class="col s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/fauxil.png');"></div>
+						</div>
+						<div class="col s12 m7 offset-m1">
+							<div class="col s12 center-on-small-only">
+								<h3 class="header hide-on-small-only no-margin">Fauxil Fox</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Fauxil Fox</h4>
+
+								<p class="flow-text">Fauxil is the founder of redacted!  Additionally, he has developed most every aspect of the platform.  He oversees all operations and decisions as well.  He is studying Computer Science, and loves to code!  He especially loves backend web-developement or general programming, his primary language being PHP.</p>
+
+								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "SELF",
+		"SERVICE_URL" => ROOTDIR."User/Fauxil",
+		"DISP_NAME" => "Profile",
+	],
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/Fauxil_Fox",
+		"DISP_NAME" => "@Fauxil_Fox",
+	],
+	[
+		"NETWORK" => "TELEGRAM",
+		"SERVICE_URL" => "https://t.me/Fauxil_Fox",
+		"DISP_NAME" => "@Fauxil_Fox",
+	],
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Fauxil_Fox#5881",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:fauxil@redacted.co",
+		"DISP_NAME" => "fauxil@redacted.co",
+	],
+])) ?>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="history">
