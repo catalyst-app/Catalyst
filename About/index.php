@@ -48,7 +48,146 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="divider"></div>
 				<div class="section" id="social-media">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Social Media</h4>
-					
+					<div class="row">
+						<div class="col s12 m6 hide-on-large-only">
+							<a href="mailto:redacted@redacted.co" class="black-text center col s12">
+								<i class="large material-icons">mail</i>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted@redacted.co</h5></span>
+							</a>
+							<a href="https://github.com/smileytechguy/AwaitingAName" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/AwaitingAName</h5></span>
+							</a>
+							<a href="https://twitter.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://discord.gg/YPUnxXr" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/YPUnxXr</h5></span>
+							</a>
+							<a href="https://furaffinity.net/user/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">furaffinity.net/user/redacted</h5></span>
+							</a>
+							<a href="https://redacted.deviantart.com/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted.deviantart.com</h5></span>
+							</a>
+							<a href="https://weasyl.com/~redacted/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/w_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">weasyl.com/~redacted</h5></span>
+							</a>
+							<a href="https://furrynetwork.com/redacted/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fn_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted</h5></span>
+							</a>
+						</div>
+						<div class="col s12 m6 hide-on-large-only">
+							<a href="https://instagram.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/ig_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://ko-fi.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/ko-fi_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">ko-fi.com/redacted</h5></span>
+							</a>
+							<a href="https://patreon.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">patreon.com/redacted</h5></span>
+							</a>
+							<a href="https://t.me/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://t.me/redacted_announcements" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted_announcements</h5></span>
+							</a>
+							<a href="https://plus.google.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+redacted</h5></span>
+							</a>
+							<a href="https://redacted.tumblr.com/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://facebook.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">/redacted</h5></span>
+							</a>
+						</div>
+						<div class="col l4 hide-on-med-and-down">
+							<a href="mailto:redacted@redacted.co" class="black-text center col s12">
+								<i class="large material-icons">mail</i>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted@redacted.co</h5></span>
+							</a>
+							<a href="https://github.com/smileytechguy/AwaitingAName" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/AwaitingAName</h5></span>
+							</a>
+							<a href="https://twitter.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://discord.gg/YPUnxXr" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/YPUnxXr</h5></span>
+							</a>
+							<a href="https://redacted.deviantart.com/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted.deviantart.com</h5></span>
+							</a>
+							<a href="https://weasyl.com/~redacted/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/w_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">weasyl.com/~redacted</h5></span>
+							</a>
+						</div>
+						<div class="col l4 hide-on-med-and-down">
+							<a href="https://furaffinity.net/user/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted</h5></span>
+							</a>
+							<a href="https://instagram.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/ig_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://ko-fi.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/ko-fi_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">ko-fi.com/redacted</h5></span>
+							</a>
+							<a href="https://furrynetwork.com/redacted/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fn_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted</h5></span>
+							</a>
+							<a href="https://plus.google.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+redacted</h5></span>
+							</a>
+						</div>
+						<div class="col l4 hide-on-med-and-down">
+							<a href="https://patreon.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">patreon.com/redacted</h5></span>
+							</a>
+							<a href="https://t.me/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://t.me/redacted_announcements" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted_announcements</h5></span>
+							</a>
+							<a href="https://redacted.tumblr.com/" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+							</a>
+							<a href="https://facebook.com/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">/redacted</h5></span>
+							</a>
+						</div>
+					</div>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="our-staff">
