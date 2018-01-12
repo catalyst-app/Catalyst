@@ -35,6 +35,15 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="section" id="what-we-do">
 					<h4 style="margin-top: -80px; padding-top: 80px;">What We Do</h4>
 					
+					<p class="flow-text">We strive to simplify the complex process of commissioning for both the artist and the customer.  We allow for artists and clients to easily connect and find each other on our platform.  We do this through easy listing and searching of artist's information, allowing the customer to find <i>exactly</i> what they want and who they want to commission.  Next, we provide an easy-to-use system to track these commissions, simplifying and improving the whole process and allowing both sides to focus on what matters.</p>
+					<p class="flow-text">Additionally, we offer other services such as character management, a messaging system, artist reviews, and much more.</p>
+					<p class="flow-text">We stand apart from the competition for several reasons, primarily:</p>
+					<ul class="browser-default">
+						<li class="flow-text">Our easy to use and powerful search system - no more unpredictable tags</li>
+						<li class="flow-text">A responsive, mobile-friendly design - built for the 21<sup>st</sup> century</li>
+						<li class="flow-text"><strong>No fees or cuts</strong> - you control your own money</li>
+						<li class="flow-text">And so much more!</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="social-media">
