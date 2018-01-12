@@ -5,6 +5,7 @@ namespace Redacted\Page;
 class Values {
 	// [keyword (for navbar), title]
 	const HOME = ["home", "Home"];
+	const ABOUT_US = ["about", "About Us"];
 	const LOGIN = ["login", "Login"];
 	const LOGOUT = ["logout", "Logout"];
 	const REGISTER = ["register", "Register"];
@@ -49,6 +50,15 @@ class Values {
 			$str .= '<li><p class="no-margin"><a href="#'.htmlspecialchars($id).'">'.htmlspecialchars($name).'</a></p></li>';
 		}
 		$str .= '</ul></div>';
+		return $str;
+	}
+
+	public static function createInlineTOC(array $items) : string {
+		$str = '<h4 style="margin-top: -80px; padding-top: 80px;">Table of Contents</h4><ul class="browser-default">';
+		foreach ($items as list($id, $name)) {
+			$str .= '<li><p class="flow-text no-margin"><a href="#'.htmlspecialchars($id).'">'.htmlspecialchars($name).'</a></p></li>';
+		}
+		$str .= '</ul>';
 		return $str;
 	}
 }
