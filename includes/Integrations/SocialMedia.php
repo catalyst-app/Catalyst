@@ -36,7 +36,7 @@ class SocialMedia {
 
 		foreach ($rows as $row) {
 			$result[] = [
-				"id" => $row["ID"],
+				"id" => array_key_exists("ID", $row) ? $row["ID"] : 0,
 				"src" => $meta[$row["NETWORK"]][0],
 				"label" => $row["DISP_NAME"],
 				"href" => $row["SERVICE_URL"],
