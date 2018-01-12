@@ -22,7 +22,12 @@ class Navbar {
 			"all" => [
 				["Home", self::NAME, "home", ROOTDIR, self::NORMAL_LINK],
 				["Browse", self::NAME, "browse", ROOTDIR."Browse", self::NORMAL_LINK],
-				["About", self::NAME, "about", ROOTDIR."About", self::NORMAL_LINK],
+				["About", self::NAME, "about", ROOTDIR."About/", self::DROPDOWN_PARENT, "about-dropdown"],
+				["About Us", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
+				["Help Center", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
+				["FAQ", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
+				["Terms of Service", self::NAME, null, ROOTDIR."TOS", self::DROPDOWN_CHILD],
+				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"not-artist" => [
 				["Artist", self::NAME, "artist", ROOTDIR."Artist/".(\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
