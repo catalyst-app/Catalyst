@@ -42,4 +42,13 @@ class Values {
 			return $values[$in[1]];
 		}, $title);
 	}
+
+	public static function createTOC(array $items) : string {
+		$str = '<div class="pushpin toc"><ul class="browser-default">';
+		foreach ($items as list($id, $name)) {
+			$str .= '<li><p class="no-margin"><a href="#'.htmlspecialchars($id).'">'.htmlspecialchars($name).'</a></p></li>';
+		}
+		$str .= '</ul></div>';
+		return $str;
+	}
 }
