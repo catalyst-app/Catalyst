@@ -25,24 +25,23 @@ echo UniversalFunctions::createHeading("Markdown");
 				<p class="flow-text">Redacted uses a modified version of Markdown to render certian areas of the site, typically descriptions or bodies.</p>
 				<p class="flow-text">Markdown allows for text to be easily formatted while still being clean and simple.</p>
 			</div>
-			<div class="divider"></div>
-			<div class="section">
-				<h4>Table of Contents</h4>
-				<ul class="browser-default">
-					<li><p class="flow-text no-margin"><a href="#playground">Playground</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#headings">Headings</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#basic-formatting">Basic Formatting</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#escaping">Escaping</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#superscripts">Superscripts</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#dividers">Dividers</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#links">Links</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#images">Images</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#lists">Lists</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#checklists">Checklists</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#tables">Tables</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#emoji">Emoji</a></p></li>
-					<li><p class="flow-text no-margin"><a href="#containers">Containters</a></p></li>
-				</ul>
+			<div class="divider hide-on-med-and-up"></div>
+			<div class="section hide-on-med-and-up">
+<?= Values::createInlineTOC([
+	["playground", "Playground"],
+	["headings", "Headings"],
+	["basic-formatting", "Basic Formatting"],
+	["escaping", "Escaping"],
+	["superscripts", "Superscripts"],
+	["dividers", "Dividers"],
+	["links", "Links"],
+	["images", "Images"],
+	["lists", "Lists"],
+	["checklists", "Checklists"],
+	["tables", "Tables"],
+	["emoji", "Emoji"],
+	["containers", "Containters"],
+]) ?>
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="playground">
