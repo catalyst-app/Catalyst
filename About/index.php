@@ -149,9 +149,9 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="https://furaffinity.net/user/redacted" class="black-text center col s12">
+							<a href="http://furaffinity.net/user/redacted" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">~redacted</h5></span>
 							</a>
 							<a href="https://instagram.com/redacted" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/ig_logo.png" style="width: 6rem;">
@@ -215,6 +215,8 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text">Fauxil is the founder of redacted!  Additionally, he has developed most every aspect of the platform.  He oversees all operations and decisions as well.  He is studying Computer Science, and loves to code!  He especially loves backend web-developement or general programming, his primary language being PHP.</p>
 
+								<p class="flow-text">Image by Echo-80/hamburgerfox (<a href="https://www.furaffinity.net/view/25777547/">Fur Affinity</a>, <a href="https://echo-80.deviantart.com/art/C-Fauxil-2-2-720595610">DeviantArt</a>, and <a href="https://www.instagram.com/p/Bc0gkXlFlV5/?taken-by=hamburgerfox">Instagram</a>)</p>
+
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
 	[
@@ -239,8 +241,8 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 	[
 		"NETWORK" => "FURAFFINITY",
-		"SERVICE_URL" => "https://furaffinity.net/user/fauxilfox/",
-		"DISP_NAME" => "Fauxil_Fox",
+		"SERVICE_URL" => "http://furaffinity.net/user/fauxilfox/",
+		"DISP_NAME" => "~Fauxil_Fox",
 	],
 	[
 		"NETWORK" => "EMAIL",
@@ -263,20 +265,66 @@ echo UniversalFunctions::createHeading("About Us");
 								<br class="hide-on-med-and-up">
 								<h4 class="header hide-on-med-and-up no-margin">Foxxo</h4>
 
-								<p class="flow-text">Something.</p>
+								<p class="flow-text">From the land of maple syrup, moose, and beavers.  AKA Canada.  Also is a blue fox thing.  Speaking of blue things, Cherry MX Blue™ key switches are great. (We are not endoresed or paid by Cherry)</p>
+
+								<p>Image by wo7f (<a href="https://www.furaffinity.net/view/24726073/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
 	[
-		"NETWORK" => "SELF",
-		"SERVICE_URL" => ROOTDIR."User/Foxxo",
-		"DISP_NAME" => "Profile",
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/fluffracing",
+		"DISP_NAME" => "@fluffracing",
 	],
 ])) ?>
 							</div>
 						</div>
 						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
 							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png');"></div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<br>
+					<div class="row">
+						<div class="col s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/soul.png');"></div>
+						</div>
+						<div class="col s12 m7 offset-m1">
+							<div class="col s12 center-on-small-only">
+								<h3 class="header hide-on-small-only no-margin">Soul Wesson</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Soul Wesson</h4>
+
+								<p class="flow-text">Soul has been an artist for almost a decade now, and loves growing her style with the help of the community. Always one to help others, she loves taking the time to help others via Twitter, Twitch, and several other communities and art sites. Great at diffusing tense situations, and always ready to lend a hand, Soul often offers her friendship first, and her services second. Her messages are always open for anyone who needs advice, or just someone to talk to.</p>
+
+								<p class="flow-text">Image by Jasmae (<a href="https://www.furaffinity.net/view/22443950/">Fur Affinity</a>)</p>
+
+								<p class="flow-text"><strong>Roles: </strong> PR manager</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Soul Wesson#7693",
+	],
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/SoulWesson/",
+		"DISP_NAME" => "@SoulWesson",
+	],
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "http://www.furaffinity.net/user/soulcommissions/",
+		"DISP_NAME" => "~SoulCommissions",
+	],
+	[
+		"NETWORK" => "TWITCH",
+		"SERVICE_URL" => "https://twitch.tv/soulwesson/",
+		"DISP_NAME" => "SoulWesson",
+	],
+])) ?>
+							</div>
 						</div>
 					</div>
 				</div>
