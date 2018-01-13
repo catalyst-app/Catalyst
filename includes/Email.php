@@ -1,9 +1,9 @@
 <?php
 
-namespace Redacted;
+namespace Catalyst;
 
 class Email {
-	public const NO_REPLY_EMAIL = ["no-reply@<redacted>", "Redacted No-Reply"];
+	public const NO_REPLY_EMAIL = ["no-reply@{domain-placeholder}", "Catalyst No-Reply"];
 	protected const NO_REPLY_SMTP = ["host15.registrar-servers.com", 465, "ssl"];
 	private const NO_REPLY_PASSWORD = NO_REPLY_PASSWORD;
 
