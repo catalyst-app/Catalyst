@@ -4,9 +4,9 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::EMOJI[0]);
 define("PAGE_TITLE", Values::createTitle(Values::EMOJI[1], []));

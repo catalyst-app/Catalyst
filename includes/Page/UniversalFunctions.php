@@ -72,7 +72,7 @@ class UniversalFunctions {
 	}
 
 	public static function getStrictCircleImageHTML(string $filename, bool $nsfw, string $additionalClasses="") : string {
-		if ($nsfw && (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
+		if ($nsfw && (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
 			return '<div class="img-strict-circle'.(strlen($additionalClasses) ? ' ' : '').$additionalClasses.'" style="background-image: url(\''.ROOTDIR.'img/nsfw.png\');"></div>';
 		}
 		if (!empty(ROOTDIR)) {
@@ -88,7 +88,7 @@ class UniversalFunctions {
 	}
 
 	public static function renderImageCard(string $filename, bool $nsfw, string $title, string $caption, string $link) : string {
-		if ($nsfw && (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
+		if ($nsfw && (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
 			return self::renderImageCard(ROOTDIR.'img/nsfw.png', false, $title, $caption, $link);
 		}
 		if (!empty(ROOTDIR)) {
@@ -114,7 +114,7 @@ class UniversalFunctions {
 	}
 
 	public static function renderImageCardRawHTML(string $filename, bool $nsfw, string $html) : string {
-		if ($nsfw && (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
+		if ($nsfw && (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
 			return self::renderImageCardRawHTML(ROOTDIR.'img/nsfw.png', false, $html);
 		}
 		if (!empty(ROOTDIR)) {
@@ -139,7 +139,7 @@ class UniversalFunctions {
 	}
 	
 	public static function renderImageCardWithRibbon(string $filename, bool $nsfw, string $title, string $caption, string $link, string $ribbon, array $ribbonColor) : string {
-		if ($nsfw && (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
+		if ($nsfw && (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
 			return self::renderImageCard(ROOTDIR.'img/nsfw.png', false, $title, $caption, $link);
 		}
 		if (!empty(ROOTDIR)) {

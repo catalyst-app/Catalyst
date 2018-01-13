@@ -3,7 +3,7 @@
 namespace Redacted\Integrations;
 
 class SocialMedia {
-	public static function getUserDisplayFromDatabase(\Redacted\User\User $user) : array {
+	public static function getUserDisplayFromDatabase(\Catalyst\User\User $user) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["user_social_media"]."` WHERE `USER_ID` = :USER_ID ORDER BY `SORT` ASC;");
 		$id = $user->getId();
 		$stmt->bindParam(":USER_ID", $id);
@@ -16,7 +16,7 @@ class SocialMedia {
 		return $result;
 	}
 
-	public static function getArtistDisplayFromDatabase(\Redacted\Artist\Artist $artist) : array {
+	public static function getArtistDisplayFromDatabase(\Catalyst\Artist\Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID ORDER BY `SORT` ASC;");
 		$id = $artist->getId();
 		$stmt->bindParam(":ARTIST_ID", $id);
@@ -32,7 +32,7 @@ class SocialMedia {
 	public static function getChipArray(array $rows) : array {
 		$result = [];
 
-		$meta = \Redacted\Database\Integrations\Meta::get();
+		$meta = \Catalyst\Database\Integrations\Meta::get();
 
 		foreach ($rows as $row) {
 			$result[] = [
@@ -84,18 +84,18 @@ class SocialMedia {
 	public static function getAddModal() : string {
 		$result  = '<div id="add-social-network-modal" class="modal modal-fixed-footer">';
 		$result .= '<div class="modal-content">';
-		$result .= \Redacted\Form\FormHTML::generateForm(\Redacted\Database\SocialMedia::getFormStructure());
+		$result .= \Catalyst\Form\FormHTML::generateForm(\Catalyst\Database\SocialMedia::getFormStructure());
 		$result .= '</div>';
 		$result .= '</div>';
 
 		return $result;
 	}
 
-	public static function getUserChipHTML(\Redacted\User\User $user) : string {
+	public static function getUserChipHTML(\Catalyst\User\User $user) : string {
 		return self::getChipHTML(self::getChipArray(self::getUserDisplayFromDatabase($user)));
 	}
 
-	public static function getArtistChipHTML(\Redacted\Artist\Artist $artist) : string {
+	public static function getArtistChipHTML(\Catalyst\Artist\Artist $artist) : string {
 		return self::getChipHTML(self::getChipArray(self::getArtistDisplayFromDatabase($artist)));
 	}
 }
