@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\Integrations;
+namespace Catalyst\Database\Integrations;
 
 class Meta {
 	private static $meta = null;

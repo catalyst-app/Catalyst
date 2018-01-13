@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database;
+namespace Catalyst\Database;
 
 class SocialMedia {
 	public const SUCCESS = 0;

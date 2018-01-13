@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Page;
+namespace Catalyst\Page;
 
 class Values {
 	// [keyword (for navbar), title]
@@ -33,7 +33,7 @@ class Values {
 		"mod" => "darken-4"
 	];
 
-	const ROOT_TITLE = "Redacted";
+	const ROOT_TITLE = "Catalyst";
 
 	const HEAD_INC = __DIR__."/Header/header.inc.php";
 	const FOOTER_INC = __DIR__."/Footer/footer.inc.php";

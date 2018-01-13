@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
 trait HasCaptchaTrait {
 	static $alertNotClosed=false;

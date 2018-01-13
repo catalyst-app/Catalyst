@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted;
+namespace Catalyst;
 
 class Tokens {
 	// [a-z0-9]

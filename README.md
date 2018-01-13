@@ -1,7 +1,4 @@
-# Redacted - commissions, simplified
-
-# WE ARE GOING THROUGH A REBRANDING
-# INFORMATION AND CODE MAY/WILL BE BROKEN
+# Catalyst - Facilitating Commissions
 
 # Table of Contents
 
@@ -23,11 +20,7 @@
 
 ## Short Blurb
 
-Redacted is a service which allows for artists and commissioners to easily connect.  We allow for artists to easily list their prices and information, provide an easy-to-track commission management system, and much more such as wishlists, reviews, and character management!
-
-## Mission
-
-The goal of Redacted is to provide a simple, unified, mobile-friendly way for artists to easily list their prices recieve commisions, track commissions, and much more.
+Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, recieve and track commissions, and much more.
 
 ## What Sets us Apart
 
@@ -40,6 +33,7 @@ We are aware that there are many current and planned competitors to us.  However
 * **No social media aspect** - this allows for us to focus on what matters and cut the crap
 * Easy integration with other social networks
 * Character management
+* No fees
 * And much more!
 
 # How you can Help
@@ -57,12 +51,10 @@ Here are some, however I'm open to anything you want to do!
   * See [contact me](#contact-me) below
 * Discuss what you would like to see in this
 * How you would use it
-* What your workflow is (please artists i don't know anything about this help me)
-* [Support me on Patreon](https://www.patreon.com/redacted)
 * Join the email list, discord server, or telegram group for updates!
   * Email me for the email list: [contact me](#contact-me)
-  * Discord: https://discord.gg/SRAgTkk
-  * Telegram: https://t.me/redacted
+  * Discord: https://discord.gg/EECUcnT
+  * Telegram: https://t.me/catalystapp
 
 # Roadmap
 
@@ -136,7 +128,8 @@ Here are some, however I'm open to anything you want to do!
 
 - [x] Basic class restructure of the base namespace
 - [x] Info website setup
-- [x] Remove secrets and publicise repo: https://github.com/smileytechguy/Redacted
+- [x] Remove secrets and publicise repo: https://github.com/smileytechguy/Catalyst
+- [x] Resolve trademark issues and get a new name
 - [x] ~~Find~~ Build a markdown editor
 
 **User Account Fundamentals: Complete**  

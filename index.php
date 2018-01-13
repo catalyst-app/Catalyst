@@ -23,8 +23,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Home");
 ?>
 			<div class="section">
-				<h3>Go to <a href="https://github.com/smileytechguy/Redacted">the roadmap/info page</a></h3>
-				<?= var_dump($_SESSION); ?>
+				<h3>sample text (not an error)</h3>
 			</div>
 <?php
 require_once Values::FOOTER_INC;

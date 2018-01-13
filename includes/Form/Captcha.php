@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Form;
+namespace Catalyst\Form;
 
 class Captcha {
 	public static function test(string $secret, string $captcha, string $ip=null) : bool {

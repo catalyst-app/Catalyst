@@ -14,10 +14,10 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Database: `redacted`
+-- Database: `catalyst`
 --
-CREATE DATABASE IF NOT EXISTS `redacted` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `redacted`;
+CREATE DATABASE IF NOT EXISTS `catalyst` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `catalyst`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +30,7 @@ CREATE TABLE `artist_pages` (
   `USER_ID` int(11) UNSIGNED NOT NULL COMMENT 'Corresponds to `users`.`ID`',
   `TOKEN` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'Unique token for the artist page, used for profile picture',
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s name - displayed in title bar and page top',
-  `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://<redacted>/Artist/<URL HERE>/',
+  `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://{domain-placeholder}/Artist/<URL HERE>/',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s description, markdown',
   `TOS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s TOS - shown only when you go to commission',
   `IMG` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Artist''s profile picture, null if default, file path (suffixed after token)',
@@ -571,7 +571,7 @@ INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GRO
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('COUPLE', 'Couple', 'The art involves 2 characters, likely as a couple', 'MISC', 4);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_ACT', 'Crafting', 'Crafting a physical object, like a plush', 'ACTIONS', 6);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_TYPE', 'Crafting', 'Crafted objects, like a plushie or similar', 'TYPES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (Redacted does not allow NSFW art of minors)', 'NICHES', 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (catalyst does not allow NSFW art of minors)', 'NICHES', 5);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUSTOM', 'Custom', 'Suits custom-made to match a character', 'FURSUIT', 13);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DEER', 'Deer', 'Deer', 'SPECIES', 10);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DIGITAL', 'Digital Artwork', 'Artwork made on a computer', 'TYPES', 0);

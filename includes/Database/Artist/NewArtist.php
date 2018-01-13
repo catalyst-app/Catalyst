@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\Artist;
+namespace Catalyst\Database\Artist;
 
 class NewArtist {
 	public const SUCCESS = 0;

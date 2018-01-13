@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Page;
+namespace Catalyst\Page;
 
 class UniversalFunctions {
 	public static function createHeading(string $contents) : string {

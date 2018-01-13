@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\User;
+namespace Catalyst\User;
 
 class User implements \Serializable {
 	private $id;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Form;
+namespace Catalyst\Form;
 
 class FormJS {
 	public static function generateCheck(array $meta, array $input) : string {

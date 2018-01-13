@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__.'/RedactedWebdriverTestCase.php';
+require_once __DIR__.'/CatalystWebdriverTestCase.php';
 require_once __DIR__.'/FooterTestTrait.php';
 require_once __DIR__.'/HasCaptchaTrait.php';
 require_once __DIR__.'/TrailingSlashTestTrait.php';
 
 require_once __DIR__.'/../../includes/init.php';
-$GLOBALS["base"] = "http://localhost/Redacted/";
+$GLOBALS["base"] = "http://localhost/Catalyst/";
 $GLOBALS["ignoreConsole"] = ["/".preg_quote("favicon.ico - Failed to load resource:", "/")."/"];
 
 $GLOBALS["captchaAlertNotClosed"] = false;

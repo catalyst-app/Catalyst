@@ -2,84 +2,82 @@
 <html>
 	<head>
 		<title>
-			Home | Redacted 
+			Catalyst 
 		</title>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.js" ></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js" async defer></script>
 
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css" rel="stylesheet" />
 		<link href="css.css" rel="stylesheet" />
 
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport" />
 		<meta charset="utf-8" />
 
-		<meta name="description" content="Redacted"/>
-		<meta name="keywords" content="Redacted is a service which allows for artists and commissioners to easily connect. We allow for artists to easily list their prices and information, providing an easy-to-track commission management system, among a myriad of other features. Additionally, we provide services such as streaming integration, an intelligent message system, wishlists, reviews, character page, and more."/>
-		<meta name="subject" content="Art, furry, commissions"/>
-		<meta name="copyright" content="Fauxil Fox"/>
+		<meta name="description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
+		<meta name="keywords" content="Catalyst"/>
+		<meta name="subject" content="Art, furry, commissions, catalyst"/>
+		<meta name="copyright" content="Catalyst"/>
 		<meta name="language" content="EN"/>
 		<meta name="robots" content="index,follow"/>
 		<meta name="Classification" content="Business"/>
-		<meta name="author" content="Fauxil Fox, fauxil_fox@furmail.net"/>
+		<meta name="author" content="Fauxil Fox, fauxil@{domain-placeholder}"/>
 		<meta name="designer" content="Fauxil Fox"/>
-		<meta name="reply-to" content="fauxil_fox@furmail.net"/>
+		<meta name="reply-to" content="fauxil@{domain-placeholder}"/>
 
 		<!-- Apple -->
-		<meta name="apple-mobile-web-app-title" content="Redacted"/>
+		<meta name="apple-mobile-web-app-title" content="Catalyst"/>
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="apple-touch-fullscreen" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 		<meta name="format-detection" content="telephone=no"/>
-		<link href="https://<redacted>/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://<redacted>/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link href="https://<redacted>/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://<redacted>/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link rel="mask-icon" href="https://<redacted>/img/logo_square.png" color="black"/>
+		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link rel="mask-icon" href="https://{domain-placeholder}/img/logo_square.png" color="black"/>
 
 		<!-- IE -->
-		<meta name="msapplication-tooltip" content="Redacted - Commissions: Simplified"/>
+		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
 		<meta http-equiv="Page-Enter" content="RevealTrans(Duration=2.0,Transition=2)"/>
 		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)"/>
 		<meta name="mssmarttagspreventparsing" content="true"/>
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-		<meta name="msapplication-starturl" content="https://<redacted>/"/>
+		<meta name="msapplication-starturl" content="https://{domain-placeholder}/"/>
 		<meta name="msapplication-window" content="width=800;height=600"/>
 		<meta name="msapplication-navbutton-color" content="green"/>
-		<meta name="application-name" content="Redacted"/>
+		<meta name="application-name" content="Catalyst"/>
 		<meta http-equiv="cleartype" content="on"/>
 
 		<!-- win 8+ -->
-		<meta name="application-name" content="Redacted"/>
+		<meta name="application-name" content="Catalyst"/>
 		<meta name="msapplication-TileColor" content="#1b5e20"/>
 		<meta name="msapplication-square70x70logo" content="img/logo_square.png"/>
 
 		<!-- opengraph -->
-		<meta property="og:title" content="Redacted"/>
+		<meta property="og:title" content="Catalyst"/>
 		<meta property="og:type" content="business.business"/>
-		<meta property="og:url" content="https://<redacted>/"/>
-		<meta property="og:image" content="https://<redacted>/img/logo_big_white.png"/>		
-		<meta property="og:description" content="Redacted is a service which allows for artists and commissioners to easily connect. We allow for artists to easily list their prices and information, providing an easy-to-track commission management system, among a myriad of other features. Additionally, we provide services such as streaming integration, an intelligent message system, wishlists, reviews, character page, and more"/>
-		<meta property="og:site_name" content="Redacted"/>
+		<meta property="og:url" content="https://{domain-placeholder}/"/>
+		<meta property="og:image" content="https://{domain-placeholder}/img/logo_big_white.png"/>		
+		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
+		<meta property="og:site_name" content="Catalyst"/>
 		<meta property="og:locale" content="en_US"/>
 
 		<!-- twitter -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="https://<redacted>/" />
-		<meta name="twitter:title" content="Redacted" />
-		<meta name="twitter:description" content="Redacted is a service which allows for artists and commissioners to easily connect. We allow for artists to easily list their prices and information, providing an easy-to-track commission management system, among a myriad of other features. Additionally, we provide services such as streaming integration, an intelligent message system, wishlists, reviews, character page, and more" />
-		<meta name="twitter:image" content="https://<redacted>/img/logo_big_white.png" />
+		<meta name="twitter:site" content="https://{domain-placeholder}/" />
+		<meta name="twitter:title" content="Catalyst" />
+		<meta name="twitter:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more." />
+		<meta name="twitter:image" content="https://{domain-placeholder}/img/logo_big_white.png" />
 
 		<!-- link tags -->
-		<link rel='shortcut icon' type='image/png' href='https://<redacted>/img/logo_square.png'/>
-		<link rel='fluid-icon' type='image/png' href='https://<redacted>/img/logo_square.png'/>
-		<link rel="canonical" href="https://<redacted>/"/>
-		<link rel='publisher' href="https://plus.google.com/106288681603484139579/"/>
-		<link rel="image_src" href="https://<redacted>/img/logo_square.png" type="image/png"/>
+		<link rel='shortcut icon' type='image/png' href='https://{domain-placeholder}/img/logo_square.png'/>
+		<link rel='fluid-icon' type='image/png' href='https://{domain-placeholder}/img/logo_square.png'/>
+		<link rel="canonical" href="https://{domain-placeholder}/"/>
+		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
+		<link rel="image_src" href="https://{domain-placeholder}/img/logo_square.png" type="image/png"/>
 	</head>
 	<body>
 		<header>
@@ -87,7 +85,7 @@
 				<nav class="green darken-4">
 					<div class="nav-wrapper">
 						<a class="brand-logo" href="">
-							Redacted 
+							Catalyst 
 						</a>
 						<a class="button-collapse" data-activates="mobile-menu" href="#">
 							<i class="material-icons">
@@ -156,13 +154,13 @@
 		<div class="container">
 			<div class="section">
 				<h1 class="center header hide-on-small-only">
-					Redacted
+					Catalyst
 				</h1>
 				<h2 class="center header hide-on-med-and-up">
-					Redacted
+					Catalyst
 				</h2>
 				<p class="light center header flow-text">
-					Commissions: Simplified
+					Facilitating Commissions
 				</p>
 			</div>
 			<div class="divider"></div>
@@ -176,11 +174,7 @@
 
 				<h5>Blurb</h5>
 
-				<p class="flow-text">Redacted is a service which allows for artists and commissioners to easily connect.  We allow for artists to easily list their prices and information, providing an easy-to-track commission management system, among a myriad of other features.  Additionally, we provide services such as streaming integration, an intelligent message system, wishlists, reviews, character page, and more.</p>
-
-				<h5>Mission</h5>
-
-				<p class="flow-text">The goal of Redacted is to provide a simple, unified, clean, and mobile-friendly way for artists to easily list and manage their prices, receive and track commissions, and be easily found, optimizing the workflow for both the buyer and artist.</p>
+				<p class="flow-text">Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more.</p>
 
 				<h5>What sets us apart</h5>
 
@@ -194,6 +188,7 @@
 					<li class="flow-text">No social media aspect - this allows for us to focus on what matters and cut the crap</li>
 					<li class="flow-text">Easy integration with other social networks</li>
 					<li class="flow-text">Character management</li>
+					<li class="flow-text">No fees or cuts</li>
 					<li class="flow-text">And much more!</li>
 				</ul>
 			</div>
@@ -207,9 +202,9 @@
 				</h3>
 
 				<h4>Stage One: Completed</h4>
-				<h5>Initial outreach, ensure that Redacted would be useful and that there is a demand.</h5>
+				<h5>Initial outreach, ensure that Catalyst would be useful and that there is a demand.</h5>
 
-				<p class="flow-text">This stage focused on the conceptualization of the project, reaching out to artists and buyers alike to see what they would want in a service such as this.  We found that there is a high demand for Redacted, and have developed a skeleton of features for the site.</p>
+				<p class="flow-text">This stage focused on the conceptualization of the project, reaching out to artists and buyers alike to see what they would want in a service such as this.  We found that there is a high demand for Catalyst, and have developed a skeleton of features for the site.</p>
 
 				<h4>Stage Two: In progress</h4>
 				<h5>Development of infrastructure and basic creation of the brand.</h5>
@@ -250,7 +245,7 @@
 					Track Development
 				</h3>
 
-				<p class="flow-text">You can track development via <a href="https://github.com/smileytechguy/Redacted">this</a> GitHub repository.</p>
+				<p class="flow-text">You can track development via <a href="https://github.com/smileytechguy/Catalyst">this</a> GitHub repository.</p>
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="involve">
@@ -264,13 +259,12 @@
 				<p class="flow-text">There are many ways you can get involved!</p>
 
 				<ul class="browser-default">
-					<li class="flow-text">Join the <a href="#email">email list</a>, <a href="https://t.me/redacted">Telegram group</a>, or <a href="https://discord.gg/YPUnxXr">Discord server</a></li>
+					<li class="flow-text">Join the <a href="#email">email list</a>, <a href="https://t.me/catalyst">Telegram group</a>, or <a href="https://discord.gg/EECUcnT">Discord server</a></li>
 					<li class="flow-text">Ask me about beta testing!</li>
-					<li class="flow-text">Leave feedback about Redacted</li>
+					<li class="flow-text">Leave feedback about Catalyst</li>
 					<ul class="browser-default">
-						<li class="flow-text">You may contact me through: <a href="mailto:fauxil_fox@furmail.net">email</a>, <a href="https://t.me/fauxil_fox">Telegram</a>, or Discord (@Fauxil_Fox#5881)</li>
+						<li class="flow-text">You may contact me through: <a href="mailto:fauxil@{domain-placeholder}">email</a>, <a href="https://t.me/fauxil_fox">Telegram</a>, or Discord (@Fauxil_Fox#5881)</li>
 					</ul>
-					<li class="flow-text">View the ever-changing specific list <a href="https://github.com/smileytechguy/Redacted#how-you-can-help">here</a></li>
 				</ul>
 			</div>
 			<div class="divider"></div>
@@ -311,12 +305,12 @@
 			</div>
 		</footer>
 	</body>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109915452-1"></script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-REDACTED-1"></script> -->
 	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-109915452-1');
+		// window.dataLayer = window.dataLayer || [];
+		// function gtag(){dataLayer.push(arguments);}
+		// gtag('js', new Date());
+		// gtag('config', 'UA-REDACTED-1');
 
 		(function($){
 			$(function(){
@@ -332,8 +326,8 @@
 	{
 	  "@context": "http://schema.org",
 	  "@type": "Organization",
-	  "url": "https://<redacted>",
-	  "name": "Redacted - Commissions: Simplified"
+	  "url": "https://{domain-placeholder}",
+	  "name": "Catalyst - Facilitating Commissions"
 	}
 	</script>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Artist;
+namespace Catalyst\Artist;
 
 class Artist {
 	private $id;

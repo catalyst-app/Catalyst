@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Message;
+namespace Catalyst\Message;
 
 class Message {
 	const USER = 0;

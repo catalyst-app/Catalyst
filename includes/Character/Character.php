@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Character;
+namespace Catalyst\Character;
 
 class Character {
 	private $id;

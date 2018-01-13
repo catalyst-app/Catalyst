@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Form;
+namespace Catalyst\Form;
 
 class FileUpload {
 	public const PROFILE_PHOTO = 0;

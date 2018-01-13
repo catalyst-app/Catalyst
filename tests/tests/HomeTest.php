@@ -1,8 +1,8 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
-class HomeTest extends RedactedWebdriverTestCase {
+class HomeTest extends CatalystWebdriverTestCase {
 	use FooterTestTrait;
 	use TrailingSlashTestTrait;
 
@@ -11,7 +11,7 @@ class HomeTest extends RedactedWebdriverTestCase {
 	}
 
 	public function testHomeTitleIsCorrect() {
-		$this->assertEquals("Home | Redacted", $GLOBALS["driver"]->getTitle());
+		$this->assertEquals("Home | Catalyst", $GLOBALS["driver"]->getTitle());
 
 		$this->checkConsole();
 	}

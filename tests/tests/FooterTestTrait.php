@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
 trait FooterTestTrait {
 	// Because we render this in the browser we can trap extra <div> and such
