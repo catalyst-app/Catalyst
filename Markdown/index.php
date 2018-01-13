@@ -22,7 +22,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Markdown");
 ?>
 			<div class="row"><div class="col s12 m9 l10"><div class="section">
-				<p class="flow-text">Redacted uses a modified version of Markdown to render certian areas of the site, typically descriptions or bodies.</p>
+				<p class="flow-text">Catalyst uses a modified version of Markdown to render certian areas of the site, typically descriptions or bodies.</p>
 				<p class="flow-text">Markdown allows for text to be easily formatted while still being clean and simple.</p>
 			</div>
 			<div class="divider hide-on-med-and-up"></div>
@@ -216,7 +216,7 @@ MD
 			<div class="section" id="links">
 				<h4 style="margin-top: -80px; padding-top: 80px;">Links</h4>
 				<p class="flow-text">You can create a clickable link with or without a representative title as shown below.</p>
-				<p class="flow-text">On Redacted, all links are shown in bold, colored text.  This cannot be changed, however you may apply additional formatting such as italics.</p>
+				<p class="flow-text">On Catalyst, all links are shown in bold, colored text.  This cannot be changed, however you may apply additional formatting such as italics.</p>
 				<div class="row">
 					<div class="col s12 m6"><div class="code-block"><p>
 <?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
@@ -224,7 +224,7 @@ https://commisso.co
 
 [The Best Site!](https://commisso.co)
 
-*For more information, check out the [About](https://<redacted>) page.*
+*For more information, check out the [About](https://{domain-placeholder}) page.*
 MD
 ))) ?> 
 </p></div></div>
@@ -232,9 +232,9 @@ MD
 <?= htmlspecialchars(<<<MD
 https://commisso.co
 
-[The Best Site!](https://<redacted>/)
+[The Best Site!](https://{domain-placeholder}/)
 
-*For more information, check out the [About](https://<redacted>) page.*
+*For more information, check out the [About](https://{domain-placeholder}) page.*
 MD
 ) ?> 
 </div>
