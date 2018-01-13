@@ -99,10 +99,10 @@ class FormHTML {
 				}
 
 				$el  = '<div data-for="'.$inputAttributes["name"].'" class="color-field '.$wrapperClasses.'">';
-				$el .= '<div class="chosen-color btn" data-for="'.$inputAttributes["name"].'" style="background-color: #'.(isset($input["default"]) ? $input["default"]["hex"] : \Redacted\Page\Values::DEFAULT_COLOR["hex"]).'"></div>';
+				$el .= '<div class="chosen-color btn" data-for="'.$inputAttributes["name"].'" style="background-color: #'.(isset($input["default"]) ? $input["default"]["hex"] : \Catalyst\Page\Values::DEFAULT_COLOR["hex"]).'"></div>';
 				$el .= '<div class="color-input-wrapper row">';
 				$el .= '<div class="input-field col s12">';
-				$el .= '<input type="text" readonly="readonly" id="'.$inputAttributes["name"].'" value="'.(isset($input["default"]) ? $input["default"]["hex"] : \Redacted\Page\Values::DEFAULT_COLOR["hex"]).'"';
+				$el .= '<input type="text" readonly="readonly" id="'.$inputAttributes["name"].'" value="'.(isset($input["default"]) ? $input["default"]["hex"] : \Catalyst\Page\Values::DEFAULT_COLOR["hex"]).'"';
 				foreach ($inputAttributes as $key => $value) {
 					$el .= " ".$key.'="'.htmlspecialchars($value).'"';
 				}
@@ -475,7 +475,7 @@ class FormHTML {
 			'<div class="row">',
 				'<br>',
 				'<div id="'.$meta["distinguisher"].'-submit-wrapper">',
-					'<button id="'.$meta["distinguisher"].'-btn" class="btn '.\Redacted\Page\UniversalFunctions::getColorClasses().' waves-effect waves-light submitter col s12 m4 l2">',
+					'<button id="'.$meta["distinguisher"].'-btn" class="btn '.\Catalyst\Page\UniversalFunctions::getColorClasses().' waves-effect waves-light submitter col s12 m4 l2">',
 						$meta["button"],
 					'</button>',
 				'</div>',
@@ -495,7 +495,7 @@ class FormHTML {
 		$str .= '<h5>Choose a color</h5>';
 		$str .= '<div class="row">';
 
-		$numColorSwatches = max(count(\Redacted\Color::COLOR_BY_CATEGORY), max(array_map("count", \Redacted\Color::COLOR_BY_CATEGORY)));
+		$numColorSwatches = max(count(\Catalyst\Color::COLOR_BY_CATEGORY), max(array_map("count", \Catalyst\Color::COLOR_BY_CATEGORY)));
 
 		for ($i = 0; $i < $numColorSwatches; $i++) {
 			$str .= '<div class="color-swatch col l2 m3 s12"></div>';
@@ -521,7 +521,7 @@ class FormHTML {
 		$str .= "</form></div>";
 
 		if (isset($form[0]["flags"])) {
-			if (in_array(\Redacted\Form\Flags::COLOR_PICKER, $form[0]["flags"])) {
+			if (in_array(\Catalyst\Form\Flags::COLOR_PICKER, $form[0]["flags"])) {
 				$str .= self::getColorPicker();
 			}
 		}

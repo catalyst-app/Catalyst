@@ -7,7 +7,7 @@ class RegisterTest extends RedactedWebdriverTestCase {
 	use FooterTestTrait;
 	use TrailingSlashTestTrait;
 
-	public static $testing = "\Redacted\Database\User\Register";
+	public static $testing = "\Catalyst\Database\User\Register";
 
 	public static function loadURL() {
 		$GLOBALS["driver"]->get($GLOBALS["base"]."Register");

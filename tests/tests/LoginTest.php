@@ -7,7 +7,7 @@ class LoginTest extends RedactedWebdriverTestCase {
 	use FooterTestTrait;
 	use TrailingSlashTestTrait;
 
-	public static $testing = "\Redacted\Database\User\Login";
+	public static $testing = "\Catalyst\Database\User\Login";
 
 	public static function loadURL() {
 		$GLOBALS["driver"]->get($GLOBALS["base"]."Login");

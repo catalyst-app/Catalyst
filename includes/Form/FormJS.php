@@ -18,9 +18,9 @@ class FormJS {
 
 		if ($input["type"] == "image") {
 			if (isset($input["required"]) && $input["required"]) {
-				return 'if ('.$selector.'[0].files.length === 0) {markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.'}for(var i=0;i<'.$selector.'[0].files.length;i++){if ('.$selector.'[0].files[i].size > '.\Redacted\Page\UniversalFunctions::dehumanize($input["maxsize"]).') { markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.' }}';
+				return 'if ('.$selector.'[0].files.length === 0) {markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.'}for(var i=0;i<'.$selector.'[0].files.length;i++){if ('.$selector.'[0].files[i].size > '.\Catalyst\Page\UniversalFunctions::dehumanize($input["maxsize"]).') { markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.' }}';
 			} else {
-				return 'for(var i=0;i<'.$selector.'[0].files.length;i++){if ('.$selector.'[0].files[i].size > '.\Redacted\Page\UniversalFunctions::dehumanize($input["maxsize"]).') { markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.' }}';
+				return 'for(var i=0;i<'.$selector.'[0].files.length;i++){if ('.$selector.'[0].files[i].size > '.\Catalyst\Page\UniversalFunctions::dehumanize($input["maxsize"]).') { markInputInvalid($("#'.$meta["distinguisher"].'-'.$input["name"].'-psuedo-path"), "'.$input["error_text"][0].'"); '.$breakJS.' }}';
 			}
 		}
 
