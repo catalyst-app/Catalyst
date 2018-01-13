@@ -169,6 +169,10 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+redacted</h5></span>
 							</a>
+							<a href="https://reddit.com/user/redacted" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">/u/redacted</h5></span>
+							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
 							<a href="https://patreon.com/redacted" class="black-text center col s12">
