@@ -35,8 +35,8 @@ class Login {
 				"ajax" => true,
 				"redirect" => self::REDIRECT_URL,
 				"auth" => [
-					["\Redacted\User\User::isLoggedIn"],
-					"\Redacted\User\User::getAlreadyLoggedInHTML"
+					["\Catalyst\User\User::isLoggedIn"],
+					"\Catalyst\User\User::getAlreadyLoggedInHTML"
 				],
 				"method" => "POST",
 				"handler" => "handler.php",
@@ -115,7 +115,7 @@ class Login {
 
 	public static function loginAsId(int $id) {
 		$_SESSION["logged_in"] = true;
-		$_SESSION["user"] = new \Redacted\User\User($id);
+		$_SESSION["user"] = new \Catalyst\User\User($id);
 	}
 
 	public static function logout() {

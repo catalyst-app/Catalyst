@@ -48,7 +48,7 @@ class NewArtist {
 				"additional_fields" => [],
 				"success" => self::PHRASES[self::SUCCESS],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -72,7 +72,7 @@ class NewArtist {
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::URL_INVALID], self::PHRASES[self::URL_TAKEN]],
 				"error_code" => [self::URL_INVALID, self::URL_TAKEN],
-				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="newartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Redacted\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Redacted\Page\UniversalFunctions::getRequestURI())).'</strong></p>'
+				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="newartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'</strong></p>'
 			],
 			[
 				"name" => "desc",
@@ -103,8 +103,8 @@ class NewArtist {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"default" => (defined("PAGE_COLOR") ? PAGE_COLOR : \Redacted\Page\Values::DEFAULT_COLOR),
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
+				"default" => (defined("PAGE_COLOR") ? PAGE_COLOR : \Catalyst\Page\Values::DEFAULT_COLOR),
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -139,8 +139,8 @@ class NewArtist {
 
 		$stmt->closeCursor();
 
-		$token = \Redacted\Tokens::generateUniqueArtistToken();
-		$img = \Redacted\Form\FileUpload::uploadImages($img, \Redacted\Form\FileUpload::ARTIST_IMAGE, $token);
+		$token = \Catalyst\Tokens::generateUniqueArtistToken();
+		$img = \Catalyst\Form\FileUpload::uploadImages($img, \Catalyst\Form\FileUpload::ARTIST_IMAGE, $token);
 
 		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["artist_pages"]."`
 				(`USER_ID`, `TOKEN`, `NAME`, `URL`, `DESCRIPTION`, `TOS`, `IMG`, `COLOR`, `DELETED`)

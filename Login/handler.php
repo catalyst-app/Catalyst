@@ -4,14 +4,14 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\User\Login;
-use \Redacted\Form\Captcha;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Database\User\Login;
+use \Catalyst\Form\Captcha;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedIn()) {
-	\Redacted\Response::send401(Login::ALREADY_LOGGED_IN, Login::PHRASES[Login::ALREADY_LOGGED_IN]);
+	\Catalyst\Response::send401(Login::ALREADY_LOGGED_IN, Login::PHRASES[Login::ALREADY_LOGGED_IN]);
 }
 
 FormPHP::checkForm(Login::getFormStructure());

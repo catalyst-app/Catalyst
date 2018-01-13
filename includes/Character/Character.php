@@ -42,7 +42,7 @@ class Character {
 
 		$this->cache = [
 			"USER_ID" => $results[0]["USER_ID"],
-			"USER" => new \Redacted\User\User($results[0]["USER_ID"]),
+			"USER" => new \Catalyst\User\User($results[0]["USER_ID"]),
 			"CHARACTER_TOKEN" => $results[0]["CHARACTER_TOKEN"],
 			"NAME" => $results[0]["NAME"],
 			"DESCRIPTION" => $results[0]["DESCRIPTION"],
@@ -64,7 +64,7 @@ class Character {
 	}
 
 	public static function getIdFromToken(string $token) : int {
-		if (!preg_match("/".\Redacted\Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
+		if (!preg_match("/".\Catalyst\Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
 			return -1;
 		}
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `CHARACTER_TOKEN` = :CHARACTER_TOKEN AND `DELETED` = 0;");
@@ -117,7 +117,7 @@ class Character {
 	}
 
 	public function getColor() : array {
-		return \Redacted\Color::getArrFromHex($this->getColorHex());
+		return \Catalyst\Color::getArrFromHex($this->getColorHex());
 	}
 
 	public function isPublic() : bool {
@@ -152,12 +152,12 @@ class Character {
 		return $result;
 	}
 
-	public function getOwner() : \Redacted\User\User {
+	public function getOwner() : \Catalyst\User\User {
 		if (array_key_exists("USER", $this->cache)) {
 			return $this->cache["USER"];
 		}
 
-		$result = $this->cache["USER"] = new \Redacted\User\User($this->getOwnerId());
+		$result = $this->cache["USER"] = new \Catalyst\User\User($this->getOwnerId());
 
 		return $result;
 	}
@@ -225,11 +225,11 @@ class Character {
 
 	public function visibleToMe() : bool {
 		if ($this->isPublic() ||
-			\Redacted\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
+			\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
 			return true;
 		}
 
-		if (\Redacted\User\User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
+		if (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 			$aid = $_SESSION["user"]->getArtistPageId();
 
 			
@@ -238,7 +238,7 @@ class Character {
 		return false;
 	}
 
-	public static function getCharactersFromUser(\Redacted\User\User $user) : array {
+	public static function getCharactersFromUser(\Catalyst\User\User $user) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `DELETED` = 0 ORDER BY `ID` DESC;");
 		$uid = $user->getId();
 		$stmt->bindParam(":USER_ID", $uid);
@@ -255,7 +255,7 @@ class Character {
 		}, $arr);
 	}
 
-	public static function getPublicCharactersFromUser(\Redacted\User\User $user) : array {
+	public static function getPublicCharactersFromUser(\Catalyst\User\User $user) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `PUBLIC` = 1 AND `DELETED` = 0 ORDER BY `ID` DESC;");
 		$uid = $user->getId();
 		$stmt->bindParam(":USER_ID", $uid);

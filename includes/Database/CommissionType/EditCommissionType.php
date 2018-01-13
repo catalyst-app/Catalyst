@@ -43,7 +43,7 @@ class EditCommissionType {
 
 	public static $lastErrId = -1;
 
-	public static function getFormStructure(\Redacted\CommissionType\CommissionType $type=null) : array {
+	public static function getFormStructure(\Catalyst\CommissionType\CommissionType $type=null) : array {
 		return [
 			[
 				"distinguisher" => "editct",
@@ -245,7 +245,7 @@ class EditCommissionType {
 				}, $in["items"])).
 				'</div>
 				<div class="divider col s12"></div>';
-			}, \Redacted\Database\CommissionType\Attributes::get())).'
+			}, \Catalyst\Database\CommissionType\Attributes::get())).'
 		</div>
 	</div>',
 				"custom_js_getter" => '
@@ -360,7 +360,7 @@ class EditCommissionType {
 		array $stages,
 		bool $physicalneeded,
 		bool $open,
-		\Redacted\CommissionType\CommissionType $type
+		\Catalyst\CommissionType\CommissionType $type
 	) : int {
 		$stmt = $GLOBALS["dbh"]->prepare("
 			UPDATE
@@ -397,7 +397,7 @@ class EditCommissionType {
 			return self::ERROR_UNKNOWN;
 		}
 
-		$imgs = \Redacted\Form\FileUpload::uploadImages($imgs, \Redacted\Form\FileUpload::COMMISSION_TYPE_IMAGE, $type->getToken());
+		$imgs = \Catalyst\Form\FileUpload::uploadImages($imgs, \Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE, $type->getToken());
 
 		if (!is_null($imgs)) {
 			$stmt = 
@@ -685,7 +685,7 @@ class EditCommissionType {
 		return self::SUCCESS;
 	}
 
-	public static function updateImages(\Redacted\CommissionType\CommissionType $type, array $images) : int {
+	public static function updateImages(\Catalyst\CommissionType\CommissionType $type, array $images) : int {
 		$current = $type->getImages();
 		$currentPaths = array_column($current, 0);
 
@@ -694,7 +694,7 @@ class EditCommissionType {
 		$toRemove = array_diff($currentPaths, $newPaths);
 
 		foreach ($toRemove as $path) {
-			\Redacted\Form\FileUpload::delete($path, \Redacted\Form\FileUpload::COMMISSION_TYPE_IMAGE);
+			\Catalyst\Form\FileUpload::delete($path, \Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE);
 		}
 
 		if (count($toRemove) != 0) {

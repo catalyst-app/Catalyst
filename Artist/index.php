@@ -4,12 +4,12 @@ define("ROOTDIR", "../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? ".
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Artist\Artist;
-use \Redacted\CommissionType\CommissionType;
-use \Redacted\Integrations\SocialMedia;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Artist\Artist;
+use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\Integrations\SocialMedia;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 if (!isset($_GET["q"])) {
 	header("Location: ".ROOTDIR."Browse");
@@ -45,7 +45,7 @@ echo UniversalFunctions::createHeading("Artist");
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::ARTIST_IMAGE]."/".$artist->getImg(), false) ?>
+						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::ARTIST_IMAGE]."/".$artist->getImg(), false) ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
@@ -156,12 +156,12 @@ foreach ($attrgs as $key => $attrs): ?>
 <?php else: ?>
 <?php
 $images = $type->getImages();
-if (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
+if (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
 	$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
 }
 
 $images = array_map(function($in) {
-	return UniversalFunctions::renderImageCard(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], false, "", $in[1], "");
+	return UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], false, "", $in[1], "");
 }, $images);
 
 $bisected = [[],[]];

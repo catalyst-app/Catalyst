@@ -4,12 +4,12 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\CommissionType\CommissionType;
-use \Redacted\Database\CommissionType\EditCommissionType;
-use \Redacted\Database\CommissionType\Attributes;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\Database\CommissionType\EditCommissionType;
+use \Catalyst\Database\CommissionType\Attributes;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
 	Response::send401(EditCommissionType::NOT_LOGGED_IN, EditCommissionType::PHRASES[EditCommissionType::NOT_LOGGED_IN]);

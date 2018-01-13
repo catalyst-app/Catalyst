@@ -21,7 +21,7 @@ class DeleteCommissionType {
 
 	public static function delete(
 		int $id,
-		\Redacted\Artist\Artist $artist
+		\Catalyst\Artist\Artist $artist
 	) : int {
 		$aid = $artist->getId();
 		$stmt = $GLOBALS["dbh"]->prepare("

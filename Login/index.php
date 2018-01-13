@@ -4,11 +4,11 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\User\Login;
-use \Redacted\Form\FormHTML;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Database\User\Login;
+use \Catalyst\Form\FormHTML;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::LOGIN[0]);
 define("PAGE_TITLE", Values::createTitle(Values::LOGIN[1], []));

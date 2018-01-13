@@ -95,7 +95,7 @@ class User implements \Serializable {
 
 	public function getColor() : array {
 		if (array_key_exists("COLOR", $this->cache)) {
-			return \Redacted\Color::getArrFromHex($this->cache["COLOR"]);
+			return \Catalyst\Color::getArrFromHex($this->cache["COLOR"]);
 		}
 
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `COLOR` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
@@ -106,7 +106,7 @@ class User implements \Serializable {
 
 		$stmt->closeCursor();
 
-		return \Redacted\Color::getArrFromHex($hex);
+		return \Catalyst\Color::getArrFromHex($hex);
 	}
 
 	public function getColorHex() : string {
@@ -257,12 +257,12 @@ class User implements \Serializable {
 		return $result;
 	}
 
-	public function getArtistPage() : ?\Redacted\Artist\Artist {
+	public function getArtistPage() : ?\Catalyst\Artist\Artist {
 		if (array_key_exists("ARTIST_PAGE", $this->cache)) {
 			return $this->cache["ARTIST_PAGE"];
 		}
 
-		return (is_null($this->getArtistPageId()) ? null : ($this->cache["ARTIST_PAGE"] = new \Redacted\Artist\Artist($this->getArtistPageId())));
+		return (is_null($this->getArtistPageId()) ? null : ($this->cache["ARTIST_PAGE"] = new \Catalyst\Artist\Artist($this->getArtistPageId())));
 	}
 
 	public function getFileToken() : string {
@@ -327,14 +327,14 @@ class User implements \Serializable {
 	}
 
 	public function getWishlistAsObjects() : array {
-		return array_map(function($in) { return (new \Redacted\CommissionType\CommissionType($in)); }, $this->getWishlist());
+		return array_map(function($in) { return (new \Catalyst\CommissionType\CommissionType($in)); }, $this->getWishlist());
 	}
 
 	public function idIsOnWishlist(int $id) : bool {
 		return in_array($id, $this->getWishlist());
 	}
 
-	public function isOnWishlist(\Redacted\CommissionType\CommissionType $type) : bool {
+	public function isOnWishlist(\Catalyst\CommissionType\CommissionType $type) : bool {
 		return $this->idIsOnWishlist($type->getId());
 	}
 
@@ -343,19 +343,19 @@ class User implements \Serializable {
 	}
 
 	public function getProfilePicturePath() : string {
-		return ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::PROFILE_PHOTO]."/".$this->getProfilePicture();
+		return ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::PROFILE_PHOTO]."/".$this->getProfilePicture();
 	}
 
 	public function getNavbarDropdown(int $bar) : string {
-		if ($bar == \Redacted\Page\Navigation\Navbar::NAVBAR) {
-			return \Redacted\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw(), "valign").$this->getNickname();
+		if ($bar == \Catalyst\Page\Navigation\Navbar::NAVBAR) {
+			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw(), "valign").$this->getNickname();
 		} else {
 			return "My Account";
 		}
 	}
 
 	public function getSidenavHTML() : string {
-		return '<li class="center">'.\Redacted\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw()).'<h5>'.$this->getNickname().'</h5><p class="grey-text">'.$this->getUsername().'</p></li>';
+		return '<li class="center">'.\Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw()).'<h5>'.$this->getNickname().'</h5><p class="grey-text">'.$this->getUsername().'</p></li>';
 	}
 
 	public function clearCache(?string $toClear=null) {

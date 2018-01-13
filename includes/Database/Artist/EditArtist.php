@@ -48,7 +48,7 @@ class EditArtist {
 				"additional_fields" => [],
 				"success" => self::PHRASES[self::SUCCESS],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -57,7 +57,7 @@ class EditArtist {
 				"type" => "text",
 				"pattern" => ['^.{2,255}$', "Between 2 and 255 characters"],
 				"label" => "Name",
-				"default" => (\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getName() : null) : null),
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getName() : null) : null),
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::NAME_INVALID]],
@@ -69,12 +69,12 @@ class EditArtist {
 				"type" => "text",
 				"pattern" => ['^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$', "Between 4 and 255 characters containing only letters, numbers, dashes, underscores, or a period.  Additionally, a period may not be the last character of the URL."],
 				"label" => "URL",
-				"default" => (\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null),
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null),
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::URL_INVALID], self::PHRASES[self::URL_TAKEN]],
 				"error_code" => [self::URL_INVALID, self::URL_TAKEN],
-				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="editartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Redacted\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Redacted\Page\UniversalFunctions::getRequestURI())).(\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null).'</strong></p>'
+				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="editartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null).'</strong></p>'
 			],
 			[
 				"name" => "desc",
@@ -83,7 +83,7 @@ class EditArtist {
 				"label" => "Description",
 				"required" => true,
 				"validate" => true,
-				"default" => (\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getDescription() : null) : null),
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getDescription() : null) : null),
 				"error_text" => [self::PHRASES[self::DESCRIPTION_INVALID]],
 				"error_code" => [self::DESCRIPTION_INVALID],
 				"after_html" => '<p class="col s12">Please do not list commission information here.</p>'
@@ -106,8 +106,8 @@ class EditArtist {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"default" => (\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getColor() : null) : null),
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getColor() : null) : null),
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -118,7 +118,7 @@ class EditArtist {
 				"wrapper_classes" => "col s12",
 				"type" => "markdown-textarea",
 				"label" => "Terms of Service",
-				"default" => (\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getTos() : null) : null),
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getTos() : null) : null),
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::TOS_INVALID]],
@@ -127,7 +127,7 @@ class EditArtist {
 		];
 	}
 
-	public static function update(\Redacted\Artist\Artist $artist, string $name, string $url, string $desc, string $tos, ?array $img, string $color) : int {
+	public static function update(\Catalyst\Artist\Artist $artist, string $name, string $url, string $desc, string $tos, ?array $img, string $color) : int {
 		$aid = $_SESSION["user"]->getId();
 
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT 1 FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` != :ID AND `URL` = :URL;");
@@ -142,7 +142,7 @@ class EditArtist {
 
 		$stmt->closeCursor();
 
-		$img = \Redacted\Form\FileUpload::uploadImages($img, \Redacted\Form\FileUpload::ARTIST_IMAGE, $artist->getToken());
+		$img = \Catalyst\Form\FileUpload::uploadImages($img, \Catalyst\Form\FileUpload::ARTIST_IMAGE, $artist->getToken());
 		if ($img[0] == null) {
 			if ($artist->getImg() != "default.png") {
 				$img[0] = str_replace($artist->getToken(), "", $artist->getImg());
@@ -175,7 +175,7 @@ class EditArtist {
 		return self::SUCCESS;
 	}
 
-	public static function delete(\Redacted\Artist\Artist $artist) : int {
+	public static function delete(\Catalyst\Artist\Artist $artist) : int {
 		$aid = $artist->getId();
 
 		$stmt = $GLOBALS["dbh"]->prepare("SET @ID = :ID;");
@@ -227,7 +227,7 @@ class EditArtist {
 		return self::SUCCESS;
 	}
 
-	public static function order(array $order, \Redacted\Artist\Artist $artist) : int {
+	public static function order(array $order, \Catalyst\Artist\Artist $artist) : int {
 		if (empty($order)) {
 			return self::SUCCESS;
 		}

@@ -4,12 +4,12 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\User\EmailVerification;
-use \Redacted\Email;
-use \Redacted\Form\FormHTML;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Database\User\EmailVerification;
+use \Catalyst\Email;
+use \Catalyst\Form\FormHTML;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::EMAIL_VERIFICATION[0]);
 define("PAGE_TITLE", Values::createTitle(Values::EMAIL_VERIFICATION[1], []));

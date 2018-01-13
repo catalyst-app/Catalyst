@@ -4,9 +4,9 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\Artist\EditArtist;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Database\Artist\EditArtist;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut() || !$_SESSION["user"]->isArtist()) {
 	Response::send500(EditArtist::PHRASES[EditArtist::ERROR_UNKNOWN], EditArtist::ERROR_UNKNOWN);

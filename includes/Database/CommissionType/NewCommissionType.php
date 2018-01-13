@@ -199,7 +199,7 @@ class NewCommissionType {
 				}, $in["items"])).
 				'</div>
 				<div class="divider col s12"></div>';
-			}, \Redacted\Database\CommissionType\Attributes::get())).'
+			}, \Catalyst\Database\CommissionType\Attributes::get())).'
 		</div>
 	</div>',
 				"custom_js_getter" => '
@@ -296,7 +296,7 @@ class NewCommissionType {
 		array $payments,
 		array $stages,
 		bool $addrneeded,
-		\Redacted\Artist\Artist $artist
+		\Catalyst\Artist\Artist $artist
 	) : int {
 		$aid = $artist->getId();
 		$stmt = $GLOBALS["dbh"]->prepare("
@@ -341,7 +341,7 @@ class NewCommissionType {
 					:PHYSICAL_ADDR_NEEDED
 				);
 			");
-		$token = \Redacted\Tokens::generateUniqueCommissionTypeToken();
+		$token = \Catalyst\Tokens::generateUniqueCommissionTypeToken();
 		$attrs = json_encode($attrs);
 		$physicalint = $addrneeded ? 1 : 0;
 
@@ -363,7 +363,7 @@ class NewCommissionType {
 
 		$ctid = $GLOBALS["dbh"]->lastInsertId();
 
-		$imgs = \Redacted\Form\FileUpload::uploadImages($imgs, \Redacted\Form\FileUpload::COMMISSION_TYPE_IMAGE, $token);
+		$imgs = \Catalyst\Form\FileUpload::uploadImages($imgs, \Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE, $token);
 
 		if (!is_null($imgs)) {
 			$stmt = $GLOBALS["dbh"]->prepare("

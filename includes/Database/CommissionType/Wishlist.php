@@ -13,7 +13,7 @@ class Wishlist {
 
 	public static $lastErrId = -1;
 
-	public static function add(\Redacted\User\User $user, int $ctid) : int {
+	public static function add(\Catalyst\User\User $user, int $ctid) : int {
 		if ($user->idIsOnWishlist($ctid)) {
 			return self::ERROR_UNKNOWN;
 		}
@@ -35,7 +35,7 @@ class Wishlist {
 		return self::SUCCESS;
 	}
 
-	public static function del(\Redacted\User\User $user, int $ctid) : int {
+	public static function del(\Catalyst\User\User $user, int $ctid) : int {
 		if (!$user->idIsOnWishlist($ctid)) {
 			return self::ERROR_UNKNOWN;
 		}

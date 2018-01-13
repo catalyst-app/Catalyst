@@ -4,10 +4,10 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\CommissionType\Wishlist;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Database\CommissionType\Wishlist;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
 	Response::send500(Wishlist::PHRASES[Wishlist::ERROR_UNKNOWN], Wishlist::ERROR_UNKNOWN);

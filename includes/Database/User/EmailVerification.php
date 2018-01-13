@@ -32,8 +32,8 @@ class EmailVerification {
 				"ajax" => true,
 				"redirect" => self::REDIRECT_URL,
 				"auth" => [
-					["\Redacted\User\User::isLoggedOut"],
-					"\Redacted\User\User::getNotLoggedInHTML"
+					["\Catalyst\User\User::isLoggedOut"],
+					"\Catalyst\User\User::getNotLoggedInHTML"
 				],
 				"method" => "POST",
 				"handler" => "handler.php",
@@ -51,7 +51,7 @@ class EmailVerification {
 				"type" => "text",
 				"default" => isset($_SESSION["token"]) ? $_SESSION["token"] : "",
 				"label" => "Token",
-				"pattern" => [\Redacted\Tokens::EMAIL_VERIFICATION_TOKEN_REGEX, "A valid token."],
+				"pattern" => [\Catalyst\Tokens::EMAIL_VERIFICATION_TOKEN_REGEX, "A valid token."],
 				"required" => true,
 				"primary" => true,
 				"validate" => true,
@@ -71,18 +71,18 @@ class EmailVerification {
 		];
 	}
 
-	public static function sendVerificationEmailToUser(\Redacted\User\User $user) {
+	public static function sendVerificationEmailToUser(\Catalyst\User\User $user) {
 		if ($user->emailIsVerified()) {
 			return;
 		}
 
-		preg_match("/^(.*)(EmailVerification|Register|Settings)/", \Redacted\Page\UniversalFunctions::getRequestURI(), $out);
+		preg_match("/^(.*)(EmailVerification|Register|Settings)/", \Catalyst\Page\UniversalFunctions::getRequestURI(), $out);
 		$url = $out[1]."EmailVerification/?token=".$user->getEmailToken();
 
-		\Redacted\Email::sendEmail(
+		\Catalyst\Email::sendEmail(
 			[[$user->getEmail(), $user->getNickname()]],
 			"Redacted - Email verification",
-			'<html><head><style>'.\Redacted\Email::getCSS($user->getColorHex()).'</style></head><body><div class="container"><div class="section"><h1 class="center header hide-on-small-only">Email Verification</h1><h3 class="center header hide-on-med-and-up">Email Verification</h3></div><div class="section"><p class="flow-text">Thank you for registering with Redacted!</p><p class="flow-text">Please click the button below to activate your account.</p><div><a href="'.$url.'" class="btn">Verify</a></div><p>Alternatively, use the token <span style="font-weight: 700;">'.$user->getEmailToken().'</span> to verify your email.</p></div></div></body></html>',
+			'<html><head><style>'.\Catalyst\Email::getCSS($user->getColorHex()).'</style></head><body><div class="container"><div class="section"><h1 class="center header hide-on-small-only">Email Verification</h1><h3 class="center header hide-on-med-and-up">Email Verification</h3></div><div class="section"><p class="flow-text">Thank you for registering with Redacted!</p><p class="flow-text">Please click the button below to activate your account.</p><div><a href="'.$url.'" class="btn">Verify</a></div><p>Alternatively, use the token <span style="font-weight: 700;">'.$user->getEmailToken().'</span> to verify your email.</p></div></div></body></html>',
 			implode("\r\n", [
 				"Email Verification",
 				"",
@@ -94,7 +94,7 @@ class EmailVerification {
 		);
 	}
 
-	public static function verify(\Redacted\User\User $user, string $token) : int {
+	public static function verify(\Catalyst\User\User $user, string $token) : int {
 		if ($user->getEmailToken() != $token) {
 			return self::TOKEN_INVALID;
 		}

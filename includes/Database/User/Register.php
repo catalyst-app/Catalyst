@@ -49,8 +49,8 @@ class Register {
 				"ajax" => true,
 				"redirect" => self::REDIRECT_URL,
 				"auth" => [
-					["\Redacted\User\User::isLoggedIn"],
-					"\Redacted\User\User::getAlreadyLoggedInHTML"
+					["\Catalyst\User\User::isLoggedIn"],
+					"\Catalyst\User\User::getAlreadyLoggedInHTML"
 				],
 				"method" => "POST",
 				"handler" => "handler.php",
@@ -62,7 +62,7 @@ class Register {
 				"success" => self::PHRASES[self::ACCOUNT_CREATED],
 				"additional_fields" => [],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -149,7 +149,7 @@ class Register {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -221,12 +221,12 @@ class Register {
 	) : int {
 		$regStmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["users"]."` (`FILE_TOKEN`,`USERNAME`,`HASHED_PASSWORD`,`PASSWORD_RESET_TOKEN`,`EMAIL`,`EMAIL_TOKEN`,`PICTURE_LOC`,`PICTURE_NSFW`,`NSFW`,`COLOR`,`NICK`) VALUES (:FILE_TOKEN,:USERNAME,:HASHED_PASSWORD,:PASSWORD_RESET_TOKEN,:EMAIL,:EMAIL_TOKEN,:PICTURE_LOC,:PICTURE_NSFW,:NSFW,UNHEX(:COLOR),:NICK)");
 
-		$fileToken = \Redacted\Tokens::generateUniqueUserFileToken();
+		$fileToken = \Catalyst\Tokens::generateUniqueUserFileToken();
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-		$passwordToken = \Redacted\Tokens::generatePasswordResetToken();
+		$passwordToken = \Catalyst\Tokens::generatePasswordResetToken();
 		$email = $email ? $email : null;
-		$emailToken = \Redacted\Tokens::generateEmailVerificationToken();
-		$pictureLoc = \Redacted\Form\FileUpload::uploadImage($pfp, \Redacted\Form\FileUpload::PROFILE_PHOTO, $fileToken);
+		$emailToken = \Catalyst\Tokens::generateEmailVerificationToken();
+		$pictureLoc = \Catalyst\Form\FileUpload::uploadImage($pfp, \Catalyst\Form\FileUpload::PROFILE_PHOTO, $fileToken);
 		$pfpnsfw = $pfpnsfw ? 1 : 0;
 		$nsfw = $nsfw ? 1 : 0;
 		$color = (string)"$color";
@@ -249,9 +249,9 @@ class Register {
 			return self::ERROR_UNKNOWN;
 		}
 
-		\Redacted\Database\User\Login::login($username, $password);
+		\Catalyst\Database\User\Login::login($username, $password);
 
-		\Redacted\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
+		\Catalyst\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
 
 		return self::ACCOUNT_CREATED;
 	}

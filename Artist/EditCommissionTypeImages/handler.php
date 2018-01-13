@@ -4,11 +4,11 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\CommissionType\CommissionType;
-use \Redacted\Database\CommissionType\EditCommissionType;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\Database\CommissionType\EditCommissionType;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 FormPHP::checkMethod(["method" => "POST"]);
 

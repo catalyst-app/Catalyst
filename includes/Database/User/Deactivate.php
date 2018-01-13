@@ -37,7 +37,7 @@ class Deactivate {
 				"wrapper_classes" => "col s12",
 				"type" => "text",
 				"label" => "Username",
-				"pattern" => ['^'.implode("" ,array_map(function($in) { return (strtolower($in)==strtoupper($in) ? $in : '['.strtolower($in).strtoupper($in).']'); }, str_split(\Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getUsername() : ""))).'$', "Your username."],
+				"pattern" => ['^'.implode("" ,array_map(function($in) { return (strtolower($in)==strtoupper($in) ? $in : '['.strtolower($in).strtoupper($in).']'); }, str_split(\Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getUsername() : ""))).'$', "Your username."],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::USERNAME_INVALID]],
@@ -96,7 +96,7 @@ class Deactivate {
 			return self::ERROR_UNKNOWN;
 		}
 
-		\Redacted\Database\User\Login::logout();
+		\Catalyst\Database\User\Login::logout();
 
 		return self::DEACTIVATED;
 	}

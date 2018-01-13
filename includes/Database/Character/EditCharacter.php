@@ -24,7 +24,7 @@ class EditCharacter {
 	public static $lastErrId = -1;
 	public static $lastInsertId = -1;
 
-	public static function getFormStructure(?\Redacted\Character\Character $character=null) : array {
+	public static function getFormStructure(?\Catalyst\Character\Character $character=null) : array {
 		return [
 			[
 				"distinguisher" => "editchar",
@@ -41,7 +41,7 @@ class EditCharacter {
 				],
 				"success" => self::PHRASES[self::SUCCESS],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -86,7 +86,7 @@ class EditCharacter {
 				"type" => "color",
 				"label" => "Color",
 				"default" => is_null($character) ? "" : $character->getColor(),
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -106,7 +106,7 @@ class EditCharacter {
 		];
 	}
 
-	public static function delete(\Redacted\Character\Character $character) : int {
+	public static function delete(\Catalyst\Character\Character $character) : int {
 		$stmt = $GLOBALS["dbh"]->prepare("UPDATE `".DB_TABLES["characters"]."`
 			SET 
 				`DELETED` = 1
@@ -124,7 +124,7 @@ class EditCharacter {
 		return self::SUCCESS;
 	}
 
-	public static function update(\Redacted\Character\Character $character, string $name, string $desc, ?array $newImages, string $color, bool $public) : int {
+	public static function update(\Catalyst\Character\Character $character, string $name, string $desc, ?array $newImages, string $color, bool $public) : int {
 		$stmt = $GLOBALS["dbh"]->prepare("UPDATE `".DB_TABLES["characters"]."`
 			SET
 				`NAME` = :NAME,
@@ -147,7 +147,7 @@ class EditCharacter {
 			return self::ERROR_UNKNOWN;
 		}
 
-		$images = \Redacted\Form\FileUpload::uploadImages($newImages, \Redacted\Form\FileUpload::CHARACTER_IMAGE, $character->getToken());
+		$images = \Catalyst\Form\FileUpload::uploadImages($newImages, \Catalyst\Form\FileUpload::CHARACTER_IMAGE, $character->getToken());
 
 		if (is_null($images)) {
 			return self::SUCCESS;
@@ -171,7 +171,7 @@ class EditCharacter {
 		return self::SUCCESS;
 	}
 
-	public static function updateImages(\Redacted\Character\Character $character, array $images) : int {
+	public static function updateImages(\Catalyst\Character\Character $character, array $images) : int {
 		$current = $character->getImages();
 		$currentPaths = array_column($current, 0);
 
@@ -180,7 +180,7 @@ class EditCharacter {
 		$toRemove = array_diff($currentPaths, $newPaths);
 
 		foreach ($toRemove as $path) {
-			\Redacted\Form\FileUpload::delete($path, \Redacted\Form\FileUpload::CHARACTER_IMAGE);
+			\Catalyst\Form\FileUpload::delete($path, \Catalyst\Form\FileUpload::CHARACTER_IMAGE);
 		}
 
 		if (count($toRemove) != 0) {
