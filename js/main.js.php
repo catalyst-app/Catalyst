@@ -5,20 +5,20 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Color;
-use \Redacted\Database\Artist\EditArtist;
-use \Redacted\Database\Artist\NewArtist;
-use \Redacted\Database\Character\EditCharacter;
-use \Redacted\Database\Character\NewCharacter;
-use \Redacted\Database\CommissionType\EditCommissionType;
-use \Redacted\Database\CommissionType\NewCommissionType;
-use \Redacted\Database\SocialMedia;
-use \Redacted\Database\User\Deactivate;
-use \Redacted\Database\User\EmailVerification;
-use \Redacted\Database\User\Login;
-use \Redacted\Database\User\Register;
-use \Redacted\Database\User\Settings;
-use \Redacted\Form\FormJS;
+use \Catalyst\Color;
+use \Catalyst\Database\Artist\EditArtist;
+use \Catalyst\Database\Artist\NewArtist;
+use \Catalyst\Database\Character\EditCharacter;
+use \Catalyst\Database\Character\NewCharacter;
+use \Catalyst\Database\CommissionType\EditCommissionType;
+use \Catalyst\Database\CommissionType\NewCommissionType;
+use \Catalyst\Database\SocialMedia;
+use \Catalyst\Database\User\Deactivate;
+use \Catalyst\Database\User\EmailVerification;
+use \Catalyst\Database\User\Login;
+use \Catalyst\Database\User\Register;
+use \Catalyst\Database\User\Settings;
+use \Catalyst\Form\FormJS;
 ?>
 // ~))))'> 
 //

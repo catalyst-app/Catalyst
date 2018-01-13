@@ -42,8 +42,8 @@ class Settings {
 				"ajax" => true,
 				"redirect" => self::REDIRECT_URL,
 				"auth" => [
-					["\Redacted\User\User::isLoggedOut"],
-					"\Redacted\User\User::getNotLoggedInHTML"
+					["\Catalyst\User\User::isLoggedOut"],
+					"\Catalyst\User\User::getNotLoggedInHTML"
 				],
 				"method" => "POST",
 				"handler" => "handler.php",
@@ -53,7 +53,7 @@ class Settings {
 				"success" => self::PHRASES[self::UPDATED],
 				"additional_fields" => [],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -63,7 +63,7 @@ class Settings {
 				"label" => "Username",
 				"pattern" => ['^([A-Za-z0-9._-]){2,64}$', "2-64 characters of letters, numbers, period, dashes, and underscores only."],
 				"required" => true,
-				"default" => \Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getUsername() : "",
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getUsername() : "",
 				"primary" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::USERNAME_INVALID], self::PHRASES[self::USERNAME_OWNED_BY_OTHER_USER]],
@@ -101,7 +101,7 @@ class Settings {
 				"wrapper_classes" => "col s12",
 				"type" => "email",
 				"label" => "Email",
-				"default" => \Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->getEmail() ? $_SESSION["user"]->getEmail() : "") : "",
+				"default" => \Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getEmail() ? $_SESSION["user"]->getEmail() : "") : "",
 				"pattern" => ['^.{2,}@.{2,}\..{2,}$', "Valid email address"],
 				"required" => false,
 				"validate" => true,
@@ -113,7 +113,7 @@ class Settings {
 				"wrapper_classes" => "col s12",
 				"type" => "text",
 				"label" => "Nickname",
-				"default" => \Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getNickname() : "",
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getNickname() : "",
 				"pattern" => ['^.{2,100}$', "Between 2 and 100 characters"],
 				"required" => false,
 				"validate" => true,
@@ -125,8 +125,8 @@ class Settings {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
-				"default" => \Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getColor() : "",
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getColor() : "",
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -148,7 +148,7 @@ class Settings {
 				"name" => "pfpnsfw",
 				"wrapper_classes" => "col s12 no-top-margin more-bottom-margin",
 				"type" => "checkbox",
-				"default" => \Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getProfilePictureNsfw() : false,
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getProfilePictureNsfw() : false,
 				"label" => "My profile picture is NSFW",
 				"required" => false,
 				"error_text" => [],
@@ -158,7 +158,7 @@ class Settings {
 				"name" => "nsfw",
 				"wrapper_classes" => "col s12",
 				"type" => "checkbox",
-				"default" => \Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->isNsfw() : false,
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->isNsfw() : false,
 				"label" => "I am above 18 years old and wish to see NSFW content",
 				"required" => false,
 				"error_text" => [],
@@ -246,15 +246,15 @@ class Settings {
 
 		$username = empty($username) ? $user["USERNAME"] : $username;
 		$hashedPassword = empty($password) ? $user["HASHED_PASSWORD"] : password_hash($password, PASSWORD_BCRYPT);
-		$passwordToken = empty($password) ? $user["PASSWORD_RESET_TOKEN"] : \Redacted\Tokens::generatePasswordResetToken();
+		$passwordToken = empty($password) ? $user["PASSWORD_RESET_TOKEN"] : \Catalyst\Tokens::generatePasswordResetToken();
 		$email = empty($email) ? null : $email;
-		$emailToken = ($email == $user["EMAIL"]) ? $user["EMAIL_TOKEN"] : \Redacted\Tokens::generateEmailVerificationToken();
+		$emailToken = ($email == $user["EMAIL"]) ? $user["EMAIL_TOKEN"] : \Catalyst\Tokens::generateEmailVerificationToken();
 
 		$emailVerified = ($user["EMAIL"] == $email) ? $user["EMAIL_VERIFIED"] : 0;
 		
-		$newPic = \Redacted\Form\FileUpload::uploadImage($pfp, \Redacted\Form\FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
+		$newPic = \Catalyst\Form\FileUpload::uploadImage($pfp, \Catalyst\Form\FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
 		if (!is_null($newPic)) {
-			\Redacted\Form\FileUpload::delete($user["FILE_TOKEN"].$user["PICTURE_LOC"], \Redacted\Form\FileUpload::PROFILE_PHOTO);
+			\Catalyst\Form\FileUpload::delete($user["FILE_TOKEN"].$user["PICTURE_LOC"], \Catalyst\Form\FileUpload::PROFILE_PHOTO);
 		}
 
 		$pictureLoc = is_null($newPic) ? $user["PICTURE_LOC"] : $newPic;
@@ -282,7 +282,7 @@ class Settings {
 			return self::ERROR_UNKNOWN;
 		}
 
-		\Redacted\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
+		\Catalyst\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
 
 		return self::UPDATED;
 	}

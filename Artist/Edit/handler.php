@@ -4,23 +4,23 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Artist\Artist;
-use \Redacted\Database\Artist\EditArtist;
-use \Redacted\Form\Captcha;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Artist\Artist;
+use \Catalyst\Database\Artist\EditArtist;
+use \Catalyst\Form\Captcha;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
-	\Redacted\Response::send401(EditArtist::NOT_LOGGED_IN, EditArtist::PHRASES[EditArtist::NOT_LOGGED_IN]);
+	\Catalyst\Response::send401(EditArtist::NOT_LOGGED_IN, EditArtist::PHRASES[EditArtist::NOT_LOGGED_IN]);
 }
 
 if (empty($_POST)) {
-	\Redacted\Response::send401(EditArtist::IMAGE_INVALID, EditArtist::PHRASES[EditArtist::IMAGE_INVALID]);
+	\Catalyst\Response::send401(EditArtist::IMAGE_INVALID, EditArtist::PHRASES[EditArtist::IMAGE_INVALID]);
 }
 
 if (!$_SESSION["user"]->isArtist()) {
-	\Redacted\Response::send401(EditArtist::NOT_AN_ARTIST, EditArtist::PHRASES[EditArtist::NOT_AN_ARTIST]);
+	\Catalyst\Response::send401(EditArtist::NOT_AN_ARTIST, EditArtist::PHRASES[EditArtist::NOT_AN_ARTIST]);
 }
 
 FormPHP::checkForm(EditArtist::getFormStructure());

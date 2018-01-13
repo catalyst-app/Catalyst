@@ -39,7 +39,7 @@ class NewCharacter {
 				"additional_fields" => [],
 				"success" => self::PHRASES[self::SUCCESS],
 				"flags" => [
-					\Redacted\Form\Flags::COLOR_PICKER
+					\Catalyst\Form\Flags::COLOR_PICKER
 				]
 			],
 			[
@@ -80,8 +80,8 @@ class NewCharacter {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"default" => (defined("PAGE_COLOR") ? PAGE_COLOR : \Redacted\Page\Values::DEFAULT_COLOR),
-				"pattern" => ['^('.implode("|", array_keys(\Redacted\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Redacted\Color::HEX_MAP))],
+				"default" => (defined("PAGE_COLOR") ? PAGE_COLOR : \Catalyst\Page\Values::DEFAULT_COLOR),
+				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],
@@ -106,7 +106,7 @@ class NewCharacter {
 			VALUES
 				(:USER_ID, :CHARACTER_TOKEN, :NAME, :DESCRIPTION, UNHEX(:COLOR), :PUBLIC);");
 		$id = $_SESSION["user"]->getId();
-		$token = $insertToken = \Redacted\Tokens::generateUniqueCharacterToken();
+		$token = $insertToken = \Catalyst\Tokens::generateUniqueCharacterToken();
 		$p = ($public ? 1 : 0);
 
 		$stmt->bindParam(":USER_ID", $id);
@@ -121,7 +121,7 @@ class NewCharacter {
 			return self::ERROR_UNKNOWN;
 		}
 
-		$images = \Redacted\Form\FileUpload::uploadImages($images, \Redacted\Form\FileUpload::CHARACTER_IMAGE, $token);
+		$images = \Catalyst\Form\FileUpload::uploadImages($images, \Catalyst\Form\FileUpload::CHARACTER_IMAGE, $token);
 
 		if (is_null($images)) {
 			return self::SUCCESS;

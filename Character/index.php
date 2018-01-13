@@ -4,12 +4,12 @@ define("ROOTDIR", "../".((isset($_GET["level1"]) && $_GET["level1"] == "/") ? ".
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Character\Character;
-use \Redacted\Database\Character\EditCharacter;
-use \Redacted\Form\FormHTML;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Character\Character;
+use \Catalyst\Database\Character\EditCharacter;
+use \Catalyst\Form\FormHTML;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 if (!isset($_GET["q1"])) {
 	$page = "LANDING";
@@ -82,7 +82,7 @@ switch ($page) {
 $chars = Character::getCharactersFromUser($_SESSION["user"]);
 $cards = array_map(function($in) {
 	$img = $in->getPrimaryImage();
-	return UniversalFunctions::renderImageCard(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::CHARACTER_IMAGE]."/".$img[0], $img[2], $in->getName(), "", ROOTDIR."Character/".$in->getToken()."/");
+	return UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$img[0], $img[2], $in->getName(), "", ROOTDIR."Character/".$in->getToken()."/");
 }, $chars);
 
 array_unshift($cards, UniversalFunctions::renderImageCard(ROOTDIR."img/new.png", false, "New Character", "", ROOTDIR."Character/New"));
@@ -154,7 +154,7 @@ for ($i=0; $i < count($cards); $i++) {
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::CHARACTER_IMAGE]."/".$character->getPrimaryImage()[0], $character->getPrimaryImage()[2]) ?>
+						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$character->getPrimaryImage()[0], $character->getPrimaryImage()[2]) ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
@@ -183,7 +183,7 @@ $i=0;
 
 $images = array_map(function($in) use ($character, $i) {
 	$i++;
-	return UniversalFunctions::renderImageCardRawHTML(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::CHARACTER_IMAGE]."/".$in[0], $in[2], 
+	return UniversalFunctions::renderImageCardRawHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$in[0], $in[2], 
 		implode("", [
 			'<div class="row no-margin">',
 			'<input type="hidden" class="path-input" id="path'.$i.'" value="'.str_replace($character->getToken(), "", $in[0]).'">',
@@ -262,7 +262,7 @@ for ($i=0; $i < count($images); $i++) {
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::CHARACTER_IMAGE]."/".$character->getPrimaryImage()[0], $character->getPrimaryImage()[2]) ?>
+						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$character->getPrimaryImage()[0], $character->getPrimaryImage()[2]) ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
@@ -298,12 +298,12 @@ for ($i=0; $i < count($images); $i++) {
 <?php else: ?>
 <?php
 $images = $character->getImages();
-if (\Redacted\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
+if (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
 	$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
 }
 
 $images = array_map(function($in) {
-	return UniversalFunctions::renderImageCard(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::CHARACTER_IMAGE]."/".$in[0], false, "", $in[1], "");
+	return UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$in[0], false, "", $in[1], "");
 }, $images);
 
 $bisected = [[],[]];

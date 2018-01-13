@@ -4,13 +4,13 @@ define("ROOTDIR", "../../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ?
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Artist\Artist;
-use \Redacted\CommissionType\CommissionType;
-use \Redacted\Database\CommissionType\EditCommissionType;
-use \Redacted\Form\FormHTML;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Artist\Artist;
+use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\Database\CommissionType\EditCommissionType;
+use \Catalyst\Form\FormHTML;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::EDIT_COMMISSION_TYPE_IMAGES);
 define("PAGE_TITLE", Values::createTitle(Values::EDIT_COMMISSION_TYPE_IMAGES[1], []));
@@ -61,7 +61,7 @@ $i=0;
 
 $images = array_map(function($in) use ($type, $i) {
 $i++;
-return UniversalFunctions::renderImageCardRawHTML(ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], $in[2], 
+return UniversalFunctions::renderImageCardRawHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], $in[2], 
 	implode("", [
 		'<div class="row no-margin">',
 		'<input type="hidden" class="path-input" id="path'.$i.'" value="'.str_replace($type->getToken(), "", $in[0]).'">',

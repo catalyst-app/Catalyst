@@ -172,16 +172,16 @@ class Artist {
 	}
 
 	public function getColor() : array {
-		return \Redacted\Color::getArrFromHex($this->getColorHex());
+		return \Catalyst\Color::getArrFromHex($this->getColorHex());
 	}
 
 	public function getPicturePath() : string {
-		return ROOTDIR.\Redacted\Form\FileUpload::FOLDERS[\Redacted\Form\FileUpload::ARTIST_IMAGE]."/".$this->getImg();
+		return ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::ARTIST_IMAGE]."/".$this->getImg();
 	}
 
 	public function getNavbarDropdown(int $bar) : string {
-		if ($bar == \Redacted\Page\Navigation\Navbar::NAVBAR) {
-			return \Redacted\Page\UniversalFunctions::getStrictCircleImageHTML($this->getPicturePath(), false, "valign").$this->getName();
+		if ($bar == \Catalyst\Page\Navigation\Navbar::NAVBAR) {
+			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getPicturePath(), false, "valign").$this->getName();
 		} else {
 			return $this->getName();
 		}

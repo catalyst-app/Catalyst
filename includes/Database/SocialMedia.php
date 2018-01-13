@@ -39,7 +39,7 @@ class SocialMedia {
 				"name" => "network",
 				"wrapper_classes" => "col s12",
 				"type" => "select",
-				"options" => \Redacted\Database\Integrations\Meta::getProfileAddSelectArray(),
+				"options" => \Catalyst\Database\Integrations\Meta::getProfileAddSelectArray(),
 				"label" => "Network",
 				"required" => true,
 				"error_text" => [self::PHRASES[self::NETWORK_INVALID]],
@@ -70,7 +70,7 @@ class SocialMedia {
 		];
 	}
 
-	public static function addToUser(\Redacted\User\User $user, string $network, string $name, ?string $url) {
+	public static function addToUser(\Catalyst\User\User $user, string $network, string $name, ?string $url) {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT IFNULL(MAX(`SORT`), 0) AS `NEXT_SORT` FROM `".DB_TABLES["user_social_media"]."` WHERE `USER_ID` = :USER_ID;");
 		$id = $user->getId();
 		$stmt->bindParam(":USER_ID", $id);
@@ -99,7 +99,7 @@ class SocialMedia {
 		return self::SUCCESS;
 
 	}
-	public static function addToArtist(\Redacted\Artist\Artist $artist, string $network, string $name, ?string $url) {
+	public static function addToArtist(\Catalyst\Artist\Artist $artist, string $network, string $name, ?string $url) {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT IFNULL(MAX(`SORT`), 0) AS `NEXT_SORT` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID;");
 		$id = $artist->getId();
 		$stmt->bindParam(":ARTIST_ID", $id);
@@ -128,7 +128,7 @@ class SocialMedia {
 		return self::SUCCESS;
 	}
 
-	public static function delFromUser(\Redacted\User\User $user, int $id) {
+	public static function delFromUser(\Catalyst\User\User $user, int $id) {
 		$stmt = $GLOBALS["dbh"]->prepare("DELETE FROM `".DB_TABLES["user_social_media"]."` WHERE `ID` = :ID AND `USER_ID` = :USER_ID;");
 		$uid = $user->getId();
 		$stmt->bindParam(":ID", $id);
@@ -142,7 +142,7 @@ class SocialMedia {
 		return self::SUCCESS;
 	}
 
-	public static function delFromArtist(\Redacted\Artist\Artist $artist, int $id) {
+	public static function delFromArtist(\Catalyst\Artist\Artist $artist, int $id) {
 		$stmt = $GLOBALS["dbh"]->prepare("DELETE FROM `".DB_TABLES["artist_social_media"]."` WHERE `ID` = :ID AND `ARTIST_ID` = :ARTIST_ID;");
 		$aid = $artist->getId();
 		$stmt->bindParam(":ID", $id);
@@ -156,7 +156,7 @@ class SocialMedia {
 		return self::SUCCESS;
 	}
 
-	public static function arrangeUser(\Redacted\User\User $user, array $ids) {
+	public static function arrangeUser(\Catalyst\User\User $user, array $ids) {
 		$i = 0;
 		$uid = $user->getId();
 		foreach ($ids as $id) {
@@ -176,7 +176,7 @@ class SocialMedia {
 		return self::SUCCESS;
 	}
 
-	public static function arrangeArtist(\Redacted\Artist\Artist $artist, array $ids) {
+	public static function arrangeArtist(\Catalyst\Artist\Artist $artist, array $ids) {
 		$i = 0;
 		$aid = $artist->getId();
 		foreach ($ids as $id) {

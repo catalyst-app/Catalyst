@@ -4,12 +4,12 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\Artist\EditArtist;
-use \Redacted\Form\FormHTML;
-use \Redacted\Integrations\SocialMedia;
-use \Redacted\Page\UniversalFunctions;
-use \Redacted\Page\Values;
-use \Redacted\User\User;
+use \Catalyst\Database\Artist\EditArtist;
+use \Catalyst\Form\FormHTML;
+use \Catalyst\Integrations\SocialMedia;
+use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::EDIT_ARTIST_PAGE[0]);
 define("PAGE_TITLE", Values::createTitle(Values::EDIT_ARTIST_PAGE[1], []));

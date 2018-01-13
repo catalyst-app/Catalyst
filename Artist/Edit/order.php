@@ -4,9 +4,9 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\SocialMedia;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Database\SocialMedia;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut() || !$_SESSION["user"]->isArtist() || !isset($_POST["order"]) || json_decode($_POST["order"]) === false || !is_array(json_decode($_POST["order"]))) {
 	Response::send500(SocialMedia::PHRASES[SocialMedia::ERROR_UNKNOWN], SocialMedia::ERROR_UNKNOWN);

@@ -107,8 +107,8 @@ class CommissionType {
 		return $result;
 	}
 
-	public function getArtistPage() : \Redacted\Artist\Artist {
-		return (new \Redacted\Artist\Artist($this->getArtistPageId()));
+	public function getArtistPage() : \Catalyst\Artist\Artist {
+		return (new \Catalyst\Artist\Artist($this->getArtistPageId()));
 	}
 
 	public function getToken() : string {
@@ -230,7 +230,7 @@ class CommissionType {
 
 		$result = $this->getAttrs();
 
-		$attrs = \Redacted\Database\CommissionType\Attributes::get();
+		$attrs = \Catalyst\Database\CommissionType\Attributes::get();
 
 		$keyedAttrs = [];
 
@@ -396,7 +396,7 @@ class CommissionType {
 		return $result;
 	}
 
-	public static function getForArtist(\Redacted\Artist\Artist $artist) : array {
+	public static function getForArtist(\Catalyst\Artist\Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["commission_types"]."` WHERE `ARTIST_PAGE_ID` = :ARTIST_PAGE_ID AND `DELETED` = 0 ORDER BY `SORT` ASC;");
 		$aid = $artist->getId();
 		$stmt->bindParam(":ARTIST_PAGE_ID", $aid);

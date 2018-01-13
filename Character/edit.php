@@ -4,18 +4,18 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Character\Character;
-use \Redacted\Database\Character\EditCharacter;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Character\Character;
+use \Catalyst\Database\Character\EditCharacter;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
-	\Redacted\Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
+	\Catalyst\Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
 }
 
 if (empty($_POST)) {
-	\Redacted\Response::send401(EditCharacter::PICTURE_INVALID, EditCharacter::PHRASES[EditCharacter::PICTURE_INVALID]);
+	\Catalyst\Response::send401(EditCharacter::PICTURE_INVALID, EditCharacter::PHRASES[EditCharacter::PICTURE_INVALID]);
 }
 
 FormPHP::checkForm(EditCharacter::getFormStructure());

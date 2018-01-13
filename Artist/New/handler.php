@@ -4,22 +4,22 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Artist\Artist;
-use \Redacted\Database\Artist\NewArtist;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Artist\Artist;
+use \Catalyst\Database\Artist\NewArtist;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
-	\Redacted\Response::send401(NewArtist::NOT_LOGGED_IN, NewArtist::PHRASES[NewArtist::NOT_LOGGED_IN]);
+	\Catalyst\Response::send401(NewArtist::NOT_LOGGED_IN, NewArtist::PHRASES[NewArtist::NOT_LOGGED_IN]);
 }
 
 if (empty($_POST)) {
-	\Redacted\Response::send401(NewArtist::IMAGE_INVALID, NewArtist::PHRASES[NewArtist::IMAGE_INVALID]);
+	\Catalyst\Response::send401(NewArtist::IMAGE_INVALID, NewArtist::PHRASES[NewArtist::IMAGE_INVALID]);
 }
 
 if ($_SESSION["user"]->isArtist()) {
-	\Redacted\Response::send401(NewArtist::ALREADY_AN_ARTIST, NewArtist::PHRASES[NewArtist::ALREADY_AN_ARTIST]);
+	\Catalyst\Response::send401(NewArtist::ALREADY_AN_ARTIST, NewArtist::PHRASES[NewArtist::ALREADY_AN_ARTIST]);
 }
 
 FormPHP::checkForm(NewArtist::getFormStructure());

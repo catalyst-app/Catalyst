@@ -4,10 +4,10 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/init.php";
-use \Redacted\Database\SocialMedia;
-use \Redacted\Form\FormPHP;
-use \Redacted\Response;
-use \Redacted\User\User;
+use \Catalyst\Database\SocialMedia;
+use \Catalyst\Form\FormPHP;
+use \Catalyst\Response;
+use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
 	Response::send500(SocialMedia::PHRASES[SocialMedia::ERROR_UNKNOWN], SocialMedia::ERROR_UNKNOWN);
@@ -39,9 +39,9 @@ if ($result != SocialMedia::SUCCESS) {
 	Response::send401($result, SocialMedia::PHRASES[$result]);
 }
 
-$meta = \Redacted\Database\Integrations\Meta::get();
+$meta = \Catalyst\Database\Integrations\Meta::get();
 
-Response::send200(\Redacted\Integrations\SocialMedia::getChipHTML([[
+Response::send200(\Catalyst\Integrations\SocialMedia::getChipHTML([[
 	"id" => $GLOBALS["dbh"]->lastInsertId(),
 	"src" => $meta[$_POST["network"]][0],
 	"label" => $_POST["name"],

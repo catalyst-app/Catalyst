@@ -57,11 +57,11 @@ class FileUpload {
 			return null;
 		}
 
-		$middle = \Redacted\Tokens::generateToken(10);
+		$middle = \Catalyst\Tokens::generateToken(10);
 
 		while (file_exists(REAL_ROOTDIR.self::FOLDERS[$type]."/".$prefix.$middle.$suffix)) {
 			error_log("a");
-		    $middle = \Redacted\Token::generateToken(10);
+		    $middle = \Catalyst\Token::generateToken(10);
 		}
 
 		move_uploaded_file($file["tmp_name"], REAL_ROOTDIR.self::FOLDERS[$type]."/".$prefix.$middle.$suffix);

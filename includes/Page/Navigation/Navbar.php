@@ -30,13 +30,13 @@ class Navbar {
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"not-artist" => [
-				["Artist", self::NAME, "artist", ROOTDIR."Artist/".(\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["Artist", self::NAME, "artist", ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
 					["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"artist" => [
-				[[(\Redacted\User\User::isLoggedIn() ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".(\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
-				["My Page", self::NAME, null, ROOTDIR."Artist/".(\Redacted\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
+				[[(\Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["My Page", self::NAME, null, ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
 				["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
 				["Commission Types", self::NAME, null, ROOTDIR."Artist/EditCommissionTypes", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
@@ -45,7 +45,7 @@ class Navbar {
 				// 
 			],
 			"logged_in" => [
-				[[(\Redacted\User\User::isLoggedIn() ? $_SESSION["user"] : null), "getNavbarDropdown"], self::CALLABLE, "user", ROOTDIR."Dashboard", self::DROPDOWN_PARENT, "user-dropdown"],
+				[[(\Catalyst\User\User::isLoggedIn() ? $_SESSION["user"] : null), "getNavbarDropdown"], self::CALLABLE, "user", ROOTDIR."Dashboard", self::DROPDOWN_PARENT, "user-dropdown"],
 					["Dashboard", self::NAME, null, ROOTDIR."Dashboard", self::DROPDOWN_CHILD],
 					["Characters", self::NAME, null, ROOTDIR."Character", self::DROPDOWN_CHILD],
 					["Settings", self::NAME, null, ROOTDIR."Settings", self::DROPDOWN_CHILD],
