@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\CommissionType;
+namespace Catalyst\Database\CommissionType;
 
 class Attributes {
 	private static $meta = null;

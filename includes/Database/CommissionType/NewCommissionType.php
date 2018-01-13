@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\CommissionType;
+namespace Catalyst\Database\CommissionType;
 
 class NewCommissionType {
 	public const SUCCESS = 0;

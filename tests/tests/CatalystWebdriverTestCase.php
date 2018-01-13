@@ -1,8 +1,8 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
-abstract class RedactedWebdriverTestCase extends \PHPUnit\Framework\TestCase {
+abstract class CatalystWebdriverTestCase extends \PHPUnit\Framework\TestCase {
 	public static function loadURL() {
 		new \RuntimeException("loadURL is not defined");
 	}

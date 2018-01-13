@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\CommissionType;
+namespace Catalyst\CommissionType;
 
 class CommissionType {
 	private $id;

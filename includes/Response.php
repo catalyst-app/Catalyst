@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted;
+namespace Catalyst;
 
 class Response {
 	public static function generateSuccessResponse(int $httpCode, string $message) : string {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\User;
+namespace Catalyst\Database\User;
 
 class Login {
 	public const CREDENTIALS_VALID = 0;

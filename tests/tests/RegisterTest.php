@@ -1,8 +1,8 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
-class RegisterTest extends RedactedWebdriverTestCase {
+class RegisterTest extends CatalystWebdriverTestCase {
 	use HasCaptchaTrait;
 	use FooterTestTrait;
 	use TrailingSlashTestTrait;
@@ -14,7 +14,7 @@ class RegisterTest extends RedactedWebdriverTestCase {
 	}
 
 	public function testLoginTitleIsCorrect() {
-		$this->assertEquals("Register | Redacted", $GLOBALS["driver"]->getTitle());
+		$this->assertEquals("Register | Catalyst", $GLOBALS["driver"]->getTitle());
 
 		$this->checkConsole();
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Tests;
+namespace Catalyst\Tests;
 
 trait TrailingSlashTestTrait {
 	public function testUrlContainsTrailingSlash() {

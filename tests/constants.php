@@ -1,3 +1,3 @@
 <?php
 
-$GLOBALS["base"] = "http://localhost/Redacted/";
+$GLOBALS["base"] = "http://localhost/Catalyst/";

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\Character;
+namespace Catalyst\Database\Character;
 
 class EditCharacter {
 	public const SUCCESS = 0;

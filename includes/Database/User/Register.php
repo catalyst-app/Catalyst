@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\User;
+namespace Catalyst\Database\User;
 
 class Register {
 	public const ACCOUNT_CREATED = 0;

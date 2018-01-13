@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Page\Navigation;
+namespace Catalyst\Page\Navigation;
 
 class Navbar {
 	public const NAME = 1;

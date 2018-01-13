@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Integrations;
+namespace Catalyst\Integrations;
 
 class SocialMedia {
 	public static function getUserDisplayFromDatabase(\Catalyst\User\User $user) : array {

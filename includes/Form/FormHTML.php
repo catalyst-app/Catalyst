@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Form;
+namespace Catalyst\Form;
 
 class FormHTML {
 	public static function testAjaxSubmissionFailed() : bool {
@@ -347,7 +347,7 @@ class FormHTML {
 					$inputAttributes = array_merge($inputAttributes, $input["other_attributes"]);
 				}
 
-				$el  = '<p class="col s12">Redacted uses a modified version of Markdown in this field.  Please see <a href="'.ROOTDIR.'Markdown">this page</a> for help.</p>';
+				$el  = '<p class="col s12">Catalyst uses a modified version of Markdown in this field.  Please see <a href="'.ROOTDIR.'Markdown">this page</a> for help.</p>';
 				$el .= '<div class="input-field '.$wrapperClasses.'">';
 				$el .= '<div class="row">';
 				$el .= '<div class="col s12 m6">';

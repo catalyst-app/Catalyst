@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Form;
+namespace Catalyst\Form;
 
 class FormPHP {
 	public static function checkMethod(array $meta) {

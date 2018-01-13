@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Page\Header;
+namespace Catalyst\Page\Header;
 
 class Header {
 	const SCRIPTS = [

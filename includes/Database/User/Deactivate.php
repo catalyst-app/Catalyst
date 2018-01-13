@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\User;
+namespace Catalyst\Database\User;
 
 class Deactivate {
 	public const DEACTIVATED = 0;

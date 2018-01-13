@@ -1,6 +1,6 @@
 <?php
 
-namespace Redacted\Database\User;
+namespace Catalyst\Database\User;
 
 class Settings {
 	public const UPDATED = 0;
