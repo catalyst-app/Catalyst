@@ -51,25 +51,25 @@ echo UniversalFunctions::createHeading("About Us");
 					<h4 style="margin-top: -80px; padding-top: 80px;">Social Media</h4>
 					<div class="row">
 						<div class="col s12 m6 hide-on-large-only">
-							<a href="mailto:redacted@redacted.co" class="black-text center col s12">
+							<a href="mailto:catalyst@{domain-placeholder}" class="black-text center col s12">
 								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted@redacted.co</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">catalyst@{domain-placeholder}</h5></span>
 							</a>
-							<a href="https://github.com/smileytechguy/AwaitingAName" class="black-text center col s12">
+							<a href="https://github.com/smileytechguy/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/AwaitingAName</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/Catalyst</h5></span>
 							</a>
-							<a href="https://twitter.com/redacted" class="black-text center col s12">
+							<a href="https://twitter.com/catalystapp_cp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp_co</h5></span>
 							</a>
-							<a href="https://discord.gg/YPUnxXr" class="black-text center col s12">
+							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/YPUnxXr</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/EECUcnT</h5></span>
 							</a>
-							<a href="https://furaffinity.net/user/redacted" class="black-text center col s12">
+							<a href="https://furaffinity.net/user/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">furaffinity.net/user/redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">~Catalystapp</h5></span>
 							</a>
 							<a href="https://redacted.deviantart.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
@@ -101,17 +101,17 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">patreon.com/redacted</h5></span>
 							</a>
-							<a href="https://t.me/redacted" class="black-text center col s12">
+							<a href="https://t.me/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp</h5></span>
 							</a>
-							<a href="https://t.me/redacted_announcements" class="black-text center col s12">
+							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted_announcements</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp_announcements</h5></span>
 							</a>
-							<a href="https://plus.google.com/redacted" class="black-text center col s12">
+							<a href="https://plus.google.com/102762464787584663279" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+Catalyst</h5></span>
 							</a>
 							<a href="https://redacted.tumblr.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
@@ -123,21 +123,21 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="mailto:redacted@redacted.co" class="black-text center col s12">
+							<a href="mailto:catalyst@{domain-placeholder}" class="black-text center col s12">
 								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted@redacted.co</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">catalyst@{domain-placeholder}</h5></span>
 							</a>
-							<a href="https://github.com/smileytechguy/AwaitingAName" class="black-text center col s12">
+							<a href="https://github.com/smileytechguy/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/AwaitingAName</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">smileytechguy/Catalyst</h5></span>
 							</a>
-							<a href="https://twitter.com/redacted" class="black-text center col s12">
+							<a href="https://twitter.com/catalystapp_cp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp_co</h5></span>
 							</a>
-							<a href="https://discord.gg/YPUnxXr" class="black-text center col s12">
+							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/YPUnxXr</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">discord.gg/EECUcnT</h5></span>
 							</a>
 							<a href="https://redacted.deviantart.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
@@ -149,9 +149,9 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="http://furaffinity.net/user/redacted" class="black-text center col s12">
+							<a href="http://furaffinity.net/user/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">~redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">~Catalystapp</h5></span>
 							</a>
 							<a href="https://instagram.com/redacted" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/ig_logo.png" style="width: 6rem;">
@@ -165,9 +165,9 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/fn_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">redacted</h5></span>
 							</a>
-							<a href="https://plus.google.com/redacted" class="black-text center col s12">
+							<a href="https://plus.google.com/102762464787584663279" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">+Catalyst</h5></span>
 							</a>
 							<a href="https://reddit.com/user/redacted" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
@@ -179,13 +179,13 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">patreon.com/redacted</h5></span>
 							</a>
-							<a href="https://t.me/redacted" class="black-text center col s12">
+							<a href="https://t.me/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp</h5></span>
 							</a>
-							<a href="https://t.me/redacted_announcements" class="black-text center col s12">
+							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@redacted_announcements</h5></span>
+								<span style="overflow-x: auto;" class="col s12"><h5 class="no-top-margin">@catalystapp_announcements</h5></span>
 							</a>
 							<a href="https://redacted.tumblr.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
@@ -246,8 +246,8 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 	[
 		"NETWORK" => "EMAIL",
-		"SERVICE_URL" => "mailto:fauxil@redacted.co",
-		"DISP_NAME" => "fauxil@redacted.co",
+		"SERVICE_URL" => "mailto:fauxil@{domain-placeholder}",
+		"DISP_NAME" => "fauxil@{domain-placeholder}",
 	],
 ])) ?>
 							</div>
@@ -275,6 +275,16 @@ echo UniversalFunctions::createHeading("About Us");
 		"NETWORK" => "TWITTER",
 		"SERVICE_URL" => "https://twitter.com/fluffracing",
 		"DISP_NAME" => "@fluffracing",
+	],
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "http://furaffinity.net/user/foxxoracing",
+		"DISP_NAME" => "~foxxoracing",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:foxxo@{domain-placeholder}",
+		"DISP_NAME" => "foxxo@{domain-placeholder}",
 	],
 ])) ?>
 							</div>
@@ -322,6 +332,11 @@ echo UniversalFunctions::createHeading("About Us");
 		"NETWORK" => "TWITCH",
 		"SERVICE_URL" => "https://twitch.tv/soulwesson/",
 		"DISP_NAME" => "SoulWesson",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:soul@{domain-placeholder}",
+		"DISP_NAME" => "soul@{domain-placeholder}",
 	],
 ])) ?>
 							</div>
