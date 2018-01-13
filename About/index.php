@@ -238,12 +238,45 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@Fauxil_Fox#5881",
 	],
 	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "https://furaffinity.net/user/fauxilfox/",
+		"DISP_NAME" => "Fauxil_Fox",
+	],
+	[
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:fauxil@redacted.co",
 		"DISP_NAME" => "fauxil@redacted.co",
 	],
 ])) ?>
 							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<br>
+
+					<div class="row">
+						<div class="col s12 m7">
+							<div class="col s12 center-on-small-only right right-align">
+								<h3 class="header hide-on-small-only no-margin">Foxxo</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Foxxo</h4>
+
+								<p class="flow-text">Something.</p>
+
+								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "SELF",
+		"SERVICE_URL" => ROOTDIR."User/Foxxo",
+		"DISP_NAME" => "Profile",
+	],
+])) ?>
+							</div>
+						</div>
+						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png');"></div>
 						</div>
 					</div>
 				</div>
