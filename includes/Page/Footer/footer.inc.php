@@ -2,7 +2,7 @@
 		<footer class="page-footer <?= \Catalyst\Page\UniversalFunctions::getColorClasses() ?>">
 			<div class="container white-text">
 				<p>
-					Website &copy;<?php echo date("Y"); ?> Fauxil Fox, All rights reserved.
+					Website &copy;<?php echo date("Y"); ?> Catalyst, All rights reserved.
 				</p>
 				<p>
 					Hosted artwork copyright their respective owners unless otherwise stated.
