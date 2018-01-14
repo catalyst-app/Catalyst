@@ -380,6 +380,11 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "~foxxoracing",
 	],
 	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Foxxo#7183",
+	],
+	[
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:foxxo@catalystapp.co",
 		"DISP_NAME" => "foxxo@catalystapp.co",
