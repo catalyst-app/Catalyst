@@ -30,7 +30,7 @@ CREATE TABLE `artist_pages` (
   `USER_ID` int(11) UNSIGNED NOT NULL COMMENT 'Corresponds to `users`.`ID`',
   `TOKEN` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'Unique token for the artist page, used for profile picture',
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s name - displayed in title bar and page top',
-  `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://{domain-placeholder}/Artist/<URL HERE>/',
+  `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://catalystapp.co/Artist/<URL HERE>/',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s description, markdown',
   `TOS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s TOS - shown only when you go to commission',
   `IMG` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Artist''s profile picture, null if default, file path (suffixed after token)',

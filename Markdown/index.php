@@ -224,7 +224,7 @@ https://commisso.co
 
 [The Best Site!](https://commisso.co)
 
-*For more information, check out the [About](https://{domain-placeholder}) page.*
+*For more information, check out the [About](https://catalystapp.co) page.*
 MD
 ))) ?> 
 </p></div></div>
@@ -232,9 +232,9 @@ MD
 <?= htmlspecialchars(<<<MD
 https://commisso.co
 
-[The Best Site!](https://{domain-placeholder}/)
+[The Best Site!](https://catalystapp.co/)
 
-*For more information, check out the [About](https://{domain-placeholder}) page.*
+*For more information, check out the [About](https://catalystapp.co) page.*
 MD
 ) ?> 
 </div>

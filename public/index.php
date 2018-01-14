@@ -23,9 +23,9 @@
 		<meta name="language" content="EN"/>
 		<meta name="robots" content="index,follow"/>
 		<meta name="Classification" content="Business"/>
-		<meta name="author" content="Fauxil Fox, fauxil@{domain-placeholder}"/>
+		<meta name="author" content="Fauxil Fox, fauxil@catalystapp.co"/>
 		<meta name="designer" content="Fauxil Fox"/>
-		<meta name="reply-to" content="fauxil@{domain-placeholder}"/>
+		<meta name="reply-to" content="fauxil@catalystapp.co"/>
 
 		<!-- Apple -->
 		<meta name="apple-mobile-web-app-title" content="Catalyst"/>
@@ -33,11 +33,11 @@
 		<meta name="apple-touch-fullscreen" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 		<meta name="format-detection" content="telephone=no"/>
-		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://{domain-placeholder}/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link rel="mask-icon" href="https://{domain-placeholder}/img/logo_square.png" color="black"/>
+		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link rel="mask-icon" href="https://catalystapp.co/img/logo_square.png" color="black"/>
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
@@ -45,7 +45,7 @@
 		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)"/>
 		<meta name="mssmarttagspreventparsing" content="true"/>
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-		<meta name="msapplication-starturl" content="https://{domain-placeholder}/"/>
+		<meta name="msapplication-starturl" content="https://catalystapp.co/"/>
 		<meta name="msapplication-window" content="width=800;height=600"/>
 		<meta name="msapplication-navbutton-color" content="green"/>
 		<meta name="application-name" content="Catalyst"/>
@@ -59,25 +59,25 @@
 		<!-- opengraph -->
 		<meta property="og:title" content="Catalyst"/>
 		<meta property="og:type" content="business.business"/>
-		<meta property="og:url" content="https://{domain-placeholder}/"/>
-		<meta property="og:image" content="https://{domain-placeholder}/img/logo_big_white.png"/>		
+		<meta property="og:url" content="https://catalystapp.co/"/>
+		<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>		
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
 		<meta property="og:locale" content="en_US"/>
 
 		<!-- twitter -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="https://{domain-placeholder}/" />
+		<meta name="twitter:site" content="https://catalystapp.co/" />
 		<meta name="twitter:title" content="Catalyst" />
 		<meta name="twitter:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more." />
-		<meta name="twitter:image" content="https://{domain-placeholder}/img/logo_big_white.png" />
+		<meta name="twitter:image" content="https://catalystapp.co/img/logo_big_white.png" />
 
 		<!-- link tags -->
-		<link rel='shortcut icon' type='image/png' href='https://{domain-placeholder}/img/logo_square.png'/>
-		<link rel='fluid-icon' type='image/png' href='https://{domain-placeholder}/img/logo_square.png'/>
-		<link rel="canonical" href="https://{domain-placeholder}/"/>
+		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
+		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
+		<link rel="canonical" href="https://catalystapp.co/"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
-		<link rel="image_src" href="https://{domain-placeholder}/img/logo_square.png" type="image/png"/>
+		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
 	</head>
 	<body>
 		<header>
@@ -263,7 +263,7 @@
 					<li class="flow-text">Ask me about beta testing!</li>
 					<li class="flow-text">Leave feedback about Catalyst</li>
 					<ul class="browser-default">
-						<li class="flow-text">You may contact me through: <a href="mailto:fauxil@{domain-placeholder}">email</a>, <a href="https://t.me/fauxil_fox">Telegram</a>, or Discord (@Fauxil_Fox#5881)</li>
+						<li class="flow-text">You may contact me through: <a href="mailto:fauxil@catalystapp.co">email</a>, <a href="https://t.me/fauxil_fox">Telegram</a>, or Discord (@Fauxil_Fox#5881)</li>
 					</ul>
 				</ul>
 			</div>
@@ -326,7 +326,7 @@
 	{
 	  "@context": "http://schema.org",
 	  "@type": "Organization",
-	  "url": "https://{domain-placeholder}",
+	  "url": "https://catalystapp.co",
 	  "name": "Catalyst - Facilitating Commissions"
 	}
 	</script>
