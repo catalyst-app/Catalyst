@@ -28,7 +28,7 @@ echo UniversalFunctions::createHeading("About Us");
 <?= Values::createInlineTOC([
 	["what-we-do", "What We Do"],
 	["social-media", "Social Media"],
-	["our-staff", "Out Staff"],
+	["our-staff", "Our Staff"],
 	["patreon", "Patrons"]
 ]) ?>
 				</div>
@@ -489,7 +489,7 @@ echo UniversalFunctions::createHeading("About Us");
 <?= Values::createTOC([
 	["what-we-do", "What We Do"],
 	["social-media", "Social Media"],
-	["our-staff", "Out Staff"],
+	["our-staff", "Our Staff"],
 	["patreon", "Patrons"]
 ]) ?>
 			</div>
