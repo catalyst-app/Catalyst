@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2018 at 06:27 AM
+-- Generation Time: Jan 14, 2018 at 06:17 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -571,7 +571,7 @@ INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GRO
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('COUPLE', 'Couple', 'The art involves 2 characters, likely as a couple', 'MISC', 4);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_ACT', 'Crafting', 'Crafting a physical object, like a plush', 'ACTIONS', 6);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_TYPE', 'Crafting', 'Crafted objects, like a plushie or similar', 'TYPES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (catalyst does not allow NSFW art of minors)', 'NICHES', 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (Catalyst does not allow NSFW art of minors)', 'NICHES', 5);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUSTOM', 'Custom', 'Suits custom-made to match a character', 'FURSUIT', 13);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DEER', 'Deer', 'Deer', 'SPECIES', 10);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DIGITAL', 'Digital Artwork', 'Artwork made on a computer', 'TYPES', 0);
@@ -857,7 +857,7 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(32, 1, 'EMAIL', 'email.png', 'Email', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(28, 1, 'ETSY', 'etsy.png', 'Etsy', 'orange darken-3 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(11, 1, 'FACEBOOK', 'fb.png', 'Facebook', 'blue darken-4 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(1, 1, 'FURAFFINITY', 'fa.png', 'FurAffinity', 'orange white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(1, 1, 'FURAFFINITY', 'fa.png', 'Fur Affinity', 'orange white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(5, 1, 'FURRYNETWORK', 'furrynetwork.png', 'Furry Network', 'blue darken-2 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(14, 1, 'GPLUS', 'gplus.png', 'Google+', 'red darken-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(3, 1, 'INKBUNNY', 'inkbunny.png', 'Inkbunny', 'light-green darken-1 white-text');
@@ -870,6 +870,7 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(16, 1, 'PICARTO', 'picarto.png', 'Picarto.TV', 'blue-grey darken-2 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(27, 1, 'PINTEREST', 'pintrest.png', 'Pinterest', 'red darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(9, 1, 'REDDIT', 'reddit.png', 'Reddit', 'reddit-orangered white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(0, 1, 'SELF', 'self.png', 'Catalyst', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(12, 1, 'SNAPCHAT', 'snap.png', 'Snapchat', 'yellow darken-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(4, 1, 'SOFURRY', 'sofurry.png', 'SoFurry', 'brown darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(23, 1, 'SOUNDCLOUD', 'soundcloud.png', 'SoundCloud', 'deep-orange darken-1 white-text');
@@ -1196,7 +1197,7 @@ ALTER TABLE `characters`
 -- AUTO_INCREMENT for table `character_images`
 --
 ALTER TABLE `character_images`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for the image', AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for the image';
 
 --
 -- AUTO_INCREMENT for table `commissions`
@@ -1268,7 +1269,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_social_media`
 --
 ALTER TABLE `user_social_media`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `user_wishlists`

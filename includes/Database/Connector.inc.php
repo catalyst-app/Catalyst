@@ -23,6 +23,7 @@ define("DB_TABLES", [
 	"commission_type_payment_options" => "commission_type_payment_options",
 	"commission_type_stages" => "commission_type_stages",
 	"commission_types" => "commission_types",
+	"email_list" => "email_list",
 	"integrations_meta" => "social_media_meta",
 	"user_social_media" => "user_social_media",
 	"user_wishlists" => "user_wishlists",
