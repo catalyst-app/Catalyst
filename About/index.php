@@ -198,6 +198,26 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 						</div>
 					</div>
+					
+					<h5 class="header">
+						Email List
+					</h5>
+
+					<form action="email.php" method="POST">
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="email" name="email" id="email-input" required="required">
+								<label for="email-input">Email</label>
+							</div>
+							<div class="input-field col s12">
+								<input type="text" name="context" id="context-input" required="required">
+								<label for="context-input">Name and other info</label>
+							</div>
+							<div class="col s12">
+								<button type="submit" class="btn col s12 m4 l2">Submit</button>
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="our-staff">
