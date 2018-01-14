@@ -305,12 +305,12 @@
 			</div>
 		</footer>
 	</body>
-	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-REDACTED-1"></script> -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112460506-1"></script>
 	<script>
-		// window.dataLayer = window.dataLayer || [];
-		// function gtag(){dataLayer.push(arguments);}
-		// gtag('js', new Date());
-		// gtag('config', 'UA-REDACTED-1');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-112460506-1');
 
 		(function($){
 			$(function(){
