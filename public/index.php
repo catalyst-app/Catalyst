@@ -296,7 +296,7 @@
 		<footer class="page-footer green darken-4">
 			<div class="container white-text">
 				<p>
-					Website &copy;2017 Fauxil Fox, All rights reserved.
+					Website &copy;2018 Catalyst, All rights reserved.
 				</p>
 				<p>
 					Hosted artwork copyright their respective owners unless otherwise stated.
