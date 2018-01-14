@@ -29,6 +29,7 @@ echo UniversalFunctions::createHeading("About Us");
 	["what-we-do", "What We Do"],
 	["social-media", "Social Media"],
 	["our-staff", "Out Staff"],
+	["patreon", "Patrons"]
 ]) ?>
 				</div>
 				<div class="divider hide-on-med-and-up"></div>
@@ -222,7 +223,7 @@ echo UniversalFunctions::createHeading("About Us");
 	[
 		"NETWORK" => "SELF",
 		"SERVICE_URL" => ROOTDIR."User/Fauxil",
-		"DISP_NAME" => "Profile",
+		"DISP_NAME" => "Fauxil",
 	],
 	[
 		"NETWORK" => "TWITTER",
@@ -260,6 +261,83 @@ echo UniversalFunctions::createHeading("About Us");
 					<div class="row">
 						<div class="col s12 m7">
 							<div class="col s12 center-on-small-only right right-align">
+								<h3 class="header hide-on-small-only no-margin">Lykai</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Lykai</h4>
+
+								<p class="flow-text">A wonderful and sweet wolf that keeps everything going.  Studying computer science and machine learning!</p>
+
+								<p class="flow-text">Image by blackmustang13 (<a href="https://www.furaffinity.net/view/25588593/">Fur Affinity</a>)</p>
+
+								<p class="flow-text"><strong>Roles: </strong> Assistant, General Helper</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "http://www.furaffinity.net/user/lykai/",
+		"DISP_NAME" => "~Lykai",
+	],
+	[
+		"NETWORK" => "TELEGRAM",
+		"SERVICE_URL" => "https://t.me/Lykai",
+		"DISP_NAME" => "@Lykai",
+	],
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Lykai#2495",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:lykai@catalystapp.co",
+		"DISP_NAME" => "lykai@catalystapp.co",
+	],
+])) ?>
+							</div>
+						</div>
+						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png');"></div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<br>
+					<div class="row">
+						<div class="col s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/new.png');"></div>
+						</div>
+						<div class="col s12 m7 offset-m1">
+							<div class="col s12 center-on-small-only">
+								<h3 class="header hide-on-small-only no-margin">Discombobulation</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Discombobulation</h4>
+
+								<p class="flow-text">TODO</p>
+
+								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Patreon, Tumblr)</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Discombobulation#5558",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:blackoak@catalystapp.co",
+		"DISP_NAME" => "blackoak@catalystapp.co",
+	],
+])) ?>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<br>
+
+					<div class="row">
+						<div class="col s12 m7">
+							<div class="col s12 center-on-small-only right right-align">
 								<h3 class="header hide-on-small-only no-margin">Foxxo</h3>
 								
 								<br class="hide-on-med-and-up">
@@ -267,7 +345,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text">From the land of maple syrup, moose, and beavers.  AKA Canada.  Also is a blue fox thing.  Speaking of blue things, Cherry MX Blue™ key switches are great. (We are not endoresed or paid by Cherry)</p>
 
-								<p>Image by wo7f (<a href="https://www.furaffinity.net/view/24726073/">Fur Affinity</a>)</p>
+								<p class="flow-text">Image by wo7f (<a href="https://www.furaffinity.net/view/24726073/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
@@ -296,6 +374,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<div class="divider"></div>
 
 					<br>
+
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
 							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/soul.png');"></div>
@@ -335,18 +414,55 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 	[
 		"NETWORK" => "EMAIL",
-		"SERVICE_URL" => "mailto:soul@catalystapp.co",
-		"DISP_NAME" => "soul@catalystapp.co",
+		"SERVICE_URL" => "mailto:soul.wesson@catalystapp.co",
+		"DISP_NAME" => "soul.wesson@catalystapp.co",
 	],
 ])) ?>
 							</div>
 						</div>
 					</div>
+
+					<div class="divider"></div>
+
+					<br>
+
+					<div class="row">
+						<div class="col s12 m7">
+							<div class="col s12 center-on-small-only right right-align">
+								<h3 class="header hide-on-small-only no-margin">Jiki Scott</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Jiki Scott</h4>
+
+								<p class="flow-text">TODO</p>
+
+								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Fur Affinity, Facebook)</p>
+<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "TELEGRAM",
+		"SERVICE_URL" => "https://t.me/JikiScott",
+		"DISP_NAME" => "@JikiScott",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:jiki@catalystapp.co",
+		"DISP_NAME" => "jiki@catalystapp.co",
+	],
+])) ?>
+							</div>
+						</div>
+						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/new.png');"></div>
+						</div>
+					</div>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="history">
-					<h4 style="margin-top: -80px; padding-top: 80px;">History</h4>
-					
+					<h4 style="margin-top: -80px; padding-top: 80px;">Patrons</h4>
+
+					<p>Catalyst does not endorse/support any of the below names, and the patrons listed below do not officially represent Catalyst.</p>
+
+					<p class="flow-text">None yet!  <a href="https://patreon.com/Catalyst">Become one?</a></p>					
 				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
@@ -354,6 +470,7 @@ echo UniversalFunctions::createHeading("About Us");
 	["what-we-do", "What We Do"],
 	["social-media", "Social Media"],
 	["our-staff", "Out Staff"],
+	["patreon", "Patrons"]
 ]) ?>
 			</div>
 		</div>
