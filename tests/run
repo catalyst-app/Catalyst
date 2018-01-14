@@ -1,2 +1,0 @@
-(curl -sS http://localhost:4444/selenium-server/driver?cmd=getLogMessages &> /dev/null) || (java -jar /c/Selenium/selen* &> /dev/null &)
-./vendor/bin/phpunit --bootstrap tests/LoadTests.php --verbose --testdox --printer "rpkamp\FancyTestdoxPrinter" tests/

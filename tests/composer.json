@@ -1,9 +1,0 @@
-{
-    "require": {
-        "facebook/webdriver": "^1.5"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.5",
-        "rpkamp/fancy-testdox-printer": "^0.1.1"
-    }
-}
