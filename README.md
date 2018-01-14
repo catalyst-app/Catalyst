@@ -38,23 +38,24 @@ We are aware that there are many current and planned competitors to us.  However
 
 # How you can Help
 
-There are many ways!  
-Here are some, however I'm open to anything you want to do!
+Follow us!  I ask for help often in the Discord and Telegram!
 
-* Beta testing
-  * Soon:tm: I will have a beta version available, any testing there is appreciated!
-  * Sporadic requests for testing may be made in the appropriate discord/telegram channels
-    * If you do do this, _please_ try to break it.  Be malicious.  See what you can do to mess it up, make it glitch, etc - you'll be helping the site against real attackers.
-* Spread the word!
-  * Feel free to tell people about this! The more interest we have the sooner we can take off
-* PM me suggestions, questions, _or just talk im lonely please_
-  * See [contact me](#contact-me) below
-* Discuss what you would like to see in this
-* How you would use it
-* Join the email list, discord server, or telegram group for updates!
-  * Email me for the email list: [contact me](#contact-me)
-  * Discord: https://discord.gg/EECUcnT
-  * Telegram: https://t.me/catalystapp
+Discord: https://discord.gg/EECUcnT
+Telegram: https://t.me/catalystapp and https://t.me/catalystapp_announcements
+Twitter: https://twitter.com/catalystapp_co
+Patreon: https://patreon.com/catalyst
+Ko-Fi: https://ko-fi.com/catalystapp
+Instagram: https://instagram.com/catalyst.app
+DeviantArt: https://catalystapp.deviantart.com/
+Weasyl: https://weasyl.com/~catalystapp/
+Fur Affinity: http://furaffinity.net/user/catalystapp
+FurryNetwork: https://beta.furrynetwork.com/catalyst/
+Google Plus: https://plus.google.com/102762464787584663279
+Reddit: https://reddit.com/user/catalystapp
+Tumblr: https://catalystapp-co.tumblr.com/
+Facebook: https://facebook.com/catalystapp.co
+GitHub: https://github.com/smileytechguy/Catalyst
+Email: catalyst@catalystapp.co
 
 # Roadmap
 
