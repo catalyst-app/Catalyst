@@ -238,7 +238,7 @@ class EditCommissionType {
 				}
 				$attrs = $type->getAttrs();
 				return '
-				<p class="col s12 no-bottom-margin">'.$in["label"].'</p>
+				<p class="col s12 no-bottom-margin">'.$in["label"].' (<a href="#" class="attr-invert-btn">Invert</a>)</p>
 				<div class="attr-container col s12">'.
 				implode("",array_map(function($in) use ($attrs) {
 					return '<div class="btn attr-button toggle-btn tooltipped '.(in_array($in[0], $attrs) ? 'on' : 'off').'" data-key="'.htmlspecialchars($in[0]).'" data-tooltip="'.htmlspecialchars($in[2]).'" data-position="bottom" data-delay="10">'.htmlspecialchars($in[1]).'</div>';
