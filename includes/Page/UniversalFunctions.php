@@ -164,4 +164,8 @@ class UniversalFunctions {
 			'</a>'
 		]);
 	}
+
+	public static function zeropad($num, $lim) {
+		return (strlen($num) >= $lim) ? $num : self::zeropad("0" . $num, $lim);
+	}
 }

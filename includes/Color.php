@@ -54,6 +54,6 @@ class Color {
 			$byte = dechex($val);
 		}
 
-		return implode("", $exploded);
+		return implode("", array_map(function($a) { return \Catalyst\Page\UniversalFunctions::zeropad($a, 2); }, $exploded));
 	}
 }
