@@ -621,6 +621,16 @@ var getCardState = function() {
 				handle: 'p'
 			});
 		} catch(e) {}
+		$(document).on("click", ".attr-invert-btn", function(e) {
+			e.preventDefault();
+			$($(this).parent().next().children()).each(function(i, a) {
+				if ($(a).hasClass("off")) {
+					$(a).addClass("on").removeClass("off");
+				} else {
+					$(a).addClass("off").removeClass("on");
+				}
+			});
+		});
 
 		/* DELETE COMMISSION TYPES */
 		$(document).on("click", ".delete-commission-type-button", function(e) {
