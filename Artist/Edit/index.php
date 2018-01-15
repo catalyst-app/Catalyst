@@ -24,7 +24,7 @@ if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 
 require_once Values::HEAD_INC;
 
-echo UniversalFunctions::createHeading("Edit Artist");
+echo UniversalFunctions::createHeading("Edit Artist Page");
 
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
