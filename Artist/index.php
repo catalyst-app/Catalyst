@@ -108,7 +108,7 @@ if (count($types)): ?>
 										<?= htmlspecialchars($type->getBaseCost()) ?>
 									</h5>
 <?php if ($type->isOpen()): ?>
-									<a class="btn">commission</a>
+									<a href="<?= ROOTDIR ?>Commission/New/<?= $type->getToken() ?>" class="btn">commission</a>
 <?php else: ?>
 									<a class="btn disabled">closed</a>
 <?php endif; ?>
