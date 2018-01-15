@@ -122,6 +122,10 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/catalystapp.co</h5></span>
 							</a>
+							<a href="https://reddit.com/r/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
+							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
@@ -195,6 +199,10 @@ echo UniversalFunctions::createHeading("About Us");
 							<a href="https://facebook.com/catalystapp.co" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/catalystapp.co</h5></span>
+							</a>
+							<a href="https://reddit.com/r/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
 							</a>
 						</div>
 					</div>
@@ -279,18 +287,23 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col s12 m7">
-							<div class="col s12 center-on-small-only right right-align">
-								<h3 class="header hide-on-small-only no-margin">Lykai</h3>
-								
-								<br class="hide-on-med-and-up">
-								<h4 class="header hide-on-med-and-up no-margin">Lykai</h4>
+						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png');"></div>
+						</div>
+						<div class="col s12 m7 pull-m4">
+							<div class="col s12 right-align">
+								<div class="center-on-small-only">
+									<h3 class="header hide-on-small-only no-margin">Lykai</h3>
 
-								<p class="flow-text">A wonderful and sweet wolf that keeps everything going.  Studying computer science and machine learning!</p>
+									<br class="hide-on-med-and-up">
+									<h4 class="header hide-on-med-and-up no-margin">Lykai</h4>
 
-								<p class="flow-text">Image by blackmustang13 (<a href="https://www.furaffinity.net/view/25588593/">Fur Affinity</a>)</p>
+									<p class="flow-text">A wonderful and sweet wolf that keeps everything going.  Studying computer science and machine learning!</p>
 
-								<p class="flow-text"><strong>Roles: </strong> Assistant, General Helper</p>
+									<p class="flow-text">Image by blackmustang13 (<a href="https://www.furaffinity.net/view/25588593/">Fur Affinity</a>)</p>
+
+									<p class="flow-text"><strong>Roles: </strong> Assistant, General Helper</p>
+								</div>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -315,25 +328,24 @@ echo UniversalFunctions::createHeading("About Us");
 ])) ?>
 							</div>
 						</div>
-						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png');"></div>
-						</div>
 					</div>
 					<div class="divider"></div>
 
 					<br>
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/new.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/disco.png');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
-								<h3 class="header hide-on-small-only no-margin">Discombobulation</h3>
+								<h3 class="header hide-on-small-only no-margin">Disco Bob</h3>
 								
 								<br class="hide-on-med-and-up">
-								<h4 class="header hide-on-med-and-up no-margin">Discombobulation</h4>
+								<h4 class="header hide-on-med-and-up no-margin">Disco Bob</h4>
 
-								<p class="flow-text">TODO</p>
+								<p class="flow-text">Disco Bob (Discombobulation) loves to help out others with whatever problems they encounter.  He studies Chemistry and English and loves all sorts of animals (primarily his dogs).  Disco Bob is always happy to get a message from someone who needs help or simply wants to talk.</p>
+
+								<p class="flow-text">Image by Orlando Fox (<a href="https://twitter.com/Orlando_Fox/">Twitter</a>, <a href="http://afoxdraws.com/index.html">Website</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Patreon, Tumblr)</p>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
@@ -356,18 +368,23 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col s12 m7">
-							<div class="col s12 center-on-small-only right right-align">
-								<h3 class="header hide-on-small-only no-margin">Foxxo</h3>
-								
-								<br class="hide-on-med-and-up">
-								<h4 class="header hide-on-med-and-up no-margin">Foxxo</h4>
+						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png');"></div>
+						</div>
+						<div class="col s12 m7 pull-m4">
+							<div class="col s12 right-align">
+								<div class="center-on-small-only">
+									<h3 class="header hide-on-small-only no-margin">Foxxo</h3>
+									
+									<br class="hide-on-med-and-up">
+									<h4 class="header hide-on-med-and-up no-margin">Foxxo</h4>
 
-								<p class="flow-text">From the land of maple syrup, moose, and beavers.  AKA Canada.  Also is a blue fox thing.  Speaking of blue things, Cherry MX Blue™ key switches are great. (We are not endoresed or paid by Cherry)</p>
+									<p class="flow-text">From the land of maple syrup, moose, and beavers.  AKA Canada.  Also is a blue fox thing.  Speaking of blue things, Cherry MX Blue™ key switches are great. (We are not endorsed or paid by Cherry)</p>
 
 								<p class="flow-text">Image by wo7f (<a href="https://www.furaffinity.net/view/24726073/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
+								</div>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TWITTER",
@@ -391,9 +408,6 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 ])) ?>
 							</div>
-						</div>
-						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png');"></div>
 						</div>
 					</div>
 					<div class="divider"></div>
@@ -452,16 +466,23 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col s12 m7">
-							<div class="col s12 center-on-small-only right right-align">
-								<h3 class="header hide-on-small-only no-margin">Jiki Scott</h3>
-								
-								<br class="hide-on-med-and-up">
-								<h4 class="header hide-on-med-and-up no-margin">Jiki Scott</h4>
+						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/jiki.png');"></div>
+						</div>
+						<div class="col s12 m7 pull-m4">
+							<div class="col s12 right-align">
+								<div class="center-on-small-only">
+									<h3 class="header hide-on-small-only no-margin">Jiki Scott</h3>
+									
+									<br class="hide-on-med-and-up">
+									<h4 class="header hide-on-med-and-up no-margin">Jiki Scott</h4>
 
-								<p class="flow-text">TODO</p>
+									<p class="flow-text">Jiki is a social media tycoonist who's studying marketing and the principles needed to make social platforms.</p>
 
-								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Fur Affinity, Facebook)</p>
+									<p class="flow-text">Image by ShadowNinja976 (<a href="https://www.furaffinity.net/view/19702583/">Fur Affinity</a>)</p>
+
+									<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Fur Affinity, Facebook)</p>
+								</div>
 <?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TELEGRAM",
@@ -475,9 +496,6 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 ])) ?>
 							</div>
-						</div>
-						<div class="col s6 offset-s3 m4 offset-m1 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/new.png');"></div>
 						</div>
 					</div>
 				</div>

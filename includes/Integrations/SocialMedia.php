@@ -49,7 +49,7 @@ class SocialMedia {
 	}
 
 	public static function getChipHTML(array $chips) : string {
-		$result = "";
+		$result = '<div class="center-on-small-only">';
 
 		foreach ($chips as $chip) {
 			if (!is_null($chip["href"])) {
@@ -67,7 +67,7 @@ class SocialMedia {
 			}
 		}
 
-		return $result;
+		return $result.'</div>';
 	}
 
 	public static function getAddChip() : string {
