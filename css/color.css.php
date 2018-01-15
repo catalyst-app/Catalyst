@@ -32,7 +32,7 @@ a {
 }
 
 .user-color {
-	background-color: #<?= isset(Color::COLOR_BY_CATEGORY[Color::HEX_MAP[$_GET["hex"]][0]]["darken-1"]) ? Color::COLOR_BY_CATEGORY[Color::HEX_MAP[$_GET["hex"]][0]]["darken-1"] : Color::COLOR_BY_CATEGORY[Color::HEX_MAP[$_GET["hex"]][0]][""] ?>;
+	background-color: #<?= $_GET["hex"] ?>;
 }
 
 .dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {
