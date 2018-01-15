@@ -32,7 +32,9 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("New Commission");
 
 ?>
-<?php if (!isset($type)): ?>
+<?php if (User::isLoggedOut()): ?>
+	<?= User::getNotLoggedInHTML() ?>
+<?php elseif (!isset($type)): ?>
 	No exist
 <?php elseif (!$type->isOpen()): ?>
 	no open
