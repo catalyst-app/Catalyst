@@ -271,12 +271,12 @@ Email: catalyst@catalystapp.co
 
 **Text things**
 
-- [ ] About Page
-  - [ ] Staff
-  - [ ] Official accounts of staff
-  - [ ] Social medias
-  - [ ] story?
-  - [ ] helpers/testers
+- [x] About Page
+  - [x] Staff
+  - [x] Official accounts of staff
+  - [x] Social medias
+  - [x] ~~story?~~
+  - [x] ~~helpers/testers~~
 - [ ] ToS
 - [ ] Help center?
   - [ ] Support desk
