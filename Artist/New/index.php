@@ -21,7 +21,7 @@ if (User::isLoggedIn()) {
 
 require_once Values::HEAD_INC;
 
-echo UniversalFunctions::createHeading("New Artist");
+echo UniversalFunctions::createHeading("New Artist Page");
 
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
