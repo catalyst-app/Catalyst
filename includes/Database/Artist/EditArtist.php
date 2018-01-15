@@ -128,7 +128,7 @@ class EditArtist {
 	}
 
 	public static function update(\Catalyst\Artist\Artist $artist, string $name, string $url, string $desc, string $tos, ?array $img, string $color) : int {
-		$aid = $_SESSION["user"]->getId();
+		$aid = $artist->getId();
 
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT 1 FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` != :ID AND `URL` = :URL;");
 		$stmt->bindParam(":ID", $aid);
