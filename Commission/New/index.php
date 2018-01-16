@@ -13,14 +13,15 @@ if (isset($_GET["q"])) {
 	$id = CommissionType::getIdFromToken($_GET["q"]);
 	if ($id != -1) {
 		$type = new CommissionType($id);
+		$artist = $type->getArtistPage();
 	}
 }
 
 define("PAGE_KEYWORD", Values::NEW_COMMISSION[0]);
-define("PAGE_TITLE", Values::createTitle(Values::NEW_COMMISSION[1], ["type" => (isset($type) ? $type->getName() : "Invalid"), "artist" => (isset($type) ? $type->getArtistPage()->getName() : "Invalid")]));
+define("PAGE_TITLE", Values::createTitle(Values::NEW_COMMISSION[1], ["type" => (isset($type) ? $type->getName() : "Invalid"), "artist" => (isset($type) ? $artist->getName() : "Invalid")]));
 
 if (isset($type)) {
-	define("PAGE_COLOR", $type->getArtistPage()->getColor());
+	define("PAGE_COLOR", $artist->getColor());
 } elseif (User::isLoggedIn()) {
 	define("PAGE_COLOR", User::getCurrentUser()->getColor());
 } else {
