@@ -50,6 +50,7 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="divider"></div>
 				<div class="section" id="social-media">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Social Media</h4>
+					<p class="flow-text">Italic networks are social groups which are used for direct user interaction and are preferred.</p>
 					<div class="row">
 						<div class="col s12 m6 hide-on-large-only">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
@@ -66,7 +67,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">discord.gg/EECUcnT</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>discord.gg/EECUcnT</i></h5></span>
 							</a>
 							<a href="https://furaffinity.net/user/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
@@ -104,7 +105,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://t.me/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
 							</a>
 							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
@@ -142,7 +143,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">discord.gg/EECUcnT</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>discord.gg/EECUcnT</i></h5></span>
 							</a>
 							<a href="https://catalystapp.deviantart.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
@@ -186,7 +187,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://t.me/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
 							</a>
 							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
