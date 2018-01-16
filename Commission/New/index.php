@@ -36,9 +36,17 @@ echo UniversalFunctions::createHeading("New Commission");
 <?php if (User::isLoggedOut()): ?>
 	<?= User::getNotLoggedInHTML() ?>
 <?php elseif (!isset($type)): ?>
-	No exist
+	<div class="section">
+		<p class="flow-text">This commission type does not exist</p>
+	</div>
 <?php elseif (!$type->isOpen()): ?>
-	no open
+	<div class="section">
+		<p class="flow-text">This commission type is not currently open!</p>
+<?php if (!$_SESSION["user"]->isOnWishlist($type)): ?>
+		<p class="flow-text"><a href="#" data-id="<?= $type->getId() ?>" class="wishlist-add-btn">Add to wishlist?</a></p>
+<?php endif; ?>
+		<p class="flow-text">Return to <a href="<?= ROOTDIR ?>Artist/<?= $artist->getUrl() ?>"><?= $artist->getName() ?>'s page</a></p>
+	</div>
 <?php else: ?>
 	ayyy
 <?php endif; ?>
