@@ -110,7 +110,7 @@ var getCardState = function() {
 			renderMarkdownArea($(".markdown-target[data-field="+$(this).attr("id")+"]"));
 		});
 
-		$(document).on("click", ".markdown-rendered-checkbox", function(e) { e.preventDefault(); e.stopPropogation(); return false; });
+		$(document).on("click", ".markdown-rendered-checkbox", function(e) { e.preventDefault(); if (e.stopPropogation()) { e.stopPropogation(); } return false; });
 
 		/* EASTER EGGS */
 		try {
@@ -168,7 +168,7 @@ var getCardState = function() {
 		/* FILE PICKER */
 		$(document).on("click", ".file-input-field, .file-input-field *", function(e) {
 			$(this).find("input[type=file]").focus().trigger("click");
-			e.stopPropagation();
+			if (e.stopPropogation) e.stopPropogation();
 		});
 		$(document).on('change', '.file-input-field .file-input-path', function () {
 			if ($(this).val().length == 0) {
@@ -393,7 +393,7 @@ var getCardState = function() {
 				alert("Unknown error.");
 				window.location="";
 			});
-			e.stopPropagation();
+			if (e.stopPropogation) e.stopPropogation();
 			e.preventDefault();
 			return false;
 		});
@@ -714,7 +714,7 @@ var getCardState = function() {
 				alert("Unknown error.");
 				window.location="";
 			});
-			e.stopPropogation();
+			if (e.stopPropogation) e.stopPropogation();
 			e.preventDefault();
 			return false;
 		});
@@ -733,7 +733,7 @@ var getCardState = function() {
 				alert("Unknown error.");
 				window.location="";
 			});
-			e.stopPropogation();
+			if (e.stopPropogation) e.stopPropogation();
 			e.preventDefault();
 			return false;
 		});
