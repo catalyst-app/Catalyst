@@ -359,7 +359,7 @@ var getCardState = function() {
 		echo FormJS::generateFormHandler(SocialMedia::getFormStructure());
 		?> 
 		var addSocialChip = function(e) {
-			$(".social-chips").append(e.message);
+			$(".social-chips > div").append($(e.message).html());
 			$("#add-social-network-modal").modal("close");
 			$("#addnetwork-form")[0].reset();
 		};
@@ -400,8 +400,8 @@ var getCardState = function() {
 
 		/* MOVE SOCIAL MEDIA */
 		try {
-			new Draggable.Sortable(document.getElementsByClassName('social-chips')[0], {
-				draggable: '.social-chips > a, .social-chips > .chip',
+			new Draggable.Sortable(document.querySelector('.social-chips > div'), {
+				draggable: '.social-chips > div > a, .social-chips > div > .chip',
 				appendTo: '.social-chips'
 			}).on("sortable:stop", function() {
 				setTimeout(function() {
