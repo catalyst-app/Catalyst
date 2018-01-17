@@ -145,6 +145,42 @@ class User implements \Serializable {
 		return $result;
 	}
 
+	public function getTotpKey() : ?string {
+		if (array_key_exists("TOTP_KEY", $this->cache)) {
+			return $this->cache["TOTP_KEY"];
+		}
+
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_KEY` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND `EMAIL` IS NOT NULL;");
+		$stmt->bindParam(":ID", $this->id);
+		$stmt->execute();
+
+		$result = $this->cache["TOTP_KEY"] = $stmt->fetchAll()[0]["TOTP_KEY"];
+
+		$stmt->closeCursor();
+
+		return $result;
+	}
+
+	public function isTotpEnabled() : bool {
+		return !is_null($this->getTotpKey());
+	}
+
+	public function getTotpResetToken() : ?string {
+		if (array_key_exists("TOTP_RESET_TOKEN", $this->cache)) {
+			return $this->cache["TOTP_RESET_TOKEN"];
+		}
+
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_RESET_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND `EMAIL` IS NOT NULL;");
+		$stmt->bindParam(":ID", $this->id);
+		$stmt->execute();
+
+		$result = $this->cache["TOTP_RESET_TOKEN"] = $stmt->fetchAll()[0]["TOTP_RESET_TOKEN"];
+
+		$stmt->closeCursor();
+
+		return $result;
+	}
+
 	public function getEmail() : ?string {
 		if (array_key_exists("EMAIL", $this->cache)) {
 			return $this->cache["EMAIL"];
