@@ -199,6 +199,7 @@ function totp(K,t) {
 		$(document).on("click", ".file-input-field, .file-input-field *", function(e) {
 			$(this).find("input[type=file]").focus().trigger("click");
 			if (e.stopPropogation) e.stopPropogation();
+			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 		});
 		$(document).on('change', '.file-input-field .file-input-path', function () {
 			if ($(this).val().length == 0) {
@@ -427,6 +428,7 @@ function totp(K,t) {
 				window.location="";
 			});
 			if (e.stopPropogation) e.stopPropogation();
+			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 			e.preventDefault();
 			return false;
 		});
@@ -748,6 +750,7 @@ function totp(K,t) {
 				window.location="";
 			});
 			if (e.stopPropogation) e.stopPropogation();
+			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 			e.preventDefault();
 			return false;
 		});
@@ -767,6 +770,7 @@ function totp(K,t) {
 				window.location="";
 			});
 			if (e.stopPropogation) e.stopPropogation();
+			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 			e.preventDefault();
 			return false;
 		});
