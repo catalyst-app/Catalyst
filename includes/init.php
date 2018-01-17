@@ -17,6 +17,7 @@ require_once __DIR__."/Database/CommissionType/NewCommissionType.php";
 require_once __DIR__."/Database/CommissionType/Wishlist.php";
 require_once __DIR__."/Database/Connector.inc.php";
 require_once __DIR__."/Database/FeatureBoard/Groups.php";
+require_once __DIR__."/Database/FeatureBoard/Item.php";
 require_once __DIR__."/Database/Integrations/Meta.php";
 require_once __DIR__."/Database/SocialMedia.php";
 require_once __DIR__."/Database/User/Deactivate.php";
