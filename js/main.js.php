@@ -775,6 +775,10 @@ function totp(K,t) {
 			return false;
 		});
 
+		/* FEATURE BOARD */
+		$(document).on("click", "tr.feature-item", function(e) {
+			window.location = $(this).attr("data-url");
+		});
 		/* ONLOADS */
 		$(".button-collapse").sideNav();
 		$(".modal").modal();
