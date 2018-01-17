@@ -36,6 +36,7 @@ require_once __DIR__."/Page/Header/Header.php";
 require_once __DIR__."/Page/Navigation/Navbar.php";
 require_once __DIR__."/Page/UniversalFunctions.php";
 require_once __DIR__."/Page/Values.php";
+require_once __DIR__."/phpqrcode.php";
 require_once __DIR__."/Response.php";
 require_once __DIR__."/Tokens.php";
 require_once __DIR__."/User/User.php";
