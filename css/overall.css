@@ -12,6 +12,10 @@ a .card-content p, .new-commission-type *:not(a) {
 	color: #000;
 }
 
+tr.feature-item {
+	cursor: pointer;
+}
+
 .toggle-btn.off {
 	background-color: #DFDFDF !important;
 	-webkit-box-shadow: none;
