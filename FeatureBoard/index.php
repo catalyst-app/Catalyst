@@ -43,7 +43,7 @@ echo UniversalFunctions::createHeading("Feature Board");
 				</thead>
 				<tbody>
 <?php foreach (Item::getForGroup($key) as $item): ?>
-					<tr data-id="<?= $item["ID"] ?>" date-url="<?= ROOTDIR ?>FeatureBoard/<?= $item["AUTOGEN_URL"] ?>" class="feature-item <?= in_array($item["STATUS_KEY"], ["COMPLETED", "DENIED"]) ? "grey-text" : "" ?>">
+					<tr data-id="<?= $item["ID"] ?>" data-url="<?= ROOTDIR ?>FeatureBoard/<?= $item["AUTOGEN_URL"] ?>" class="feature-item <?= in_array($item["STATUS_KEY"], ["COMPLETED", "DENIED"]) ? "grey-text" : "" ?>">
 						<td><?= $item["STATUS"] ?></td>
 						<td><?= $item["NAME"] ?></td>
 						<td><a href="<?= ROOTDIR ?>User/<?= ($user = new User($item["AUTHOR_ID"]))->getUsername() ?>"><?= $user->getNickname() ?></a></td>
