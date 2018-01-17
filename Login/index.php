@@ -28,6 +28,9 @@ if (FormHTML::testAjaxSubmissionFailed()) {
 } elseif (call_user_func(...Login::getFormStructure()[0]["auth"][0])) {
 	echo call_user_func(Login::getFormStructure()[0]["auth"][1]);
 } else {
+	if (Login::pending2FA()) {
+		unset($_SESSION["pending_user"]);
+	}
 	echo FormHTML::generateForm(Login::getFormStructure());
 }
 
