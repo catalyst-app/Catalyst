@@ -222,7 +222,7 @@ class Register {
 		$regStmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["users"]."` (`FILE_TOKEN`,`USERNAME`,`HASHED_PASSWORD`,`PASSWORD_RESET_TOKEN`,`EMAIL`,`EMAIL_TOKEN`,`PICTURE_LOC`,`PICTURE_NSFW`,`NSFW`,`COLOR`,`NICK`) VALUES (:FILE_TOKEN,:USERNAME,:HASHED_PASSWORD,:PASSWORD_RESET_TOKEN,:EMAIL,:EMAIL_TOKEN,:PICTURE_LOC,:PICTURE_NSFW,:NSFW,UNHEX(:COLOR),:NICK)");
 
 		$fileToken = \Catalyst\Tokens::generateUniqueUserFileToken();
-		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+		$hashedPassword = password_hash($password, PASSWORD_BCRYPT, ["cost" => \Catalyst\Page\Values::BCRYPT_COST]);
 		$passwordToken = \Catalyst\Tokens::generatePasswordResetToken();
 		$email = $email ? $email : null;
 		$emailToken = \Catalyst\Tokens::generateEmailVerificationToken();

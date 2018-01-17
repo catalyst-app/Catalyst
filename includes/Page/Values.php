@@ -34,6 +34,8 @@ class Values {
 		"mod" => "darken-4"
 	];
 
+	const BCRYPT_COST = 14;
+
 	const ROOT_TITLE = "Catalyst";
 
 	const HEAD_INC = __DIR__."/Header/header.inc.php";
