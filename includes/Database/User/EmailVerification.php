@@ -20,8 +20,8 @@ class EmailVerification {
 
 	public const REDIRECT_URL = "../Dashboard";
 
-	public const CAPTCHA_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
-	public const CAPTCHA_SECRET = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+	public const CAPTCHA_KEY = "6LdGBEEUAAAAAMHsFHz4BRvEnIq1NMuuU_Keo7nn";
+	public const CAPTCHA_SECRET = EMAIL_VERIFICATION_CAPTCHA_SECRET;
 
 	public static $lastErrId = -1;
 

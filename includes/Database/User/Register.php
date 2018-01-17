@@ -37,8 +37,8 @@ class Register {
 
 	public const REDIRECT_URL = "../Dashboard";
 
-	public const CAPTCHA_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
-	public const CAPTCHA_SECRET = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+	public const CAPTCHA_KEY = "6Lf7A0EUAAAAAM7naF_3NGWGVAxMUK-qPQABEdAl";
+	public const CAPTCHA_SECRET = REGISTER_CAPTCHA_SECRET;
 
 	public static $lastErrId = -1;
 
