@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2018 at 06:17 PM
+-- Generation Time: Jan 17, 2018 at 01:59 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -601,7 +601,7 @@ INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GRO
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HYPNOSIS', 'Hypnosis', 'Any form of mind control, including corruption, falls under this category', 'NICHES', 17);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ICONS', 'Icons', 'Art which is designed to be used as a profile picture', 'ART', 9);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('INFLATION', 'Inflation', 'Forced feeding or otherwise inflating a character with a substance', 'NICHES', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('KEMONO', 'Kemnon', '\"Anime-style\" art, originated in Japan', 'STYLES', 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('KEMONO', 'Kemono', '\"Anime-style\" art, originated in Japan', 'STYLES', 5);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LATEX_RUBBER', 'Latex/Rubber', 'Art in which latex or rubber may be drawn', 'NICHES', 18);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LEGS', 'Legs', 'Just the legs of the costume', 'FURSUIT', 4);
 INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LINEART', 'Lineart', 'Cleaned-up sketch, thick, definitive lines', 'ACTIONS', 1);
@@ -1173,7 +1173,7 @@ ALTER TABLE `user_wishlists`
 -- AUTO_INCREMENT for table `artist_pages`
 --
 ALTER TABLE `artist_pages`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for each artist page', AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for each artist page', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `artist_social_media`
@@ -1263,19 +1263,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `user_social_media`
 --
 ALTER TABLE `user_social_media`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `user_wishlists`
 --
 ALTER TABLE `user_wishlists`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
