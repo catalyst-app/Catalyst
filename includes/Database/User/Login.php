@@ -9,7 +9,8 @@ class Login {
 	public const CAPTCHA_INVALID = 3;
 	public const ACCOUNT_DISABLED = 4;
 	public const ALREADY_LOGGED_IN = 5;
-	public const ERROR_UNKNOWN = 6;
+	public const TOTP_REQUIRED = 6;
+	public const ERROR_UNKNOWN = 7;
 
 	public const PHRASES = [
 		self::CREDENTIALS_VALID => "Success",
@@ -18,6 +19,7 @@ class Login {
 		self::CAPTCHA_INVALID => "Invalid Captcha",
 		self::ACCOUNT_DISABLED => "This account has been disabled.  Please contact support for more information.",
 		self::ALREADY_LOGGED_IN => "You are already logged in.  Please try again.",
+		self::TOTP_REQUIRED => "Please authenticate with your 2FA code",
 		self::ERROR_UNKNOWN => "An unknown error has occured.  Please try again.  If the problem persists, please contact support.  Error ID: ",
 	];
 
@@ -45,7 +47,9 @@ class Login {
 					self::ACCOUNT_DISABLED =>
 						'alert("'.self::PHRASES[self::ACCOUNT_DISABLED].'");return;break;',
 					self::ALREADY_LOGGED_IN =>
-						'alert("'.self::PHRASES[self::ALREADY_LOGGED_IN].'");window.location="";return;break;'
+						'alert("'.self::PHRASES[self::ALREADY_LOGGED_IN].'");window.location="";return;break;',
+					self::TOTP_REQUIRED =>
+						'window.location=$("html").attr("data-rootdir")+"Login/TOTP/";return;break;'
 				],
 				"additional_fields" => [],
 				"success" => self::PHRASES[self::CREDENTIALS_VALID]
@@ -86,19 +90,19 @@ class Login {
 	}
 
 	public static function login(string $username, string $password) : int {
-		$userStmt = $GLOBALS["dbh"]->prepare("SELECT `ID`, `DEACTIVATED`, `SUSPENDED`, `HASHED_PASSWORD` FROM `".DB_TABLES["users"]."` WHERE `USERNAME` = :USERNAME;");
-		$userStmt->bindParam(":USERNAME", $username);
-		if (!$userStmt->execute()) {
-			error_log(" Login error: **".(self::$lastErrId = microtime(true))."**, ".serialize($userStmt->errorInfo()));
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`, `DEACTIVATED`, `SUSPENDED`, `HASHED_PASSWORD`, `TOTP_KEY` FROM `".DB_TABLES["users"]."` WHERE `USERNAME` = :USERNAME;");
+		$stmt->bindParam(":USERNAME", $username);
+		if (!$stmt->execute()) {
+			error_log(" Login error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
 			return self::ERROR_UNKNOWN;
 		}
 
-		if ($userStmt->rowCount() == 0) {
+		if ($stmt->rowCount() == 0) {
 			return self::USERNAME_INVALID;
 		}
 
-		$userRow = $userStmt->fetchAll()[0];
-		$userStmt->closeCursor();
+		$userRow = $stmt->fetchAll()[0];
+		$stmt->closeCursor();
 
 		if (!password_verify($password, $userRow["HASHED_PASSWORD"])) {
 			return self::PASSWORD_INVALID;
@@ -108,9 +112,18 @@ class Login {
 			return self::ACCOUNT_DISABLED;
 		}
 
+		if ($userRow["TOTP_KEY"] !== null) {
+			$_SESSION["pending_user"] = new \Catalyst\User\User($userRow["ID"]);
+			return self::TOTP_REQUIRED;
+		}
+
 		self::loginAsId($userRow["ID"]);
 
 		return self::CREDENTIALS_VALID;
+	}
+
+	public static function pending2FA() : bool {
+		return isset($_SESSION["pending_user"]) && !is_null($_SESSION["pending_user"]) && $_SESSION["pending_user"] instanceof \Catalyst\User\User;
 	}
 
 	public static function loginAsId(int $id) {
