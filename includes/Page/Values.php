@@ -7,6 +7,7 @@ class Values {
 	const HOME = ["home", "Home"];
 	const ABOUT_US = ["about", "About Us"];
 	const FAQ = ["about", "FAQ"];
+	const FEATURE_BOARD = ["about", "Feature Board"];
 	const LOGIN = ["login", "Login"];
 	const LOGOUT = ["logout", "Logout"];
 	const REGISTER = ["register", "Register"];
