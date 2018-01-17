@@ -99,11 +99,13 @@ echo UniversalFunctions::createHeading("FAQ");
 				<div class="section" id="color">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Why can I change the site's colors?</h4>
 					
+					<p class="flow-text">We believe that you should be able to make our platform your own.  Therefore, you may choose your own color theme which will be seen around the site and when anyone views your profile.  You can customize the colors of characters, user profiles, and artist's pages.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="markdown">
 					<h4 style="margin-top: -80px; padding-top: 80px;">How can I format text?</h4>
 					
+					<p class="flow-text">Catalyst uses a modified version of Markdown for formatting.  Please see <a href="<?= ROOTDIR ?>Markdown">this page</a> for help.</p>
 				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
