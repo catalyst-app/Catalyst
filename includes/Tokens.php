@@ -13,6 +13,7 @@ class Tokens {
 	public const COMMISSION_TYPE_TOKEN_LENGTH = 50;
 	public const EMAIL_VERIFICATION_TOKEN_LENGTH = 12;
 	public const PASSWORD_RESET_TOKEN_LENGTH = 16;
+	public const TOTP_RESET_TOKEN_LENGTH = 20;
 	public const USER_FILE_TOKEN_LENGTH = 32;
 
 	public const ARTIST_TOKEN_REGEX = '^[a-z0-9]{'.self::ARTIST_TOKEN_LENGTH.'}$';
@@ -21,6 +22,7 @@ class Tokens {
 	public const COMMISSION_TYPE_TOKEN_REGEX = '^[a-z0-9]{'.self::COMMISSION_TYPE_TOKEN_LENGTH.'}$';
 	public const EMAIL_VERIFICATION_TOKEN_REGEX = '^[a-z0-9]{'.self::EMAIL_VERIFICATION_TOKEN_LENGTH.'}$';
 	public const PASSWORD_RESET_TOKEN_REGEX = '^[a-z0-9]{'.self::PASSWORD_RESET_TOKEN_LENGTH.'}$';
+	public const TOTP_RESET_TOKEN_REGEX = '^[a-z0-9]{'.self::TOTP_RESET_TOKEN_LENGTH.'}$';
 	public const USER_FILE_TOKEN_REGEX = '^[a-z0-9]{'.self::USER_FILE_TOKEN_LENGTH.'}$';
 
 	public static function generateUniqueUserFileToken() : string {
@@ -97,6 +99,10 @@ class Tokens {
 
 	public static function generateEmailVerificationToken() : string {
 		return self::generateToken(self::EMAIL_VERIFICATION_TOKEN_LENGTH);
+	}
+
+	public static function generateTotpResetToken() : string {
+		return self::generateToken(self::TOTP_RESET_TOKEN_LENGTH);
 	}
 
 	public static function generatePasswordResetToken() : string {
