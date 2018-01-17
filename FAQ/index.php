@@ -31,6 +31,7 @@ echo UniversalFunctions::createHeading("FAQ");
 	["cost", "What does it cost?"],
 	["difference", "What sets us apart?"],
 	["security", "Is my information protected?"],
+	["suggestions", "How can I suggest features?"],
 	["payment", "How do artists get paid?"],
 	["protect", "How do we protect artists?"],
 	["scam", "What if I get scammed?"],
@@ -126,6 +127,12 @@ echo UniversalFunctions::createHeading("FAQ");
 					</ul>
 				</div>
 				<div class="divider"></div>
+				<div class="section" id="suggest">
+					<h4 style="margin-top: -80px; padding-top: 80px;">How can I suggest features?</h4>
+					
+					<p class="flow-text">Please see our <a href="<?= ROOTDIR ?>FeatureBoard">feature board</a> for more information</p>
+				</div>
+				<div class="divider"></div>
 				<div class="section" id="payment">
 					<h4 style="margin-top: -80px; padding-top: 80px;">How do artists get paid?</h4>
 					
@@ -162,6 +169,7 @@ echo UniversalFunctions::createHeading("FAQ");
 	["cost", "What does it cost?"],
 	["difference", "What sets us apart?"],
 	["security", "Is my information protected?"],
+	["suggestions", "How can I suggest features?"],
 	["payment", "How do artists get paid?"],
 	["protect", "How do we protect artists?"],
 	["scam", "What if I get scammed?"],
