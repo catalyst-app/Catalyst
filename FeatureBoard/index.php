@@ -48,12 +48,12 @@ echo UniversalFunctions::createHeading("Feature Board");
 						<td><?= $item["NAME"] ?></td>
 						<td><a href="<?= ROOTDIR ?>User/<?= ($user = new User($item["AUTHOR_ID"]))->getUsername() ?>"><?= $user->getNickname() ?></a></td>
 						<td><?= (new DateTime($item["CREATED_TS"]))->format("F jS, Y") ?></td>
-						<td>
+						<td class="vote">
 <?php $votes = Item::getVotes($item["ID"]); ?>
 <?php if (User::isLoggedIn() && !Item::hasVoted($item["ID"], $_SESSION["user"]->getId())): ?>
-							<strong><a href="#" class="green-text vote-btn vote-yes"><?= $votes["YES"] ?></a>&nbsp;:&nbsp;<a href="#" class="grey-text vote-btn vote-maybe"><?= $votes["MAYBE"] ?></a>&nbsp;:&nbsp;<a href="#" class="red-text vote-btn vote-no"><?= $votes["NO"] ?></a>&nbsp;|&nbsp;<a href="#" class="grey-text vote-btn vote-irrelevant"><?= $votes["IRRELEVANT"] ?></a></strong>
+							<strong><a href="#" class="green-text vote-btn vote-yes tooltipped" data-tooltip="Yes" data-delay="10"><?= $votes["YES"] ?></a>&nbsp;:&nbsp;<a href="#" class="grey-text vote-btn vote-maybe tooltipped" data-tooltip="Maybe" data-delay="10"><?= $votes["MAYBE"] ?></a>&nbsp;:&nbsp;<a href="#" class="red-text vote-btn vote-no tooltipped" data-tooltip="No" data-delay="10"><?= $votes["NO"] ?></a>&nbsp;|&nbsp;<a href="#" class="grey-text vote-btn vote-irrelevant tooltipped" data-tooltip="Irrelevant to me" data-delay="10"><?= $votes["IRRELEVANT"] ?></a></strong>
 <?php else: ?>
-							<strong><span class="green-text"><?= $votes["YES"] ?></span>&nbsp;:&nbsp;<span class="grey-text"><?= $votes["MAYBE"] ?></span>&nbsp;:&nbsp;<span class="red-text"><?= $votes["NO"] ?></span>&nbsp;|&nbsp;<span class="grey-text"><?= $votes["IRRELEVANT"] ?></span></strong>
+							<strong><span class="green-text tooltipped" data-tooltip="Yes" data-delay="10"><?= $votes["YES"] ?></span>&nbsp;:&nbsp;<span class="grey-text tooltipped" data-tooltip="Maybe" data-delay="10"><?= $votes["MAYBE"] ?></span>&nbsp;:&nbsp;<span class="red-text tooltipped" data-tooltip="No" data-delay="10"><?= $votes["NO"] ?></span>&nbsp;|&nbsp;<span class="grey-text tooltipped" data-tooltip="Irrelevant to me" data-delay="10"><?= $votes["IRRELEVANT"] ?></span></strong>
 <?php endif; ?>
 						</td>
 					</tr>
