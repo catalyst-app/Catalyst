@@ -26,6 +26,7 @@ class Navbar {
 				["About Us", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
 				["Help Center", self::NAME, null, ROOTDIR."Help", self::DROPDOWN_CHILD],
 				["FAQ", self::NAME, null, ROOTDIR."FAQ", self::DROPDOWN_CHILD],
+				["Feature Board", self::NAME, null, ROOTDIR."FeatureBoard", self::DROPDOWN_CHILD],
 				["Terms of Service", self::NAME, null, ROOTDIR."TOS", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
