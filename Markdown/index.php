@@ -482,7 +482,7 @@ MD
 				</div>
 				<p class="flow-text"><strong><span class="red-text">C</span><span class="orange-text">o</span><span class="yellow-text">l</span><span class="green-text">o</span><span class="indigo-text">r</span></strong> can add a unique splash to your text!</p>
 				<p class="flow-text">Use the <span class="code">backcolor #abcdef</span> token to change the background color or the <span class="code">textcolor #abcdef</span> token for the text color.</p>
-				<p class="flow-text"><span class="code">#abcdef</span> is a 6 character hexadecimal color.  These values can be picked from our <a target="_blank" href="https://www.materialui.co/colors">site colors</a> (for maximum consistency) or <a target="_blank" href="https://www.webpagefx.com/web-design/color-picker/">all colors</a>.</p>
+				<p class="flow-text"><span class="code">#abcdef</span> is a 6 character hexadecimal color.  These values can be picked from our <a target="_blank" href="https://www.materialui.co/colors">recommended palette</a> (these blend nicely with the site) or <a target="_blank" href="https://www.webpagefx.com/web-design/color-picker/">all colors</a>.</p>
 				<p class="flow-text">It is recommended <u>not</u> to use a background color, or a light tint if needed, due to the rest of the site's design.</p>
 				<p class="flow-text">Try to use a sane color for this, or you may get a result like you see below.</p>
 				<div class="row">
