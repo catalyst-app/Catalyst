@@ -150,7 +150,7 @@ class User implements \Serializable {
 			return $this->cache["TOTP_KEY"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_KEY` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND `EMAIL` IS NOT NULL;");
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_KEY` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
 		$stmt->bindParam(":ID", $this->id);
 		$stmt->execute();
 
@@ -170,7 +170,7 @@ class User implements \Serializable {
 			return $this->cache["TOTP_RESET_TOKEN"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_RESET_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND `EMAIL` IS NOT NULL;");
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_RESET_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
 		$stmt->bindParam(":ID", $this->id);
 		$stmt->execute();
 
