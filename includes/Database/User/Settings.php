@@ -40,7 +40,7 @@ class Settings {
 			[
 				"distinguisher" => "settings",
 				"ajax" => true,
-				"redirect" => self::REDIRECT_URL,
+				"eval" => 'if (!$("#settings-totp").is(":checked")) {window.location="'.self::REDIRECT_URL.'";} else {window.location=$("html").attr("data-rootdir")+"Settings/TOTP/";}',
 				"auth" => [
 					["\Catalyst\User\User::isLoggedOut"],
 					"\Catalyst\User\User::getNotLoggedInHTML"
@@ -94,6 +94,19 @@ class Settings {
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::NEW_PASSWORDS_UNEQUAL]],
 				"error_code" => [self::NEW_PASSWORDS_UNEQUAL],
+				"other_attributes" => ["autocomplete" => "no"]
+			],
+			[
+				"name" => "totp",
+				"wrapper_classes" => "col s12",
+				"type" => "checkbox",
+				"label" => "Enable Two Factor Authentication (Google Authenticator or similar required)",
+				"required" => false,
+				"validate" => true,
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->isTotpEnabled() : "",
+				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
+				"error_code" => [self::ERROR_UNKNOWN],
+				"after_html" => (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isTotpEnabled()) ? '<p class="col s12 no-top-margin">View your 2FA settings <a href="'.ROOTDIR.'Settings/TOTP">here</a></p>' : '',
 				"other_attributes" => ["autocomplete" => "no"]
 			],
 			[
@@ -181,6 +194,7 @@ class Settings {
 	public static function update(
 		string $username,
 		string $password,
+		bool $totp,
 		string $email,
 		string $nick,
 		string $color,
@@ -215,7 +229,7 @@ class Settings {
 			}
 		}
 
-		$getStmt = $GLOBALS["dbh"]->prepare("SELECT `FILE_TOKEN`,`USERNAME`, `HASHED_PASSWORD`, `PASSWORD_RESET_TOKEN`, `EMAIL`, `EMAIL_VERIFIED`, `EMAIL_TOKEN`, `PICTURE_LOC`, `PICTURE_NSFW`, `NSFW`, `COLOR`, `NICK` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
+		$getStmt = $GLOBALS["dbh"]->prepare("SELECT `FILE_TOKEN`,`USERNAME`, `HASHED_PASSWORD`, `PASSWORD_RESET_TOKEN`, `TOTP_KEY`, `TOTP_RESET_TOKEN`, `EMAIL`, `EMAIL_VERIFIED`, `EMAIL_TOKEN`, `PICTURE_LOC`, `PICTURE_NSFW`, `NSFW`, `COLOR`, `NICK` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
 		$getStmt->bindParam(":ID", $id);
 
 		if (!$getStmt->execute()) {
@@ -251,6 +265,38 @@ class Settings {
 		$emailToken = ($email == $user["EMAIL"]) ? $user["EMAIL_TOKEN"] : \Catalyst\Tokens::generateEmailVerificationToken();
 
 		$emailVerified = ($user["EMAIL"] == $email) ? $user["EMAIL_VERIFIED"] : 0;
+
+		$totpKey = null;
+		$totpReset = (!is_null($user["TOTP_RESET_TOKEN"]) ? $user["TOTP_RESET_TOKEN"] : null);
+		if ($totp && !is_null($user["TOTP_KEY"])) {
+			$totpKey = $user["TOTP_KEY"];
+		} else if ($totp) {
+			$chars = "234567ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			$key = implode("",array_map(function($in) use ($chars) { return $chars[$in]; }, array_rand(str_split($chars), 16)));
+			
+			list($t, $b, $totpKey) = array("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", "", "");
+
+			$lut = ["A"=>0,"B"=>1,"C"=>2,"D"=>3,"E"=>4,"F"=>5,"G"=>6,"H"=>7,"I"=>8,"J"=>9,"K"=>10,"L"=>11,"M"=>12,"N"=>13,"O"=>14,"P"=>15,"Q"=>16,"R"=>17,"S"=>18,"T"=>19,"U"=>20,"V"=>21,"W"=>22,"X"=>23,"Y"=>24,"Z"=>25,"2"=>26,"3"=>27,"4"=>28,"5"=>29,"6"=>30,"7"=>31];
+
+			$l = strlen($key);
+			$n = 0;
+			$j = 0;
+			$totpKey = "";
+
+			for ($i = 0; $i < $l; $i++) {
+				$n = $n << 5;
+				$n = $n + $lut[$key[$i]];
+				$j = $j + 5;
+				if ($j >= 8) {
+					$j = $j - 8;
+					$totpKey .= chr(($n & (0xFF << $j)) >> $j);
+				}
+			}
+
+			if (is_null($user["TOTP_RESET_TOKEN"])) {
+				$totpReset = \Catalyst\Tokens::generateTotpResetToken();
+			}
+		}
 		
 		$newPic = \Catalyst\Form\FileUpload::uploadImage($pfp, \Catalyst\Form\FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
 		if (!is_null($newPic)) {
@@ -266,6 +312,8 @@ class Settings {
 		$updateStmt->bindParam(":USERNAME", $username);
 		$updateStmt->bindParam(":HASHED_PASSWORD", $hashedPassword);
 		$updateStmt->bindParam(":PASSWORD_RESET_TOKEN", $passwordToken);
+		$updateStmt->bindParam(":TOTP_KEY", $totpKey);
+		$updateStmt->bindParam(":TOTP_RESET_TOKEN", $totpReset);
 		$updateStmt->bindParam(":EMAIL", $email);
 		$updateStmt->bindParam(":EMAIL_VERIFIED", $emailVerified);
 		$updateStmt->bindParam(":EMAIL_TOKEN", $emailToken);

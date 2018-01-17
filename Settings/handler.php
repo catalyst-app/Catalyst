@@ -21,6 +21,7 @@ $password = $_POST["password"];
 $result = Settings::update(
 	$_POST["username"],
 	$_POST["password"],
+	$_POST["totp"] === "true",
 	$_POST["email"],
 	$_POST["nickname"],
 	$_POST["color"],
