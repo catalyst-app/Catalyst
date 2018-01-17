@@ -42,6 +42,13 @@ echo UniversalFunctions::createHeading("FAQ");
 				<div class="section" id="important-definitions">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Important definitions</h4>
 					
+					<p class="flow-text"><strong>User:</strong> anyone who makes an account on our platform</p>
+					<p class="flow-text"><strong>Character:</strong> a collection of information and images (reference sheets, art, etc.) about a character which can be easily shared with artists</p>
+					<p class="flow-text"><strong>Artist:</strong> a special "second profile" in which a user can advertise commission information</p>
+					<p class="flow-text"><strong>Commission:</strong> something which is custom-created for a customer based on their requirements</p>
+					<p class="flow-text"><strong>Commission Type:</strong> a type of commission the artist offers.  This can vary from artist to artist, however typically is separated by style (traditional, digital, etc.), type (headshot, bust), or both!</p>
+					<p class="flow-text"><strong>Commission Modifier:</strong> a list of preset things which may add to a commission price.  Can be things such as NSFW, backgrounds, multiple characters, etc.</p>
+					<p class="flow-text"><strong>Artist's Terms of Service:</strong> a set of rules you must follow in order to commission an artist (may cover things such as commercial use and refunds)</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="getting-started">
