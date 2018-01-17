@@ -79,6 +79,45 @@ echo UniversalFunctions::createHeading("FAQ");
 				<div class="section" id="security">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Is my information protected?</h4>
 					
+					<p class="flow-text">We care about your security.  We've seen many similar websites be attacked and lots of important user information breached.  As such, we take extreme precautions about what data we store and how we store it.</p>
+
+					<p class="flow-text">Here are some of the things that we do to ensure your security and privacy.</p>
+					<ul class="browser-default">
+						<li class="flow-text">Every connection to our site is made with the newest SSL and TLS technology</li>
+						<ul>
+							<li>Our certificates, as of January 16, 2018, are issued by LetsEncrypt.  We score an A+ rating on Qualys SSL Server Test, scoring a 100% in Certificate integrity.</li>
+							<li>Additionally, we use HPKP (HTTP Public Key Pinning) and HSTS (HTTP Strict Transport Security) to ensure that your connection is always secure, and always to us.</li>
+							<li>We also employ Diffie-Hellman (DH) Parameters and SNI in order to keep your connection secure.</li>
+						</ul>
+						<li class="flow-text">User passwords are never stored</li>
+						<ul>
+							<li>We use per-user salts - if two users have the same password, the hashes are different</li>
+							<li>Additionally, we require all passwords be 8 characters long, and that they have no maximum length.  This encourages the use of ridiculously long random passwords.</li>
+							<li>We store passwords after they are hashed with the bcrypt algorithm and a high work factor (currently 14).  If the user is to use a password of only 8 characters, the password would take (by current estimates) billions of years to crack.</li>
+						</ul>
+						<li class="flow-text">Binding of database queries</li>
+						<ul>
+							<li>Following the lessons of <a href="https://xkcd.com/327/">Bobby Tables</a>, we bind all parameters using a database abstraction library.</li>
+							<li>This prevents any possibility of SQL injection.</li>
+						</ul>
+						<li class="flow-text">Few outside dependencies on the server</li>
+						<ul>
+							<li>We use no external libraries for the backend except for the popular <a href="https://github.com/PHPMailer/PHPMailer">PHPMailer</a> and <a href="http://phpqrcode.sourceforge.net/">phpqrcode</a>.</li>
+							<li>PHPMailer is used in at least 25% of all websites (based on Wordpress usage) and much more than that, and is only invoked when we need to send user emails.</li>
+							<li>phpqrcode is small and used for generating 2FA QR codes</li>
+							<li>Other than PHPMailer and phpqrcode, all of our code is home-grown.</li>
+						</ul>
+						<li class="flow-text">Randomization of uploaded information</li>
+						<ul>
+							<li>All uploaded information is stored with random paths.</li>
+							<li>This prevents malicious users from taking the path to one file and determining a pattern to get others</li>
+						</ul>
+						<li class="flow-text">Open-sourced on GitHub</li>
+						<ul>
+							<li>All of our code is on GitHub where anyone can view it for transparency reasons</li>
+						</ul>
+						<li class="flow-text">And much more!</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="payment">
