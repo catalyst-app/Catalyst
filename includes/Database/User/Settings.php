@@ -245,7 +245,7 @@ class Settings {
 			WHERE `ID` = :ID");
 
 		$username = empty($username) ? $user["USERNAME"] : $username;
-		$hashedPassword = empty($password) ? $user["HASHED_PASSWORD"] : password_hash($password, PASSWORD_BCRYPT);
+		$hashedPassword = empty($password) ? $user["HASHED_PASSWORD"] : password_hash($password, PASSWORD_BCRYPT, ["cost" => \Catalyst\Page\Values::BCRYPT_COST]);
 		$passwordToken = empty($password) ? $user["PASSWORD_RESET_TOKEN"] : \Catalyst\Tokens::generatePasswordResetToken();
 		$email = empty($email) ? null : $email;
 		$emailToken = ($email == $user["EMAIL"]) ? $user["EMAIL_TOKEN"] : \Catalyst\Tokens::generateEmailVerificationToken();
