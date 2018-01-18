@@ -1011,7 +1011,7 @@ CREATE TABLE `social_media_meta` (
   `VISIBLE` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `INTEGRATION_NAME` varchar(12) NOT NULL,
   `IMAGE_PATH` varchar(16) NOT NULL,
-  `DEFAULT_HUMAN_NAME` varchar(14) NOT NULL,
+  `DEFAULT_HUMAN_NAME` varchar(18) NOT NULL,
   `CHIP_CLASSES` varchar(31) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
@@ -1025,6 +1025,7 @@ CREATE TABLE `social_media_meta` (
 
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(26, 1, '500PX', '500px.png', '500px', 'black white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(2, 1, 'AMINO', 'amino.png', 'Furry Amino', 'cyan white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(31, 1, 'AO3', 'ao3.png', 'Archive of Our Own', 'red darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(24, 1, 'BANDCAMP', 'bandcamp.png', 'Bandcamp', 'teal lighten-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(33, 1, 'CUSTOM', 'custom.png', 'Custom Link', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(6, 1, 'DEVIANTART', 'deviantart.png', 'DeviantArt', 'green white-text');
