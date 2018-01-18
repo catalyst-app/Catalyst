@@ -12,6 +12,7 @@ use \Catalyst\Database\Character\EditCharacter;
 use \Catalyst\Database\Character\NewCharacter;
 use \Catalyst\Database\CommissionType\EditCommissionType;
 use \Catalyst\Database\CommissionType\NewCommissionType;
+use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Database\User\EmailVerification;
@@ -809,6 +810,9 @@ function totp(K,t) {
 				window.location="";
 			});
 		});
+		<?php
+		echo FormJS::generateFormHandler(Comment::getFormStructure());
+		?> 
 
 		/* ONLOADS */
 		$(".button-collapse").sideNav();
