@@ -27,4 +27,16 @@ class Item {
 
 		return (bool)($stmt->rowCount());
 	}
+
+	public static function castVote(int $id, string $vote, int $uid) : bool {
+		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["feature_board_votes"]."` (`USER_ID`,`FEATURE_ID`,`VOTE_TYPE`) VALUES (:USER_ID,:FEATURE_ID,:VOTE_TYPE);");
+		$stmt->bindParam(":USER_ID", $uid);
+		$stmt->bindParam(":FEATURE_ID", $id);
+		$stmt->bindParam(":VOTE_TYPE", $vote);
+		if (!$stmt->execute()) {
+			return false;
+		}
+
+		return true;
+	}
 }
