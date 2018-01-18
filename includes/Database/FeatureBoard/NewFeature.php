@@ -123,4 +123,45 @@ class NewFeature {
 			],
 		];
 	}
+
+	public static function new(\Catalyst\User\User $user, string $name, string $group, string $intro, string $proposal, string $acknowledgement, string $future, string &$url) : int {
+		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["feature_board_items"]."` (`NAME`,`AUTOGEN_URL`,`CREATED_TS`,`AUTHOR_ID`,`GROUP`,`INTRODUCTION`,`PROPOSAL`,`ACKNOWLEDGEMENT`,`FUTURE_SCOPE`) VALUES (:NAME,:AUTOGEN_URL,CURRENT_TIMESTAMP,:AUTHOR_ID,:GROUP,:INTRODUCTION,:PROPOSAL,:ACKNOWLEDGEMENT,:FUTURE_SCOPE);");
+		$stmt->bindParam(":NAME", $name);
+		// turns a name into dash-case
+		$url = substr(
+			implode(
+				"-",
+				explode(
+					" ",
+					implode(
+						"",
+						array_filter(
+							str_split(
+								strtolower($name)
+							), 
+							function($in) {
+								return preg_match('/[a-z0-9 ]/', $in);
+							}
+						)
+					)
+				)
+			),
+			0,
+			64
+		);
+		$stmt->bindParam(":AUTOGEN_URL", $url);
+		$aid = $user->getId();
+		$stmt->bindParam(":AUTHOR_ID", $aid);
+		$stmt->bindParam(":GROUP", $group);
+		$stmt->bindParam(":INTRODUCTION", $intro);
+		$stmt->bindParam(":PROPOSAL", $proposal);
+		$stmt->bindParam(":ACKNOWLEDGEMENT", $acknowledgement);
+		$stmt->bindParam(":FUTURE_SCOPE", $future);
+
+		if (!$stmt->execute()) {
+			return self::ERROR_UNKNOWN;
+		}
+
+		return self::SUCCESS;
+	}
 }
