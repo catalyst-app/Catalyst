@@ -35,6 +35,35 @@ echo UniversalFunctions::createHeading("Feature");
 
 <?php if (!is_null($item)): ?>
 			<div class="section">
+				<h4><?= htmlspecialchars($item["NAME"]) ?></h4>
+				<p class="flow-text no-margin"><i><?= htmlspecialchars($item["GROUP"]) ?></i></p>
+<?php
+if (!is_null($item["AUTHOR_ID"])) {
+	$author = new User($item["AUTHOR_ID"]);
+}
+?>
+				<h5>Submitted by <?= is_null($item["AUTHOR_ID"]) ? "N/A" : '<a href="'.ROOTDIR.'User/'.$author->getUsername().'">'.htmlspecialchars($author->getNickname()).'</a>' ?> on <?= (new DateTime($item["CREATED_TS"]))->format("F jS, Y") ?></h5>
+<?php if (!is_null($item["ESTIMATED_MANHOURS"])): ?>
+				<h5>Estimated manhours: <?= $item["ESTIMATED_MANHOURS"] ?></h5>
+<?php endif; ?>
+				<h5>Status: <?= htmlspecialchars($item["STATUS"]) ?></h5>
+				<p class="no-top-margin"><?= htmlspecialchars($item["STATUS_DESCRIPTION"]) ?></p>
+<?php $comments = Item::getVotes($item["ID"]); ?>
+				<h5>Vote: <span class="green-text"><?= $comments["YES"] ?> Yes</span>, <?= $comments["MAYBE"] ?> Maybe, <span class="red-text"><?= $comments["NO"] ?> No</span>, <?= $comments["IRRELEVANT"] ?> Irrelevant</h5>
+				<p class="no-top-margin">Please go to the <a href="<?= ROOTDIR ?>FeatureBoard">board</a> to vote</p>
+				<div class="row">
+					<h5>Introduction</h5>
+					<div class="raw-markdown"><?= htmlspecialchars($item["INTRODUCTION"]) ?></div>
+					<h5>Proposal</h5>
+					<div class="raw-markdown"><?= htmlspecialchars($item["PROPOSAL"]) ?></div>
+					<h5>Acknowledgement</h5>
+					<div class="raw-markdown"><?= htmlspecialchars($item["ACKNOWLEDGEMENT"]) ?></div>
+					<h5>Future Scope</h5>
+					<div class="raw-markdown"><?= htmlspecialchars($item["FUTURE_SCOPE"]) ?></div>
+<?php if (!is_null($item["DEVELOPER_NOTE"])): ?>
+					<h5>Developer Note</h5>
+					<div class="raw-markdown"><?= htmlspecialchars($item["DEVELOPER_NOTE"]) ?></div>
+<?php endif; ?>
 			</div>
 <?php else: ?>
 			<div class="section">
