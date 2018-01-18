@@ -43,10 +43,10 @@ echo UniversalFunctions::createHeading("Feature Board");
 				</thead>
 				<tbody>
 <?php foreach (Item::getForGroup($key) as $item): ?>
-					<tr data-id="<?= $item["ID"] ?>" data-url="<?= ROOTDIR ?>FeatureBoard/<?= $item["AUTOGEN_URL"] ?>" class="feature-item <?= in_array($item["STATUS_KEY"], ["COMPLETED", "DENIED"]) ? "grey-text" : "" ?>">
-						<td><?= $item["STATUS"] ?></td>
-						<td><?= $item["NAME"] ?></td>
-						<td><a href="<?= ROOTDIR ?>User/<?= ($user = new User($item["AUTHOR_ID"]))->getUsername() ?>"><?= $user->getNickname() ?></a></td>
+					<tr data-id="<?= $item["ID"] ?>" data-url="<?= ROOTDIR ?>FeatureBoard/Item/<?= $item["AUTOGEN_URL"] ?>" class="feature-item <?= in_array($item["STATUS_KEY"], ["COMPLETED", "DENIED"]) ? "grey-text" : "" ?>">
+						<td><?= htmlspecialchars($item["STATUS"]) ?></td>
+						<td><?= htmlspecialchars($item["NAME"]) ?></td>
+						<td><a href="<?= ROOTDIR ?>User/<?= ($user = new User($item["AUTHOR_ID"]))->getUsername() ?>"><?= htmlspecialchars($user->getNickname()) ?></a></td>
 						<td><?= (new DateTime($item["CREATED_TS"]))->format("F jS, Y") ?></td>
 						<td class="vote">
 <?php $votes = Item::getVotes($item["ID"]); ?>
