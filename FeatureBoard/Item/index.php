@@ -79,6 +79,7 @@ $comments = Comment::get($item["ID"]);
 <?php if (User::isLoggedIn()): ?>
 					<div class="meta-feature-id" data-id="<?= $item["ID"] ?>"></div>
 					<h5>New Comment</h5>
+					<?= FormHTML::generateForm(Comment::getFormStructure()) ?>
 <?php endif; ?>
 				</div>
 			</div>
