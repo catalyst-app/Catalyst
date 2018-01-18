@@ -64,6 +64,23 @@ if (!is_null($item["AUTHOR_ID"])) {
 					<h5>Developer Note</h5>
 					<div class="raw-markdown"><?= htmlspecialchars($item["DEVELOPER_NOTE"]) ?></div>
 <?php endif; ?>
+				<h5>Comments</h5>
+<?php
+$comments = Comment::get($item["ID"]);
+?>
+<?php if (count($comments)): ?>
+<?php foreach ($comments as $comment): ?>
+					<div class="raw-markdown"><?= htmlspecialchars($comment["BODY"]) ?></div>
+					<p class="no-top-margin">By <i><?= htmlspecialchars($comment["NICK"]) ?></i></p>
+<?php endforeach; ?>
+<?php else: ?>
+					<p class="flow-text">None yet</p>
+<?php endif; ?>
+<?php if (User::isLoggedIn()): ?>
+					<div class="meta-feature-id" data-id="<?= $item["ID"] ?>"></div>
+					<h5>New Comment</h5>
+<?php endif; ?>
+				</div>
 			</div>
 <?php else: ?>
 			<div class="section">
