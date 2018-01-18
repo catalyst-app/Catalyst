@@ -62,5 +62,8 @@ echo UniversalFunctions::createHeading("Feature Board");
 			</table>
 		</div>
 <?php endforeach; ?>
+		<div class="section">
+			<p class="flow-text">You may submit a feature <a href="<?= ROOTDIR ?>FeatureBoard/Submit">here</a></p>
+		</div>
 <?php
 require_once Values::FOOTER_INC;
