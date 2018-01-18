@@ -777,8 +777,8 @@ function totp(K,t) {
 		});
 
 		/* FEATURE BOARD */
-		$(document).on("click", "tr.feature-item", function(e) {
-			window.location = $(this).attr("data-url");
+		$(document).on("click", "tr.feature-item td:not(.vote)", function(e) {
+			window.location = $(this).parent().attr("data-url");
 		});
 		$(document).on("click", "tr.feature-item .vote-btn", function(e) {
 			e.preventDefault();
