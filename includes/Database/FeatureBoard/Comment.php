@@ -48,4 +48,17 @@ class Comment {
 			],
 		];
 	}
+
+	public static function new(int $id, int $uid, string $comment) : int {
+		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["feature_board_comments"]."` (`USER_ID`,`FEATURE_ID`,`BODY`) VALUES (:USER_ID,:FEATURE_ID,:BODY);");
+		$stmt->bindParam(":USER_ID", $uid);
+		$stmt->bindParam(":FEATURE_ID", $id);
+		$stmt->bindParam(":BODY", $comment);
+
+		if (!$stmt->execute()) {
+			return self::ERROR_UNKNOWN;
+		}
+
+		return self::SUCCESS;
+	}
 }
