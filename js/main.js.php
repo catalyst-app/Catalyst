@@ -779,6 +779,37 @@ function totp(K,t) {
 		$(document).on("click", "tr.feature-item", function(e) {
 			window.location = $(this).attr("data-url");
 		});
+		$(document).on("click", "tr.feature-item .vote-btn", function(e) {
+			e.preventDefault();
+			if (e.stopPropogation) e.stopPropogation();
+			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+			var data = new FormData();
+			data.append("feature", $(this).parent().parent().parent().attr("data-id"));
+			if ($(this).hasClass("vote-yes")) {
+				data.append("vote", "YES");
+			} else if ($(this).hasClass("vote-maybe")) {
+				data.append("vote", "MAYBE");
+			} else if ($(this).hasClass("vote-no")) {
+				data.append("vote", "NO");
+			} else if ($(this).hasClass("vote-irrelevant")) {
+				data.append("vote", "IRRELEVANT");
+			}
+			$(this).parent().find(".vote-btn").removeClass("vote-btn");
+			$(this).text(parseInt($(this).text())+1);
+			$.ajax($("html").attr("data-rootdir")+"FeatureBoard/vote.php", {
+				data: data,
+				processData: false,
+				contentType: false,
+				method: "POST"
+			}).done(function(response) {
+				Materialize.toast("Vote submitted", 4000);
+			}).fail(function(response) {
+				alert("Unknown error.");
+				window.location="";
+			});
+		});
+
 		/* ONLOADS */
 		$(".button-collapse").sideNav();
 		$(".modal").modal();
