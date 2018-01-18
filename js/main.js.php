@@ -13,6 +13,7 @@ use \Catalyst\Database\Character\NewCharacter;
 use \Catalyst\Database\CommissionType\EditCommissionType;
 use \Catalyst\Database\CommissionType\NewCommissionType;
 use \Catalyst\Database\FeatureBoard\Comment;
+use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Database\User\EmailVerification;
@@ -26,6 +27,8 @@ use \Catalyst\Form\FormJS;
 //
 // What's this, a possum in the JavaScript?
 // Impossible!
+//
+// (yes spade im looking at you)
 
 /* GENERAL FUNCTIONS */
 var markInputInvalid = function(e, a) {
@@ -812,6 +815,11 @@ function totp(K,t) {
 		});
 		<?php
 		echo FormJS::generateFormHandler(Comment::getFormStructure());
+		?> 
+
+		/* NEW FEATURE REQUESTS */
+		<?php
+		echo FormJS::generateFormHandler(NewFeature::getFormStructure());
 		?> 
 
 		/* ONLOADS */
