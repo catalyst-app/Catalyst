@@ -49,7 +49,8 @@ require_once __DIR__."/User/User.php";
 require_once __DIR__."/vendor/autoload.php";
 
 if (!session_id()) {
-	session.cookie_lifetime = 24*60*60;
-	session.gc_maxlifetime = 24*60*60;
+	ini_set("session.cookie_lifetime", 24*60*60);
+	ini_set("session.gc_maxlifetime", 24*60*60);
+	ini_set("session.name", 24*60*60);
 	session_start();
 }
