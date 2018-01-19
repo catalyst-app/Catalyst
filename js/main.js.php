@@ -823,6 +823,12 @@ function totp(K,t) {
 		?> 
 
 		/* ONLOADS */
+		$(document).on("keydown", function (event) {
+			if (event.which === 8 && $("form").length != 0) {
+				event.preventDefault();
+			}
+		});
+
 		$(".button-collapse").sideNav();
 		$(".modal").modal();
 		$('select').attr("required", false).material_select();
