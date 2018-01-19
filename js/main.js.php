@@ -824,7 +824,7 @@ function totp(K,t) {
 
 		/* ONLOADS */
 		$(document).on("keydown", function (event) {
-			if (event.which === 8 && $("form").length != 0) {
+			if (event.which === 8 && $("form").length != 0 && $(event.target).parents("form").length == 0) {
 				event.preventDefault();
 			}
 		});
