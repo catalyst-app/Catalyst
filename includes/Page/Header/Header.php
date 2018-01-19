@@ -5,7 +5,7 @@ namespace Catalyst\Page\Header;
 class Header {
 	const SCRIPTS = [
 		["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"],
-		["https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.js"],
+		["https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.js"],
 		["https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.min.js", "defer"],
 		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.3/draggable.bundle.min.js"],
 		["https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer"],
@@ -15,8 +15,7 @@ class Header {
 	];
 
 	const STYLES = [
-		// "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css",
-		"https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css",
+		"https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.css",
 		"https://fonts.googleapis.com/icon?family=Material+Icons",
 		ROOTDIR."css/overall.css",
 		ROOTDIR."css/color.css.php?hex=".PAGE_COLOR["hex"],
