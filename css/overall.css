@@ -220,6 +220,10 @@ label[data-error], label[data-success] {
 	list-style-type: initial;
 }
 
+.rendered-markdown p:empty {
+	min-height: 1em;
+}
+
 .social-chips .chip {
 	padding-right: 0;
 }
