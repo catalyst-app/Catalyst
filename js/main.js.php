@@ -63,7 +63,7 @@ var dec2twoDigitHex = function(c) {
 
 /* MARKDOWN */
 var renderMarkdownArea = function(area) {
-	$(area).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
+	$(area).html(md.render($(area).html().replace("\n\n", "\n"+String.fromCharCode(160)+"\n"))).removeClass('raw-markdown').addClass('rendered-markdown');
 	$(area).find('.collapsible').collapsible();
 };
 
