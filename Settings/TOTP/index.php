@@ -63,7 +63,7 @@ $qr = base64_encode(file_get_contents($tmpfname));
 unlink($tmpfname);
 ?>
 				<img class="col s12 render-pixelated" src="data:image/png;base64,<?= $qr ?>">
-				<h4 class="code col s12"><?= $key ?></h4>
+				<p class="code col s12 flow-text"><?= $key ?></h4>
 			</div>
 			<div class="col s12 m8">
 				<p class="flow-text">If you lose access to your two-factor authentication app, you will need the following recovery key.</p>
