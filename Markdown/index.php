@@ -146,16 +146,47 @@ MD
 			<div class="section" id="escaping">
 				<h4 style="margin-top: -80px; padding-top: 80px;">Escaping</h4>
 				<p class="flow-text">Sometimes, you may want to use asterisks and other special characters in your text.  This can cause issues with markdown, as it might think you are trying to format something.  If you experience this, you can place a backslash (<span class="code">\</span>, above the enter key) before the character.</p>
+				<p class="flow-text">In Markdown, multiple line breaks are treated as one.  In order to use multiple line breaks, use a backslash (<span class="code">\</span>) before the newline.</p>
 				<div class="row">
 					<div class="col s12 m6"><div class="code-block"><p>
 <?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
 I\_can\*use\_all\*the\_characters\*I\_want!
+
+No
+
+
+backslash
+
+
+here
+
+compared to
+
+With
+\
+\
+backslash
 MD
 ))) ?> 
 </p></div></div>
 				<div class="raw-markdown markdown-preview col s12 m6">
 <?= htmlspecialchars(<<<MD
 I\_can\*use\_all\*the\_characters\*I\_want!
+
+No
+
+
+backslash
+
+
+here
+
+compared to
+
+With
+\
+\
+backslash
 MD
 ) ?> 
 </div>
