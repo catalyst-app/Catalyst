@@ -73,11 +73,13 @@ class TOTPLogin {
 			
 			if ($token == self::oath_truncate($thiskey,6)) {
 				\Catalyst\Database\User\Login::loginAsId($_SESSION["pending_user"]->getId());
+				unset($_SESSION["pending_user"]);
 
 				return self::LOGGED_IN;
 			}
 			
 		}
+
 		return self::TOKEN_INVALID;
 	}
 
