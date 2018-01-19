@@ -51,6 +51,6 @@ require_once __DIR__."/vendor/autoload.php";
 if (!session_id()) {
 	ini_set("session.cookie_lifetime", 24*60*60);
 	ini_set("session.gc_maxlifetime", 24*60*60);
-	ini_set("session.name", 24*60*60);
+	ini_set("session.name", "catalyst");
 	session_start();
 }
