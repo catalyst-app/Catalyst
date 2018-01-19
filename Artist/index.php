@@ -135,9 +135,10 @@ foreach ($attrgs as $key => $attrs): ?>
 					</div>
 					<div class="commission-type-collapsible-body collapsible-hidden" style="display: none;">
 						<div class="row">
-							<div class="col s12 raw-markdown">
+							<div class="col s12 raw-markdown row">
 <?= htmlspecialchars($type->getDescription()) ?>
 							</div>
+							<br><br>
 							<div class="col s12">
 								<p><strong>Options:</strong></p>
 <?php foreach ($type->getModifiers() as $a): ?>
