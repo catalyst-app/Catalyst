@@ -97,6 +97,8 @@ Email: catalyst@catalystapp.co
 - [x] Emoji no work (thanks foxxo)
 - [x] Login is case sensitive username
 - [ ] Something fucky with the color picker that disallows certain *valid* colors
+- [ ] Very light colors are hard on navbar and links
+  - [ ] shadow?
 - [ ] Somethings really weird with the dragging/dropping/sorting plugins, seems to be worsening, requiring bad overrides
   - [ ] New library?
   - [ ] Longboi chips
