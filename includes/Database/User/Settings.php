@@ -81,7 +81,7 @@ class Settings {
 				"error_text" => [self::PHRASES[self::NEW_PASSWORD_INVALID]],
 				"error_code" => [self::NEW_PASSWORD_INVALID],
 				"after_html" => '<p class="no-top-margin col s12 grey-text">Only fill out this field if you wish to change your password.</p>',
-				"other_attributes" => ["autocomplete" => "no"]
+				"other_attributes" => ["autocomplete" => "off"]
 			],
 			[
 				"name" => "passwordconfirm",
@@ -94,7 +94,7 @@ class Settings {
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::NEW_PASSWORDS_UNEQUAL]],
 				"error_code" => [self::NEW_PASSWORDS_UNEQUAL],
-				"other_attributes" => ["autocomplete" => "no"]
+				"other_attributes" => ["autocomplete" => "off"]
 			],
 			[
 				"name" => "totp",
@@ -107,7 +107,7 @@ class Settings {
 				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
 				"error_code" => [self::ERROR_UNKNOWN],
 				"after_html" => (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isTotpEnabled()) ? '<p class="col s12 no-top-margin">View your 2FA settings <a href="'.ROOTDIR.'Settings/TOTP">here</a></p>' : '',
-				"other_attributes" => ["autocomplete" => "no"]
+				"other_attributes" => ["autocomplete" => "off"]
 			],
 			[
 				"name" => "email",
