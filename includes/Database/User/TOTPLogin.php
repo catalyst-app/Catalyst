@@ -55,7 +55,8 @@ class TOTPLogin {
 				"error_text" => [self::PHRASES[self::TOKEN_INVALID]],
 				"error_code" => [self::TOKEN_INVALID],
 				"after_html" => '<p class="col s12 no-top-margin">If you do not have access to this code, please <a href="'.ROOTDIR.'Help">contact support</a> with your recovery key.</p>',
-			],
+                "other_attributes" => ["autocomplete" => "off"],
+            ],
 		];
 	}
 
