@@ -45,4 +45,4 @@ if ($result == EditCharacter::ERROR_UNKNOWN) {
 	Response::send500(EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN].EditCharacter::$lastErrId, EditCharacter::ERROR_UNKNOWN);
 }
 
-Response::send299(EditCharacter::PHRASES[EditCharacter::SUCCESS]);
+Response::send200(EditCharacter::PHRASES[EditCharacter::SUCCESS]);
