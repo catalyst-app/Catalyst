@@ -14,7 +14,8 @@ class Settings {
 	public const PICTURE_INVALID = 8;
 	public const COLOR_INVALID = 9;
 	public const OLD_PASSWORD_INVALID = 10;
-	public const ERROR_UNKNOWN = 11;
+	public const TOTP_INIT = 11;
+	public const ERROR_UNKNOWN = 12;
 
 	public const PHRASES = [
 		self::UPDATED => "Success",
@@ -28,6 +29,7 @@ class Settings {
 		self::PICTURE_INVALID => "Invalid profile photo",
 		self::COLOR_INVALID => "Invalid color",
 		self::OLD_PASSWORD_INVALID => "Incorrect password",
+		self::TOTP_INIT => "TOTP needs to be initialized",
 		self::ERROR_UNKNOWN => "An unknown error has occured.  Please try again.  If the problem persists, please contact support.  Error ID: ",
 	];
 
@@ -40,7 +42,7 @@ class Settings {
 			[
 				"distinguisher" => "settings",
 				"ajax" => true,
-				"eval" => 'if (!$("#settings-totp").is(":checked")) {window.location="'.self::REDIRECT_URL.'";} else {window.location=$("html").attr("data-rootdir")+"Settings/TOTP/";}',
+				"eval" => 'window.location="'.self::REDIRECT_URL.'";',
 				"auth" => [
 					["\Catalyst\User\User::isLoggedOut"],
 					"\Catalyst\User\User::getNotLoggedInHTML"
@@ -49,6 +51,7 @@ class Settings {
 				"handler" => "handler.php",
 				"button" => "save",
 				"additional_cases" => [
+					self::TOTP_INIT => 'window.location="TOTP";return;break;'
 				],
 				"success" => self::PHRASES[self::UPDATED],
 				"additional_fields" => [],
@@ -106,7 +109,7 @@ class Settings {
 				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->isTotpEnabled() : "",
 				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
 				"error_code" => [self::ERROR_UNKNOWN],
-				"after_html" => (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isTotpEnabled()) ? '<p class="col s12 no-top-margin">View your 2FA settings <a href="'.ROOTDIR.'Settings/TOTP">here</a></p>' : '',
+				"after_html" => (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isTotpEnabled()) ? '<p class="col s12 no-top-margin">If you need to regenerate your code, disable and reenable this option</p>' : '',
 				"other_attributes" => ["autocomplete" => "off"]
 			],
 			[
@@ -298,6 +301,8 @@ class Settings {
 			if (is_null($user["TOTP_RESET_TOKEN"])) {
 				$totpReset = \Catalyst\Tokens::generateTotpResetToken();
 			}
+
+			$totpInitialized = true;
 		}
 		
 		$newPic = \Catalyst\Form\FileUpload::uploadImage($pfp, \Catalyst\Form\FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
@@ -334,6 +339,9 @@ class Settings {
 
 		\Catalyst\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
 
+		if (isset($totpInitialized) && $totpInitialized) {
+			return self::TOTP_INIT;
+		}
 		return self::UPDATED;
 	}
 }
