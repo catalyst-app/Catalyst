@@ -77,7 +77,6 @@ class Color {
 		"0288d1"=>["light-blue", "darken-2"],
 		"0277bd"=>["light-blue", "darken-3"],
 		"01579b"=>["light-blue", "darken-4"],
-		"80d8ff"=>["light-blue", "accent-1"],
 		"40c4ff"=>["light-blue", "accent-2"],
 		"00b0ff"=>["light-blue", "accent-3"],
 		"0091ea"=>["light-blue", "accent-4"],
@@ -88,7 +87,6 @@ class Color {
 		"0097a7"=>["cyan", "darken-2"],
 		"00838f"=>["cyan", "darken-3"],
 		"006064"=>["cyan", "darken-4"],
-		"84ffff"=>["cyan", "accent-1"],
 		"18ffff"=>["cyan", "accent-2"],
 		"00e5ff"=>["cyan", "accent-3"],
 		"00b8d4"=>["cyan", "accent-4"],
@@ -99,7 +97,6 @@ class Color {
 		"00796b"=>["teal", "darken-2"],
 		"00695c"=>["teal", "darken-3"],
 		"004d40"=>["teal", "darken-4"],
-		"a7ffeb"=>["teal", "accent-1"],
 		"64ffda"=>["teal", "accent-2"],
 		"1de9b6"=>["teal", "accent-3"],
 		"00bfa5"=>["teal", "accent-4"],
@@ -110,7 +107,6 @@ class Color {
 		"388e3c"=>["green", "darken-2"],
 		"2e7d32"=>["green", "darken-3"],
 		"1b5e20"=>["green", "darken-4"],
-		"b9f6ca"=>["green", "accent-1"],
 		"69f0ae"=>["green", "accent-2"],
 		"00e676"=>["green", "accent-3"],
 		"00c853"=>["green", "accent-4"],
@@ -121,7 +117,6 @@ class Color {
 		"689f38"=>["light-green", "darken-2"],
 		"558b2f"=>["light-green", "darken-3"],
 		"33691e"=>["light-green", "darken-4"],
-		"ccff90"=>["light-green", "accent-1"],
 		"b2ff59"=>["light-green", "accent-2"],
 		"76ff03"=>["light-green", "accent-3"],
 		"64dd17"=>["light-green", "accent-4"],
@@ -132,7 +127,6 @@ class Color {
 		"afb42b"=>["lime", "darken-2"],
 		"9e9d24"=>["lime", "darken-3"],
 		"827717"=>["lime", "darken-4"],
-		"f4ff81"=>["lime", "accent-1"],
 		"eeff41"=>["lime", "accent-2"],
 		"c6ff00"=>["lime", "accent-3"],
 		"aeea00"=>["lime", "accent-4"],
@@ -290,7 +284,6 @@ class Color {
 			'darken-2'=>'0288d1',
 			'darken-3'=>'0277bd',
 			'darken-4'=>'01579b',
-			'accent-1'=>'80d8ff',
 			'accent-2'=>'40c4ff',
 			'accent-3'=>'00b0ff',
 			'accent-4'=>'0091ea'
@@ -303,7 +296,6 @@ class Color {
 			'darken-2'=>'0097a7',
 			'darken-3'=>'00838f',
 			'darken-4'=>'006064',
-			'accent-1'=>'84ffff',
 			'accent-2'=>'18ffff',
 			'accent-3'=>'00e5ff',
 			'accent-4'=>'00b8d4'
@@ -316,7 +308,6 @@ class Color {
 			'darken-2'=>'00796b',
 			'darken-3'=>'00695c',
 			'darken-4'=>'004d40',
-			'accent-1'=>'a7ffeb',
 			'accent-2'=>'64ffda',
 			'accent-3'=>'1de9b6',
 			'accent-4'=>'00bfa5'
@@ -329,7 +320,6 @@ class Color {
 			'darken-2'=>'388e3c',
 			'darken-3'=>'2e7d32',
 			'darken-4'=>'1b5e20',
-			'accent-1'=>'b9f6ca',
 			'accent-2'=>'69f0ae',
 			'accent-3'=>'00e676',
 			'accent-4'=>'00c853'
@@ -342,7 +332,6 @@ class Color {
 			'darken-2'=>'689f38',
 			'darken-3'=>'558b2f',
 			'darken-4'=>'33691e',
-			'accent-1'=>'ccff90',
 			'accent-2'=>'b2ff59',
 			'accent-3'=>'76ff03',
 			'accent-4'=>'64dd17'
@@ -355,7 +344,6 @@ class Color {
 			'darken-2'=>'afb42b',
 			'darken-3'=>'9e9d24',
 			'darken-4'=>'827717',
-			'accent-1'=>'f4ff81',
 			'accent-2'=>'eeff41',
 			'accent-3'=>'c6ff00',
 			'accent-4'=>'aeea00'
@@ -530,7 +518,6 @@ class Color {
 			'0288d1',
 			'0277bd',
 			'01579b',
-			'80d8ff',
 			'40c4ff',
 			'00b0ff',
 			'0091ea'
@@ -543,7 +530,6 @@ class Color {
 			'0097a7',
 			'00838f',
 			'006064',
-			'84ffff',
 			'18ffff',
 			'00e5ff',
 			'00b8d4'
@@ -556,7 +542,6 @@ class Color {
 			'00796b',
 			'00695c',
 			'004d40',
-			'a7ffeb',
 			'64ffda',
 			'1de9b6',
 			'00bfa5'
@@ -569,7 +554,6 @@ class Color {
 			'388e3c',
 			'2e7d32',
 			'1b5e20',
-			'b9f6ca',
 			'69f0ae',
 			'00e676',
 			'00c853'
@@ -582,7 +566,6 @@ class Color {
 			'689f38',
 			'558b2f',
 			'33691e',
-			'ccff90',
 			'b2ff59',
 			'76ff03',
 			'64dd17'
@@ -595,7 +578,6 @@ class Color {
 			'afb42b',
 			'9e9d24',
 			'827717',
-			'f4ff81',
 			'eeff41',
 			'c6ff00',
 			'aeea00'
