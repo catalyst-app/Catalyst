@@ -504,9 +504,14 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="section" id="history">
 					<h4 style="margin-top: -80px; padding-top: 80px;">Patrons</h4>
 
+					<p class="flow-text"><a href="https://patreon.com/Catalyst">Get your name on this list!</a></p>					
+
 					<p>Catalyst does not endorse/support any of the below names, and the patrons listed below do not officially represent Catalyst.</p>
 
-					<p class="flow-text">None yet!  <a href="https://patreon.com/Catalyst">Become one?</a></p>					
+					<h5>Patrons:</h5>
+					<ul class="browser-default">
+						<li class="flow-text"><a href="http://furaffinity.net/user/sinnerscout/">sinnerscout</a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
