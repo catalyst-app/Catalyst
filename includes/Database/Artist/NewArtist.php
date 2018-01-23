@@ -72,7 +72,7 @@ class NewArtist {
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::URL_INVALID], self::PHRASES[self::URL_TAKEN]],
 				"error_code" => [self::URL_INVALID, self::URL_TAKEN],
-				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="newartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'</strong></p>'
+				"after_html" => '<p class="col s12">This will be the link to your page: <strong id="newartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'</strong></p>'
 			],
 			[
 				"name" => "desc",
