@@ -74,7 +74,7 @@ class EditArtist {
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::URL_INVALID], self::PHRASES[self::URL_TAKEN]],
 				"error_code" => [self::URL_INVALID, self::URL_TAKEN],
-				"after_html" => '<p class="col s12">This will be to the link to your page: <strong id="editartist-url-sample" data-base="'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null).'</strong></p>'
+				"after_html" => '<p class="col s12">This will be the link to your page: <strong id="editartist-url-sample" data-base="'.(preg_replace('/Edit\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).'">'.(preg_replace('/New\/?$/', '', \Catalyst\Page\UniversalFunctions::getRequestURI())).(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getUrl() : null) : null).'</strong></p>'
 			],
 			[
 				"name" => "desc",
