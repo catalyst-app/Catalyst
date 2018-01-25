@@ -4,7 +4,7 @@ namespace Catalyst;
 
 class Email {
 	public const NO_REPLY_EMAIL = ["no-reply@catalystapp.co", "Catalyst No-Reply"];
-	protected const NO_REPLY_SMTP = ["localhost", 465, "ssl"];
+	protected const NO_REPLY_SMTP = ["catalystapp.co", 465, "tls"];
 	private const NO_REPLY_PASSWORD = NO_REPLY_PASSWORD;
 
 	public static function getCSS(string $color) {
