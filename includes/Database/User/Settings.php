@@ -313,7 +313,7 @@ class Settings {
 		$pictureLoc = is_null($newPic) ? $user["PICTURE_LOC"] : $newPic;
 		$pfpnsfw = $pfpnsfw ? 1 : 0;
 		$nsfw = $nsfw ? 1 : 0;
-		$color = (string)"$color";
+		$color = $color;
 		$nick = empty($nick) ? $user["NICK"] : $nick;
 
 		$updateStmt->bindParam(":USERNAME", $username);

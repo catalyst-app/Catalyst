@@ -229,7 +229,7 @@ class Register {
 		$pictureLoc = \Catalyst\Form\FileUpload::uploadImage($pfp, \Catalyst\Form\FileUpload::PROFILE_PHOTO, $fileToken);
 		$pfpnsfw = $pfpnsfw ? 1 : 0;
 		$nsfw = $nsfw ? 1 : 0;
-		$color = (string)"$color";
+		$color = $color;
 		$nick = $nick ? $nick : $username;
 
 		$regStmt->bindParam(":FILE_TOKEN", $fileToken);

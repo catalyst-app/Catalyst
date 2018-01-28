@@ -12,7 +12,6 @@ define("DB_USER", "CATALYST");
 define("DB_TABLES", [
 	"artist_pages" => "artist_pages",
 	"artist_social_media" => "artist_social_media",
-	"artist_social_media" => "artist_social_media",
 	"artist_streaming_integrations" => "artist_streaming_integrations",
 	"character_images" => "character_images",
 	"characters" => "characters",
