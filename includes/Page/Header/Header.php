@@ -10,7 +10,8 @@ class Header {
 		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.3/draggable.bundle.min.js"],
 		["https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer"],
 		["https://www.google.com/recaptcha/api.js", "defer"],
-		[ROOTDIR."js/markdown-it.js"],
+		[ROOTDIR."js/markdown-it.js", "defer"],
+		[ROOTDIR."js/jq-ajax-progress.js", "defer"],
 		[ROOTDIR."js/main.js.php"],
 	];
 
