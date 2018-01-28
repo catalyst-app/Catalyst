@@ -1,0 +1,5 @@
+parameters:
+    excludes_analyse:
+        - includes/vendor
+        - includes/phpqrcode.php
+    bootstrap: includes/phpstan-init.php
