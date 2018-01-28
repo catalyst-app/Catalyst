@@ -125,7 +125,9 @@ class FormJS {
 
 		$str .= $qs;
 
-		$str .= '$.ajax("'.$form[0]["handler"].'", {data: data, processData: false, contentType: false, method: "'.$form[0]["method"].'"}).done(function(response) {Materialize.toast("'.$form[0]["success"].'", 4000);'.(isset($form[0]["redirect"]) ? 'window.location = "'.$form[0]["redirect"].'";' : $form[0]["eval"]).'}).fail(function(response) {var data = JSON.parse(response.responseText);console.warn(data);';
+		$containsFile = (bool)count(array_filter($form, function($in) { return array_key_exists("type", $in) && $in["type"] == "image"; }));
+
+		$str .= '$.ajax("'.$form[0]["handler"].'", {data: data, processData: false, contentType: false, method: "'.$form[0]["method"].'"})'.($containsFile ? '.uploadProgress(function(e) { uploadIndicator("'.$form[0]["distinguisher"].'", e); })' : '').'.done(function(response) {Materialize.toast("'.$form[0]["success"].'", 4000);'.(isset($form[0]["redirect"]) ? 'window.location = "'.$form[0]["redirect"].'";' : $form[0]["eval"]).'}).fail(function(response) {var data = JSON.parse(response.responseText);console.warn(data);';
 		$str .= self::generateErrorSwitch($form);
 		$str .= "}).always(function() {".self::generateStopSubmitAnimation($form[0])."});";
 
