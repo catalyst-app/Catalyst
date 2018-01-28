@@ -10,7 +10,7 @@ use \Catalyst\Response;
 use \Catalyst\User\User;
 
 if (User::isLoggedOut()) {
-	\Catalyst\Response::send401(Deactivate::ERROR_UNKNOWN, Deactivate::PHRASES[Deactivate::ERROR_UNKNOWN]);
+	\Catalyst\Response::send401(Settings::ERROR_UNKNOWN, Settings::PHRASES[Settings::ERROR_UNKNOWN]);
 }
 
 FormPHP::checkForm(Settings::getFormStructure());
