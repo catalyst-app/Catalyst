@@ -14,7 +14,7 @@ if (User::isLoggedOut()) {
 }
 
 if (empty($_POST)) {
-	\Catalyst\Response::send401(NewCharacter::PICTURE_INVALID, NewCharacter::PHRASES[NewCharacter::PICTURE_INVALID]);
+	\Catalyst\Response::send401(NewCharacter::IMAGES_INVALID, NewCharacter::PHRASES[NewCharacter::IMAGES_INVALID]);
 }
 
 FormPHP::checkForm(NewCharacter::getFormStructure());
