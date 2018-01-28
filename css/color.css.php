@@ -99,7 +99,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 	background-color: #<?= Color::lightenHex($_GET["hex"], 2) ?>;
 }
 
-.progress .indeterminate {
+.progress .indeterminate, .progress .determinate {
 	background-color: #<?= $_GET["hex"] ?>;
 }
 
