@@ -46,8 +46,8 @@ class NewFeature {
 				"pattern" => ['^.{2,255}$', "Between 2 and 255 characters"],
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::NAME_INVALID]],
+				"error_code" => [self::NAME_INVALID],
 			],
 			[
 				"name" => "group",
@@ -56,8 +56,8 @@ class NewFeature {
 				"options" => \Catalyst\Database\FeatureBoard\Groups::get(),
 				"label" => "Group",
 				"required" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::GROUP_INVALID]],
+				"error_code" => [self::GROUP_INVALID],
 			],
 			[
 				"name" => "intro",
@@ -66,8 +66,8 @@ class NewFeature {
 				"label" => "Introduction",
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::INTRO_INVALID]],
+				"error_code" => [self::INTRO_INVALID],
 				"other_attributes" => [
 					"placeholder" => "The elevator pitch for your request.  Should only be a paragraph or so, and summarily tell what your request is asking for.  Please write a good introduction, it is what will convince the reader to continue to read your proposal.",
 				],
@@ -79,8 +79,8 @@ class NewFeature {
 				"label" => "Proposal",
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::PROPOSAL_INVALID]],
+				"error_code" => [self::PROPOSAL_INVALID],
 				"other_attributes" => [
 					"placeholder" => "All the features, explainations, and examples of the proposal.  Explain hows the proposal brings substantial value and why it should be considered for inclusion.",
 				],
@@ -92,8 +92,8 @@ class NewFeature {
 				"label" => "Acknowledgement",
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::ACKNOWLEDGEMENT_INVALID]],
+				"error_code" => [self::ACKNOWLEDGEMENT_INVALID],
 				"other_attributes" => [
 					"placeholder" => "What might some people have against your feature?  What are some arguments that could be made about why it shouldn't be included?  List them here, and, if possible, a rebuttal.  This proves that you have thoroughly thought about the feature.",
 				],
@@ -105,8 +105,8 @@ class NewFeature {
 				"label" => "Future Scope",
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::FUTURE_INVALID]],
+				"error_code" => [self::FUTURE_INVALID],
 				"other_attributes" => [
 					"placeholder" => "How could this be expanded on or changed over time?  What could be some additional extensions that build off your request?  Not required, but recommended.",
 				],
@@ -118,8 +118,8 @@ class NewFeature {
 				"label" => "I have searched the existing board list and found no similar proposals",
 				"required" => true,
 				"validate" => true,
-				"error_text" => [self::PHRASES[self::ERROR_UNKNOWN]],
-				"error_code" => [self::ERROR_UNKNOWN],
+				"error_text" => [self::PHRASES[self::SEARCH_INVALID]],
+				"error_code" => [self::SEARCH_INVALID],
 			],
 		];
 	}
