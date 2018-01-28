@@ -148,7 +148,7 @@ class Artist {
 		$stmt->bindParam(":ID", $this->id);
 		$stmt->execute();
 
-		$result = $this->cache["IMG"] = (is_null($results[0]["IMG"]) ? "default.png" : $this->getToken().$results[0]["IMG"]);
+		$result = $this->cache["IMG"] = (is_null($results[0]["IMG"]) ? "default.png" : $this->getToken().$stmt->fetchAll()[0]["IMG"]);
 
 		$stmt->closeCursor();
 
