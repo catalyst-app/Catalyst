@@ -122,4 +122,4 @@ if ($result != NewCommissionType::SUCCESS) {
 	Response::send401($result, NewCommissionType::PHRASES[$result]);
 }
 
-Response::send201(NewCommissionType::SUCCESS);
+Response::send201(NewCommissionType::PHRASES[NewCommissionType::SUCCESS]);
