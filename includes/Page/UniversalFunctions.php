@@ -46,18 +46,18 @@ class UniversalFunctions {
 	// https://github.com/mingalevme/utils/blob/master/src/Filesize.php
 	public static function dehumanize(string $size) {
 		if (preg_match('/\d+\.\d+B/', $size)) {
-			throw new Exception("Invalid size format or unknown/unsupported units");
+			throw new \Exception("Invalid size format or unknown/unsupported units");
 		}
 		
 		if (preg_match('/\d+kiB/', $size)) {
-			throw new Exception("Invalid size format or unknown/unsupported units");
+			throw new \Exception("Invalid size format or unknown/unsupported units");
 		}
 		
 		$supportedUnits = implode('', array_keys(self::UNIT_PREFIXES_POWERS));
 		$regexp = "/^(\d+(?:\.\d+)?)(([{$supportedUnits}])((?<!B)(B|iB))?)?$/";
 		
 		if ((bool) preg_match($regexp, $size, $matches) === false) {
-			throw new Exception("Invalid size format or unknown/unsupported units");
+			throw new \Exception("Invalid size format or unknown/unsupported units");
 		}
 		
 		$prefix = isset($matches[3]) ? $matches[3] : 'B';
