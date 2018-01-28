@@ -20,7 +20,7 @@ $result = Item::castVote(
 );
 
 if (!$result) {
-	Response::send500(2, "Unknown error");
+	Response::send500("Unknown error", 2);
 }
 
 Response::send200("Vote submitted");

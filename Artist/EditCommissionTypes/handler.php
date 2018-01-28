@@ -44,4 +44,4 @@ if ($result != EditArtist::SUCCESS) {
 	Response::send401($result, EditArtist::PHRASES[$result]);
 }
 
-Response::send200(EditArtist::SUCCESS);
+Response::send200(EditArtist::PHRASES[EditArtist::SUCCESS]);

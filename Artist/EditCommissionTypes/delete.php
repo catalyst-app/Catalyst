@@ -40,4 +40,4 @@ if ($result != DeleteCommissionType::SUCCESS) {
 	Response::send401($result, DeleteCommissionType::PHRASES[$result]);
 }
 
-Response::send200(DeleteCommissionType::SUCCESS);
+Response::send200(DeleteCommissionType::PHRASES[DeleteCommissionType::SUCCESS]);
