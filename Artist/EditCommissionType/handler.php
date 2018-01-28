@@ -43,7 +43,7 @@ if (!isset($_POST["mods"]) || empty($_POST["mods"])) {
 
 $modGroups = json_decode($_POST["mods"], true);
 
-if ($modGroups === false || !is_array($modGroups) || is_null($modGroups)) {
+if ($modGroups === false || !is_array($modGroups)) {
 	Response::send401(EditCommissionType::MODIFIERS_INVALID, EditCommissionType::PHRASES[EditCommissionType::MODIFIERS_INVALID]);
 }
 
@@ -68,7 +68,7 @@ foreach ($modGroups as $modGroup) {
 
 $attrs = json_decode($_POST["attrs"], true);
 
-if ($attrs === false || !is_array($attrs) || is_null($attrs)) {
+if ($attrs === false || !is_array($attrs)) {
 	Response::send401(EditCommissionType::ATTRS_INVALID, EditCommissionType::PHRASES[EditCommissionType::ATTRS_INVALID]);
 }
 
@@ -85,7 +85,7 @@ foreach ($attrs as $attr) {
 
 $payments = json_decode($_POST["payments"], true);
 
-if ($payments === false || !is_array($payments) || is_null($payments)) {
+if ($payments === false || !is_array($payments)) {
 	Response::send401(EditCommissionType::PAYMENT_OPTIONS_INVALID, EditCommissionType::PHRASES[EditCommissionType::PAYMENT_OPTIONS_INVALID]);
 }
 
@@ -102,7 +102,7 @@ foreach ($payments as $payment) {
 
 $stages = json_decode($_POST["stages"], true);
 
-if ($stages === false || !is_array($stages) || is_null($stages)) {
+if ($stages === false || !is_array($stages)) {
 	Response::send401(EditCommissionType::STAGES_INVALID, EditCommissionType::PHRASES[EditCommissionType::STAGES_INVALID]);
 }
 
@@ -136,4 +136,4 @@ if ($result != EditCommissionType::SUCCESS) {
 	Response::send401($result, EditCommissionType::PHRASES[$result]);
 }
 
-Response::send200(EditCommissionType::SUCCESS);
+Response::send200(EditCommissionType::PHRASES[EditCommissionType::SUCCESS]);
