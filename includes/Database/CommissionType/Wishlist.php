@@ -27,7 +27,7 @@ class Wishlist {
 		$uid = $user->getId();
 		$stmt->bindParam(":USER_ID", $uid);
 		$stmt->bindParam(":COMMISSION_TYPE_ID", $ctid);
-		if (!$stmt->execute($arr)) {
+		if (!$stmt->execute()) {
 			error_log(" Add to wishlist error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
 			return self::ERROR_UNKNOWN;
 		}
@@ -50,7 +50,7 @@ class Wishlist {
 		$uid = $user->getId();
 		$stmt->bindParam(":USER_ID", $uid);
 		$stmt->bindParam(":COMMISSION_TYPE_ID", $ctid);
-		if (!$stmt->execute($arr)) {
+		if (!$stmt->execute()) {
 			error_log(" Remove from wishlist error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
 			return self::ERROR_UNKNOWN;
 		}
