@@ -104,7 +104,7 @@ class TOTPLogin {
 		return $result;
 	}
 
-	private static function oath_truncate($hash, $length = 6, $debug=false) {
+	private static function oath_truncate($hash, $length=6, $debug=false) {
 		$result=""; 
 
 		$hashcharacters = str_split($hash,2);
