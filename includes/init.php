@@ -1,6 +1,6 @@
 <?php
 
-define("DEVEL",1);
+define("DEVEL",true);
 
 require_once __DIR__."/Secrets.php";
 
