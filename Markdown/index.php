@@ -251,9 +251,9 @@ MD
 				<div class="row">
 					<div class="col s12 m6"><div class="code-block"><p>
 <?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
-https://commisso.co
+https://catalystapp.co
 
-[The Best Site!](https://commisso.co)
+[The Best Site!](https://catalystapp.co)
 
 *For more information, check out the [About](https://catalystapp.co) page.*
 MD
@@ -261,7 +261,7 @@ MD
 </p></div></div>
 				<div class="raw-markdown markdown-preview col s12 m6">
 <?= htmlspecialchars(<<<MD
-https://commisso.co
+https://catalystapp.co
 
 [The Best Site!](https://catalystapp.co/)
 
