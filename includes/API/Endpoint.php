@@ -6,6 +6,19 @@ namespace Catalyst\API;
  * Utility functions for an endpoint
  */
 class Endpoint {
+	/**
+	 * Ran for every endpoint
+	 */
+	public static function init() {
+		define("IS_API", true);
+		self::checkAuthorizationHeaders();
+	}
+
+	/**
+	 * Check if the authorization headers are valid
+	 * 
+	 * @return bool If the headers are valid
+	 */
 	public static function checkAuthorizationHeaders() : bool {
 		$headers = getallheaders();
 
