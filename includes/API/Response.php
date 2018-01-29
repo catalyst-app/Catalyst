@@ -2,6 +2,8 @@
 
 namespace Catalyst\API;
 
+use \Catalyst\HTTPCode;
+
 /**
  * Contains various utilities to standardize JSON responses
  */
@@ -15,7 +17,7 @@ class Response {
 	public static function sendSuccessResponse(string $message, array $data=[]) {
 		return die(json_encode([
 			"error" => false,
-			"http_code" => \Catalyst\HTTPCode::get(),
+			"http_code" => HTTPCode::get(),
 			"error_code" => 0,
 			"message" => $message,
 			"data" => $data,
@@ -32,7 +34,7 @@ class Response {
 	public static function sendErrorResponse(int $code, string $message, array $data=[]) {
 		return die(json_encode([
 			"error" => true,
-			"http_code" => \Catalyst\HTTPCode::get(),
+			"http_code" => HTTPCode::get(),
 			"error_code" => $code,
 			"message" => $message,
 			"data" => $data,
