@@ -24,9 +24,13 @@ abstract class Query {
 	 */
 	protected $values = [];
 	/**
-	 * A single item or array of \Catalyst\Database\QueryAddition
+	 * An array of \Catalyst\Database\QueryAddition
 	 */
-	protected $additionalCapabilities = null;
+	protected $additionalCapabilities = [];
+	/**
+	 * Result
+	 */
+	protected $result = null;
 
 	/**
 	 * Creates a Query object
@@ -34,9 +38,9 @@ abstract class Query {
 	 * @param string $table Table to affect/target
 	 * @param string[] $columns Column list to affect/target
 	 * @param array $values List of values to bind to the above columns
-	 * @param null|\Catalyst\Database\QueryAddition|array $additionalCapabilities Single or multiple \Catalyst\Database\QueryAddition
+	 * @param \Catalyst\Database\QueryAddition[] $additionalCapabilities Single or multiple \Catalyst\Database\QueryAddition
 	 */
-	public function __construct(string $table="", array $columns=[], array $values=[], $additionalCapabilities=null) {
+	public function __construct(string $table="", array $columns=[], array $values=[], $additionalCapabilities=[]) {
 		$this->table = $table;
 		$this->columns = $columns;
 		$this->values = $values;
@@ -166,11 +170,11 @@ abstract class Query {
 	}
 
 	/**
-	 * Add an additional capabilities for the query
+	 * Add an additional capability for the query
 	 * 
 	 * @param \Catalyst\Database\QueryAddition $additionalCapability The addition to add to the query
 	 */
-	public function addAdditionalCapabilities(\Catalyst\Database\QueryAddition $additionalCapability) : void {
+	public function addAdditionalCapability(\Catalyst\Database\QueryAddition $additionalCapability) : void {
 		$this->additionalCapabilities[] = $additionalCapability;
 	}
 
@@ -201,14 +205,12 @@ abstract class Query {
 				throw new \InvalidArgumentException("Column is not a string");
 			}
 		}
-		if (!($this->additionalCapabilities instanceof \Catalyst\Database\QueryAddition) && !is_null($this->additionalCapabilities) && !is_array($this->additionalCapabilities)) {
+		if (!is_array($this->additionalCapabilities)) {
 			throw new \InvalidArgumentException("Additional capabilities is not a valid type");
 		}
-		if (is_array($this->additionalCapabilities)) {
-			foreach ($this->additionalCapabilities as $additionalCapability) {
-				if (!($additionalCapability instanceof \Catalyst\Database\QueryAddition)) {
-					throw new \InvalidArgumentException("Additional capability is not a QueryAddition");
-				}
+		foreach ($this->additionalCapabilities as $additionalCapability) {
+			if (!($additionalCapability instanceof \Catalyst\Database\QueryAddition)) {
+				throw new \InvalidArgumentException("Additional capability is not a QueryAddition");
 			}
 		}
 		return true;
