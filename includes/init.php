@@ -42,6 +42,7 @@ require_once __DIR__."/Form/Flags.php";
 require_once __DIR__."/Form/FormHTML.php";
 require_once __DIR__."/Form/FormJS.php";
 require_once __DIR__."/Form/FormPHP.php";
+require_once __DIR__."/HTTPCode.php";
 require_once __DIR__."/Integrations/SocialMedia.php";
 require_once __DIR__."/Message/Message.php";
 require_once __DIR__."/Page/Header/Header.php";
