@@ -60,6 +60,15 @@ echo UniversalFunctions::createHeading("API Documentation");
 					<li><span class="flow-text"><strong>Client</strong>: A string which contains your client ID and secret, separated by a comma.  Example:</span> <span class="code">Client: v8ayeztxskdm8x0sm,xm0xzvm3jncdjsm1iejasjkfv8mkktbyrmzakegcwnc9pmw107fbmy3zbwls</span></li>
 					<li><span class="flow-text"><strong>User</strong>: A string which contains your user's access token and secret, separated by a comma.  Example:</span> <span class="code">User: 4yt43e1wbgzt1397wcbpv249v51vroh2doc8uhte,2s9wc0nr9d7z17hh6943d66e5br06pnrpt6f3noz42mc9vsep43rg7nf7xai</span></li>
 				</ul>
+				<p class="flow-text">Error codes</p>
+				<ul class="browser-default">
+					<li><span class="flow-text"><strong>10001</strong>: Client header not passed</li>
+					<li><span class="flow-text"><strong>10002</strong>: User header not passed</li>
+					<li><span class="flow-text"><strong>10003</strong>: Client header is invalid</li>
+					<li><span class="flow-text"><strong>10004</strong>: User header is invalid</li>
+					<li><span class="flow-text"><strong>10005</strong>: Client does not exist (was your API access revoked?)</li>
+					<li><span class="flow-text"><strong>10006</strong>: User tokens are invalid (did the user revoke your API access to their account?)</li>
+				</ul>
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="response-codes">
