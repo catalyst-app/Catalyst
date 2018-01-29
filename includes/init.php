@@ -1,5 +1,7 @@
 <?php
 
+define("DEVEL",1);
+
 require_once __DIR__."/Secrets.php";
 
 require_once __DIR__."/Artist/Artist.php";
