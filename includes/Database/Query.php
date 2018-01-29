@@ -236,8 +236,18 @@ abstract class Query {
 	 * 
 	 * This is where all the real logic and execution occurs
 	 * 
-	 * @return mixed bool for certain types, or data if applicable
+	 * @return bool if the query was successful
 	 * @abstract
 	 */
-	public abstract function execute();
+	public abstract function execute() : bool;
+
+	/**
+	 * Returns the result from ->execute
+	 * 
+	 * @return mixed bool for certain types, id, or data if applicable
+	 * @throws LogicException if the query has not been executed
+	 */
+	public function getResult() {
+		return $this->result;
+	}
 }
