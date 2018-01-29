@@ -2,10 +2,13 @@
 
 namespace Catalyst\Database;
 
+use \LogicException;
+use \InvalidArgumentException;
+
 /**
  * Class which represents a WHERE clause in a MySQL query
  */
-class WhereClause implements \Catalyst\Database\QueryAddition {
+class WhereClause implements QueryAddition {
 	/**
 	 * Represents a boolean AND operation
 	 */
@@ -76,11 +79,11 @@ class WhereClause implements \Catalyst\Database\QueryAddition {
 						$str .= ' OR ';
 						break;
 					default:
-						throw new \LogicException("Where clause item has no associated column and is not equal to WhereClause::AND or WhereClause::OR");
+						throw new LogicException("Where clause item has no associated column and is not equal to WhereClause::AND or WhereClause::OR");
 				}
 			} else {
 				if (count($value) != 3) {
-					throw new \InvalidArgumentException("Invalid where clause (".serialize($value).")");
+					throw new InvalidArgumentException("Invalid where clause (".serialize($value).")");
 				}
 				$str .= '`'.$value[0].'` '.$value[1].' ?';
 			}
