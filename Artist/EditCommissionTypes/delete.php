@@ -15,10 +15,6 @@ if (User::isLoggedOut()) {
 	Response::send401(DeleteCommissionType::NOT_LOGGED_IN, DeleteCommissionType::PHRASES[DeleteCommissionType::NOT_LOGGED_IN]);
 }
 
-if (empty($_POST)) {
-	Response::send401(DeleteCommissionType::IMAGES_INVALID, DeleteCommissionType::PHRASES[DeleteCommissionType::IMAGES_INVALID]);
-}
-
 if (!$_SESSION["user"]->isArtist()) {
 	Response::send401(DeleteCommissionType::NOT_AN_ARTIST, DeleteCommissionType::PHRASES[DeleteCommissionType::NOT_AN_ARTIST]);
 }

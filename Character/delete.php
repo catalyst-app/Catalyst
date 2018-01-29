@@ -15,14 +15,19 @@ if (User::isLoggedOut()) {
 }
 
 $characterId = Character::getIdFromToken($_POST["token"]);
+$character = null;
 if ($characterId !== -1) {
 	$characterObj = new Character($characterId);
 	if ($characterObj->getOwnerId() == $_SESSION["user"]->getId()) {
 		$character = $characterObj;
+	} else {
+		Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
 	}
+} else {
+	Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
 }
 
-if (!isset($character)) {
+if (is_null($character)) {
 	Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
 }
 
