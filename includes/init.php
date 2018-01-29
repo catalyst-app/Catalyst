@@ -25,6 +25,7 @@ require_once __DIR__."/Database/FeatureBoard/Item.php";
 require_once __DIR__."/Database/FeatureBoard/NewFeature.php";
 require_once __DIR__."/Database/Integrations/Meta.php";
 require_once __DIR__."/Database/SocialMedia.php";
+require_once __DIR__."/Database/Tables.php";
 require_once __DIR__."/Database/User/Deactivate.php";
 require_once __DIR__."/Database/User/EmailVerification.php";
 require_once __DIR__."/Database/User/Login.php";
