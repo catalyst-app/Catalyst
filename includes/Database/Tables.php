@@ -8,6 +8,8 @@ namespace Catalyst\Database;
  * Compartmentalized due to MySQL handling and potential growth/modifications.
  */
 class Tables {
+	public const API_AUTHORIZATIONS = "api_authorizations";
+	public const API_KEYS = "api_keys";
 	public const ARTIST_PAGES = "artist_pages";
 	public const ARTIST_SOCIAL_MEDIA = "artist_social_media";
 	public const ARTIST_STREAMING_INTEGRATIONS = "artist_streaming_integrations";
