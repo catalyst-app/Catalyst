@@ -24,7 +24,7 @@ abstract class Query {
 	 */
 	protected $values = [];
 	/**
-	 * An array of \Catalyst\Database\QueryAddition
+	 * An array of QueryAddition
 	 */
 	protected $additionalCapabilities = [];
 	/**
@@ -38,7 +38,7 @@ abstract class Query {
 	 * @param string $table Table to affect/target
 	 * @param string[] $columns Column list to affect/target
 	 * @param array $values List of values to bind to the above columns
-	 * @param \Catalyst\Database\QueryAddition[] $additionalCapabilities Single or multiple \Catalyst\Database\QueryAddition
+	 * @param QueryAddition[] $additionalCapabilities Single or multiple QueryAddition
 	 */
 	public function __construct(string $table="", array $columns=[], array $values=[], $additionalCapabilities=[]) {
 		$this->table = $table;
@@ -163,7 +163,7 @@ abstract class Query {
 	/**
 	 * Get the additional capabilities for the query
 	 * 
-	 * @return \Catalyst\Database\QueryAddition[] The additions for the query (joins, etc)
+	 * @return QueryAddition[] The additions for the query (joins, etc)
 	 */
 	public function getAdditionalCapabilities() : array {
 		return $this->additionalCapabilities;
@@ -172,16 +172,16 @@ abstract class Query {
 	/**
 	 * Add an additional capability for the query
 	 * 
-	 * @param \Catalyst\Database\QueryAddition $additionalCapability The addition to add to the query
+	 * @param QueryAddition $additionalCapability The addition to add to the query
 	 */
-	public function addAdditionalCapability(\Catalyst\Database\QueryAddition $additionalCapability) : void {
+	public function addAdditionalCapability(QueryAddition $additionalCapability) : void {
 		$this->additionalCapabilities[] = $additionalCapability;
 	}
 
 	/**
 	 * Set the additional capabilities for the query
 	 * 
-	 * @param \Catalyst\Database\QueryAddition[] $additionalCapabilities The new list of additions for the query
+	 * @param QueryAddition[] $additionalCapabilities The new list of additions for the query
 	 */
 	public function setAdditionalCapabilities(array $additionalCapabilities) : void {
 		$this->additionalCapabilities = $additionalCapabilities;
@@ -209,7 +209,7 @@ abstract class Query {
 			throw new \InvalidArgumentException("Additional capabilities is not a valid type");
 		}
 		foreach ($this->additionalCapabilities as $additionalCapability) {
-			if (!($additionalCapability instanceof \Catalyst\Database\QueryAddition)) {
+			if (!($additionalCapability instanceof QueryAddition)) {
 				throw new \InvalidArgumentException("Additional capability is not a QueryAddition");
 			}
 		}
