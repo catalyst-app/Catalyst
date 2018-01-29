@@ -44,7 +44,7 @@ class WhereClause implements QueryAddition {
 	/**
 	 * Gets the current WHERE clause array
 	 * 
-	 * @param int|array[] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
+	 * @param int|mixed[] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
 	 */
 	public function addToClause($item) : void {
 		$this->clause[] = $item;
