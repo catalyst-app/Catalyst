@@ -43,7 +43,7 @@ class Artist {
 		return $this->id;
 	}
 
-	public function getUserId() : string {
+	public function getUserId() : int {
 		if (array_key_exists("USER_ID", $this->cache)) {
 			return $this->cache["USER_ID"];
 		}
@@ -148,7 +148,9 @@ class Artist {
 		$stmt->bindParam(":ID", $this->id);
 		$stmt->execute();
 
-		$result = $this->cache["IMG"] = (is_null($results[0]["IMG"]) ? "default.png" : $this->getToken().$stmt->fetchAll()[0]["IMG"]);
+		$img = $stmt->fetchAll()[0]["IMG"];
+
+		$result = $this->cache["IMG"] = (is_null($img) ? "default.png" : $this->getToken().$img);
 
 		$stmt->closeCursor();
 

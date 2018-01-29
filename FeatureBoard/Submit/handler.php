@@ -29,7 +29,7 @@ $result = NewFeature::new(
 );
 
 if ($result == NewFeature::ERROR_UNKNOWN) {
-	Response::send500(NewFeature::PHRASES[NewFeature::ERROR_UNKNOWN].NewFeature::$lastErrId, NewFeature::ERROR_UNKNOWN);
+	Response::send500(NewFeature::PHRASES[NewFeature::ERROR_UNKNOWN], NewFeature::ERROR_UNKNOWN);
 }
 
 if ($result != NewFeature::SUCCESS) {

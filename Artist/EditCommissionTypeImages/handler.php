@@ -35,13 +35,17 @@ foreach ($body as $row) {
 }
 
 $ctid = CommissionType::getIdFromToken($_POST["token"]);
+$type = null;
 if ($ctid !== -1) {
-	if (($type = (new CommissionType($ctid)))->getArtistPageId() != $_SESSION["user"]->getArtistPageId()) {
+	$type = new CommissionType($ctid);
+	if ($type->getArtistPageId() != $_SESSION["user"]->getArtistPageId()) {
 		Response::send401(EditCommissionType::ERROR_UNKNOWN, EditCommissionType::PHRASES[EditCommissionType::ERROR_UNKNOWN]);
 	}
+} else {
+	Response::send401(EditCommissionType::ERROR_UNKNOWN, EditCommissionType::PHRASES[EditCommissionType::ERROR_UNKNOWN]);
 }
 
-if (!isset($type)) {
+if (is_null($type)) {
 	Response::send401(EditCommissionType::ERROR_UNKNOWN, EditCommissionType::PHRASES[EditCommissionType::ERROR_UNKNOWN]);
 }
 

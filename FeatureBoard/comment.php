@@ -19,7 +19,7 @@ $result = Comment::new(
 );
 
 if ($result == Comment::ERROR_UNKNOWN) {
-	Response::send500(Comment::PHRASES[Comment::ERROR_UNKNOWN].Comment::$lastErrId, Comment::ERROR_UNKNOWN);
+	Response::send500(Comment::PHRASES[Comment::ERROR_UNKNOWN], Comment::ERROR_UNKNOWN);
 }
 
 if ($result != Comment::SUCCESS) {
