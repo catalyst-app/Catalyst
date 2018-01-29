@@ -2,10 +2,14 @@
 
 namespace Catalyst\Database;
 
+use \Catalyst\Database\Database;
+use \Catalyst\HTTPCode;
+use \Catalyst\API\{Endpoint, Response};
+
 /**
  * Represents a MySQL SELECT query
  */
-class SelectQuery extends \Catalyst\Database\Query {
+class SelectQuery extends Query {
 	/**
 	 * Executes the query
 	 * 
@@ -38,12 +42,12 @@ class SelectQuery extends \Catalyst\Database\Query {
 		}
 		$initalQuery .= ";";
 
-		$stmt = \Catalyst\Database\Database::getDbh()->prepare($initalQuery);
+		$stmt = Database::getDbh()->prepare($initalQuery);
 		if (!$stmt->execute($this->getParamtersToBind())) {
 			error_log(__CLASS__." execution error: ".serialize($stmt->errorInfo())."\n".implode(" | ",array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace())));
-			if (defined("IS_API") && IS_API) {
-				\Catalyst\HTTPCode::set(500);
-				\Catalyst\API\Response::sendErrorResponse(1, "An unknown database error occured");
+			if (Endpoint::isApi()) {
+				HTTPCode::set(500);
+				Response::sendErrorResponse(1, "An unknown database error occured");
 			}
 		}
 
