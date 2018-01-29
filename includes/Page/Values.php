@@ -6,6 +6,7 @@ class Values {
 	// [keyword (for navbar), title]
 	const HOME = ["home", "Home"];
 	const ABOUT_US = ["about", "About Us"];
+	const API_DOCS = ["about", "API Docs"];
 	const FAQ = ["about", "FAQ"];
 	const FEATURE_BOARD = ["about", "Feature Board"];
 	const FEATURE = ["about", "{name} | Feature"];
