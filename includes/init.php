@@ -4,6 +4,8 @@ define("DEVEL",1);
 
 require_once __DIR__."/Secrets.php";
 
+require_once __DIR__."/API/Endpoint.php";
+require_once __DIR__."/API/Response.php";
 require_once __DIR__."/Artist/Artist.php";
 require_once __DIR__."/Character/Character.php";
 require_once __DIR__."/Color.php";
