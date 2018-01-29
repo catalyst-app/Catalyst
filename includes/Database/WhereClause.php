@@ -25,7 +25,7 @@ class WhereClause implements \Catalyst\Database\QueryAddition {
 	 * 
 	 * @param array $clause Items for the clause.  [column, equality, value] delimited by WhereClause::AND or WhereClause::OR
 	 */
-	public function __construct(array $clause) {
+	public function __construct(array $clause=[]) {
 		$this->clause = $clause;
 	}
 
@@ -41,10 +41,10 @@ class WhereClause implements \Catalyst\Database\QueryAddition {
 	/**
 	 * Gets the current WHERE clause array
 	 * 
-	 * @param int[]|array[] $items Items to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
+	 * @param int|array[] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
 	 */
-	public function addToClause(array $items) : void {
-		$this->clause = array_merge($this->clause, $items);
+	public function addToClause($item) : void {
+		$this->clause[] = $item;
 	}
 
 	/**
@@ -70,10 +70,10 @@ class WhereClause implements \Catalyst\Database\QueryAddition {
 			if (!is_array($value)) {
 				switch ($value) {
 					case self::AND:
-						$str .= 'AND ';
+						$str .= ' AND ';
 						break;
 					case self::OR:
-						$str .= 'OR ';
+						$str .= ' OR ';
 						break;
 					default:
 						throw new \LogicException("Where clause item has no associated column and is not equal to WhereClause::AND or WhereClause::OR");
