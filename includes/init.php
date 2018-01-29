@@ -34,6 +34,7 @@ require_once __DIR__."/Database/User/Login.php";
 require_once __DIR__."/Database/User/Register.php";
 require_once __DIR__."/Database/User/Settings.php";
 require_once __DIR__."/Database/User/TOTPLogin.php";
+require_once __DIR__."/Database/WhereClause.php";
 require_once __DIR__."/Email.php";
 require_once __DIR__."/Form/Captcha.php";
 require_once __DIR__."/Form/FileUpload.php";
