@@ -27,6 +27,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 	["intro", "Introduction"],
 	["keys", "API Keys"],
 	["response-codes", "Response Codes"],
+	["get-user", "User: get"],
 ]) ?>
 			</div>
 			<div class="divider hide-on-med-and-up"></div>
@@ -83,12 +84,34 @@ echo UniversalFunctions::createHeading("API Documentation");
 					<li class="flow-text"><strong>5xx (???)</strong>: Something is very broken.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp and an explaination of the issue.</li>
 				</ul>
 			</div>
+			<div class="divider"></div>
+			<div class="section" id="response-codes">
+				<h4 style="margin-top: -80px; padding-top: 80px;">User: get</h4>
+				<p class="flow-text code">https://catalystapp.co/api/user/get/</p>
+				<p class="flow-text">Gets either the current user or one specified by their username</p>
+				<p class="flow-text">Parameters</p>
+				<ul class="browser-default">
+					<li class="flow-text"><span class="code">?name</span> <span class="code">string</span> Username to get data for.</li>
+				</ul>
+				<p class="flow-text">Response</p>
+				<ul class="browser-default">
+					<li class="flow-text"><span class="code">username</span> <span class="code">string</span> The User's username.</li>
+					<li class="flow-text"><span class="code">?email</span> <span class="code">?string</span> The User's email; only provided for logged-in user.</li>
+					<li class="flow-text"><span class="code">?email_verified</span> <span class="code">bool</span> If the user has verified their email; only provided for logged-in user.  Always returns true if the user's email is not set</li>
+					<li class="flow-text"><span class="code">artist_page_url</span> <span class="code">?string</span> If the user has an artist page, this field will contain their URL</li>
+					<li class="flow-text"><span class="code">picture_loc</span> <span class="code">string</span> This contains the path for the user's profile picture, or <span class="code">profile_pictures/default.png</span> if none is set.  Append this path to <span class="code">https://catalystapp.co/</span>.</li>
+					<li class="flow-text"><span class="code">picture_nsfw</span> <span class="code">bool</span> If the profile picture is NSFW.  Always false for default user.</li>
+					<li class="flow-text"><span class="code">nsfw</span> <span class="code">?bool</span> If the user has NSFW access; only provided for logged-in user.</li>
+					<li class="flow-text"><span class="code">color</span> <span class="code">string(6)</span> The user's color of preference, as a 6-character hex.</li>
+				</ul>
+			</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
 <?= Values::createTOC([
 	["intro", "Introduction"],
 	["keys", "API Keys"],
 	["response-codes", "Response Codes"],
+	["get-user", "User: get"],
 ]) ?>
 			</div>
 		</div>
