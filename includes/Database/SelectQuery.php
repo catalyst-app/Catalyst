@@ -20,33 +20,35 @@ class SelectQuery extends Query {
 	public function execute() : bool {
 		$this->verifyIntegrity();
 
-		$initalQuery = "SELECT ";
+		$initialQuery = "SELECT ";
 		
 		// columns
 		foreach ($this->columns as $column) {
 			if (is_array($column)) {
-				$initalQuery .= "`".$column[0]."`.`".$column[1]."`";
+				$initialQuery .= "`".$column[0]."`.`".$column[1]."`";
 			} else {
-				$initalQuery .= "`".$column."`";
+				$initialQuery .= "`".$column."`";
 			}
 			if ($column != end($this->columns)) {
-				$initalQuery .= ",";
+				$initialQuery .= ",";
 			}
 		}
 
 		// from
-		$initalQuery .= " FROM `".$this->table."`";
+		$initialQuery .= " FROM `".$this->table."`";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
 			foreach ($this->additionalCapabilities as $additionalCapability) {
-				$initalQuery .= " ";
+				$initialQuery .= " ";
+				// each additional capability should verify integrity in its getQueryString
 				$initialQuery .= $additionalCapability->getQueryString();
 			}
 		}
-		$initalQuery .= ";";
+		$initialQuery .= ";";
 
-		$stmt = Database::getDbh()->prepare($initalQuery);
+		$stmt = Database::getDbh()->prepare($initialQuery);
+
 		if (!$stmt->execute($this->getParamtersToBind())) {
 			error_log(__CLASS__." execution error: ".serialize($stmt->errorInfo())."\n".implode(" | ",array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace())));
 			if (Endpoint::isApi()) {
