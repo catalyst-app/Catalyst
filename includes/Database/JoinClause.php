@@ -108,7 +108,7 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	/**
 	 * Set the join condition
 	 * 
-	 * @param string[]|string[][] The new condition
+	 * @param string[]|string[][] $condition The new condition
 	 */
 	public function setCondition(array $condition) : void {
 		if (count($condition) !== 2) {
