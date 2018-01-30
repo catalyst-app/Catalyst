@@ -4,6 +4,7 @@ define("DEVEL",true);
 
 require_once __DIR__."/Secrets.php";
 
+require_once __DIR__."/Database/QueryAddition.php"; // temp fix, i should register an autoload
 require_once __DIR__."/API/Endpoint.php";
 require_once __DIR__."/API/Response.php";
 require_once __DIR__."/Artist/Artist.php";
@@ -26,8 +27,8 @@ require_once __DIR__."/Database/FeatureBoard/Groups.php";
 require_once __DIR__."/Database/FeatureBoard/Item.php";
 require_once __DIR__."/Database/FeatureBoard/NewFeature.php";
 require_once __DIR__."/Database/Integrations/Meta.php";
+require_once __DIR__."/Database/JoinClause.php";
 require_once __DIR__."/Database/Query.php";
-require_once __DIR__."/Database/QueryAddition.php";
 require_once __DIR__."/Database/SelectQuery.php";
 require_once __DIR__."/Database/SocialMedia.php";
 require_once __DIR__."/Database/Tables.php";
