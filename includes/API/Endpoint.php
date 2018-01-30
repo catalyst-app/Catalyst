@@ -88,6 +88,10 @@ class Endpoint {
 
 	/**
 	 * Checks if the client keys exist in the database and are valid
+	 * 
+	 * @param string $clientId The app's client ID
+	 * @param string $clientSecret The app's client secret
+	 * @return bool if the keys are valid
 	 */
 	public static function checkClientKeys(string $clientId, string $clientSecret) : bool {
 		$query = new SelectQuery();
