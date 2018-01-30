@@ -44,7 +44,7 @@ class WhereClause implements QueryAddition {
 	/**
 	 * Gets the current WHERE clause array
 	 * 
-	 * @param int|mixed[] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
+	 * @param int|mixed[]|mixed[][] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
 	 */
 	public function addToClause($item) : void {
 		$this->clause[] = $item;
@@ -53,7 +53,7 @@ class WhereClause implements QueryAddition {
 	/**
 	 * Sets the current WHERE clause array
 	 * 
-	 * @param int[]|array[] $items New items for the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
+	 * @param int[]|mixed[]|mixed[][] $items New items for the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
 	 */
 	public function setClause(array $items) : void {
 		$this->clause = $items;
@@ -63,8 +63,10 @@ class WhereClause implements QueryAddition {
 	 * Returns the properly-formated clause
 	 * 
 	 * @return string the WHERE clause (not including the WHERE directive)
+	 * @throws LogicException on bad values
+	 * @throws InvalidArgumentException on other bad values
 	 */
-	public function __toString() : string {
+	public function getQueryString() : string {
 		if (empty($this->clause)) {
 			return '';
 		}
@@ -85,7 +87,11 @@ class WhereClause implements QueryAddition {
 				if (count($value) != 3) {
 					throw new InvalidArgumentException("Invalid where clause (".serialize($value).")");
 				}
-				$str .= '`'.$value[0].'` '.$value[1].' ?';
+				if (is_array($value[0])) {
+					$str .= '`'.$value[0][0].'`.`'.$value[0][1].'` '.$value[1].' ?';
+				} else {
+					$str .= '`'.$value[0].'` '.$value[1].' ?';
+				}
 			}
 		}
 		return trim($str);
