@@ -2,7 +2,7 @@
 
 namespace Catalyst\API;
 
-use \Catalyst\Database\{SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\HTTPCode;
 
 /**
@@ -97,11 +97,48 @@ class Endpoint {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_KEYS);
 		$query->addColumn("ID");
+		
 		$whereClause = new WhereClause();
 		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
 		$query->addAdditionalCapability($whereClause);
+
+		$query->execute();
+
+		return !empty($query->getResult());
+	}
+
+	/**
+	 * Checks if the client keys exist and are with the user's keys in the database
+	 * 
+	 * @param string $clientId The app's client ID
+	 * @param string $clientSecret The app's client secret
+	 * @param string $userToken The user's token for the app
+	 * @param string $userSecret The user's secret for the app
+	 * @return bool if the keys are valid
+	 */
+	public static function checkUserKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : bool {
+		$query = new SelectQuery();
+		$query->setTable(Tables::API_AUTHORIZATIONS);
+		$query->addColumn([Tables::API_AUTHORIZATIONS,"ID"]);
+
+		$joinClause = new JoinClause();
+		$joinClause->setType(JoinClause::INNER);
+		$joinClause->setJoinTable(Tables::API_KEYS);
+		$joinClause->setCondition([[Tables::API_KEYS,"ID"],[Tables::API_AUTHORIZATIONS,"API_ID"]]);
+		$query->addAdditionalCapability($joinClause);
+		
+		$whereClause = new WhereClause();
+		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["ACCESS_TOKEN", "=", $userToken]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["ACCESS_SECRET", "=", $userSecret]);
+		$query->addAdditionalCapability($whereClause);
+		
 		$query->execute();
 
 		return !empty($query->getResult());
