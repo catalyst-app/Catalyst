@@ -24,7 +24,11 @@ class SelectQuery extends Query {
 		
 		// columns
 		foreach ($this->columns as $column) {
-			$initalQuery .= "`".$column."`";
+			if (is_array($column)) {
+				$initalQuery .= "`".$column[0]."`.`".$column[1]."`";
+			} else {
+				$initalQuery .= "`".$column."`";
+			}
 			if ($column != end($this->columns)) {
 				$initalQuery .= ",";
 			}

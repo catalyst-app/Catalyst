@@ -68,9 +68,7 @@ abstract class Query {
 	/**
 	 * Get the currently targeted columns
 	 * 
-	 * Some examples may be a DELETE, SELECT, UPDATE, etc.
-	 * 
-	 * @return array List of columns being operated upon
+	 * @return string[]|string[][] List of columns being operated upon
 	 */
 	public function getColumns() : array {
 		return $this->columns;
@@ -79,16 +77,16 @@ abstract class Query {
 	/**
 	 * Add a column to the list being targeted
 	 * 
-	 * @param string $column Column to add
+	 * @param string|string[] $column Column to add
 	 */
-	public function addColumn(string $column) : void {
+	public function addColumn($column) : void {
 		$this->columns[] = $column;
 	}
 
 	/**
 	 * Add a series of columns to the list
 	 * 
-	 * @param string[] $columns Columns to add
+	 * @param string[]|string[][] $columns Columns to add
 	 */
 	public function addColumns(array $columns) : void {
 		array_map([$this, "addColumn"], $columns);
@@ -97,7 +95,7 @@ abstract class Query {
 	/**
 	 * Set the current list of columns to a new value
 	 * 
-	 * @param string[] $columns New list of columns
+	 * @param string[]|string[][] $columns New list of columns
 	 */
 	public function setColumns(array $columns) : void {
 		$this->columns = $columns;
@@ -106,13 +104,13 @@ abstract class Query {
 	/**
 	 * Remove a column from the list of columns
 	 * 
-	 * @param string $column The column to remove
+	 * @param string|string[] $column The column to remove
 	 * @return bool If the column was removed
 	 */
-	public function removeColumn(string $column) : bool {
+	public function removeColumn($column) : bool {
 		$initialCount = count($this->columns);
 		$this->columns = array_filter($this->columns, function($in) use ($column) {
-			return $in !== $column;
+			return $in != $column;
 		});
 		return count($this->columns) != $initialCount;
 	}
@@ -120,13 +118,13 @@ abstract class Query {
 	/**
 	 * Remove sevaral columns from the list of columns
 	 * 
-	 * @param string[] $columns The list of columns to remove
+	 * @param string[]|string[][] $columns The list of columns to remove
 	 * @return bool If count($columns) columns were removed
 	 */
 	public function removeColumns(array $columns) : bool {
 		$initialCount = count($this->columns);
 		$this->columns = array_filter($this->columns, function($in) use ($columns) {
-			return !in_array($in, $columns, true);
+			return !in_array($in, $columns);
 		});
 		return $initialCount - count($this->columns) == count($columns);
 	}
@@ -201,8 +199,11 @@ abstract class Query {
 			throw new \InvalidArgumentException("Query columns is not an array");
 		}
 		foreach ($this->columns as $column) {
-			if (!is_string($column)) {
-				throw new \InvalidArgumentException("Column is not a string");
+			if (!is_string($column) && !is_array($column)) {
+				throw new \InvalidArgumentException("Column is not a string or [table,column] array");
+			}
+			if (is_array($column) && count($column) != 2) {
+				throw new \InvalidArgumentException("Column is not a valid [table,column] array");
 			}
 		}
 		if (!is_array($this->additionalCapabilities)) {
