@@ -17,5 +17,5 @@ interface QueryAddition {
 	 * 
 	 * @return string Query string, MUST include the WHERE/JOIN/etc
 	 */
-	public function __toString() : string;
+	public function getQueryString() : string;
 }
