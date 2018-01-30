@@ -41,7 +41,7 @@ class SelectQuery extends Query {
 		if (is_array($this->additionalCapabilities)) {
 			foreach ($this->additionalCapabilities as $additionalCapability) {
 				$initalQuery .= " ";
-				$initalQuery .= (string)($additionalCapability);
+				$initialQuery .= $additionalCapability->getQueryString();
 			}
 		}
 		$initalQuery .= ";";
