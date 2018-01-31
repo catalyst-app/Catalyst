@@ -45,6 +45,9 @@ class Values {
 	const HEAD_INC = __DIR__."/Header/header.inc.php";
 	const FOOTER_INC = __DIR__."/Footer/footer.inc.php";
 
+	const DEBUG_CAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+	const DEBUG_CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {
 			return $values[$in[1]];

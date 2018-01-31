@@ -61,8 +61,8 @@ class EmailVerification {
 			[
 				"type" => "captcha",
 				"name" => "captcha",
-				"key" => self::CAPTCHA_KEY,
-				"secret" => self::CAPTCHA_SECRET,
+				"key" => DEVEL ? \Catalyst\Page\Values::DEBUG_CAPTCHA_KEY : self::CAPTCHA_KEY,
+				"secret" => DEVEL ? \Catalyst\Page\Values::DEBUG_CAPTCHA_SECRET : self::CAPTCHA_SECRET,
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::CAPTCHA_INVALID]],
