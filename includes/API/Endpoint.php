@@ -4,6 +4,7 @@ namespace Catalyst\API;
 
 use \Catalyst\Database\{JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\HTTPCode;
+use \Catalyst\User\User;
 
 /**
  * Utility functions for an endpoint
@@ -82,7 +83,9 @@ class Endpoint {
 			Response::sendErrorResponse(10006, "User tokens are invalid.");
 			return false;
 		}
-
+		
+		self::loginWithKeys($clientKeys[1], $clientKeys[2], $userKeys[1], $userKeys[2]);
+		
 		return true;
 	}
 
@@ -142,5 +145,39 @@ class Endpoint {
 		$query->execute();
 
 		return !empty($query->getResult());
+	}
+
+	/**
+	 * Logs in with the provided keys
+	 * 
+	 * @param string $clientId The app's client ID
+	 * @param string $clientSecret The app's client secret
+	 * @param string $userToken The user's token for the app
+	 * @param string $userSecret The user's secret for the app
+	 */
+	public static function loginWithKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : void {
+		$query = new SelectQuery();
+		$query->setTable(Tables::API_AUTHORIZATIONS);
+		$query->addColumn([Tables::API_AUTHORIZATIONS,"USER_ID"]);
+
+		$joinClause = new JoinClause();
+		$joinClause->setType(JoinClause::INNER);
+		$joinClause->setJoinTable(Tables::API_KEYS);
+		$joinClause->setCondition([[Tables::API_KEYS,"ID"],[Tables::API_AUTHORIZATIONS,"API_ID"]]);
+		$query->addAdditionalCapability($joinClause);
+		
+		$whereClause = new WhereClause();
+		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["ACCESS_TOKEN", "=", $userToken]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause(["ACCESS_SECRET", "=", $userSecret]);
+		$query->addAdditionalCapability($whereClause);
+		
+		$query->execute();
+
+		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
 	}
 }
