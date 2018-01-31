@@ -2,6 +2,8 @@
 
 namespace Catalyst\Database;
 
+use \InvalidArgumentException;
+
 /**
  * A standard class which will handle all database interaction
  * 
@@ -18,9 +20,7 @@ abstract class Query {
 	 */
 	protected $columns = [];
 	/**
-	 * List of values for column names (if applicable)
-	 * 
-	 * Should take the structure of value, in the same order as $this->columns
+	 * List of values (if applicable)
 	 */
 	protected $values = [];
 	/**
@@ -36,7 +36,7 @@ abstract class Query {
 	 * Creates a Query object
 	 * 
 	 * @param string $table Table to affect/target
-	 * @param string[] $columns Column list to affect/target
+	 * @param Column[] $columns Column list to affect/target
 	 * @param array $values List of values to bind to the above columns
 	 * @param QueryAddition[] $additionalCapabilities Single or multiple QueryAddition
 	 */
@@ -68,7 +68,7 @@ abstract class Query {
 	/**
 	 * Get the currently targeted columns
 	 * 
-	 * @return string[]|string[][] List of columns being operated upon
+	 * @return Column[] List of columns being operated upon
 	 */
 	public function getColumns() : array {
 		return $this->columns;
@@ -77,16 +77,16 @@ abstract class Query {
 	/**
 	 * Add a column to the list being targeted
 	 * 
-	 * @param string|string[] $column Column to add
+	 * @param Column $column Column to add
 	 */
-	public function addColumn($column) : void {
+	public function addColumn(Column $column) : void {
 		$this->columns[] = $column;
 	}
 
 	/**
 	 * Add a series of columns to the list
 	 * 
-	 * @param string[]|string[][] $columns Columns to add
+	 * @param Column[] $columns Columns to add
 	 */
 	public function addColumns(array $columns) : void {
 		array_map([$this, "addColumn"], $columns);
@@ -95,7 +95,7 @@ abstract class Query {
 	/**
 	 * Set the current list of columns to a new value
 	 * 
-	 * @param string[]|string[][] $columns New list of columns
+	 * @param Column[] $columns New list of columns
 	 */
 	public function setColumns(array $columns) : void {
 		$this->columns = $columns;
@@ -104,10 +104,10 @@ abstract class Query {
 	/**
 	 * Remove a column from the list of columns
 	 * 
-	 * @param string|string[] $column The column to remove
+	 * @param Column $column The column to remove
 	 * @return bool If the column was removed
 	 */
-	public function removeColumn($column) : bool {
+	public function removeColumn(Column $column) : bool {
 		$initialCount = count($this->columns);
 		$this->columns = array_filter($this->columns, function($in) use ($column) {
 			return $in != $column;
@@ -118,7 +118,7 @@ abstract class Query {
 	/**
 	 * Remove sevaral columns from the list of columns
 	 * 
-	 * @param string[]|string[][] $columns The list of columns to remove
+	 * @param Column[] $columns The list of columns to remove
 	 * @return bool If count($columns) columns were removed
 	 */
 	public function removeColumns(array $columns) : bool {
@@ -145,7 +145,7 @@ abstract class Query {
 	 * @param array $values List of values to add to the value array
 	 */
 	public function addValues(array $values) : void {
-		array_map([$this, "addColumn"], $values);
+		array_map([$this, "addValue"], $values);
 	}
 
 	/**
@@ -193,25 +193,22 @@ abstract class Query {
 	 */
 	public function verifyIntegrity() : bool {
 		if (empty($this->table) || !is_string($this->table)) {
-			throw new \InvalidArgumentException("Invalid table for Query");
+			throw new InvalidArgumentException("Invalid table for Query");
 		}
 		if (!is_array($this->columns)) {
-			throw new \InvalidArgumentException("Query columns is not an array");
+			throw new InvalidArgumentException("Query columns is not an array");
 		}
 		foreach ($this->columns as $column) {
-			if (!is_string($column) && !is_array($column)) {
-				throw new \InvalidArgumentException("Column is not a string or [table,column] array");
-			}
-			if (is_array($column) && count($column) != 2) {
-				throw new \InvalidArgumentException("Column is not a valid [table,column] array");
+			if (!$column instanceof Column) {
+				throw new InvalidArgumentException("Column is not a valid [table,column] array");
 			}
 		}
 		if (!is_array($this->additionalCapabilities)) {
-			throw new \InvalidArgumentException("Additional capabilities is not a valid type");
+			throw new InvalidArgumentException("Additional capabilities is not a valid type");
 		}
 		foreach ($this->additionalCapabilities as $additionalCapability) {
 			if (!($additionalCapability instanceof QueryAddition)) {
-				throw new \InvalidArgumentException("Additional capability is not a QueryAddition");
+				throw new InvalidArgumentException("Additional capability is not a QueryAddition");
 			}
 		}
 		return true;

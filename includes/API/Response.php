@@ -15,13 +15,15 @@ class Response {
 	 * @param array $data Additional data
 	 */
 	public static function sendSuccessResponse(string $message, array $data=[]) {
-		return die(json_encode([
+		echo json_encode([
 			"error" => false,
 			"http_code" => HTTPCode::get(),
 			"error_code" => 0,
 			"message" => $message,
 			"data" => $data,
-		], DEVEL ? JSON_PRETTY_PRINT : 0));
+		], DEVEL ? JSON_PRETTY_PRINT : 0);
+		$_SESSION = [];
+		die();
 	}
 
 	/**
@@ -32,7 +34,7 @@ class Response {
 	 * @param array $data Additional data
 	 */
 	public static function sendErrorResponse(int $code, string $message, array $data=[]) {
-		return die(json_encode([
+		echo json_encode([
 			"error" => true,
 			"http_code" => HTTPCode::get(),
 			"error_code" => $code,
@@ -44,6 +46,8 @@ class Response {
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION
 			]
-		], DEVEL ? JSON_PRETTY_PRINT : 0));
+		], DEVEL ? JSON_PRETTY_PRINT : 0);
+		$_SESSION = [];
+		die();
 	}
 }

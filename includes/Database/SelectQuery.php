@@ -22,17 +22,7 @@ class SelectQuery extends Query {
 
 		$initialQuery = "SELECT ";
 		
-		// columns
-		foreach ($this->columns as $column) {
-			if (is_array($column)) {
-				$initialQuery .= "`".$column[0]."`.`".$column[1]."`";
-			} else {
-				$initialQuery .= "`".$column."`";
-			}
-			if ($column != end($this->columns)) {
-				$initialQuery .= ",";
-			}
-		}
+		$initialQuery .= implode(",", $this->columns);
 
 		// from
 		$initialQuery .= " FROM `".$this->table."`";

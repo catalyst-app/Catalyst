@@ -44,7 +44,7 @@ class WhereClause implements QueryAddition {
 	/**
 	 * Gets the current WHERE clause array
 	 * 
-	 * @param int|mixed[]|mixed[][] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
+	 * @param int|mixed[] $item Item to add to the clause, either [column, equality, value] or WhereClause::AND or WhereClause::OR
 	 */
 	public function addToClause($item) : void {
 		$this->clause[] = $item;
@@ -87,11 +87,10 @@ class WhereClause implements QueryAddition {
 				if (count($value) != 3) {
 					throw new InvalidArgumentException("Invalid where clause (".serialize($value).")");
 				}
-				if (is_array($value[0])) {
-					$str .= '`'.$value[0][0].'`.`'.$value[0][1].'` '.$value[1].' ?';
-				} else {
-					$str .= '`'.$value[0].'` '.$value[1].' ?';
+				if (!$value[0] instanceof Column) {
+					throw new InvalidArgumentException("Column expected in WhereClause, found ".(gettype($value[0]) == "object" ? get_class($value[0]) : gettype($value[0])));
 				}
+				$str .= $value[0].' '.$value[1].' ?';
 			}
 		}
 		return trim($str);

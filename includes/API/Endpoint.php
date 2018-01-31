@@ -2,7 +2,7 @@
 
 namespace Catalyst\API;
 
-use \Catalyst\Database\{JoinClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
 
@@ -99,12 +99,12 @@ class Endpoint {
 	public static function checkClientKeys(string $clientId, string $clientSecret) : bool {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_KEYS);
-		$query->addColumn("ID");
+		$query->addColumn(new Column("ID", Tables::API_KEYS));
 		
 		$whereClause = new WhereClause();
-		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
+		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
+		$whereClause->addToClause([new Column("CLIENT_SECRET", Tables::API_KEYS), "=", $clientSecret]);
 		$query->addAdditionalCapability($whereClause);
 
 		$query->execute();
@@ -124,22 +124,23 @@ class Endpoint {
 	public static function checkUserKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : bool {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_AUTHORIZATIONS);
-		$query->addColumn([Tables::API_AUTHORIZATIONS,"ID"]);
+		$query->addColumn(new Column("ID",Tables::API_KEYS));
 
 		$joinClause = new JoinClause();
 		$joinClause->setType(JoinClause::INNER);
 		$joinClause->setJoinTable(Tables::API_KEYS);
-		$joinClause->setCondition([[Tables::API_KEYS,"ID"],[Tables::API_AUTHORIZATIONS,"API_ID"]]);
+		$joinClause->setLeftColumn(new Column("ID", Tables::API_KEYS));
+		$joinClause->setRightColumn(new Column("API_ID", Tables::API_AUTHORIZATIONS));
 		$query->addAdditionalCapability($joinClause);
 		
 		$whereClause = new WhereClause();
-		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
+		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
+		$whereClause->addToClause([new Column("CLIENT_SECRET", Tables::API_KEYS), "=", $clientSecret]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["ACCESS_TOKEN", "=", $userToken]);
+		$whereClause->addToClause([new Column("ACCESS_TOKEN", Tables::API_AUTHORIZATIONS), "=", $userToken]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["ACCESS_SECRET", "=", $userSecret]);
+		$whereClause->addToClause([new Column("ACCESS_SECRET", Tables::API_AUTHORIZATIONS), "=", $userSecret]);
 		$query->addAdditionalCapability($whereClause);
 		
 		$query->execute();
@@ -158,26 +159,28 @@ class Endpoint {
 	public static function loginWithKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : void {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_AUTHORIZATIONS);
-		$query->addColumn([Tables::API_AUTHORIZATIONS,"USER_ID"]);
+		$query->addColumn(new Column("USER_ID", Tables::API_AUTHORIZATIONS));
 
 		$joinClause = new JoinClause();
 		$joinClause->setType(JoinClause::INNER);
 		$joinClause->setJoinTable(Tables::API_KEYS);
-		$joinClause->setCondition([[Tables::API_KEYS,"ID"],[Tables::API_AUTHORIZATIONS,"API_ID"]]);
+		$joinClause->setLeftColumn(new Column("ID", Tables::API_KEYS));
+		$joinClause->setRightColumn(new Column("API_ID", Tables::API_AUTHORIZATIONS));
 		$query->addAdditionalCapability($joinClause);
 		
 		$whereClause = new WhereClause();
-		$whereClause->addToClause(["CLIENT_ID", "=", $clientId]);
+		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["CLIENT_SECRET", "=", $clientSecret]);
+		$whereClause->addToClause([new Column("CLIENT_SECRET", Tables::API_KEYS), "=", $clientSecret]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["ACCESS_TOKEN", "=", $userToken]);
+		$whereClause->addToClause([new Column("ACCESS_TOKEN", Tables::API_AUTHORIZATIONS), "=", $userToken]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause(["ACCESS_SECRET", "=", $userSecret]);
+		$whereClause->addToClause([new Column("ACCESS_SECRET", Tables::API_AUTHORIZATIONS), "=", $userSecret]);
 		$query->addAdditionalCapability($whereClause);
 		
 		$query->execute();
 
 		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
+		$_SESSION["logged_in"] = true;
 	}
 }
