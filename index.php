@@ -23,7 +23,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Home");
 ?>
 			<div class="section">
-				<h3>sample text (not an error)</h3>
+				<h3>"a less-samplier text" (not an error)</h3>
 			</div>
 <?php
 require_once Values::FOOTER_INC;
