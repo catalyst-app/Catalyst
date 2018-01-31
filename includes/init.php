@@ -15,6 +15,7 @@ require_once __DIR__."/Database/Artist/EditArtist.php";
 require_once __DIR__."/Database/Artist/NewArtist.php";
 require_once __DIR__."/Database/Character/EditCharacter.php";
 require_once __DIR__."/Database/Character/NewCharacter.php";
+require_once __DIR__."/Database/Column.php";
 require_once __DIR__."/Database/CommissionType/Attributes.php";
 require_once __DIR__."/Database/CommissionType/DeleteCommissionType.php";
 require_once __DIR__."/Database/CommissionType/EditCommissionType.php";

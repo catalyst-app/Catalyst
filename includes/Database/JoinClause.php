@@ -37,9 +37,9 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	/**
 	 * Condtion on which to join the tables
 	 * 
-	 * This is an array with 2 values, each columns (may be array of 2)
+	 * This is an array with 2 values, each columns
 	 */
-	protected $condition = ["",""];
+	protected $condition = [null,null];
 
 	/**
 	 * Constructs a JoinClause from the array of clause items
@@ -48,13 +48,13 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	 * @param string $joinTable Table to join
 	 * @param string[]|string[][] $condition Condition on which to join the tables, array with 2 values, one for left column, one for right
 	 */
-	public function __construct(int $type=self::INNER,string $joinTable="",array $condition=["",""]) {
+	public function __construct(int $type=self::INNER,string $joinTable="",?Column $leftColumn=null,?Column $rightColumn=null) {
 		if ($type < self::INNER || $type > self::FULL) {
 			throw new InvalidArgumentException("Invalid value passed for JoinClause type");
 		}
 		$this->type = $type;
 		$this->joinTable = $joinTable;
-		$this->condition = $condition;
+		$this->condition = [$leftColumn,$rightColumn];
 	}
 
 	/**
@@ -97,24 +97,39 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	}
 
 	/**
-	 * Get the current condition for joining
+	 * Get the current left column for comparison
 	 * 
-	 * @return string[]|string[][] The condition
+	 * @return Column|null The left column
 	 */
-	public function getCondition() : array {
-		return $this->condition;
+	public function getLeftColumn() : ?Column {
+		return $this->condition[0];
 	}
 
 	/**
-	 * Set the join condition
+	 * Get the current right column for comparison
 	 * 
-	 * @param string[]|string[][] $condition The new condition
+	 * @return Column|null The right column
 	 */
-	public function setCondition(array $condition) : void {
-		if (count($condition) !== 2) {
-			throw new InvalidArgumentException("Invalid condition for JoinClause");
-		}
-		$this->condition = $condition;
+	public function getRightColumn() : ?Column {
+		return $this->condition[1];
+	}
+
+	/**
+	 * Set the left column
+	 * 
+	 * @param Column|null $column New value for the left column
+	 */
+	public function setLeftColumn(?Column $column) : void {
+		$this->condition[0] = $column;
+	}
+
+	/**
+	 * Set the right column
+	 * 
+	 * @param Column|null $column New value for the right column
+	 */
+	public function setRightColumn(?Column $column) : void {
+		$this->condition[1] = $column;
 	}
 
 	/**
@@ -148,25 +163,11 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 		$str .= "`".$this->joinTable."` ";
 		$str .= "ON ";
 
-		// validation
-		if (count(array_filter($this->condition)) != 2 || 
-			(is_array($this->condition[0]) && count(array_filter($this->condition[0])) != 2) ||
-			(is_array($this->condition[1]) && count(array_filter($this->condition[1])) != 2)) {
-			throw new InvalidArgumentException("Condition for JOIN is invalid");
-		}
-		if (is_array($this->condition[0])) {
-			$str .= "`".$this->condition[0][0]."`.`".$this->condition[0][1]."`";
-		} else {
-			$str .= "`".$this->condition[0]."`";
+		if (count(array_filter($this->condition)) !== 2) {
+			throw new InvalidArgumentException("Bad condition for JOIN clause");
 		}
 
-		$str .= "=";
-
-		if (is_array($this->condition[1])) {
-			$str .= "`".$this->condition[1][0]."`.`".$this->condition[1][1]."`";
-		} else {
-			$str .= "`".$this->condition[1]."`";
-		}
+		$str .= ((string)$this->condition[0])."=".((string)$this->condition[1]);
 
 		return trim($str);
 	}
