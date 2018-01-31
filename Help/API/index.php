@@ -37,7 +37,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<p class="flow-text">Catalyst's API is based around a HTTPS/REST API, and operates through GET and POST operations.  Your client must support both of these methods as well as TLS v1.2.</p>
 				<p class="flow-text">All API endpoints are based off of our base URL: <span class="code">https://catalystapp.co/api/</span>.  From there, endpoints are separated by scope (user, artist, commission, etc.) then method (create, delete, reorder, etc.), then further parameters if required.</p>
 				<p class="flow-text">All requests should contain your authorization headers (see below), as well as a JSON payload which contains parameters</p>
-				<p class="flow-text">A <span class="code">?</span> before a parameter name means that it is optional, and a <span class="code">?</span> before a reponse parameter name means that it may be omitted from the result.  The <span class="code">?</span> is NOT part of the parameter.</p>
+				<p class="flow-text">A <span class="code">?</span> before a parameter name means that it is optional, and a <span class="code">?</span> before a reponse parameter name means that it may be omitted from the response.  The <span class="code">?</span> is NOT part of the parameter.</p>
 				<p class="flow-text">A <span class="code">?</span> before a type indicates that it may be null.</p>
 				<p class="flow-text">All proper endpoints (not 301, 404, or similar) will return a JSON object.  This object will contain the following keys:</p>
 				<ul class="browser-default">
@@ -109,9 +109,13 @@ echo UniversalFunctions::createHeading("API Documentation");
 					<li class="flow-text"><span class="code">?email_verified</span> <span class="code">bool</span> If the user has verified their email; only provided for logged-in user.  Always returns true if the user's email is not set</li>
 					<li class="flow-text"><span class="code">artist_page_url</span> <span class="code">?string</span> If the user has an artist page, this field will contain their URL</li>
 					<li class="flow-text"><span class="code">picture_loc</span> <span class="code">string</span> This contains the path for the user's profile picture, or <span class="code">profile_pictures/default.png</span> if none is set.  Append this path to <span class="code">https://catalystapp.co/</span>.</li>
-					<li class="flow-text"><span class="code">picture_nsfw</span> <span class="code">bool</span> If the profile picture is NSFW.  Always false for default user.</li>
-					<li class="flow-text"><span class="code">nsfw</span> <span class="code">?bool</span> If the user has NSFW access; only provided for logged-in user.</li>
+					<li class="flow-text"><span class="code">picture_nsfw</span> <span class="code">bool</span> If the profile picture is NSFW.  Always false for default image.</li>
+					<li class="flow-text"><span class="code">?nsfw</span> <span class="code">bool</span> If the user has NSFW access; only provided for logged-in user.</li>
 					<li class="flow-text"><span class="code">color</span> <span class="code">string(6)</span> The user's color of preference, as a 6-character hex.</li>
+				</ul>
+				<p class="flow-text">Error codes</p>
+				<ul class="browser-default">
+					<li><span class="flow-text"><strong>20001</strong>: User account does not exist</li>
 				</ul>
 			</div>
 			</div>
