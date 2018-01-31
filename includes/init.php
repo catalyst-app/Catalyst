@@ -1,6 +1,7 @@
 <?php
 
 define("DEVEL",true);
+define("VERSION","0.0.1~alpha");
 
 require_once __DIR__."/Secrets.php";
 
