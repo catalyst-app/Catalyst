@@ -82,7 +82,7 @@ class Controller {
 	 * @param string $errfile File the error occured in
 	 * @param int $errline Line the error occured on
 	 */
-	public static function sendErrorEmail(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) {
+	public static function sendErrorEmail(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
 		Email::sendEmail(
 			[["error_logs@catalystapp.co","Error Log"]],
 			$subj." occured in ".$errfile." at ".$errline.": ".$errstr,
@@ -106,6 +106,21 @@ class Controller {
 	}
 
 	/**
+	 * Will send 500 and JSON error IF an endpoint is being accessed
+	 * 
+	 * @param int $errno Error number/code
+	 * @param string $errstr Error string/message
+	 * @param string $errfile File the error occured in
+	 * @param int $errline Line the error occured on
+	 */
+	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline) : void {
+		HTTPCode::set(500);
+		if (Endpoint::isApi()) {
+			Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
+		}
+	}
+
+	/**
 	 * set_error_handler function
 	 * 
 	 * @param int $errno Error number/code
@@ -118,69 +133,42 @@ class Controller {
 		switch ($errno) {
 			case E_ERROR:
 				self::sendErrorEmail("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown fatal error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_WARNING:
 				self::sendErrorEmail("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_PARSE:
 				self::sendErrorEmail("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_NOTICE:
 				self::sendErrorEmail("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_CORE_ERROR:
 				self::sendErrorEmail("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_CORE_WARNING:
 				self::sendErrorEmail("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_COMPILE_ERROR:
 				self::sendErrorEmail("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_COMPILE_WARNING:
 				self::sendErrorEmail("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_ERROR:
 				self::sendErrorEmail("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_WARNING:
 				self::sendErrorEmail("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_NOTICE:
 				self::sendErrorEmail("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline);
@@ -190,10 +178,7 @@ class Controller {
 				return true;
 			case E_RECOVERABLE_ERROR:
 				self::sendErrorEmail("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_DEPRECATED:
 				self::sendErrorEmail("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline);
@@ -203,10 +188,7 @@ class Controller {
 				return true;
 			default:
 				self::sendErrorEmail("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
-				HTTPCode::set(500);
-				if (Endpoint::isApi()) {
-					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
-				}
+				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 		}
 		return true;
