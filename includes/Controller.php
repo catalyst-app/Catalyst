@@ -32,11 +32,10 @@ class Controller {
 	 * Generate a pretty trace - MAY CONTAIN SENSITIVE INFO
 	 * 
 	 * @param bool $includeParams Whether or not to include function args
-	 * @param Exception $e Exception to generate trace from
 	 * @return string[] pretty traceback
 	 */
-	public static function getTrace(bool $includeParams=true, Exception $e=new Exception()) : array {
-		$trace = $e->getTrace();
+	public static function getTrace(bool $includeParams=true) : array {
+		$trace = (new Exception())->getTrace();
 
 		$result = [];
 		foreach ($trace as $row) {
