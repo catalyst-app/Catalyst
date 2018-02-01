@@ -3,7 +3,7 @@
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."includes/init.php";
+require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Database\CommissionType\DeleteCommissionType;
 use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;

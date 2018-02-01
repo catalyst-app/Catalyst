@@ -3,7 +3,7 @@
 define("ROOTDIR", "../".((isset($_GET["level1"]) && $_GET["level1"] == "/") ? "../" : "").((isset($_GET["level2"]) && $_GET["level2"] == "/") ? "../" : ""));
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/init.php";
+require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
 use \Catalyst\Database\Character\EditCharacter;
 use \Catalyst\Form\FormHTML;

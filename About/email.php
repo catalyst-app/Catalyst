@@ -3,7 +3,7 @@
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/init.php";
+require_once REAL_ROOTDIR."includes/Controller.php";
 
 if (!isset($_POST["email"]) || empty($_POST["email"]) || !isset($_POST["context"]) || empty($_POST["context"])) {
 	die("Invalid input");
