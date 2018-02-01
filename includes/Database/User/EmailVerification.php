@@ -90,7 +90,9 @@ class EmailVerification {
 				"Please go to the following URL to verify your account:",
 				$url,
 				"Alternatively, use the token ".$user->getEmailToken()
-			])
+			]),
+			self::NO_REPLY_EMAIL,
+			self::NO_REPLY_PASSWORD
 		);
 	}
 
