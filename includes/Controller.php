@@ -138,7 +138,7 @@ class Controller {
 									],
 									[
 										"name" => 'Error file',
-										"value" => $errfile
+										"value" => htmlspecialchars($errfile)
 									],
 									[
 										"name" => 'Error line',
