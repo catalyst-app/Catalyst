@@ -202,7 +202,7 @@ class Controller {
 				self::sendErrorEmail("E_USER_DEPRECATED", "E_USER_DEPRECATED", $errno, $errstr, $errfile, $errline);
 				return true;
 			default:
-				self::sendErrorEmail("Halting unknown (".$error_code.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
+				self::sendErrorEmail("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
 				HTTPCode::set(500);
 				if (Endpoint::isApi()) {
 					Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
@@ -239,10 +239,12 @@ if (Controller::isDevelMode()) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
+	ini_set('scream.enabled', 1);
 } else {
 	error_reporting(0);
 	ini_set('display_errors', 0);
 	ini_set('display_startup_errors', 0);
+	ini_set('scream.enabled', 0);
 }
 
 set_error_handler("\\Catalyst\\Controller::handleError", E_ALL);
