@@ -5,6 +5,7 @@ namespace Catalyst\API;
 use \Catalyst\Database\{Column, JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
+use \InvalidArgumentException;
 
 /**
  * Utility functions for an endpoint
@@ -23,10 +24,27 @@ class Endpoint {
 
 	/**
 	 * Ran for every endpoint
+	 * 
+	 * @param bool $internal Used to denote an internal API endpoint, affects authentication
+	 * @param int $internalAuth Type of authentication to require for an internal endpoint, 1 = logged in, 2 = logged out, 0 = none
 	 */
-	public static function init() {
+	public static function init(bool $internal=false, int $internalAuth=1) : void {
 		self::$isEndpoint = true;
-		self::checkAuthorizationHeaders();
+		if (!$internal) {
+			self::checkAuthorizationHeaders();
+		} else {
+			switch ($internalAuth) {
+				case 1:
+					self::checkLoggedIn();
+					break;
+				case 2:
+					self::checkLoggedOut();
+					break;
+				case 0: break; // none
+				default:
+					throw new InvalidArgumentException("Bad internal auth type specified");
+			}
+		}
 	}
 
 	/**
@@ -43,7 +61,7 @@ class Endpoint {
 	 * 
 	 * @return bool If the headers are valid
 	 */
-	public static function checkAuthorizationHeaders() : bool {
+	protected static function checkAuthorizationHeaders() : bool {
 		$headers = getallheaders();
 
 		if (!array_key_exists("Client", $headers)) {
@@ -96,7 +114,7 @@ class Endpoint {
 	 * @param string $clientSecret The app's client secret
 	 * @return bool if the keys are valid
 	 */
-	public static function checkClientKeys(string $clientId, string $clientSecret) : bool {
+	protected static function checkClientKeys(string $clientId, string $clientSecret) : bool {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_KEYS);
 		$query->addColumn(new Column("ID", Tables::API_KEYS));
@@ -121,7 +139,7 @@ class Endpoint {
 	 * @param string $userSecret The user's secret for the app
 	 * @return bool if the keys are valid
 	 */
-	public static function checkUserKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : bool {
+	protected static function checkUserKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : bool {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_AUTHORIZATIONS);
 		$query->addColumn(new Column("ID",Tables::API_KEYS));
@@ -156,7 +174,7 @@ class Endpoint {
 	 * @param string $userToken The user's token for the app
 	 * @param string $userSecret The user's secret for the app
 	 */
-	public static function loginWithKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : void {
+	protected static function loginWithKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : void {
 		$query = new SelectQuery();
 		$query->setTable(Tables::API_AUTHORIZATIONS);
 		$query->addColumn(new Column("USER_ID", Tables::API_AUTHORIZATIONS));
@@ -181,5 +199,19 @@ class Endpoint {
 		$query->execute();
 
 		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
+	}
+
+	protected static function checkLoggedIn() : void {
+		if (!User::isLoggedIn()) {
+			HTTPCode::set(401);
+			Response::sendErrorResponse(99999, "User not logged in") {
+		}
+	}
+
+	protected static function checkLoggedOut() : void {
+		if (User::isLoggedIn()) {
+			HTTPCode::set(401);
+			Response::sendErrorResponse(99998, "A user is logged in") {
+		}
 	}
 }
