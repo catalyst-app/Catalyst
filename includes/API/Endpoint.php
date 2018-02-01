@@ -204,14 +204,14 @@ class Endpoint {
 	protected static function checkLoggedIn() : void {
 		if (!User::isLoggedIn()) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(99999, "User not logged in") {
+			Response::sendErrorResponse(99999, "User not logged in");
 		}
 	}
 
 	protected static function checkLoggedOut() : void {
 		if (User::isLoggedIn()) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(99998, "A user is logged in") {
+			Response::sendErrorResponse(99998, "A user is logged in");
 		}
 	}
 }
