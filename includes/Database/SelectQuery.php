@@ -39,12 +39,7 @@ class SelectQuery extends Query {
 
 		$stmt = Database::getDbh()->prepare($initialQuery);
 
-		if (!$stmt->execute($this->getParamtersToBind())) {
-			if (Endpoint::isApi()) {
-				HTTPCode::set(500);
-				Response::sendErrorResponse(99999, "An unknown error occured");
-			}
-		}
+		$stmt->execute($this->getParamtersToBind());
 
 		$this->result = $stmt->fetchAll();
 
