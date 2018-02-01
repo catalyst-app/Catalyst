@@ -14,8 +14,8 @@ class Database {
 	protected const DB_DRIVER = "mysql";
 	protected const DB_SERVER = "localhost";
 	protected const DB_PORT = 3306;
-	protected const DB_NAME = "CATALYST";
-	protected const DB_USER = "CATALYST";
+	protected const DB_NAME = "catalyst";
+	protected const DB_USER = "catalyst";
 	// this is already public in Secrets so
 	protected const DB_PASSWORD = Secrets::DB_PASSWORD;
 

@@ -7,8 +7,8 @@ namespace Catalyst\Database;
 define("DB_DRIVER", "mysql");
 define("DB_SERVER", "localhost");
 define("DB_PORT", 3306);
-define("DB_NAME", "CATALYST");
-define("DB_USER", "CATALYST");
+define("DB_NAME", "catalyst");
+define("DB_USER", "catalyst");
 // define("DB_PASSWORD", .); DEFINED IN SECRETS.PHP, WAS REGENERATED
 
 define("DB_TABLES", [
