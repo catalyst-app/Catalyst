@@ -43,7 +43,7 @@ class SelectQuery extends Query {
 			error_log(__CLASS__." execution error: ".serialize($stmt->errorInfo())."\n".implode(" | ",array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace())));
 			if (Endpoint::isApi()) {
 				HTTPCode::set(500);
-				Response::sendErrorResponse(1, "An unknown database error occured");
+				Response::sendErrorResponse(99999, "An unknown error occured");
 			}
 		}
 
