@@ -20,12 +20,10 @@ class Column {
 	/**
 	 * Creates a Query object
 	 * 
-	 * @param string $table Table to affect/target
-	 * @param string[] $columns Column list to affect/target
-	 * @param array $values List of values to bind to the above columns
-	 * @param QueryAddition[] $additionalCapabilities Single or multiple QueryAddition
+	 * @param string|null $column Column name
+	 * @param string|null $table Table for the column, null to assume
 	 */
-	public function __construct(string $column=null, string $table=null) {
+	public function __construct(?string $column=null, ?string $table=null) {
 		$this->table = $table;
 		$this->column = $column;
 	}
@@ -62,7 +60,7 @@ class Column {
 	 * 
 	 * @param string|null The new column name
 	 */
-	public function setColumn(array $column) : void {
+	public function setColumn(?string $column) : void {
 		$this->column = $column;
 	}
 

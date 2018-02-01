@@ -46,7 +46,8 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	 * 
 	 * @param int $type Type of join clause, see class constants for info
 	 * @param string $joinTable Table to join
-	 * @param string[]|string[][] $condition Condition on which to join the tables, array with 2 values, one for left column, one for right
+	 * @param Column|null $leftColumn Left column to test for equality to right
+	 * @param Column|null $rightColumn Right column to test for equality to left
 	 */
 	public function __construct(int $type=self::INNER,string $joinTable="",?Column $leftColumn=null,?Column $rightColumn=null) {
 		if ($type < self::INNER || $type > self::FULL) {
