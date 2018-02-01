@@ -3,62 +3,19 @@
 define("DEVEL",true);
 define("VERSION","0.0.1~alpha");
 
-require_once __DIR__."/Secrets.php";
+spl_autoload_register(function ($name) {
+	if (strpos($name, 'Catalyst\\') === 0) {
+		$unNamespaced = str_replace('Catalyst\\', '', $name);
+		$toPath = str_replace('\\', DIRECTORY_SEPARATOR, $unNamespaced).".php";
+		if (file_exists(__DIR__.DIRECTORY_SEPARATOR.$toPath)) {
+			require_once __DIR__.DIRECTORY_SEPARATOR.$toPath;
+		}
+	}
+});
 
-require_once __DIR__."/Database/QueryAddition.php"; // temp fix, i should register an autoload
-require_once __DIR__."/API/Endpoint.php";
-require_once __DIR__."/API/Response.php";
-require_once __DIR__."/Artist/Artist.php";
-require_once __DIR__."/Character/Character.php";
-require_once __DIR__."/Color.php";
-require_once __DIR__."/CommissionType/CommissionType.php";
-require_once __DIR__."/Database/Artist/EditArtist.php";
-require_once __DIR__."/Database/Artist/NewArtist.php";
-require_once __DIR__."/Database/Character/EditCharacter.php";
-require_once __DIR__."/Database/Character/NewCharacter.php";
-require_once __DIR__."/Database/Column.php";
-require_once __DIR__."/Database/CommissionType/Attributes.php";
-require_once __DIR__."/Database/CommissionType/DeleteCommissionType.php";
-require_once __DIR__."/Database/CommissionType/EditCommissionType.php";
-require_once __DIR__."/Database/CommissionType/NewCommissionType.php";
-require_once __DIR__."/Database/CommissionType/Wishlist.php";
+// LEGACY
+require_once __DIR__."/Secrets.php";
 require_once __DIR__."/Database/Connector.inc.php";
-require_once __DIR__."/Database/Database.php";
-require_once __DIR__."/Database/FeatureBoard/Comment.php";
-require_once __DIR__."/Database/FeatureBoard/Groups.php";
-require_once __DIR__."/Database/FeatureBoard/Item.php";
-require_once __DIR__."/Database/FeatureBoard/NewFeature.php";
-require_once __DIR__."/Database/Integrations/Meta.php";
-require_once __DIR__."/Database/JoinClause.php";
-require_once __DIR__."/Database/Query.php";
-require_once __DIR__."/Database/SelectQuery.php";
-require_once __DIR__."/Database/SocialMedia.php";
-require_once __DIR__."/Database/Tables.php";
-require_once __DIR__."/Database/User/Deactivate.php";
-require_once __DIR__."/Database/User/EmailVerification.php";
-require_once __DIR__."/Database/User/Login.php";
-require_once __DIR__."/Database/User/Register.php";
-require_once __DIR__."/Database/User/Settings.php";
-require_once __DIR__."/Database/User/TOTPLogin.php";
-require_once __DIR__."/Database/WhereClause.php";
-require_once __DIR__."/Email.php";
-require_once __DIR__."/Form/Captcha.php";
-require_once __DIR__."/Form/FileUpload.php";
-require_once __DIR__."/Form/Flags.php";
-require_once __DIR__."/Form/FormHTML.php";
-require_once __DIR__."/Form/FormJS.php";
-require_once __DIR__."/Form/FormPHP.php";
-require_once __DIR__."/HTTPCode.php";
-require_once __DIR__."/Integrations/SocialMedia.php";
-require_once __DIR__."/Message/Message.php";
-require_once __DIR__."/Page/Header/Header.php";
-require_once __DIR__."/Page/Navigation/Navbar.php";
-require_once __DIR__."/Page/UniversalFunctions.php";
-require_once __DIR__."/Page/Values.php";
-require_once __DIR__."/phpqrcode.php";
-require_once __DIR__."/Response.php";
-require_once __DIR__."/Tokens.php";
-require_once __DIR__."/User/User.php";
 
 require_once __DIR__."/vendor/autoload.php";
 
