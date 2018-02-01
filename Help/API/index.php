@@ -48,6 +48,10 @@ echo UniversalFunctions::createHeading("API Documentation");
 					<li class="flow-text"><span class="code">data</span>: an object which contains any applicable return data</li>
 					<li class="flow-text"><span class="code">?_debug</span>: debug information which we use to squish bugs</li>
 				</ul>
+				<p class="flow-text">Generic error codes</p>
+				<ul class="browser-default">
+					<li><span class="flow-text"><strong>99901</strong>: Endpoint not found</li>
+				</ul>
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="keys">
@@ -98,9 +102,9 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<h4 style="margin-top: -80px; padding-top: 80px;">User: get</h4>
 				<p class="flow-text code">https://catalystapp.co/api/user/get/</p>
 				<p class="flow-text">Gets either the current user or one specified by their username</p>
-				<p class="flow-text">Parameters</p>
+				<p class="flow-text"><strong>GET</strong> Parameters</p>
 				<ul class="browser-default">
-					<li class="flow-text"><span class="code">?name</span> <span class="code">string</span> Username to get data for.</li>
+					<li class="flow-text"><span class="code">?name</span> <span class="code">string</span> Username to get data for.  Omit for current user</li>
 				</ul>
 				<p class="flow-text">Response</p>
 				<ul class="browser-default">
