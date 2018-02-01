@@ -39,12 +39,12 @@ class Controller {
 
 		$result = [];
 		foreach ($trace as $row) {
-			if ($row == realpath(__FILE__)) {
+			if (array_key_exists("file", $row) && $row["file"] == realpath(__FILE__)) {
 				continue;
 			}
 			$item = "";
 			if (array_key_exists("file", $row)) {
-				$item .= $row["file"]."";
+				$item .= basename($row["file"])."";
 			}
 			if (array_key_exists("line", $row)) {
 				$item .= ":".$row["line"];
@@ -63,9 +63,9 @@ class Controller {
 				$item .= "(";
 				foreach ($row["args"] as $key => $arg) {
 					try {
-						$item .= $key." ".serialize($arg);
+						$item .= serialize($arg).", ";
 					} catch (Exception $e) {
-						$item .= $key.": non-serializable";
+						$item .= "non-serializable".", ";
 					}
 				}
 				$item .= ")";
@@ -99,14 +99,14 @@ class Controller {
 			'<p><strong>Error line:</strong> '.$errline.'</p>'.
 			'<p><strong>Trace:</strong></p>'.
 			'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
-			'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize($_SERVER)).'</pre></p>',
+			'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
 			"Error code: ".$errco." (".$errno.")\r\n\r\n".
 			"Error string: ".$errstr."\r\n\r\n".
 			"Error file: ".$errfile."\r\n\r\n".
 			"Error line: ".$errline."\r\n\r\n".
 			"Trace: \r\n\r\n".
 			implode("\r\n\r\n",$trace)."\r\n\r\n".
-			"Dump: ".serialize($_SERVER),
+			"Dump: ".serialize([$_SERVER,$_SESSION]),
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD
 		);

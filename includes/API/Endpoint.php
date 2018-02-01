@@ -31,6 +31,7 @@ class Endpoint {
 	 */
 	public static function init(bool $internal=false, int $internalAuth=1) : void {
 		self::$isEndpoint = true;
+		ini_set('display_errors', 0); // don't pollute the JSON
 		if (!$internal) {
 			self::checkAuthorizationHeaders();
 		} else {
