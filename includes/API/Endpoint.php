@@ -21,6 +21,7 @@ class Endpoint {
 	const USER_HEADER_REGEX = '/^([a-z0-9]{40}),([a-z0-9]{60})$/';
 
 	static $isEndpoint = false;
+	static $isInternalEndpoint = false;
 
 	/**
 	 * Ran for every endpoint
@@ -33,6 +34,7 @@ class Endpoint {
 		if (!$internal) {
 			self::checkAuthorizationHeaders();
 		} else {
+			self::$isInternalEndpoint = true;
 			switch ($internalAuth) {
 				case 1:
 					self::checkLoggedIn();
@@ -54,6 +56,15 @@ class Endpoint {
 	 */
 	public static function isApi() : bool {
 		return self::$isEndpoint;
+	}
+
+	/**
+	 * Get if the current page is an internal API endpoint
+	 * 
+	 * @return bool if the current page is an internal API endpoint
+	 */
+	public static function isInternalEndpoint() : bool {
+		return self::$isInternalEndpoint;
 	}
 
 	/**
