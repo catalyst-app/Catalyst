@@ -127,7 +127,6 @@ class Login {
 	}
 
 	public static function loginAsId(int $id) {
-		$_SESSION["logged_in"] = true;
 		$_SESSION["user"] = new \Catalyst\User\User($id);
 	}
 
