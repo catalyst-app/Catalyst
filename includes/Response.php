@@ -18,7 +18,7 @@ class Response {
 			"http_code" => $httpCode,
 			"error_code" => $code,
 			"_debug" => [
-				"_trace" => array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace()),
+				"_trace" => Controller::getTrace(false),
 				"_request" => (isset($_REQUEST)) ? $_REQUEST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION

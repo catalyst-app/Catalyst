@@ -2,7 +2,7 @@
 
 namespace Catalyst\Database;
 
-use \Catalyst\Secrets;
+use \Catalyst\{Controller, Secrets};
 use \PDO;
 
 /**
@@ -34,7 +34,7 @@ class Database {
 			return;
 		}
 		self::$dbh = new PDO(DB_DRIVER.":host=".DB_SERVER.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4", DB_USER, DB_PASSWORD);
-		if (DEVEL) {
+		if (Controller::isDevelMode()) {
 			// show errors
 			self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 		}
