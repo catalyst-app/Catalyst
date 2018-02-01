@@ -9,9 +9,41 @@ spl_autoload_register(function ($name) {
 		$toPath = str_replace('\\', DIRECTORY_SEPARATOR, $unNamespaced).".php";
 		if (file_exists(__DIR__.DIRECTORY_SEPARATOR.$toPath)) {
 			require_once __DIR__.DIRECTORY_SEPARATOR.$toPath;
+namespace Catalyst;
+
+use \Catalyst\{Email, HTTPCode};
+use \Catalyst\API\{Endpoint, Response};
+use \Exception;
+
+/**
+ * Generic controller which handles things like error logging, autoloading, etc.
+ */
+class Controller {
+	const DEVEL = true;
+	const VERSION = "0.0.1~alpha";
+
 		}
 	}
 });
+
+	/**
+	 * Return if the platform is in development mode
+	 * 
+	 * @return bool If development mode is on
+	 */
+	public static function isDevelMode() : bool {
+		return self::DEVEL;
+	}
+
+	/**
+	 * Return the current version
+	 * 
+	 * @return string Version identifier
+	 */
+	public static function getVersion() : string {
+		return self::VERSION;
+	}
+}
 
 // LEGACY
 require_once __DIR__."/Secrets.php";
