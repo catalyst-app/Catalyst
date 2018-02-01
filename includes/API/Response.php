@@ -22,7 +22,9 @@ class Response {
 			"message" => $message,
 			"data" => $data,
 		], DEVEL ? JSON_PRETTY_PRINT : 0);
-		$_SESSION = [];
+		if (!Endpoint::isInternalEndpoint()) {
+			$_SESSION = [];
+		}
 		die();
 	}
 
@@ -47,7 +49,9 @@ class Response {
 				"_session" => $_SESSION
 			]
 		], DEVEL ? JSON_PRETTY_PRINT : 0);
-		$_SESSION = [];
+		if (!Endpoint::isInternalEndpoint()) {
+			$_SESSION = [];
+		}
 		die();
 	}
 }
