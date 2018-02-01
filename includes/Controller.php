@@ -104,6 +104,7 @@ class Controller {
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD
 		);
+		$trace = self::getTrace(false);
 		$traceEmbeds = [];
 		foreach ($trace as $row) {
 			$traceEmbeds[] = [
