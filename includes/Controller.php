@@ -32,20 +32,25 @@ class Controller {
 	 * Generate a pretty trace - MAY CONTAIN SENSITIVE INFO
 	 * 
 	 * @param bool $includeParams Whether or not to include function args
+	 * @param Exception $e Exception to generate trace from
 	 * @return string[] pretty traceback
 	 */
-	public static function getTrace(bool $includeParams=true) : array {
-		$trace = (new Exception())->getTrace();
+	public static function getTrace(bool $includeParams=true, Exception $e=new Exception()) : array {
+		$trace = $e->getTrace();
 
 		$result = [];
 		foreach ($trace as $row) {
+			if ($row == realpath(__FILE__)) {
+				continue;
+			}
 			$item = "";
-			if (array_key_exists("line", $row)) {
-				$item .= "(".$row["line"].") ";
-			}
 			if (array_key_exists("file", $row)) {
-				$item .= $row["file"].", ";
+				$item .= $row["file"]."";
 			}
+			if (array_key_exists("line", $row)) {
+				$item .= ":".$row["line"];
+			}
+			$item .= " called ";
 			if (array_key_exists("class", $row)) {
 				$item .= $row["class"];
 			}
@@ -65,6 +70,8 @@ class Controller {
 					}
 				}
 				$item .= ")";
+			} else {
+				$item .= "(...)";
 			}
 			$result[] = $item;
 		}
