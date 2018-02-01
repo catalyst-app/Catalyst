@@ -201,6 +201,9 @@ class Endpoint {
 		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
 	}
 
+	/**
+	 * Check if there is a user logged in.  Used for internal API calls.
+	 */
 	protected static function checkLoggedIn() : void {
 		if (!User::isLoggedIn()) {
 			HTTPCode::set(401);
@@ -208,6 +211,10 @@ class Endpoint {
 		}
 	}
 
+
+	/**
+	 * Check if there is NOT a user logged in.  Used for internal API calls.
+	 */
 	protected static function checkLoggedOut() : void {
 		if (User::isLoggedIn()) {
 			HTTPCode::set(401);
