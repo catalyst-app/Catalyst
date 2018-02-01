@@ -5,3 +5,4 @@ To anyone inspecting this folder for various fun things:
 Potential error codes for these endpoints:
 - **99999** - No user is logged in
 - **99998** - A user is already logged in
+
