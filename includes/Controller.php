@@ -118,10 +118,12 @@ class Controller {
 				"value" => $row
 			];
 		}
+		ob_start();
 		try {
 			file_get_contents(Secrets::DISCORD_BUG_WEBHOOK_URL, false, stream_context_create([
 				"http" => [
 					"method" => "POST",
+					"ignore_errors" => true,
 					"content" => json_encode([
 						"content" => $subj." occured",
 						"embeds" => [
@@ -154,6 +156,7 @@ class Controller {
 		} catch (Exception $e) {
 			// discord could not be reached
 		}
+		ob_end_clean();
 	}
 
 	/**
