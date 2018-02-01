@@ -50,7 +50,8 @@ echo UniversalFunctions::createHeading("API Documentation");
 				</ul>
 				<p class="flow-text">Generic error codes</p>
 				<ul class="browser-default">
-					<li class="flow-text"><strong>99901</strong>: Endpoint not found</li>
+					<li class="flow-text"><strong>10001</strong>: Endpoint not found</li>
+					<li class="flow-text"><strong>99999</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
 				</ul>
 			</div>
 			<div class="divider"></div>
@@ -68,12 +69,12 @@ echo UniversalFunctions::createHeading("API Documentation");
 				</ul>
 				<p class="flow-text">Error codes</p>
 				<ul class="browser-default">
-					<li class="flow-text"><strong>10001</strong>: Client header not passed</li>
-					<li class="flow-text"><strong>10002</strong>: User header not passed</li>
-					<li class="flow-text"><strong>10003</strong>: Client header is invalid</li>
-					<li class="flow-text"><strong>10004</strong>: User header is invalid</li>
-					<li class="flow-text"><strong>10005</strong>: Client does not exist (was your API access revoked?)</li>
-					<li class="flow-text"><strong>10006</strong>: User tokens are invalid (did the user revoke your API access to their account?)</li>
+					<li class="flow-text"><strong>11001</strong>: Client header not passed</li>
+					<li class="flow-text"><strong>11002</strong>: User header not passed</li>
+					<li class="flow-text"><strong>11003</strong>: Client header is invalid</li>
+					<li class="flow-text"><strong>11004</strong>: User header is invalid</li>
+					<li class="flow-text"><strong>11005</strong>: Client does not exist (was your API access revoked?)</li>
+					<li class="flow-text"><strong>11006</strong>: User tokens are invalid (did the user revoke your API access to their account?)</li>
 				</ul>
 			</div>
 			<div class="divider"></div>

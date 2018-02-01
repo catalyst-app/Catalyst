@@ -66,39 +66,39 @@ class Endpoint {
 
 		if (!array_key_exists("Client", $headers)) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10001, "Client header was not passed.");
+			Response::sendErrorResponse(11001, "Client header was not passed.");
 			return false;
 		}
 
 		if (!array_key_exists("User", $headers)) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10002, "User header was not passed.");
+			Response::sendErrorResponse(11002, "User header was not passed.");
 			return false;
 		}
 
 		$clientKeys = [];
 		if (!preg_match(self::CLIENT_HEADER_REGEX, $headers["Client"], $clientKeys)) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10003, "Client header is invalid.");
+			Response::sendErrorResponse(11003, "Client header is invalid.");
 			return false;
 		}
 
 		$userKeys = [];
 		if (!preg_match(self::USER_HEADER_REGEX, $headers["User"], $userKeys)) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10004, "User header is invalid.");
+			Response::sendErrorResponse(11004, "User header is invalid.");
 			return false;
 		}
 
 		if (!self::checkClientKeys($clientKeys[1], $clientKeys[2])) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10005, "Client does not exist.");
+			Response::sendErrorResponse(11005, "Client does not exist.");
 			return false;
 		}
 
 		if (!self::checkUserKeys($clientKeys[1], $clientKeys[2], $userKeys[1], $userKeys[2])) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(10006, "User tokens are invalid.");
+			Response::sendErrorResponse(11006, "User tokens are invalid.");
 			return false;
 		}
 		
@@ -207,7 +207,7 @@ class Endpoint {
 	protected static function checkLoggedIn() : void {
 		if (!User::isLoggedIn()) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(99999, "User not logged in");
+			Response::sendErrorResponse(99901, "User not logged in");
 		}
 	}
 
@@ -218,7 +218,7 @@ class Endpoint {
 	protected static function checkLoggedOut() : void {
 		if (User::isLoggedIn()) {
 			HTTPCode::set(401);
-			Response::sendErrorResponse(99998, "A user is logged in");
+			Response::sendErrorResponse(99902, "A user is logged in");
 		}
 	}
 }

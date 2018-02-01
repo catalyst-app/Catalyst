@@ -12,4 +12,4 @@ use \Catalyst\API\Response;
 use \Catalyst\HTTPCode;
 
 HTTPCode::set(404);
-Response::sendErrorResponse(99901, "The specified endpoint (".$_GET["in"].") was not found.");
+Response::sendErrorResponse(10001, "The specified endpoint (".$_GET["in"].") was not found.");
