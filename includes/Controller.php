@@ -73,7 +73,7 @@ class Controller {
 	}
 
 	/**
-	 * Sends an email reporting the error
+	 * Sends an email/discord webhook reporting the error
 	 * 
 	 * @param string $subj Subject message (include halt or similar)
 	 * @param string $errco Error code
@@ -82,7 +82,8 @@ class Controller {
 	 * @param string $errfile File the error occured in
 	 * @param int $errline Line the error occured on
 	 */
-	public static function sendErrorEmail(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
+	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
+		$trace = self::getTrace();
 		Email::sendEmail(
 			[["error_logs@catalystapp.co","Error Log"]],
 			$subj." occured in ".$errfile." at ".$errline.": ".$errstr,
@@ -91,18 +92,61 @@ class Controller {
 			'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
 			'<p><strong>Error line:</strong> '.$errline.'</p>'.
 			'<p><strong>Trace:</strong></p>'.
-			'<p>'.implode('</p><p>',array_map("htmlspecialchars",self::getTrace())).'</p>'.
+			'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
 			'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize($_SERVER)).'</pre></p>',
 			"Error code: ".$errco." (".$errno.")\r\n\r\n".
 			"Error string: ".$errstr."\r\n\r\n".
 			"Error file: ".$errfile."\r\n\r\n".
 			"Error line: ".$errline."\r\n\r\n".
 			"Trace: \r\n\r\n".
-			implode("\r\n\r\n",self::getTrace())."\r\n\r\n".
+			implode("\r\n\r\n",$trace)."\r\n\r\n".
 			"Dump: ".serialize($_SERVER),
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD
 		);
+		$traceEmbeds = [];
+		foreach ($trace as $row) {
+			$traceEmbeds[] = [
+				"name" => "Trace:",
+				"value" => $row
+			];
+		}
+		try {
+			file_get_contents(Secrets::DISCORD_BUG_WEBHOOK_URL, false, stream_context_create([
+				"http" => [
+					"method" => "POST",
+					"content" => json_encode([
+						"content" => $subj." occured",
+						"embeds" => [
+							[
+								"title" => "An error occured",
+								"fields" => array_merge([
+									[
+										"name" => 'Error code',
+										"value" => $errco.' ('.$errno.')'
+									],
+									[
+										"name" => 'Error string',
+										"value" => $errstr
+									],
+									[
+										"name" => 'Error file',
+										"value" => $errfile
+									],
+									[
+										"name" => 'Error line',
+										"value" => $errline
+									],
+								], $traceEmbeds),
+								"description" => "Please see the embed fields"
+							]
+						]
+					])
+				]
+			]));
+		} catch (Exception $e) {
+			// discord could not be reached
+		}
 	}
 
 	/**
@@ -132,62 +176,62 @@ class Controller {
 	public static function handleError(int $errno, string $errstr, string $errfile, int $errline) : bool {
 		switch ($errno) {
 			case E_ERROR:
-				self::sendErrorEmail("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown fatal error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_WARNING:
-				self::sendErrorEmail("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_PARSE:
-				self::sendErrorEmail("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_NOTICE:
-				self::sendErrorEmail("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_CORE_ERROR:
-				self::sendErrorEmail("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_CORE_WARNING:
-				self::sendErrorEmail("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_COMPILE_ERROR:
-				self::sendErrorEmail("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_COMPILE_WARNING:
-				self::sendErrorEmail("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_ERROR:
-				self::sendErrorEmail("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_WARNING:
-				self::sendErrorEmail("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_USER_NOTICE:
-				self::sendErrorEmail("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_STRICT:
-				self::sendErrorEmail("E_STRICT", "E_STRICT", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_STRICT", "E_STRICT", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_RECOVERABLE_ERROR:
-				self::sendErrorEmail("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 			case E_DEPRECATED:
-				self::sendErrorEmail("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_USER_DEPRECATED:
-				self::sendErrorEmail("E_USER_DEPRECATED", "E_USER_DEPRECATED", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_USER_DEPRECATED", "E_USER_DEPRECATED", $errno, $errstr, $errfile, $errline);
 				return true;
 			default:
-				self::sendErrorEmail("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 		}
