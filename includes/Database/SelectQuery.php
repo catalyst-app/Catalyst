@@ -40,7 +40,6 @@ class SelectQuery extends Query {
 		$stmt = Database::getDbh()->prepare($initialQuery);
 
 		if (!$stmt->execute($this->getParamtersToBind())) {
-			error_log(__CLASS__." execution error: ".serialize($stmt->errorInfo())."\n".implode(" | ",array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace())));
 			if (Endpoint::isApi()) {
 				HTTPCode::set(500);
 				Response::sendErrorResponse(99999, "An unknown error occured");

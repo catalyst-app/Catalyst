@@ -1,5 +1,6 @@
 <?php
 
+namespace Catalyst\Controller;
 namespace Catalyst\Database\User;
 
 class Login {
@@ -79,8 +80,8 @@ class Login {
 			[
 				"type" => "captcha",
 				"name" => "captcha",
-				"key" => DEVEL ? \Catalyst\Page\Values::DEBUG_CAPTCHA_KEY : self::CAPTCHA_KEY,
-				"secret" => DEVEL ? \Catalyst\Page\Values::DEBUG_CAPTCHA_SECRET : self::CAPTCHA_SECRET,
+				"key" => Controller::isDevelMode() ? \Catalyst\Page\Values::DEBUG_CAPTCHA_KEY : self::CAPTCHA_KEY,
+				"secret" => Controller::isDevelMode() ? \Catalyst\Page\Values::DEBUG_CAPTCHA_SECRET : self::CAPTCHA_SECRET,
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::CAPTCHA_INVALID]],

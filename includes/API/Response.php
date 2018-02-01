@@ -2,7 +2,7 @@
 
 namespace Catalyst\API;
 
-use \Catalyst\HTTPCode;
+use \Catalyst\{Controller, HTTPCode};
 
 /**
  * Contains various utilities to standardize JSON responses
@@ -21,7 +21,7 @@ class Response {
 			"error_code" => 0,
 			"message" => $message,
 			"data" => $data,
-		], DEVEL ? JSON_PRETTY_PRINT : 0);
+		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (!Endpoint::isInternalEndpoint()) {
 			$_SESSION = [];
 		}
@@ -43,15 +43,16 @@ class Response {
 			"message" => $message,
 			"data" => $data,
 			"_debug" => [
-				"_trace" => array_map(function($in) { return "(".$in["line"].")"."->".$in["class"].$in["type"].$in["function"]; }, (new \Exception())->getTrace()),
+				"_trace" => Controller::getTrace(false),
 				"_request" => (isset($_REQUEST)) ? $_REQUEST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION
 			]
-		], DEVEL ? JSON_PRETTY_PRINT : 0);
+		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (!Endpoint::isInternalEndpoint()) {
 			$_SESSION = [];
 		}
+		trigger_error("API Error RESPONSE given: ".$code." ".$message." ".serialize($data));
 		die();
 	}
 }
