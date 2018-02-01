@@ -58,7 +58,7 @@ class Column {
 	/**
 	 * Set the column name
 	 * 
-	 * @param string|null The new column name
+	 * @param string|null $column The new column name
 	 */
 	public function setColumn(?string $column) : void {
 		$this->column = $column;
