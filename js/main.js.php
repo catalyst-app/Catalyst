@@ -4,7 +4,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/init.php";
+require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Color;
 use \Catalyst\Database\Artist\EditArtist;
 use \Catalyst\Database\Artist\NewArtist;

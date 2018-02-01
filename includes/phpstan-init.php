@@ -3,7 +3,7 @@
 define("ROOTDIR", "");
 define("REAL_ROOTDIR", "");
 
-require_once __DIR__."/init.php";
+require_once __DIR__."/controller.php";
 define("PAGE_COLOR", \Catalyst\Page\Values::DEFAULT_COLOR);
 
 define("PAGE_KEYWORD", \Catalyst\Page\Values::ABOUT_US[0]);

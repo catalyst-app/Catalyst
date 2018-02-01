@@ -3,7 +3,7 @@
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."includes/init.php";
+require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\Database\Artist\NewArtist;
 use \Catalyst\Form\FormPHP;
