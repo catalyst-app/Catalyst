@@ -33,7 +33,7 @@ class User implements \Serializable {
 	}
 
 	public static function isLoggedIn() : bool {
-		return isset($_SESSION["logged_in"]) && ($_SESSION["logged_in"] === true) && !is_null($_SESSION["user"]) && $_SESSION["user"] instanceof self;
+		return array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
 	}
 
 	public static function isLoggedOut() : bool {

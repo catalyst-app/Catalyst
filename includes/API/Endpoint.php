@@ -181,6 +181,5 @@ class Endpoint {
 		$query->execute();
 
 		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
-		$_SESSION["logged_in"] = true;
 	}
 }
