@@ -1,4 +1,5 @@
 <?php
+use \Catalyst\Controller;
 use \Catalyst\Page\UniversalFunctions;
 ?>
 		</div>
@@ -9,7 +10,7 @@ use \Catalyst\Page\UniversalFunctions;
 				</p>
 				<p>
 					<?php chdir(realpath(REAL_ROOTDIR)); ?>
-					Version: <?= VERSION ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
+					Version: <?= Controller::VERSION ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
 				</p>
 				<p>
 					Hosted artwork copyright their respective owners unless otherwise stated.
