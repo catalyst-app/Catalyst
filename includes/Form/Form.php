@@ -363,6 +363,30 @@ class Form {
 		return $str;
 	}
 
+	/**
+	 * Get the code to show the progress bar
+	 * 
+	 * @return string JS to show progress bar
+	 */
+	public function getShowProgressBarJs() : string {
+		$str = '';
+		$str .= '$('.json_encode('#'.$this->getProgressWrapperId()).').removeClass("hide");';
+		$str .= '$('.json_encode('#'.$this->getSubmitWrapperId()).').addClass("hide");';
+		return $str;
+	}
+
+	/**
+	 * Get the code to hide the progress bar
+	 * 
+	 * @return string JS to hide progress bar
+	 */
+	public function getHideProgressBarJs() : string {
+		$str = '';
+		$str .= '$('.json_encode('#'.$this->getSubmitWrapperId()).').removeClass("hide");';
+		$str .= '$('.json_encode('#'.$this->getProgressWrapperId()).').addClass("hide");';
+		return $str;
+	}
+
 	public function getJsValidation() : string {
 		// TODO
 	}
