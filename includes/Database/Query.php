@@ -41,10 +41,10 @@ abstract class Query {
 	 * @param QueryAddition[] $additionalCapabilities Single or multiple QueryAddition
 	 */
 	public function __construct(string $table="", array $columns=[], array $values=[], $additionalCapabilities=[]) {
-		$this->table = $table;
-		$this->columns = $columns;
-		$this->values = $values;
-		$this->additionalCapabilities = $additionalCapabilities;
+		$this->setTable($table);
+		$this->setColumns($columns);
+		$this->setValues($values);
+		$this->setAdditionalCapabilities($additionalCapabilities);
 	}
 
 	/**
