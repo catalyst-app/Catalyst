@@ -1,7 +1,7 @@
 <?php
 
-namespace Catalyst\Controller;
 namespace Catalyst\Database\User;
+use Catalyst\Controller;
 
 class Register {
 	public const ACCOUNT_CREATED = 0;
