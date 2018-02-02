@@ -314,7 +314,7 @@ class Form {
 	 * @return string the opening tag
 	 */
 	public function getFormHeader() : string {
-		return '<form action="'.htmlspecialchars($this->getDistinguisher().self::FORM_ELEMENT_ID_SUFFIX).'" id="'.htmlspecialchars($this->getDistinguisher().self::FORM_ELEMENT_ID_SUFFIX).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
+		return '<form action="'.htmlspecialchars($this->getId()).'" id="'.htmlspecialchars($this->getId()).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
 	}
 
 	/**
@@ -326,12 +326,12 @@ class Form {
 		$str = '';
 		$str .= '<div class="row">';
 		$str .= '<br>';
-		$str .= '<div id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_WRAPPER_SUFFIX).'">';
+		$str .= '<div id="'.htmlspecialchars($this->getSubmitWrapperId()).'">';
 		$str .= '<button id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_SUFFIX).'" class="btn waves-effect waves-light col s12 m4 l2">';
 		$str .= htmlspecialchars($this->getButtonText());
 		$str .= '</button>';
 		$str .= '</div>';
-		$str .= '<div id="'.htmlspecialchars($this->getDistinguisher().self::PROGRESS_ELEMENT_ID_SUFFIX).'" class="hide">';
+		$str .= '<div id="'.htmlspecialchars($this->getProgressWrapperId()).'" class="hide">';
 		$str .= '<div class="progress">';
 		$str .= '<div class="indeterminate"></div>';
 		$str .= '</div>';
