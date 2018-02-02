@@ -282,6 +282,33 @@ class Form {
 	}
 
 	/**
+	 * Get the ID of the form
+	 * 
+	 * @return string Form's ID
+	 */
+	public function getId() : string {
+		return $this->getDistinguisher().self::FORM_ELEMENT_ID_SUFFIX;
+	}
+
+	/**
+	 * Get the ID of the progress bar wrapper
+	 * 
+	 * @return string The progress wrapper's ID
+	 */
+	public function getProgressWrapperId() : string {
+		return $this->getDistinguisher().self::PROGRESS_ELEMENT_ID_SUFFIX;
+	}
+
+	/**
+	 * Get the ID of the submit button wrapper
+	 * 
+	 * @return string The submit wrapper's ID
+	 */
+	public function getSubmitWrapperId() : string {
+		return $this->getDistinguisher().self::SUBMIT_ELEMENT_ID_SUFFIX;
+	}
+
+	/**
 	 * Get the form's header/opening tag
 	 * 
 	 * @return string the opening tag
