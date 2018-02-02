@@ -387,12 +387,30 @@ class Form {
 		return $str;
 	}
 
+	/**
+	 * Return all the JS validation checks
+	 * 
+	 * @return string Form validation checks
+	 */
 	public function getJsValidation() : string {
-		// TODO
+		$str = '';
+		foreach ($this->fields as $field) {
+			$str .= $field->getJsValidator();
+		}
+		return $str;
 	}
 
+	/**
+	 * Return code used to aggregate all form elements into self::FORM_DATA_VAR_NAME
+	 * 
+	 * @return string Aggregation code
+	 */
 	public function getJsAggregator() : string {
-		// TODO
+		$str = 'var '.self::FORM_DATA_VAR_NAME.' = new FormData();';
+		foreach ($this->fields as $field) {
+			$str .= $field->getJsAggregator(self::FORM_DATA_VAR_NAME);
+		}
+		return $str;
 	}
 
 	public function getJsAjaxRequest() : string {
