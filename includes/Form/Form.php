@@ -381,7 +381,15 @@ class Form {
 	 * @return string JS code
 	 */
 	public function getAllJs() : string {
-		return $this->getJsValidation().$this->getJsAggregator().$this->getJsAjaxRequest();
+		$str = '';
+		$str .= '$(document).on("submit", '.json_encode($this->getId()).', function(e) {';
+		$str .= 'e.preventDefault();';
+		$str .= $this->getJsValidation();
+		$str .= $this->getJsAggregator();
+		$str .= $this->getShowProgressBarJs();
+		$str .= $this->getJsAjaxRequest();
+		$str .= '});';
+		return $str;
 	}
 
 	/**
