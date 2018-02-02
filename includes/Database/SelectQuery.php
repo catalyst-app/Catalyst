@@ -3,8 +3,6 @@
 namespace Catalyst\Database;
 
 use \Catalyst\Database\Database;
-use \Catalyst\HTTPCode;
-use \Catalyst\API\{Endpoint, Response};
 
 /**
  * Represents a MySQL SELECT query
