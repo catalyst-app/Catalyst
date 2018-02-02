@@ -29,7 +29,7 @@ class WhereClause implements QueryAddition {
 	 * @param array $clause Items for the clause.  [column, equality, value] delimited by WhereClause::AND or WhereClause::OR
 	 */
 	public function __construct(array $clause=[]) {
-		$this->clause = $clause;
+		$this->setClause($clause);
 	}
 
 	/**

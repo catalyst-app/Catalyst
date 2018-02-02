@@ -24,8 +24,8 @@ class Column {
 	 * @param string|null $table Table for the column, null to assume
 	 */
 	public function __construct(?string $column=null, ?string $table=null) {
-		$this->table = $table;
-		$this->column = $column;
+		$this->setTable($table);
+		$this->setColumn($column);
 	}
 
 	/**
