@@ -9,32 +9,46 @@ namespace Catalyst\Form;
 abstract class Field {
 	/**
 	 * internal name for the field
+	 * 
+	 * @var string
 	 */
 	protected $distinguisher = "";
 	/**
 	 * self explanatory
+	 * 
+	 * @var string
 	 */
 	protected $label = "";
 	/**
 	 * If the field is required
+	 * 
+	 * @var string
 	 */
 	protected $required = true;
 	/**
 	 * If the field should be primary, will be overridden by Form
+	 * 
+	 * @var string
 	 */
 	protected $primary = true;
 
 	/**
 	 * Array of error_code => error_message
+	 * 
+	 * @var string
 	 */
 	protected $errors = [];
 
 	/**
 	 * Error code to send if the field is missing
+	 * 
+	 * @var string
 	 */
 	protected $missingErrorCode = -1;
 	/**
 	 * Error code to send if the field fails validation
+	 * 
+	 * @var string
 	 */
 	protected $invalidErrorCode = -1;
 
