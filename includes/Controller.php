@@ -89,9 +89,6 @@ class Controller {
 	 * @param int $errline Line the error occured on
 	 */
 	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
-		if ($_SERVER["SERVER_NAME"] == "localhost") {
-			return;
-		}
 		$trace = self::getTrace();
 		Email::sendEmail(
 			[["error_logs@catalystapp.co","Error Log"]],
@@ -113,6 +110,9 @@ class Controller {
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD
 		);
+		if ($_SERVER["SERVER_NAME"] == "localhost") {
+			return; // dont send to discord/telegram when on local
+		}
 		$trace = self::getTrace(false);
 		$traceEmbeds = [];
 		foreach ($trace as $row) {
