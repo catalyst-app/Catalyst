@@ -413,8 +413,59 @@ class Form {
 		return $str;
 	}
 
+	/**
+	 * Return code used to send and process AJAX request
+	 * 
+	 * @return string AJAX request
+	 */
 	public function getJsAjaxRequest() : string {
-		// TODO
+		$str = '';
+		$str .= '$.ajax(';
+		$str .= '$("html").attr("data-rootdir")+'.json_encode(self::BASE_URI.$this->getEndpoint());
+		$str .= ',';
+		// ajax config
+		$str .= '{';
+		$str .= 'data: '.self::FORM_DATA_VAR_NAME.',';
+		$str .= 'processData: false,';
+		$str .= 'contentType: false,';
+		$str .= 'method: '.json_encode($this->getMethodString());
+		$str .= '})';
+
+		// upload progress
+		$str .= '.uploadProgress(function(e) {';
+		$str .= 'updateUploadIndicator('.json_encode($this->getProgressWrapperId()).', e);';
+		$str .= '})';
+
+		// success
+		$str .= '.done(function(response) {';
+		$str .= 'console.log(response.responseText);';
+		$str .= 'var data = JSON.parse(response.responseText);';
+		$str .= 'Materialize.toast("Success", 4000);';
+		$str .= $this->getCompletionAction()->getJs();
+		$str .= '})';
+
+		// failure
+		$str .= '.fail(function(response) {';
+		$str .= 'console.log(response.responseText);';
+		$str .= 'var data = JSON.parse(response.responseText);';
+		$str .= 'switch (data.error_code) {';
+		foreach ($this->fields as $field) {
+			foreach ($field->getErrors() as $code => $message) {
+				$str .= 'case '.json_encode($code).':';
+				$str .= 'markInputInvalid('.'$('.json_encode("#".$field->getId()).'), data);';
+				$str .= 'return;';
+			}
+		}
+		$str .= '}';
+		$str .= 'showErrorMessageForCode(data.error_code);';
+		$str .= '})';
+
+		// always
+		$str .= '.always(function() {';
+		$str .= $this->getHideProgressBarJs();
+		$str .= '})';
+
+		$str .= ';';
 	}
 
 	/**
