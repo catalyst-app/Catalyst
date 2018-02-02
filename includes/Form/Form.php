@@ -14,6 +14,24 @@ class Form {
 	public const BASE_URI = "api/";
 
 	/**
+	 * Appended to distinguisher for <form> ID
+	 */
+	public const FORM_ELEMENT_ID_SUFFIX = "-form-element";
+
+	/**
+	 * Appended to distinguisher for submit button wrapper
+	 */
+	public const SUBMIT_BUTTON_WRAPPER_SUFFIX = "-submit-wrapper";
+	/**
+	 * Appended to distinguisher for submit button
+	 */
+	public const SUBMIT_BUTTON_SUFFIX = "-submit-btn";
+	/**
+	 * Appended to distinguisher for progress div
+	 */
+	public const PROGRESS_ELEMENT_ID_SUFFIX = "-form-element";
+
+	/**
 	 * Name for the form, used to distinguish it from others
 	 */
 	protected $distinguisher = "";
@@ -107,6 +125,24 @@ class Form {
 	 */
 	public function getMethod() : int {
 		return $this->method;
+	}
+
+	/**
+	 * Get the current form method as a string (GET or POST)
+	 * 
+	 * @return string The form's method, either GET or POST
+	 */
+	public function getMethodString() : string {
+		switch ($this->getMethod()) {
+			case self::GET:
+				return "GET";
+				break;
+			case self::POST:
+				return "POST";
+				break;
+			default:
+				throw new InvalidArgumentException("Unknown method type");
+		}
 	}
 
 	/**
@@ -214,5 +250,92 @@ class Form {
 	 */
 	public function setPrimary(bool $primary) : void {
 		$this->primary = $primary;
+	}
+
+	/**
+	 * Get the form's header/opening tag
+	 * 
+	 * @return string the opening tag
+	 */
+	public function getFormHeader() : string {
+		return '<form action="'.htmlspecialchars($this->getDistinguisher().self::FORM_ELEMENT_ID_SUFFIX).'" id="'.htmlspecialchars($this->getDistinguisher().self::FORM_ELEMENT_ID_SUFFIX).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
+	}
+
+	/**
+	 * Get the submission button HTML
+	 * 
+	 * @return string The ending html
+	 */
+	public function getSubmitButton() : string {
+		$str = '';
+		$str .= '<div class="row">';
+		$str .= '<br>';
+		$str .= '<div id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_WRAPPER_SUFFIX).'">';
+		$str .= '<button id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_SUFFIX).'" class="btn waves-effect waves-light col s12 m4 l2">';
+		$str .= htmlspecialchars($this->getButtonText());
+		$str .= '</button>';
+		$str .= '</div>';
+		$str .= '<div id="'.htmlspecialchars($this->getDistinguisher().self::PROGRESS_ELEMENT_ID_SUFFIX).'" class="hide">';
+		$str .= '<div class="progress">';
+		$str .= '<div class="indeterminate"></div>';
+		$str .= '</div>';
+		$str .= '</div>';
+		$str .= '</div>';
+		return $str;
+	}
+
+	/**
+	 * Get the form's HTML
+	 * 
+	 * @return string The form's HTML
+	 */
+	public function getHtml() : string {
+		$str = '';
+		$str .= '<div class="section">';
+		$str .= $this->getFormHeader();
+		$str .= '<div class="row">';
+		foreach ($this->fields as $field) {
+			$str .= $field->getHtml();
+		}
+		$str .= '</div>';
+		$str .= '<br>';
+		$str .= '<div class="divider">';
+		$str .= '</div>';
+		$str .= $this->getSubmitButton();
+		$str .= '</form>';
+		$str .= '</div>';
+		return $str;
+	}
+
+	public function getJsValidation() : string {
+		// TODO
+	}
+
+	public function getJsAggregator() : string {
+		// TODO
+	}
+
+	public function getJsAjaxRequest() : string {
+		// TODO
+	}
+
+	/**
+	 * Get all of the JavaScript for the form
+	 * 
+	 * @return string JS code
+	 */
+	public function getAllJs() : string {
+		return $this->getJsValidation().$this->getJsAggregator().$this->getJsAjaxRequest();
+	}
+
+	/**
+	 * Check the field's forms on the servers side
+	 * 
+	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 */
+	public function checkServerSide() : void {
+		foreach ($this->fields as $field) {
+			$field->checkServerSide();
+		}
 	}
 }
