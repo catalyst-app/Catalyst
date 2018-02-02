@@ -42,7 +42,7 @@ abstract class Field {
 	 * Construct a Field object
 	 * 
 	 * @param string $distinguisher The internal name of the field
-	 * @param sting $label The field's label
+	 * @param string $label The field's label
 	 * @param bool $required If the field is required
 	 */
 	public function __construct(string $distinguisher="", string $label="", bool $required=true) {
