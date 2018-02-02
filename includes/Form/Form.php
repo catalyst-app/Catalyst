@@ -240,6 +240,7 @@ class Form {
 	 * @param Field $field New field to add
 	 */
 	public function addField(Field $field) : void {
+		$field->setForm($this);
 		$this->fields[] = $field;
 	}
 
