@@ -2,4 +2,3 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(([^/]*/?)*)$ ../../nf.php?in=/user/get/$1 [NC,L]
-RewriteRule ^$ ../../nf.php?in=/user/get/ [NC,L]
