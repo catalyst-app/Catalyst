@@ -22,6 +22,8 @@ class Database {
 	/**
 	 * Contains the PDO instance for our database
 	 * Should be accessed through ::getDbh so we can make sure its initialized
+	 * 
+	 * @var PDO
 	 */
 	protected static $dbh;
 

@@ -13,22 +13,32 @@ use \InvalidArgumentException;
 abstract class Query {
 	/**
 	 * String contianing table name
+	 * 
+	 * @var string
 	 */
 	protected $table = "";
 	/**
 	 * List of column names
+	 * 
+	 * @var Column[]
 	 */
 	protected $columns = [];
 	/**
 	 * List of values (if applicable)
+	 * 
+	 * @var array
 	 */
 	protected $values = [];
 	/**
 	 * An array of QueryAddition
+	 * 
+	 * @var QueryAddition[]
 	 */
 	protected $additionalCapabilities = [];
 	/**
 	 * Result
+	 * 
+	 * @var array
 	 */
 	protected $result = null;
 
