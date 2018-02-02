@@ -20,7 +20,17 @@ class Endpoint {
 	 */
 	const USER_HEADER_REGEX = '/^([a-z0-9]{40}),([a-z0-9]{60})$/';
 
+	/**
+	 * If the currently accessed page is an endpoint
+	 * 
+	 * @var bool
+	 */
 	static $isEndpoint = false;
+	/**
+	 * If the current page is an internal endpoint
+	 * 
+	 * @var bool
+	 */
 	static $isInternalEndpoint = false;
 
 	/**

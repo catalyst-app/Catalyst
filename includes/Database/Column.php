@@ -10,10 +10,14 @@ use \InvalidArgumentException;
 class Column {
 	/**
 	 * Name of table
+	 * 
+	 * @var string|null
 	 */
 	protected $table = null;
 	/**
 	 * Name of column
+	 * 
+	 * @var string
 	 */
 	protected $column = null;
 

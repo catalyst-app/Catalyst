@@ -28,16 +28,22 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 
 	/**
 	 * Type of JOIN to perform
+	 * 
+	 * @var int
 	 */
 	protected $type = self::INNER;
 	/**
 	 * Table which will be JOINed to the query
+	 * 
+	 * @var string
 	 */
 	protected $joinTable = "";
 	/**
 	 * Condtion on which to join the tables
 	 * 
 	 * This is an array with 2 values, each columns
+	 * 
+	 * @var Column[]
 	 */
 	protected $condition = [null,null];
 
