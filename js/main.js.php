@@ -49,11 +49,19 @@ var markCaptchaInvalid = function(a) {
 var markCaptchaValid = function() {
 	$(".g-recaptcha").addClass("valid").removeClass("invalid");
 };
+// deprecated
 var uploadIndicator = function(f, e) {
 	$("#"+f+"-progress-wrapper .indeterminate").removeClass("indeterminate").addClass("determinate");
 	$("#"+f+"-progress-wrapper .determinate").css("width", ((e.loaded*100)/e.total)+"%");
 	if (e.loaded == e.total) {
 		$("#"+f+"-progress-wrapper .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
+	}
+};
+var updateUploadIndicator = function(f, e) {
+	$("#"+f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
+	$("#"+f+" .determinate").css("width", ((e.loaded*100)/e.total)+"%");
+	if (e.loaded == e.total) {
+		$("#"+f+" .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
 	}
 };
 var rgb2hex = function(rgb){
