@@ -30,6 +30,15 @@ abstract class Field {
 	protected $errors = [];
 
 	/**
+	 * Error code to send if the field is missing
+	 */
+	protected $missingErrorCode = -1;
+	/**
+	 * Error code to send if the field fails validation
+	 */
+	protected $invalidErrorCode = -1;
+
+	/**
 	 * Construct a Field object
 	 * 
 	 * @param string $distinguisher The internal name of the field
@@ -145,5 +154,41 @@ abstract class Field {
 		if (array_key_exists($code, $this->errors)) {
 			unset($this->errors[$code]);
 		}
+	}
+
+	/**
+	 * Get the error code for when the field is missing
+	 * 
+	 * @return int The error code sent when the field is missing
+	 */
+	public function getMissingErrorCode() : int {
+		return $this->missingErrorCode;
+	}
+
+	/**
+	 * Set the error code for when the field is missing
+	 * 
+	 * @param int $missingErrorCode The error code to set the missing code to
+	 */
+	public function setMissingErrorCode(int $missingErrorCode) : void {
+		$this->missingErrorCode = $missingErrorCode;
+	}
+
+	/**
+	 * Get the error code for when the field is missing
+	 * 
+	 * @return int The error code sent when the field is missing
+	 */
+	public function getInvalidErrorCode() : int {
+		return $this->invalidErrorCode;
+	}
+
+	/**
+	 * Set the error code for when the field is invalid
+	 * 
+	 * @param int $invalidErrorCode The error code to return on invalid data
+	 */
+	public function setInvalidErrorCode(int $invalidErrorCode) : void {
+		$this->invalidErrorCode = $invalidErrorCode;
 	}
 }
