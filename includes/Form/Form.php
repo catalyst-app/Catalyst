@@ -160,7 +160,7 @@ class Form {
 	/**
 	 * Get the current form endpoint (where the AJAX call is sent)
 	 * 
-	 * This should be relative to self::BASE_URL
+	 * This should be relative to self::BASE_URI
 	 * 
 	 * @return string The current endpoint
 	 */
@@ -171,7 +171,7 @@ class Form {
 	/**
 	 * Set the form endpoint to a new value
 	 * 
-	 * This should be relative to self::BASE_URL
+	 * This should be relative to self::BASE_URI
 	 * 
 	 * @param string $endpoint The new endpoint
 	 */
