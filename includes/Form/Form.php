@@ -47,31 +47,45 @@ class Form {
 
 	/**
 	 * Name for the form, used to distinguish it from others
+	 * 
+	 * @var string
 	 */
 	protected $distinguisher = "";
 	/**
 	 * Action to perform upon form submission.  One of CompletionAction
+	 * 
+	 * @var CompletionAction|null
 	 */
 	protected $completionAction = null;
 	/**
 	 * Method used for request.  One of self::GET or self::POST
+	 * 
+	 * @var int
 	 */
 	protected $method = self::POST;
 	/**
 	 * Endpoint to handle request.  Will almost always be internal/..., relative to /api/
+	 * 
+	 * @var string
 	 */
 	protected $endpoint = "";
 	/**
 	 * Text for submit button
+	 * 
+	 * @var string
 	 */
 	protected $buttonText = "submit";
 	/**
 	 * If form is the only form on page (and thus should auto-focus)
+	 * 
+	 * @var bool
 	 */
 	protected $primary = true;
 
 	/**
 	 * Array of Field[] objects
+	 * 
+	 * @var Field[]
 	 */
 	protected $fields = [];
 
