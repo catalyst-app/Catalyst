@@ -205,4 +205,11 @@ abstract class Field {
 	public function setInvalidErrorCode(int $invalidErrorCode) : void {
 		$this->invalidErrorCode = $invalidErrorCode;
 	}
+
+	/**
+	 * Return the field's HTML input
+	 * 
+	 * @return string The HTML to display
+	 */
+	abstract public function getHtml() : string;
 }
