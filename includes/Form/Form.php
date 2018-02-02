@@ -30,6 +30,20 @@ class Form {
 	 * Appended to distinguisher for progress div
 	 */
 	public const PROGRESS_ELEMENT_ID_SUFFIX = "-progress-wrapper";
+	/**
+	 * Appended to distinguisher for submit button wrapper
+	 */
+	public const SUBMIT_ELEMENT_ID_SUFFIX = "-submit-wrapper";
+
+	/**
+	 * Code to stop further action within the form submission JS
+	 */
+	public const CANCEL_SUBMISSION_JS = "return;";
+
+	/**
+	 * Name for the FormData variable in the JS
+	 */
+	public const FORM_DATA_VAR_NAME = "data";
 
 	/**
 	 * Name for the form, used to distinguish it from others
