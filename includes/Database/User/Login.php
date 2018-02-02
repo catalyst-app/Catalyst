@@ -1,7 +1,7 @@
 <?php
 
-namespace Catalyst\Controller;
 namespace Catalyst\Database\User;
+use Catalyst\Controller;
 
 class Login {
 	public const CREDENTIALS_VALID = 0;
