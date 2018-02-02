@@ -1,7 +1,7 @@
 <?php
 
 namespace Catalyst\Database\User;
-use Catalyst\Controller;
+use Catalyst\{Controller, Email};
 
 class EmailVerification {
 	public const VERIFIED = 0;
@@ -92,8 +92,8 @@ class EmailVerification {
 				$url,
 				"Alternatively, use the token ".$user->getEmailToken()
 			]),
-			self::NO_REPLY_EMAIL,
-			self::NO_REPLY_PASSWORD
+			Email::NO_REPLY_EMAIL,
+			Email::NO_REPLY_PASSWORD
 		);
 	}
 
