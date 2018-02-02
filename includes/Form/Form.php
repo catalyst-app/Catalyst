@@ -29,7 +29,7 @@ class Form {
 	/**
 	 * Appended to distinguisher for progress div
 	 */
-	public const PROGRESS_ELEMENT_ID_SUFFIX = "-form-element";
+	public const PROGRESS_ELEMENT_ID_SUFFIX = "-progress-wrapper";
 
 	/**
 	 * Name for the form, used to distinguish it from others
