@@ -212,6 +212,7 @@ echo UniversalFunctions::createHeading("About Us");
 						Email List
 					</h5>
 
+					<!-- TODO: THIS IS BROKEN -->
 					<form action="email.php" method="POST">
 						<div class="row">
 							<div class="input-field col s12">
