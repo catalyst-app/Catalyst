@@ -11,4 +11,6 @@ artist_images/*
 ssl
 tests/vendor
 
+subl-project.sublime-workspace
+
 \.idea/
