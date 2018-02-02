@@ -1,6 +1,7 @@
 <?php
 
 namespace Catalyst\Database\User;
+
 use Catalyst\Controller;
 
 class Login {
