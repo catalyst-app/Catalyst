@@ -432,11 +432,13 @@ Email: catalyst@catalystapp.co
 - [x] Single user SQL fetch on normal page load
   - [ ] API calls should not use this
 
-# Contact Me
+# Developer Notes
 
-**Email:** smileytechguy@smileytechguy.com, fauxil\_fox@furmail.net  
-**Telegram:** https://t.me/fauxil_fox  
-**Discord:** Fauxil\_Fox#5881  
+This project adheres to PSR-1 and PSR-2 with the following exceptions:
+- Indentation is a tab, not spaces,
+- Opening braces go on the same line, and
+- Closure `function` keywords must not have a space following them.
+
 
 # Special Thanks
 
