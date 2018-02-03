@@ -2,6 +2,8 @@
 
 namespace Catalyst\Form;
 
+use \LogicException;
+
 /**
  * Represents a form's field
  * @abstract
@@ -51,6 +53,15 @@ abstract class Field {
 	 * @var int
 	 */
 	protected $invalidErrorCode = -1;
+
+	/**
+	 * The form the field is associated to
+	 * 
+	 * This SHOULD be assigned only when added to a Form.  It calls setForm() then
+	 * 
+	 * @var Form|null
+	 */
+	protected $form = null;
 
 	/**
 	 * Construct a Field object
@@ -204,6 +215,27 @@ abstract class Field {
 	 */
 	public function setInvalidErrorCode(int $invalidErrorCode) : void {
 		$this->invalidErrorCode = $invalidErrorCode;
+	}
+
+	/**
+	 * Get the Form associated with the Field
+	 * 
+	 * @return Form the associated Form
+	 */
+	public function getForm() : Form {
+		if (is_null($this->form)) {
+			throw new LogicException("Form has not been set");
+		}
+		return $this->form;
+	}
+
+	/**
+	 * Set the Form associated with the Field
+	 * 
+	 * @param Form $form the Form to associate
+	 */
+	public function setForm(Form $form) : void {
+		$this->form = $form;
 	}
 
 	/**
