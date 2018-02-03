@@ -350,7 +350,10 @@ class Form {
 		$str .= '<div class="section">';
 		$str .= $this->getFormHeader();
 		$str .= '<div class="row">';
+		$setPrimary = $this->isPrimary();
 		foreach ($this->fields as $field) {
+			$field->setPrimary($setPrimary);
+			$setPrimary = false;
 			$str .= $field->getHtml();
 		}
 		$str .= '</div>';
