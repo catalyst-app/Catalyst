@@ -131,6 +131,24 @@ abstract class Field {
 	}
 
 	/**
+	 * Return whether the field is primary
+	 * 
+	 * @return bool If the field is primary
+	 */
+	public function isPrimary() : bool {
+		return $this->primary;
+	}
+
+	/**
+	 * Control whether the field is primary
+	 * 
+	 * @param bool $primary If the field is primary
+	 */
+	public function setPrimary(bool $primary) : void {
+		$this->primary = $primary;
+	}
+
+	/**
 	 * Errors which this field is associated with
 	 * 
 	 * @return array Keyed array of $code => $message
