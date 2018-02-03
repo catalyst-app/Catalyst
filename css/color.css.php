@@ -107,7 +107,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 	background-color: #<?= $_GET["hex"] ?>;
 }
 
-.btn:hover, .btn-large:hover {
+.btn:hover, .btn:focus, .btn-large:hover, .btn-large:focus {
 	background-color: #<?= Color::lightenHexByPercent($_GET["hex"], 5) ?>;
 }
 
