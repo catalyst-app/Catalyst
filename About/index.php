@@ -4,6 +4,7 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
+use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
@@ -212,22 +213,7 @@ echo UniversalFunctions::createHeading("About Us");
 						Email List
 					</h5>
 
-					<!-- TODO: THIS IS BROKEN -->
-					<form action="email.php" method="POST">
-						<div class="row">
-							<div class="input-field col s12">
-								<input type="email" name="email" id="email-input" required="required">
-								<label for="email-input">Email</label>
-							</div>
-							<div class="input-field col s12">
-								<input type="text" name="context" id="context-input" required="required">
-								<label for="context-input">Name and other info</label>
-							</div>
-							<div class="col s12">
-								<button type="submit" class="btn col s12 m4 l2">Submit</button>
-							</div>
-						</div>
-					</form>
+					<?= FormRepository::getEmailListAdditionForm()->getHtml() ?> 
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="our-staff">
