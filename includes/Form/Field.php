@@ -239,6 +239,15 @@ abstract class Field {
 	}
 
 	/**
+	 * Return the field's ID attribute
+	 * 
+	 * @return string The Field's ID
+	 */
+	public function getId() : string {
+		return $this->getForm()->getDistinguisher()."-input-".$this->getDistinguisher();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
