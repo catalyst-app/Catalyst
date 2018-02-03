@@ -5,10 +5,10 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Form\FormRepository;
+use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
-use \Catalyst\Integrations\SocialMedia;
 
 
 define("PAGE_KEYWORD", Values::ABOUT_US[0]);
