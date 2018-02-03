@@ -314,7 +314,7 @@ class Form {
 	 * @return string the opening tag
 	 */
 	public function getFormHeader() : string {
-		return '<form action="'.htmlspecialchars($this->getId()).'" id="'.htmlspecialchars($this->getId()).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
+		return '<form action="#'.htmlspecialchars($this->getId()).'" id="'.htmlspecialchars($this->getId()).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
 	}
 
 	/**
