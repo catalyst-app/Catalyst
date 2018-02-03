@@ -117,7 +117,7 @@ abstract class Field {
 	 * 
 	 * @return bool If the field is required
 	 */
-	public function getRequired() : bool {
+	public function isRequired() : bool {
 		return $this->required;
 	}
 
