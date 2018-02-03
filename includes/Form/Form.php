@@ -268,7 +268,7 @@ class Form {
 	 * 
 	 * @return bool If the form is primary
 	 */
-	public function getPrimary() : bool {
+	public function isPrimary() : bool {
 		return $this->primary;
 	}
 
