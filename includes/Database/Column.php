@@ -17,7 +17,7 @@ class Column {
 	/**
 	 * Name of column
 	 * 
-	 * @var string
+	 * @var string|null
 	 */
 	protected $column = null;
 

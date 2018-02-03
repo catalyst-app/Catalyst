@@ -43,7 +43,7 @@ class JoinClause implements \Catalyst\Database\QueryAddition {
 	 * 
 	 * This is an array with 2 values, each columns
 	 * 
-	 * @var Column[]
+	 * @var Column[]|null[]
 	 */
 	protected $condition = [null,null];
 
