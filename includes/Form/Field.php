@@ -22,33 +22,33 @@ abstract class Field {
 	/**
 	 * If the field is required
 	 * 
-	 * @var string
+	 * @var bool
 	 */
 	protected $required = true;
 	/**
 	 * If the field should be primary, will be overridden by Form
 	 * 
-	 * @var string
+	 * @var bool
 	 */
 	protected $primary = true;
 
 	/**
 	 * Array of error_code => error_message
 	 * 
-	 * @var string
+	 * @var string[]
 	 */
 	protected $errors = [];
 
 	/**
 	 * Error code to send if the field is missing
 	 * 
-	 * @var string
+	 * @var int
 	 */
 	protected $missingErrorCode = -1;
 	/**
 	 * Error code to send if the field fails validation
 	 * 
-	 * @var string
+	 * @var int
 	 */
 	protected $invalidErrorCode = -1;
 
