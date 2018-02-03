@@ -253,4 +253,26 @@ abstract class Field {
 	 * @return string The HTML to display
 	 */
 	abstract public function getHtml() : string;
+
+	/**
+	 * Full JS validation code, including if statement and all
+	 * 
+	 * @return string The JS to validate the field
+	 */
+	abstract public function getJsValidator() : string;
+
+	/**
+	 * Return JS code to store the field's value in $formDataName
+	 * 
+	 * @param string $formDataName The name of the FormData variable
+	 * @return string Code to use to store field in $formDataName
+	 */
+	abstract public function getJsAggregator(string $formDataName) : string;
+
+	/**
+	 * Check the field's forms on the servers side
+	 * 
+	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 */
+	abstract public function checkServerSide() : void;
 }
