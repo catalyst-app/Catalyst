@@ -247,7 +247,6 @@ abstract class Query {
 	 * This is where all the real logic and execution occurs
 	 * 
 	 * @return bool if the query was successful
-	 * @abstract
 	 */
 	public abstract function execute() : bool;
 
