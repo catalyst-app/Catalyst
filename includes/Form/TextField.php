@@ -95,6 +95,7 @@ class TextField extends Field {
 		$str .= '>';
 		
 		$str .= '<label';
+		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 		$str .= htmlspecialchars($this->getLabel());
