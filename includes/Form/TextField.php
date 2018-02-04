@@ -2,6 +2,8 @@
 
 namespace Catalyst\Form;
 
+use \Catalyst\API\Response;
+use \Catalyst\HTTPCode;
 use \LogicException;
 
 /**
