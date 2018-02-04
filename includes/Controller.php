@@ -3,7 +3,7 @@
 namespace Catalyst;
 
 use \Catalyst\{Email, HTTPCode};
-use \Catalyst\API\{Endpoint, Response};
+use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Exception;
 
 /**
@@ -187,7 +187,7 @@ class Controller {
 	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline) : void {
 		HTTPCode::set(500);
 		if (Endpoint::isApi()) {
-			Response::sendErrorResponse(99999, "An unknown error occured", [$errno,$errstr,$errfile,$errline]);
+			Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, [$errno,$errstr,basename($errfile),$errline]);
 		}
 	}
 
