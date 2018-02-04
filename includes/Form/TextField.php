@@ -128,5 +128,19 @@ class TextField extends Field {
 	 * 
 	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
 	 */
-	public function checkServerSide() : void { /* TODO */ }
+	public function checkServerSide() : void {
+		if (!is_null($this->getAdditionalCheck())) {
+			$this->getAdditionalCheck()($this);
+		}
+		if ($this->isRequired()) {
+			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
+				HTTPCode::set(400);
+				Response::sendErrorResponse($this->getMissingErrorCode(), $this->getErrorMessage($this->getMissingErrorCode()));
+			}
+		}
+		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
+			HTTPCode::set(400);
+			Response::sendErrorResponse($this->getInvalidErrorCode(), $this->getErrorMessage($this->getInvalidErrorCode()));
+		}
+	}
 }
