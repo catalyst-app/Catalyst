@@ -143,7 +143,7 @@ class TextField extends Field {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode("#".$this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
 	}
 
 	/**
