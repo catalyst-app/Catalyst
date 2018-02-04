@@ -5,6 +5,11 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
+use \Catalyst\Form\FormRepository;
+
+$forms = FormRepository::getAllForms();
+
+
 use \Catalyst\Color;
 use \Catalyst\Database\Artist\EditArtist;
 use \Catalyst\Database\Artist\NewArtist;
@@ -167,6 +172,11 @@ function totp(K,t) {
 				$(".brand-logo").html("OwO what's this?");
 			});
 		} catch(e) {} // cheet doesn't like to be defined
+
+		/* FORMS */
+<?php foreach ($forms as $form): ?>
+	<?= $form->getAllJs(); ?>
+<?php endforeach; ?>
 
 		/* IMAGE ARRANGEMENT */
 		$(document).on("click", ".edit-cards .make-primary-button", function() {
