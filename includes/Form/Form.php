@@ -471,6 +471,8 @@ class Form {
 		$str .= '})';
 
 		$str .= ';';
+
+		return $str;
 	}
 
 	/**
