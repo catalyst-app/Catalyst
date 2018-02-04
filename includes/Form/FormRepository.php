@@ -7,6 +7,15 @@ use \Catalyst\API\ErrorCodes;
  * Simply a repository of forms for the site.  May be split up later, if needed
  */
 class FormRepository {
+	public static function getDistinguisherFromMethodName(string $in) : string {
+		// remove get
+		$withoutGet = preg_replace('/^get/', '', $in);
+		// convert to dash-case
+		$toDashCase = preg_replace('/([a-z])([A-Z])/', '\1-\2', $withoutGet);
+		// force lowercase
+		return strtolower($toDashCase);
+	}
+
 	/**
 	 * Get the form used to add a user to the mailing list.
 	 * 
@@ -17,7 +26,7 @@ class FormRepository {
 	public static function getEmailListAdditionForm() : Form {
 		$form = new Form();
 
-		$form->setDistinguisher(__FUNCTION__);
+		$form->setDistinguisher(self::getDistinguisherFromMethodName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setCompletionAction(null);
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/email_list/");
