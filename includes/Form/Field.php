@@ -167,6 +167,16 @@ abstract class Field {
 	}
 
 	/**
+	 * Get the error message associated with a code
+	 * 
+	 * @param int $code error code to get message for
+	 * @return string Error mesasge
+	 */
+	public function getErrorMessage(int $code) : string {
+		return $this->errors[$code];
+	}
+
+	/**
 	 * Add an error to the array
 	 * 
 	 * @param int $code The error code
