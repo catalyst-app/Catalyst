@@ -84,6 +84,9 @@ class UniversalFunctions {
 		} else {
 			$realfile = $filename;
 		}
+		if (!file_exists($filename)) {
+			return '';
+		}
 		return '<div class="img-strict-circle'.(strlen($additionalClasses) ? ' ' : '').$additionalClasses.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" style="background-image: url(\''.$filename.'\');"></div>';
 	}
 
@@ -99,6 +102,18 @@ class UniversalFunctions {
 			}
 		} else {
 			$realfile = $filename;
+		}
+		if (!file_exists($filename)) {
+			return implode("", [
+				'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
+				'<div class="card-image">',
+				'</div>',
+				(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
+				(!empty($title) ? '<p class="card-title">'.htmlspecialchars($title).'</p>' : ''),
+				(!empty($caption) ? '<p>'.str_replace("\n", "</p><p>", htmlspecialchars($caption)).'</p>' : ''),
+				(!empty($caption) || !empty($title) ? '</div>' : ''),
+				'</a>'
+			]);
 		}
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
@@ -126,6 +141,17 @@ class UniversalFunctions {
 		} else {
 			$realfile = $filename;
 		}
+		if (!file_exists($filename)) {
+			return implode("", [
+				'<div class="col s12 card hoverable">',
+				'<div class="card-image">',
+				'</div>',
+				'<div class="card-content black-text">',
+				$html,
+				'</div>',
+				'</div>',
+			]);
+		}
 		return implode("", [
 			'<div class="col s12 card hoverable">',
 			'<div class="card-image">',
@@ -150,6 +176,19 @@ class UniversalFunctions {
 			}
 		} else {
 			$realfile = $filename;
+		}
+		if (!file_exists($filename)) {
+			return implode("", [
+				'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
+				'<div class="ribbon '.$ribbonColor["base"].' '.$ribbonColor["mod"].'">'.$ribbon.'</div>',
+				'<div class="card-image">',
+				'</div>',
+				(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
+				(!empty($title) ? '<p class="card-title">'.htmlspecialchars($title).'</p>' : ''),
+				(!empty($caption) ? '<p>'.str_replace("\n", "</p><p>", htmlspecialchars($caption)).'</p>' : ''),
+				(!empty($caption) || !empty($title) ? '</div>' : ''),
+				'</a>'
+			]);
 		}
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
