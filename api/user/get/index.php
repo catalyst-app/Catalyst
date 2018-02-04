@@ -4,7 +4,7 @@ define("ROOTDIR", "../../../");
 define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\API\{Endpoint, Response};
+use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
 
@@ -13,12 +13,12 @@ Endpoint::init();
 if (isset($_GET["name"])) {
 	if (!preg_match('/^([A-Za-z0-9._-]){2,64}$/', $_GET["name"])) {
 		HTTPCode::set(404);
-		Response::sendErrorResponse(20001, "The specified user does not exist.");
+		Response::sendErrorResponse(20001, ErrorCodes::ERR_20001);
 	}
 	$id = User::getIdFromUsername($_GET["name"]);
 	if ($id == -1) {
 		HTTPCode::set(404);
-		Response::sendErrorResponse(20001, "The specified user does not exist.");
+		Response::sendErrorResponse(20001, ErrorCodes::ERR_20001);
 	}
 	if ($id == $_SESSION["user"]->getId()) {
 		$user = $_SESSION["user"];
