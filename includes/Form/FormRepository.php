@@ -3,6 +3,8 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
+use \ReflectionClass;
+
 /**
  * Simply a repository of forms for the site.  May be split up later, if needed
  */
@@ -44,6 +46,25 @@ class FormRepository {
 		$form->addField($contextField);
 
 		return $form;
+	}
+
+	/**
+	 * Get all Forms functions defined in the repository
+	 * 
+	 * @return Form[] All forms in the repository
+	 */
+	public static function getAllForms() : array {
+		$reflectedClass = new ReflectionClass(__CLASS__);
+		$classMethods = $reflectedClass->getMethods();
+
+		$forms = [];
+		foreach ($classMethods as $method) {
+			if ($method->getReturnType()->getName() == 'Catalyst\Form\Form') {
+				$forms[] = call_user_func([__CLASS__, $method->getName()]);
+			}
+		}
+
+		return $forms;
 	}
 }
 
