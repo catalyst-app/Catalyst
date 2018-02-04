@@ -496,6 +496,9 @@ class Form {
 	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
 	 */
 	public function checkServerSide() : void {
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
+			\Catalyst\Response::send405($this->getMethodString());
+		}
 		foreach ($this->fields as $field) {
 			$field->checkServerSide();
 		}
