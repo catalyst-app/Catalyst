@@ -14,3 +14,4 @@
 - **90001** - No email was passed
 - **90002** - Invalid email was passed
 - **90003** - No context was passed
+- **90004** - An invalid context was passed
