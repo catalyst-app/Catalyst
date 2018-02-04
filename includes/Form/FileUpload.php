@@ -90,7 +90,7 @@ class FileUpload {
 	}
 
 	public static function delete(?string $filename,int $type) {
-		if (is_null($filename)) {
+		if (is_null($filename) || !file_exists(REAL_ROOTDIR.self::FOLDERS[$type]."/".$filename)) {
 			return;
 		}
 
