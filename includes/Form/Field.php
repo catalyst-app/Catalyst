@@ -55,6 +55,15 @@ abstract class Field {
 	protected $invalidErrorCode = -1;
 
 	/**
+	 * Additional check for the field
+	 * 
+	 * Must take an argument $field of type Field, callable is responsible for returning errors.
+	 * 
+	 * @var callable
+	 */
+	protected $additionalCheck = function(Field $field) {};
+
+	/**
 	 * The form the field is associated to
 	 * 
 	 * This SHOULD be assigned only when added to a Form.  It calls setForm() then
@@ -233,6 +242,24 @@ abstract class Field {
 	 */
 	public function setInvalidErrorCode(int $invalidErrorCode) : void {
 		$this->invalidErrorCode = $invalidErrorCode;
+	}
+
+	/**
+	 * Get the current additional check to perform
+	 * 
+	 * @return callable The field's additional check
+	 */
+	public function getAdditionalCheck() : callable {
+		return $this->additionalCheck;
+	}
+
+	/**
+	 * Set the field's additional check to a new value
+	 * 
+	 * @param callable $additionalCheck Check to perform
+	 */
+	public function setAdditionalCheck(callable $additionalCheck) : void {
+		$this->additionalCheck = $additionalCheck;
 	}
 
 	/**
