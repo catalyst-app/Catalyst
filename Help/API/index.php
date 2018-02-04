@@ -122,7 +122,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 				</ul>
 				<p class="flow-text">Error codes</p>
 				<ul class="browser-default">
-					<li class="flow-text"><strong>20001</strong>: User account does not exist</li>
+					<li class="flow-text"><strong>20001</strong>: User account does not exist, has been suspended, or is deactivated</li>
 				</ul>
 			</div>
 			</div>
