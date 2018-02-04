@@ -139,7 +139,9 @@ class TextField extends Field {
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */
-	public function getJsAggregator(string $formDataName) : string { /* TODO */ }
+	public function getJsAggregator(string $formDataName) : string {
+		return $formDataName.'.append('.json_encode("#".$this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+	}
 
 	/**
 	 * Check the field's forms on the servers side
