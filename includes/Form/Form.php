@@ -458,7 +458,7 @@ class Form {
 			foreach ($field->getErrors() as $code => $message) {
 				$str .= 'case '.json_encode($code).':';
 				$str .= 'markInputInvalid('.'$('.json_encode("#".$field->getId()).'), data.message);';
-				$str .= 'return;';
+				$str .= 'break;';
 			}
 		}
 		$str .= '}';
