@@ -2,6 +2,7 @@
 
 namespace Catalyst\Form;
 
+use \Catalyst\API\ErrorCodes;
 /**
  * Simply a repository of forms for the site.  May be split up later, if needed
  */
@@ -27,6 +28,10 @@ class FormRepository {
 		$contextField->setDistinguisher("context");
 		$contextField->setLabel("Name or other information");
 		$contextField->setRequired(true);
+		$contextField->addError(90003, ErrorCodes::ERR_90001);
+		$contextField->setMissingErrorCode(90003);
+		$contextField->addError(90004, ErrorCodes::ERR_90001);
+		$contextField->setInvalidErrorCode(90004);
 		$form->addField($contextField);
 
 		return $form;
