@@ -59,9 +59,9 @@ abstract class Field {
 	 * 
 	 * Must take an argument $field of type Field, callable is responsible for returning errors.
 	 * 
-	 * @var callable
+	 * @var callable|null
 	 */
-	protected $additionalCheck = function(Field $field) {};
+	protected $additionalCheck = null;
 
 	/**
 	 * The form the field is associated to
@@ -257,18 +257,18 @@ abstract class Field {
 	/**
 	 * Get the current additional check to perform
 	 * 
-	 * @return callable The field's additional check
+	 * @return callable|null The field's additional check
 	 */
-	public function getAdditionalCheck() : callable {
+	public function getAdditionalCheck() : ?callable {
 		return $this->additionalCheck;
 	}
 
 	/**
 	 * Set the field's additional check to a new value
 	 * 
-	 * @param callable $additionalCheck Check to perform
+	 * @param callable|null $additionalCheck Check to perform
 	 */
-	public function setAdditionalCheck(callable $additionalCheck) : void {
+	public function setAdditionalCheck(?callable $additionalCheck) : void {
 		$this->additionalCheck = $additionalCheck;
 	}
 

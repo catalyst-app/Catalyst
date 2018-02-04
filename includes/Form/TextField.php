@@ -13,7 +13,7 @@ class TextField extends Field {
 	 * 
 	 * @var string
 	 */
-	protected $patten = '';
+	protected $pattern = '';
 	/**
 	 * Maximum string length, <= 0 means none
 	 * 
@@ -26,17 +26,17 @@ class TextField extends Field {
 	 * 
 	 * @return string Current pattern
 	 */
-	public function getPatten() : string {
-		return $this->patten;
+	public function getPattern() : string {
+		return $this->pattern;
 	}
 
 	/**
 	 * Set the regex needed to match
 	 * 
-	 * @param string $patten New pattern
+	 * @param string $pattern New pattern
 	 */
-	public function setPatten(string $patten) : void {
-		$this->patten = $patten;
+	public function setPattern(string $pattern) : void {
+		$this->pattern = $pattern;
 	}
 
 	/**
@@ -82,8 +82,8 @@ class TextField extends Field {
 		}
 		
 		$inputAttributes[] = "validate";
-		if ($this->getPatten() !== '') {
-			$str .= ' pattern="'.htmlspecialchars($this->getPatten()).'"';
+		if ($this->getPattern() !== '') {
+			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
 			$str .= ' title="Please follow the requested format"'; // required to not be ugly on some browsers
 		}
 		
