@@ -436,7 +436,7 @@ class Form {
 
 		// upload progress
 		$str .= '.uploadProgress(function(e) {';
-		$str .= 'updateUploadIndicator('.json_encode($this->getProgressWrapperId()).', e);';
+		$str .= 'updateUploadIndicator('.json_encode("#".$this->getProgressWrapperId()).', e);';
 		$str .= '})';
 
 		// success
@@ -482,7 +482,7 @@ class Form {
 	 */
 	public function getAllJs() : string {
 		$str = '';
-		$str .= '$(document).on("submit", '.json_encode($this->getId()).', function(e) {';
+		$str .= '$(document).on("submit", '.json_encode("#".$this->getId()).', function(e) {';
 		$str .= 'e.preventDefault();';
 		$str .= $this->getJsValidation();
 		$str .= $this->getJsAggregator();
