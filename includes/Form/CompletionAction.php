@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 /**
- * Represents an action which can be performed based
+ * Represents an action which can be performed after form submission
  * @abstract
  */
 abstract class CompletionAction {
