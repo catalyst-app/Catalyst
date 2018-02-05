@@ -29,7 +29,7 @@ define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
 define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? $user->getNickname() : "Invalid User")]));
 
 if ($userExists) {
-	define("PAGE_COLOR", $user->getColor());
+	define("PAGE_COLOR", $user->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

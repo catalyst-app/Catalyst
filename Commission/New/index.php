@@ -21,9 +21,9 @@ define("PAGE_KEYWORD", Values::NEW_COMMISSION[0]);
 define("PAGE_TITLE", Values::createTitle(Values::NEW_COMMISSION[1], ["type" => (isset($type) ? $type->getName() : "Invalid"), "artist" => (isset($type) ? $artist->getName() : "Invalid")]));
 
 if (isset($type)) {
-	define("PAGE_COLOR", $artist->getColor());
+	define("PAGE_COLOR", $artist->getColorHex());
 } elseif (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColor());
+	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

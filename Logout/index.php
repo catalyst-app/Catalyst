@@ -14,7 +14,7 @@ define("PAGE_KEYWORD", Values::LOGOUT[0]);
 define("PAGE_TITLE", Values::createTitle(Values::LOGOUT[1], []));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColor());
+	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

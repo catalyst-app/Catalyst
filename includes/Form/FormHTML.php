@@ -99,10 +99,10 @@ class FormHTML {
 				}
 
 				$el  = '<div data-for="'.$inputAttributes["name"].'" class="color-field '.$wrapperClasses.'">';
-				$el .= '<div class="chosen-color btn" data-for="'.$inputAttributes["name"].'" style="background-color: #'.(isset($input["default"]) ? $input["default"]["hex"] : \Catalyst\Page\Values::DEFAULT_COLOR["hex"]).'"></div>';
+				$el .= '<div class="chosen-color btn" data-for="'.$inputAttributes["name"].'" style="background-color: #'.(isset($input["default"]) ? $input["default"] : \Catalyst\Page\Values::DEFAULT_COLOR).'"></div>';
 				$el .= '<div class="color-input-wrapper row">';
 				$el .= '<div class="input-field col s12">';
-				$el .= '<input type="text" readonly="readonly" id="'.$inputAttributes["name"].'" value="'.(isset($input["default"]) ? $input["default"]["hex"] : \Catalyst\Page\Values::DEFAULT_COLOR["hex"]).'"';
+				$el .= '<input type="text" readonly="readonly" id="'.$inputAttributes["name"].'" value="'.(isset($input["default"]) ? $input["default"] : \Catalyst\Page\Values::DEFAULT_COLOR).'"';
 				foreach ($inputAttributes as $key => $value) {
 					$el .= " ".$key.'="'.htmlspecialchars($value).'"';
 				}
@@ -475,7 +475,7 @@ class FormHTML {
 			'<div class="row">',
 				'<br>',
 				'<div id="'.$meta["distinguisher"].'-submit-wrapper">',
-					'<button id="'.$meta["distinguisher"].'-btn" class="btn '.\Catalyst\Page\UniversalFunctions::getColorClasses().' waves-effect waves-light submitter col s12 m4 l2">',
+					'<button id="'.$meta["distinguisher"].'-btn" class="btn waves-effect waves-light submitter col s12 m4 l2">',
 						$meta["button"],
 					'</button>',
 				'</div>',

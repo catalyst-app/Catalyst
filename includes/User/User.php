@@ -93,22 +93,6 @@ class User implements \Serializable {
 		]);
 	}
 
-	public function getColor() : array {
-		if (array_key_exists("COLOR", $this->cache)) {
-			return \Catalyst\Color::getArrFromHex($this->cache["COLOR"]);
-		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `COLOR` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$hex = $this->cache["COLOR"] = bin2hex($stmt->fetchAll()[0]["COLOR"]);
-
-		$stmt->closeCursor();
-
-		return \Catalyst\Color::getArrFromHex($hex);
-	}
-
 	public function getColorHex() : string {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];

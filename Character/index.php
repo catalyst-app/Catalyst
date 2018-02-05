@@ -49,9 +49,9 @@ switch ($page) {
 
 
 if (isset($character)) {
-	define("PAGE_COLOR", $character->getColor());
+	define("PAGE_COLOR", $character->getColorHex());
 } elseif (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColor());
+	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
