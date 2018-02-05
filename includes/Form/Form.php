@@ -444,7 +444,7 @@ class Form {
 		$str .= 'console.log(response);';
 		$str .= 'var data = JSON.parse(response);';
 		$str .= 'Materialize.toast("Success", 4000);';
-		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();'
+		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
 		if (!is_null($this->getCompletionAction())) {
 			$str .= $this->getCompletionAction()->getJs();
 		}
