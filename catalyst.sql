@@ -1505,6 +1505,19 @@ ALTER TABLE `user_wishlists`
 --
 
 --
+-- Constraints for table `api_authorizations`
+--
+ALTER TABLE `api_authorizations`
+  ADD CONSTRAINT `api_authorizations_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `api_authorizations_ibfk_2` FOREIGN KEY (`API_ID`) REFERENCES `api_keys` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  ADD CONSTRAINT `api_keys_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `artist_pages`
 --
 ALTER TABLE `artist_pages`
