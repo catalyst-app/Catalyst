@@ -32,11 +32,7 @@ class Values {
 	const EDIT_COMMISSION_TYPE_IMAGES = ["artist", "Edit Commission Type Images"];
 	const NEW_COMMISSION = ["browse", "New {type} Commission | {artist}"];
 
-	const DEFAULT_COLOR = [
-		"hex" => "1b5e20",
-		"base" => "green",
-		"mod" => "darken-4"
-	];
+	const DEFAULT_COLOR = "1b5e20";
 
 	const BCRYPT_COST = 14;
 

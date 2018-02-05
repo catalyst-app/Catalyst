@@ -17,6 +17,6 @@ class Message {
 			default:
 				throw new \InvalidArgumentException();
 		}
-		return '<p class="flow-text no-top-margin"><a href="'.ROOTDIR.'Message/'.$typePath.'/'.$uname.'" class="btn '.$color["base"].' '.$color["mod"].'">message '.(empty($nick) ? $uname : $nick).'</a></p>';
+		return '<p class="flow-text no-top-margin"><a href="'.ROOTDIR.'Message/'.$typePath.'/'.$uname.'" class="btn">message '.(empty($nick) ? $uname : $nick).'</a></p>';
 	}
 }

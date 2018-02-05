@@ -116,10 +116,6 @@ class Character {
 		return $result;
 	}
 
-	public function getColor() : array {
-		return \Catalyst\Color::getArrFromHex($this->getColorHex());
-	}
-
 	public function isPublic() : bool {
 		if (array_key_exists("PUBLIC", $this->cache)) {
 			return $this->cache["PUBLIC"];

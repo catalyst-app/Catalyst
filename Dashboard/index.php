@@ -14,7 +14,7 @@ define("PAGE_KEYWORD", Values::DASHBOARD[0]);
 define("PAGE_TITLE", Values::createTitle(Values::DASHBOARD[1], ["name" => (isset($_SESSION["user"]) ? $_SESSION["user"]->getNickname() : "Logged Out")]));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColor());
+	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
@@ -95,7 +95,7 @@ foreach ($types as $type) {
 			$type->getName(), 
 			($artist = $type->getArtistPage())->getName()."\n".$type->getBlurb(), 
 			ROOTDIR."Artist/".$artist->getUrl()."/", 
-			$type->isOpen() ? $type->getBaseCost() : "CLOSED", $artist->getColor()
+			$type->isOpen() ? $type->getBaseCost() : "CLOSED", $artist->getColorHex()
 		).'</div>';
 }
 ?>

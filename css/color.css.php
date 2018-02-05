@@ -27,37 +27,32 @@ a {
 	background-color: rgba(<?= implode(",", Color::getRGB($_GET["hex"])) ?>, 0.15) !important;
 }
 
-.switch label input[type=checkbox]:checked + .lever::after {
-	background-color: #<?= $_GET["hex"] ?>;
-}
-
-.user-color {
-	background-color: #<?= $_GET["hex"] ?>;
+.switch label input[type=checkbox]:checked + .lever::after, .user-color, nav, footer.page-footer,
+.img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
+[type="checkbox"].filled-in:checked + label:after,
+[type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
+.progress .indeterminate, .progress .determinate, .btn, .btn-large {
+	background-color: #<?= $_GET["hex"] ?> !important;
 }
 
 .dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {
 	color: #<?= $_GET["hex"] ?> !important;
 }
 
-.img-strict-circle[style*="/default.png');"], img[src$="/default.png"] {
-	background-color: #<?= $_GET["hex"] ?>;;
-}
-
 [type="checkbox"]:checked + label:before {
   border-right: 2px solid #<?= $_GET["hex"] ?>;
   border-bottom: 2px solid #<?= $_GET["hex"] ?>;
 }
+
 [type="checkbox"]:indeterminate + label:before {
   border-right: 2px solid #<?= $_GET["hex"] ?>;
 }
 
 [type="checkbox"].filled-in:checked + label:after {
   border: 2px solid #<?= $_GET["hex"] ?>;
-  background-color: #<?= $_GET["hex"] ?>;
 }
 
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after {
-  background-color: #<?= $_GET["hex"] ?>;
   border-color: #<?= $_GET["hex"] ?>;
 }
 
@@ -97,14 +92,6 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .progress {
 	background-color: #<?= Color::lightenHex($_GET["hex"], 2) ?>;
-}
-
-.progress .indeterminate, .progress .determinate {
-	background-color: #<?= $_GET["hex"] ?>;
-}
-
-.btn, .btn-large {
-	background-color: #<?= $_GET["hex"] ?>;
 }
 
 .btn:hover, .btn:focus, .btn-large:hover, .btn-large:focus {

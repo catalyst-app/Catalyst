@@ -3,7 +3,7 @@ use \Catalyst\Controller;
 use \Catalyst\Page\UniversalFunctions;
 ?>
 		</div>
-		<footer class="page-footer <?= UniversalFunctions::getColorClasses() ?>">
+		<footer class="page-footer">
 			<div class="container white-text">
 				<p>
 					Website &copy;<?php echo date("Y"); ?> Catalyst, All rights reserved.

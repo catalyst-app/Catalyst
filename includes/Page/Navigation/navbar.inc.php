@@ -1,6 +1,6 @@
 <header>
 	<div class="navbar-fixed">
-		<nav class="<?= \Catalyst\Page\UniversalFunctions::getColorClasses() ?>">
+		<nav>
 			<div class="nav-wrapper">
 				<a class="brand-logo" href="<?= ROOTDIR ?>">
 					<?= \Catalyst\Page\Header\Header::LOGO_HTML ?>

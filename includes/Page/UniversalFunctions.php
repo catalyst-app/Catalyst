@@ -20,10 +20,6 @@ class UniversalFunctions {
 		]);
 	}
 
-	public static function getColorClasses() : string {
-		return PAGE_COLOR["base"].(empty(PAGE_COLOR["mod"]) ? "" : " ".PAGE_COLOR["mod"]);
-	}
-
 	// https://github.com/mingalevme/utils/blob/master/src/Filesize.php
 	const UNIT_PREFIXES_POWERS = [
 		'B' => 0,
@@ -180,7 +176,7 @@ class UniversalFunctions {
 		if (!file_exists($filename)) {
 			return implode("", [
 				'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
-				'<div class="ribbon '.$ribbonColor["base"].' '.$ribbonColor["mod"].'">'.$ribbon.'</div>',
+				'<div class="ribbon" style="background-color: #'.$ribbonColor["hex"].'">'.$ribbon.'</div>',
 				'<div class="card-image">',
 				'</div>',
 				(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
@@ -192,7 +188,7 @@ class UniversalFunctions {
 		}
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
-			'<div class="ribbon '.$ribbonColor["base"].' '.$ribbonColor["mod"].'">'.$ribbon.'</div>',
+			'<div class="ribbon" style="background-color: #'.$ribbonColor["hex"].'">'.$ribbon.'</div>',
 			'<div class="card-image">',
 			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',

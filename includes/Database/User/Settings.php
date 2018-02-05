@@ -142,7 +142,7 @@ class Settings {
 				"type" => "color",
 				"label" => "Color",
 				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
-				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getColor() : "",
+				"default" => \Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getColorHex() : "",
 				"required" => true,
 				"validate" => true,
 				"error_text" => [self::PHRASES[self::COLOR_INVALID]],

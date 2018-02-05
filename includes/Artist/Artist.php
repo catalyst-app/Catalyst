@@ -173,10 +173,6 @@ class Artist {
 		return $result;
 	}
 
-	public function getColor() : array {
-		return \Catalyst\Color::getArrFromHex($this->getColorHex());
-	}
-
 	public function getPicturePath() : string {
 		return ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::ARTIST_IMAGE]."/".$this->getImg();
 	}

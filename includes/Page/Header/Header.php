@@ -19,7 +19,7 @@ class Header {
 		"https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.css",
 		"https://fonts.googleapis.com/icon?family=Material+Icons",
 		ROOTDIR."css/overall.css",
-		ROOTDIR."css/color.css.php?hex=".PAGE_COLOR["hex"],
+		ROOTDIR."css/color.css.php?hex=".PAGE_COLOR,
 	];
 
 	const LOGO_HTML = '
