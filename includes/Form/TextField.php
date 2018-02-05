@@ -168,6 +168,10 @@ class TextField extends Field {
 				HTTPCode::set(400);
 				Response::sendErrorResponse($this->getMissingErrorCode(), $this->getErrorMessage($this->getMissingErrorCode()));
 			}
+		} else {
+			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
+				return; // not required and empty, don't do further checks
+			}
 		}
 		if ($this->getMaxLength() > 0) {
 			if (strlen($_REQUEST[$this->getDistinguisher()]) > $this->getMaxLength()) {
