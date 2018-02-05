@@ -22,6 +22,49 @@ USE `catalyst`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `api_authorizations`
+--
+
+CREATE TABLE `api_authorizations` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `API_ID` int(10) UNSIGNED NOT NULL,
+  `USER_ID` int(10) UNSIGNED NOT NULL,
+  `ACCESS_TOKEN` varchar(40) CHARACTER SET ascii NOT NULL,
+  `ACCESS_SECRET` varchar(60) CHARACTER SET ascii NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `api_authorizations`:
+--   `USER_ID`
+--       `users` -> `ID`
+--   `API_ID`
+--       `api_keys` -> `ID`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api_keys`
+--
+
+CREATE TABLE `api_keys` (
+  `ID` int(11) UNSIGNED NOT NULL,
+  `NAME` varchar(64) NOT NULL,
+  `USER_ID` int(11) UNSIGNED NOT NULL,
+  `DESCRIPTION` mediumtext NOT NULL,
+  `CLIENT_ID` varchar(16) CHARACTER SET ascii NOT NULL,
+  `CLIENT_SECRET` varchar(60) CHARACTER SET ascii NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `api_keys`:
+--   `USER_ID`
+--       `users` -> `ID`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `artist_pages`
 --
 
