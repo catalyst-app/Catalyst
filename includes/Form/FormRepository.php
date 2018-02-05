@@ -35,6 +35,16 @@ class FormRepository {
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
 
+		$emailField = new EmailField();
+		$emailField->setDistinguisher("email");
+		$emailField->setLabel("Email");
+		$emailField->setRequired(true);
+		$emailField->addError(90001, ErrorCodes::ERR_90001);
+		$emailField->setMissingErrorCode(90001);
+		$emailField->addError(90002, ErrorCodes::ERR_90001);
+		$emailField->setInvalidErrorCode(90002);
+		$form->addField($emailField);
+
 		$contextField = new TextField();
 		$contextField->setDistinguisher("context");
 		$contextField->setLabel("Name or other information");
