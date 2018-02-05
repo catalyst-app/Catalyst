@@ -84,7 +84,7 @@ class EmailVerification {
 		\Catalyst\Email::sendEmail(
 			[[$user->getEmail(), $user->getNickname()]],
 			"Catalyst - Email verification",
-			'<html><head><style>'.\Catalyst\Email::getCSS($user->getColorHex()).'</style></head><body><div class="container"><div class="section"><h1 class="center header hide-on-small-only">Email Verification</h1><h3 class="center header hide-on-med-and-up">Email Verification</h3></div><div class="section"><p class="flow-text">Thank you for registering with Catalyst!</p><p class="flow-text">Please click the button below to activate your account.</p><div><a href="'.$url.'" class="btn">Verify</a></div><p>Alternatively, use the token <span style="font-weight: 700;">'.$user->getEmailToken().'</span> to verify your email.</p></div></div></body></html>',
+			'<html><head><style>'.\Catalyst\Email::getCss($user->getColorHex()).'</style></head><body><div class="container"><div class="section"><h1 class="center header hide-on-small-only">Email Verification</h1><h3 class="center header hide-on-med-and-up">Email Verification</h3></div><div class="section"><p class="flow-text">Thank you for registering with Catalyst!</p><p class="flow-text">Please click the button below to activate your account.</p><div><a href="'.$url.'" class="btn">Verify</a></div><p>Alternatively, use the token <span style="font-weight: 700;">'.$user->getEmailToken().'</span> to verify your email.</p></div></div></body></html>',
 			implode("\r\n", [
 				"Email Verification",
 				"",
