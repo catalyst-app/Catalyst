@@ -81,8 +81,10 @@ class AutoClosingModalCompletionAction extends CompletionAction {
 		$str .= 'var modalId = '.json_encode(self::PREFIX_ID).'+Date.now().toString();';
 		$str .= '$("body").append(';
 			$str .= '$("<div></div>").attr("id", modalId).addClass("modal").append(';
-				$str .= '$("<h4></h4>").text('.json_encode($this->getContents()).').after(';
-					$str .= '$("<p></p>").text("This box will close in "+'.json_encode($this->getDelay()).'+" seconds.")';
+				$str .= '$("<div></div>").addClass("modal-content").append(';
+					$str .= '$("<h4></h4>").text('.json_encode($this->getContents()).').add(';
+						$str .= '$("<p></p>").text("This box will close in "+'.json_encode($this->getDelay()).'+" seconds.")';
+					$str .= ')';
 				$str .= ')';
 			$str .= ')';
 		$str .= ');';
