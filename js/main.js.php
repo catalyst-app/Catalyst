@@ -62,6 +62,7 @@ var showErrorMessageForCode = function(c) {
 <?php foreach ($errors as $code => $message): ?>
 		case <?= $code ?>:
 			Materialize.toast(<?= json_encode($message) ?>, 4000);
+			break;
 <?php endforeach; ?>
 		default:
 			Materialize.toast("An unknown error occured", 4000);
