@@ -63,10 +63,10 @@ var uploadIndicator = function(f, e) {
 	}
 };
 var updateUploadIndicator = function(f, e) {
-	$("#"+f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
-	$("#"+f+" .determinate").css("width", ((e.loaded*100)/e.total)+"%");
+	$(f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
+	$(f+" .determinate").css("width", ((e.loaded*100)/e.total)+"%");
 	if (e.loaded == e.total) {
-		$("#"+f+" .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
+		$(f+" .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
 	}
 };
 var rgb2hex = function(rgb){
