@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2018 at 01:00 AM
+-- Generation Time: Feb 05, 2018 at 02:26 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -810,15 +810,6 @@ CREATE TABLE `feature_board_comments` (
 --       `feature_board_items` -> `ID`
 --
 
---
--- Dumping data for table `feature_board_comments`
---
-
-INSERT INTO `feature_board_comments` (`ID`, `USER_ID`, `FEATURE_ID`, `BODY`) VALUES(1, 17, 1, 'asdui');
-INSERT INTO `feature_board_comments` (`ID`, `USER_ID`, `FEATURE_ID`, `BODY`) VALUES(2, 17, 1, 'asdui');
-INSERT INTO `feature_board_comments` (`ID`, `USER_ID`, `FEATURE_ID`, `BODY`) VALUES(3, 1, 1, 'abc\r\n');
-INSERT INTO `feature_board_comments` (`ID`, `USER_ID`, `FEATURE_ID`, `BODY`) VALUES(4, 1, 1, 'ajdiofjadsfj');
-
 -- --------------------------------------------------------
 
 --
@@ -883,12 +874,6 @@ CREATE TABLE `feature_board_items` (
 --       `feature_board_groups` -> `INTERNAL_NAME`
 --
 
---
--- Dumping data for table `feature_board_items`
---
-
-INSERT INTO `feature_board_items` (`ID`, `NAME`, `AUTOGEN_URL`, `CREATED_TS`, `AUTHOR_ID`, `STATUS`, `GROUP`, `INTRODUCTION`, `PROPOSAL`, `ACKNOWLEDGEMENT`, `FUTURE_SCOPE`, `DEVELOPER_NOTE`, `ESTIMATED_MANHOURS`) VALUES(1, 'test1', 'ur-l', '2018-01-20 02:08:12', 8, 'PLANNING', 'WRITING', '_intro:+1:_', 'porpost', 'ack', 'scope', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -939,16 +924,6 @@ CREATE TABLE `feature_board_votes` (
 --   `FEATURE_ID`
 --       `feature_board_items` -> `ID`
 --
-
---
--- Dumping data for table `feature_board_votes`
---
-
-INSERT INTO `feature_board_votes` (`ID`, `USER_ID`, `FEATURE_ID`, `VOTE_TYPE`) VALUES(1, 8, 1, 'YES');
-INSERT INTO `feature_board_votes` (`ID`, `USER_ID`, `FEATURE_ID`, `VOTE_TYPE`) VALUES(2, 8, 1, 'YES');
-INSERT INTO `feature_board_votes` (`ID`, `USER_ID`, `FEATURE_ID`, `VOTE_TYPE`) VALUES(3, 31, 1, 'NO');
-INSERT INTO `feature_board_votes` (`ID`, `USER_ID`, `FEATURE_ID`, `VOTE_TYPE`) VALUES(4, 18, 1, 'YES');
-INSERT INTO `feature_board_votes` (`ID`, `USER_ID`, `FEATURE_ID`, `VOTE_TYPE`) VALUES(5, 1, 1, 'YES');
 
 -- --------------------------------------------------------
 
