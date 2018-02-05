@@ -1378,13 +1378,13 @@ ALTER TABLE `user_wishlists`
 -- AUTO_INCREMENT for table `artist_pages`
 --
 ALTER TABLE `artist_pages`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for each artist page', AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID for each artist page';
 
 --
 -- AUTO_INCREMENT for table `artist_social_media`
 --
 ALTER TABLE `artist_social_media`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for each entry', AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for each entry';
 
 --
 -- AUTO_INCREMENT for table `artist_streaming_integrations`
@@ -1396,7 +1396,7 @@ ALTER TABLE `artist_streaming_integrations`
 -- AUTO_INCREMENT for table `characters`
 --
 ALTER TABLE `characters`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the character', AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier of the character';
 
 --
 -- AUTO_INCREMENT for table `character_images`
@@ -1426,31 +1426,31 @@ ALTER TABLE `commission_stages`
 -- AUTO_INCREMENT for table `commission_types`
 --
 ALTER TABLE `commission_types`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commission_type_images`
 --
 ALTER TABLE `commission_type_images`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commission_type_modifiers`
 --
 ALTER TABLE `commission_type_modifiers`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commission_type_payment_options`
 --
 ALTER TABLE `commission_type_payment_options`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commission_type_stages`
 --
 ALTER TABLE `commission_type_stages`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commission_wips`
@@ -1462,19 +1462,19 @@ ALTER TABLE `commission_wips`
 -- AUTO_INCREMENT for table `feature_board_comments`
 --
 ALTER TABLE `feature_board_comments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feature_board_items`
 --
 ALTER TABLE `feature_board_items`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feature_board_votes`
 --
 ALTER TABLE `feature_board_votes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -1486,19 +1486,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_social_media`
 --
 ALTER TABLE `user_social_media`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_wishlists`
 --
 ALTER TABLE `user_wishlists`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
