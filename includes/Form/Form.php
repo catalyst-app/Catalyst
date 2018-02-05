@@ -441,8 +441,8 @@ class Form {
 
 		// success
 		$str .= '.done(function(response) {';
-		$str .= 'console.log(response.responseText);';
-		$str .= 'var data = JSON.parse(response.responseText);';
+		$str .= 'console.log(response);';
+		$str .= 'var data = JSON.parse(response);';
 		$str .= 'Materialize.toast("Success", 4000);';
 		if (!is_null($this->getCompletionAction())) {
 			$str .= $this->getCompletionAction()->getJs();
@@ -451,7 +451,7 @@ class Form {
 
 		// failure
 		$str .= '.fail(function(response) {';
-		$str .= 'console.log(response.responseText);';
+		$str .= 'console.log(response);';
 		$str .= 'var data = JSON.parse(response.responseText);';
 		$str .= 'switch (data.error_code) {';
 		foreach ($this->fields as $field) {
