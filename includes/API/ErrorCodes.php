@@ -2,6 +2,8 @@
 
 namespace Catalyst\API;
 
+use \ReflectionClass;
+
 /**
  * Contains the error messages for all error codes
  */
@@ -31,4 +33,22 @@ class ErrorCodes {
 	const ERR_90002 = 'Invalid email was passed';
 	const ERR_90003 = 'No context was passed';
 	const ERR_90004 = 'An invalid context was passed';
+
+	/**
+	 * Get an associative array of code => message based on class constants
+	 * 
+	 * @return array Associative array, code => message of all codes
+	 */
+	public static function getAssoc() : array {
+		$reflectedClass = new ReflectionClass(__CLASS__);
+		$constants = $reflectedClass->getConstants();
+
+		$result = [];
+		foreach ($constants as $name => $value) {
+			$cutName = str_replace("ERR_", "", $name);
+			$result[(int)$cutName] = $value;
+		}
+
+		return $result;
+	}
 }
