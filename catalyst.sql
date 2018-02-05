@@ -1125,6 +1125,24 @@ CREATE TABLE `user_wishlists` (
 --
 
 --
+-- Indexes for table `api_authorizations`
+--
+ALTER TABLE `api_authorizations`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `ACCESS_TOKEN` (`ACCESS_TOKEN`),
+  ADD KEY `API_ID` (`API_ID`),
+  ADD KEY `USER_ID` (`USER_ID`);
+
+--
+-- Indexes for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAME` (`NAME`),
+  ADD UNIQUE KEY `CLIENT_ID` (`CLIENT_ID`),
+  ADD KEY `USER_ID` (`USER_ID`);
+
+--
 -- Indexes for table `artist_pages`
 --
 ALTER TABLE `artist_pages`
@@ -1373,6 +1391,18 @@ ALTER TABLE `user_wishlists`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `api_authorizations`
+--
+ALTER TABLE `api_authorizations`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `artist_pages`
