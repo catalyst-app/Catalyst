@@ -29,11 +29,15 @@ class FormRepository {
 		$form = new Form();
 
 		$form->setDistinguisher(self::getDistinguisherFromMethodName(__FUNCTION__)); // get-dash-case from camelCase
-		$form->setCompletionAction(null);
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/email_list/");
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
+
+		$completionAction = new AutoClosingModalCompletionAction();
+		$completionAction->setContents("You have been added to the email list!");
+		$completionAction->setDelay(10);
+		$form->setCompletionAction($completionAction);
 
 		$emailField = new EmailField();
 		$emailField->setDistinguisher("email");
