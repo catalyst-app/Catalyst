@@ -41,7 +41,7 @@ echo UniversalFunctions::createHeading("FAQ");
 				</div>
 				<div class="divider hide-on-med-and-up"></div>
 				<div class="section" id="important-definitions">
-					<h4 style="margin-top: -80px; padding-top: 80px;">Important definitions</h4>
+					<h4>Important definitions</h4>
 					
 					<p class="flow-text"><strong>User:</strong> anyone who makes an account on our platform</p>
 					<p class="flow-text"><strong>Character:</strong> a collection of information and images (reference sheets, art, etc.) about a character which can be easily shared with artists</p>
@@ -53,32 +53,32 @@ echo UniversalFunctions::createHeading("FAQ");
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="getting-started">
-					<h4 style="margin-top: -80px; padding-top: 80px;">How do I get started?</h4>
+					<h4>How do I get started?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="rules">
-					<h4 style="margin-top: -80px; padding-top: 80px;">What rules are in place?</h4>
+					<h4>What rules are in place?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="users">
-					<h4 style="margin-top: -80px; padding-top: 80px;">Who can use Catalyst?</h4>
+					<h4>Who can use Catalyst?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="cost">
-					<h4 style="margin-top: -80px; padding-top: 80px;">What does it cost?</h4>
+					<h4>What does it cost?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="difference">
-					<h4 style="margin-top: -80px; padding-top: 80px;">What sets us apart?</h4>
+					<h4>What sets us apart?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="security">
-					<h4 style="margin-top: -80px; padding-top: 80px;">Is my information protected?</h4>
+					<h4>Is my information protected?</h4>
 					
 					<p class="flow-text">We care about your security.  We've seen many similar websites be attacked and lots of important user information breached.  As such, we take extreme precautions about what data we store and how we store it.</p>
 
@@ -128,34 +128,34 @@ echo UniversalFunctions::createHeading("FAQ");
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="suggest">
-					<h4 style="margin-top: -80px; padding-top: 80px;">How can I suggest features?</h4>
+					<h4>How can I suggest features?</h4>
 					
 					<p class="flow-text">Please see our <a href="<?= ROOTDIR ?>FeatureBoard">feature board</a> for more information</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="payment">
-					<h4 style="margin-top: -80px; padding-top: 80px;">How do artists get paid?</h4>
+					<h4>How do artists get paid?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="protect">
-					<h4 style="margin-top: -80px; padding-top: 80px;">How do we protect artists?</h4>
+					<h4>How do we protect artists?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="scam">
-					<h4 style="margin-top: -80px; padding-top: 80px;">What if I get scammed?</h4>
+					<h4>What if I get scammed?</h4>
 					
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="color">
-					<h4 style="margin-top: -80px; padding-top: 80px;">Why can I change the site's colors?</h4>
+					<h4>Why can I change the site's colors?</h4>
 					
 					<p class="flow-text">We believe that you should be able to make our platform your own.  Therefore, you may choose your own color theme which will be seen around the site and when anyone views your profile.  You can customize the colors of characters, user profiles, and artist's pages.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="markdown">
-					<h4 style="margin-top: -80px; padding-top: 80px;">How can I format text?</h4>
+					<h4>How can I format text?</h4>
 					
 					<p class="flow-text">Catalyst uses a modified version of Markdown for formatting.  Please see <a href="<?= ROOTDIR ?>Markdown">this page</a> for help.</p>
 				</div>

@@ -45,7 +45,7 @@ echo UniversalFunctions::createHeading("Markdown");
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="playground">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Playground</h4>
+				<h4>Playground</h4>
 				<p class="flow-text">Feel free to use the box below and see how it will look!  Output will appear&nbsp;<span class="hide-on-med-and-up">below it</span><span class="hide-on-small-only">to the right</span>.</p>
 				<div class="row">
 					<div class="col s12 m6">
@@ -73,7 +73,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="headings">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Headings</h4>
+				<h4>Headings</h4>
 				<p class="flow-text">You may use one to six hash marks (<span class="code">#</span>) at the beginning of a line to denote a heading.</p>
 				<p class="flow-text">A single hash will yield the largest heading, and six will create the smallest.</p>
 				<p class="flow-text">It is recommended to use no less than three due to mobile device limitations.</p>
@@ -117,7 +117,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="basic-formatting">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Basic Formatting</h4>
+				<h4>Basic Formatting</h4>
 				<p class="flow-text">To make your text <strong>bold</strong> place two asterisks (<span class="code">*</span>) around the text you want to embolden. Alternatively, you can use two underscores (<span class="code">_</span>) in place of the asterisks.  You can use this to highlight important information, in a sentence such as payment deadlines, instructions, or small headers.</p>
 				<p class="flow-text">To use <i>italic</i> text, place a single asterisk around the text.  Italics are typically used for emphasis, however to a lesser magnitude than bolding.</p>
 				<p class="flow-text">You can <u>underline</u> text with a single underscore on each side.  This too shows emphasis or, in some cases, titles.</p>
@@ -144,7 +144,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="escaping">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Escaping</h4>
+				<h4>Escaping</h4>
 				<p class="flow-text">Sometimes, you may want to use asterisks and other special characters in your text.  This can cause issues with markdown, as it might think you are trying to format something.  If you experience this, you can place a backslash (<span class="code">\</span>, above the enter key) before the character.</p>
 				<p class="flow-text">In Markdown, multiple line breaks are treated as one.  In order to use multiple line breaks, use a backslash (<span class="code">\</span>) before the newline.</p>
 				<div class="row">
@@ -194,7 +194,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="escaping">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Superscripts</h4>
+				<h4>Superscripts</h4>
 				<p class="flow-text">A superscript is possible too!  To raise your text to the <sup>next <sup>level</sup></sup>, just add a caret (<span class="code">^</span>) around the word or group of letters!</p>
 				<div class="row">
 					<div class="col s12 m6"><div class="code-block"><p>
@@ -217,7 +217,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="dividers">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Dividers</h4>
+				<h4>Dividers</h4>
 				<p class="flow-text">To create a divider in your text, use three hyphens (<span class="code">-</span>).  A divider is a horizontal line across the page which can be used to differentiate between different sections of content.</p>
 				<p>Note: due to the heading also created with 3 hyphens, it is important that there are 2 lines before it.</p>
 				<div class="row">
@@ -245,7 +245,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="links">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Links</h4>
+				<h4>Links</h4>
 				<p class="flow-text">You can create a clickable link with or without a representative title as shown below.</p>
 				<p class="flow-text">On Catalyst, all links are shown in bold, colored text.  This cannot be changed, however you may apply additional formatting such as italics.</p>
 				<div class="row">
@@ -273,7 +273,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="images">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Images</h4>
+				<h4>Images</h4>
 				<p class="flow-text">You may use images in a similar manner to links, prepending it with an exclamation point.  However, images are special: they do not need a title.</p>
 				<p class="flow-text">If you add images, please ensure they are scaled to a decent size, or they may look bad/break your page on mobile browsers.</p>
 				<div class="row">
@@ -295,7 +295,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="lists">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Lists</h4>
+				<h4>Lists</h4>
 				<p class="flow-text">Lists make things neat!</p>
 				<p class="flow-text"><strong>Ordered Lists</strong> can begin with any number, however must increment by one. Each line of text must be separated by a newline, and the number must be the first thing on the line.</p>
 				<div class="row">
@@ -386,7 +386,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="checklists">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Checklists</h4>
+				<h4>Checklists</h4>
 				<p class="flow-text">To show checkboxes, for example to show that you have or have not completed something/reached a goal, use the following bracket syntax:</p>
 				<p class="flow-text">For an empty checkbox, start your line with a pair of brackets containing only a space: <span class="code">[ ]</span>.  For a checked checkbox, mark it with an x: <span class="code">[x]</span>.</p>
 				<p class="flow-text">These can be parts of lists, tables, and any other features we support!</p>
@@ -411,7 +411,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="tables">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Tables</h4>
+				<h4>Tables</h4>
 				<p class="flow-text">Tables are useful for presenting information in an organized way.</p>
 				<p class="flow-text">The markdown syntax for them may seem a bit intimidating, but it's not too complicated. Use vertical bars (<span class="code">|</span>, above the enter key, <strong>not a capital <span class="code">I</span></strong>) to separate your columns.</p>
 				<p class="flow-text">Your header row should have at least 3 hyphens in the next row (no other text!), and then you just a new line for a new row. Colons can be used to customize alignment. Note that markdown works the same in tables, so feel free to bold, italic, strikethrough, etc.</p>
@@ -459,7 +459,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="emoji">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Emoji</h4>
+				<h4>Emoji</h4>
 				<p class="flow-text">Apparently these are useful for something?  Anyways, we support them.</p>
 				<p class="flow-text">For our emoji, we use a limited set of <a href="https://github.com/twitter/twemoji">twemoji</a>.  To see all the emoji we support, go <a href="Emoji">here</a>.</p>
 				<p class="flow-text">To use emoji, place a colon (<span class="code">:</span>) on each side of the identifier.  The list of identifiers are <a href="Emoji">here</a>.</p>
@@ -480,7 +480,7 @@ MD
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="containers">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Containers</h4>
+				<h4>Containers</h4>
 				<p class="flow-text">We have created several custom containers for your use.  These are wrapped in at least three colons (<span class="code">:</span>) above and below the content.  The top set should have a token following it (i.e. <span class="code">::: token</span>).</p>
 				<p class="flow-text">To nest, the outermost levels must have more colons than the insides.  For example, if you had a parent and child, the parent would use four colons and the child three.</p>
 				<p class="flow-text"><strong>Collapsible boxes</strong> provide a way to create "drawers" of information, either opened or closed (default).</p>

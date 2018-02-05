@@ -32,7 +32,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 			</div>
 			<div class="divider hide-on-med-and-up"></div>
 			<div class="section" id="intro">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Introduction</h4>
+				<h4>Introduction</h4>
 				<p class="flow-text">This page tells you how to use Catalyst's API to do awesome things!</p>
 				<p class="flow-text">Catalyst's API is based around a HTTPS/REST API, and operates through GET and POST operations.  Your client must support both of these methods as well as TLS v1.2.</p>
 				<p class="flow-text">All API endpoints are based off of our base URL: <span class="code">https://catalystapp.co/api/</span>.  From there, endpoints are separated by scope (user, artist, commission, etc.) then method (create, delete, reorder, etc.), then further parameters if required.</p>
@@ -56,7 +56,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="keys">
-				<h4 style="margin-top: -80px; padding-top: 80px;">API Keys</h4>
+				<h4>API Keys</h4>
 				<p class="flow-text">In order to use our API, contact us at <span class="code">api@catalystapp.co</span> for credentials.  Please include your Catalyst username, name of your app, and a description of what you intend to do.</p>
 				<p class="flow-text">Requests may take up to one week to be processed.</p>
 				<p class="flow-text">Upon creation of your app, you will be assigned a set of four tokens: a client ID which identifies your app, a client secret which verifies ownership of the app, an access token which authenticates a user (the one we provide will be your own), and an access secret (additional verification)</p>
@@ -79,7 +79,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="response-codes">
-				<h4 style="margin-top: -80px; padding-top: 80px;">Response Codes</h4>
+				<h4>Response Codes</h4>
 				<p class="flow-text">Our API can return a lot of different response codes, depending on what happened.</p>
 				<ul class="browser-default">
 					<li class="flow-text"><strong>200 (OK)</strong>: The request was successfully completed.</li>
@@ -102,7 +102,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 			</div>
 			<div class="divider"></div>
 			<div class="section" id="response-codes">
-				<h4 style="margin-top: -80px; padding-top: 80px;">User: get</h4>
+				<h4>User: get</h4>
 				<p class="flow-text code">https://catalystapp.co/api/user/get/</p>
 				<p class="flow-text">Gets either the current user or one specified by their username</p>
 				<p class="flow-text"><strong>GET</strong> Parameters</p>

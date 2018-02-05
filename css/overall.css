@@ -16,6 +16,11 @@ tr.feature-item {
 	cursor: pointer;
 }
 
+div.section > h4:first-child {
+	margin-top: -80px;
+	padding-top: 80px;
+}
+
 .toggle-btn.off {
 	background-color: #DFDFDF !important;
 	-webkit-box-shadow: none;
