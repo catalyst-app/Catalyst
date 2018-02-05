@@ -854,7 +854,7 @@ CREATE TABLE `feature_board_items` (
   `AUTOGEN_URL` varchar(64) CHARACTER SET ascii NOT NULL,
   `CREATED_TS` datetime NOT NULL,
   `AUTHOR_ID` int(11) UNSIGNED DEFAULT NULL,
-  `STATUS` varchar(255) CHARACTER SET ascii NOT NULL,
+  `STATUS` varchar(255) CHARACTER SET ascii NOT NULL DEFAULT 'AWAITING_REVIEW',
   `GROUP` varchar(255) CHARACTER SET ascii NOT NULL,
   `INTRODUCTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `PROPOSAL` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
