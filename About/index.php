@@ -512,5 +512,3 @@ echo UniversalFunctions::createHeading("About Us");
 		</div>
 <?php
 require_once Values::FOOTER_INC;
- 
- 
