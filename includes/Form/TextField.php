@@ -126,6 +126,14 @@ class TextField extends Field {
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
 		}
+		if ($this->getMaxLength() > 0) {
+			$str .= 'if (';
+			$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
+			$str .= ') {';
+			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
+			$str .= Form::CANCEL_SUBMISSION_JS;
+			$str .= '}';
+		}
 		$str .= 'if (';
 		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
 		$str .= ') {';
@@ -159,6 +167,12 @@ class TextField extends Field {
 			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
 				HTTPCode::set(400);
 				Response::sendErrorResponse($this->getMissingErrorCode(), $this->getErrorMessage($this->getMissingErrorCode()));
+			}
+		}
+		if ($this->getMaxLength() > 0) {
+			if (strlen($_REQUEST[$this->getDistinguisher()]) > $this->getMaxLength()) {
+				HTTPCode::set(400);
+				Response::sendErrorResponse($this->getInvalidErrorCode(), $this->getErrorMessage($this->getInvalidErrorCode()));
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
