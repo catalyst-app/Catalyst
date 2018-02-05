@@ -6,8 +6,11 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Form\FormRepository;
+use \Catalyst\API\ErrorCodes;
 
 $forms = FormRepository::getAllForms();
+
+$errors = ErrorCodes::getAssoc();
 
 
 use \Catalyst\Color;
@@ -53,6 +56,16 @@ var markCaptchaInvalid = function(a) {
 };
 var markCaptchaValid = function() {
 	$(".g-recaptcha").addClass("valid").removeClass("invalid");
+};
+var showErrorMessageForCode = function(c) {
+	switch (c) {
+<?php foreach ($errors as $code => $message): ?>
+		case <?= $code ?>:
+			Materialize.toast(<?= json_encode($message) ?>, 4000);
+<?php endforeach; ?>
+		default:
+			Materialize.toast("An unknown error occured", 4000);
+	}
 };
 // deprecated
 var uploadIndicator = function(f, e) {
