@@ -35,7 +35,10 @@ if (!session_id()) {
 
 // remove pending_user if not actively logging in
 if (User::isPending2FA()) {
-	if (strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/api/internal/totp_login/index.php")) !== 0 && strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/Login/TOTP/index.php")) !== 0) {
+	if (strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/api/internal/totp_login/index.php")) !== 0 && 
+		strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/Login/TOTP/index.php")) !== 0 &&
+		strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/css/color.css.php")) !== 0 &&
+		strpos(strrev($_SERVER["SCRIPT_NAME"]), strrev("/js/main.js.php")) !== 0) {
 		unset($_SESSION["pending_user"]);
 	}
 }
