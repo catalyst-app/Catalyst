@@ -24,6 +24,23 @@ class CaptchaField extends AbstractField {
 	protected $secretKey = "";
 
 	/**
+	 * Override because CAPTCHA's do not have labels
+	 */
+	public function getLabel() : string {
+		throw new InvalidArgumentException("CAPTCHAs don't use labels");
+	}
+
+	/**
+	 * Override because CAPTCHA's do not have labels
+	 */
+	public function setLabel(string $label) : void {
+		if (empty($label)) {
+			return; // constructor defaults
+		}
+		throw new InvalidArgumentException("CAPTCHAs don't use labels");
+	}
+
+	/**
 	 * Get the current site key, or debug/testing one if the site is in development mode
 	 * 
 	 * @return string Site key
