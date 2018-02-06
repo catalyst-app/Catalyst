@@ -27,9 +27,6 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Login");
 
 if (User::isLoggedIn()) {
-	if (User::isPending2FA()) {
-		unset($_SESSION["pending_user"]);
-	}
 ?>
 			<p class="flow-text">You are already logged in.</p>
 			<p class="flow-text">Go to your <a href="<?= ROOTDIR ?>Dashboard">dashboard</a>?</p>

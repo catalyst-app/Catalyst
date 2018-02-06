@@ -14,10 +14,6 @@ Endpoint::init(true, 2);
 
 FormRepository::getLoginForm()->checkServerSide();
 
-if (User::isPending2FA()) {
-	unset($_SESSION["pending_user"]);
-}
-
 $query = new SelectQuery();
 $query->setTable(Tables::USERS);
 
