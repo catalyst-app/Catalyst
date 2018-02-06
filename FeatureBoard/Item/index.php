@@ -8,8 +8,7 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\Groups;
 use \Catalyst\Database\FeatureBoard\Item;
 use \Catalyst\Form\FormHTML;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 if (!isset($_GET["q"])) {
