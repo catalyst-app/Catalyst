@@ -86,6 +86,10 @@ class FormRepository {
 		$completionAction->setRedirectUrl("Dashboard");
 		$form->setCompletionAction($completionAction);
 
+		$totpAction = new ConcreteRedirectCompletionAction();
+		$totpAction->setRedirectUrl("Login/TOTP");
+		$form->addAdditionalCases(90110, $totpAction);
+
 		$usernameField = new TextField();
 		$usernameField->setDistinguisher("username");
 		$usernameField->setLabel("Username");
