@@ -15,3 +15,13 @@
 - **90002** - Invalid email was passed
 - **90003** - No context was passed
 - **90004** - An invalid context was passed
+
+#### Login
+
+- **90101** - No username was passed
+- **90102** - Invalid username
+- **90103** - No password was passed
+- **90104** - An incorrect password was passed
+- **90105** - This account has been suspended
+- **90106** - This account has been disabled
+- **90107** - TOTP Challenge required
