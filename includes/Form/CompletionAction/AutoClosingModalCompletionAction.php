@@ -49,7 +49,7 @@ class AutoClosingModalCompletionAction extends AbstractCompletionAction {
 	 * 
 	 * @param string $contents New contents to show in modal
 	 */
-	public function setContents($contents) : void {
+	public function setContents(string $contents) : void {
 		$this->contents = $contents;
 	}
 
@@ -67,7 +67,7 @@ class AutoClosingModalCompletionAction extends AbstractCompletionAction {
 	 * 
 	 * @param int $delay Number of seconds until the modal closes
 	 */
-	public function setDelay($delay) : void {
+	public function setDelay(int $delay) : void {
 		$this->delay = $delay;
 	}
 
