@@ -68,7 +68,7 @@ Tumblr: https://catalystapp-co.tumblr.com/
 
 Facebook: https://facebook.com/catalystapp.co
 
-GitHub: https://github.com/smileytechguy/Catalyst
+GitHub: https://github.com/catalyst-app/Catalyst
 
 Email: catalyst@catalystapp.co
 
@@ -146,7 +146,7 @@ Email: catalyst@catalystapp.co
 
 - [x] Basic class restructure of the base namespace
 - [x] Info website setup
-- [x] Remove secrets and publicise repo: https://github.com/smileytechguy/Catalyst
+- [x] Remove secrets and publicise repo: https://github.com/catalyst-app/Catalyst
 - [x] Resolve trademark issues and get a new name
 - [x] ~~Find~~ Build a markdown editor
 
