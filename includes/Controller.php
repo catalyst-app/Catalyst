@@ -91,89 +91,101 @@ class Controller {
 	 * @param int $errline Line the error occured on
 	 */
 	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
-		$trace = self::getTrace();
-		Email::sendEmail(
-			[["error_logs@catalystapp.co","Error Log"]],
-			$subj." occured in ".$errfile." at ".$errline.": ".$errstr,
-			'<p><strong>Error code:</strong> '.$errco.' ('.$errno.')</p>'.
-			'<p><strong>Error string:</strong> '.htmlspecialchars($errstr).'</p>'.
-			'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
-			'<p><strong>Error line:</strong> '.$errline.'</p>'.
-			'<p><strong>Trace:</strong></p>'.
-			'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
-			'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
-			"Error code: ".$errco." (".$errno.")\r\n\r\n".
-			"Error string: ".$errstr."\r\n\r\n".
-			"Error file: ".$errfile."\r\n\r\n".
-			"Error line: ".$errline."\r\n\r\n".
-			"Trace: \r\n\r\n".
-			implode("\r\n\r\n",$trace)."\r\n\r\n".
-			"Dump: ".serialize([$_SERVER,$_SESSION]),
-			Email::ERROR_LOG_EMAIL,
-			Email::ERROR_LOG_PASSWORD
-		);
-		if ($_SERVER["SERVER_NAME"] == "localhost") {
-			return; // dont send to discord/telegram when on local
-		}
-		$trace = self::getTrace(false);
-		$traceEmbeds = [];
-		foreach ($trace as $row) {
-			$traceEmbeds[] = [
-				"name" => "Trace:",
-				"value" => $row
-			];
-		}
 		ob_start();
-		try {
-			file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BUG_WEBHOOK_TOKEN, false, stream_context_create([
-				"http" => [
-					"method" => "POST",
-					"ignore_errors" => true,
-					"content" => json_encode([
-						"content" => $subj." occured",
-						"embeds" => [
-							[
-								"title" => "An error occured",
-								"fields" => array_merge([
-									[
-										"name" => 'Error code',
-										"value" => $errco.' ('.$errno.')'
-									],
-									[
-										"name" => 'Error string',
-										"value" => $errstr
-									],
-									[
-										"name" => 'Error file',
-										"value" => basename($errfile)
-									],
-									[
-										"name" => 'Error line',
-										"value" => $errline
-									],
-								], $traceEmbeds),
-								"description" => "Please see the embed fields"
-							]
-						]
-					])
-				]
-			]));
-			$telegramStr = $subj." occured\n\n";
-			$telegramStr .= "<b>Code:</b> ".$errco." (".$errno.")\n";
-			$telegramStr .= "<b>Error:</b> ".$errstr."\n";
-			$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
-			$telegramStr .= "<b>Line:</b> ".$errline."\n";
-			$telegramStr .= "<b>Trace:</b>\n";
+		$destinations = [];
+		if ($_SERVER["SERVER_NAME"] == "localhost") {
+			$destinations = ["discord","telegram"];
+		} else {
+			$destinations = ["discord","email","telegram"];
+		}
+		if (in_array("email", $destinations)) {
+			$trace = self::getTrace();
+			Email::sendEmail(
+				[["error_logs@catalystapp.co","Error Log"]],
+				$subj." occured in ".$errfile." at ".$errline.": ".$errstr,
+				'<p><strong>Error code:</strong> '.$errco.' ('.$errno.')</p>'.
+				'<p><strong>Error string:</strong> '.htmlspecialchars($errstr).'</p>'.
+				'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
+				'<p><strong>Error line:</strong> '.$errline.'</p>'.
+				'<p><strong>Trace:</strong></p>'.
+				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
+				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
+				"Error code: ".$errco." (".$errno.")\r\n\r\n".
+				"Error string: ".$errstr."\r\n\r\n".
+				"Error file: ".$errfile."\r\n\r\n".
+				"Error line: ".$errline."\r\n\r\n".
+				"Trace: \r\n\r\n".
+				implode("\r\n\r\n",$trace)."\r\n\r\n".
+				"Dump: ".serialize([$_SERVER,$_SESSION]),
+				Email::ERROR_LOG_EMAIL,
+				Email::ERROR_LOG_PASSWORD
+			);
+		}
+		if (in_array("discord", $destinations)) {
+			$trace = self::getTrace(false);
+			$traceEmbeds = [];
 			foreach ($trace as $row) {
-				$telegramStr .= $row .= "\n";
+				$traceEmbeds[] = [
+					"name" => "Trace:",
+					"value" => $row
+				];
 			}
-			file_get_contents("https://api.telegram.org/bot".Secrets::TELEGRAM_TOKEN."/sendMessage?chat_id=".Secrets::TELEGRAM_CHAT."&disable_notification=true&parse_mode=HTML&text=".urlencode($telegramStr), false, stream_context_create([
-				"http" => [
-					"ignore_errors" => true,
-				]
-			]));
-		} catch (Exception $e) {
-			// discord or telegram could not be reached
+			try {
+				file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BUG_WEBHOOK_TOKEN, false, stream_context_create([
+					"http" => [
+						"method" => "POST",
+						"ignore_errors" => true,
+						"content" => json_encode([
+							"content" => $subj." occured",
+							"embeds" => [
+								[
+									"title" => "An error occured",
+									"fields" => array_merge([
+										[
+											"name" => 'Error code',
+											"value" => $errco.' ('.$errno.')'
+										],
+										[
+											"name" => 'Error string',
+											"value" => $errstr
+										],
+										[
+											"name" => 'Error file',
+											"value" => basename($errfile)
+										],
+										[
+											"name" => 'Error line',
+											"value" => $errline
+										],
+									], $traceEmbeds),
+									"description" => "Please see the embed fields"
+								]
+							]
+						])
+					]
+				]));
+			} catch (Exception $e) {} // couldnt reach discord
+		}
+		if (in_array("telegram", $destinations)) {
+			try {
+				$trace = self::getTrace(false);
+				$telegramStr = $subj." occured\n\n";
+				$telegramStr .= "<b>Code:</b> ".$errco." (".$errno.")\n";
+				$telegramStr .= "<b>Error:</b> ".$errstr."\n";
+				$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
+				$telegramStr .= "<b>Line:</b> ".$errline."\n";
+				$telegramStr .= "<b>Trace:</b>\n";
+				foreach ($trace as $row) {
+					$telegramStr .= $row .= "\n";
+				}
+				file_get_contents("https://api.telegram.org/bot".Secrets::TELEGRAM_TOKEN."/sendMessage?chat_id=".Secrets::TELEGRAM_CHAT."&disable_notification=true&parse_mode=HTML&text=".urlencode($telegramStr), false, stream_context_create([
+					"http" => [
+						"ignore_errors" => true,
+					]
+				]));
+			} catch (Exception $e) {
+				// discord or telegram could not be reached
+			}
 		}
 		ob_end_clean();
 	}
