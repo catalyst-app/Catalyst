@@ -37,16 +37,29 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="section" id="what-we-do">
 					<h4>What We Do</h4>
 					
-					<p class="flow-text">We strive to simplify the complex process of commissioning for both the artist and the customer.  We allow for artists and clients to easily connect and find each other on our platform.  We do this through easy listing and searching of artist's information, allowing the customer to find <i>exactly</i> what they want and who they want to commission.  Next, we provide an easy-to-use system to track these commissions, simplifying and improving the whole process and allowing both sides to focus on what matters.</p>
-					<p class="flow-text">Additionally, we offer other services such as character management, a messaging system, artist reviews, and much more.</p>
-					<p class="flow-text">Our name, Catalyst, comes from its definition.  Merriam-Webster defines a catalyst as "an agent that provokes or speeds significant change or action," and that is what we do to commissions.  We facilitate the whole process, making it easier, faster, and more enjoyable.</p>
-					<p class="flow-text">We stand apart from the competition for several reasons, primarily:</p>
+					<p class="flow-text">Hello and welcome to Catalyst!</p>
+					<p class="flow-text">We strive to simplify the often complex and difficult process of commissioning, for both the artist and customer!</p>
+					<p class="flow-text">Our site allows for artists and clients to easily connect and find each other on our platform!</p>
+					<p class="flow-text">We aim to be as inclusive of all forms of art - be it a picture, writing, sculpting or crafting - Catalyst has a place for artists of all kinds, genres, and backgrounds!</p>
+					<p class="flow-text">Through easy listing and searching of artists' information, the customer can find exactly what they want and who they want to commission and how much it will cost, without having to wade through hundreds of feeds.</p>
+					<p class="flow-text">Our system allows for an in-depth customization of your commission as well, keeping it simple yet feature-rich!  Some describe it like ordering a pizza with custom toppings: choose what you want, how you want it, and get an estimate of how much it'll be!</p>
+					<p class="flow-text">Have you ever placed a commission and are wondering how far the artist is?  We have a system where artists can mark individual stages (sketching, coloring, etc.) as "Completed", as well as set deadlines, allowing you to check your commission's status without having to message them each time, letting the artist focus on their work without distraction!</p>
+					<p class="flow-text">Another defining feature of Catalyst is the lack of most social-media aspects.  While communicating with the artist can be done, it lacks the usual galleries, journal and comment features.  Other sites are made for social media - so let them handle that, and let us focus on what we do best: simplifying commissions.</p>
+					<p class="flow-text">There is a ton of additional, great features, some of them being:</p>
 					<ul class="browser-default">
-						<li class="flow-text">Our easy to use and powerful search system - no more unpredictable tags</li>
-						<li class="flow-text">A responsive, mobile-friendly design - built for the 21<sup>st</sup> century</li>
-						<li class="flow-text"><strong>No fees or cuts</strong> - you control your own money</li>
-						<li class="flow-text">And so much more!</li>
+						<li class="flow-text">Character storages!</li>
+						<p class="flow-text no-margin">No more re-uploading ref-sheets, or having to send tons of refs!</p>
+						<p class="flow-text no-top-margin">Had something drawn by an artist previously? You can upload it and comment on what might deviate from the official ref, on what you think has turned out great, or things you want other artists to focus on, too!</p>
+						<li class="flow-text">Commission tracking</li>
+						<li class="flow-text">Wish-Lists!</li>
+						<p class="flow-text no-top-margin">Want to commission someone, but don't have the funds yet? - No worries! Put them on your wish-list so you'll remember later!</p>
+						<li class="flow-text">No Charges, fees or cuts of any kind!</li>
+						<p class="flow-text no-top-margin">Catalyst is entirely free to use by both the artist and customer!</p>
+						<li class="flow-text">User-powered</li>
+						<p class="flow-text no-top-margin">We are powered by our community!  We make it easy for members of the community to share ideas for improvements, new features, etc!  We value your input!</p>
 					</ul>
+					<p class="flow-text">We love to hear all your ideas, so please, don't hesitate to share them with us!  You can find us at any of the social media platforms listed below!</p>
+					<p>This text was originally written by Naahva on Telegram - huge thanks to him!</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="social-media">
