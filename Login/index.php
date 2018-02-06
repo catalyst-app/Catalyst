@@ -27,7 +27,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Login");
 
 if (User::isLoggedIn()) {
-	if (Login::pending2FA()) {
+	if (User::isPending2FA()) {
 		unset($_SESSION["pending_user"]);
 	}
 ?>
