@@ -71,9 +71,9 @@ echo UniversalFunctions::createHeading("About Us");
 								<i class="large material-icons">mail</i>
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst@catalystapp.co</h5></span>
 							</a>
-							<a href="https://github.com/smileytechguy/Catalyst" class="black-text center col s12">
+							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">smileytechguy/Catalyst</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst-app/Catalyst</h5></span>
 							</a>
 							<a href="https://twitter.com/catalystapp_co" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
@@ -147,9 +147,9 @@ echo UniversalFunctions::createHeading("About Us");
 								<i class="large material-icons">mail</i>
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst@catalystapp.co</h5></span>
 							</a>
-							<a href="https://github.com/smileytechguy/Catalyst" class="black-text center col s12">
+							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">smileytechguy/Catalyst</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst-app/Catalyst</h5></span>
 							</a>
 							<a href="https://twitter.com/catalystapp_co" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/tw_logo.png" style="width: 6rem;">
