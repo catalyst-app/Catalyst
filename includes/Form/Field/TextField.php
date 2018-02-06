@@ -2,10 +2,7 @@
 
 namespace Catalyst\Form\Field;
 
-use \Catalyst\API\Response;
 use \Catalyst\Form\Form;
-use \Catalyst\HTTPCode;
-use \LogicException;
 
 /**
  * Represents a text field
