@@ -46,6 +46,12 @@ class ErrorCodes {
 	const ERR_90109 = 'This account has been deactivated';
 	const ERR_90110 = 'TOTP Challenge required';
 
+	// totp login
+	const ERR_90201 = 'There are no active TOTP logins';
+	const ERR_90202 = 'No code was passed';
+	const ERR_90203 = 'An invalid code was passed';
+	const ERR_90204 = 'The code is invalid';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
