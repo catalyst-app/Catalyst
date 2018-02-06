@@ -25,6 +25,8 @@ class Controller {
 			if (file_exists(__DIR__.DIRECTORY_SEPARATOR.$toPath)) {
 				require_once __DIR__.DIRECTORY_SEPARATOR.$toPath;
 			}
+		} elseif ($name == 'QRcode') {
+			require_once __DIR__.DIRECTORY_SEPARATOR."phpqrcode.php";
 		}
 	}
 
