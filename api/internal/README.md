@@ -20,10 +20,11 @@
 
 - **90101** - No username was passed
 - **90102** - Invalid username
-- **90103** - No password was passed
-- **90104** - An incorrect password was passed
-- **90105** - No captcha response was sent
-- **90106** - An invalid captcha response was sent
-- **90107** - This account has been suspended
-- **90108** - This account has been disabled
-- **90109** - TOTP Challenge required
+- **90103** - The username does not exist
+- **90104** - No password was passed
+- **90105** - An incorrect password was passed
+- **90106** - No captcha response was sent
+- **90107** - An invalid captcha response was sent
+- **90108** - This account has been suspended
+- **90109** - This account has been deactivated
+- **90110** - TOTP Challenge required
