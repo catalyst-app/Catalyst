@@ -2,6 +2,8 @@
 
 namespace Catalyst\User;
 
+use \InvalidArgumentException;
+
 /**
  * Handle TOTP-related things
  */
@@ -46,8 +48,13 @@ class TOTP {
 
 		$hashCharacters = str_split($hash,2);
 
+		$hmacResult = [];
+
 		for ($j=0; $j<count($hashCharacters); $j++) {
 			$hmacResult[]=hexdec($hashCharacters[$j]);
+		}
+		if (count($hmacResult) !== 20) {
+			throw new InvalidArgumentException("Invalid hash passed to oathTruncate");
 		}
 
 		$offset = $hmacResult[19] & 0xf;
