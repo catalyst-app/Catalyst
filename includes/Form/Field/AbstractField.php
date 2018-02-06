@@ -1,14 +1,15 @@
 <?php
 
-namespace Catalyst\Form;
+namespace Catalyst\Form\Field;
 
+use \Catalyst\Form\Form;
 use \LogicException;
 
 /**
  * Represents a form's field
  * @abstract
  */
-abstract class Field {
+abstract class AbstractField {
 	/**
 	 * internal name for the field
 	 * 
@@ -57,7 +58,7 @@ abstract class Field {
 	/**
 	 * Additional check for the field
 	 * 
-	 * Must take an argument $field of type Field, callable is responsible for returning errors.
+	 * Must take an argument $field of type AbstractField, callable is responsible for returning errors.
 	 * 
 	 * @var callable|null
 	 */
@@ -73,7 +74,7 @@ abstract class Field {
 	protected $form = null;
 
 	/**
-	 * Construct a Field object
+	 * Construct a AbstractField object
 	 * 
 	 * @param string $distinguisher The internal name of the field
 	 * @param string $label The field's label
@@ -273,7 +274,7 @@ abstract class Field {
 	}
 
 	/**
-	 * Get the Form associated with the Field
+	 * Get the Form associated with the AbstractField
 	 * 
 	 * @return Form the associated Form
 	 */
@@ -285,7 +286,7 @@ abstract class Field {
 	}
 
 	/**
-	 * Set the Form associated with the Field
+	 * Set the Form associated with the AbstractField
 	 * 
 	 * @param Form $form the Form to associate
 	 */
@@ -300,6 +301,22 @@ abstract class Field {
 	 */
 	public function getId() : string {
 		return $this->getForm()->getDistinguisher()."-input-".$this->getDistinguisher();
+	}
+
+	/**
+	 * Throw an error for a missing field
+	 */
+	protected function throwMissingError() : void {
+		HTTPCode::set(400);
+		Response::sendErrorResponse($this->getMissingErrorCode(), $this->getErrorMessage($this->getMissingErrorCode()));
+	}
+
+	/**
+	 * Throws an error for an invalid field
+	 */
+	protected function throwInvalidError() : void {
+		HTTPCode::set(400);
+		Response::sendErrorResponse($this->getInvalidErrorCode(), $this->getErrorMessage($this->getInvalidErrorCode()));
 	}
 
 	/**
