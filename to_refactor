@@ -94,7 +94,6 @@
 ./includes/User/User.php
 ./index.php
 ./js/main.js.php
-./Login/handler.php
 ./Login/index.php
 ./Login/TOTP/handler.php
 ./Login/TOTP/index.php
