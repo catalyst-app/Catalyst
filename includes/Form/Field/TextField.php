@@ -158,9 +158,6 @@ class TextField extends AbstractField {
 	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
 	 */
 	public function checkServerSide() : void {
-		if (!is_null($this->getAdditionalCheck())) {
-			$this->getAdditionalCheck()($this);
-		}
 		if ($this->isRequired()) {
 			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
 				$this->throwMissingError();
