@@ -160,7 +160,7 @@ class UniversalFunctions {
 		]);
 	}
 	
-	public static function renderImageCardWithRibbon(string $filename, bool $nsfw, string $title, string $caption, string $link, string $ribbon, array $ribbonColor) : string {
+	public static function renderImageCardWithRibbon(string $filename, bool $nsfw, string $title, string $caption, string $link, string $ribbon, string $ribbonColor) : string {
 		if ($nsfw && (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw())) {
 			return self::renderImageCard(ROOTDIR.'img/nsfw.png', false, $title, $caption, $link);
 		}
@@ -176,7 +176,7 @@ class UniversalFunctions {
 		if (!file_exists($filename)) {
 			return implode("", [
 				'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
-				'<div class="ribbon" style="background-color: #'.$ribbonColor["hex"].'">'.$ribbon.'</div>',
+				'<div class="ribbon" style="background-color: #'.$ribbonColor.'">'.$ribbon.'</div>',
 				'<div class="card-image">',
 				'</div>',
 				(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
@@ -188,7 +188,7 @@ class UniversalFunctions {
 		}
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
-			'<div class="ribbon" style="background-color: #'.$ribbonColor["hex"].'">'.$ribbon.'</div>',
+			'<div class="ribbon" style="background-color: #'.$ribbonColor.'">'.$ribbon.'</div>',
 			'<div class="card-image">',
 			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',
