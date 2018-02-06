@@ -95,16 +95,19 @@ class FormRepository {
 		$usernameField->setMissingErrorCode(90101);
 		$usernameField->addError(90102, ErrorCodes::ERR_90102);
 		$usernameField->setInvalidErrorCode(90102);
+		$usernameField->addError(90103, ErrorCodes::ERR_90103);
+		$usernameField->addError(90108, ErrorCodes::ERR_90108);
+		$usernameField->addError(90109, ErrorCodes::ERR_90109);
 		$form->addField($usernameField);
 
 		$passwordField = new PasswordField();
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
-		$passwordField->addError(90103, ErrorCodes::ERR_90103);
-		$passwordField->setMissingErrorCode(90103);
 		$passwordField->addError(90104, ErrorCodes::ERR_90104);
-		$passwordField->setInvalidErrorCode(90104);
+		$passwordField->setMissingErrorCode(90104);
+		$passwordField->addError(90105, ErrorCodes::ERR_90105);
+		$passwordField->setInvalidErrorCode(90105);
 		$form->addField($passwordField);
 
 		$captchaField = new CaptchaField();
@@ -112,10 +115,10 @@ class FormRepository {
 		$captchaField->setRequired(true);
 		$captchaField->setSiteKey("6LfGBUEUAAAAAIC4spvBe8kIKhQlU_JsAVuTfnid");
 		$captchaField->setSecretKey(Secrets::LOGIN_CAPTCHA_SECRET);
-		$captchaField->addError(90105, ErrorCodes::ERR_90105);
-		$captchaField->setMissingErrorCode(90105);
 		$captchaField->addError(90106, ErrorCodes::ERR_90106);
-		$captchaField->setInvalidErrorCode(90106);
+		$captchaField->setMissingErrorCode(90106);
+		$captchaField->addError(90107, ErrorCodes::ERR_90107);
+		$captchaField->setInvalidErrorCode(90107);
 		$form->addField($captchaField);
 
 		return $form;
