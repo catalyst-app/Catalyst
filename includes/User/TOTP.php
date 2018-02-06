@@ -39,9 +39,9 @@ class TOTP {
 	 * modified from https://github.com/Voronenko/PHPOTP/
 	 * 
 	 * @param string $hash String to truncate
-	 * @return string Truncated hash (to 6 characters)
+	 * @return int Truncated token from hash
 	 */
-	public static function oathTruncate(string $hash) : string {
+	public static function oathTruncate(string $hash) : int {
 		$result=""; 
 
 		$hashCharacters = str_split($hash,2);
