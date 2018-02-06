@@ -63,9 +63,9 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<p class="flow-text">All requests to our API must contain the following headers:</p>
 				<ul class="browser-default">
 					<li class="flow-text"><strong>Client</strong>: A string which contains your client ID and secret, separated by a comma.</li>
-					<p><strong>Example: </strong><span class="code">Client: v8ayeztxskdm8x0sm,xm0xzvm3jncdjsm1iejasjkfv8mkktbyrmzakegcwnc9pmw107fbmy3zbwls</span></p>
+					<p class="no-top-margin"><strong>Example: </strong><span class="code">Client: v8ayeztxskdm8x0sm,xm0xzvm3jncdjsm1iejasjkfv8mkktbyrmzakegcwnc9pmw107fbmy3zbwls</span></p>
 					<li class="flow-text"><strong>User</strong>: A string which contains your user's access token and secret, separated by a comma.</li>
-					<p><strong>Example: </strong><span class="code">User: 4yt43e1wbgzt1397wcbpv249v51vroh2doc8uhte,2s9wc0nr9d7z17hh6943d66e5br06pnrpt6f3noz42mc9vsep43rg7nf7xai</span></p>
+					<p class="no-top-margin"><strong>Example: </strong><span class="code">User: 4yt43e1wbgzt1397wcbpv249v51vroh2doc8uhte,2s9wc0nr9d7z17hh6943d66e5br06pnrpt6f3noz42mc9vsep43rg7nf7xai</span></p>
 				</ul>
 				<p class="flow-text">Error codes</p>
 				<ul class="browser-default">
