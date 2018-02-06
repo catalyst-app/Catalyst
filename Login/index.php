@@ -4,10 +4,9 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\User\Login;
-use \Catalyst\Form\FormHTML;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Form\FormRepository;
+use \Catalyst\HTTPCode;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::LOGIN[0]);
@@ -19,19 +18,24 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (User::isLoggedIn()) {
+	HTTPCode::set(401);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Login");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (call_user_func(...Login::getFormStructure()[0]["auth"][0])) {
-	echo call_user_func(Login::getFormStructure()[0]["auth"][1]);
-} else {
+if (User::isLoggedIn()) {
 	if (Login::pending2FA()) {
 		unset($_SESSION["pending_user"]);
 	}
-	echo FormHTML::generateForm(Login::getFormStructure());
+?>
+			<p class="flow-text">You are already logged in.</p>
+			<p class="flow-text">Go to your <a href="<?= ROOTDIR ?>Dashboard">dashboard</a>?</p>
+<?php
+} else {
+	echo FormRepository::getLoginForm()->getHtml();
 }
 
 require_once Values::FOOTER_INC;
