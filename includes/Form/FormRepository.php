@@ -13,7 +13,16 @@ use \ReflectionClass;
  * Simply a repository of forms for the site.  May be split up later, if needed
  */
 class FormRepository {
-	public static function getDistinguisherFromMethodName(string $in) : string {
+	/**
+	 * Get a distinguisher from __FUNCTION__ (convert to dash case and remove get)
+	 * 
+	 * I like this method as it ensures unique names (you can't redefine a function!)
+	 * (ok lets be honest this is php you can fucking redefine constants but whatever)
+	 * 
+	 * @param string $in Function name to get a distinguisher from
+	 * @return string Dash-case formatted distinguisher
+	 */
+	public static function getDistinguisherFromFunctionName(string $in) : string {
 		// remove get
 		$withoutGet = preg_replace('/^get/', '', $in);
 		// convert to dash-case
@@ -32,7 +41,7 @@ class FormRepository {
 	public static function getEmailListAdditionForm() : Form {
 		$form = new Form();
 
-		$form->setDistinguisher(self::getDistinguisherFromMethodName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/email_list/");
 		$form->setButtonText("ADD");
@@ -76,7 +85,7 @@ class FormRepository {
 	public static function getLoginForm() : Form {
 		$form = new Form();
 
-		$form->setDistinguisher(self::getDistinguisherFromMethodName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/login/");
 		$form->setButtonText("LOGIN");
