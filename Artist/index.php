@@ -7,8 +7,7 @@ require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Integrations\SocialMedia;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 if (!isset($_GET["q"])) {

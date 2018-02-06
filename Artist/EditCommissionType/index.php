@@ -8,8 +8,7 @@ use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Database\CommissionType\EditCommissionType;
 use \Catalyst\Form\FormHTML;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::EDIT_COMMISSION_TYPE);

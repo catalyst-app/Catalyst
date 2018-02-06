@@ -7,8 +7,7 @@ require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
 use \Catalyst\Database\Character\EditCharacter;
 use \Catalyst\Form\FormHTML;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 if (!isset($_GET["q1"])) {

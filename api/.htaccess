@@ -1,5 +1,1 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(([^/]*/?)*)$ nf.php?in=/$1 [NC,L]
-RewriteRule ^/$ nf.php?in=/ [NC,L]
+ErrorDocument 404 '{ "error": true, "http_code": 404, "error_code": 10001, "message": "Endpoint not found", "data": []}'
