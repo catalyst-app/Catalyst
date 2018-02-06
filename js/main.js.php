@@ -45,7 +45,7 @@ var markInputInvalid = function(e, a) {
 		$("label[for="+$(e).attr("id")+"-psuedo-path]").attr("data-error", a);
 		$("label[for="+$(e).attr("id")+"-psuedo-path]").addClass("active");
 	} else {
-		$(e).addClass("invalid").focus();
+		$(e).addClass("invalid").addClass("marked-invalid").focus();
 		$("label[for="+$(e).attr("id")+"]").attr("data-error", a);
 		$("label[for="+$(e).attr("id")+"]").addClass("active");
 	}
@@ -188,6 +188,9 @@ function totp(K,t) {
 		} catch(e) {} // cheet doesn't like to be defined
 
 		/* FORMS */
+		$(document).on("input", ".marked-invalid", function(e) {
+			$(this).removeClass("invalid").removeClass("invalid");
+		});
 <?php foreach ($forms as $form): ?>
 	<?= $form->getAllJs(); ?>
 <?php endforeach; ?>
