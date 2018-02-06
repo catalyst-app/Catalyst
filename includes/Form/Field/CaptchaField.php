@@ -80,7 +80,7 @@ class CaptchaField extends AbstractField {
 		$str = '';
 		$str .= '<div';
 		$str .= ' class="g-recaptcha col s12"';
-		$str .= ' data-sitekey="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' data-sitekey="'.htmlspecialchars($this->getSiteKey()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' data-expired-callback="markCaptchaInvalid"';
 		$str .= ' data-callback="markCaptchaValid"';
