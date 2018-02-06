@@ -2,6 +2,7 @@
 
 namespace Catalyst\Form\Field;
 
+use \Catalyst\Controller;
 use \Catalyst\Form\Form;
 use \Catalyst\Page\Values;
 use \InvalidArgumentException;
