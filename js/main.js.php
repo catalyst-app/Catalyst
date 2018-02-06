@@ -25,7 +25,6 @@ use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Database\User\EmailVerification;
-use \Catalyst\Database\User\Login;
 use \Catalyst\Database\User\Register;
 use \Catalyst\Database\User\Settings;
 use \Catalyst\Database\User\TOTPLogin;
@@ -309,10 +308,6 @@ function totp(K,t) {
 			}
 		});
 
-		/* LOGIN */
-		<?php
-		echo FormJS::generateFormHandler(Login::getFormStructure());
-		?> 
 		<?php
 		echo FormJS::generateFormHandler(TOTPLogin::getFormStructure());
 		?> 
