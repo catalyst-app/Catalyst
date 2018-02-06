@@ -417,7 +417,7 @@ class User implements \Serializable {
 		$stmt->execute();
 
 		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("User ID ".$data." does not exist in the database.");
+			throw new \InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
 		}
 
 		$user = $stmt->fetchAll()[0];
