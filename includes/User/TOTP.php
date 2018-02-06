@@ -6,9 +6,10 @@ namespace Catalyst\User;
  * Handle TOTP-related things
  */
 class TOTP {
-	// modified from https://github.com/Voronenko/PHPOTP/
 	/**
 	 * Generate a oath token from a key and counter
+	 * 
+	 * modified from https://github.com/Voronenko/PHPOTP/
 	 * 
 	 * @param string $key Oath key to use to derive the hash
 	 * @param int $counter Number of iterations since the key's birth to calculate
@@ -34,6 +35,8 @@ class TOTP {
 
 	/**
 	 * Truncate a hash to a given number of characters
+	 * 
+	 * modified from https://github.com/Voronenko/PHPOTP/
 	 * 
 	 * @param string $hash String to truncate
 	 * @return string Truncated hash (to 6 characters)
