@@ -62,4 +62,26 @@ class TOTP {
 		$result = ((($hmacResult[$offset+0] & 0x7f) << 24 ) | (($hmacResult[$offset+1] & 0xff) << 16 ) | (($hmacResult[$offset+2] & 0xff) << 8 ) | ($hmacResult[$offset+3] & 0xff)) % pow(10,6);
 		return $result;
 	}
+
+	/**
+	 * Check a TOTP token
+	 * 
+	 * @param string $key TOTP key to check against
+	 * @param int $token Token to check
+	 * @param int $fuzz Number of 30s intervals to allow back/forward
+	 */
+	public static function checkToken(string $key, int $token, int $fuzz=2) : bool {
+		$currentTime = time()/30;
+
+		for($i=-$fuzz; $i<=$fuzz; $i++) {
+			$checktime = (int)($currentTime+$i);
+			$curKey = self::oathHotp($key, $checktime);
+			
+			if ($token == self::oathTruncate($curKey)) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
 }
