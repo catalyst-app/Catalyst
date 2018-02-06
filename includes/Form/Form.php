@@ -2,6 +2,7 @@
 
 namespace Catalyst\Form;
 
+use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
 use \InvalidArgumentException;
 
 /**
@@ -52,9 +53,9 @@ class Form {
 	 */
 	protected $distinguisher = "";
 	/**
-	 * Action to perform upon form submission.  One of CompletionAction
+	 * Action to perform upon form submission.  One of AbstractCompletionAction
 	 * 
-	 * @var CompletionAction|null
+	 * @var AbstractCompletionAction|null
 	 */
 	protected $completionAction = null;
 	/**
@@ -93,14 +94,14 @@ class Form {
 	 * Create a new Form based on the given parameters
 	 * 
 	 * @param string $distinguisher
-	 * @param CompletionAction|null $completionAction
+	 * @param AbstractCompletionAction|null $completionAction
 	 * @param int $method
 	 * @param string $endpoint
 	 * @param string $buttonText
 	 * @param Field[] $fields
 	 * @param bool $primary If the form is the only one on the page (it should be focused automatically if so)
 	 */
-	public function __construct(string $distinguisher="", ?CompletionAction $completionAction=null, int $method=self::POST, string $endpoint="", string $buttonText="", array $fields=[], bool $primary=true) {
+	public function __construct(string $distinguisher="", ?AbstractCompletionAction $completionAction=null, int $method=self::POST, string $endpoint="", string $buttonText="", array $fields=[], bool $primary=true) {
 		$this->setDistinguisher($distinguisher);
 		$this->setCompletionAction($completionAction);
 		$this->setMethod($method);
@@ -131,18 +132,18 @@ class Form {
 	/**
 	 * Get the current form completion action (null if none)
 	 * 
-	 * @return CompletionAction|null The current completion action
+	 * @return AbstractCompletionAction|null The current completion action
 	 */
-	public function getCompletionAction() : ?CompletionAction {
+	public function getCompletionAction() : ?AbstractCompletionAction {
 		return $this->completionAction;
 	}
 
 	/**
 	 * Set the form completion action to a new value
 	 * 
-	 * @param CompletionAction|null $completionAction The new action to be called upon completion
+	 * @param AbstractCompletionAction|null $completionAction The new action to be called upon completion
 	 */
-	public function setCompletionAction(?CompletionAction $completionAction) : void {
+	public function setCompletionAction(?AbstractCompletionAction $completionAction) : void {
 		$this->completionAction = $completionAction;
 	}
 

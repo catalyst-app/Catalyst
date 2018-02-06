@@ -1,12 +1,12 @@
 <?php
 
-namespace Catalyst\Form;
+namespace Catalyst\Form\CompletionAction;
 
 /**
  * Represents an action which can be performed after form submission
  * @abstract
  */
-abstract class CompletionAction {
+abstract class AbstractCompletionAction {
 	/**
 	 * Get JavaScript to run on success
 	 * 

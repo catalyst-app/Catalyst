@@ -1,11 +1,11 @@
 <?php
 
-namespace Catalyst\Form;
+namespace Catalyst\Form\CompletionAction;
 
 /**
  * Represents an action which can be performed based
  */
-class AutoClosingModalCompletionAction extends CompletionAction {
+class AutoClosingModalCompletionAction extends AbstractCompletionAction {
 	/**
 	 * Prepended to any generated modal's IDs
 	 */

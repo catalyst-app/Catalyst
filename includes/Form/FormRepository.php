@@ -3,6 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
+use \Catalyst\Form\CompletionAction\AutoClosingModalCompletionAction;
 use \ReflectionClass;
 
 /**
