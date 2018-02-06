@@ -3,8 +3,10 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\CompletionAction\AutoClosingModalCompletionAction;
-use \Catalyst\Form\Field\{EmailField, TextField};
+use \Catalyst\Form\CompletionAction\{AutoClosingModalCompletionAction,ConcreteRedirectCompletionAction};
+use \Catalyst\Form\Field\{CaptchaField,EmailField,TextField};
+use \Catalyst\Form\Form;
+use \Catalyst\Secrets;
 use \ReflectionClass;
 
 /**
