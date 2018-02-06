@@ -85,6 +85,13 @@ class Form {
 	protected $primary = true;
 
 	/**
+	 * Additional actions to perform upon certain error codes
+	 * 
+	 * @var AbstractCompletionAction[]
+	 */
+	protected $additionalCases = [];
+
+	/**
 	 * Array of AbstractField[] objects
 	 * 
 	 * @var AbstractField[]
@@ -465,6 +472,11 @@ class Form {
 				$str .= 'break;';
 			}
 		}
+		foreach ($this->getAdditionalCases() as $code => $additionalCase) {
+			$str .= 'case '.json_encode($code).':';
+			$str .= $additionalCase->getJs();
+			$str .= 'break;';
+		}
 		$str .= '}';
 		$str .= 'showErrorMessageForCode(data.error_code);';
 		$str .= '})';
@@ -508,5 +520,34 @@ class Form {
 		foreach ($this->fields as $field) {
 			$field->checkServerSide();
 		}
+	}
+
+	/**
+	 * Get the additional cases
+	 * 
+	 * @return AbstractCompletionAction[]
+	 */
+	public function getAdditionalCases() : array {
+		return $this->additionalCases;
+	}
+
+	/**
+	 * Set additional cases to a new value
+	 * 
+	 * @param int $code Error code to run this action for
+	 * @param AbstractCompletionAction $additionalCase Action to run
+	 */
+	public function addAdditionalCases(int $code, AbstractCompletionAction $additionalCase) : void {
+		$this->additionalCases[$code] = $additionalCase;
+	}
+
+	/**
+	 * Set additional cases to a new value
+	 * 
+	 * @param AbstractCompletionAction[] $additionalCases new cases
+	 */
+	public function setAdditionalCases(array $additionalCases) : void {
+		$this->additionalCases = [];
+		array_map([$this, "addAdditionalCase"], array_keys($additionalCases), $additionalCases);
 	}
 }
