@@ -40,6 +40,10 @@ class User implements \Serializable {
 		return !self::isLoggedIn();
 	}
 
+	public static function isPending2FA() : bool {
+		return array_key_exists("pending_user",$_SESSION) && $_SESSION["pending_user"] instanceof self;
+	}
+
 	public static function getCurrentUser() : self {
 		if (!self::isLoggedIn()) {
 			throw new \LogicException("Cannot get current user when the user is not logged in.");
