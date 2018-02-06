@@ -11,6 +11,7 @@ class Values {
 	const FEATURE_BOARD = ["about", "Feature Board"];
 	const FEATURE = ["about", "{name} | Feature"];
 	const LOGIN = ["login", "Login"];
+	const TOTP_LOGIN = ["login", "2FA Login"];
 	const LOGOUT = ["logout", "Logout"];
 	const REGISTER = ["register", "Register"];
 	const EMAIL_VERIFICATION = ["user", "Email Verification"];
