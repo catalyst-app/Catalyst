@@ -27,7 +27,6 @@ use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Database\User\EmailVerification;
 use \Catalyst\Database\User\Register;
 use \Catalyst\Database\User\Settings;
-use \Catalyst\Database\User\TOTPLogin;
 use \Catalyst\Form\FormJS;
 ?>
 // ~))))'> 
@@ -307,10 +306,6 @@ function totp(K,t) {
 				$(".color-picker-modal").modal("close");
 			}
 		});
-
-		<?php
-		echo FormJS::generateFormHandler(TOTPLogin::getFormStructure());
-		?> 
 
 		/* REGISTER */
 		<?php
