@@ -67,6 +67,51 @@ class FormRepository {
 	}
 
 	/**
+	 * Login form
+	 * 
+	 * See /Login for form usage
+	 * 
+	 * @return Form Form for attempting a login
+	 */
+	public static function getLoginForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromMethodName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/login/");
+		$form->setButtonText("LOGIN");
+		$form->setPrimary(false);
+
+		$completionAction = new ConcreteRedirectCompletionAction();
+		$completionAction->setRedirectUrl("Dashboard");
+		$form->setCompletionAction($completionAction);
+
+		$usernameField = new TextField();
+		$usernameField->setDistinguisher("username");
+		$usernameField->setLabel("Username");
+		$usernameField->setRequired(true);
+		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$usernameField->addError(90101, ErrorCodes::ERR_90101);
+		$usernameField->setMissingErrorCode(90101);
+		$usernameField->addError(90102, ErrorCodes::ERR_90102);
+		$usernameField->setInvalidErrorCode(90102);
+		$form->addField($usernameField);
+
+		$captchaField = new CaptchaField();
+		$captchaField->setDistinguisher("captcha");
+		$captchaField->setRequired(true);
+		$captchaField->setSiteKey("6LfGBUEUAAAAAIC4spvBe8kIKhQlU_JsAVuTfnid");
+		$captchaField->setSecretKey(Secrets::LOGIN_CAPTCHA_SECRET);
+		$captchaField->addError(90105, ErrorCodes::ERR_90105);
+		$captchaField->setMissingErrorCode(90105);
+		$captchaField->addError(90106, ErrorCodes::ERR_90106);
+		$captchaField->setInvalidErrorCode(90106);
+		$form->addField($captchaField);
+
+		return $form;
+	}
+
+	/**
 	 * Get all Forms functions defined in the repository
 	 * 
 	 * @return Form[] All forms in the repository
