@@ -19,7 +19,7 @@ echo UniversalFunctions::createHeading("Logout");
 ?>
 			<div class="section">
 				<p class="flow-text">You have been logged out.</p>
-				<p class="flow-text">Would you like to <a href="<?= ROOTDIR ?>">return home</p> or <a href="<?= ROOTDIR ?>Login">login again</a>?</a>
+				<p class="flow-text">Would you like to <a href="<?= ROOTDIR ?>">return home</a> or <a href="<?= ROOTDIR ?>Login">login again</a>?</a>
 			</div>
 <?php
 require_once Values::FOOTER_INC;
