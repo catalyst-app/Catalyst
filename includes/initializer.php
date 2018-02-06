@@ -1,6 +1,7 @@
 <?php
 
 use \Catalyst\Controller;
+use \Catalyst\User\User;
 
 spl_autoload_register("\\Catalyst\\Controller::loadClass");
 
