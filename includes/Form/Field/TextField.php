@@ -1,27 +1,28 @@
 <?php
 
-namespace Catalyst\Form;
+namespace Catalyst\Form\Field;
 
 use \Catalyst\API\Response;
+use \Catalyst\Form\Form;
 use \Catalyst\HTTPCode;
 use \LogicException;
 
 /**
- * Represents an email field
+ * Represents a text field
  */
-class EmailField extends Field {
+class TextField extends AbstractField {
 	/**
 	 * Pattern to match user input against
 	 * 
 	 * @var string
 	 */
-	protected $pattern = '^.{2,}@.{2,}\..{2,}$';
+	protected $pattern = '';
 	/**
 	 * Maximum string length, <= 0 means none
 	 * 
 	 * @var int
 	 */
-	protected $maxLength = 254;
+	protected $maxLength = 0;
 
 	/**
 	 * Get the current regex to match
@@ -33,12 +34,31 @@ class EmailField extends Field {
 	}
 
 	/**
+	 * Set the regex needed to match
+	 * 
+	 * @param string $pattern New pattern
+	 */
+	public function setPattern(string $pattern) : void {
+		$this->pattern = $pattern;
+	}
+
+	/**
 	 * Get the input's maximum length
 	 * 
 	 * @return int Current maxmimum length
 	 */
 	public function getMaxLength() : int {
 		return $this->maxLength;
+	}
+
+	/**
+	 * Set the maximum length to a new value
+	 * 
+	 * <= 0 means that there is none
+	 * @param int $maxLength New maxlength
+	 */
+	public function setMaxLength(int $maxLength) : void {
+		$this->maxLength = $maxLength;
 	}
 
 	/**
@@ -52,7 +72,7 @@ class EmailField extends Field {
 
 		$inputClasses = [];
 		$str .= '<input';
-		$str .= ' type="email"';
+		$str .= ' type="text"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isRequired()) {
@@ -63,15 +83,17 @@ class EmailField extends Field {
 			$str .= ' autofocus="autofocus"';
 			$inputClasses[] = "active";
 		}
-
-		$str .= ' maxlength="'.$this->getMaxLength().'"';
 		
 		$inputAttributes[] = "validate";
 		if ($this->getPattern() !== '') {
 			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-			$str .= ' title="Please enter a valid email"';
+			$str .= ' title="Please follow the requested format"'; // required to not be ugly on some browsers
 		}
 		
+		if ($this->getMaxLength() > 0) {
+			$str .= ' maxlength="'.$this->getMaxLength().'"';
+		}
+
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
 		$str .= '>';
 		
@@ -105,13 +127,14 @@ class EmailField extends Field {
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
 		}
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
-		$str .= ') {';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
+		if ($this->getMaxLength() > 0) {
+			$str .= 'if (';
+			$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
+			$str .= ') {';
+			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
+			$str .= Form::CANCEL_SUBMISSION_JS;
+			$str .= '}';
+		}
 		$str .= 'if (';
 		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
 		$str .= ') {';
@@ -143,8 +166,7 @@ class EmailField extends Field {
 		}
 		if ($this->isRequired()) {
 			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
-				HTTPCode::set(400);
-				Response::sendErrorResponse($this->getMissingErrorCode(), $this->getErrorMessage($this->getMissingErrorCode()));
+				$this->throwMissingError();
 			}
 		} else {
 			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
@@ -153,13 +175,11 @@ class EmailField extends Field {
 		}
 		if ($this->getMaxLength() > 0) {
 			if (strlen($_REQUEST[$this->getDistinguisher()]) > $this->getMaxLength()) {
-				HTTPCode::set(400);
-				Response::sendErrorResponse($this->getInvalidErrorCode(), $this->getErrorMessage($this->getInvalidErrorCode()));
+				$this->throwInvalidError();
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
-			HTTPCode::set(400);
-			Response::sendErrorResponse($this->getInvalidErrorCode(), $this->getErrorMessage($this->getInvalidErrorCode()));
+			$this->throwInvalidError();
 		}
 	}
 }

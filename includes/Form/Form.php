@@ -3,6 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
+use \Catalyst\Form\Field\AbstractField;
 use \InvalidArgumentException;
 
 /**
@@ -84,9 +85,9 @@ class Form {
 	protected $primary = true;
 
 	/**
-	 * Array of Field[] objects
+	 * Array of AbstractField[] objects
 	 * 
-	 * @var Field[]
+	 * @var AbstractField[]
 	 */
 	protected $fields = [];
 
@@ -98,7 +99,7 @@ class Form {
 	 * @param int $method
 	 * @param string $endpoint
 	 * @param string $buttonText
-	 * @param Field[] $fields
+	 * @param AbstractField[] $fields
 	 * @param bool $primary If the form is the only one on the page (it should be focused automatically if so)
 	 */
 	public function __construct(string $distinguisher="", ?AbstractCompletionAction $completionAction=null, int $method=self::POST, string $endpoint="", string $buttonText="", array $fields=[], bool $primary=true) {
@@ -229,7 +230,7 @@ class Form {
 	/**
 	 * Get the current array of Fields
 	 * 
-	 * @return Field[] Current fields
+	 * @return AbstractField[] Current fields
 	 */
 	public function getFields() : array {
 		return $this->fields;
@@ -238,9 +239,9 @@ class Form {
 	/**
 	 * Add a field
 	 * 
-	 * @param Field $field New field to add
+	 * @param AbstractField $field New field to add
 	 */
-	public function addField(Field $field) : void {
+	public function addField(AbstractField $field) : void {
 		$field->setForm($this);
 		$this->fields[] = $field;
 	}
@@ -248,7 +249,7 @@ class Form {
 	/**
 	 * Add several fields
 	 * 
-	 * @param Field[] $fields New fields to add
+	 * @param AbstractField[] $fields New fields to add
 	 */
 	public function addFields(array $fields) : void {
 		array_map([$this, "addField"], $fields);
@@ -257,7 +258,7 @@ class Form {
 	/**
 	 * Set the field array to a new value
 	 * 
-	 * @param Field[] $fields New fields to replace existing array
+	 * @param AbstractField[] $fields New fields to replace existing array
 	 */
 	public function setFields(array $fields) : void {
 		$this->fields = [];
