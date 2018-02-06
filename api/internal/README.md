@@ -28,3 +28,10 @@
 - **90108** - This account has been suspended
 - **90109** - This account has been deactivated
 - **90110** - TOTP Challenge required
+
+#### TOTP Login
+
+- **90201** - There are no active TOTP logins
+- **90202** - No code was passed
+- **90203** - An invalid code was passed
+- **90204** - The code is incorrect
