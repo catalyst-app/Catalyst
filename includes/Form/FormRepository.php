@@ -4,7 +4,7 @@ namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\{AutoClosingModalCompletionAction,ConcreteRedirectCompletionAction};
-use \Catalyst\Form\Field\{CaptchaField,EmailField,TextField};
+use \Catalyst\Form\Field\{CaptchaField,EmailField,PasswordField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 use \ReflectionClass;
@@ -96,6 +96,16 @@ class FormRepository {
 		$usernameField->addError(90102, ErrorCodes::ERR_90102);
 		$usernameField->setInvalidErrorCode(90102);
 		$form->addField($usernameField);
+
+		$passwordField = new PasswordField();
+		$passwordField->setDistinguisher("password");
+		$passwordField->setLabel("Password");
+		$passwordField->setRequired(true);
+		$passwordField->addError(90103, ErrorCodes::ERR_90103);
+		$passwordField->setMissingErrorCode(90103);
+		$passwordField->addError(90104, ErrorCodes::ERR_90104);
+		$passwordField->setInvalidErrorCode(90104);
+		$form->addField($passwordField);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
