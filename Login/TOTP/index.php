@@ -11,8 +11,8 @@ use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
-define("PAGE_KEYWORD", Values::LOGIN[0]);
-define("PAGE_TITLE", Values::createTitle(Values::LOGIN[1], []));
+define("PAGE_KEYWORD", Values::TOTP_LOGIN[0]);
+define("PAGE_TITLE", Values::createTitle(Values::TOTP_LOGIN[1], []));
 
 if (User::isLoggedIn()) {
 	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
