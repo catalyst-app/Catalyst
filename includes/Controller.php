@@ -183,9 +183,7 @@ class Controller {
 						"ignore_errors" => true,
 					]
 				]));
-			} catch (Exception $e) {
-				// discord or telegram could not be reached
-			}
+			} catch (Exception $e) {} // cant react telegram
 		}
 		ob_end_clean();
 	}
