@@ -22,6 +22,8 @@
 - **90102** - Invalid username
 - **90103** - No password was passed
 - **90104** - An incorrect password was passed
-- **90105** - This account has been suspended
-- **90106** - This account has been disabled
-- **90107** - TOTP Challenge required
+- **90105** - No captcha response was sent
+- **90106** - An invalid captcha response was sent
+- **90107** - This account has been suspended
+- **90108** - This account has been disabled
+- **90109** - TOTP Challenge required

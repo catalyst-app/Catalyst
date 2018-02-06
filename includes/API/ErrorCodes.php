@@ -39,9 +39,11 @@ class ErrorCodes {
 	const ERR_90102 = 'Invalid username';
 	const ERR_90103 = 'No password was passed';
 	const ERR_90104 = 'An incorrect password was passed';
-	const ERR_90105 = 'This account has been suspended';
-	const ERR_90106 = 'This account has been disabled';
-	const ERR_90107 = 'TOTP Challenge required';
+	const ERR_90105 = 'No captcha response was sent';
+	const ERR_90106 = 'An invalid captcha response was sent';
+	const ERR_90107 = 'This account has been suspended';
+	const ERR_90108 = 'This account has been disabled';
+	const ERR_90109 = 'TOTP Challenge required';
 
 	/**
 	 * Get an associative array of code => message based on class constants
