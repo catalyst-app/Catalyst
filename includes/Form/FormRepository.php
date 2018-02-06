@@ -89,7 +89,7 @@ class FormRepository {
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/login/");
 		$form->setButtonText("LOGIN");
-		$form->setPrimary(false);
+		$form->setPrimary(true);
 
 		$completionAction = new ConcreteRedirectCompletionAction();
 		$completionAction->setRedirectUrl("Dashboard");
@@ -151,7 +151,7 @@ class FormRepository {
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/totp_login/");
 		$form->setButtonText("LOGIN");
-		$form->setPrimary(false);
+		$form->setPrimary(true);
 
 		$completionAction = new ConcreteRedirectCompletionAction();
 		$completionAction->setRedirectUrl("Dashboard");
