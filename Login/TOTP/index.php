@@ -4,11 +4,9 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\User\Login;
-use \Catalyst\Database\User\TOTPLogin;
-use \Catalyst\Form\FormHTML;
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Page\Values;
+use \Catalyst\Form\FormRepository;
+use \Catalyst\HTTPCode;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::TOTP_LOGIN[0]);
@@ -24,18 +22,14 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("2FA Login");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (call_user_func(...TOTPLogin::getFormStructure()[0]["auth"][0])) {
-	echo call_user_func(TOTPLogin::getFormStructure()[0]["auth"][1]);
-} elseif (!Login::pending2FA()) {
+if (!User::isPending2FA()) {
 ?>
 		<div class="section">
-			<p class="flow-text">You must first enter your password <a href="<?= ROOTDIR ?>Login">here</a>.</p>
+			<p class="flow-text">You must first login <a href="<?= ROOTDIR ?>Login">here</a>.</p>
 		</div>
 <?php
 } else {
-	echo FormHTML::generateForm(TOTPLogin::getFormStructure());
+	echo FormRepository::getTotpLoginForm()->getHtml();
 }
 
 require_once Values::FOOTER_INC;
