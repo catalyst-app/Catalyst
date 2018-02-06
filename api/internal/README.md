@@ -23,8 +23,8 @@
 - **90103** - The username does not exist
 - **90104** - No password was passed
 - **90105** - An incorrect password was passed
-- **90106** - No captcha response was sent
-- **90107** - An invalid captcha response was sent
+- **90106** - No CAPTCHA response was sent
+- **90107** - An invalid CAPTCHA response was sent
 - **90108** - This account has been suspended
 - **90109** - This account has been deactivated
 - **90110** - TOTP Challenge required
