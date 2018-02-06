@@ -465,7 +465,7 @@ class Form {
 		$str .= 'console.log(response);';
 		$str .= 'var data = JSON.parse(response.responseText);';
 		$str .= 'switch (data.error_code) {';
-		foreach ($this->fields as $field) {
+		foreach ($this->getFields() as $field) {
 			foreach ($field->getErrors() as $code => $message) {
 				$str .= 'case '.json_encode($code).':';
 				$str .= 'markInputInvalid('.'$('.json_encode("#".$field->getId()).'), data.message);';
