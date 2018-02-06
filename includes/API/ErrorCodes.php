@@ -34,6 +34,15 @@ class ErrorCodes {
 	const ERR_90003 = 'No context was passed';
 	const ERR_90004 = 'An invalid context was passed';
 
+	// login
+	const ERR_90101 = 'No username was passed';
+	const ERR_90102 = 'Invalid username';
+	const ERR_90103 = 'No password was passed';
+	const ERR_90104 = 'An incorrect password was passed';
+	const ERR_90105 = 'This account has been suspended';
+	const ERR_90106 = 'This account has been disabled';
+	const ERR_90107 = 'TOTP Challenge required';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
