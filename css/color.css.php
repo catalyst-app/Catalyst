@@ -31,7 +31,7 @@ a {
 .img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
 [type="checkbox"].filled-in:checked + label:after,
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
-.progress .indeterminate, .progress .determinate, .btn, .btn-large {
+.progress .indeterminate, .progress .determinate, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
 	background-color: #<?= $_GET["hex"] ?> !important;
 }
 
