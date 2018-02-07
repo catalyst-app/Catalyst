@@ -334,7 +334,7 @@ class FormRepository {
 
 		$tosAcceptanceField = new RawLabelCheckboxField();
 		$tosAcceptanceField->setDistinguisher("tos-acceptance");
-		$tosAcceptanceField->setLabel('I accept the <a href="'.ROOTDIR.'TOS">terms of service</a>');
+		$tosAcceptanceField->setLabel('I accept the <a target="_blank" href="'.ROOTDIR.'TOS">terms of service</a>');
 		$tosAcceptanceField->setRequired(false);
 		$tosAcceptanceField->addError(90320, ErrorCodes::ERR_90320);
 		$tosAcceptanceField->setMissingErrorCode(90320);
