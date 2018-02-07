@@ -72,8 +72,8 @@ class ErrorCodes {
 	const ERR_90317 = 'The image is invalid';
 	const ERR_90318 = 'The NSFW profile picture checkbox is invalid';
 	const ERR_90319 = 'NSFW access checkbox is invalid';
-	const ERR_90320 = 'Terms of service agreement value was not sent';
-	const ERR_90321 = 'Terms of service was not agreed to';
+	const ERR_90320 = 'Terms of service agreement checkbox is not valid';
+	const ERR_90321 = 'You must agree to the Terms of Service';
 	const ERR_90322 = 'CAPTCHA was not sent';
 	const ERR_90323 = 'CAPTCHA response was invalid';
 
