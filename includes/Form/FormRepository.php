@@ -267,6 +267,20 @@ class FormRepository {
 		$confirmPasswordField->setLinkedField($passwordField);
 		$form->addField($confirmPasswordField);
 
+		$colorField = new ColorField();
+		$colorField->setDistinguisher("color");
+		$colorField->setLabel("Color");
+		$colorField->setRequired(true);
+		$colorField->addError(90313, ErrorCodes::ERR_90313);
+		$colorField->setMissingErrorCode(90313);
+		$colorField->addError(90314, ErrorCodes::ERR_90314);
+		$colorField->setInvalidErrorCode(90314);
+		$form->addField($colorField);
+
+		$colorUsageMessage = new StaticHTMLField();
+		$colorUsageMessage->setHtml('<p class="no-top-margin col s12">This color will be used to theme the interface and your profile</p>');
+		$form->addField($colorUsageMessage);
+
 		$profilePictureField = new ImageField();
 		$profilePictureField->setDistinguisher("profile-picture");
 		$profilePictureField->setLabel("Profile Picture");
