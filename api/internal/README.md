@@ -41,20 +41,23 @@
 - **90301** - Username was not passed
 - **90302** - Username is invalid
 - **90303** - Username is already in use
-- **90304** - Nickname is invalid
-- **90305** - Email is invalid
-- **90306** - Email is already in use
-- **90307** - Password was not passed
-- **90308** - Password does not meet requirements
-- **90309** - Password confirmation was not passed
-- **90310** - Password confirmation does not match the provided password
-- **90311** - Color was not sent
-- **90312** - Color is not a valid color
-- **90313** - Profile picture is too large
-- **90314** - Profile picture is not an image
-- **90315** - Profile picture is invalid
-- **90316** - NSFW profile picture checkbox is invalid
-- **90317** - NSFW access checkbox is invalid
-- **90318** - Terms of service agreement value was not sent
-- **90319** - Terms of service was not agreed to
-- **90320** - CAPTCHA was not completed
+- **90304** - Nickname was not passed
+- **90305** - Nickname is invalid
+- **90306** - Email was not passed
+- **90307** - Email is invalid
+- **90308** - Email is already in use
+- **90309** - Password was not passed
+- **90310** - Password does not meet requirements
+- **90311** - Password confirmation was not passed
+- **90312** - Password confirmation does not match the provided password
+- **90313** - Color was not sent
+- **90314** - Color is not a valid color
+- **90315** - Profile picture is too large
+- **90316** - Profile picture is not an image
+- **90317** - Profile picture is invalid
+- **90318** - NSFW profile picture checkbox is invalid
+- **90319** - NSFW access checkbox is invalid
+- **90320** - Terms of service agreement value was not sent
+- **90321** - Terms of service was not agreed to
+- **90322** - CAPTCHA response was not sent
+- **90323** - CAPTCHA is invalid
