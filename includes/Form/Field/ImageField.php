@@ -140,6 +140,11 @@ class ImageField extends AbstractField {
 		$str .= '</label>';
 		
 		$str .= '</div>';
+		
+		$str .= '</div>';
+		
+		$str .= '</div>';
+		
 		return $str;
 	}
 
