@@ -15,6 +15,7 @@ use \Catalyst\Form\Field\{
 	EmailField,
 	ImageField,
 	PasswordField,
+	RawLabelCheckboxField,
 	StaticHTMLField,
 	TextField};
 use \Catalyst\Form\Form;
