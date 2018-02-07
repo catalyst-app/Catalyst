@@ -367,6 +367,13 @@ header a, a.btn {
 	color: #f44336;
 }
 
+input[type="checkbox"].invalid + label + span::after {
+	content: attr(data-error);
+	display: block;
+	font-size: 12px;
+	color: #f44336;
+}
+
 input.invalid[type=checkbox][required]:not(:checked) + label + span.invalid-text {
 	font-size: 12px !important;
 	color: #f44336 !important;
