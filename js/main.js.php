@@ -294,13 +294,13 @@ function totp(K,t) {
 			$("input#"+$(this).closest(".modal").attr("data-for")).val(rgb2hex($(this).css("backgroundColor")));
 			$(".chosen-color[data-for="+$(this).closest(".modal").attr("data-for")+"]").animate({
 				backgroundColor: $(this).css("backgroundColor")
-			}, 100);
+			}, 200);
 
 			if (Array.isArray(colors)) {
 				for (var i = 0; i < colors.length; i++) {
 					$(swatches[i]).show().animate({
 						backgroundColor: "#"+colors[i]
-					}, 400);
+					}, 200);
 				}
 			} else {
 				$(".color-picker-modal").modal("close");
