@@ -1039,7 +1039,7 @@ CREATE TABLE `users` (
   `PICTURE_NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `COLOR` binary(3) NOT NULL DEFAULT '^ ',
-  `NICK` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mistake',
+  `NICK` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mistake',
   `SUSPENDED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `DEACTIVATED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
