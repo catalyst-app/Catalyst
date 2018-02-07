@@ -97,7 +97,7 @@ class FileUpload {
 		unlink(REAL_ROOTDIR.self::FOLDERS[$type]."/".$filename);
 	}
 
-	public static function getMIME(string $filename) : string {
+	public static function getMime(string $filename) : string {
 		$info = finfo_open(FILEINFO_MIME_TYPE);
 		$result = finfo_file($info, $filename);
 		finfo_close($info);
