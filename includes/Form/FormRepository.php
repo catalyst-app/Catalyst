@@ -321,6 +321,16 @@ class FormRepository {
 		$explicitDefinitionMessage->setHtml('<p class="no-top-margin col s12">Go <a href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
 		$form->addField($explicitDefinitionMessage);
 
+		$nsfwAccessField = new CheckboxField();
+		$nsfwAccessField->setDistinguisher("nsfw-access");
+		$nsfwAccessField->setLabel("I am above 18 years old and wish to see NSFW content");
+		$nsfwAccessField->setRequired(false);
+		$nsfwAccessField->addError(90319, ErrorCodes::ERR_90319);
+		$nsfwAccessField->setMissingErrorCode(90319);
+		$nsfwAccessField->addError(90319, ErrorCodes::ERR_90319);
+		$nsfwAccessField->setInvalidErrorCode(90319);
+		$form->addField($nsfwAccessField);
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
