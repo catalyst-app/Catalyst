@@ -125,6 +125,7 @@ class ImageField extends AbstractField {
 		$str .= ' type="text"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).self::PATH_INPUT_SUFFIX.'"';
 		$str .= ' class="file-input-path"';
+		$str .= ' data-required="'.($this->isRequired() ? 'yes' : 'no').'"';
 		$str .= '>';
 
 		$str .= '<label';
@@ -144,7 +145,7 @@ class ImageField extends AbstractField {
 		$str .= '</div>';
 		
 		$str .= '</div>';
-		
+
 		return $str;
 	}
 
