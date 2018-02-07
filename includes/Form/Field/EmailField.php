@@ -106,6 +106,10 @@ class EmailField extends AbstractField {
 			$str .= '}';
 		}
 		$str .= 'if (';
+		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
+		$str .= ') {';
+
+		$str .= 'if (';
 		$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
@@ -117,6 +121,8 @@ class EmailField extends AbstractField {
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
+		$str .= '}';
+
 		$str .= '}';
 
 		return $str;
