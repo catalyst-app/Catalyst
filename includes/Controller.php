@@ -94,7 +94,7 @@ class Controller {
 		ob_start();
 		$destinations = [];
 		if ($_SERVER["SERVER_NAME"] == "localhost") {
-			$destinations = ["discord","telegram"];
+			$destinations = ["discord","email","telegram"];
 		} else {
 			$destinations = ["discord","email","telegram"];
 		}
