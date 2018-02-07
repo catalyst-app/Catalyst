@@ -307,6 +307,16 @@ class FormRepository {
 		$profilePictureField->setTooLargeErrorCode(90315);
 		$form->addField($profilePictureField);
 
+		$nsfwProfilePictureField = new CheckboxField();
+		$nsfwProfilePictureField->setDistinguisher("profile-picture-is-nsfw");
+		$nsfwProfilePictureField->setLabel("My profile picture is explicit or mature");
+		$nsfwProfilePictureField->setRequired(false);
+		$nsfwProfilePictureField->addError(90322, ErrorCodes::ERR_90322);
+		$nsfwProfilePictureField->setMissingErrorCode(90322);
+		$nsfwProfilePictureField->addError(90323, ErrorCodes::ERR_90323);
+		$nsfwProfilePictureField->setInvalidErrorCode(90323);
+		$form->addField($nsfwProfilePictureField);
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
