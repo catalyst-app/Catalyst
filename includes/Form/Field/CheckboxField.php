@@ -29,7 +29,6 @@ class CheckboxField extends AbstractField {
 		$str .= '>';
 		
 		$str .= '<label';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 		$str .= htmlspecialchars($this->getLabel());
@@ -39,6 +38,12 @@ class CheckboxField extends AbstractField {
 			$str .= '</span>';
 		}
 		$str .= '</label>';
+		
+		// required due to the way materialize draws the checkbox
+		$str .= '<span';
+		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		$str .= '></span>';
+
 		$str .= '</p>';
 		return $str;
 	}
@@ -70,7 +75,7 @@ class CheckboxField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').is(":checked");';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').is(":checked"));';
 	}
 
 	/**
