@@ -8,6 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a text field
  */
 class PasswordField extends AbstractField {
+	use LabelTrait;
 	/**
 	 * Minimum length for the password
 	 * @var int

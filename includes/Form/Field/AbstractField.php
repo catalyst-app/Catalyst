@@ -19,12 +19,6 @@ abstract class AbstractField {
 	 */
 	protected $distinguisher = "";
 	/**
-	 * self explanatory
-	 * 
-	 * @var string
-	 */
-	protected $label = "";
-	/**
 	 * If the field is required
 	 * 
 	 * @var bool
@@ -70,12 +64,10 @@ abstract class AbstractField {
 	 * Construct a AbstractField object
 	 * 
 	 * @param string $distinguisher The internal name of the field
-	 * @param string $label The field's label
 	 * @param bool $required If the field is required
 	 */
-	public function __construct(string $distinguisher="", string $label="", bool $required=true) {
+	public function __construct(string $distinguisher="", bool $required=true) {
 		$this->setDistinguisher($distinguisher);
-		$this->setLabel($label);
 		$this->setRequired($required);
 	}
 
@@ -95,24 +87,6 @@ abstract class AbstractField {
 	 */
 	public function setDistinguisher(string $distinguisher) : void {
 		$this->distinguisher = $distinguisher;
-	}
-
-	/**
-	 * Get the current label
-	 * 
-	 * @return string the label
-	 */
-	public function getLabel() : string {
-		return $this->label;
-	}
-
-	/**
-	 * Set the label
-	 * 
-	 * @param string $label The new label
-	 */
-	public function setLabel(string $label) : void {
-		$this->label = $label;
 	}
 
 	/**
