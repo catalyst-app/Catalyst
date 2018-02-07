@@ -124,6 +124,11 @@ class TextField extends AbstractField {
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
 		}
+
+		$str .= 'if (';
+		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
+		$str .= ') {';
+
 		if ($this->getMaxLength() > 0) {
 			$str .= 'if (';
 			$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
@@ -137,6 +142,8 @@ class TextField extends AbstractField {
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
+		$str .= '}';
+
 		$str .= '}';
 
 		return $str;
