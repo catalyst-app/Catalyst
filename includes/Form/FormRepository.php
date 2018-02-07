@@ -181,6 +181,76 @@ class FormRepository {
 	}
 
 	/**
+	 * Register form
+	 * 
+	 * See /Register for form usage
+	 * 
+	 * @return Form Form for registering a new user
+	 */
+	public static function getRegisterForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/register/");
+		$form->setButtonText("REGISTER");
+		$form->setPrimary(false);
+
+		$completionAction = new ConcreteRedirectCompletionAction();
+		$completionAction->setRedirectUrl("Dashboard");
+		$form->setCompletionAction($completionAction);
+
+		$usernameField = new TextField();
+		$usernameField->setDistinguisher("username");
+		$usernameField->setLabel("Username");
+		$usernameField->setRequired(true);
+		$usernameField->setMaxLength(64);
+		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$usernameField->addError(90301, ErrorCodes::ERR_90301);
+		$usernameField->setMissingErrorCode(90301);
+		$usernameField->addError(90302, ErrorCodes::ERR_90302);
+		$usernameField->setInvalidErrorCode(90302);
+		$usernameField->addError(90303, ErrorCodes::ERR_90303);
+		$form->addField($usernameField);
+
+		$usernameAcceptedCharactersMessage = new StaticHTMLField();
+		$usernameAcceptedCharactersMessage->setHtml('<p class="no-top-margin col s12">2-64 characters of letters, numbers, period, dashes, and underscores only.</p>');
+		$form->addField($usernameAcceptedCharactersMessage);
+
+		$nicknameField = new TextField();
+		$nicknameField->setDistinguisher("nickname");
+		$nicknameField->setLabel("Nickname");
+		$nicknameField->setRequired(false);
+		$usernameField->setMaxLength(100);
+		$nicknameField->setPattern('^.{2,100}$');
+		$nicknameField->addError(90304, ErrorCodes::ERR_90304);
+		$nicknameField->setInvalidErrorCode(90304);
+		$form->addField($nicknameField);
+
+		$emailField = new EmailField();
+		$emailField->setDistinguisher("email");
+		$emailField->setLabel("Email");
+		$emailField->setRequired(false);
+		$emailField->addError(90305, ErrorCodes::ERR_90305);
+		$emailField->setInvalidErrorCode(90305);
+		$emailField->addError(90306, ErrorCodes::ERR_90306);
+		$form->addField($emailField);
+
+		$passwordField = new PasswordField();
+		$passwordField->setDistinguisher("password");
+		$passwordField->setLabel("Password");
+		$passwordField->setRequired(true);
+		$passwordField->setMinLength(8);
+		$usernameField->addError(90307, ErrorCodes::ERR_90307);
+		$usernameField->setMissingErrorCode(90307);
+		$passwordField->addError(90308, ErrorCodes::ERR_90308);
+		$passwordField->setInvalidErrorCode(90308);
+		$form->addField($passwordField);
+
+		return $form;
+	}
+
+	/**
 	 * Get all Forms functions defined in the repository
 	 * 
 	 * @return Form[] All forms in the repository
