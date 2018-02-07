@@ -224,16 +224,20 @@ class FormRepository {
 		$nicknameField->setMaxLength(100);
 		$nicknameField->setPattern('^.{2,100}$');
 		$nicknameField->addError(90304, ErrorCodes::ERR_90304);
-		$nicknameField->setInvalidErrorCode(90304);
+		$nicknameField->setMissingErrorCode(90304);
+		$nicknameField->addError(90305, ErrorCodes::ERR_90305);
+		$nicknameField->setInvalidErrorCode(90305);
 		$form->addField($nicknameField);
 
 		$emailField = new EmailField();
 		$emailField->setDistinguisher("email");
 		$emailField->setLabel("Email");
 		$emailField->setRequired(false);
-		$emailField->addError(90305, ErrorCodes::ERR_90305);
-		$emailField->setInvalidErrorCode(90305);
 		$emailField->addError(90306, ErrorCodes::ERR_90306);
+		$emailField->setMissingErrorCode(90306);
+		$emailField->addError(90307, ErrorCodes::ERR_90307);
+		$emailField->setInvalidErrorCode(90307);
+		$emailField->addError(90308, ErrorCodes::ERR_90308);
 		$form->addField($emailField);
 
 		$passwordField = new PasswordField();
@@ -241,10 +245,10 @@ class FormRepository {
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
 		$passwordField->setMinLength(8);
-		$usernameField->addError(90307, ErrorCodes::ERR_90307);
-		$usernameField->setMissingErrorCode(90307);
-		$passwordField->addError(90308, ErrorCodes::ERR_90308);
-		$passwordField->setInvalidErrorCode(90308);
+		$passwordField->addError(90309, ErrorCodes::ERR_90309);
+		$passwordField->setMissingErrorCode(90309);
+		$passwordField->addError(90310, ErrorCodes::ERR_90310);
+		$passwordField->setInvalidErrorCode(90310);
 		$form->addField($passwordField);
 
 		return $form;
