@@ -17,6 +17,8 @@ class EmailField extends AbstractField {
 	/**
 	 * Maximum string length, <= 0 means none
 	 * 
+	 * Per IETF's RFC (pay attention to the errata), this is 254 chars
+	 * 
 	 * @var int
 	 */
 	protected $maxLength = 254;
