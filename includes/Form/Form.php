@@ -367,7 +367,6 @@ class Form {
 			$str .= $field->getHtml();
 		}
 		$str .= '</div>';
-		$str .= '<br>';
 		$str .= '<div class="divider">';
 		$str .= '</div>';
 		$str .= $this->getSubmitButton();
