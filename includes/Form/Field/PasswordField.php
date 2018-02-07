@@ -9,6 +9,30 @@ use \Catalyst\Form\Form;
  */
 class PasswordField extends AbstractField {
 	/**
+	 * Minimum length for the password
+	 * @var int
+	 */
+	protected $minLength = 8;
+
+	/**
+	 * Get the password's minimum length
+	 * 
+	 * @return int Minimum password length
+	 */
+	public function getMinLength() : int {
+		return $this->minLength;
+	}
+
+	/**
+	 * Set the password's minimum length
+	 * 
+	 * @param int $minLength New minimum password length
+	 */
+	public function setMinLength(int $minLength) : void {
+		$this->minLength = $minLength;
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display

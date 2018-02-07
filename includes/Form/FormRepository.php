@@ -117,6 +117,7 @@ class FormRepository {
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
+		$passwordField->setMinLength(8);
 		$passwordField->addError(90104, ErrorCodes::ERR_90104);
 		$passwordField->setMissingErrorCode(90104);
 		$passwordField->addError(90105, ErrorCodes::ERR_90105);
