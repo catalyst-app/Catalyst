@@ -9,6 +9,7 @@ use \Catalyst\Form\CompletionAction\{
 };
 use \Catalyst\Form\Field\{
 	CaptchaField,
+	CheckboxField,
 	ColorField,
 	ConfirmPasswordField,
 	EmailField,
