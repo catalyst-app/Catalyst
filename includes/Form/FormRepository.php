@@ -332,6 +332,16 @@ class FormRepository {
 		$nsfwAccessField->setInvalidErrorCode(90319);
 		$form->addField($nsfwAccessField);
 
+		$tosAcceptanceField = new RawLabelCheckboxField();
+		$tosAcceptanceField->setDistinguisher("tos-acceptance");
+		$tosAcceptanceField->setLabel('I accept the <a href="'.ROOTDIR.'TOS">terms of service</a>');
+		$tosAcceptanceField->setRequired(false);
+		$tosAcceptanceField->addError(90320, ErrorCodes::ERR_90320);
+		$tosAcceptanceField->setMissingErrorCode(90320);
+		$tosAcceptanceField->addError(90321, ErrorCodes::ERR_90321);
+		$tosAcceptanceField->setInvalidErrorCode(90321);
+		$form->addField($tosAcceptanceField);
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
