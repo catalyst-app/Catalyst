@@ -31,7 +31,7 @@ Email::sendEmail(
 	implode("\r\n", [
 		"Email List Registration",
 		"",
-		"Thank you for registering for Catalyst\'s email list!  We\'re glad to see you\'re with us, and can\'t wait to keep you updated via email.",
+		"Thank you for registering for Catalyst's email list!  We're glad to see you're with us, and can't wait to keep you updated via email.",
 		"",
 		"If you did not sign up for this list, contact abuse@catalystapp.co immediately."
 	]),
