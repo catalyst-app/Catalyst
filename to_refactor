@@ -19,7 +19,6 @@
 ./includes/Character/Character.php
 ./includes/Color.php
 ./includes/CommissionType/CommissionType.php
-./includes/Email.php
 ./includes/Form/FileUpload.php
 ./includes/Form/Flags.php
 ./includes/Integrations/SocialMedia.php
