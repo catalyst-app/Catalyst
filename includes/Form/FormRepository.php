@@ -221,7 +221,7 @@ class FormRepository {
 		$nicknameField->setDistinguisher("nickname");
 		$nicknameField->setLabel("Nickname");
 		$nicknameField->setRequired(false);
-		$usernameField->setMaxLength(100);
+		$nicknameField->setMaxLength(100);
 		$nicknameField->setPattern('^.{2,100}$');
 		$nicknameField->addError(90304, ErrorCodes::ERR_90304);
 		$nicknameField->setInvalidErrorCode(90304);
