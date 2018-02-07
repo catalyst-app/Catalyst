@@ -4,8 +4,8 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\User\Register;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
+use \Catalyst\HTTPCode;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
@@ -18,16 +18,21 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (User::isLoggedIn()) {
+	HTTPCode::set(401);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Register");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (call_user_func(...Register::getFormStructure()[0]["auth"][0])) {
-	echo call_user_func(Register::getFormStructure()[0]["auth"][1]);
+if (User::isLoggedIn()) {
+?>
+			<p class="flow-text">You are already logged in.</p>
+			<p class="flow-text">Go to your <a href="<?= ROOTDIR ?>Dashboard">dashboard</a>?</p>
+<?php
 } else {
-	echo FormHTML::generateForm(Register::getFormStructure());
+	echo FormRepository::getRegisterForm()->getHtml();
 }
 
 require_once Values::FOOTER_INC;
