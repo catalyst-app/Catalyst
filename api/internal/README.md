@@ -35,3 +35,26 @@
 - **90202** - No code was passed
 - **90203** - An invalid code was passed
 - **90204** - The code is incorrect
+
+#### Register
+
+- **90301** - Username was not passed
+- **90302** - Username is invalid
+- **90303** - Username is already in use
+- **90304** - Password was not passed
+- **90305** - Password does not meet requirements
+- **90306** - Password confirmation was not passed
+- **90307** - Password confirmation does not match the provided password
+- **90308** - Email is invalid
+- **90309** - Email is already in use
+- **90310** - Nickname is invalid
+- **90311** - Profile picture is too large
+- **90312** - Profile picture is not an image
+- **90313** - Profile picture is invalid
+- **90314** - NSFW profile picture checkbox is invalid
+- **90315** - Color was not sent
+- **90316** - Color is not a valid color
+- **90317** - NSFW access checkbox is invalid
+- **90318** - Terms of service agreement value was not sent
+- **90319** - Terms of service was not agreed to
+- **90320** - CAPTCHA was not completed
