@@ -52,6 +52,28 @@ class ErrorCodes {
 	const ERR_90203 = 'An invalid code was entered';
 	const ERR_90204 = 'The code is invalid';
 
+	// register
+	const ERR_90301 = 'Username was not entered';
+	const ERR_90302 = 'Username is invalid';
+	const ERR_90303 = 'Username is already in use';
+	const ERR_90304 = 'Password was not passed';
+	const ERR_90305 = 'Password does not meet requirements';
+	const ERR_90306 = 'Password confirmation was not passed';
+	const ERR_90307 = 'Password confirmation does not match the provided password';
+	const ERR_90308 = 'Email is invalid';
+	const ERR_90309 = 'Email is already in use';
+	const ERR_90310 = 'Nickname is invalid';
+	const ERR_90311 = 'Profile picture is too large';
+	const ERR_90312 = 'Profile picture is not an image';
+	const ERR_90313 = 'Profile picture is invalid';
+	const ERR_90314 = 'NSFW profile picture checkbox is invalid';
+	const ERR_90315 = 'Color was not sent';
+	const ERR_90316 = 'Color is not a valid color';
+	const ERR_90317 = 'NSFW access checkbox is invalid';
+	const ERR_90318 = 'Terms of service agreement value was not sent';
+	const ERR_90319 = 'Terms of service was not agreed to';
+	const ERR_90320 = 'CAPTCHA was not completed';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
