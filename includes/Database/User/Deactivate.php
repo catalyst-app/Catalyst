@@ -96,7 +96,7 @@ class Deactivate {
 			return self::ERROR_UNKNOWN;
 		}
 
-		\Catalyst\Database\User\Login::logout();
+		// \Catalyst\Database\User\Login::logout();
 
 		return self::DEACTIVATED;
 	}
