@@ -4,7 +4,7 @@ namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\{AutoClosingModalCompletionAction,ConcreteRedirectCompletionAction};
-use \Catalyst\Form\Field\{CaptchaField,ConfirmPasswordField,EmailField,PasswordField,StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{CaptchaField,ConfirmPasswordField,EmailField,ImageField,PasswordField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 use \ReflectionClass;
@@ -267,6 +267,19 @@ class FormRepository {
 		$confirmPasswordField->setLinkedField($passwordField);
 		$form->addField($confirmPasswordField);
 
+		$profilePictureField = new ImageField();
+		$profilePictureField->setDistinguisher("profile-picture");
+		$profilePictureField->setLabel("Profile Picture");
+		$profilePictureField->setRequired(false);
+		$profilePictureField->setMaxHumanSize('10MB');
+		// these lost some clarity as what means what due to ImageField
+		$profilePictureField->addError(90317, ErrorCodes::ERR_90317);
+		$profilePictureField->setMissingErrorCode(90317);
+		$profilePictureField->addError(90316, ErrorCodes::ERR_90316);
+		$profilePictureField->setInvalidErrorCode(90316);
+		$profilePictureField->addError(90315, ErrorCodes::ERR_90315);
+		$profilePictureField->setTooLargeErrorCode(90315);
+		$form->addField($profilePictureField);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
