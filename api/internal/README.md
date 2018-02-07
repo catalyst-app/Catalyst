@@ -57,7 +57,7 @@
 - **90317** - Profile picture is invalid
 - **90318** - NSFW profile picture checkbox is invalid
 - **90319** - NSFW access checkbox is invalid
-- **90320** - Terms of service agreement value was not sent
+- **90320** - Terms of service agreement value is invalid
 - **90321** - Terms of service was not agreed to
 - **90322** - CAPTCHA response was not sent
 - **90323** - CAPTCHA is invalid
