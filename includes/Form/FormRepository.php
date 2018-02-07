@@ -255,6 +255,17 @@ class FormRepository {
 		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Please use at least 8 characters, however, a longer, random generated one is suggested.  You may easily generate one <a target="_blank" href="https://passwordsgenerator.net/?length=60&symbols=1&numbers=1&lowercase=1&uppercase=1&similar=0&ambiguous=0&client=1&autoselect=1">here</a>.</p>');
 		$form->addField($passwordMinimumMessage);
 
+		$captchaField = new CaptchaField();
+		$captchaField->setDistinguisher("captcha");
+		$captchaField->setRequired(true);
+		$captchaField->setSiteKey("6Lf7A0EUAAAAAM7naF_3NGWGVAxMUK-qPQABEdAl");
+		$captchaField->setSecretKey(Secrets::REGISTER_CAPTCHA_SECRET);
+		$captchaField->addError(90322, ErrorCodes::ERR_90322);
+		$captchaField->setMissingErrorCode(90322);
+		$captchaField->addError(90323, ErrorCodes::ERR_90323);
+		$captchaField->setInvalidErrorCode(90323);
+		$form->addField($captchaField);
+
 		return $form;
 	}
 
