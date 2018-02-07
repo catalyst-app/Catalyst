@@ -2,6 +2,8 @@
 
 namespace Catalyst\Page;
 
+use \Exception;
+
 class UniversalFunctions {
 	public static function createHeading(string $contents) : string {
 		return implode("\n", [
@@ -39,26 +41,28 @@ class UniversalFunctions {
 		return $_SERVER["REQUEST_SCHEME"]."://".((isset($_SERVER["HTTP_X_FORWARDED_HOST"])) ? $_SERVER["HTTP_X_FORWARDED_HOST"] : $_SERVER["SERVER_NAME"].(($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") ? "" : ":".$_SERVER["SERVER_PORT"])).$_SERVER["REQUEST_URI"];
 	}
 
-	// https://github.com/mingalevme/utils/blob/master/src/Filesize.php
-	public static function dehumanize(string $size) {
-		if (preg_match('/\d+\.\d+B/', $size)) {
-			throw new \Exception("Invalid size format or unknown/unsupported units");
-		}
-		
-		if (preg_match('/\d+kiB/', $size)) {
-			throw new \Exception("Invalid size format or unknown/unsupported units");
-		}
-		
+	// adapted from https://github.com/mingalevme/utils/blob/master/src/Filesize.php
+	public static function humanize($size, int $precision=2) : string {
+		$base = $useBinaryPrefix ? 1024 : 1000;
+		$limit = array_values(self::UNIT_PREFIXES_POWERS)[count(self::UNIT_PREFIXES_POWERS)-1];
+		$power = ($powerOfTwo = floor(log($size, $base))) > $limit ? $limit : $powerOfTwo;
+		$prefix = array_flip(self::UNIT_PREFIXES_POWERS)[$power];
+		$base = $prefix.'B';
+		return number_format($size/pow($base,$power), $precision).$base;
+	}
+
+	// adapted from https://github.com/mingalevme/utils/blob/master/src/Filesize.php
+	public static function dehumanize(string $size) : int {
 		$supportedUnits = implode('', array_keys(self::UNIT_PREFIXES_POWERS));
 		$regexp = "/^(\d+(?:\.\d+)?)(([{$supportedUnits}])((?<!B)(B|iB))?)?$/";
 		
 		if ((bool) preg_match($regexp, $size, $matches) === false) {
-			throw new \Exception("Invalid size format or unknown/unsupported units");
+			throw new Exception("Invalid size format or unknown/unsupported units");
 		}
 		
 		$prefix = isset($matches[3]) ? $matches[3] : 'B';
 		
-		$base = 1024;
+		$base = 1024; // none of that 1000/B bs
 		
 		if (strpos($matches[1], '.') !== false) {
 			return intval(floatval($matches[1]) * pow($base, self::UNIT_PREFIXES_POWERS[$prefix]));
@@ -75,7 +79,7 @@ class UniversalFunctions {
 			$pos = strpos($filename, ROOTDIR);
 			$realfile = $filename;
 			if ($pos !== false) {
-			    $realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
+				$realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
 			}
 		} else {
 			$realfile = $filename;
@@ -94,7 +98,7 @@ class UniversalFunctions {
 			$pos = strpos($filename, ROOTDIR);
 			$realfile = $filename;
 			if ($pos !== false) {
-			    $realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
+				$realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
 			}
 		} else {
 			$realfile = $filename;
@@ -132,7 +136,7 @@ class UniversalFunctions {
 			$pos = strpos($filename, ROOTDIR);
 			$realfile = $filename;
 			if ($pos !== false) {
-			    $realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
+				$realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
 			}
 		} else {
 			$realfile = $filename;
@@ -168,7 +172,7 @@ class UniversalFunctions {
 			$pos = strpos($filename, ROOTDIR);
 			$realfile = $filename;
 			if ($pos !== false) {
-			    $realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
+				$realfile = substr_replace($filename, REAL_ROOTDIR, $pos, strlen(ROOTDIR));
 			}
 		} else {
 			$realfile = $filename;
