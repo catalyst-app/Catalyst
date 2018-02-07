@@ -291,8 +291,8 @@ function totp(K,t) {
 
 			$(".color-swatch").hide().data("sub-colors", null);
 
-			$("input#"+$(this).parent().parent().parent().attr("data-for")).val(rgb2hex($(this).css("backgroundColor"))).removeClass('invalid').addClass('valid');
-			$(".chosen-color[data-for="+$(this).parent().parent().parent().attr("data-for")+"]").animate({
+			$("input#"+$(this).closest(".modal").attr("data-for")).val(rgb2hex($(this).css("backgroundColor")));
+			$(".chosen-color[data-for="+$(this).closest(".modal").attr("data-for")+"]").animate({
 				backgroundColor: $(this).css("backgroundColor")
 			}, 100);
 
