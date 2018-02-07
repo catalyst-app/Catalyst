@@ -4,7 +4,7 @@ namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\{AutoClosingModalCompletionAction,ConcreteRedirectCompletionAction};
-use \Catalyst\Form\Field\{CaptchaField,ConfirmPasswordField,EmailField,ImageField,PasswordField,StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{CaptchaField,ColorField,ConfirmPasswordField,EmailField,ImageField,PasswordField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 use \ReflectionClass;
