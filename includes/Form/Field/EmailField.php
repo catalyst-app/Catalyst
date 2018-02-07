@@ -144,12 +144,15 @@ class EmailField extends AbstractField {
 	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
 	 */
 	public function checkServerSide() : void {
+		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+			$this->throwMissingError();
+		}
 		if ($this->isRequired()) {
-			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($_REQUEST[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
 		} else {
-			if (!isset($_REQUEST[$this->getDistinguisher()]) || empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($_REQUEST[$this->getDistinguisher()])) {
 				return; // not required and empty, don't do further checks
 			}
 		}
