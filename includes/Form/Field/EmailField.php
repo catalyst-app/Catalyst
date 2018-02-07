@@ -8,6 +8,7 @@ use \Catalyst\Form\Form;
  * Represents an email field
  */
 class EmailField extends AbstractField {
+	use LabelTrait;
 	/**
 	 * Pattern to match user input against
 	 * 

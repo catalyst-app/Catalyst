@@ -8,6 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a text field
  */
 class TextField extends AbstractField {
+	use LabelTrait;
 	/**
 	 * Pattern to match user input against
 	 * 
