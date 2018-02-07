@@ -13,4 +13,5 @@ tests/vendor
 
 subl-project.sublime-workspace
 
-\.idea/
+.idea/
+update.php
