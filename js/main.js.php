@@ -40,10 +40,6 @@ use \Catalyst\Form\FormJS;
 var markInputInvalid = function(e, a) {
 	if ($(e).hasClass("g-recaptcha")) {
 		markCaptchaInvalid(a);
-	} else if ($(e).attr("type") == "file") {
-		$("#"+$(e).attr("id")+"-psuedo-path").addClass("invalid").focus();
-		$("label[for="+$(e).attr("id")+"-psuedo-path]").attr("data-error", a);
-		$("label[for="+$(e).attr("id")+"-psuedo-path]").addClass("active");
 	} else {
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
 		$("label[for="+$(e).attr("id")+"]").attr("data-error", a);
