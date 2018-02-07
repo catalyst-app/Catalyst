@@ -244,8 +244,10 @@ function totp(K,t) {
 			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 		});
 		$(document).on('change', '.file-input-field .file-input-path', function () {
-			if ($(this).val().length == 0) {
+			if ($(this).val().length == 0 && $(this).attr("data-required") == "yes") {
 				$(this).addClass('invalid').removeClass('valid');
+			} else if ($(this).val().length == 0) {
+				$(this).removeClass('valid');
 			} else {
 				$(this).addClass('valid').removeClass('invalid');
 			}
