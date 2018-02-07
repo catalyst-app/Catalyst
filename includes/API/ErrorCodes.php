@@ -29,18 +29,18 @@ class ErrorCodes {
 	const ERR_99902 = 'A user is already logged in';
 
 	// email list
-	const ERR_90001 = 'No email was passed';
-	const ERR_90002 = 'Invalid email was passed';
-	const ERR_90003 = 'No context was passed';
-	const ERR_90004 = 'An invalid context was passed';
+	const ERR_90001 = 'No email was entered';
+	const ERR_90002 = 'Invalid email';
+	const ERR_90003 = 'No context was entered';
+	const ERR_90004 = 'Invalid context';
 
 	// login
-	const ERR_90101 = 'No username was passed';
+	const ERR_90101 = 'No username was entered';
 	const ERR_90102 = 'Invalid username';
 	const ERR_90103 = 'The username does not exist';
-	const ERR_90104 = 'No password was passed';
+	const ERR_90104 = 'No password was entered';
 	const ERR_90105 = 'Incorrect password';
-	const ERR_90106 = 'No captcha response was sent';
+	const ERR_90106 = 'No captcha was sent';
 	const ERR_90107 = 'Invalid captcha';
 	const ERR_90108 = 'This account has been suspended';
 	const ERR_90109 = 'This account has been deactivated';
@@ -48,8 +48,8 @@ class ErrorCodes {
 
 	// totp login
 	const ERR_90201 = 'There are no active TOTP logins';
-	const ERR_90202 = 'No code was passed';
-	const ERR_90203 = 'An invalid code was passed';
+	const ERR_90202 = 'No code was entered';
+	const ERR_90203 = 'An invalid code was entered';
 	const ERR_90204 = 'The code is invalid';
 
 	/**
