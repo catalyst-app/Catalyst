@@ -102,9 +102,11 @@ class ImageField extends AbstractField {
 	 */
 	public function getHtml() : string {
 		$str = '';
-		$str .= '<div class="file-input-field col s12">';
+		$str .= '<div';
+		$str .= ' class="file-input-field col s12">';
 
-		$str .= '<div class="btn file-button">';
+		$str .= '<div';
+		$str .= ' class="btn file-button">';
 
 		$str .= '<span>FILE</span>';
 
@@ -116,9 +118,11 @@ class ImageField extends AbstractField {
 
 		$str .= '</div>';
 
-		$str .= '<div class="file-input-path-wrapper">';
+		$str .= '<div';
+		$str .= ' class="file-input-path-wrapper">';
 
-		$str .= '<div class="input-field col s12">';
+		$str .= '<div';
+		$str .= ' class="input-field col s12">';
 
 		$str .= '<input';
 		$str .= ' readonly="readonly"';
@@ -134,7 +138,8 @@ class ImageField extends AbstractField {
 		$str .= '>';
 		$str .= htmlspecialchars($this->getLabel());
 		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
+			$str .= '<span';
+			$str .= ' class="red-text">';
 			$str .= '&nbsp;*';
 			$str .= '</span>';
 		}
