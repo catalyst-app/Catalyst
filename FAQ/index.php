@@ -29,6 +29,7 @@ echo UniversalFunctions::createHeading("FAQ");
 	["users", "Who can use Catalyst?"],
 	["cost", "What does it cost?"],
 	["difference", "What sets us apart?"],
+	["explicit", "What is the difference between safe, mature, and explicit?"],
 	["security", "Is my information protected?"],
 	["suggestions", "How can I suggest features?"],
 	["payment", "How do artists get paid?"],
@@ -73,6 +74,12 @@ echo UniversalFunctions::createHeading("FAQ");
 				<div class="divider"></div>
 				<div class="section" id="difference">
 					<h4>What sets us apart?</h4>
+					
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="explicit">
+					<!-- Move to community guidelines? -->
+					<h4>What is the difference between safe, mature, and explicit?</h4>
 					
 				</div>
 				<div class="divider"></div>
@@ -167,6 +174,7 @@ echo UniversalFunctions::createHeading("FAQ");
 	["users", "Who can use Catalyst?"],
 	["cost", "What does it cost?"],
 	["difference", "What sets us apart?"],
+	["explicit", "What is the difference between safe, mature, and explicit?"],
 	["security", "Is my information protected?"],
 	["suggestions", "How can I suggest features?"],
 	["payment", "How do artists get paid?"],
