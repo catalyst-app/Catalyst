@@ -255,6 +255,19 @@ class FormRepository {
 		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Please use at least 8 characters, however, a longer, random generated one is suggested.  You may easily generate one <a target="_blank" href="https://passwordsgenerator.net/?length=60&symbols=1&numbers=1&lowercase=1&uppercase=1&similar=0&ambiguous=0&client=1&autoselect=1">here</a>.</p>');
 		$form->addField($passwordMinimumMessage);
 
+		$confirmPasswordField = new ConfirmPasswordField();
+		$confirmPasswordField->setDistinguisher("confirm-password");
+		$confirmPasswordField->setLabel("Confirm Password");
+		$confirmPasswordField->setRequired(true);
+		$confirmPasswordField->setMinLength(8);
+		$confirmPasswordField->addError(90311, ErrorCodes::ERR_90311);
+		$confirmPasswordField->setMissingErrorCode(90311);
+		$confirmPasswordField->addError(90312, ErrorCodes::ERR_90312);
+		$confirmPasswordField->setInvalidErrorCode(90312);
+		$confirmPasswordField->setLinkedField($passwordField);
+		$form->addField($confirmPasswordField);
+
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
@@ -288,4 +301,3 @@ class FormRepository {
 		return $forms;
 	}
 }
-
