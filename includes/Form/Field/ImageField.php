@@ -179,7 +179,7 @@ class ImageField extends AbstractField {
 		$str .= '}';
 
 		$str .= 'if (';
-		$str .= '!'.json_encode(FileUpload::MIME_TO_EXT).'.includes($('.json_encode("#".$this->getId()).')[0].files[i].type)';
+		$str .= '!'.json_encode(array_keys(FileUpload::MIME_TO_EXT)).'.includes($('.json_encode("#".$this->getId()).')[0].files[i].type)';
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId().self::PATH_INPUT_SUFFIX).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
