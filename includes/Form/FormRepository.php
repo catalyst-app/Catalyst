@@ -311,10 +311,10 @@ class FormRepository {
 		$nsfwProfilePictureField->setDistinguisher("profile-picture-is-nsfw");
 		$nsfwProfilePictureField->setLabel("My profile picture is explicit or mature");
 		$nsfwProfilePictureField->setRequired(false);
-		$nsfwProfilePictureField->addError(90322, ErrorCodes::ERR_90322);
-		$nsfwProfilePictureField->setMissingErrorCode(90322);
-		$nsfwProfilePictureField->addError(90323, ErrorCodes::ERR_90323);
-		$nsfwProfilePictureField->setInvalidErrorCode(90323);
+		$nsfwProfilePictureField->addError(90318, ErrorCodes::ERR_90318);
+		$nsfwProfilePictureField->setMissingErrorCode(90318);
+		$nsfwProfilePictureField->addError(90318, ErrorCodes::ERR_90318);
+		$nsfwProfilePictureField->setInvalidErrorCode(90318);
 		$form->addField($nsfwProfilePictureField);
 
 		$explicitDefinitionMessage = new StaticHTMLField();
