@@ -3,7 +3,8 @@
 namespace Catalyst\Form;
 
 use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
-use \Catalyst\Form\Field\AbstractField;
+use \Catalyst\Form\Field\{AbstractField,ImageField};
+use \Exception;
 use \InvalidArgumentException;
 
 /**
@@ -516,6 +517,15 @@ class Form {
 	public function checkServerSide() : void {
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
 			\Catalyst\Response::send405($this->getMethodString());
+		}
+		// https://stackoverflow.com/a/9908619/
+		if ($this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($_POST) === 0) {
+			foreach ($this->getFields() as $field) {
+				if ($field instanceof ImageField) {
+					$field->throwTooLargeError();
+				}
+			}
+			throw new Exception('PHP discarded POST data because of request exceeding post_max_size, but there are no ImageField\'s in the form');
 		}
 		foreach ($this->fields as $field) {
 			$field->checkServerSide();
