@@ -66,7 +66,8 @@ class TextField extends AbstractField {
 	 */
 	public function getHtml() : string {
 		$str = '';
-		$str .= '<div class="input-field col s12">';
+		$str .= '<div';
+		$str .= ' class="input-field col s12">';
 
 		$inputClasses = [];
 		$str .= '<input';
@@ -101,7 +102,8 @@ class TextField extends AbstractField {
 		$str .= '>';
 		$str .= htmlspecialchars($this->getLabel());
 		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
+			$str .= '<span';
+			$str .= ' class="red-text">';
 			$str .= '&nbsp;*';
 			$str .= '</span>';
 		}
