@@ -317,6 +317,10 @@ class FormRepository {
 		$nsfwProfilePictureField->setInvalidErrorCode(90323);
 		$form->addField($nsfwProfilePictureField);
 
+		$explicitDefinitionMessage = new StaticHTMLField();
+		$explicitDefinitionMessage->setHtml('<p class="no-top-margin col s12">Go <a href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
+		$form->addField($explicitDefinitionMessage);
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
