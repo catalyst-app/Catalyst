@@ -39,7 +39,6 @@
 ./js/main.js.php
 ./Markdown/Emoji/index.php
 ./Markdown/index.php
-./Register/index.php
 ./Settings/index.php
 ./Settings/TOTP/index.php
 ./User/index.php
