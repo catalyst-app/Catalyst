@@ -43,7 +43,7 @@ class UniversalFunctions {
 
 	// adapted from https://github.com/mingalevme/utils/blob/master/src/Filesize.php
 	public static function humanize($size, int $precision=2) : string {
-		$base = $useBinaryPrefix ? 1024 : 1000;
+		$base = 1024;
 		$limit = array_values(self::UNIT_PREFIXES_POWERS)[count(self::UNIT_PREFIXES_POWERS)-1];
 		$power = ($powerOfTwo = floor(log($size, $base))) > $limit ? $limit : $powerOfTwo;
 		$prefix = array_flip(self::UNIT_PREFIXES_POWERS)[$power];
