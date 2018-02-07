@@ -83,7 +83,7 @@ class UniversalFunctions {
 		if (!file_exists($filename)) {
 			return '';
 		}
-		return '<div class="img-strict-circle'.(strlen($additionalClasses) ? ' ' : '').$additionalClasses.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" style="background-image: url(\''.$filename.'\');"></div>';
+		return '<div class="img-strict-circle'.(strlen($additionalClasses) ? ' ' : '').$additionalClasses.(min(array_slice(getimagesize($realfile), 0, 2)) <= 100 ? " render-pixelated" : "").'" style="background-image: url(\''.$filename.'\');"></div>';
 	}
 
 	public static function renderImageCard(string $filename, bool $nsfw, string $title, string $caption, string $link) : string {
@@ -114,7 +114,7 @@ class UniversalFunctions {
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
 			'<div class="card-image">',
-			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
+			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) <= 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',
 			(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
 			(!empty($title) ? '<p class="card-title">'.htmlspecialchars($title).'</p>' : ''),
@@ -151,7 +151,7 @@ class UniversalFunctions {
 		return implode("", [
 			'<div class="col s12 card hoverable">',
 			'<div class="card-image">',
-			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
+			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) <= 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',
 			'<div class="card-content black-text">',
 			$html,
@@ -190,7 +190,7 @@ class UniversalFunctions {
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
 			'<div class="ribbon" style="background-color: #'.$ribbonColor.'">'.$ribbon.'</div>',
 			'<div class="card-image">',
-			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) < 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
+			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) <= 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',
 			(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
 			(!empty($title) ? '<p class="card-title">'.htmlspecialchars($title).'</p>' : ''),
