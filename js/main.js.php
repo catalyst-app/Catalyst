@@ -25,7 +25,6 @@ use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Database\User\EmailVerification;
-use \Catalyst\Database\User\Register;
 use \Catalyst\Database\User\Settings;
 use \Catalyst\Form\FormJS;
 ?>
@@ -306,11 +305,6 @@ function totp(K,t) {
 				$(".color-picker-modal").modal("close");
 			}
 		});
-
-		/* REGISTER */
-		<?php
-		echo FormJS::generateFormHandler(Register::getFormStructure());
-		?> 
 
 		/* DEACTIVATION */
 		<?php
