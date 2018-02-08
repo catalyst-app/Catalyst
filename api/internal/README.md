@@ -1,6 +1,6 @@
 # To anyone inspecting this folder for various fun things:  
 ## **THESE ENDPOINTS CANNOT BE USED WITH THE NORMAL API.  THEY DO NOT TAKE, NOR PROVIDE, API KEYS.**
-
+### Using these endpoints inside your own application without prior approval from Catalyst will result in account termination and applicable banning
 
 ### Potential error codes for these endpoints:
 
