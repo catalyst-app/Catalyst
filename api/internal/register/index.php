@@ -87,5 +87,8 @@ $query->execute();
 
 $_SESSION["user"] = new User($query->getResult());
 
+// if the user's email is null, this will silently return
+$_SESSION["user"]->sendVerificationEmail();
+
 HTTPCode::set(201);
 Response::sendSuccessResponse("Success");
