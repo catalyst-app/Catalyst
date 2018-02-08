@@ -68,3 +68,4 @@
 - **90402** - Token is invalid
 - **90403** - CAPTCHA response was not sent
 - **90404** - CAPTCHA is invalid
+- **90405** - Email is already verified
