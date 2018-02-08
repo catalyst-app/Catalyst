@@ -32,7 +32,7 @@ a {
 [type="checkbox"].filled-in:checked + label:after,
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
 .progress .indeterminate, .progress .determinate, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
-	background-color: #<?= $_GET["hex"] ?> !important;
+	background-color: #<?= $_GET["hex"] ?>;
 }
 
 .dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {
