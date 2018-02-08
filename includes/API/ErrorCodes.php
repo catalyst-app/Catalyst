@@ -77,6 +77,12 @@ class ErrorCodes {
 	const ERR_90322 = 'CAPTCHA was not sent';
 	const ERR_90323 = 'CAPTCHA response was invalid';
 
+	// email verification
+	const ERR_90401 = 'Token was not entered';
+	const ERR_90402 = 'Token is invalid';
+	const ERR_90403 = 'CAPTCHA was not sent';
+	const ERR_90404 = 'CAPTCHA response was invalid';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

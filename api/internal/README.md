@@ -61,3 +61,10 @@
 - **90321** - Terms of service was not agreed to
 - **90322** - CAPTCHA response was not sent
 - **90323** - CAPTCHA is invalid
+
+#### Email Verification
+
+- **90401** - Token was not passed
+- **90402** - Token is invalid
+- **90403** - CAPTCHA response was not sent
+- **90404** - CAPTCHA is invalid
