@@ -35,6 +35,11 @@ if (count($result) != 0) {
 
 // check email
 if (!empty($_POST["email"])) {
+	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
+		HTTPCode::set(400);
+		Response::sendErrorResponse(90324, ErrorCodes::ERR_90324);
+	}
+
 	$query = new SelectQuery();
 	$query->setTable(Tables::USERS);
 	$query->addColumn(new Column("ID", Tables::USERS));
