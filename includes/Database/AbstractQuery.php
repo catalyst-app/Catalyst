@@ -10,7 +10,7 @@ use \InvalidArgumentException;
  * Contains a common interface for creating and executing PDOStatements
  * @abstract
  */
-abstract class Query {
+abstract class AbstractQuery {
 	/**
 	 * String contianing table name
 	 * 
@@ -30,9 +30,9 @@ abstract class Query {
 	 */
 	protected $values = [];
 	/**
-	 * An array of QueryAddition
+	 * An array of QueryAdditionInterface
 	 * 
-	 * @var QueryAddition[]
+	 * @var QueryAdditionInterface[]
 	 */
 	protected $additionalCapabilities = [];
 	/**
@@ -48,7 +48,7 @@ abstract class Query {
 	 * @param string $table Table to affect/target
 	 * @param Column[] $columns Column list to affect/target
 	 * @param array $values List of values to bind to the above columns
-	 * @param QueryAddition[] $additionalCapabilities Single or multiple QueryAddition
+	 * @param QueryAdditionInterface[] $additionalCapabilities Single or multiple QueryAdditionInterface
 	 */
 	public function __construct(string $table="", array $columns=[], array $values=[], $additionalCapabilities=[]) {
 		$this->setTable($table);
@@ -171,7 +171,7 @@ abstract class Query {
 	/**
 	 * Get the additional capabilities for the query
 	 * 
-	 * @return QueryAddition[] The additions for the query (joins, etc)
+	 * @return QueryAdditionInterface[] The additions for the query (joins, etc)
 	 */
 	public function getAdditionalCapabilities() : array {
 		return $this->additionalCapabilities;
@@ -180,16 +180,16 @@ abstract class Query {
 	/**
 	 * Add an additional capability for the query
 	 * 
-	 * @param QueryAddition $additionalCapability The addition to add to the query
+	 * @param QueryAdditionInterface $additionalCapability The addition to add to the query
 	 */
-	public function addAdditionalCapability(QueryAddition $additionalCapability) : void {
+	public function addAdditionalCapability(QueryAdditionInterface $additionalCapability) : void {
 		$this->additionalCapabilities[] = $additionalCapability;
 	}
 
 	/**
 	 * Set the additional capabilities for the query
 	 * 
-	 * @param QueryAddition[] $additionalCapabilities The new list of additions for the query
+	 * @param QueryAdditionInterface[] $additionalCapabilities The new list of additions for the query
 	 */
 	public function setAdditionalCapabilities(array $additionalCapabilities) : void {
 		$this->additionalCapabilities = $additionalCapabilities;
@@ -217,8 +217,8 @@ abstract class Query {
 			throw new InvalidArgumentException("Additional capabilities is not a valid type");
 		}
 		foreach ($this->additionalCapabilities as $additionalCapability) {
-			if (!($additionalCapability instanceof QueryAddition)) {
-				throw new InvalidArgumentException("Additional capability is not a QueryAddition");
+			if (!($additionalCapability instanceof QueryAdditionInterface)) {
+				throw new InvalidArgumentException("Additional capability is not a QueryAdditionInterface");
 			}
 		}
 		return true;

@@ -7,7 +7,7 @@ use \Catalyst\Database\Database;
 /**
  * Represents a MySQL SELECT query
  */
-class SelectQuery extends Query {
+class SelectQuery extends AbstractQuery {
 	/**
 	 * Executes the query
 	 * 
