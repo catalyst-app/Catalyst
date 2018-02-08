@@ -40,7 +40,7 @@ class Email {
 	 * @param string $textMessage Message in text format for older clients/viewers
 	 * @param array $email E-mail to send from, [username, name]
 	 * @param string $pass Password for the email
-	 * @param string[] $smtp STMP settings, [host,port,protocol]
+	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
 	 */
 	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, array $smtp=self::EMAIL_SMTP) : void {
 		$mail = new \PHPMailer\PHPMailer\PHPMailer(false);
