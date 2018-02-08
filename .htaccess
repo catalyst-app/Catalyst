@@ -1,11 +1,9 @@
-Satisfy any
+Allow from 192.168.0.1/24
+Satisfy Any
 
 AuthType Basic
 AuthName "Approved testers only"
 AuthUserFile /home/catalyst/.htpasswd
-Require valid-user
-
-Require local
 Require valid-user
 
 Options -Indexes
