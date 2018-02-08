@@ -14,7 +14,7 @@ Endpoint::init(true, 2);
 FormRepository::getTotpLoginForm()->checkServerSide();
 
 if (!User::isPending2FA()) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90201, ErrorCodes::ERR_90201);
 }
 
@@ -25,7 +25,7 @@ if (!$_SESSION["pending_user"]->isTotpEnabled()) {
 
 $key = $_SESSION["pending_user"]->getTotpKey();
 if (!TOTP::checkToken($key, $_POST["totp-code"])) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90204, ErrorCodes::ERR_90204);
 }
 
