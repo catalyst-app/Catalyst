@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents an email field
  */
 class EmailField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Pattern to match user input against
 	 * 
@@ -55,6 +55,14 @@ class EmailField extends AbstractField {
 		$str .= '<input';
 		$str .= ' type="email"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+
+		if ($this->isFieldPrefilled()) {
+			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || strlen($this->getPrefilledValue()) > $this->getMaxLength()) {
+				$this->throwInvalidPrefilledValueError();
+			}
+			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
+			$inputClasses[] = "active";
+		}
 
 		if ($this->isRequired()) {
 			$str .= ' required="required"';
