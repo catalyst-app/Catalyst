@@ -22,7 +22,7 @@ class CheckboxField extends AbstractField {
 		$str .= '<input';
 		$str .= ' type="checkbox"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' class="filled-in validate"';
+		$str .= ' class="filled-in"';
 		if ($this->isFieldPrefilled()) {
 			if (!is_bool($this->getPrefilledValue())) {
 				$this->throwInvalidPrefilledValueError();

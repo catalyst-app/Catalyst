@@ -91,7 +91,6 @@ class TextField extends AbstractField {
 			$inputClasses[] = "active";
 		}
 		
-		$inputClasses[] = "validate";
 		if ($this->getPattern() !== '') {
 			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
 			$str .= ' title="Please follow the requested format"'; // required to not be ugly on some browsers
