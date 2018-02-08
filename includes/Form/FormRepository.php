@@ -22,6 +22,7 @@ use \Catalyst\Form\Field\{
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 use \Catalyst\Tokens;
+use \Catalyst\User\User;
 use \ReflectionClass;
 
 /**
