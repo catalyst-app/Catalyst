@@ -291,10 +291,6 @@ class FormRepository {
 		$colorField->setInvalidErrorCode(90314);
 		$form->addField($colorField);
 
-		$colorUsageMessage = new StaticHTMLField();
-		$colorUsageMessage->setHtml('<p class="no-top-margin col s12">This color will be used to theme the interface and your profile</p>');
-		$form->addField($colorUsageMessage);
-
 		$profilePictureField = new ImageField();
 		$profilePictureField->setDistinguisher("profile-picture");
 		$profilePictureField->setLabel("Profile Picture");
