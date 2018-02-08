@@ -207,7 +207,7 @@ class FormRepository {
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/register/");
 		$form->setButtonText("REGISTER");
-		$form->setPrimary(false);
+		$form->setPrimary(true);
 
 		$completionAction = new ConcreteRedirectCompletionAction();
 		$completionAction->setRedirectUrl("Dashboard");
