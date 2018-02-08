@@ -24,7 +24,6 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
-use \Catalyst\Database\User\Settings;
 use \Catalyst\Form\FormJS;
 ?>
 // ~))))'> 
@@ -308,11 +307,6 @@ function totp(K,t) {
 		/* DEACTIVATION */
 		<?php
 		echo FormJS::generateFormHandler(Deactivate::getFormStructure());
-		?> 
-
-		/* SETTINGS */
-		<?php
-		echo FormJS::generateFormHandler(Settings::getFormStructure());
 		?> 
 
 		/* NEW ARTIST PAGE */
