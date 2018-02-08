@@ -9,7 +9,6 @@
 ./Character/New/index.php
 ./Commission/New/index.php
 ./Dashboard/index.php
-./EmailVerification/index.php
 ./FAQ/index.php
 ./FeatureBoard/index.php
 ./FeatureBoard/Item/index.php
@@ -20,7 +19,6 @@
 ./includes/Color.php
 ./includes/CommissionType/CommissionType.php
 ./includes/Form/FileUpload.php
-./includes/Form/Flags.php
 ./includes/Integrations/SocialMedia.php
 ./includes/Message/Message.php
 ./includes/Page/Footer/footer.inc.php
