@@ -61,6 +61,7 @@
 - **90321** - Terms of service was not agreed to
 - **90322** - CAPTCHA response was not sent
 - **90323** - CAPTCHA is invalid
+- **90324** - @catalystapp.co emails are not allowed
 
 #### Email Verification
 

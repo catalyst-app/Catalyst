@@ -76,6 +76,7 @@ class ErrorCodes {
 	const ERR_90321 = 'You must agree to the Terms of Service';
 	const ERR_90322 = 'CAPTCHA was not sent';
 	const ERR_90323 = 'CAPTCHA response was invalid';
+	const ERR_90324 = '@catalystapp.co emails are not allowed';
 
 	// email verification
 	const ERR_90401 = 'Token was not entered';

@@ -254,6 +254,7 @@ class FormRepository {
 		$emailField->addError(90307, ErrorCodes::ERR_90307);
 		$emailField->setInvalidErrorCode(90307);
 		$emailField->addError(90308, ErrorCodes::ERR_90308);
+		$emailField->addError(90324, ErrorCodes::ERR_90324);
 		$form->addField($emailField);
 
 		$passwordField = new PasswordField();
