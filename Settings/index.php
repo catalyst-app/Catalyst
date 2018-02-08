@@ -4,10 +4,9 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\User\Deactivate;
-use \Catalyst\Database\User\Settings;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\{UniversalFunctions, Values};
+use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::SETTINGS[0]);
@@ -19,16 +18,18 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (!User::isLoggedIn()) {
+	HTTPCode::set(401);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Settings");
 
-if (FormHTML::testAjaxSubmissionFailed()):
-	echo FormHTML::getAjaxSubmissionHtml();
-elseif (User::isLoggedOut()):
+if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHTML();
 else: 
-	echo FormHTML::generateForm(Settings::getFormStructure());
+	echo FormRepository::getSettingsForm($_SESSION["user"])->getHtml();
 ?>
 	<div class="divider"></div>
 	<div class="section">
@@ -41,7 +42,7 @@ else:
 				<p class="flow-text">
 					In order to deactivate your account, please enter your username and password below.
 				</p>
-				<?= FormHTML::generateForm(Deactivate::getFormStructure()) ?>
+				<?= /* FormHTML::generateForm(Deactivate::getFormStructure()) */'' ?>
 			</div>
 		</div>
 	</div>
