@@ -8,7 +8,7 @@ use \InvalidArgumentException;
 /**
  * Class which represents a JOIN clause in a MySQL SELECT query
  */
-class JoinClause implements \Catalyst\Database\QueryAddition {
+class JoinClause implements QueryAdditionInterface {
 	/**
 	 * Represents an INNER JOIN
 	 */
