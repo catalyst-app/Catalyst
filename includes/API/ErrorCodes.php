@@ -84,6 +84,30 @@ class ErrorCodes {
 	const ERR_90404 = 'CAPTCHA response was invalid';
 	const ERR_90405 = 'Email is already verified';
 
+	// settings
+	const ERR_90501 = 'Username was not entered';
+	const ERR_90502 = 'Username is invalid';
+	const ERR_90503 = 'Username is in use by another user';
+	const ERR_90504 = 'Nickname was not properly submitted';
+	const ERR_90505 = 'Nickname is too long';
+	const ERR_90506 = 'Email was not properly submitted';
+	const ERR_90507 = 'Email is invalid';
+	const ERR_90508 = 'Email is already in use';
+	const ERR_90509 = 'New password was not properly submitted';
+	const ERR_90510 = 'New password does not meet the requirements';
+	const ERR_90511 = 'New password confirmation was not entered';
+	const ERR_90512 = 'Password confirmation does not match the provided password';
+	const ERR_90513 = 'Two-factor checkbox was not properly submitted';
+	const ERR_90514 = 'Color was not entered';
+	const ERR_90515 = 'Invalid color';
+	const ERR_90516 = 'This file is too large';
+	const ERR_90517 = 'This file is not an image';
+	const ERR_90518 = 'The image is invalid';
+	const ERR_90519 = 'The NSFW profile picture checkbox is invalid';
+	const ERR_90520 = 'NSFW access checkbox is invalid';
+	const ERR_90521 = 'Old password was not entered';
+	const ERR_90522 = 'Old password is incorrect';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
