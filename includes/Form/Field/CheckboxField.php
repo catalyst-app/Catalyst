@@ -3,18 +3,24 @@
 namespace Catalyst\Form\Field;
 
 use \Catalyst\Form\Form;
+use \InvalidArgumentException;
 
 /**
  * Represents a checkbox field
  */
 class CheckboxField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
+		if ($this->isFieldPrefilled()) {
+			if (!is_bool($this->getPrefilledValue())) {
+				throw new InvalidArgumentException("Invalid default ".__CLASS__." value (".serialize($this->getPrefilledValue()).")");
+			}
+		}
 		$str = '';
 		$str .= '<p';
 		$str .= ' class="col s12">';
@@ -23,6 +29,9 @@ class CheckboxField extends AbstractField {
 		$str .= ' type="checkbox"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' class="filled-in validate"';
+		if ($this->getPrefilledValue()) {
+			$str .= ' checked="checked"';
+		}
 		if ($this->isRequired()) {
 			$str .= ' required="required"';
 		}
