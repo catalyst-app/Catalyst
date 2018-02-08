@@ -45,7 +45,7 @@ trait SupportsPrefilledValueTrait {
 	 * 
 	 * @return bool if the field has been prefilled
 	 */
-	public function isFieldPrefilled() : bool {
+	protected function isFieldPrefilled() : bool {
 		return $this->fieldIsPrefilled;
 	}
 
