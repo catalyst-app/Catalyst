@@ -70,7 +70,7 @@ class ColorField extends AbstractField {
 		$str .= ' class="row">';
 
 		// get the maximum swatches, either of a category or of categories themselves
-		$numColorSwatches = max(count(\Catalyst\Color::COLOR_BY_CATEGORY), max(array_map("count", \Catalyst\Color::COLOR_BY_CATEGORY)));
+		$numColorSwatches = max(count(Color::COLOR_BY_CATEGORY), max(array_map("count", Color::COLOR_BY_CATEGORY)));
 
 		for ($i = 0; $i < $numColorSwatches; $i++) {
 			$str .= '<div';
