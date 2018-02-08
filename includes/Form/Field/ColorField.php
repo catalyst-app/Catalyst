@@ -83,7 +83,6 @@ class ColorField extends AbstractField {
 		$str .= '</div>';
 		$str .= '</div>';
 		$str .= '</div>';
-		return $str;
 
 		return $str;
 	}
