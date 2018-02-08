@@ -1,5 +1,5 @@
 # To anyone inspecting this folder for various fun things:  
-## **THESE CANNOT BE USED WITH THE NORMAL API.  THEY DO NOT TAKE, NOR PROVIDE, KEYS.**
+## **THESE ENDPOINTS CANNOT BE USED WITH THE NORMAL API.  THEY DO NOT TAKE, NOR PROVIDE, API KEYS.**
 
 
 ### Potential error codes for these endpoints:
