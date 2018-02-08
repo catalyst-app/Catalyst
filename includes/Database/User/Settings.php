@@ -337,7 +337,7 @@ class Settings {
 			return self::ERROR_UNKNOWN;
 		}
 
-		\Catalyst\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
+		// \Catalyst\Database\User\EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
 
 		if (isset($totpInitialized) && $totpInitialized) {
 			return self::TOTP_INIT;
@@ -345,3 +345,4 @@ class Settings {
 		return self::UPDATED;
 	}
 }
+// 

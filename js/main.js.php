@@ -24,7 +24,6 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
 use \Catalyst\Database\User\Deactivate;
-use \Catalyst\Database\User\EmailVerification;
 use \Catalyst\Database\User\Settings;
 use \Catalyst\Form\FormJS;
 ?>
@@ -314,11 +313,6 @@ function totp(K,t) {
 		/* SETTINGS */
 		<?php
 		echo FormJS::generateFormHandler(Settings::getFormStructure());
-		?> 
-
-		/* EMAIL VERIFICATION */
-		<?php
-		echo FormJS::generateFormHandler(EmailVerification::getFormStructure());
 		?> 
 
 		/* NEW ARTIST PAGE */
