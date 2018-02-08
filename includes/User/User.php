@@ -2,6 +2,8 @@
 
 namespace Catalyst\User;
 
+use \Catalyst\Email;
+
 class User implements \Serializable {
 	private $id;
 
