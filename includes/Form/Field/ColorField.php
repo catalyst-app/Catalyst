@@ -10,13 +10,18 @@ use \Catalyst\Page\Values;
  * Represents a field to pick a color from the allowed values
  */
 class ColorField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
+		if ($this->isFieldPrefilled()) {
+			if (!in_array($this->getPrefilledValue(), array_keys(Color::HEX_MAP))) {
+				$this->throwInvalidError();
+			}
+		}
 		$str = '';
 		$str .= '<div';
 		$str .= ' data-for="'.htmlspecialchars($this->getId()).'"';
@@ -25,7 +30,11 @@ class ColorField extends AbstractField {
 		$str .= '<div';
 		$str .= ' class="chosen-color btn"';
 		$str .= ' data-for="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' style="background-color: #'.(Values::DEFAULT_COLOR).'"';
+		if ($this->isFieldPrefilled()) {
+			$str .= ' style="background-color: #'.($this->getPrefilledValue()).'"';
+		} else {
+			$str .= ' style="background-color: #'.(Values::DEFAULT_COLOR).'"';
+		}
 		$str .= '>';
 		$str .= '</div>';
 
@@ -40,7 +49,11 @@ class ColorField extends AbstractField {
 		$str .= ' type="text"';
 		$str .= ' class="active"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' value="'.Values::DEFAULT_COLOR.'"';
+		if ($this->isFieldPrefilled()) {
+			$str .= ' value="'.$this->getPrefilledValue().'"';
+		} else {
+			$str .= ' value="'.Values::DEFAULT_COLOR.'"';
+		}
 		$str .= '>';
 
 		$str .= '<label';
