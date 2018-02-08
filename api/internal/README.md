@@ -69,3 +69,28 @@
 - **90403** - CAPTCHA response was not sent
 - **90404** - CAPTCHA is invalid
 - **90405** - Email is already verified
+
+#### Settings
+
+- **90501** - Username was not passed
+- **90502** - Username is invalid
+- **90503** - Username is in use by another user
+- **90504** - Nickname was not passed
+- **90505** - Nickname is invalid
+- **90506** - Email was not passed
+- **90507** - Email is invalid
+- **90508** - Email is already in use
+- **90509** - Password was not passed
+- **90510** - Password does not meet requirements
+- **90511** - Password confirmation was not passed
+- **90512** - Password confirmation does not match the provided password
+- **90513** - Two factor authentication checkbox is invalid
+- **90514** - Color was not sent
+- **90515** - Color is not a valid color
+- **90516** - Profile picture is too large
+- **90517** - Profile picture is not an image
+- **90518** - Profile picture is invalid
+- **90519** - NSFW profile picture checkbox is invalid
+- **90520** - NSFW access checkbox is invalid
+- **90521** - Old password was not passed
+- **90522** - Old password is incorrect
