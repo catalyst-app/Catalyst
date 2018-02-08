@@ -367,7 +367,7 @@ class FormRepository {
 
 		$forms = [];
 		foreach ($classMethods as $method) {
-			if ($method->getReturnType()->getName() == 'Catalyst\Form\Form') {
+			if ($method->getReturnType()->getName() == Form::class) {
 				$forms[] = call_user_func([__CLASS__, $method->getName()]);
 			}
 		}
