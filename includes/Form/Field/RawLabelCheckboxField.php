@@ -20,6 +20,14 @@ class RawLabelCheckboxField extends CheckboxField {
 		$str .= ' type="checkbox"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' class="filled-in validate"';
+		if ($this->isFieldPrefilled()) {
+			if (!is_bool($this->getPrefilledValue())) {
+				$this->throwInvalidPrefilledValueError();
+			}
+			if ($this->getPrefilledValue()) {
+				$str .= ' checked="checked"';
+			}
+		}
 		if ($this->isRequired()) {
 			$str .= ' required="required"';
 		}
