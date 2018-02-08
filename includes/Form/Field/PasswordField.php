@@ -56,8 +56,6 @@ class PasswordField extends AbstractField {
 			$inputClasses[] = "active";
 		}
 		
-		$inputAttributes[] = "validate";
-
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
 		$str .= '>';
 		

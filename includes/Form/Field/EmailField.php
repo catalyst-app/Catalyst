@@ -75,7 +75,6 @@ class EmailField extends AbstractField {
 
 		$str .= ' maxlength="'.$this->getMaxLength().'"';
 		
-		$inputAttributes[] = "validate";
 		if ($this->getPattern() !== '') {
 			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
 			$str .= ' title="Please enter a valid email"';
