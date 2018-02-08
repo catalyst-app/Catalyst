@@ -4,9 +4,8 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\User\EmailVerification;
-use \Catalyst\Email;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
+use \Catalyst\{Email, HTTPCode};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
@@ -19,12 +18,18 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
-if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->emailIsVerified()) {
-	EmailVerification::sendVerificationEmailToUser($_SESSION["user"]);
+if (User::isLoggedIn() && $_SESSION["user"]->emailIsVerified()) {
+	HTTPCode::set(401);
+} else if (!User::isLoggedIn()) {
+	HTTPCode::set(403);
 }
 
 if (isset($_GET["token"])) {
-	$_SESSION["token"] = $_GET["token"];
+	$_SESSION["email_token"] = $_GET["token"];
+}
+
+if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->emailIsVerified()) {
+	$_SESSION["user"]->sendVerificationEmail();
 }
 
 require_once Values::HEAD_INC;
@@ -32,17 +37,17 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Email Verification");
 
 ?>
-<?php if (User::isLoggedOut()): ?>
+<?php if (!User::isLoggedIn()): ?>
 <?= User::getNotLoggedInHTML() ?>
 <?php elseif ($_SESSION["user"]->emailIsVerified()): ?>
 			<div class="section">
-				<p class="flow-text">Your email has been verified.  Return <a href="<?=ROOTDIR?>">home</a>.</p>
+				<p class="flow-text">Your email has been verified.  Return <a href="<?=ROOTDIR?>">home</a>?</p>
 			</div>
 <?php else: ?>
 			<div class="section">
 				<p class="flow-text">An email has been sent to <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.</p>
 				<p class="flow-text">Please follow the link inside or enter the token in the box below to validate your account.</p>
-<?= FormHTML::generateForm(EmailVerification::getFormStructure()) ?>
+<?= FormRepository::getEmailVerificationForm()->getHtml(); ?>
 				<p class="flow-text">Didn't recieve an email?</p>
 				<p>Try the following:</p>
 				<blockquote>
