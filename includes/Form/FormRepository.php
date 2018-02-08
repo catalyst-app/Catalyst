@@ -473,6 +473,7 @@ class FormRepository {
 		$emailField->addError(90507, ErrorCodes::ERR_90507);
 		$emailField->setInvalidErrorCode(90507);
 		$emailField->addError(90508, ErrorCodes::ERR_90508);
+		$emailField->addError(90523, ErrorCodes::ERR_90523);
 		if (!is_null($user) && !is_null($user->getEmail())) {
 			$emailField->setPrefilledValue($user->getEmail());
 		}

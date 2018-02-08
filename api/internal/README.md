@@ -95,3 +95,4 @@
 - **90520** - NSFW access checkbox is invalid
 - **90521** - Old password was not passed
 - **90522** - Old password is incorrect
+- **90523** - @catalystapp.co emails are not allowed
