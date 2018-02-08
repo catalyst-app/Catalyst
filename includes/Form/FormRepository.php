@@ -5,7 +5,8 @@ namespace Catalyst\Form;
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\{
 	AutoClosingModalCompletionAction,
-	ConcreteRedirectCompletionAction
+	ConcreteRedirectCompletionAction,
+	ConditionalCompletionAction
 };
 use \Catalyst\Form\Field\{
 	CaptchaField,
