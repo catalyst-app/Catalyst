@@ -14,7 +14,7 @@ class Response {
 	 * @param string $message Message which describes the response
 	 * @param array $data Additional data
 	 */
-	public static function sendSuccessResponse(string $message, array $data=[]) {
+	public static function sendSuccessResponse(string $message, array $data=[]) : void {
 		echo json_encode([
 			"error" => false,
 			"http_code" => HTTPCode::get(),
@@ -35,7 +35,7 @@ class Response {
 	 * @param string $message Message which describes the response
 	 * @param array $data Additional data
 	 */
-	public static function sendErrorResponse(int $code, string $message, array $data=[]) {
+	public static function sendErrorResponse(int $code, string $message, array $data=[]) : void {
 		echo json_encode([
 			"error" => true,
 			"http_code" => HTTPCode::get(),
