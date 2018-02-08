@@ -5,7 +5,7 @@ namespace Catalyst\Database;
 /**
  * Basic interface which contains the functions required in order to make the query addition
  */
-interface QueryAddition {
+interface QueryAdditionInterface {
 	/**
 	 * Get the parameters to bind
 	 * 

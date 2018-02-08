@@ -8,7 +8,7 @@ use \InvalidArgumentException;
 /**
  * Class which represents a WHERE clause in a MySQL query
  */
-class WhereClause implements QueryAddition {
+class WhereClause implements QueryAdditionInterface {
 	/**
 	 * Represents a boolean AND operation
 	 */
