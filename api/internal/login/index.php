@@ -31,30 +31,29 @@ $query->execute();
 
 $result = $query->getResult();
 
-// all the HTTP codes here are 401 as this is a login - they will be denied or granted access based on outcome
 if (count($result) == 0) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90103, ErrorCodes::ERR_90103);
 }
 
 if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90105, ErrorCodes::ERR_90105);
 }
 
 // suspension/deactivation is serious, and should be displayed only when password is correct
 if ($result[0]["SUSPENDED"]) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90108, ErrorCodes::ERR_90108);
 }
 if ($result[0]["DEACTIVATED"]) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90109, ErrorCodes::ERR_90109);
 }
 
 if ($result[0]["TOTP_KEY"] !== null) {
 	$_SESSION["pending_user"] = new User($result[0]["ID"]);
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 	Response::sendErrorResponse(90110, ErrorCodes::ERR_90110);
 }
 

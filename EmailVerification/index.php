@@ -19,9 +19,9 @@ if (User::isLoggedIn()) {
 }
 
 if (User::isLoggedIn() && $_SESSION["user"]->emailIsVerified()) {
-	HTTPCode::set(401);
+	HTTPCode::set(400);
 } else if (!User::isLoggedIn()) {
-	HTTPCode::set(403);
+	HTTPCode::set(401);
 }
 
 if (isset($_GET["token"])) {
