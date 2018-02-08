@@ -66,7 +66,7 @@ class ErrorCodes {
 	const ERR_90311 = 'Password confirmation was not entered';
 	const ERR_90312 = 'Confirmation does not match the provided password';
 	const ERR_90313 = 'Color was not entered';
-	const ERR_90314 = 'The color is not a valid color';
+	const ERR_90314 = 'Invalid color';
 	const ERR_90315 = 'This file is too large';
 	const ERR_90316 = 'This file is not an image';
 	const ERR_90317 = 'The image is invalid';
