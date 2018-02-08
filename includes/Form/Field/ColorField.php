@@ -38,6 +38,7 @@ class ColorField extends AbstractField {
 		$str .= '<input';
 		$str .= ' readonly="readonly"';
 		$str .= ' type="text"';
+		$str .= ' class="active"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' value="'.Values::DEFAULT_COLOR.'"';
 		$str .= '>';
