@@ -3,7 +3,6 @@
 namespace Catalyst\Form\Field;
 
 use \Catalyst\Form\Form;
-use \InvalidArgumentException;
 
 /**
  * Represents a checkbox field
@@ -18,7 +17,7 @@ class CheckboxField extends AbstractField {
 	public function getHtml() : string {
 		if ($this->isFieldPrefilled()) {
 			if (!is_bool($this->getPrefilledValue())) {
-				throw new InvalidArgumentException("Invalid default ".__CLASS__." value (".serialize($this->getPrefilledValue()).")");
+				$this->throwInvalidPrefilledValueError();
 			}
 		}
 		$str = '';

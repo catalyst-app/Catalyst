@@ -2,6 +2,8 @@
 
 namespace Catalyst\Form\Field;
 
+use \InvalidArgumentException;
+
 /**
  * Used by fields which allow pre-filled values
  */
@@ -45,5 +47,14 @@ trait SupportsPrefilledValueTrait {
 	 */
 	public function isFieldPrefilled() : bool {
 		return $this->fieldIsPrefilled;
+	}
+
+	/**
+	 * Throws an error regarding an invalid prefilled value
+	 * 
+	 * @throws InvalidArgumentException
+	 */
+	protected function throwInvalidPrefilledValueError() : void {
+		throw new InvalidArgumentException("Invalid default ".__CLASS__." value (".serialize($this->getPrefilledValue()).")");
 	}
 }
