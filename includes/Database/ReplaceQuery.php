@@ -9,7 +9,7 @@ use \Catalyst\API\{Endpoint, Response};
 /**
  * Represents a MySQL REPLACE query
  */
-class ReplaceQuery extends Query {
+class ReplaceQuery extends AbstractQuery {
 	/**
 	 * Executes the query
 	 * 

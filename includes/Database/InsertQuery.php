@@ -9,7 +9,7 @@ use \Catalyst\API\{Endpoint, Response};
 /**
  * Represents a MySQL INSERT query
  */
-class InsertQuery extends Query {
+class InsertQuery extends AbstractQuery {
 	/**
 	 * Executes the query
 	 * 
