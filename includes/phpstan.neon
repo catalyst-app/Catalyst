@@ -3,6 +3,8 @@ parameters:
 		- includes/vendor
 		- includes/phpqrcode.php
 	bootstrap: includes/phpstan-init.php
+	ignoreErrors:
+		- '/Class QRcode should be written with ::class notation, string found\./'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
 
