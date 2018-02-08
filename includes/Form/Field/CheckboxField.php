@@ -15,11 +15,6 @@ class CheckboxField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		if ($this->isFieldPrefilled()) {
-			if (!is_bool($this->getPrefilledValue())) {
-				$this->throwInvalidPrefilledValueError();
-			}
-		}
 		$str = '';
 		$str .= '<p';
 		$str .= ' class="col s12">';
@@ -29,6 +24,9 @@ class CheckboxField extends AbstractField {
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' class="filled-in validate"';
 		if ($this->isFieldPrefilled()) {
+			if (!is_bool($this->getPrefilledValue())) {
+				$this->throwInvalidPrefilledValueError();
+			}
 			if ($this->getPrefilledValue()) {
 				$str .= ' checked="checked"';
 			}
