@@ -3,3 +3,6 @@ parameters:
 		- includes/vendor
 		- includes/phpqrcode.php
 	bootstrap: includes/phpstan-init.php
+includes:
+	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
+
