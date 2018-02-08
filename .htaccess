@@ -1,1 +1,11 @@
+Satisfy any
+
+AuthType Basic
+AuthName "Approved testers only"
+AuthUserFile /home/catalyst/.htpasswd
+Require valid-user
+
+Require local
+Require valid-user
+
 Options -Indexes
