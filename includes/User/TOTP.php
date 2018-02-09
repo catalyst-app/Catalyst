@@ -84,4 +84,35 @@ class TOTP {
 		}
 		return false;
 	}
+
+	/**
+	 * Generate a TOTP key
+	 * 
+	 * @return string A new TOTP key
+	 */
+	public static function generateKey() : string {
+		$chars = "234567ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$key = implode("",array_map(function($in) use ($chars) { return $chars[$in]; }, array_rand(str_split($chars), 16)));
+		
+		$totpKey = "";
+
+		$lut = ["A"=>0,"B"=>1,"C"=>2,"D"=>3,"E"=>4,"F"=>5,"G"=>6,"H"=>7,"I"=>8,"J"=>9,"K"=>10,"L"=>11,"M"=>12,"N"=>13,"O"=>14,"P"=>15,"Q"=>16,"R"=>17,"S"=>18,"T"=>19,"U"=>20,"V"=>21,"W"=>22,"X"=>23,"Y"=>24,"Z"=>25,"2"=>26,"3"=>27,"4"=>28,"5"=>29,"6"=>30,"7"=>31];
+
+		$l = strlen($key);
+		$n = 0;
+		$j = 0;
+		$totpKey = "";
+
+		for ($i = 0; $i < $l; $i++) {
+			$n = $n << 5;
+			$n = $n + $lut[$key[$i]];
+			$j = $j + 5;
+			if ($j >= 8) {
+				$j = $j - 8;
+				$totpKey .= chr(($n & (0xFF << $j)) >> $j);
+			}
+		}
+
+		return $totpKey;
+	}
 }
