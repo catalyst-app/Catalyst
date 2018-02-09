@@ -14,6 +14,11 @@ Endpoint::init(true, 1);
 
 FormRepository::getDeactivateForm()->checkServerSide();
 
+if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername())) {
+	HTTPCode::set(400);
+	Response::sendErrorResponse(90602, ErrorCodes::ERR_90602);
+}
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
