@@ -88,6 +88,20 @@ if ($_SESSION["user"]->isArtist()) {
 	$removeArtistStreamingIntegrationsQuery->addAdditionalCapability($whereClause);
 	$removeArtistStreamingIntegrationsQuery->execute();
 
+	$archiveCommissionsQuery = new UpdateQuery();
+	$archiveCommissionsQuery->setTable(Tables::COMMISSIONS);
+	$archiveCommissionsQuery->addColumn(new Column("ARCHIVED_ARTIST", Tables::COMMISSIONS));
+	$archiveCommissionsQuery->addValue(true);
+	$joinClause = new JoinClause();
+	$joinClause->setType(JoinClause::INNER);
+	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
+	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSIONS));
+	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
+	$archiveCommissionsQuery->addAdditionalCapability($whereClause);
+	$archiveCommissionsQuery->execute();
+
 }
 $_SESSION = [];
 
