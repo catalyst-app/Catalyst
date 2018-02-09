@@ -160,6 +160,11 @@ if (($_POST["nsfw-access"] == "true") != $user["NSFW"]) {
 	$query->addValue($_POST["nsfw-access"] == "true");
 }
 
+if ($_POST["color"] !== $_SESSION["user"]->getColorHex()) {
+	$query->addColumn(new Column("COLOR", Tables::USERS));
+	$query->addValue(hex2bin($_POST["color"]));
+}
+
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
