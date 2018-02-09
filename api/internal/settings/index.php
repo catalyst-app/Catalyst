@@ -76,18 +76,20 @@ $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
 $query->execute();
 
-$user = $query->result()[0];
+$user = $query->getResult()[0];
 
-if (!password_verify($oldPassword, $user["HASHED_PASSWORD"])) {
+if (!password_verify($_POST["password"], $user["HASHED_PASSWORD"])) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90522, ErrorCodes::ERR_90522);
 }
+
 
 $query = new UpdateQuery();
 if ($_POST["username"] != $user["USERNAME"]) {
 	$query->addColumn(new Column("USERNAME", Tables::USERS));
 	$query->addValue($_POST["username"]);
 }
+
 if (!empty($_POST["new-password"])) {
 	$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
 	$query->addValue(password_hash($_POST["new-password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]));
@@ -95,6 +97,7 @@ if (!empty($_POST["new-password"])) {
 	$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
 	$query->addValue(Tokens::generatePasswordResetToken());
 }
+
 $redirectToTotp = false;
 if (is_null($user["TOTP_KEY"]) != ($_POST["two-factor"] == "false")) {
 	if ($_POST["two-factor"] == "true") {
@@ -111,6 +114,7 @@ if (is_null($user["TOTP_RESET_TOKEN"])) {
 	$query->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
 	$query->addValue(Tokens::generateTotpResetToken());
 }
+
 if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 	$query->addColumn(new Column("EMAIL", Tables::USERS));
 	$query->addValue(null);
