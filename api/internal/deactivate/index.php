@@ -156,6 +156,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$deleteCommissionTypeStages->addAdditionalCapability($whereClause);
 	$deleteCommissionTypeStages->execute();
 }
+
 $deleteCharactersQuery = new UpdateQuery();
 $deleteCharactersQuery->setTable(Tables::CHARACTERS);
 $deleteCharactersQuery->addColumn(new Column("DELETED", Tables::CHARACTERS));
@@ -164,6 +165,19 @@ $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USER_ID", Tables::CHARACTERS), "=", $userId]);
 $deleteCharactersQuery->addAdditionalCapability($whereClause);
 $deleteCharactersQuery->execute();
+
+$deleteCharacterImagesQuery = new DeleteQuery();
+$deleteCharacterImagesQuery->setTable(Tables::CHARACTER_IMAGES);
+$joinClause = new JoinClause();
+$joinClause->setType(JoinClause::INNER);
+$joinClause->setJoinTable(Tables::CHARACTERS);
+$joinClause->setLeftColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
+$joinClause->setRightColumn(new Column("ID", Tables::CHARACTERS));
+$deleteCharacterImagesQuery->addAdditionalCapability($joinClause);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::CHARACTERS), "=", $userId]);
+$deleteCharacterImagesQuery->addAdditionalCapability($whereClause);
+$deleteCharacterImagesQuery->execute();
 
 $_SESSION = [];
 
