@@ -22,6 +22,7 @@ class Tables {
 	public const COMMISSION_TYPE_PAYMENT_OPTIONS = "commission_type_payment_options";
 	public const COMMISSION_TYPE_STAGES = "commission_type_stages";
 	public const COMMISSION_TYPES = "commission_types";
+	public const COMMISSIONS = "commissions";
 	public const EMAIL_LIST = "email_list";
 	public const FEATURE_BOARD_COMMENTS = "feature_board_comments";
 	public const FEATURE_BOARD_GROUPS = "feature_board_groups";
