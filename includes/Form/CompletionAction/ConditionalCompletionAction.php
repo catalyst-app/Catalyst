@@ -114,7 +114,6 @@ class ConditionalCompletionAction extends AbstractCompletionAction {
 			$str .= $this->getElse()->getJs();
 			$str .= '}';
 		}
-		$str .= 'window.location = $("html").attr("data-rootdir")+'.json_encode($this->getConditions()).';';
 		return $str;
 	}
 }
