@@ -23,7 +23,6 @@ use \Catalyst\Database\CommissionType\NewCommissionType;
 use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Database\SocialMedia;
-use \Catalyst\Database\User\Deactivate;
 use \Catalyst\Form\FormJS;
 ?>
 // ~))))'> 
@@ -303,11 +302,6 @@ function totp(K,t) {
 				$(".color-picker-modal").modal("close");
 			}
 		});
-
-		/* DEACTIVATION */
-		<?php
-		echo FormJS::generateFormHandler(Deactivate::getFormStructure());
-		?> 
 
 		/* NEW ARTIST PAGE */
 		<?php
