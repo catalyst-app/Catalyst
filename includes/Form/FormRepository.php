@@ -425,7 +425,7 @@ class FormRepository {
 		$form->setPrimary(true);
 
 		$completionAction = new ConditionalCompletionAction();
-		$completionAction->addCondition("redirect_to_totp == true", new ConcreteRedirectCompletionAction("Settings/TOTP"));
+		$completionAction->addCondition('data.data["redirect_to_totp"] == true', new ConcreteRedirectCompletionAction("Settings/TOTP"));
 		$completionAction->setElse(new ConcreteRedirectCompletionAction("Dashboard"));
 		$form->setCompletionAction($completionAction);
 
