@@ -55,6 +55,13 @@ $whereClause->addToClause([new Column("USER_ID", Tables::API_AUTHORIZATIONS), "=
 $removeApiAuthorizationsQuery->addAdditionalCapability($whereClause);
 $removeApiAuthorizationsQuery->execute();
 
+$removeApiKeysQuery = new DeleteQuery();
+$removeApiKeysQuery->setTable(Tables::API_KEYS);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::API_KEYS), "=", $userId]);
+$removeApiKeysQuery->addAdditionalCapability($whereClause);
+$removeApiKeysQuery->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
