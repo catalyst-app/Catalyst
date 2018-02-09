@@ -83,3 +83,11 @@ if (!password_verify($oldPassword, $user["HASHED_PASSWORD"])) {
 	Response::sendErrorResponse(90522, ErrorCodes::ERR_90522);
 }
 
+$query = new UpdateQuery();
+
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+$query->addAdditionalCapability($whereClause);
+$query->execute();
+
+Response::sendSuccessResponse("Success", ["redirect_to_totp" => $redirectToTotp]);
