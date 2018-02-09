@@ -155,6 +155,11 @@ if (is_null($newPfp) && is_null($user["PICTURE_LOC"])) {
 	$query->addValue(false);
 }
 
+if (($_POST["nsfw-access"] == "true") != $user["NSFW"]) {
+	$query->addColumn(new Column("NSFW", Tables::USERS));
+	$query->addValue($_POST["nsfw-access"] == "true");
+}
+
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
