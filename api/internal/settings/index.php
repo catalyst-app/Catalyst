@@ -9,7 +9,7 @@ use \Catalyst\Database\{Column, SelectQuery, Tables, UpdateQuery, WhereClause};
 use \Catalyst\{Email, HTTPCode, Tokens};
 use \Catalyst\Form\{FileUpload, FormRepository};
 use \Catalyst\Page\Values;
-use \Catalyst\User\User;
+use \Catalyst\User\{TOTP,User};
 
 Endpoint::init(true, 1);
 
@@ -85,6 +85,7 @@ if (!password_verify($_POST["password"], $user["HASHED_PASSWORD"])) {
 
 
 $query = new UpdateQuery();
+$query->setTable(Tables::USERS);
 if ($_POST["username"] != $user["USERNAME"]) {
 	$query->addColumn(new Column("USERNAME", Tables::USERS));
 	$query->addValue($_POST["username"]);
