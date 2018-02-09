@@ -135,6 +135,15 @@ if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 	$query->addValue(false);
 }
 
+$newPfp = FileUpload::uploadImage(isset($_FILES["profile-picture"]) ? $_FILES["profile-picture"] : null, FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
+if (!is_null($newPfp) && !is_null($user["PICTURE_LOC"])) {
+	FileUpload::delete($user["FILE_TOKEN"].$user["PICTURE_LOC"], FileUpload::PROFILE_PHOTO);
+}
+if ($user["PICTURE_LOC"] !== $newPfp) {
+	$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
+	$query->addValue($newPfp);
+}
+
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
