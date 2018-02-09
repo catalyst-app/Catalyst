@@ -165,6 +165,11 @@ if ($_POST["color"] !== $_SESSION["user"]->getColorHex()) {
 	$query->addValue(hex2bin($_POST["color"]));
 }
 
+if ($_POST["nickname"] != $user["NICK"]) {
+	$query->addColumn(new Column("NICK", Tables::USERS));
+	$query->addValue($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
+}
+
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
