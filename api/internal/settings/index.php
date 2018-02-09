@@ -88,6 +88,13 @@ if ($_POST["username"] != $user["USERNAME"]) {
 	$query->addColumn(new Column("USERNAME", Tables::USERS));
 	$query->addValue($_POST["username"]);
 }
+if (!empty($_POST["new-password"])) {
+	$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+	$query->addValue(password_hash($_POST["new-password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]));
+	
+	$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
+	$query->addValue(Tokens::generatePasswordResetToken());
+}
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
