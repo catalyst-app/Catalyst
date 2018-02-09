@@ -84,6 +84,10 @@ if (!password_verify($oldPassword, $user["HASHED_PASSWORD"])) {
 }
 
 $query = new UpdateQuery();
+if ($_POST["username"] != $user["USERNAME"]) {
+	$query->addColumn(new Column("USERNAME", Tables::USERS));
+	$query->addValue($_POST["username"]);
+}
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
