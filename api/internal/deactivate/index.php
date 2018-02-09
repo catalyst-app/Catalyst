@@ -195,6 +195,13 @@ $whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_COMMENTS)
 $deleteFeatureBoardComments->addAdditionalCapability($whereClause);
 $deleteFeatureBoardComments->execute();
 
+$deleteFeatureBoardVotes = new DeleteQuery();
+$deleteFeatureBoardVotes->setTable(Tables::FEATURE_BOARD_VOTES);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_VOTES), "=", $userId]);
+$deleteFeatureBoardVotes->addAdditionalCapability($whereClause);
+$deleteFeatureBoardVotes->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
