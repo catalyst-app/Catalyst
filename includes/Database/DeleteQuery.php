@@ -37,8 +37,6 @@ class DeleteQuery extends AbstractQuery {
 
 		$stmt->execute($this->getParamtersToBind());
 
-		$this->result = $stmt->fetchAll();
-
 		return true;
 	}
 }
