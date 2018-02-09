@@ -202,6 +202,15 @@ $whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_VOTES), "
 $deleteFeatureBoardVotes->addAdditionalCapability($whereClause);
 $deleteFeatureBoardVotes->execute();
 
+$updateFeatureBoardItems = new UpdateQuery();
+$updateFeatureBoardItems->setTable(Tables::FEATURE_BOARD_ITEMS);
+$updateFeatureBoardItems->addColumn(new Column("USER_ID", Tables::FEATURE_BOARD_ITEMS));
+$updateFeatureBoardItems->addValue(null);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_ITEMS), "=", $userId]);
+$updateFeatureBoardItems->addAdditionalCapability($whereClause);
+$updateFeatureBoardItems->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
