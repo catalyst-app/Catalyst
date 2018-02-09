@@ -111,6 +111,23 @@ if (is_null($user["TOTP_RESET_TOKEN"])) {
 	$query->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
 	$query->addValue(Tokens::generateTotpResetToken());
 }
+if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
+	$query->addColumn(new Column("EMAIL", Tables::USERS));
+	$query->addValue(null);
+
+	$query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
+	$query->addValue(Tokens::generateEmailVerificationToken());
+	$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+	$query->addValue(false);
+} else if ($_POST["email"] != $user["EMAIL"]) {
+	$query->addColumn(new Column("EMAIL", Tables::USERS));
+	$query->addValue($_POST["email"]);
+
+	$query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
+	$query->addValue(Tokens::generateEmailVerificationToken());
+	$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+	$query->addValue(false);
+}
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
