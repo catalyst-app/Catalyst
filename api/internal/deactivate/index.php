@@ -179,6 +179,15 @@ $whereClause->addToClause([new Column("USER_ID", Tables::CHARACTERS), "=", $user
 $deleteCharacterImagesQuery->addAdditionalCapability($whereClause);
 $deleteCharacterImagesQuery->execute();
 
+$archiveCommissionsQuery = new UpdateQuery();
+$archiveCommissionsQuery->setTable(Tables::COMMISSIONS);
+$archiveCommissionsQuery->addColumn(new Column("ARCHIVED_BUYER", Tables::COMMISSIONS));
+$archiveCommissionsQuery->addValue(true);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::COMMISSIONS), "=", $userId]);
+$archiveCommissionsQuery->addAdditionalCapability($whereClause);
+$archiveCommissionsQuery->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
