@@ -62,6 +62,18 @@ $whereClause->addToClause([new Column("USER_ID", Tables::API_KEYS), "=", $userId
 $removeApiKeysQuery->addAdditionalCapability($whereClause);
 $removeApiKeysQuery->execute();
 
+if ($_SESSION["user"]->isArtist()) {
+	$artistId = $_SESSION["user"]->getArtistPageId();
+
+	$deleteArtistQuery = new UpdateQuery();
+	$deleteArtistQuery->setTable(Tables::ARTIST_PAGES);
+	$deleteArtistQuery->addColumn(new Column("DELETED", Tables::ARTIST_PAGES));
+	$deleteArtistQuery->addValue(true);
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), "=", $userId]);
+	$deleteArtistQuery->addAdditionalCapability($whereClause);
+	$deleteArtistQuery->execute();
+}
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
