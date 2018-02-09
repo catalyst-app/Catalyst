@@ -79,6 +79,14 @@ if ($_SESSION["user"]->isArtist()) {
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_ID", Tables::ARTIST_SOCIAL_MEDIA), "=", $artistId]);
 	$removeArtistSocialMediaQuery->addAdditionalCapability($whereClause);
+	$removeArtistSocialMediaQuery->execute();
+
+	$removeArtistStreamingIntegrationsQuery = new DeleteQuery();
+	$removeArtistStreamingIntegrationsQuery->setTable(Tables::ARTIST_STREAMING_INTEGRATIONS);
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_ID", Tables::ARTIST_STREAMING_INTEGRATIONS), "=", $artistId]);
+	$removeArtistStreamingIntegrationsQuery->addAdditionalCapability($whereClause);
+	$removeArtistStreamingIntegrationsQuery->execute();
 
 }
 $_SESSION = [];
