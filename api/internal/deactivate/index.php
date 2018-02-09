@@ -19,6 +19,26 @@ if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername(
 	Response::sendErrorResponse(90602, ErrorCodes::ERR_90602);
 }
 
+$userId = $_SESSION["user"]->getId();
+
+$query = new SelectQuery();
+$query->setTable(Tables::USERS);
+
+$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $userId]);
+$query->addAdditionalCapability($whereClause);
+
+$query->execute();
+
+$result = $query->getResult();
+
+if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
+	HTTPCode::set(400);
+	Response::sendErrorResponse(90604, ErrorCodes::ERR_90604);
+}
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
