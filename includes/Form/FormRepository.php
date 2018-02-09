@@ -554,6 +554,9 @@ class FormRepository {
 		$nsfwProfilePictureField->setMissingErrorCode(90519);
 		$nsfwProfilePictureField->addError(90519, ErrorCodes::ERR_90519);
 		$nsfwProfilePictureField->setInvalidErrorCode(90519);
+		if (!is_null($user)) {
+			$nsfwProfilePictureField->setPrefilledValue($user->getProfilePictureNsfw());
+		}
 		$form->addField($nsfwProfilePictureField);
 
 		$explicitDefinitionMessage = new StaticHTMLField();
@@ -568,6 +571,9 @@ class FormRepository {
 		$nsfwAccessField->setMissingErrorCode(90520);
 		$nsfwAccessField->addError(90520, ErrorCodes::ERR_90520);
 		$nsfwAccessField->setInvalidErrorCode(90520);
+		if (!is_null($user)) {
+			$nsfwAccessField->setPrefilledValue($user->isNsfw());
+		}
 		$form->addField($nsfwAccessField);
 
 		$passwordField = new PasswordField();
