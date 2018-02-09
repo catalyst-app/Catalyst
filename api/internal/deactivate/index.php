@@ -39,6 +39,15 @@ if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
 	Response::sendErrorResponse(90604, ErrorCodes::ERR_90604);
 }
 
+$deactivateUserQuery = new UpdateQuery();
+$deactivateUserQuery->setTable(Tables::USERS);
+$deactivateUserQuery->addColumn(new Column("DEACTIVATED", Tables::USERS));
+$deactivateUserQuery->addValue(true);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $userId]);
+$deactivateUserQuery->addAdditionalCapability($whereClause);
+$deactivateUserQuery->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
