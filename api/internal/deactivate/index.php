@@ -188,6 +188,13 @@ $whereClause->addToClause([new Column("USER_ID", Tables::COMMISSIONS), "=", $use
 $archiveCommissionsQuery->addAdditionalCapability($whereClause);
 $archiveCommissionsQuery->execute();
 
+$deleteFeatureBoardComments = new DeleteQuery();
+$deleteFeatureBoardComments->setTable(Tables::FEATURE_BOARD_COMMENTS);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_COMMENTS), "=", $userId]);
+$deleteFeatureBoardComments->addAdditionalCapability($whereClause);
+$deleteFeatureBoardComments->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
