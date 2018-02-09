@@ -108,7 +108,7 @@ class ErrorCodes {
 	const ERR_90520 = 'NSFW access checkbox is invalid';
 	const ERR_90521 = 'Old password was not entered';
 	const ERR_90522 = 'Old password is incorrect';
-	const ERR_90523 = '@catalystapp.co emails are not allowed'
+	const ERR_90523 = '@catalystapp.co emails are not allowed';
 
 	/**
 	 * Get an associative array of code => message based on class constants
