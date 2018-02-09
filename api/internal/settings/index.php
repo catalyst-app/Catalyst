@@ -17,20 +17,19 @@ FormRepository::getSettingsForm()->checkServerSide();
 
 $id = $_SESSION["user"]->getId();
 
+
+// check username is free/own
 $query = new SelectQuery();
 $query->setTable(Tables::USERS);
-
 $query->addColumn(new Column("ID", Tables::USERS));
-
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["username"]]);
+$whereClause->addToClause(WhereClause::AND);
+$whereClause->addToClause([new Column("ID", Tables::USERS), "!=", $id]);
 $query->addAdditionalCapability($whereClause);
-
 $query->execute();
 
-$result = $query->getResult();
-
-if (count($result) != 0) {
+if (count($query->getResult()) != 0) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90503, ErrorCodes::ERR_90103);
+	Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
 }
