@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, DeleteQuery, JoinClause, SelectQuery, Tables, UpdateQuery, WhereClause};
+use \Catalyst\Database\{Column, Database, DeleteQuery, JoinClause, SelectQuery, Tables, UpdateQuery, WhereClause};
 use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\User\User;
@@ -38,6 +38,8 @@ if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90604, ErrorCodes::ERR_90604);
 }
+
+Database::getDbh()->beginTransaction();
 
 $deactivateUserQuery = new UpdateQuery();
 $deactivateUserQuery->setTable(Tables::USERS);
@@ -224,6 +226,8 @@ $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $userId]);
 $deleteWishlist->addAdditionalCapability($whereClause);
 $deleteWishlist->execute();
+
+Database::getDbh()->commit();
 
 $_SESSION = [];
 
