@@ -102,6 +102,18 @@ if ($_SESSION["user"]->isArtist()) {
 	$archiveCommissionsQuery->addAdditionalCapability($whereClause);
 	$archiveCommissionsQuery->execute();
 
+	$deleteCommissionTypeImages = new DeleteQuery();
+	$deleteCommissionTypeImages->setTable(Tables::COMMISSION_TYPE_IMAGES);
+	$joinClause = new JoinClause();
+	$joinClause->setType(JoinClause::INNER);
+	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
+	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES));
+	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
+	$deleteCommissionTypeImages->addAdditionalCapability($whereClause);
+	$deleteCommissionTypeImages->execute();
+
 }
 $_SESSION = [];
 
