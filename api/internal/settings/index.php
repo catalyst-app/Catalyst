@@ -55,3 +55,31 @@ if (!empty($_POST["email"])) {
 	}
 }
 
+$query = new SelectQuery();
+$query->setTable(Tables::USERS);
+$query->addColumn(new Column("FILE_TOKEN", Table::USERS));
+$query->addColumn(new Column("USERNAME", Table::USERS));
+$query->addColumn(new Column("HASHED_PASSWORD", Table::USERS));
+$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Table::USERS));
+$query->addColumn(new Column("TOTP_KEY", Table::USERS));
+$query->addColumn(new Column("TOTP_RESET_TOKEN", Table::USERS));
+$query->addColumn(new Column("EMAIL", Table::USERS));
+$query->addColumn(new Column("EMAIL_VERIFIED", Table::USERS));
+$query->addColumn(new Column("EMAIL_TOKEN", Table::USERS));
+$query->addColumn(new Column("PICTURE_LOC", Table::USERS));
+$query->addColumn(new Column("PICTURE_NSFW", Table::USERS));
+$query->addColumn(new Column("NSFW", Table::USERS));
+$query->addColumn(new Column("COLOR", Table::USERS));
+$query->addColumn(new Column("NICK", Table::USERS));
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+$query->addAdditionalCapability($whereClause);
+$query->execute();
+
+$user = $query->result()[0];
+
+if (!password_verify($oldPassword, $user["HASHED_PASSWORD"])) {
+	HTTPCode::set(400);
+	Response::sendErrorResponse(90522, ErrorCodes::ERR_90522);
+}
+
