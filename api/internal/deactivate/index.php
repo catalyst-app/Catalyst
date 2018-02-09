@@ -211,6 +211,13 @@ $whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_ITEMS), "
 $updateFeatureBoardItems->addAdditionalCapability($whereClause);
 $updateFeatureBoardItems->execute();
 
+$deleteSocialMedia = new DeleteQuery();
+$deleteSocialMedia->setTable(Tables::USER_SOCIAL_MEDIA);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::USER_SOCIAL_MEDIA), "=", $userId]);
+$deleteSocialMedia->addAdditionalCapability($whereClause);
+$deleteSocialMedia->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
