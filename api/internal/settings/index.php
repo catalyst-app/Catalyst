@@ -95,6 +95,22 @@ if (!empty($_POST["new-password"])) {
 	$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
 	$query->addValue(Tokens::generatePasswordResetToken());
 }
+$redirectToTotp = false;
+if (is_null($user["TOTP_KEY"]) != ($_POST["two-factor"] == "false")) {
+	if ($_POST["two-factor"] == "true") {
+		$redirectToTotp = true;
+
+		$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
+		$query->addValue(TOTP::generateKey());
+	} else {
+		$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
+		$query->addValue(null);
+	}
+}
+if (is_null($user["TOTP_RESET_TOKEN"])) {
+	$query->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
+	$query->addValue(Tokens::generateTotpResetToken());
+}
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
