@@ -73,6 +73,13 @@ if ($_SESSION["user"]->isArtist()) {
 	$whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), "=", $userId]);
 	$deleteArtistQuery->addAdditionalCapability($whereClause);
 	$deleteArtistQuery->execute();
+
+	$removeArtistSocialMediaQuery = new DeleteQuery();
+	$removeArtistSocialMediaQuery->setTable(Tables::ARTIST_SOCIAL_MEDIA);
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_ID", Tables::ARTIST_SOCIAL_MEDIA), "=", $artistId]);
+	$removeArtistSocialMediaQuery->addAdditionalCapability($whereClause);
+
 }
 $_SESSION = [];
 
