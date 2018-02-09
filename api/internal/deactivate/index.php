@@ -218,6 +218,13 @@ $whereClause->addToClause([new Column("USER_ID", Tables::USER_SOCIAL_MEDIA), "="
 $deleteSocialMedia->addAdditionalCapability($whereClause);
 $deleteSocialMedia->execute();
 
+$deleteWishlist = new DeleteQuery();
+$deleteWishlist->setTable(Tables::USER_WISHLISTS);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $userId]);
+$deleteWishlist->addAdditionalCapability($whereClause);
+$deleteWishlist->execute();
+
 $_SESSION = [];
 
 Response::sendSuccessResponse("Success");
