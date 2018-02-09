@@ -110,6 +110,12 @@ class ErrorCodes {
 	const ERR_90522 = 'Old password is incorrect';
 	const ERR_90523 = '@catalystapp.co emails are not allowed';
 
+	// deactivate
+	const ERR_90601 = 'No username was entered';
+	const ERR_90602 = 'This username is not yours';
+	const ERR_90603 = 'No password was entered';
+	const ERR_90604 = 'Incorrect password';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

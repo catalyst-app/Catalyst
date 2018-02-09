@@ -96,3 +96,10 @@
 - **90521** - Old password was not passed
 - **90522** - Old password is incorrect
 - **90523** - @catalystapp.co emails are not allowed
+
+#### Deactivate
+
+- **90601** - No username was passed
+- **90602** - This username is not yours
+- **90603** - No password was passed
+- **90604** - An incorrect password was passed
