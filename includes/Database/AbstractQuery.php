@@ -145,6 +145,9 @@ abstract class AbstractQuery {
 	 * @param mixed $value Value to add
 	 */
 	public function addValue($value) : void {
+		if (is_bool($value)) {
+			$value = $value ? 1 : 0;
+		}
 		$this->values[] = $value;
 	}
 
