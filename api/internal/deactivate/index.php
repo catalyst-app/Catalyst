@@ -142,6 +142,19 @@ if ($_SESSION["user"]->isArtist()) {
 	$deleteCommissionTypePaymentOptions->addAdditionalCapability($whereClause);
 	$deleteCommissionTypePaymentOptions->execute();
 
+	$deleteCommissionTypeStages = new UpdateQuery();
+	$deleteCommissionTypeStages->setTable(Tables::COMMISSION_TYPE_STAGES);
+	$deleteCommissionTypeStages->addColumn(new Column("DELETED", Tables::COMMISSION_TYPE_STAGES));
+	$deleteCommissionTypeStages->addValue(true);
+	$joinClause = new JoinClause();
+	$joinClause->setType(JoinClause::INNER);
+	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
+	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES));
+	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
+	$deleteCommissionTypeStages->addAdditionalCapability($whereClause);
+	$deleteCommissionTypeStages->execute();
 }
 $_SESSION = [];
 
