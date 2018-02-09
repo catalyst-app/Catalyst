@@ -40,9 +40,9 @@ else:
 				<h4>Deactivate your account</h4>
 				<h5><strong>This action is IRREVERSIBLE</strong></h5>
 				<p class="flow-text">
-					In order to deactivate your account, please enter your username and password below.
+					In order to deactivate your account, please enter your username and password below (for confirmation purposes).
 				</p>
-				<?= /* FormHTML::generateForm(Deactivate::getFormStructure()) */'' ?>
+				<?= FormRepository::getDeactivateForm()->getHtml() ?>
 			</div>
 		</div>
 	</div>
