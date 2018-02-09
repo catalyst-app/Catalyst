@@ -115,6 +115,7 @@ if (is_null($user["TOTP_RESET_TOKEN"])) {
 	$query->addValue(Tokens::generateTotpResetToken());
 }
 
+$resendVerificationEmail = false;
 if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 	$query->addColumn(new Column("EMAIL", Tables::USERS));
 	$query->addValue(null);
@@ -124,6 +125,7 @@ if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 	$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
 	$query->addValue(false);
 } else if ($_POST["email"] != $user["EMAIL"]) {
+	$resendVerificationEmail = true;
 	$query->addColumn(new Column("EMAIL", Tables::USERS));
 	$query->addValue($_POST["email"]);
 
