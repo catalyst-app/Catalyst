@@ -19,6 +19,7 @@ if (Controller::isDevelMode()) {
 }
 
 set_error_handler("\\Catalyst\\Controller::handleError", E_ALL);
+set_exception_handler("\\Catalyst\\Controller::handleException");
 
 // LEGACY
 require_once __DIR__."/Secrets.php";
