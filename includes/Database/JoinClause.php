@@ -174,7 +174,7 @@ class JoinClause implements QueryAdditionInterface {
 			throw new InvalidArgumentException("Bad condition for JOIN clause");
 		}
 
-		$str .= ((string)$this->condition[0])."=".((string)$this->condition[1]);
+		$str .= '('.((string)$this->condition[0])."=".((string)$this->condition[1]).')';
 
 		return trim($str);
 	}
