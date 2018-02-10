@@ -18,7 +18,7 @@ class DeleteQuery extends AbstractQuery {
 	public function execute() : bool {
 		$this->verifyIntegrity();
 
-		$initialQuery = "DELETE";
+		$initialQuery = "DELETE ";
 		
 		// join clauses go up here!
 		if (is_array($this->additionalCapabilities)) {
@@ -31,7 +31,7 @@ class DeleteQuery extends AbstractQuery {
 		}
 		
 		// from
-		$initialQuery .= " FROM `".$this->table."`";
+		$initialQuery .= "FROM `".$this->table."`";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
