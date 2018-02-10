@@ -32,7 +32,7 @@ class UpdateQuery extends AbstractQuery {
 			}
 		}
 		
-		$initialQuery .= " SET ".implode(" = ?, ", $this->columns)." = ?";
+		$initialQuery .= " SET ".implode(" = ?, ", $this->columns)." = ? ";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
