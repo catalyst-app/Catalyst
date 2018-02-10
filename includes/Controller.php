@@ -136,7 +136,7 @@ class Controller {
 					"http" => [
 						"method" => "POST",
 						"ignore_errors" => true,
-						"header" => "Content-Type: application/x-www-form-urlencoded"
+						"header" => "Content-Type: application/x-www-form-urlencoded",
 						"content" => json_encode([
 							"content" => $subj." occured",
 							"embeds" => [
