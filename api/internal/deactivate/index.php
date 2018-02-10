@@ -99,6 +99,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
 	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSIONS));
 	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$archiveCommissionsQuery->addAdditionalCapability($joinClause);
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$archiveCommissionsQuery->addAdditionalCapability($whereClause);
@@ -111,6 +112,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
 	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES));
 	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$deleteCommissionTypeImages->addAdditionalCapability($joinClause);
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$deleteCommissionTypeImages->addAdditionalCapability($whereClause);
@@ -125,6 +127,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
 	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS));
 	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$deleteCommissionTypeModifiers->addAdditionalCapability($joinClause);
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$deleteCommissionTypeModifiers->addAdditionalCapability($whereClause);
@@ -139,6 +142,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
 	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
 	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$deleteCommissionTypePaymentOptions->addAdditionalCapability($joinClause);
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$deleteCommissionTypePaymentOptions->addAdditionalCapability($whereClause);
@@ -153,6 +157,7 @@ if ($_SESSION["user"]->isArtist()) {
 	$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
 	$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES));
 	$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+	$deleteCommissionTypeStages->addAdditionalCapability($joinClause);
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$deleteCommissionTypeStages->addAdditionalCapability($whereClause);
