@@ -5,6 +5,7 @@ namespace Catalyst;
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Exception;
+use \Throwable;
 
 /**
  * Generic controller which handles things like error logging, autoloading, etc.
@@ -275,6 +276,18 @@ class Controller {
 				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
 		}
 		return true;
+	}
+
+	/**
+	 * Handles a PHP exception, will just trigger a USER_ERROR for the above handleError to deal with
+	 * 
+	 * @param Throwable|null $e Exception/error to be handled
+	 */
+	public static function handleException(?Throwable $e) : void {
+		if (is_null($e)) {
+			return;
+		}
+		self::handleError(E_ERROR, $e->getMessage(), $e->getFile(), $e->getLine());
 	}
 
 	/**
