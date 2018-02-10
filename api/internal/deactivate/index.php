@@ -211,10 +211,10 @@ $deleteFeatureBoardVotes->execute();
 
 $updateFeatureBoardItems = new UpdateQuery();
 $updateFeatureBoardItems->setTable(Tables::FEATURE_BOARD_ITEMS);
-$updateFeatureBoardItems->addColumn(new Column("USER_ID", Tables::FEATURE_BOARD_ITEMS));
+$updateFeatureBoardItems->addColumn(new Column("AUTHOR_ID", Tables::FEATURE_BOARD_ITEMS));
 $updateFeatureBoardItems->addValue(null);
 $whereClause = new WhereClause();
-$whereClause->addToClause([new Column("USER_ID", Tables::FEATURE_BOARD_ITEMS), "=", $userId]);
+$whereClause->addToClause([new Column("AUTHOR_ID", Tables::FEATURE_BOARD_ITEMS), "=", $userId]);
 $updateFeatureBoardItems->addAdditionalCapability($whereClause);
 $updateFeatureBoardItems->execute();
 
