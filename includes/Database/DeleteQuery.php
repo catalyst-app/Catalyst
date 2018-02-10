@@ -20,12 +20,25 @@ class DeleteQuery extends AbstractQuery {
 
 		$initialQuery = "DELETE";
 		
+		// join clauses go up here!
+		if (is_array($this->additionalCapabilities)) {
+			foreach ($this->additionalCapabilities as $additionalCapability) {
+				if ($additionalCapability instanceof JoinClause) {
+					$initialQuery .= $additionalCapability->getQueryString();
+					$initialQuery .= " ";
+				}
+			}
+		}
+		
 		// from
 		$initialQuery .= " FROM `".$this->table."`";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
 			foreach ($this->additionalCapabilities as $additionalCapability) {
+				if ($additionalCapability instanceof JoinClause) {
+					continue;
+				}
 				$initialQuery .= " ";
 				// each additional capability should verify integrity in its getQueryString
 				$initialQuery .= $additionalCapability->getQueryString();
