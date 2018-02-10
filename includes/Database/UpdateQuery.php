@@ -20,14 +20,26 @@ class UpdateQuery extends AbstractQuery {
 	public function execute() : bool {
 		$this->verifyIntegrity();
 
-		$initialQuery = "UPDATE `".$this->table."` SET ";;
+		$initialQuery = "UPDATE `".$this->table."` ";
+
+		// join clauses go up here!
+		if (is_array($this->additionalCapabilities)) {
+			foreach ($this->additionalCapabilities as $additionalCapability) {
+				if ($additionalCapability instanceof JoinClause) {
+					$initialQuery .= $additionalCapability->getQueryString();
+					$initialQuery .= " ";
+				}
+			}
+		}
 		
-		$initialQuery .= implode(" = ?, ", $this->columns)." = ?";
+		$initialQuery .= " SET ".implode(" = ?, ", $this->columns)." = ?";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
 			foreach ($this->additionalCapabilities as $additionalCapability) {
-				$initialQuery .= " ";
+				if ($additionalCapability instanceof JoinClause) {
+					continue;
+				}
 				// each additional capability should verify integrity in its getQueryString
 				$initialQuery .= $additionalCapability->getQueryString();
 			}
