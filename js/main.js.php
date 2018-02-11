@@ -32,6 +32,24 @@ use \Catalyst\Form\FormJS;
 //
 // (yes spade im looking at you)
 
+window.onerror = function(message, url, lineNumber) {  
+	var data = new FormData();
+	data.append("message", message);
+	data.append("url", url);
+	data.append("lineNumber", lineNumber);
+	$.ajax($("html").attr("data-rootdir")+"api/internal/js_error/", {
+		data: data,
+		processData: false,
+		contentType: false,
+		method: "POST"
+	}).done(function(response) {
+		Materialize.toast("An error occured", 4000);
+	}).fail(function(response) {
+		alert("Unable to report error.");
+	});
+	return false;
+};
+
 /* GENERAL FUNCTIONS */
 var markInputInvalid = function(e, a) {
 	if ($(e).hasClass("g-recaptcha")) {
