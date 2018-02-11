@@ -2,6 +2,8 @@
 
 namespace Catalyst\Images;
 
+use \Catalyst\User\User;
+
 /**
  * Represents an image on the filesystem
  */
@@ -182,7 +184,7 @@ class Image {
 	 * 
 	 * @return bool If the image is pixel art
 	 */
-	public static function isPixelArt() : bool {
+	public function isPixelArt() : bool {
 		$imageDimensions = getimagesize($this->getFilesystemPath());
 		if ($imageDimensions === false) {
 			return false;
@@ -198,7 +200,7 @@ class Image {
 	 * 
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
-	public static function getStrictCircleHtml() : string {
+	public function getStrictCircleHtml() : string {
 		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
 			return '<div class="img-strict-circle" style="background-image: url('.htmlspecialchars(json_encode($this->getNsfwImagePath())).');"></div>';
 		}
