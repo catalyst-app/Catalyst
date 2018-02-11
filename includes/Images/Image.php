@@ -132,5 +132,23 @@ class Image {
 			return REAL_ROOTDIR.$this->getFolder()."/".$this->getFileToken().$this->getPath();
 		}
 	}
+
+	/**
+	 * Get the path to the [NSFW] notice
+	 * 
+	 * @return string
+	 */
+	public static function getNsfwImagePath() : string {
+		return ROOTDIR.'img/nsfw.png';
+	}
+
+	/**
+	 * Get the path to the image not found notice
+	 * 
+	 * @return string
+	 */
+	public static function getNotFoundPath() : string {
+		return ROOTDIR.'img/not_found.png';
+	}
 }
 
