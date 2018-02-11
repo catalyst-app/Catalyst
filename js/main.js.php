@@ -97,7 +97,7 @@ window.onerror = function(message, url, lineNumber) {
 	}).done(function(response) {
 		Materialize.toast("An error occured", 4000);
 	}).fail(function(response) {
-		alert("Unable to report error.");
+		Materialize.toast("An error occured", 4000);
 	});
 	return false;
 };
