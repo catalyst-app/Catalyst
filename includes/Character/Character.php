@@ -232,6 +232,15 @@ class Character {
 		}
 	}
 
+	public function isPrimaryImageNsfw() : bool {
+		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
+		if (count($imagesThatArePrimary)) {
+			return $imagesThatArePrimary[0][2];
+		} else {
+			return false;
+		}
+	}
+
 	public function visibleToMe() : bool {
 		if ($this->isPublic() ||
 			\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
