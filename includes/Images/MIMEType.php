@@ -81,6 +81,16 @@ class MIMEType {
 	}
 
 	/**
+	 * Determie if a MIME type is known/valid
+	 * 
+	 * @param string $mime MIME type to get test
+	 * @return bool if the MIME type is known and valid
+	 */
+	public static function isValidMimeType(string $mime) : bool {
+		return array_key_exists($mime, self::MIME_TO_EXT);
+	}
+
+	/**
 	 * Get a MIME type's file extension
 	 * 
 	 * @param string $mime MIME type to get extension of
