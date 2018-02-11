@@ -70,14 +70,14 @@ class Image {
 	 * @return string
 	 */
 	public function getFileToken() : string {
-		return $this->token;
+		return $this->fileToken;
 	}
 
 	/**
 	 * @param string $fileToken
 	 */
 	public function setFileToken(string $fileToken) : void {
-		$this->token = $fileToken;
+		$this->fileToken = $fileToken;
 	}
 
 	/**
