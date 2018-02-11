@@ -2,7 +2,11 @@
 
 namespace Catalyst\Character;
 
+use \Catalyst\Images\{Folders, HasImageTrait, Image};
+
 class Character {
+	use HasImageTrait;
+
 	private $id;
 
 	private $cache = [];
@@ -219,6 +223,15 @@ class Character {
 		return (count($imagesThatArePrimary) ? $imagesThatArePrimary[0] : ["default.png", "", false, true]);
 	}
 
+	public function getPrimaryImagePath() : ?string {
+		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
+		if (count($imagesThatArePrimary)) {
+			return $imagesThatArePrimary[0][0];
+		} else {
+			return null;
+		}
+	}
+
 	public function visibleToMe() : bool {
 		if ($this->isPublic() ||
 			\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
@@ -266,5 +279,9 @@ class Character {
 		return array_map(function($in) {
 			return new self($in["ID"]);
 		}, $arr);
+	}
+
+	public function initializeImage() : void {
+		$this->setImage(new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
 	}
 }
