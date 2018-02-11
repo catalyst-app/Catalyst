@@ -222,6 +222,26 @@ class Image {
 		$str .= ' style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"';
 		$str .= '></div>';
 	}
+
+	/**
+	 * Get the image as a <img> element
+	 * 
+	 * @param string[] $additionalClasses Classes to add to the tag
+	 * @return string HTML img representing the image
+	 */
+	public function getImgElementHtml(array $additionalClasses=[]) : string {
+		if ($this->isPixelArt()) {
+			$additionalClasses[] = " render-pixelated";
+		}
+		$str = '';
+		$str .= '<img';
+		if (count($additionalClasses)) {
+		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
+		}
+		$str .= ' src="'.htmlspecialchars($this->getFullPath()).'"';
+		$str .= ' />';
+		return $str;
+	}
 		}
 		return '<div class="img-strict-circle '.$additionalClass.'" style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"></div>';
 	}
