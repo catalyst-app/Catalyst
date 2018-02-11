@@ -117,7 +117,6 @@ class UniversalFunctions {
 		}
 		return implode("", [
 			'<a href="'.(empty($link) ? $filename : $link).'" class="col s12 card hoverable">',
-			'<div class="card-image">',
 			'<img class="z-depth-2'.(min(array_slice(getimagesize($realfile), 0, 2)) <= 100 ? " render-pixelated" : "").'" src="'.$filename.'">',
 			'</div>',
 			(!empty($caption) || !empty($title) ? '<div class="card-content black-text">' : ''),
