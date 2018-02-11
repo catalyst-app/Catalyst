@@ -7,7 +7,8 @@ require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{Column, SelectQuery, Tables, UpdateQuery, WhereClause};
 use \Catalyst\{Email, HTTPCode, Tokens};
-use \Catalyst\Form\{FileUpload, FormRepository};
+use \Catalyst\Form\FormRepository;
+use \Catalyst\Images\{Image,Folders};
 use \Catalyst\Page\Values;
 use \Catalyst\User\{TOTP,User};
 
@@ -136,21 +137,21 @@ if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 	$query->addValue(false);
 }
 
-$newPfp = FileUpload::uploadImage(isset($_FILES["profile-picture"]) ? $_FILES["profile-picture"] : null, FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
-if (!is_null($newPfp) && !is_null($user["PICTURE_LOC"])) {
-	$pfp = $newPfp;
-	FileUpload::delete($user["FILE_TOKEN"].$user["PICTURE_LOC"], FileUpload::PROFILE_PHOTO);
-} elseif (!is_null($newPfp)) {
-	$pfp = $newPfp;
-} else {
-	$pfp = $user["PICTURE_LOC"];
-}
-if ($user["PICTURE_LOC"] !== $newPfp) {
-	$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-	$query->addValue($pfp);
+$profilePicture = $user["PICTURE_LOC"];
+if (isset($_FILES["profile-picture"])) {
+	$newImage = Image::upload($_FILES["profile-picture"], Folders::PROFILE_PHOTO, $user["FILE_TOKEN"]);
+	if (!is_null($newImage)) {
+		$profilePicture = $newImage->getPath();
+		$_SESSION["user"]->getImage()->delete();
+	}
 }
 
-if (is_null($newPfp) && is_null($user["PICTURE_LOC"])) {
+if ($user["PICTURE_LOC"] !== $profilePicture) {
+	$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
+	$query->addValue($profilePicture);
+}
+
+if (is_null($profilePicture) && is_null($user["PICTURE_LOC"])) {
 	$query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
 	$query->addValue(false);
 } else if ($_POST["profile-picture-is-nsfw"] == "true") {
