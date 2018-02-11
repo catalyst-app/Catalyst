@@ -206,9 +206,11 @@ class Controller {
 	 * @param int $errline Line the error occured on
 	 */
 	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline) : void {
-		HTTPCode::set(500);
-		if (Endpoint::isApi()) {
-			Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, [$errno,$errstr,basename($errfile),$errline]);
+		if (!headers_sent()) {
+			HTTPCode::set(500);
+			if (Endpoint::isApi()) {
+				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, [$errno,$errstr,basename($errfile),$errline]);
+			}
 		}
 	}
 
