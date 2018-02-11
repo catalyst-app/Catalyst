@@ -7,6 +7,7 @@ require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
+use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::DASHBOARD[0]);
@@ -18,18 +19,21 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (!User::isLoggedIn()) {
+	HTTPCode::set(401);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Dashboard");
 
-?>
-<?php if (User::isLoggedOut()): ?>
-<?= User::getNotLoggedInHTML() ?>
-<?php else: ?>
+if (User::isLoggedOut()):
+	echo User::getNotLoggedInHTML();
+else: ?>
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML($_SESSION["user"]->getProfilePicturePath(), $_SESSION["user"]->getProfilePictureNsfw()) ?>
+						<?= $_SESSION["user"]->getImage()->getStrictCircleHtml() ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
