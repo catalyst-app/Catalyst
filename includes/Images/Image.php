@@ -113,6 +113,9 @@ class Image {
 	 * @return string Path to the image
 	 */
 	public function getFullPath() : string {
+		if (!file_exists($this->getFilesystemPath())) {
+			return $this->getNotFoundPath();
+		}
 		if (is_null($this->getPath())) {
 			return ROOTDIR.$this->getFolder()."/"."default.png";
 		} else {
