@@ -6,7 +6,7 @@ class Message {
 	const USER = 0;
 	const ARTIST = 1;
 
-	public static function createMessageButton(int $type, string $uname, string $nick="", array $color=PAGE_COLOR) : string {
+	public static function createMessageButton(int $type, string $uname, string $nick="", string $color=PAGE_COLOR) : string {
 		switch ($type) {
 			case self::USER:
 				$typePath = 'User';
