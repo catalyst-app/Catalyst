@@ -242,8 +242,54 @@ class Image {
 		$str .= ' />';
 		return $str;
 	}
+
+	/**
+	 * Render an image card with raw HTML
+	 * 
+	 * @param string $html HTML to use for the card
+	 * @param bool $sendNsfw If the card should still return html if the item is NSFW
+	 * @param bool $link If the card should be a link or not
+	 * @param string|null $linkPath Null if the card should link to the image (default), or a link to link to
+	 * @return string Card html
+	 */
+	public function getCardFromRawHtml(string $html, bool $sendNsfw=false, bool $link=false, ?string $linkPath=null) : string {
+		if ($this->isNsfw() && !$sendNsfw) {
+			return '';
 		}
-		return '<div class="img-strict-circle '.$additionalClass.'" style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"></div>';
+		$str = '';
+
+		if ($link) {
+			$str .= '<a';
+			if (is_null($linkPath)) {
+				$str .= ' href="'.htmlspecialchars($this->getFullPath()).'"';
+			} else {
+				$str .= ' href="'.htmlspecialchars($linkPath).'"';
+			}
+		} else {
+			$str .= '<div';
+		}
+		$str .= ' class="col s12 card hoverable"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="card-image"';
+		$str .= '>';
+
+		$str .= $this->getImgElementHtml("z-depth-2");
+
+		$str .= '</div>';
+
+		$str .= '<div class="card-content black-text">';
+		$str .= $html;
+		$str .= '</div>';
+
+		if ($link) {
+			$str .= '</a>';
+		} else {
+			$str .= '</div>';
+		}
+
+		return $str;
 	}
 
 	/**
