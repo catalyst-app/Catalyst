@@ -131,6 +131,9 @@ class Image {
 	 * @return string Path to the image
 	 */
 	public function getFullPath() : string {
+		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
+			return $this->getNsfwImagePath();
+		}
 		if ($this->getFilesystemPath() == $this->getNotFoundFilesystemPath()) {
 			return $this->getNotFoundPath(); // NF note
 		}
@@ -209,9 +212,6 @@ class Image {
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
 	public function getStrictCircleHtml() : string {
-		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
-			return '<div class="img-strict-circle" style="background-image: url('.htmlspecialchars(json_encode($this->getNsfwImagePath())).');"></div>';
-		}
 		if ($this->isPixelArt()) {
 			$additionalClass = " render-pixelated";
 		} else {
@@ -261,4 +261,3 @@ class Image {
 		return new self($folder, $fileToken, $middle.$suffix);
 	}
 }
-
