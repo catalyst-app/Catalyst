@@ -121,8 +121,8 @@ class Image {
 	 * @return string Path to the image
 	 */
 	public function getFullPath() : string {
-		if (!file_exists($this->getFilesystemPath())) {
-			return $this->getNotFoundPath();
+		if ($this->getFilesystemPath() == $this->getNotFoundFilesystemPath()) {
+			return $this->getNotFoundPath(); // NF note
 		}
 		if (is_null($this->getPath())) {
 			return ROOTDIR.$this->getFolder()."/"."default.png";
@@ -138,9 +138,15 @@ class Image {
 	 */
 	public function getFilesystemPath() : string {
 		if (is_null($this->getPath())) {
-			return REAL_ROOTDIR.$this->getFolder()."/"."default.png";
+			$path = REAL_ROOTDIR.$this->getFolder()."/"."default.png";
 		} else {
-			return REAL_ROOTDIR.$this->getFolder()."/".$this->getFileToken().$this->getPath();
+			$path = REAL_ROOTDIR.$this->getFolder()."/".$this->getFileToken().$this->getPath();
+		}
+		// prevent warnings and shit
+		if (file_exists($path)) {
+			return $path;
+		} else {
+			return $this->getNotFoundFilesystemPath();
 		}
 	}
 
