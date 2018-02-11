@@ -212,10 +212,16 @@ class Image {
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
 	public function getStrictCircleHtml() : string {
+		$str = '';
+		$str .= '<div';
+		$str .= ' class="img-strict-circle';
 		if ($this->isPixelArt()) {
-			$additionalClass = " render-pixelated";
-		} else {
-			$additionalClass = "";
+			$str .= " render-pixelated";
+		}
+		$str .= '"';
+		$str .= ' style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"';
+		$str .= '></div>';
+	}
 		}
 		return '<div class="img-strict-circle '.$additionalClass.'" style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"></div>';
 	}
