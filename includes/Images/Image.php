@@ -2,6 +2,7 @@
 
 namespace Catalyst\Images;
 
+use \Catalyst\Tokens;
 use \Catalyst\User\User;
 
 /**
