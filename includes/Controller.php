@@ -151,7 +151,7 @@ class Controller {
 										],
 										[
 											"name" => 'Error string',
-											"value" => $errstr
+											"value" => str_replace("<br>", "\r\n", $errstr)
 										],
 										[
 											"name" => 'Error file',
@@ -179,7 +179,7 @@ class Controller {
 				$trace = self::getTrace(false);
 				$telegramStr = $subj." occured\n\n";
 				$telegramStr .= "<b>Code:</b> ".$errco." (".$errno.")\n";
-				$telegramStr .= "<b>Error:</b> ".$errstr."\n";
+				$telegramStr .= "<b>Error:</b> ".str_replace("<br>", "\r\n", $errstr)."\n";
 				$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
 				$telegramStr .= "<b>Line:</b> ".$errline."\n";
 				$telegramStr .= "<b>User:</b> ".(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\n";
