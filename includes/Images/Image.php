@@ -38,6 +38,13 @@ class Image {
 	public const PIXEL_ART_MAX_SIZE = 100;
 
 	/**
+	 * Lenth of token used for midsection
+	 * 
+	 * Changing this will require updating max length in database
+	 */
+	public const FILE_DISTINGUISHER_LENGTH = 10;
+
+	/**
 	 * Create a new object to represent an image
 	 * 
 	 * @param string $folder Folder in which the image is contained
@@ -219,6 +226,38 @@ class Image {
 		if (!is_null($this->getPath())) {
 			unlink($this->getFilesystemPath());
 		}
+	}
+
+	/**
+	 * Upload an image to the server with the given parameters
+	 * 
+	 * @param null|array $image An uploaded image object, from the $_FILES array
+	 * @param string $folder Folder to place the uploaded image
+	 * @param string $fileToken Token to use for the new image
+	 * @return null|self The newly uploaded image, or null on failure
+	 */
+	public static function upload(?array $image, string $folder, string $fileToken) : ?self {
+		if (is_null($image) || !array_key_exists("error",$image) || $image["error"] !== 0) {
+			return null;
+		}
+
+		$mime = MIMEType::getFilepathMimeType($image["tmp_name"]);
+
+		if (!MIMEType::isValidMimeType($mime)) {
+			return null;
+		}
+
+		$suffix = ".".MIMEType::getExtensionFromMime($mime);
+
+		$middle = Tokens::generateToken(self::FILE_DISTINGUISHER_LENGTH);
+
+		while (file_exists(REAL_ROOTDIR.$folder."/".$fileToken.$middle.$suffix)) {
+			$middle = Tokens::generateToken(self::FILE_DISTINGUISHER_LENGTH);
+		}
+
+		move_uploaded_file($image["tmp_name"], REAL_ROOTDIR.$folder."/".$fileToken.$middle.$suffix);
+
+		return new self($folder, $fileToken, $middle.$suffix);
 	}
 }
 
