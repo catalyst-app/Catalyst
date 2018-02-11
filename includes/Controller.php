@@ -108,6 +108,7 @@ class Controller {
 				'<p><strong>Error string:</strong> '.htmlspecialchars($errstr).'</p>'.
 				'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
 				'<p><strong>Error line:</strong> '.$errline.'</p>'.
+				'<p><strong>User:</strong> '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown').'</p>'.
 				'<p><strong>Trace:</strong></p>'.
 				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
 				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
@@ -115,6 +116,7 @@ class Controller {
 				"Error string: ".$errstr."\r\n\r\n".
 				"Error file: ".$errfile."\r\n\r\n".
 				"Error line: ".$errline."\r\n\r\n".
+				'User: '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,$_SESSION]),
@@ -159,6 +161,10 @@ class Controller {
 											"name" => 'Error line',
 											"value" => $errline
 										],
+										[
+											"name" => 'User',
+											"value" => (array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')
+										],
 									], $traceEmbeds),
 									"description" => "Please see the embed fields"
 								]
@@ -176,6 +182,7 @@ class Controller {
 				$telegramStr .= "<b>Error:</b> ".$errstr."\n";
 				$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
 				$telegramStr .= "<b>Line:</b> ".$errline."\n";
+				$telegramStr .= "<b>User:</b> ".(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\n";
 				$telegramStr .= "<b>Trace:</b>\n";
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
