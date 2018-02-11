@@ -59,6 +59,15 @@ class MIMEType {
 	}
 
 	/**
+	 * Get all known MIME types
+	 * 
+	 * @return string[] A list of MIME types
+	 */
+	public static function getMimeTypes() : array {
+		return array_keys(self::MIME_TO_EXT);
+	}
+
+	/**
 	 * Get a filepath's MIME type
 	 * 
 	 * @param string $filepath Path to the file
