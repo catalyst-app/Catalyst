@@ -3,8 +3,11 @@
 namespace Catalyst\User;
 
 use \Catalyst\Email;
+use \Catalyst\Images\{Folders, HasImageTrait, Image};
 
 class User implements \Serializable {
+	use HasImageTrait;
+
 	private $id;
 
 	private $cache = [];
@@ -325,6 +328,22 @@ class User implements \Serializable {
 		return $result;
 	}
 
+	public function getProfilePhoto() : ?string {
+		if (array_key_exists("PROFILE_PHOTO", $this->cache)) {
+			return $this->cache["PROFILE_PHOTO"];
+		}
+		
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_LOC` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
+		$stmt->bindParam(":ID", $this->id);
+		$stmt->execute();
+
+		$result = $this->cache["PROFILE_PHOTO"] = $stmt->fetchAll()[0]["PICTURE_LOC"];
+
+		$stmt->closeCursor();
+
+		return $result;
+	}
+
 	public function getId() : int {
 		return $this->id;
 	}
@@ -434,6 +453,10 @@ class User implements \Serializable {
 		);
 	}
 
+	public function initializeImage() : void {
+		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->getProfilePictureNsfw()));
+	}
+
 	public function serialize() : string {
 		return $this->id;
 	}
@@ -465,5 +488,15 @@ class User implements \Serializable {
 		];
 
 		$this->id = $data;
+	}
+
+	public static function isCurrentUserNsfw() : bool {
+		if (self::isLoggedOut()) {
+			return false;
+		}
+		if (!User::getCurrentUser()->isNsfw()) {
+			return false;
+		}
+		return true;
 	}
 }
