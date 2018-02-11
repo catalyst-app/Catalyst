@@ -270,6 +270,22 @@ class User implements \Serializable {
 		return $result;
 	}
 
+	public function isProfilePictureNsfw() : bool {
+		if (array_key_exists("PICTURE_NSFW", $this->cache)) {
+			return $this->cache["PICTURE_NSFW"];
+		}
+		
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_NSFW` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
+		$stmt->bindParam(":ID", $this->id);
+		$stmt->execute();
+
+		$result = $this->cache["PICTURE_NSFW"] = (bool)($stmt->fetchAll()[0]["PICTURE_NSFW"]);
+
+		$stmt->closeCursor();
+
+		return $result;
+	}
+
 	public function getArtistPageId() : ?int {
 		if (array_key_exists("ARTIST_PAGE_ID", $this->cache)) {
 			return $this->cache["ARTIST_PAGE_ID"];
@@ -454,7 +470,7 @@ class User implements \Serializable {
 	}
 
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->getProfilePictureNsfw()));
+		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->isProfilePictureNsfw()));
 	}
 
 	public function serialize() : string {
