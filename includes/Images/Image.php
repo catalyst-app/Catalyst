@@ -15,7 +15,7 @@ class Image {
 	 * The parent's file token
 	 * @var string
 	 */
-	protected $token;
+	protected $fileToken;
 	/**
 	 * Path to the image, either a shortened path or null
 	 * @var string|null
@@ -39,13 +39,13 @@ class Image {
 	 * Create a new object to represent an image
 	 * 
 	 * @param string $folder Folder in which the image is contained
-	 * @param string $token The parent object's file token
+	 * @param string $fileToken The parent object's file token
 	 * @param string|null $path The path to the image, or null if default
 	 * @param bool $nsfw If the image is mature or explicit
 	 */
-	public function __construct(string $folder, string $token, ?string $path, bool $nsfw=false) {
+	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw=false) {
 		$this->setFolder($folder);
-		$this->setToken($token);
+		$this->setFileToken($fileToken);
 		$this->setPath($path);
 		$this->setNsfw($nsfw);
 	}
@@ -67,15 +67,15 @@ class Image {
 	/**
 	 * @return string
 	 */
-	public function getToken() : string {
+	public function getFileToken() : string {
 		return $this->token;
 	}
 
 	/**
-	 * @param string $token
+	 * @param string $fileToken
 	 */
-	public function setToken(string $token) : void {
-		$this->token = $token;
+	public function setFileToken(string $fileToken) : void {
+		$this->token = $fileToken;
 	}
 
 	/**
