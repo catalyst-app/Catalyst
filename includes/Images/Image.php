@@ -28,6 +28,14 @@ class Image {
 	protected $nsfw;
 
 	/**
+	 * Maximum size an image can be if it is pixel art
+	 * 
+	 * _before any pixel artists yell at me_, I am NOT transforming the image
+	 * This is used to change browser rendering so it doesn't antialias
+	 */
+	public const PIXEL_ART_MAX_SIZE = 100;
+
+	/**
 	 * Create a new object to represent an image
 	 * 
 	 * @param string $folder Folder in which the image is contained
@@ -152,6 +160,22 @@ class Image {
 	 */
 	public static function getNotFoundPath() : string {
 		return ROOTDIR.'img/not_found.png';
+	}
+
+	/**
+	 * Determine if the image is pixel art
+	 * 
+	 * @return bool If the image is pixel art
+	 */
+	public static function isPixelArt() : bool {
+		$imageDimensions = getimagesize($this->getFilesystemPath());
+		if ($imageDimensions === false) {
+			return false;
+		}
+		if (min($imageDimensions[0], $imageDimensions[1]) <= self::PIXEL_ART_MAX_SIZE) {
+			return true;
+		}
+		return false;
 	}
 }
 
