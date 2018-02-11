@@ -206,7 +206,7 @@ class Character {
 		$result = $this->cache["IMAGES"] = (
 				$stmt->rowCount() == 0
 			?
-				[["default.png", "", false, true]]
+				[[null, "", false, true]]
 			:
 				array_map(function($in) {
 					return [$this->getToken().$in["PATH"], $in["CAPTION"], (bool)$in["NSFW"], (bool)$in["PRIMARY"]];
