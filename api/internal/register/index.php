@@ -7,7 +7,8 @@ require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{Column, InsertQuery, SelectQuery, Tables, WhereClause};
 use \Catalyst\{Email, HTTPCode, Tokens};
-use \Catalyst\Form\{FileUpload, FormRepository};
+use \Catalyst\Form\FormRepository;
+use \Catalyst\Images\{Folders,Image};
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
@@ -63,7 +64,14 @@ $query->setTable(Tables::USERS);
 
 $fileToken = Tokens::generateUniqueUserFileToken();
 $password = password_hash($_POST["password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
-$pictureLoc = FileUpload::uploadImage(isset($_FILES["profile-picture"]) ? $_FILES["profile-picture"] : null, FileUpload::PROFILE_PHOTO, $fileToken);
+
+$profilePicture = null;
+if (isset($_FILES["profile-picture"])) {
+	$newImage = Image::upload($_FILES["profile-picture"], Folders::PROFILE_PHOTO, $fileToken);
+	if (!is_null($newImage)) {
+		$profilePicture = $newImage->getPath();
+	}
+}
 
 $query->addColumn(new Column("FILE_TOKEN", Tables::USERS));
 $query->addValue($fileToken);
@@ -78,7 +86,7 @@ $query->addValue($_POST["email"] ? $_POST["email"] : null); // empty = false = n
 $query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
 $query->addValue(Tokens::generateEmailVerificationToken());
 $query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-$query->addValue($pictureLoc);
+$query->addValue($profilePicture);
 $query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
 $query->addValue($_POST["profile-picture-is-nsfw"] == "true");
 $query->addColumn(new Column("NSFW", Tables::USERS));
