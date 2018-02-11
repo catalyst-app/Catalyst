@@ -6,7 +6,6 @@ define("REAL_ROOTDIR", "../../");
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\Database\Artist\EditArtist;
-use \Catalyst\Form\Captcha;
 use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;
 use \Catalyst\User\User;
