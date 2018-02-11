@@ -192,5 +192,22 @@ class Image {
 		}
 		return false;
 	}
+
+	/**
+	 * Get the image's HTML as a strict circle
+	 * 
+	 * @return string HTML div.img-strict-circle representing the image
+	 */
+	public static function getStrictCircleHtml() : string {
+		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
+			return '<div class="img-strict-circle" style="background-image: url('.htmlspecialchars(json_encode($this->getNsfwImagePath())).');"></div>';
+		}
+		if ($this->isPixelArt()) {
+			$additionalClass = " render-pixelated";
+		} else {
+			$additionalClass = "";
+		}
+		return '<div class="img-strict-circle '.$additionalClass.'" style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"></div>';
+	}
 }
 
