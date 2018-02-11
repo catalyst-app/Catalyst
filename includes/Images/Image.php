@@ -211,5 +211,14 @@ class Image {
 		}
 		return '<div class="img-strict-circle '.$additionalClass.'" style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"></div>';
 	}
+
+	/**
+	 * Delete the image from disk (won't work for default)
+	 */
+	public function delete() : void {
+		if (!is_null($this->getPath())) {
+			unlink($this->getFilesystemPath());
+		}
+	}
 }
 
