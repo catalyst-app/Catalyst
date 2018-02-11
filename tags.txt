@@ -123,7 +123,7 @@
 	'MUSTELIDS', 'Mustelids', 'Includes weasels, otters, etc.'
 	'REPTILES', 'Reptiles', 'Reptiles like lizards, dinosaurs, etc.'
 	'RODENTS', 'Rodents', 'Rats, mice, etc.'
-	'SERGALS', 'Sergals', 'Fictional species, famous for their cheese shaped heads'
+	'SERGALS', 'Sergals', 'The cheese-shaped fantasy animal'
 	'WOLVES', 'Wolves', 'Wolves, including derivatives like dingoes'
 	'ORIGINAL_SPECIES', 'Original Species', 'Other original species such as Dutch Angel Dragons, Protogens, etc.'
 	'OTHER', 'Other', 'Something not listed in the other options'
