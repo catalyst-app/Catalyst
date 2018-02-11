@@ -4,6 +4,7 @@ namespace Catalyst\Form\Field;
 
 use \Catalyst\API\Response;
 use \Catalyst\Form\{FileUpload,Form};
+use \Catalyst\Images\MIMEType;
 use \Catalyst\HTTPCode;
 use \Catalyst\Page\UniversalFunctions;
 
@@ -184,7 +185,7 @@ class ImageField extends AbstractField {
 		$str .= '}';
 
 		$str .= 'if (';
-		$str .= '!'.json_encode(array_keys(FileUpload::MIME_TO_EXT)).'.includes($('.json_encode("#".$this->getId()).')[0].files[i].type)';
+		$str .= '!'.json_encode(MIMEType::getMimeTypes()).'.includes($('.json_encode("#".$this->getId()).')[0].files[i].type)';
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId().self::PATH_INPUT_SUFFIX).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
@@ -231,7 +232,7 @@ class ImageField extends AbstractField {
 		if ($_FILES[$this->getDistinguisher()]["error"] === 4) {
 			return;
 		}
-		if (!in_array(FileUpload::getMime($_FILES[$this->getDistinguisher()]["tmp_name"]), array_keys(FileUpload::MIME_TO_EXT))) {
+		if (!in_array(FileUpload::getMime($_FILES[$this->getDistinguisher()]["tmp_name"]), MIMEType::getMimeTypes())) {
 			$this->throwInvalidError();
 		}
 		if ($_FILES[$this->getDistinguisher()]["size"] > $this->getMaxSize()) {
