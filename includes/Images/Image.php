@@ -163,6 +163,15 @@ class Image {
 	}
 
 	/**
+	 * Get the FS path to the image not found notice
+	 * 
+	 * @return string
+	 */
+	public static function getNotFoundFilesystemPath() : string {
+		return REAL_ROOTDIR.'img/not_found.png';
+	}
+
+	/**
 	 * Determine if the image is pixel art
 	 * 
 	 * @return bool If the image is pixel art
