@@ -138,11 +138,16 @@ if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
 
 $newPfp = FileUpload::uploadImage(isset($_FILES["profile-picture"]) ? $_FILES["profile-picture"] : null, FileUpload::PROFILE_PHOTO, $user["FILE_TOKEN"]);
 if (!is_null($newPfp) && !is_null($user["PICTURE_LOC"])) {
+	$pfp = $newPfp;
 	FileUpload::delete($user["FILE_TOKEN"].$user["PICTURE_LOC"], FileUpload::PROFILE_PHOTO);
+} elseif (!is_null($newPfp)) {
+	$pfp = $newPfp;
+} else {
+	$pfp = $user["PICTURE_LOC"];
 }
 if ($user["PICTURE_LOC"] !== $newPfp) {
 	$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-	$query->addValue($newPfp);
+	$query->addValue($pfp);
 }
 
 if (is_null($newPfp) && is_null($user["PICTURE_LOC"])) {
