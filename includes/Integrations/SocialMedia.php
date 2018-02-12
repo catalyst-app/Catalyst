@@ -48,7 +48,9 @@ class SocialMedia {
 		$stmt->addColumn(new Column("DEFAULT_HUMAN_NAME", Tables::INTEGRATIONS_META));
 		$stmt->addColumn(new Column("CHIP_CLASSES", Tables::INTEGRATIONS_META));
 
-		$orderClause = new OrderByClause(new Column("SORT_ORDER", "ASC"));
+		$orderClause = new OrderByClause();
+		$orderClause->setColumn(new Column("SORT_ORDER", Tables::INTEGRATIONS_META));
+		$orderClause->setOrder("ASC");
 		$stmt->addAdditionalCapability($orderClause);
 
 		$stmt->execute();
