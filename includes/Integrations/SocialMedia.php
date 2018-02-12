@@ -2,6 +2,8 @@
 
 namespace Catalyst\Integrations;
 
+use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables};
+
 /**
  * Represents social-media related things
  */
