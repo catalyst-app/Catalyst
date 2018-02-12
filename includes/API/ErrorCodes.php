@@ -116,6 +116,18 @@ class ErrorCodes {
 	const ERR_90603 = 'No password was entered';
 	const ERR_90604 = 'Incorrect password';
 
+	// add social
+	const ERR_90701 = 'Internal error';
+	const ERR_90702 = 'Missing display name';
+	const ERR_90703 = 'Invalid display name';
+	const ERR_90704 = 'URL/email missing';
+	const ERR_90705 = 'URL/email is invalid';
+	const ERR_90706 = 'This domain is not allowed';
+	const ERR_90707 = 'IP addresses are not allowed';
+	const ERR_90708 = 'URL is not a valid scheme (http,https, or email only)';
+	const ERR_90709 = 'URL inline authentication is disallowed';
+	const ERR_90710 = 'Non-standard ports are disallowed';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

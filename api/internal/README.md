@@ -103,3 +103,17 @@
 - **90602** - This username is not yours
 - **90603** - No password was passed
 - **90604** - An incorrect password was passed
+
+#### Social Media Addition
+
+- **90701** - Invalid destination
+- **90702** - Missing Display Name
+- **90703** - Invalid Display Name
+- **90704** - URL/email not passed
+- **90705** - URL/email is invalid
+- **90706** - This domain is not allowed
+- **90707** - IP addresses are not allowed
+- **90708** - URL is not a valid scheme (http,https,mailto)
+- **90709** - URL inline authentication is disallowed
+- **90710** - Non-standard ports are disallowed
+
