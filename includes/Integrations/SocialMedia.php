@@ -7,20 +7,6 @@ namespace Catalyst\Integrations;
  */
 class SocialMedia {
 	// DEPRECATED
-	public static function getUserDisplayFromDatabase(\Catalyst\User\User $user) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["user_social_media"]."` WHERE `USER_ID` = :USER_ID ORDER BY `SORT` ASC;");
-		$id = $user->getId();
-		$stmt->bindParam(":USER_ID", $id);
-		$stmt->execute();
-
-		$result = $stmt->fetchAll();
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
-	// DEPRECATED
 	public static function getArtistDisplayFromDatabase(\Catalyst\Artist\Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID ORDER BY `SORT` ASC;");
 		$id = $artist->getId();
