@@ -3,6 +3,7 @@
 namespace Catalyst\Integrations;
 
 use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables};
+use \Catalyst\Form\FormRepository;
 use \Catalyst\Images\Folders;
 
 /**
@@ -219,15 +220,37 @@ class SocialMedia {
 		return $str;
 	}
 
+	/**
+	 * Get the modals and forms for adding social networks
+	 * 
+	 * @param string $destination If the destination is Artist or User, MUST match one of these two
+	 * @return string HTML
+	 */
 	public static function getAddModal(string $destination="User") : string {
-		$result  = '<input type="hidden" id="add-social-type" value="'.htmlspecialchars($destination).'">';
-		$result .= '<div id="add-social-link-modal" class="modal modal-fixed-footer">';
-		$result .= '<div class="modal-content">';
-		$result .= \Catalyst\Form\FormHTML::generateForm(\Catalyst\Database\SocialMedia::getFormStructure());
-		$result .= '</div>';
-		$result .= '</div>';
+		$str = '';
+		
+		$str .= '<input';
+		$str .= ' type="hidden"';
+		$str .= ' id="add-social-type"';
+		$str .= ' value="'.htmlspecialchars($destination).'"';
+		$str .= '>';
 
-		return $result;
+		$str .= '<div';
+		$str .= ' id="add-social-link-modal"';
+		$str .= ' class="modal modal-fixed-footer"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="modal-content"';
+		$str .= '>';
+
+		$str .= FormRepository::getAddNetworkLinkForm()->getHtml(false);
+
+		$str .= '</div>';
+
+		$str .= '</div>';
+
+		return $str;
 	}
 
 	// DEPRECATED
