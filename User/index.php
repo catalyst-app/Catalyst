@@ -48,7 +48,7 @@ echo UniversalFunctions::createHeading("User Profile");
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML($user->getProfilePicturePath(), $user->getProfilePictureNsfw()) ?>
+						<?= $user->getImage()->getStrictCircleHtml() ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
@@ -70,7 +70,7 @@ echo UniversalFunctions::createHeading("User Profile");
 
 							<br>
 
-							<?= Message::createMessageButton(Message::USER, $user->getUsername(), $user->getNickname()) ?>
+							<?= $user->getMessageButton() ?>
 
 							<br>
 

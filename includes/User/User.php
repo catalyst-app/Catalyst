@@ -498,6 +498,22 @@ class User implements \Serializable {
 		$this->id = $data;
 	}
 
+	public function getMessageButton() : string {
+		$str = '';
+		$str .= '<p';
+		$str .= ' class="flow-text no-top-margin"';
+		$str .= '>';
+		$str .= '<a';
+		$str .= ' href="'.ROOTDIR.'Message/New/User/'.$this->getUsername().'"';
+		$str .= ' class="btn"';
+		$str .= '>';
+		$str .= 'message ';
+		$str .= $this->getNickname();
+		$str .= '</a>';
+		$str .= '</p>';
+		return $str;
+	}
+
 	public static function isCurrentUserNsfw() : bool {
 		if (self::isLoggedOut()) {
 			return false;
