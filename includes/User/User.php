@@ -94,14 +94,6 @@ class User implements \Serializable {
 		]);
 	}
 
-	public static function getInvalidHTML() : string {
-		return implode("\n", [
-			'			<div class="section">',
-			'				<p class="flow-text">This account does not exist or has been removed.</p>',
-			'			</div>',
-		]);
-	}
-
 	public function getColorHex() : string {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];
