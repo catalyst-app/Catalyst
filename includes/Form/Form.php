@@ -355,9 +355,11 @@ class Form {
 	 * 
 	 * @return string The form's HTML
 	 */
-	public function getHtml() : string {
+	public function getHtml(bool $section=true) : string {
 		$str = '';
-		$str .= '<div class="section">';
+		if ($section) {
+			$str .= '<div class="section">';
+		}
 		$str .= $this->getFormHeader();
 		$str .= '<div class="row">';
 		$setPrimary = $this->isPrimary();
@@ -371,7 +373,9 @@ class Form {
 		$str .= '</div>';
 		$str .= $this->getSubmitButton();
 		$str .= '</form>';
-		$str .= '</div>';
+		if ($section) {
+			$str .= '</div>';
+		}
 		return $str;
 	}
 
