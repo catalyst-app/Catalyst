@@ -17,11 +17,11 @@ if (isset($_GET["q"])) {
 	if ($id !== -1) {
 		$user = new User($id);
 		$userExists = true;
+	} else {
+		HTTPCode::set(400);
 	}
 } else {
-	header($_SERVER["SERVER_PROTOCOL"]." 301 Moved permanently");
-	header("Location: ".ROOTDIR."Dashboard");
-	die("Redirecting to your dashboard...");
+	HTTPCode::set(400);
 }
 
 define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
@@ -29,6 +29,8 @@ define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (is
 
 if ($userExists) {
 	define("PAGE_COLOR", $user->getColorHex());
+} elseif (User::isLoggedIn()) {
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
@@ -39,7 +41,9 @@ echo UniversalFunctions::createHeading("User Profile");
 
 ?>
 <?php if (!$userExists): ?>
-<?= User::getInvalidHTML() ?>
+			<div class="section">
+				<p class="flow-text">This account does not exist or has been deleted.</p>
+			</div>
 <?php else: ?>
 			<div class="section">
 				<div class="row">
