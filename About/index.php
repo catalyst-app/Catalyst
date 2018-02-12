@@ -247,7 +247,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by Echo-80/hamburgerfox (<a href="https://www.furaffinity.net/view/25777547/">Fur Affinity</a>, <a href="https://echo-80.deviantart.com/art/C-Fauxil-2-2-720595610">DeviantArt</a>, and <a href="https://www.instagram.com/p/Bc0gkXlFlV5/?taken-by=hamburgerfox">Instagram</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "SELF",
 		"SERVICE_URL" => ROOTDIR."User/Fauxil",
@@ -304,7 +304,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 									<p class="flow-text"><strong>Roles: </strong> Assistant, General Helper</p>
 								</div>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
 		"SERVICE_URL" => "http://www.furaffinity.net/user/lykai/",
@@ -348,7 +348,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by Orlando Fox (<a href="https://twitter.com/Orlando_Fox/">Twitter</a>, <a href="http://afoxdraws.com/index.html">Website</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Patreon, Tumblr)</p>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
 		"SERVICE_URL" => null,
@@ -385,7 +385,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
 								</div>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TWITTER",
 		"SERVICE_URL" => "https://twitter.com/fluffracing",
@@ -430,7 +430,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by Jasmae (<a href="https://www.furaffinity.net/view/22443950/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> PR manager</p>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
 		"SERVICE_URL" => null,
@@ -483,7 +483,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 									<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Fur Affinity, Facebook)</p>
 								</div>
-<?= SocialMedia::getChipHTML(SocialMedia::getChipArray([
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TELEGRAM",
 		"SERVICE_URL" => "https://t.me/JikiScott",
