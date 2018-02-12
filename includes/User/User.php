@@ -3,10 +3,11 @@
 namespace Catalyst\User;
 
 use \Catalyst\Email;
+use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 
 class User implements \Serializable {
-	use HasImageTrait;
+	use HasImageTrait, MessagableTrait;
 
 	private $id;
 
@@ -498,20 +499,12 @@ class User implements \Serializable {
 		$this->id = $data;
 	}
 
-	public function getMessageButton() : string {
-		$str = '';
-		$str .= '<p';
-		$str .= ' class="flow-text no-top-margin"';
-		$str .= '>';
-		$str .= '<a';
-		$str .= ' href="'.ROOTDIR.'Message/New/User/'.$this->getUsername().'"';
-		$str .= ' class="btn"';
-		$str .= '>';
-		$str .= 'message ';
-		$str .= $this->getNickname();
-		$str .= '</a>';
-		$str .= '</p>';
-		return $str;
+	public function getMessageUrlPath() : string {
+		return 'User/'.$this->getUsername();
+	}
+
+	public function getFriendlyName() : string {
+		return $this->getNickname();
 	}
 
 	public static function isCurrentUserNsfw() : bool {
