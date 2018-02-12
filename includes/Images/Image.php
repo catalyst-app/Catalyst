@@ -248,6 +248,43 @@ class Image {
 	}
 
 	/**
+	 * Render an image card with given parameters
+	 * 
+	 * Makes use of getCardFromRawHtml
+	 * 
+	 * @param string $title Card title
+	 * @param string $caption Card caption
+	 * @param bool $link If the card should link to something
+	 * @param null|string $linkPath What the card should link to, null if image, no effect if $link=false
+	 * @param bool $sendNsfw If there should be anything returned if the card is nsfw
+	 * @return string the card html
+	 */
+	public function getCard(string $title="", string $caption="", bool $link=false, ?string $linkPath=null, bool $sendNsfw=false) : string {
+		$html = '';
+
+		if (!empty($title)) {
+			$html .= '<p';
+			$html .= ' class="card-title"';
+			$html .= '>';
+
+			$html .= htmlspecialchars($title);
+
+			$html .= '</p>';
+		}
+
+		if (!empty($caption)) {
+			$html .= '<p';
+			$html .= '>';
+
+			$html .= str_replace("\n", "</p><p>", htmlspecialchars($caption));
+
+			$html .= '</p>';
+		}
+
+		return $this->getCardFromRawHtml($html, $link, $linkPath, $sendNsfw);
+	}
+
+	/**
 	 * Render an image card with raw HTML
 	 * 
 	 * @param string $html HTML to use for the card
