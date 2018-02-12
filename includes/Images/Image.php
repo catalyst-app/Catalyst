@@ -251,12 +251,12 @@ class Image {
 	 * Render an image card with raw HTML
 	 * 
 	 * @param string $html HTML to use for the card
-	 * @param bool $sendNsfw If the card should still return html if the item is NSFW
 	 * @param bool $link If the card should be a link or not
 	 * @param string|null $linkPath Null if the card should link to the image (default), or a link to link to
+	 * @param bool $sendNsfw If the card should still return html if the item is NSFW
 	 * @return string Card html
 	 */
-	public function getCardFromRawHtml(string $html, bool $sendNsfw=false, bool $link=false, ?string $linkPath=null) : string {
+	public function getCardFromRawHtml(string $html, bool $link=false, ?string $linkPath=null, bool $sendNsfw=false) : string {
 		if ($this->isNsfw() && !$sendNsfw) {
 			return '';
 		}
