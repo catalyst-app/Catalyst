@@ -283,7 +283,7 @@ class Image {
 
 		$str .= '</div>';
 
-		if (!empty($html)) {
+		if (!empty(trim($html))) {
 			$str .= '<div class="card-content black-text">';
 			$str .= $html;
 			$str .= '</div>';
