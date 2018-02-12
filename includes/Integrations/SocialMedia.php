@@ -3,6 +3,7 @@
 namespace Catalyst\Integrations;
 
 use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables};
+use \Catalyst\Images\Folders;
 
 /**
  * Represents social-media related things
@@ -55,9 +56,26 @@ class SocialMedia {
 
 		$stmt->execute();
 
-		self::$meta = $stmt->getResult();
+		self::$meta = array_merge(...array_map([__CLASS__, "processMetaRow"], $stmt->getResult()));
 
 		return self::$meta;
+	}
+
+	/**
+	 * Processes a database meta row into a proper associative array
+	 * 
+	 * @param array $row Database row
+	 * @return array Processed row, name => {path, name, classes, visible}
+	 */
+	protected static function processMetaRow(array $row) : array {
+		return [
+			$row["INTEGRATION_NAME"] => [
+				"path" => ROOTDIR.Folders::INTEGRATION_ICONS."/".$row["IMAGE_PATH"],
+				"name" => $row["DEFAULT_HUMAN_NAME"],
+				"classes" => $row["CHIP_CLASSES"],
+				"visible" => $row["VISIBLE"]
+			]
+		];
 	}
 
 	/**
@@ -82,11 +100,11 @@ class SocialMedia {
 		foreach ($rows as $row) {
 			$result[] = [
 				"id" => array_key_exists("ID", $row) ? $row["ID"] : 0,
-				"src" => $meta[$row["NETWORK"]][0],
+				"src" => $meta[$row["NETWORK"]]["path"],
 				"label" => $row["DISP_NAME"],
 				"href" => $row["SERVICE_URL"],
-				"classes" => $meta[$row["NETWORK"]][2],
-				"tooltip" => $meta[$row["NETWORK"]][1]
+				"classes" => $meta[$row["NETWORK"]]["classes"],
+				"tooltip" => $meta[$row["NETWORK"]]["name"]
 			];
 		}
 
