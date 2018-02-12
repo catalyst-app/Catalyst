@@ -362,7 +362,7 @@ function totp(K,t) {
 			var swatches = $(".color-swatch");
 
 			for (var i = 0; i < Object.keys(colors).length; i++) {
-				$(swatches[i]).data("sub-colors", colors[Object.keys(colors)[i]]).show().animate({
+				$(swatches[i]).data("sub-colors", colors[Object.keys(colors)[i]]).show().css({
 					backgroundColor: "#"+Object.keys(colors)[i]
 				}, 100);
 			}
@@ -381,13 +381,13 @@ function totp(K,t) {
 			$(".color-swatch").hide().data("sub-colors", null);
 
 			$("input#"+$(this).closest(".modal").attr("data-for")).val(rgb2hex($(this).css("backgroundColor")));
-			$(".chosen-color[data-for="+$(this).closest(".modal").attr("data-for")+"]").animate({
+			$(".chosen-color[data-for="+$(this).closest(".modal").attr("data-for")+"]").css({
 				backgroundColor: $(this).css("backgroundColor")
 			}, 200);
 
 			if (Array.isArray(colors)) {
 				for (var i = 0; i < colors.length; i++) {
-					$(swatches[i]).show().animate({
+					$(swatches[i]).show().css({
 						backgroundColor: "#"+colors[i]
 					}, 200);
 				}
