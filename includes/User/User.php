@@ -2,10 +2,11 @@
 
 namespace Catalyst\User;
 
+use \Catalyst\Database\Tables;
 use \Catalyst\Email;
-use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
+use \Catalyst\Message\MessagableTrait;
 
 class User implements \Serializable {
 	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
