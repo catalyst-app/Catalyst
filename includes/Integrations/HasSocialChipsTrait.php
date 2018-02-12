@@ -64,6 +64,6 @@ trait HasSocialChipsTrait {
 	 * @return string The HTML for the object's chips
 	 */
 	public function getSocialChipHtml(bool $clearButton=false) : string {
-		return SocialMedia::getChipHTML(SocialMedia::getChipArray($this->getSocialChipsFromDatabase()), $clearButton);
+		return SocialMedia::getChipHtml(SocialMedia::getChipArray($this->getSocialChipsFromDatabase()), $clearButton);
 	}
 }
