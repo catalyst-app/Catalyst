@@ -53,7 +53,7 @@ class SocialMedia {
 		return $result;
 	}
 
-	public static function getChipHTML(array $chips) : string {
+	public static function getChipHTML(array $chips, bool $showClearButton=false) : string {
 		$result = '<div class="center-on-small-only">';
 
 		foreach ($chips as $chip) {
@@ -63,7 +63,7 @@ class SocialMedia {
 			$result .= '<div class="chip hoverable tooltipped '.$chip["classes"].'" data-id="'.$chip["id"].'" data-tooltip="'.$chip["tooltip"].'" data-position="bottom" data-delay="50">';
 			$result .= '<img src="'.htmlspecialchars($chip["src"]).'" />';
 			$result .= htmlspecialchars($chip["label"]);
-			if (preg_match("/Dashboard\\/.*\.php$/", $_SERVER["PHP_SELF"]) || preg_match("/Artist\\/Edit\\/.*\.php$/", $_SERVER["PHP_SELF"])) {
+			if ($showClearButton) {
 				$result .= '<i class="material-icons">clear</i>';
 			}
 			$result .= '</div>';
