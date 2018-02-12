@@ -6,6 +6,12 @@ namespace Catalyst\Integrations;
  * Represents social-media related things
  */
 class SocialMedia {
+	/**
+	 * All the metadata for the social chips, filled by getMeta
+	 * @var array|null
+	 */
+	protected static $meta = null;
+
 	// DEPRECATED
 	public static function getArtistDisplayFromDatabase(\Catalyst\Artist\Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID ORDER BY `SORT` ASC;");
@@ -20,6 +26,50 @@ class SocialMedia {
 		return $result;
 	}
 
+	/**
+	 * Get meta information
+	 * 
+	 * @return array Associative array of response from database
+	 */
+	public static function getMeta() : array {
+		if (!is_null(self::$meta)) {
+			return self::$meta;
+		}
+
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::INTEGRATIONS_META);
+		
+		$stmt->addColumn(new Column("VISIBLE", Tables::INTEGRATIONS_META));
+		$stmt->addColumn(new Column("INTEGRATION_NAME", Tables::INTEGRATIONS_META));
+		$stmt->addColumn(new Column("IMAGE_PATH", Tables::INTEGRATIONS_META));
+		$stmt->addColumn(new Column("DEFAULT_HUMAN_NAME", Tables::INTEGRATIONS_META));
+		$stmt->addColumn(new Column("CHIP_CLASSES", Tables::INTEGRATIONS_META));
+
+		$orderClause = new OrderByClause(new Column("SORT_ORDER", "ASC"));
+		$stmt->addAdditionalCapability($orderClause);
+
+		$stmt->execute();
+
+		self::$meta = $stmt->getResult();
+
+		return self::$meta;
+	}
+
+	/**
+	 * Get a properly-structured array from a given set of chips
+	 * 
+	 * [
+	 * id => int (0 by default),
+	 * src => string|null
+	 * label => string
+	 * href => string
+	 * classes => string (from Meta)
+	 * tooltip => string (from Meta)
+	 * ]
+	 * 
+	 * @return array
+	 */
 	public static function getChipArray(array $rows) : array {
 		$result = [];
 
