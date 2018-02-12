@@ -6,6 +6,7 @@ define("REAL_ROOTDIR", "../");
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
 use \Catalyst\Integrations\SocialMedia;
+use \Catalyst\Images\{Folders,Image};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
@@ -63,12 +64,15 @@ else: ?>
 				<div class="horizontal-scrollable-container row">
 <?php
 $characters = Character::getCharactersFromUser($_SESSION["user"]);
+
+$newCharacterImage = new Image(Folders::GLOBAL_IMG, "", "new.png", false);
+
 $cards = [
-	'<div class="col s8 m4 l3">'.UniversalFunctions::renderImageCard(ROOTDIR."img/new.png", false, "New Character", "", ROOTDIR."Character/New").'</div>'
+	'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", true).'</div>'
 ];
 foreach ($characters as $character) {
 	$img = $character->getPrimaryImage();
-	$cards[] = '<div class="col s8 m4 l3">'.UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::CHARACTER_IMAGE]."/".$img[0], $img[2], $character->getName(), "", ROOTDIR."Character/".$character->getToken()."/").'</div>';
+	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/").'</div>';
 }
 ?>
 <?= implode("", $cards) ?>
