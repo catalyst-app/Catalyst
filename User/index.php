@@ -5,18 +5,17 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
+use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Message\Message;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
-$userExists = false;
-
+$user = null;
 if (isset($_GET["q"])) {
 	$id = User::getIdFromUsername($_GET["q"]); 
 	if ($id !== -1) {
 		$user = new User($id);
-		$userExists = true;
 	} else {
 		HTTPCode::set(400);
 	}
@@ -27,7 +26,7 @@ if (isset($_GET["q"])) {
 define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
 define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? $user->getNickname() : "Invalid User")]));
 
-if ($userExists) {
+if (!is_null($user)) {
 	define("PAGE_COLOR", $user->getColorHex());
 } elseif (User::isLoggedIn()) {
 	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
@@ -40,7 +39,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("User Profile");
 
 ?>
-<?php if (!$userExists): ?>
+<?php if (is_null($user)): ?>
 			<div class="section">
 				<p class="flow-text">This account does not exist or has been deleted.</p>
 			</div>
