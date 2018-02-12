@@ -275,7 +275,7 @@ class Image {
 		$str .= ' class="card-image"';
 		$str .= '>';
 
-		$str .= $this->getImgElementHtml("z-depth-2");
+		$str .= $this->getImgElementHtml(["z-depth-2"]);
 
 		$str .= '</div>';
 
