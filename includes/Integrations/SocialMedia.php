@@ -96,10 +96,6 @@ class SocialMedia {
 		return $result;
 	}
 
-	public static function getUserChipHTML(\Catalyst\User\User $user) : string {
-		return self::getChipHTML(self::getChipArray(self::getUserDisplayFromDatabase($user)));
-	}
-
 	public static function getArtistChipHTML(\Catalyst\Artist\Artist $artist) : string {
 		return self::getChipHTML(self::getChipArray(self::getArtistDisplayFromDatabase($artist)));
 	}
