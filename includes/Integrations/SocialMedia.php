@@ -199,10 +199,11 @@ class SocialMedia {
 		return $str;
 	}
 
-	public static function getAddModal() : string {
-		$result  = '<div id="add-social-network-modal" class="modal modal-fixed-footer">';
+	public static function getAddModal(string $destination="User") : string {
+		$result  = '<div id="add-social-link-modal" class="modal modal-fixed-footer">';
 		$result .= '<div class="modal-content">';
 		$result .= \Catalyst\Form\FormHTML::generateForm(\Catalyst\Database\SocialMedia::getFormStructure());
+		$result .= '<input type="hidden" id="add-social-link-type" value="'.htmlspecialchars($destination).'">';
 		$result .= '</div>';
 		$result .= '</div>';
 
