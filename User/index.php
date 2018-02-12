@@ -74,7 +74,7 @@ echo UniversalFunctions::createHeading("User Profile");
 
 							<br>
 
-							<?= SocialMedia::getUserChipHTML($user) ?>
+							<?= $user->getSocialChipHtml() ?>
 						</div>
 					</div>
 				</div>

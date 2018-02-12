@@ -50,7 +50,7 @@ else: ?>
 							<br>
 
 							<div class="social-chips">
-								<?= SocialMedia::getUserChipHTML($_SESSION["user"]) ?>
+								<?= $_SESSION["user"]->getSocialChipHtml(true) ?>
 							</div>
 							<?= SocialMedia::getAddChip() ?>
 							<?= SocialMedia::getAddModal() ?>
