@@ -125,7 +125,7 @@ class ErrorCodes {
 	const ERR_90706 = 'This domain is not allowed';
 	const ERR_90707 = 'IP addresses are not allowed';
 	const ERR_90708 = 'URL is not a valid scheme (http,https, or email only)';
-	const ERR_90709 = 'URL inline authentication is disallowed';
+	const ERR_90709 = 'Inline URL authentication is disallowed';
 	const ERR_90710 = 'Non-standard ports are disallowed';
 
 	/**
