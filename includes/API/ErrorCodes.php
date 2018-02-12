@@ -118,8 +118,8 @@ class ErrorCodes {
 
 	// add social
 	const ERR_90701 = 'Internal error';
-	const ERR_90702 = 'Missing display name';
-	const ERR_90703 = 'Invalid display name';
+	const ERR_90702 = 'Missing label';
+	const ERR_90703 = 'Label too long';
 	const ERR_90704 = 'URL/email missing';
 	const ERR_90705 = 'URL/email is invalid';
 	const ERR_90706 = 'This domain is not allowed';
