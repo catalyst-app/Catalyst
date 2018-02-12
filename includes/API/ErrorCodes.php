@@ -127,6 +127,7 @@ class ErrorCodes {
 	const ERR_90708 = 'URL is not a valid scheme (http,https, or email only)';
 	const ERR_90709 = 'Inline URL authentication is disallowed';
 	const ERR_90710 = 'Non-standard ports are disallowed';
+	const ERR_90711 = 'You aren\'t funny';
 
 	/**
 	 * Get an associative array of code => message based on class constants

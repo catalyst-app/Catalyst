@@ -116,4 +116,4 @@
 - **90708** - URL is not a valid scheme (http,https)
 - **90709** - URL inline authentication is disallowed
 - **90710** - Non-standard ports are disallowed
-
+- **90711** - "javascript:" starts the url string
