@@ -42,15 +42,15 @@ $binaryKey = str_split($binaryKey);
 $binaryString = "";
 $inputCount = count($binaryKey);
 for ($i = 0; $i < $inputCount; $i++) {
-    $binaryString .= str_pad(base_convert(ord($binaryKey[$i]), 10, 2), 8, '0', STR_PAD_LEFT);
+	$binaryString .= str_pad(base_convert(ord($binaryKey[$i]), 10, 2), 8, '0', STR_PAD_LEFT);
 }
 $fiveBitBinaryArray = str_split($binaryString, 5);
 $key = "";
 $i = 0;
 $fiveCount = count($fiveBitBinaryArray);
 while ($i < $fiveCount) {
-    $key .= $map[base_convert(str_pad($fiveBitBinaryArray[$i], 5, '0'), 2, 10)];
-    $i++;
+	$key .= $map[base_convert(str_pad($fiveBitBinaryArray[$i], 5, '0'), 2, 10)];
+	$i++;
 }
 
 $tmpfname = tempnam(sys_get_temp_dir(), 'FOO');
