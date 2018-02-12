@@ -443,8 +443,9 @@ input[type=checkbox] + label + span.invalid-text {
 	padding: 0 !important;
 }
 
-.color-swatch {
+.color-swatch, .chosen-color {
 	cursor: pointer;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out;
 }
 
 @media only screen and (max-width: 600px) {
