@@ -37,7 +37,7 @@ if ($result != SocialMedia::SUCCESS) {
 
 $meta = \Catalyst\Database\Integrations\Meta::get();
 
-Response::send200(\Catalyst\Integrations\SocialMedia::getChipHTML([[
+Response::send200(\Catalyst\Integrations\SocialMedia::getChipHtml([[
 	"id" => $GLOBALS["dbh"]->lastInsertId(),
 	"src" => $meta[$_POST["network"]][0],
 	"label" => $_POST["name"],
