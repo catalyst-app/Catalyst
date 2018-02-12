@@ -107,8 +107,8 @@
 #### Social Media Addition
 
 - **90701** - Invalid destination
-- **90702** - Missing Display Name
-- **90703** - Invalid Display Name
+- **90702** - Missing label
+- **90703** - Invalid label
 - **90704** - URL/email not passed
 - **90705** - URL/email is invalid
 - **90706** - This domain is not allowed
