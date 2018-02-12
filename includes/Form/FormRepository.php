@@ -647,7 +647,7 @@ class FormRepository {
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
-		$form->setEndpoint("internal/social_media/add/");
+		$form->setEndpoint("internal/social_media/add_link/");
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
 
