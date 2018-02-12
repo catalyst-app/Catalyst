@@ -226,7 +226,7 @@ class Character {
 	public function getPrimaryImagePath() : ?string {
 		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
 		if (count($imagesThatArePrimary)) {
-			return $imagesThatArePrimary[0][0];
+			return str_replace($this->getToken(), "", $imagesThatArePrimary[0][0]); // TODO: REMOVE THE STR REPLACE
 		} else {
 			return null;
 		}
