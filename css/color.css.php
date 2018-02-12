@@ -28,7 +28,7 @@ a {
 }
 
 .switch label input[type=checkbox]:checked + .lever::after, .user-color, nav, footer.page-footer,
-.img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
+.img-strict-circle[style*='/default.png");'], .img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
 [type="checkbox"].filled-in:checked + label:after,
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
 .progress .indeterminate, .progress .determinate, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
