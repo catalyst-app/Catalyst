@@ -279,10 +279,12 @@ class Image {
 
 		$str .= '</div>';
 
-		$str .= '<div class="card-content black-text">';
-		$str .= $html;
-		$str .= '</div>';
-
+		if (!empty($html)) {
+			$str .= '<div class="card-content black-text">';
+			$str .= $html;
+			$str .= '</div>';
+		}
+		
 		if ($link) {
 			$str .= '</a>';
 		} else {
