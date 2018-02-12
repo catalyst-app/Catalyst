@@ -52,42 +52,42 @@ class OrderByClause implements QueryAdditionInterface {
 		return [];
 	}
 
-    /**
-     * Get the clause's column
-     * 
-     * @return null|Column
-     */
-    public function getColumn() : ?Column {
-        return $this->column;
-    }
+	/**
+	 * Get the clause's column
+	 * 
+	 * @return null|Column
+	 */
+	public function getColumn() : ?Column {
+		return $this->column;
+	}
 
-    /**
-     * Set the clause's column
-     * 
-     * @param null|Column $column
-     */
-    public function setColumn(?Column $column=null) : void {
-        $this->column = $column;
-    }
+	/**
+	 * Set the clause's column
+	 * 
+	 * @param null|Column $column
+	 */
+	public function setColumn(?Column $column=null) : void {
+		$this->column = $column;
+	}
 
-    /**
-     * Get the clause's order
-     * 
-     * @return string (one of ASC or DESC)
-     */
-    public function getOrder() : string {
-        return $this->order;
-    }
+	/**
+	 * Get the clause's order
+	 * 
+	 * @return string (one of ASC or DESC)
+	 */
+	public function getOrder() : string {
+		return $this->order;
+	}
 
-    /**
-     * Set the clause's order
-     * 
-     * @param string $order
-     */
-    public function setOrder(string $order) : void {
-    	if ($order != "ASC" && $order != "DESC") {
-    		throw new InvalidArgumentException($order." is not a valid order for a MySQL ORDER clause");
-    	}
-        $this->order = $order;
-    }
+	/**
+	 * Set the clause's order
+	 * 
+	 * @param string $order
+	 */
+	public function setOrder(string $order) : void {
+		if ($order != "ASC" && $order != "DESC") {
+			throw new InvalidArgumentException($order." is not a valid order for a MySQL ORDER clause");
+		}
+		$this->order = $order;
+	}
 }
