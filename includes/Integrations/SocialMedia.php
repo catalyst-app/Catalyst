@@ -73,7 +73,7 @@ class SocialMedia {
 	public static function getChipArray(array $rows) : array {
 		$result = [];
 
-		$meta = \Catalyst\Database\Integrations\Meta::get();
+		$meta = self::getMeta();
 
 		foreach ($rows as $row) {
 			$result[] = [
