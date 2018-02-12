@@ -113,7 +113,7 @@
 - **90705** - URL/email is invalid
 - **90706** - This domain is not allowed
 - **90707** - IP addresses are not allowed
-- **90708** - URL is not a valid scheme (http,https,mailto)
+- **90708** - URL is not a valid scheme (http,https)
 - **90709** - URL inline authentication is disallowed
 - **90710** - Non-standard ports are disallowed
 
