@@ -54,6 +54,9 @@ class Image {
 	 * @param bool $nsfw If the image is mature or explicit
 	 */
 	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw=false) {
+		if ($path == "default.png") {
+			$path = null; // BC
+		}
 		$this->setFolder($folder);
 		$this->setFileToken($fileToken);
 		$this->setPath($path);
@@ -221,6 +224,7 @@ class Image {
 		$str .= '"';
 		$str .= ' style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"';
 		$str .= '></div>';
+		return $str;
 	}
 
 	/**
