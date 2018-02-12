@@ -210,6 +210,7 @@ class SocialMedia {
 		return $result;
 	}
 
+	// DEPRECATED
 	public static function getArtistChipHTML(\Catalyst\Artist\Artist $artist) : string {
 		return self::getChipHtml(self::getChipArray(self::getArtistDisplayFromDatabase($artist)));
 	}
