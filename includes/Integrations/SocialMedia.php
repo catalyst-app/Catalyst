@@ -163,7 +163,7 @@ class SocialMedia {
 		$str .= ' class="chip hoverable user-color white-text"';
 		$str .= '>';
 
-		$str .= 'Add link';
+		$str .= 'Add link or e-mail';
 		
 		$str .= '<i';
 		$str .= ' class="material-icons"';
@@ -200,10 +200,10 @@ class SocialMedia {
 	}
 
 	public static function getAddModal(string $destination="User") : string {
-		$result  = '<div id="add-social-link-modal" class="modal modal-fixed-footer">';
+		$result  = '<input type="hidden" id="add-social-type" value="'.htmlspecialchars($destination).'">';
+		$result .= '<div id="add-social-link-modal" class="modal modal-fixed-footer">';
 		$result .= '<div class="modal-content">';
 		$result .= \Catalyst\Form\FormHTML::generateForm(\Catalyst\Database\SocialMedia::getFormStructure());
-		$result .= '<input type="hidden" id="add-social-link-type" value="'.htmlspecialchars($destination).'">';
 		$result .= '</div>';
 		$result .= '</div>';
 
