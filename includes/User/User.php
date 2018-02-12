@@ -5,9 +5,10 @@ namespace Catalyst\User;
 use \Catalyst\Email;
 use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
+use \Catalyst\Integrations\HasSocialChipsTrait;
 
 class User implements \Serializable {
-	use HasImageTrait, MessagableTrait;
+	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
 	private $id;
 
@@ -418,6 +419,14 @@ class User implements \Serializable {
 		} else {
 			unset($this->cache[$toClear]);
 		}
+	}
+
+	public function getSocialChipTable() : string {
+		return Tables::USER_SOCIAL_MEDIA;
+	}
+
+	public function getSocialChipIdColumn() : string {
+		return "USER_ID";
 	}
 
 	public static function getIdFromUsername(string $username) : int {
