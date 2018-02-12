@@ -62,7 +62,7 @@ class WhereClause implements QueryAdditionInterface {
 	/**
 	 * Returns the properly-formated clause
 	 * 
-	 * @return string the WHERE clause (not including the WHERE directive)
+	 * @return string the WHERE clause
 	 * @throws LogicException on bad values
 	 * @throws InvalidArgumentException on other bad values
 	 */
