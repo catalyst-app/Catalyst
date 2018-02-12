@@ -145,15 +145,58 @@ class SocialMedia {
 		return $str;
 	}
 
-	public static function getAddChip() : string {
-		$result  = '<a class="modal-trigger" href="#add-social-network-modal">';
-		$result .= '<div class="chip hoverable user-color white-text">';
-		$result .= 'Add network';
-		$result .= '<i class="material-icons">add</i>';
-		$result .= '</div>';
-		$result .= '</a>';
+	public static function getAddChip() : string { return self::getAddChipHtml(); } // BC, DEPRECATED
 
-		return $result;
+	/**
+	 * Get "Add Network" chip
+	 * 
+	 * @return string Chip HTML
+	 */
+	public static function getAddChipHtml() : string {
+		$str = '';
+		$str .= '<a';
+		$str .= ' class="modal-trigger"';
+		$str .= ' href="#add-social-link-modal"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="chip hoverable user-color white-text"';
+		$str .= '>';
+
+		$str .= 'Add link';
+		
+		$str .= '<i';
+		$str .= ' class="material-icons"';
+		$str .= '>';
+		$str .= 'add';
+		$str .= '</i>';
+
+		$str .= '</div>';
+		
+		$str .= '</a>';
+
+		$str .= '<a';
+		$str .= ' class="modal-trigger"';
+		$str .= ' href="#add-social-other-modal"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="chip hoverable user-color white-text"';
+		$str .= '>';
+
+		$str .= 'Add other';
+		
+		$str .= '<i';
+		$str .= ' class="material-icons"';
+		$str .= '>';
+		$str .= 'add';
+		$str .= '</i>';
+
+		$str .= '</div>';
+		
+		$str .= '</a>';
+
+		return $str;
 	}
 
 	public static function getAddModal() : string {
