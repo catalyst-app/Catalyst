@@ -654,7 +654,6 @@ class FormRepository {
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
 
-		// temporary
 		$completionAction = new CallUserFuncCompletionAction();
 		$completionAction->setFunc("addSocialMediaChip");
 		$form->setCompletionAction($completionAction);
