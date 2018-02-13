@@ -70,35 +70,6 @@ class SocialMedia {
 		];
 	}
 
-	public static function addToUser(\Catalyst\User\User $user, string $network, string $name, ?string $url) {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT IFNULL(MAX(`SORT`), 0) AS `NEXT_SORT` FROM `".DB_TABLES["user_social_media"]."` WHERE `USER_ID` = :USER_ID;");
-		$id = $user->getId();
-		$stmt->bindParam(":USER_ID", $id);
-		if (!$stmt->execute()) {
-			error_log(" Add social media error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
-			return self::ERROR_UNKNOWN;
-		}
-		$nextSort = $stmt->fetchAll()[0]["NEXT_SORT"];
-		$stmt->closeCursor();
-
-		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["user_social_media"]."`
-				(`SORT`, `USER_ID`, `NETWORK`, `SERVICE_URL`, `DISP_NAME`)
-			VALUES
-				(:SORT,:USER_ID,:NETWORK,:SERVICE_URL,:DISP_NAME);");
-		$stmt->bindParam(":SORT", $nextSort);
-		$stmt->bindParam(":USER_ID", $id);
-		$stmt->bindParam(":NETWORK", $network);
-		$stmt->bindParam(":SERVICE_URL", $url);
-		$stmt->bindParam(":DISP_NAME", $name);
-
-		if (!$stmt->execute()) {
-			error_log(" Add social media error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
-			return self::ERROR_UNKNOWN;
-		}
-
-		return self::SUCCESS;
-
-	}
 	public static function addToArtist(\Catalyst\Artist\Artist $artist, string $network, string $name, ?string $url) {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT IFNULL(MAX(`SORT`), 0) AS `NEXT_SORT` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID;");
 		$id = $artist->getId();
