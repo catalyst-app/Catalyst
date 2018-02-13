@@ -312,6 +312,21 @@ class SocialMedia {
 
 		$str .= '</div>';
 
+		$str .= '<div';
+		$str .= ' id="add-social-other-modal"';
+		$str .= ' class="modal modal-fixed-footer"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="modal-content"';
+		$str .= '>';
+
+		$str .= FormRepository::getAddNetworkOtherForm()->getHtml(false);
+
+		$str .= '</div>';
+
+		$str .= '</div>';
+
 		return $str;
 	}
 
