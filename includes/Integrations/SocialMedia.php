@@ -80,6 +80,68 @@ class SocialMedia {
 	}
 
 	/**
+	 * G(uesses)ets a integration type from a URL
+	 * 
+	 * @param string $url URL to use
+	 * @return string Best guess as to what the type is
+	 */
+	public static function getTypeFromUrl(string $url) : string {
+		if (strpos($url, "mailto:") === 0) {
+			return "EMAIL";
+		}
+		$url = str_replace("www.", "", $url);
+		$typeRegexDefs = [
+			['/500px\.com$/', '500PX'],
+			['/aminoapps\.com$/', 'AMINO'],
+			['/archiveofourown\.org$/', 'AO3'],
+			['/bandcamp\.com$/', 'BANDCAMP'],
+			['/deviantart\.com$/', 'DEVIANTART'],
+			['/(discord\.gg|discordapp\.com|watchanimeattheoffice\.com|bigbeans\.solutions|dis\.gd)$/', 'DISCORD'],
+			['/etsy\.com$/', 'ETSY'],
+			['/(facebook\.com|akamaihd\.net|fbcdn\.net|fb\.me|fbsbx\.com)$/', 'FACEBOOK'],
+			['/fanfiction\.net$/', 'FANFICTION'],
+			['/(furaffinity\.net|facdn\.net)$/', 'FURAFFINITY'],
+			['/furrynetwork\.com$/', 'FURRYNETWORK'],
+			['/(googleusercontent\.com|plus\.google\.com)$/', 'GPLUS'],
+			['/inkbunny\.net$/', 'INKBUNNY'],
+			['/(instagram\.com|cdninstagram\.com)$/', 'INSTAGRAM'],
+			['/ko-fi\.com$/', 'KOFI'],
+			['/patreon\.com$/', 'PATREON'],
+			['/paypal\.(me|com)$/', 'PAYPAL'],
+			['/pscp\.tv$/', 'PERISCOPE'],
+			['/picarto\.tv$/', 'PICARTO'],
+			['/pinterest\.com$/', 'PINTEREST'],
+			['/(redd\.it|reddit.com|reddit(static|media)\.com)$/', 'REDDIT'],
+			['/catalystapp\.co$/', 'SELF'],
+			['/snapchat\.com$/', 'SNAPCHAT'],
+			['/(sofurry\.com|isfeathery\.com|isfluffy\.com|isfurry\.com|isrubbery\.com|isscaly\.com|iswinged\.com)$/', 'SOFURRY'],
+			['/(snd\.sc|soundcloud\.com)$/', 'SOUNDCLOUD'],
+			['/spotify\.com$/', 'SPOTIFY'],
+			['/steampowered\.com$/', 'STEAM'],
+			['/(t\.me|telegram\.(me|dog))$/', 'TELEGRAM'],
+			['/trello\.com$/', 'TRELLO'],
+			['/tumblr\.com$/', 'TUMBLR'],
+			['/twitch\.tv$/', 'TWITCH'],
+			['/(t\.co|twitter\.com)$/', 'TWITTER'],
+			['/vimeo\.com$/', 'VIMEO'],
+			['/weasyl\.com$/', 'WEASYL'],
+			['/(youtube\.com|youtu\.be)$/', 'YOUTUBE'],
+		];
+		$host = parse_url($url, PHP_URL_HOST);
+		foreach ($typeRegexDefs as list($regex, $type)) {
+			if (preg_match($regex, strtolower($host))) {
+				return $type;
+			}
+		}
+
+		if (empty(parse_url($url, PHP_URL_PATH))) {
+			return "DOMAIN";
+		}
+
+		return "CUSTOM";
+	}
+
+	/**
 	 * Get a properly-structured array from a given set of chips
 	 * 
 	 * [
