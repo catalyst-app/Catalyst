@@ -19,6 +19,7 @@ use \Catalyst\Form\Field\{
 	ImageField,
 	PasswordField,
 	RawLabelCheckboxField,
+	SelectField,
 	StaticHTMLField,
 	TextField};
 use \Catalyst\Form\Form;
