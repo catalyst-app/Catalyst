@@ -56,9 +56,9 @@ class HiddenInputField extends AbstractField {
 		} else {
 			$str .= '$('.json_encode($this->getSelector()).').length > 1';
 		}
-		$str .= ')';
+		$str .= ') {';
 
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
+		$str .= 'Materialize.toast("An unknown error has occured.", 4000);';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 
 		$str .= '}';
