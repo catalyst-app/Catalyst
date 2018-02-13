@@ -22,7 +22,7 @@ class Column {
 	protected $column = null;
 
 	/**
-	 * Creates a Query object
+	 * Creates a Column object
 	 * 
 	 * @param string|null $column Column name
 	 * @param string|null $table Table for the column, null to assume
