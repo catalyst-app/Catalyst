@@ -5,6 +5,7 @@ namespace Catalyst\Form;
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\{
 	AutoClosingModalCompletionAction,
+	CallUserFuncCompletionAction,
 	ConcreteRedirectCompletionAction,
 	ConditionalCompletionAction
 };
@@ -653,8 +654,8 @@ class FormRepository {
 		$form->setPrimary(false);
 
 		// temporary
-		$completionAction = new ConcreteRedirectCompletionAction();
-		$completionAction->setRedirectUrl("Login");
+		$completionAction = new CallUserFuncCompletionAction();
+		$completionAction->setFunc("addSocialMediaChip");
 		$form->setCompletionAction($completionAction);
 
 		$destField = new HiddenInputField();
