@@ -18,7 +18,7 @@ class ConcreteRedirectCompletionAction extends AbstractCompletionAction {
 	 * 
 	 * @param string $redirectUrl The URL to redirect to
 	 */
-	public function __construct(string $redirectUrl='Thank you for submitting this form.') {
+	public function __construct(string $redirectUrl='') {
 		$this->setRedirectUrl($redirectUrl);
 	}
 
