@@ -423,6 +423,7 @@ class Form {
 	 */
 	public function getJsAggregator() : string {
 		$str = 'var '.self::FORM_DATA_VAR_NAME.' = new FormData();';
+		$str .= self::FORM_DATA_VAR_NAME.'.append("rootdir", $("html").attr("data-rootdir"));';
 		foreach ($this->fields as $field) {
 			$str .= $field->getJsAggregator(self::FORM_DATA_VAR_NAME);
 		}

@@ -1,6 +1,6 @@
 <?php
 
-define("ROOTDIR", "../../../");
+define("ROOTDIR", isset($_POST["rootdir"]) ? $_POST["rootdir"] : "");
 define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
