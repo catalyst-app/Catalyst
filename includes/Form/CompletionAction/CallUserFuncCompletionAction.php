@@ -47,7 +47,7 @@ class CallUserFuncCompletionAction extends AbstractCompletionAction {
 	 */
 	public function getJs() : string {
 		$str = '';
-		$str .= $this->getFunc().'(data);';
+		$str .= $this->getFunc().'(data.data);';
 		return $str;
 	}
 }
