@@ -27,6 +27,7 @@ class ErrorCodes {
 	// auth-related
 	const ERR_99901 = 'No user is logged in';
 	const ERR_99902 = 'A user is already logged in';
+	const ERR_99903 = 'You are not an artist';
 
 	// email list
 	const ERR_90001 = 'No email was entered';

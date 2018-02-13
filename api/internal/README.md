@@ -8,6 +8,7 @@
 
 - **99901** - No user is logged in
 - **99902** - A user is already logged in
+- **99903** - You are not an artist
 
 #### Email List
 
