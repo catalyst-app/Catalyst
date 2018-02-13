@@ -14,6 +14,7 @@ use \Catalyst\Form\Field\{
 	ColorField,
 	ConfirmPasswordField,
 	EmailField,
+	HiddenInputField,
 	ImageField,
 	PasswordField,
 	RawLabelCheckboxField,
@@ -655,6 +656,11 @@ class FormRepository {
 		$completionAction = new ConcreteRedirectCompletionAction();
 		$completionAction->setRedirectUrl("Login");
 		$form->setCompletionAction($completionAction);
+
+		$destField = new HiddenInputField();
+		$destField->setDistinguisher("dest");
+		$destField->setSelector("#add-social-type");
+		$form->addField($destField);
 
 		$labelField = new TextField();
 		$labelField->setDistinguisher("label");
