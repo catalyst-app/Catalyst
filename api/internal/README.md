@@ -110,11 +110,13 @@
 - **90701** - Invalid destination
 - **90702** - Missing label
 - **90703** - Invalid label
-- **90704** - URL/email not passed
-- **90705** - URL/email is invalid
-- **90706** - This domain is not allowed
-- **90707** - IP addresses are not allowed
-- **90708** - URL is not a valid scheme (http,https)
-- **90709** - URL inline authentication is disallowed
-- **90710** - Non-standard ports are disallowed
-- **90711** - "javascript:" starts the url string
+- **90704** - URL/email not passed (link only)
+- **90705** - URL/email is invalid (link only)
+- **90706** - This domain is not allowed (link only)
+- **90707** - IP addresses are not allowed (link only)
+- **90708** - URL is not a valid scheme (http,https) (link only)
+- **90709** - URL inline authentication is disallowed (link only)
+- **90710** - Non-standard ports are disallowed (link only)
+- **90711** - "javascript:" starts the url string (link only)
+- **90712** - No social media type passed ("other" only)
+- **90713** - Invalid social media type passed ("other" only)

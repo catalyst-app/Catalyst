@@ -129,6 +129,8 @@ class ErrorCodes {
 	const ERR_90709 = 'Inline URL authentication is disallowed';
 	const ERR_90710 = 'Non-standard ports are disallowed';
 	const ERR_90711 = 'You aren\'t funny';
+	const ERR_90712 = 'No social media type passed';
+	const ERR_90713 = 'Invalid social media type passed';
 
 	/**
 	 * Get an associative array of code => message based on class constants
