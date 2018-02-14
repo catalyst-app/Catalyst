@@ -200,7 +200,7 @@ class SocialMedia {
 
 		foreach ($chips as $chip) {
 			// we wrap the chip with a link
-			if (!is_null($chip["href"])) {
+			if (isset($chip["href"]) && !is_null($chip["href"])) {
 				$str .= '<a';
 				$str .= ' target="_blank"';
 				$str .= ' href="'.htmlspecialchars($chip["href"]).'"';
@@ -230,7 +230,7 @@ class SocialMedia {
 
 			$str .= '</div>';
 			
-			if (!is_null($chip["href"])) {
+			if (isset($chip["href"]) && !is_null($chip["href"])) {
 				$str .= '</a>';
 			}
 		}
