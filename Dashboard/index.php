@@ -68,11 +68,11 @@ $characters = Character::getCharactersFromUser($_SESSION["user"]);
 $newCharacterImage = new Image(Folders::GLOBAL_IMG, "", "new.png", false);
 
 $cards = [
-	'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", true).'</div>'
+	'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", [], false).'</div>'
 ];
 foreach ($characters as $character) {
 	$img = $character->getPrimaryImage();
-	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/").'</div>';
+	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/", [], true).'</div>';
 }
 ?>
 <?= implode("", $cards) ?>
