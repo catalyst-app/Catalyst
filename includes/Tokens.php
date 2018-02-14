@@ -167,4 +167,24 @@ class Tokens {
 
 		return array_column($stmt->getResult(), $column);
 	}
+
+	/**
+	 * Get a unique token with a given length and database column/table
+	 * 
+	 * @param int $length Token length
+	 * @param string $table Table
+	 * @param string $column Column
+	 * @return string Token
+	 */
+	public static function generateUniqueToken(int $length, string $table, string $column) : string {
+		$existingTokens = self::getTokensFromDatabase($column, $table);
+		
+		$token = self::generateToken($length);
+
+		while (in_array($token, $existingTokens)) {
+			$token = self::generateArtistToken();
+		}
+
+		return $token;
+	}
 }
