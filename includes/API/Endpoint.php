@@ -65,7 +65,7 @@ class Endpoint {
 	 * 
 	 * @return bool if the current page is an API endpoint
 	 */
-	public static function isApi() : bool {
+	public static function isEndpoint() : bool {
 		return self::$isEndpoint;
 	}
 
