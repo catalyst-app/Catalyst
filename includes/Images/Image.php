@@ -256,10 +256,11 @@ class Image {
 	 * @param string $caption Card caption
 	 * @param bool $link If the card should link to something
 	 * @param null|string $linkPath What the card should link to, null if image, no effect if $link=false
+	 * @param array $ribbon Ribbon color and text, as [hex, text]
 	 * @param bool $sendNsfw If there should be anything returned if the card is nsfw
 	 * @return string the card html
 	 */
-	public function getCard(string $title="", string $caption="", bool $link=false, ?string $linkPath=null, bool $sendNsfw=false) : string {
+	public function getCard(string $title="", string $caption="", bool $link=false, ?string $linkPath=null, array $ribbon=[], bool $sendNsfw=false) : string {
 		$html = '';
 
 		if (!empty($title)) {
@@ -281,7 +282,17 @@ class Image {
 			$html .= '</p>';
 		}
 
-		return $this->getCardFromRawHtml($html, $link, $linkPath, $sendNsfw);
+		$ribbonHtml = '';
+		if (count($ribbon) == 2) {
+			$ribbonHtml .= '<div';
+			$ribbonHtml .= ' class="ribbon"';
+			$ribbonHtml .= ' style="background-color: #'.$ribbon[0].'"';
+			$ribbonHtml .= '>';
+			$ribbonHtml .= htmlspecialchars($ribbon[1]);
+			$ribbonHtml = '</div>';
+		}
+
+		return $this->getCardFromRawHtml($html, $link, $linkPath, $ribbonHtml, $sendNsfw);
 	}
 
 	/**
@@ -293,7 +304,7 @@ class Image {
 	 * @param bool $sendNsfw If the card should still return html if the item is NSFW
 	 * @return string Card html
 	 */
-	public function getCardFromRawHtml(string $html, bool $link=false, ?string $linkPath=null, bool $sendNsfw=false) : string {
+	public function getCardFromRawHtml(string $html, bool $link=false, ?string $linkPath=null, string $preHtml="", bool $sendNsfw=false) : string {
 		if ($this->isNsfw() && !$sendNsfw) {
 			return '';
 		}
@@ -311,6 +322,8 @@ class Image {
 		}
 		$str .= ' class="col s12 card hoverable"';
 		$str .= '>';
+
+		$str .= $preHtml;
 
 		$str .= '<div';
 		$str .= ' class="card-image"';
