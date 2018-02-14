@@ -32,12 +32,12 @@ $order = json_decode($_POST["order"]);
 
 if (!is_array($order)) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90713, ErrorCodes::ERR_90713);
+	Response::sendErrorResponse(99999, ErrorCodes::ERR_99999);
 }
 foreach ($order as $item) {
 	if ((int)$item != $item) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90713, ErrorCodes::ERR_90713);
+		Response::sendErrorResponse(99999, ErrorCodes::ERR_99999);
 	}
 }
 
