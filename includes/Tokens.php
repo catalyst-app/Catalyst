@@ -149,4 +149,22 @@ class Tokens {
 		$chars = self::TOKEN_CHARS;
 		return str_shuffle(implode("", array_map(function ($in) use ($chars) { return $chars[array_rand($chars)]; }, range(1, $length))));
 	}
+
+	/**
+	 * Get an array of in-use tokens from the database
+	 * 
+	 * @param string $table Database table
+	 * @param string $column Database column which holds tokens
+	 * @return string[] Tokens
+	 */
+	public static function getTokensFromDatabase(string $table, string $column) : array {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable($table);
+		$stmt->addColumn(new Column($column, $table));
+
+		$stmt->execute();
+
+		return array_column($stmt->getResult(), $column);
+	}
 }
