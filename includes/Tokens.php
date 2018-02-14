@@ -2,7 +2,13 @@
 
 namespace Catalyst;
 
+use \Catalyst\Database\{Column, SelectQuery, Tables}
+
+/**
+ * A class which facilitates generation of (potentially unique) tokens
+ */
 class Tokens {
+	// characters which nacan be made into tokens
 	// [a-z0-9]
 	public const TOKEN_CHARS = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"];
 	public const TOKEN_REGEX = '^[a-z0-9]*$';
@@ -25,12 +31,21 @@ class Tokens {
 	public const TOTP_RESET_TOKEN_REGEX = '^[a-z0-9]{'.self::TOTP_RESET_TOKEN_LENGTH.'}$';
 	public const USER_FILE_TOKEN_REGEX = '^[a-z0-9]{'.self::USER_FILE_TOKEN_LENGTH.'}$';
 
+	/**
+	 * Get a unique FILE_TOKEN for a User
+	 * @return string
+	 */
 	public static function generateUniqueUserFileToken() : string {
 		$token = self::generateUserFileToken();
 
-		$tokenStmt = $GLOBALS["dbh"]->query("SELECT `FILE_TOKEN` FROM `".DB_TABLES["users"]."`;");
-		$existingTokens = array_column($tokenStmt->fetchAll(), "FILE_TOKEN");
-		$tokenStmt->closeCursor();
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::USERS);
+		$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
+
+		$stmt->fetchAll();
+
+		$existingTokens = array_column($stmt->getResult(), "FILE_TOKEN");
 
 		while (in_array($token, $existingTokens)) {
 			$token = self::generateUserFileToken();
