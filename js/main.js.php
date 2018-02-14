@@ -515,18 +515,28 @@ function totp(K,t) {
 
 			var data = new FormData();
 			data.append("id", id);
+			data.append("rootdir", $("html").attr("data-rootdir"));
+			if ($("#social-dest-type").length !== 1) {
+				data.append("dest", "");
+			} else {
+				data.append("dest", $("#social-dest-type").val());
+			}
 
-			$.ajax("del.php", {
+			$.ajax($("html").attr("data-rootdir") + "api\/internal\/social_media\/delete\/", {
 				data: data,
 				processData: false,
 				contentType: false,
 				method: "POST"
 			}).done(function(response) {
-				Materialize.toast("Saved", 4000);
+				console.log(response);
+				var data = JSON.parse(response);
+				Materialize.toast("Removed", 4000);
 			}).fail(function(response) {
-				alert("Unknown error.");
-				window.location="";
+				console.log(response);
+				var data = JSON.parse(response.responseText);
+				showErrorMessageForCode(data.error_code);
 			});
+
 			if (e.stopPropogation) e.stopPropogation();
 			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 			e.preventDefault();
