@@ -64,12 +64,22 @@ class Tokens {
 		return self::generateToken(self::USER_FILE_TOKEN_LENGTH);
 	}
 
+	/**
+	 * Generate a unique CHARACTER_TOKEN for a Character
+	 * 
+	 * @return string
+	 */
 	public static function generateUniqueCharacterToken() : string {
 		$token = self::generateCharacterToken();
 
-		$tokenStmt = $GLOBALS["dbh"]->query("SELECT `CHARACTER_TOKEN` FROM `".DB_TABLES["characters"]."`;");
-		$existingTokens = array_column($tokenStmt->fetchAll(), "CHARACTER_TOKEN");
-		$tokenStmt->closeCursor();
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::CHARACTERS);
+		$stmt->addColumn(new Column("CHARACTER_TOKEN", Tables::CHARACTERS));
+
+		$stmt->execute();
+
+		$existingTokens = array_column($stmt->getResult(), "CHARACTER_TOKEN");
 
 		while (in_array($token, $existingTokens)) {
 			$token = self::generateCharacterToken();
@@ -78,6 +88,11 @@ class Tokens {
 		return $token;
 	}
 
+	/**
+	 * Generate a CHARACTER_TOKEN for a Character
+	 * 
+	 * @return string token
+	 */
 	public static function generateCharacterToken() : string {
 		return self::generateToken(self::CHARACTER_TOKEN_LENGTH);
 	}
