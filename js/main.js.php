@@ -501,17 +501,19 @@ function totp(K,t) {
 		/* REMOVE SOCIAL MEDIA */
 		$(document).on("click", ".social-chips .chip i", function(e) {
 			var id = $(this).parent().attr("data-id");
-			$(this).parent().tooltip('remove');
-			$(this).parent().velocity("finish").velocity("stop");
-			if ($(this).parent().parent()[0].tagName.toLowerCase() == "a") {
-				$(this).parent().parent().fadeOut(400, function() {
-					$(this).remove();
-				});
-			} else {
-				$(this).parent().fadeOut(400, function() {
-					$(this).remove();
-				});
-			}
+			try {
+				$(this).parent().tooltip('remove');
+				$(this).parent().velocity("finish").velocity("stop");
+				if ($(this).parent().parent()[0].tagName.toLowerCase() == "a") {
+					$(this).parent().parent().fadeOut(400, function() {
+						$(this).remove();
+					});
+				} else {
+					$(this).parent().fadeOut(400, function() {
+						$(this).remove();
+					});
+				}
+			} catch (e) {}
 
 			var data = new FormData();
 			data.append("id", id);
