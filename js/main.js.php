@@ -547,18 +547,27 @@ function totp(K,t) {
 					}
 					
 					var data = new FormData();
+					data.append("rootdir", $("html").attr("data-rootdir"));
+					if ($("#add-social-type").length !== 1) {
+						data.append("dest", "");
+					} else {
+						data.append("dest", $("#add-social-type").val());
+					}
 					data.append("order", JSON.stringify(result));
 
-					$.ajax("order.php", {
+					$.ajax($("html").attr("data-rootdir") + "api\/internal\/social_media\/order\/", {
 						data: data,
 						processData: false,
 						contentType: false,
 						method: "POST"
 					}).done(function(response) {
+						console.log(response);
+						var data = JSON.parse(response);
 						Materialize.toast("Saved", 4000);
 					}).fail(function(response) {
-						alert("Unknown error.");
-						window.location="";
+						console.log(response);
+						var data = JSON.parse(response.responseText);
+						showErrorMessageForCode(data.error_code);
 					});
 				}, 100);
 			});
