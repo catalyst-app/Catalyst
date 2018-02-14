@@ -2,7 +2,11 @@
 
 namespace Catalyst\CommissionType;
 
+use \Catalyst\Images\{Folders, HasImageTrait, Image};
+
 class CommissionType {
+	use HasImageTrait;
+
 	private $id;
 
 	private $cache = [];
@@ -328,6 +332,24 @@ class CommissionType {
 		return (count($imagesThatArePrimary) ? $imagesThatArePrimary[0] : ["default.png", "", false, true]);
 	}
 
+	public function getPrimaryImagePath() : ?string {
+		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
+		if (count($imagesThatArePrimary)) {
+			return str_replace($this->getToken(), "", $imagesThatArePrimary[0][0]); // TODO: REMOVE THE STR REPLACE
+		} else {
+			return null;
+		}
+	}
+
+	public function isPrimaryImageNsfw() : bool {
+		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
+		if (count($imagesThatArePrimary)) {
+			return $imagesThatArePrimary[0][2];
+		} else {
+			return false;
+		}
+	}
+
 	public function getModifiers() : array {
 		if (array_key_exists("MODS", $this->cache)) {
 			return $this->cache["MODS"];
@@ -407,5 +429,9 @@ class CommissionType {
 		$stmt->closeCursor();
 
 		return array_map(function($in) { return new self($in["ID"]); }, $rows);
+	}
+
+	public function initializeImage() : void {
+		$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
 	}
 }
