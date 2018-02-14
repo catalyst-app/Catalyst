@@ -149,7 +149,7 @@ Response::sendSuccessResponse("Success", [
 			"id" => $stmt->getResult(),
 			"src" => SocialMedia::getMeta()[$type]["path"],
 			"label" => $_POST["label"],
-			"href" => $_POST["url"],
+			"href" => $finalUrl,
 			"classes" => SocialMedia::getMeta()[$type]["classes"],
 			"tooltip" => SocialMedia::getMeta()[$type]["name"]
 		]
