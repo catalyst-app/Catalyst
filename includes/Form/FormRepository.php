@@ -23,6 +23,7 @@ use \Catalyst\Form\Field\{
 	StaticHTMLField,
 	TextField};
 use \Catalyst\Form\Form;
+use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Secrets;
 use \Catalyst\Tokens;
 use \Catalyst\User\User;
@@ -689,6 +690,56 @@ class FormRepository {
 		$urlField->addError(90709, ErrorCodes::ERR_90709);
 		$urlField->addError(90710, ErrorCodes::ERR_90710);
 		$form->addField($urlField);
+
+		return $form;
+	}
+
+	/**
+	 * Adding a social media network (link) form
+	 * 
+	 * See /Dashboard and other similar for fomr usage
+	 * 
+	 * @return Form Form for adding a social network via. a link
+	 */
+	public static function getAddNetworkOtherForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/social_media/add_other/");
+		$form->setButtonText("ADD");
+		$form->setPrimary(false);
+
+		$completionAction = new CallUserFuncCompletionAction();
+		$completionAction->setFunc("addSocialMediaChip");
+		$form->setCompletionAction($completionAction);
+
+		$destField = new HiddenInputField();
+		$destField->setDistinguisher("dest");
+		$destField->setSelector("#add-social-type");
+		$form->addField($destField);
+
+		$typeField = new SelectField();
+		$typeField->setDistinguisher("type");
+		$typeField->setLabel("Social Network");
+		$typeField->setOptions(SocialMedia::getOtherNetworkAddSelectArray());
+		$typeField->setRequired(true);
+		$typeField->addError(90712, ErrorCodes::ERR_90712);
+		$typeField->setMissingErrorCode(90712);
+		$typeField->addError(90713, ErrorCodes::ERR_90713);
+		$typeField->setInvalidErrorCode(90713);
+		$form->addField($typeField);
+
+		$labelField = new TextField();
+		$labelField->setDistinguisher("label");
+		$labelField->setLabel("Label");
+		$labelField->setRequired(true);
+		$labelField->setPattern('^.{2,64}$');
+		$labelField->addError(90702, ErrorCodes::ERR_90702);
+		$labelField->setMissingErrorCode(90702);
+		$labelField->addError(90703, ErrorCodes::ERR_90703);
+		$labelField->setInvalidErrorCode(90703);
+		$form->addField($labelField);
 
 		return $form;
 	}
