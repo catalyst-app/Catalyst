@@ -182,4 +182,8 @@ $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
 $query->execute();
 
+if ($sendVerificationEmail) {
+	$_SESSION["user"]->sendVerificationEmail();
+}
+
 Response::sendSuccessResponse("Success", ["redirect_to_totp" => $redirectToTotp]);
