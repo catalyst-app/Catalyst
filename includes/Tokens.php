@@ -2,7 +2,7 @@
 
 namespace Catalyst;
 
-use \Catalyst\Database\{Column, SelectQuery, Tables}
+use \Catalyst\Database\{Column, SelectQuery, Tables};
 
 /**
  * A class which facilitates generation of (potentially unique) tokens
@@ -33,6 +33,7 @@ class Tokens {
 
 	/**
 	 * Get a unique FILE_TOKEN for a User
+	 * 
 	 * @return string
 	 */
 	public static function generateUniqueUserFileToken() : string {
@@ -43,7 +44,7 @@ class Tokens {
 		$stmt->setTable(Tables::USERS);
 		$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
 
-		$stmt->fetchAll();
+		$stmt->execute();
 
 		$existingTokens = array_column($stmt->getResult(), "FILE_TOKEN");
 
@@ -56,6 +57,7 @@ class Tokens {
 
 	/**
 	 * Get a FILE_TOKEN for a User
+	 * 
 	 * @return string
 	 */
 	public static function generateUserFileToken() : string {
