@@ -103,7 +103,7 @@
 	'VORE', 'Vore', 'Consuming of another character through any means'
 ------Maturity Rating------
 	'SAFE', 'Safe', 'A piece with no sexual content or lightly suggestive'
-	'SUGGESTIVE', 'Suggestive', 'Anything which is suggestive or contains extreme fetishes'
+	'MATURE', 'Mature', 'Anything which is suggestive or contains extreme fetishes'
 	'EXPLICIT', 'Explicit', 'Anything containing sex toys or genitalia, including backsack'
 ------Types of Species That Fit This Commission------
 	'AQUATIC', 'Aquatic', 'Aquatic'
