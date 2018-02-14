@@ -54,6 +54,10 @@ class Tokens {
 		return $token;
 	}
 
+	/**
+	 * Get a FILE_TOKEN for a User
+	 * @return string
+	 */
 	public static function generateUserFileToken() : string {
 		return self::generateToken(self::USER_FILE_TOKEN_LENGTH);
 	}
