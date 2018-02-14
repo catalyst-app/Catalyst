@@ -90,7 +90,7 @@ $types = array_filter($types, function($type) {
 	if (!in_array("MATURE", $type->getAttrs()) && !in_array("EXPLICIT", $type->getAttrs())) {
 		return true;
 	}
-	return in_array("SFW", $type->getAttrs());
+	return in_array("SAFE", $type->getAttrs());
 });
 $cards = [];
 foreach ($types as $type) {
