@@ -45,7 +45,6 @@ use \Catalyst\Database\CommissionType\EditCommissionType;
 use \Catalyst\Database\CommissionType\NewCommissionType;
 use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
-use \Catalyst\Database\SocialMedia;
 use \Catalyst\Form\FormJS;
 ?>
 // ~))))'> 
