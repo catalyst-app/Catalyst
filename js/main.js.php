@@ -494,16 +494,6 @@ function totp(K,t) {
 		});
 
 		/* ADD SOCIAL MEDIA */
-		<?php
-		echo FormJS::generateFormHandler(SocialMedia::getFormStructure());
-		?> 
-		// deprecated
-		var addSocialChip = function(e) {
-			$(".social-chips > div").append($(e.message).html());
-			$("#add-social-network-modal").modal("close");
-			$("#addnetwork-form")[0].reset();
-		};
-
 		var addSocialMediaChip = function(data) {
 			$(".modal").modal("close");
 			$(".social-chips > div").append($(data.html).html());
