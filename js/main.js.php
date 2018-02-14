@@ -58,52 +58,52 @@ use \Catalyst\Form\FormJS;
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 if (!Array.prototype.includes) {
   Object.defineProperty(Array.prototype, 'includes', {
-    value: function(searchElement, fromIndex) {
+	value: function(searchElement, fromIndex) {
 
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
+	  if (this == null) {
+		throw new TypeError('"this" is null or not defined');
+	  }
 
-      // 1. Let O be ? ToObject(this value).
-      var o = Object(this);
+	  // 1. Let O be ? ToObject(this value).
+	  var o = Object(this);
 
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
+	  // 2. Let len be ? ToLength(? Get(O, "length")).
+	  var len = o.length >>> 0;
 
-      // 3. If len is 0, return false.
-      if (len === 0) {
-        return false;
-      }
+	  // 3. If len is 0, return false.
+	  if (len === 0) {
+		return false;
+	  }
 
-      // 4. Let n be ? ToInteger(fromIndex).
-      //    (If fromIndex is undefined, this step produces the value 0.)
-      var n = fromIndex | 0;
+	  // 4. Let n be ? ToInteger(fromIndex).
+	  //	(If fromIndex is undefined, this step produces the value 0.)
+	  var n = fromIndex | 0;
 
-      // 5. If n ≥ 0, then
-      //  a. Let k be n.
-      // 6. Else n < 0,
-      //  a. Let k be len + n.
-      //  b. If k < 0, let k be 0.
-      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+	  // 5. If n ≥ 0, then
+	  //  a. Let k be n.
+	  // 6. Else n < 0,
+	  //  a. Let k be len + n.
+	  //  b. If k < 0, let k be 0.
+	  var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
 
-      function sameValueZero(x, y) {
-        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-      }
+	  function sameValueZero(x, y) {
+		return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+	  }
 
-      // 7. Repeat, while k < len
-      while (k < len) {
-        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-        // b. If SameValueZero(searchElement, elementK) is true, return true.
-        if (sameValueZero(o[k], searchElement)) {
-          return true;
-        }
-        // c. Increase k by 1. 
-        k++;
-      }
+	  // 7. Repeat, while k < len
+	  while (k < len) {
+		// a. Let elementK be the result of ? Get(O, ! ToString(k)).
+		// b. If SameValueZero(searchElement, elementK) is true, return true.
+		if (sameValueZero(o[k], searchElement)) {
+		  return true;
+		}
+		// c. Increase k by 1. 
+		k++;
+	  }
 
-      // 8. Return false
-      return false;
-    }
+	  // 8. Return false
+	  return false;
+	}
   });
 }
 
@@ -210,26 +210,26 @@ var getCardState = function() {
 /* TOTP */
 function totp(K,t) {
   function sha1(C){
-    function L(x,b){return x<<b|x>>>32-b;}
-    var l=C.length,D=C.concat([1<<31]),V=0x67452301,W=0x88888888,
-        Y=271733878,X=Y^W,Z=0xC3D2E1F0;W^=V;
-    do D.push(0);while(D.length+1&15);D.push(32*l);
-    while (D.length){
-      var E=D.splice(0,16),a=V,b=W,c=X,d=Y,e=Z,f,k,i=12;
-      function I(x){var t=L(a,5)+f+e+k+E[x];e=d;d=c;c=L(b,30);b=a;a=t;}
-      for(;++i<77;)E.push(L(E[i]^E[i-5]^E[i-11]^E[i-13],1));
-      k=0x5A827999;for(i=0;i<20;I(i++))f=b&c|~b&d;
-      k=0x6ED9EBA1;for(;i<40;I(i++))f=b^c^d;
-      k=0x8F1BBCDC;for(;i<60;I(i++))f=b&c|b&d|c&d;
-      k=0xCA62C1D6;for(;i<80;I(i++))f=b^c^d;
-      V+=a;W+=b;X+=c;Y+=d;Z+=e;}
-    return[V,W,X,Y,Z];
+	function L(x,b){return x<<b|x>>>32-b;}
+	var l=C.length,D=C.concat([1<<31]),V=0x67452301,W=0x88888888,
+		Y=271733878,X=Y^W,Z=0xC3D2E1F0;W^=V;
+	do D.push(0);while(D.length+1&15);D.push(32*l);
+	while (D.length){
+	  var E=D.splice(0,16),a=V,b=W,c=X,d=Y,e=Z,f,k,i=12;
+	  function I(x){var t=L(a,5)+f+e+k+E[x];e=d;d=c;c=L(b,30);b=a;a=t;}
+	  for(;++i<77;)E.push(L(E[i]^E[i-5]^E[i-11]^E[i-13],1));
+	  k=0x5A827999;for(i=0;i<20;I(i++))f=b&c|~b&d;
+	  k=0x6ED9EBA1;for(;i<40;I(i++))f=b^c^d;
+	  k=0x8F1BBCDC;for(;i<60;I(i++))f=b&c|b&d|c&d;
+	  k=0xCA62C1D6;for(;i<80;I(i++))f=b^c^d;
+	  V+=a;W+=b;X+=c;Y+=d;Z+=e;}
+	return[V,W,X,Y,Z];
   }
   var k=[],l=[],i=0,j=0,c=0;
   for (;i<K.length;){
-    c=c*32+'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'.
-      indexOf(K.charAt(i++).toUpperCase());
-    if((j+=5)>31)k.push(Math.floor(c/(1<<(j-=32)))),c&=31;}
+	c=c*32+'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'.
+	  indexOf(K.charAt(i++).toUpperCase());
+	if((j+=5)>31)k.push(Math.floor(c/(1<<(j-=32)))),c&=31;}
   j&&k.push(c<<(32-j));
   for(i=0;i<16;++i)l.push(0x6A6A6A6A^(k[i]=k[i]^0x5C5C5C5C));
   var s=sha1(k.concat(sha1(l.concat([0,t])))),o=s[4]&0xF;
