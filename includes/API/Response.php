@@ -22,7 +22,7 @@ class Response {
 			"message" => $message,
 			"data" => $data,
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
-		if (!Endpoint::isInternalEndpoint()) {
+		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
 			$_SESSION = [];
 		}
 		die();
@@ -49,7 +49,7 @@ class Response {
 				"_session" => $_SESSION
 			]
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
-		if (!Endpoint::isInternalEndpoint()) {
+		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
 			$_SESSION = [];
 		}
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {
