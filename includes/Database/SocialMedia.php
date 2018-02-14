@@ -99,20 +99,6 @@ class SocialMedia {
 		return self::SUCCESS;
 	}
 
-	public static function delFromUser(\Catalyst\User\User $user, int $id) {
-		$stmt = $GLOBALS["dbh"]->prepare("DELETE FROM `".DB_TABLES["user_social_media"]."` WHERE `ID` = :ID AND `USER_ID` = :USER_ID;");
-		$uid = $user->getId();
-		$stmt->bindParam(":ID", $id);
-		$stmt->bindParam(":USER_ID", $uid);
-
-		if (!$stmt->execute()) {
-			error_log(" Del social media error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
-			return self::ERROR_UNKNOWN;
-		}
-
-		return self::SUCCESS;
-	}
-
 	public static function delFromArtist(\Catalyst\Artist\Artist $artist, int $id) {
 		$stmt = $GLOBALS["dbh"]->prepare("DELETE FROM `".DB_TABLES["artist_social_media"]."` WHERE `ID` = :ID AND `ARTIST_ID` = :ARTIST_ID;");
 		$aid = $artist->getId();
@@ -122,26 +108,6 @@ class SocialMedia {
 		if (!$stmt->execute()) {
 			error_log(" Del social media error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
 			return self::ERROR_UNKNOWN;
-		}
-
-		return self::SUCCESS;
-	}
-
-	public static function arrangeUser(\Catalyst\User\User $user, array $ids) {
-		$i = 0;
-		$uid = $user->getId();
-		foreach ($ids as $id) {
-			$stmt = $GLOBALS["dbh"]->prepare("UPDATE `".DB_TABLES["user_social_media"]."` SET `SORT` = :SORT WHERE `ID` = :ID AND `USER_ID` = :USER_ID;");
-			$stmt->bindParam(":SORT", $i);
-			$stmt->bindParam(":ID", $id);
-			$stmt->bindParam(":USER_ID", $uid);
-
-			if (!$stmt->execute()) {
-				error_log(" Arrange social media error: **".(self::$lastErrId = microtime(true))."**, ".serialize($stmt->errorInfo()));
-				return self::ERROR_UNKNOWN;
-			}
-
-			$i++;
 		}
 
 		return self::SUCCESS;
