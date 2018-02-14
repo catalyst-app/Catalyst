@@ -126,7 +126,7 @@ class SocialMedia {
 			['/(redd\.it|reddit.com|reddit(static|media)\.com)$/', 'REDDIT'],
 			['/catalystapp\.co$/', 'SELF'],
 			['/snapchat\.com$/', 'SNAPCHAT'],
-			['/(sofurry\.com|isfeathery\.com|isfluffy\.com|isfurry\.com|isrubbery\.com|isscaly\.com|iswinged\.com)$/', 'SOFURRY'],
+			['/(sofurry\.com|is(feathery|fluffy|furry|rubbery|scaly|winged)\.com)$/', 'SOFURRY'],
 			['/(snd\.sc|soundcloud\.com)$/', 'SOUNDCLOUD'],
 			['/spotify\.com$/', 'SPOTIFY'],
 			['/steampowered\.com$/', 'STEAM'],
