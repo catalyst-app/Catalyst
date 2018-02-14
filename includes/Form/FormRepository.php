@@ -661,7 +661,7 @@ class FormRepository {
 
 		$destField = new HiddenInputField();
 		$destField->setDistinguisher("dest");
-		$destField->setSelector("#add-social-type");
+		$destField->setSelector("#social-dest-type");
 		$form->addField($destField);
 
 		$labelField = new TextField();
@@ -716,7 +716,7 @@ class FormRepository {
 
 		$destField = new HiddenInputField();
 		$destField->setDistinguisher("dest");
-		$destField->setSelector("#add-social-type");
+		$destField->setSelector("#social-dest-type");
 		$form->addField($destField);
 
 		$typeField = new SelectField();
