@@ -6,7 +6,7 @@
 		</title>
 
 <?php foreach (\Catalyst\Page\Header\Header::SCRIPTS as $script): ?>
-		<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
+		<script src="<?= $script[0] ?>" <?= trim(implode(" ", array_slice($script, 1))) ?>></script>
 <?php endforeach; ?>
 
 <?php foreach (\Catalyst\Page\Header\Header::STYLES as $style): ?>
