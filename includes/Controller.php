@@ -208,7 +208,7 @@ class Controller {
 	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline) : void {
 		if (!headers_sent()) {
 			HTTPCode::set(500);
-			if (Endpoint::isApi()) {
+			if (Endpoint::isEndpoint()) {
 				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, [$errno,$errstr,basename($errfile),$errline]);
 			}
 		}
