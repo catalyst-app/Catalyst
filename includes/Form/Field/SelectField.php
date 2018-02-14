@@ -138,6 +138,16 @@ class SelectField extends AbstractField {
 			if (empty($_REQUEST[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
+		} else {
+			if (empty($_REQUEST[$this->getDistinguisher()])) {
+				return;
+			}
 		}
+		foreach ($this->getOptions() as list($value, $text)) {
+			if ($_REQUEST[$this->getDistinguisher()] == $value) {
+				return;
+			}
+		}
+		$this->throwInvalidError();
 	}
 }
