@@ -155,7 +155,7 @@ class Tokens {
 	 * 
 	 * @param string $table Database table
 	 * @param string $column Database column which holds tokens
-	 * @return string[] Tokens
+	 * @return string[] Tokens currently in use
 	 */
 	public static function getTokensFromDatabase(string $table, string $column) : array {
 		$stmt = new SelectQuery();
@@ -174,7 +174,7 @@ class Tokens {
 	 * @param int $length Token length
 	 * @param string $table Table
 	 * @param string $column Column
-	 * @return string Token
+	 * @return string Unique token
 	 */
 	public static function generateUniqueToken(int $length, string $table, string $column) : string {
 		$existingTokens = self::getTokensFromDatabase($column, $table);
