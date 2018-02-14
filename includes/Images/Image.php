@@ -289,7 +289,7 @@ class Image {
 			$ribbonHtml .= ' style="background-color: #'.$ribbon[0].'"';
 			$ribbonHtml .= '>';
 			$ribbonHtml .= htmlspecialchars($ribbon[1]);
-			$ribbonHtml = '</div>';
+			$ribbonHtml .= '</div>';
 		}
 
 		return $this->getCardFromRawHtml($html, $link, $linkPath, $ribbonHtml, $sendNsfw);
