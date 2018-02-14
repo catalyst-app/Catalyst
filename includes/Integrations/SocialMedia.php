@@ -80,6 +80,18 @@ class SocialMedia {
 	}
 
 	/**
+	 * Get an array of options for use with a SelectField
+	 * 
+	 * @return string[][]
+	 */
+	public static function getOtherNetworkAddSelectArray() : array {
+		$arr = array_filter(self::getMeta(), function($in) { return $in["visible"]; });
+		return array_map(function($a, $b) {
+			return [$a, $b["name"]];
+		}, array_keys($arr), $arr);
+	}
+
+	/**
 	 * G(uesses)ets a integration type from a URL
 	 * 
 	 * @param string $url URL to use
