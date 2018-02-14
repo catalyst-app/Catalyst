@@ -182,7 +182,7 @@ $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 $query->addAdditionalCapability($whereClause);
 $query->execute();
 
-if ($sendVerificationEmail) {
+if ($resendVerificationEmail) {
 	$_SESSION["user"]->sendVerificationEmail();
 }
 
