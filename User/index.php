@@ -114,7 +114,17 @@ $types = array_filter($types, function($type) {
 $cards = [];
 foreach ($types as $type) {
 	$img = $type->getPrimaryImage();
-	$cards[] = '<div class="col s8 m4 l3">'.UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$img[0], $img[2], $type->getName(), ($artist = $type->getArtistPage())->getName()."\n".$type->getBlurb(), ROOTDIR."Artist/".$artist->getUrl()."/").'</div>';
+	$artist = $type->getArtistPage();
+	$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
+		$type->getName(), 
+		$artist->getName()."\n".$type->getBlurb(), 
+		true, 
+		ROOTDIR."Artist/".$artist->getUrl()."/", 
+		[
+			$artist->getColorHex(),
+			$type->isOpen() ? $type->getBaseCost() : "CLOSED"
+		]
+	).'</div>';
 }
 ?>
 <?php if (count($cards) === 0): ?>
