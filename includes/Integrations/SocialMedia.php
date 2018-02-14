@@ -305,7 +305,7 @@ class SocialMedia {
 		
 		$str .= '<input';
 		$str .= ' type="hidden"';
-		$str .= ' id="add-social-type"';
+		$str .= ' id="social-dest-type"';
 		$str .= ' value="'.htmlspecialchars($destination).'"';
 		$str .= '>';
 

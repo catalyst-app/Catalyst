@@ -548,10 +548,10 @@ function totp(K,t) {
 					
 					var data = new FormData();
 					data.append("rootdir", $("html").attr("data-rootdir"));
-					if ($("#add-social-type").length !== 1) {
+					if ($("#social-dest-type").length !== 1) {
 						data.append("dest", "");
 					} else {
-						data.append("dest", $("#add-social-type").val());
+						data.append("dest", $("#social-dest-type").val());
 					}
 					data.append("order", JSON.stringify(result));
 
