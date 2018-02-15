@@ -76,6 +76,13 @@ class User implements Serializable {
 		return array_key_exists("pending_user",$_SESSION) && $_SESSION["pending_user"] instanceof self;
 	}
 
+	/**
+	 * Get the user's permission scope
+	 * 
+	 * As of writing, this consists of the following possible values:
+	 * ["all","logged_out","logged_in","artist","not_artist","nsfw"]
+	 * @return string[]
+	 */
 	public static function getPermissionScope() : array {
 		if (self::isLoggedIn()) {
 			$perms = ["all", "logged_in"];
@@ -86,7 +93,7 @@ class User implements Serializable {
 				$perms[] = "artist";
 			}
 			if (!$currentUser->isArtist()) {
-				$perms[] = "not-artist";
+				$perms[] = "not_artist";
 			}
 			if ($currentUser->isNsfw()) {
 				$perms[] = "nsfw";
