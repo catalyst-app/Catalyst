@@ -13,7 +13,7 @@ define("PAGE_KEYWORD", Values::FEATURE_BOARD[0]);
 define("PAGE_TITLE", Values::createTitle(Values::FEATURE_BOARD[1], []));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
