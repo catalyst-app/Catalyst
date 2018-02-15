@@ -47,7 +47,7 @@ $result["picture_nsfw"] = $user->getProfilePictureNsfw();
 if ($isOwnUser) {
 	$result["nsfw"] = $user->isNsfw();
 }
-$result["color"] = $user->getColorHex();
+$result["color"] = $user->getColor();
 
 
 Response::sendSuccessResponse("Success", $result);

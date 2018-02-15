@@ -28,9 +28,9 @@ if (User::isLoggedIn() && isset($artist) && $_SESSION["user"]->getArtistPageId()
 define("PAGE_TITLE", Values::createTitle(Values::VIEW_ARTIST[1], ["name" => (isset($artist) ? $artist->getName() : "Invalid URL")]));
 
 if (isset($artist)) {
-	define("PAGE_COLOR", $artist->getColorHex());
+	define("PAGE_COLOR", $artist->getColor());
 } elseif (User::isLoggedIn()) {
-	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

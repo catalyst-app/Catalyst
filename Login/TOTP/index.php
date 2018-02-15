@@ -13,7 +13,7 @@ define("PAGE_KEYWORD", Values::TOTP_LOGIN[0]);
 define("PAGE_TITLE", Values::createTitle(Values::TOTP_LOGIN[1], []));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

@@ -13,7 +13,7 @@ define("PAGE_KEYWORD", Values::NEW_CHARACTER[0]);
 define("PAGE_TITLE", Values::createTitle(Values::NEW_CHARACTER[1], []));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
@@ -23,7 +23,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("New Character");
 
 if (User::isLoggedIn()) {
-	echo User::getNotLoggedInHTML();
+	echo User::getNotLoggedInHtml();
 } else {
 	echo FormRepository::getNewCharacterForm()->getHtml();
 }
