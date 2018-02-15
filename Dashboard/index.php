@@ -29,7 +29,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Dashboard");
 
 if (!User::isLoggedIn()):
-	echo User::getNotLoggedInHTML();
+	echo User::getNotLoggedInHtml();
 else: ?>
 			<div class="section">
 				<div class="row">

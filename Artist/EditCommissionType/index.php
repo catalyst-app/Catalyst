@@ -31,7 +31,7 @@ $typeId = CommissionType::getIdFromToken($_GET["q"]);
 if (FormHTML::testAjaxSubmissionFailed()): ?>
 	<?= FormHTML::getAjaxSubmissionHtml(); ?>
 <?php elseif (!User::isLoggedIn()): ?>
-	<?= User::getNotLoggedInHTML() ?>
+	<?= User::getNotLoggedInHtml() ?>
 <?php elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<p class="flow-text">You do not have an artist page.</p>

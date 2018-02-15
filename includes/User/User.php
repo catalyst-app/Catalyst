@@ -105,12 +105,37 @@ class User implements Serializable {
 		}
 	}
 
-	public static function getNotLoggedInHTML() : string {
-		return implode("\n", [
-			'			<div class="section">',
-			'				<p class="flow-text">You must log in to access this page.  <a href="'.ROOTDIR.'Login">Login</a></p>',
-			'			</div>',
-		]);
+	/**
+	 * Gets HTML for a message which designates a user-only page
+	 * 
+	 * @return string
+	 */
+	public static function getNotLoggedInHtml() : string {
+		$str = '';
+
+		$str .= '<div';
+		$str .= ' class="section"';
+		$str .= '>';
+
+		$str .= '<p';
+		$str .= ' class="flow-text"';
+		$str .= '>';
+
+		$str .= 'You must log in to access this page.  ';
+
+		$str .= '<a';
+		$str .= ' href="'.ROOTDIR.'Login"';
+		$str .= '>';
+
+		$str .= 'Login';
+
+		$str .= '</a>';
+		
+		$str .= '</p>';
+
+		$str .= '</div>';
+
+		return $str;
 	}
 
 	public function getColorHex() : string {

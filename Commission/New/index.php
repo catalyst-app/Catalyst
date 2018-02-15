@@ -33,7 +33,7 @@ echo UniversalFunctions::createHeading("New Commission");
 
 ?>
 <?php if (!User::isLoggedIn()): ?>
-	<?= User::getNotLoggedInHTML() ?>
+	<?= User::getNotLoggedInHtml() ?>
 <?php elseif (!isset($type)): ?>
 	<div class="section">
 		<p class="flow-text">This commission type does not exist</p>
