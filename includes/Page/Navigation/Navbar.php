@@ -31,7 +31,7 @@ class Navbar {
 				["Terms of Service", self::NAME, null, ROOTDIR."TOS", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
-			"not-artist" => [
+			"not_artist" => [
 				["Artist", self::NAME, "artist", ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
 					["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
