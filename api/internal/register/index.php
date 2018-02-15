@@ -62,7 +62,7 @@ if (!empty($_POST["email"])) {
 $query = new InsertQuery();
 $query->setTable(Tables::USERS);
 
-$fileToken = Tokens::generateUniqueUserFileToken();
+$fileToken = Tokens::generateUserFileToken();
 $password = password_hash($_POST["password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
 
 $profilePicture = null;
