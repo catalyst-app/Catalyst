@@ -13,7 +13,7 @@ define("PAGE_KEYWORD", Values::SETTINGS[0]);
 define("PAGE_TITLE", Values::createTitle(Values::SETTINGS[1], ["name" => (isset($_SESSION["user"]) ? $_SESSION["user"]->getNickname() : "Logged Out")]));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

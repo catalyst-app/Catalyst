@@ -50,7 +50,7 @@ switch ($page) {
 if (isset($character)) {
 	define("PAGE_COLOR", $character->getColorHex());
 } elseif (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

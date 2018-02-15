@@ -76,18 +76,11 @@ class User implements Serializable {
 		return array_key_exists("pending_user",$_SESSION) && $_SESSION["pending_user"] instanceof self;
 	}
 
-	public static function getCurrentUser() : self {
-		if (!self::isLoggedIn()) {
-			throw new \LogicException("Cannot get current user when the user is not logged in.");
-		}
-		return $_SESSION["user"];
-	}
-
 	public static function getPermissionScope() : array {
 		if (self::isLoggedIn()) {
 			$perms = ["all", "logged_in"];
 
-			$currentUser = self::getCurrentUser();
+			$currentUser = $_SESSION["user"];
 
 			if ($currentUser->isArtist()) {
 				$perms[] = "artist";
@@ -545,7 +538,7 @@ class User implements Serializable {
 		if (!self::isLoggedIn()) {
 			return false;
 		}
-		if (!User::getCurrentUser()->isNsfw()) {
+		if (!$_SESSION["user"]->isNsfw()) {
 			return false;
 		}
 		return true;

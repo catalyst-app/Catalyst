@@ -15,7 +15,7 @@ define("PAGE_KEYWORD", Values::DASHBOARD[0]);
 define("PAGE_TITLE", Values::createTitle(Values::DASHBOARD[1], ["name" => (isset($_SESSION["user"]) ? $_SESSION["user"]->getNickname() : "Logged Out")]));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

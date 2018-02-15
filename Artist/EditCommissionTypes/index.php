@@ -15,7 +15,7 @@ define("PAGE_TITLE", Values::createTitle(Values::EDIT_ARTIST_PAGE_COMMISSION_TYP
 if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 	define("PAGE_COLOR", $_SESSION["user"]->getArtistPage()->getColorHex());
 } else if (User::isLoggedIn()) {
-	define("PAGE_COLOR", User::getCurrentUser()->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
