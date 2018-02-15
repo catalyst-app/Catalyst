@@ -135,7 +135,7 @@ class Tokens {
 	 * @return string Unique token
 	 */
 	public static function generateUniqueToken(int $length, string $table, string $column) : string {
-		$existingTokens = self::getTokensFromDatabase($column, $table);
+		$existingTokens = self::getTokensFromDatabase($table, $column);
 		
 		$token = self::generateToken($length);
 
