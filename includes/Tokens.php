@@ -32,36 +32,12 @@ class Tokens {
 	public const USER_FILE_TOKEN_REGEX = '^[a-z0-9]{'.self::USER_FILE_TOKEN_LENGTH.'}$';
 
 	/**
-	 * Get a unique FILE_TOKEN for a User
-	 * 
-	 * @return string
-	 */
-	public static function generateUniqueUserFileToken() : string {
-		$token = self::generateUserFileToken();
-
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(Tables::USERS);
-		$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
-
-		$stmt->execute();
-
-		$existingTokens = array_column($stmt->getResult(), "FILE_TOKEN");
-
-		while (in_array($token, $existingTokens)) {
-			$token = self::generateUserFileToken();
-		}
-
-		return $token;
-	}
-
-	/**
-	 * Get a FILE_TOKEN for a User
+	 * Get a UNIQUE FILE_TOKEN for a User
 	 * 
 	 * @return string
 	 */
 	public static function generateUserFileToken() : string {
-		return self::generateToken(self::USER_FILE_TOKEN_LENGTH);
+		return self::generateUniqueToken(self::USER_FILE_TOKEN_LENGTH, Tables::USERS, "FILE_TOKEN");
 	}
 
 	/**
