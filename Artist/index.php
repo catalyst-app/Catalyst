@@ -156,7 +156,7 @@ foreach ($attrgs as $key => $attrs): ?>
 <?php else: ?>
 <?php
 $images = $type->getImages();
-if (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
+if (!\Catalyst\User\User::isLoggedIn() || !$_SESSION["user"]->isNsfw()) {
 	$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
 }
 

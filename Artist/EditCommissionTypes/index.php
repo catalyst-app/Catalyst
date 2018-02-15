@@ -26,7 +26,7 @@ echo UniversalFunctions::createHeading("Edit Commission Types");
 
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (User::isLoggedOut()) {
+} elseif (!User::isLoggedIn()) {
 	echo User::getNotLoggedInHTML();
 } elseif (!$_SESSION["user"]->isArtist()) { ?>
 		<div class="section">

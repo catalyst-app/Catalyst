@@ -11,7 +11,7 @@ use \Catalyst\User\User;
 
 FormPHP::checkMethod(["method" => "POST"]);
 
-if (User::isLoggedOut()) {
+if (!User::isLoggedIn()) {
 	Response::send401(EditArtist::NOT_LOGGED_IN, EditArtist::PHRASES[EditArtist::NOT_LOGGED_IN]);
 }
 

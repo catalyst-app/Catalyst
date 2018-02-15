@@ -63,12 +63,13 @@ class User implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Check if a user is logged in
+	 * 
+	 * @return bool
+	 */
 	public static function isLoggedIn() : bool {
 		return array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
-	}
-
-	public static function isLoggedOut() : bool {
-		return !self::isLoggedIn();
 	}
 
 	public static function isPending2FA() : bool {

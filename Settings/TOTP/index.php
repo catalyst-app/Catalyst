@@ -20,7 +20,7 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("2FA Settings");
 
-if (User::isLoggedOut()):
+if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHTML();
 elseif (!$_SESSION["user"]->isTotpEnabled()):
 ?>

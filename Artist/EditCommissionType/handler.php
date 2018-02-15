@@ -11,7 +11,7 @@ use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (User::isLoggedOut()) {
+if (!User::isLoggedIn()) {
 	Response::send401(EditCommissionType::NOT_LOGGED_IN, EditCommissionType::PHRASES[EditCommissionType::NOT_LOGGED_IN]);
 }
 

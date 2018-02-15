@@ -12,7 +12,7 @@ use \Catalyst\User\User;
 
 FormPHP::checkMethod(["method" => "POST"]);
 
-if (User::isLoggedOut() || !isset($_POST["body"]) || empty($_POST["body"]) || !isset($_POST["body"]) || empty($_POST["body"])) {
+if (!User::isLoggedIn() || !isset($_POST["body"]) || empty($_POST["body"]) || !isset($_POST["body"]) || empty($_POST["body"])) {
 	Response::send401(EditCharacter::ERROR_UNKNOWN, EditCharacter::PHRASES[EditCharacter::ERROR_UNKNOWN]);
 }
 

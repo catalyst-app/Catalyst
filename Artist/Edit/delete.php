@@ -8,7 +8,7 @@ use \Catalyst\Database\Artist\EditArtist;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (User::isLoggedOut() || !$_SESSION["user"]->isArtist()) {
+if (!User::isLoggedIn() || !$_SESSION["user"]->isArtist()) {
 	Response::send500(EditArtist::PHRASES[EditArtist::ERROR_UNKNOWN], EditArtist::ERROR_UNKNOWN);
 }
 

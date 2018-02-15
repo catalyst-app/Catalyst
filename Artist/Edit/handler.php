@@ -10,7 +10,7 @@ use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (User::isLoggedOut()) {
+if (!User::isLoggedIn()) {
 	\Catalyst\Response::send401(EditArtist::NOT_LOGGED_IN, EditArtist::PHRASES[EditArtist::NOT_LOGGED_IN]);
 }
 

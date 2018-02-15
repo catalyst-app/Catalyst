@@ -30,7 +30,7 @@ $typeId = CommissionType::getIdFromToken($_GET["q"]);
 
 if (FormHTML::testAjaxSubmissionFailed()): ?>
 	<?= FormHTML::getAjaxSubmissionHtml(); ?>
-<?php elseif (User::isLoggedOut()): ?>
+<?php elseif (!User::isLoggedIn()): ?>
 	<?= User::getNotLoggedInHTML() ?>
 <?php elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
