@@ -127,7 +127,7 @@ class Tokens {
 	 * This uses the Mersenne Twister algorithm (underlying for array_rand), which is secure enough
 	 * and a psuedo-random enough number
 	 * @param int $length
-	 * @return string token
+	 * @return string generated token
 	 */
 	public static function generateToken(int $length) : string {
 		$chars = self::TOKEN_CHARS;
