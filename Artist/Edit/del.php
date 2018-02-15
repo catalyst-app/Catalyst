@@ -8,7 +8,7 @@ use \Catalyst\Database\SocialMedia;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (User::isLoggedOut() || !$_SESSION["user"]->isArtist() || !isset($_POST["id"]) || !is_numeric($_POST["id"])) {
+if (!User::isLoggedIn() || !$_SESSION["user"]->isArtist() || !isset($_POST["id"]) || !is_numeric($_POST["id"])) {
 	Response::send500(SocialMedia::PHRASES[SocialMedia::ERROR_UNKNOWN], SocialMedia::ERROR_UNKNOWN);
 }
 

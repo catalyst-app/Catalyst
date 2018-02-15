@@ -24,7 +24,7 @@ echo UniversalFunctions::createHeading("Submit a Feature");
 
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (User::isLoggedOut()) {
+} elseif (!User::isLoggedIn()) {
 	echo User::getNotLoggedInHTML();
 } else {
 ?>

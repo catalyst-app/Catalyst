@@ -11,7 +11,7 @@ use \Catalyst\User\User;
 
 FormPHP::checkMethod(["method" => "POST"]);
 
-if (User::isLoggedOut()) {
+if (!User::isLoggedIn()) {
 	Response::send401(DeleteCommissionType::NOT_LOGGED_IN, DeleteCommissionType::PHRASES[DeleteCommissionType::NOT_LOGGED_IN]);
 }
 

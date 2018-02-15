@@ -72,7 +72,7 @@ switch ($page) {
 ?>
 
 <?php if ($page == "LANDING"): ?>
-<?php if (User::isLoggedOut()): ?>
+<?php if (!User::isLoggedIn()): ?>
 			<?= User::getNotLoggedInHTML() ?>
 <?php else: ?>
 			<div class="section">
@@ -117,7 +117,7 @@ for ($i=0; $i < count($cards); $i++) {
 			<div class="section">
 				<p class="flow-text">This character does not exist or has been made private by the owner.</p>
 			</div>
-<?php elseif (User::isLoggedOut() || $character->getOwnerId() != $_SESSION["user"]->getId()): ?>
+<?php elseif (!User::isLoggedIn() || $character->getOwnerId() != $_SESSION["user"]->getId()): ?>
 			<div class="section">
 				<p class="flow-text">You do not have permission to do that.</p>
 			</div>
@@ -145,7 +145,7 @@ for ($i=0; $i < count($cards); $i++) {
 			<div class="section">
 				<p class="flow-text">This character does not exist or has been made private by the owner.</p>
 			</div>
-<?php elseif (User::isLoggedOut() || $character->getOwnerId() != $_SESSION["user"]->getId()): ?>
+<?php elseif (!User::isLoggedIn() || $character->getOwnerId() != $_SESSION["user"]->getId()): ?>
 			<div class="section">
 				<p class="flow-text">You do not have permission to do that.</p>
 			</div>
@@ -297,7 +297,7 @@ for ($i=0; $i < count($images); $i++) {
 <?php else: ?>
 <?php
 $images = $character->getImages();
-if (\Catalyst\User\User::isLoggedOut() || !$_SESSION["user"]->isNsfw()) {
+if (!\Catalyst\User\User::isLoggedIn() || !$_SESSION["user"]->isNsfw()) {
 	$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
 }
 

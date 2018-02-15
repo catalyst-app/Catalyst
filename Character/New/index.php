@@ -22,12 +22,10 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("New Character");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (User::isLoggedOut()) {
+if (User::isLoggedIn()) {
 	echo User::getNotLoggedInHTML();
 } else {
-	echo FormHTML::generateForm(NewCharacter::getFormStructure());
+	echo FormRepository::getNewCharacterForm()->getHtml();
 }
 
 require_once Values::FOOTER_INC;

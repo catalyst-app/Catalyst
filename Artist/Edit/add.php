@@ -9,7 +9,7 @@ use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (User::isLoggedOut()) {
+if (!User::isLoggedIn()) {
 	Response::send500(SocialMedia::PHRASES[SocialMedia::ERROR_UNKNOWN], SocialMedia::ERROR_UNKNOWN);
 }
 

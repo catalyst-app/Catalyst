@@ -28,7 +28,7 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Dashboard");
 
-if (User::isLoggedOut()):
+if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHTML();
 else: ?>
 			<div class="section">

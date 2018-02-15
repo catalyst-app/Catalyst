@@ -8,7 +8,7 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Response;
 use \Catalyst\User\User;
 
-if (!isset($_POST["feature"]) || !preg_match('/^\d+$/', $_POST["feature"]) || User::isLoggedOut() || !isset($_POST["comment"])) {
+if (!isset($_POST["feature"]) || !preg_match('/^\d+$/', $_POST["feature"]) || !User::isLoggedIn() || !isset($_POST["comment"])) {
 	Response::send401(Comment::ERROR_UNKNOWN, Comment::PHRASES[Comment::ERROR_UNKNOWN]);
 }
 
