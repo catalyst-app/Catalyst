@@ -42,12 +42,22 @@ class User implements Serializable {
 		$this->id = $id;
 	}
 
+	/**
+	 * Check if a given user ID exists in the database
+	 * 
+	 * @param int $id
+	 * @return bool
+	 */
 	public static function idExists(int $id) : bool {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT 1 FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $id);
-		$stmt->execute();
+		$stmt = new SelectQuery();
+		
+		$stmt->setTable(Tables::USERS);
+		$stmt->addColumn(new Column("ID", Tables::USERS));
 
-		if ($stmt->rowCount() == 0) {
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+
+		if (count($query->getResult()) == 0) {
 			return false;
 		}
 		return true;
