@@ -341,7 +341,7 @@ class NewCommissionType {
 					:PHYSICAL_ADDR_NEEDED
 				);
 			");
-		$token = \Catalyst\Tokens::generateUniqueCommissionTypeToken();
+		$token = \Catalyst\Tokens::generateCommissionTypeToken();
 		$attrs = json_encode($attrs);
 		$physicalint = $addrneeded ? 1 : 0;
 

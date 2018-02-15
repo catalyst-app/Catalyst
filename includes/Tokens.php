@@ -49,40 +49,22 @@ class Tokens {
 		return self::generateUniqueToken(self::CHARACTER_TOKEN_LENGTH, Tables::CHARACTERS, "CHARACTER_TOKEN");
 	}
 
-	public static function generateUniqueCommissionTypeToken() : string {
-		$token = self::generateCommissionTypeToken();
-
-		$tokenStmt = $GLOBALS["dbh"]->query("SELECT `TOKEN` FROM `".DB_TABLES["commission_types"]."`;");
-		$existingTokens = array_column($tokenStmt->fetchAll(), "TOKEN");
-		$tokenStmt->closeCursor();
-
-		while (in_array($token, $existingTokens)) {
-			$token = self::generateCommissionTypeToken();
-		}
-
-		return $token;
-	}
-
+	/**
+	 * Generate a UNIQUE TOKEN for a CommissionType
+	 * 
+	 * @return string token
+	 */
 	public static function generateCommissionTypeToken() : string {
-		return self::generateToken(self::COMMISSION_TYPE_TOKEN_LENGTH);
+		return self::generateUniqueToken(self::COMMISSION_TYPE_TOKEN_LENGTH, Tables::COMMISSION_TYPES, "TOKEN");
 	}
 
-	public static function generateUniqueArtistToken() : string {
-		$token = self::generateArtistToken();
-
-		$tokenStmt = $GLOBALS["dbh"]->query("SELECT `TOKEN` FROM `".DB_TABLES["artist_pages"]."`;");
-		$existingTokens = array_column($tokenStmt->fetchAll(), "TOKEN");
-		$tokenStmt->closeCursor();
-
-		while (in_array($token, $existingTokens)) {
-			$token = self::generateArtistToken();
-		}
-
-		return $token;
-	}
-
+	/**
+	 * Generate a UNIQUE TOKEN for an Artist / artist page
+	 * 
+	 * @return string token
+	 */
 	public static function generateArtistToken() : string {
-		return self::generateToken(self::ARTIST_TOKEN_LENGTH);
+		return self::generateUniqueToken(self::ARTIST_TOKEN_LENGTH, Tables::ARTIST_PAGES, "TOKEN");
 	}
 
 	public static function generateEmailVerificationToken() : string {
