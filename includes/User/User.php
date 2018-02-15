@@ -7,24 +7,37 @@ use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
+use \InvalidArgumentException;
+use \Serializable;
 
-class User implements \Serializable {
+/**
+ * Represents a user
+ */
+class User implements Serializable {
 	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
+	/**
+	 * The user's ID in the database
+	 * @var int
+	 */
 	private $id;
 
+	/**
+	 * This is used as not to repeatedly hammer the database
+	 * @var array
+	 */
 	private $cache = [];
 
+	/**
+	 * Create a new User object
+	 * 
+	 * @param int $id The User's ID (will be checked)
+	 * @throws InvalidArgumentException on bad ID
+	 */
 	public function __construct(int $id) {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT 1 FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $id);
-		$stmt->execute();
-
-		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("User ID ".$id." does not exist in the database.");
+		if (!self::idExists($id)) {
+			throw new InvalidArgumentException("User ID ".$id." does not exist in the database.");
 		}
-
-		$stmt->closeCursor();
 
 		$this->id = $id;
 	}
