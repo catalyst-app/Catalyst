@@ -27,9 +27,9 @@ define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
 define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? $user->getNickname() : "Invalid User")]));
 
 if (!is_null($user)) {
-	define("PAGE_COLOR", $user->getColorHex());
+	define("PAGE_COLOR", $user->getColor());
 } elseif (User::isLoggedIn()) {
-	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
@@ -121,7 +121,7 @@ foreach ($types as $type) {
 		true, 
 		ROOTDIR."Artist/".$artist->getUrl()."/", 
 		[
-			$artist->getColorHex(),
+			$artist->getColor(),
 			$type->isOpen() ? $type->getBaseCost() : "CLOSED"
 		]
 	).'</div>';

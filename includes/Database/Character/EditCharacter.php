@@ -85,7 +85,7 @@ class EditCharacter {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"default" => is_null($character) ? "" : $character->getColorHex(),
+				"default" => is_null($character) ? "" : $character->getColor(),
 				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,

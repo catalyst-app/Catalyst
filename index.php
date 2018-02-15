@@ -11,7 +11,7 @@ define("PAGE_KEYWORD", Values::HOME[0]);
 define("PAGE_TITLE", Values::createTitle(Values::HOME[1], []));
 
 if (User::isLoggedIn()) {
-	define("PAGE_COLOR", $_SESSION["user"]->getColorHex());
+	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }

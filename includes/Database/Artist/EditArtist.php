@@ -106,7 +106,7 @@ class EditArtist {
 				"wrapper_classes" => "col s12",
 				"type" => "color",
 				"label" => "Color",
-				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getColorHex() : null) : null),
+				"default" => (\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->isArtist() ? $_SESSION["user"]->getArtistPage()->getColor() : null) : null),
 				"pattern" => ['^('.implode("|", array_keys(\Catalyst\Color::HEX_MAP)).')$', "One of the following: ".implode(", ", array_keys(\Catalyst\Color::HEX_MAP))],
 				"required" => true,
 				"validate" => true,

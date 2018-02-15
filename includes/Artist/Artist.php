@@ -157,7 +157,7 @@ class Artist {
 		return $result;
 	}
 
-	public function getColorHex() : string {
+	public function getColor() : string {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];
 		}

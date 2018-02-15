@@ -167,7 +167,7 @@ if (($_POST["nsfw-access"] == "true") != $user["NSFW"]) {
 	$query->addValue($_POST["nsfw-access"] == "true");
 }
 
-if ($_POST["color"] !== $_SESSION["user"]->getColorHex()) {
+if ($_POST["color"] !== $_SESSION["user"]->getColor()) {
 	$query->addColumn(new Column("COLOR", Tables::USERS));
 	$query->addValue(hex2bin($_POST["color"]));
 }
