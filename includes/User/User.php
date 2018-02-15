@@ -2,7 +2,7 @@
 
 namespace Catalyst\User;
 
-use \Catalyst\Database\Tables;
+use \Catalyst\Database\{Column, SelectQuery, Tables, WhereClause};
 use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
@@ -57,7 +57,7 @@ class User implements Serializable {
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 
-		if (count($query->getResult()) == 0) {
+		if (count($stmt->getResult()) == 0) {
 			return false;
 		}
 		return true;
