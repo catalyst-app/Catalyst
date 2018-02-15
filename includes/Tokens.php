@@ -41,36 +41,12 @@ class Tokens {
 	}
 
 	/**
-	 * Generate a unique CHARACTER_TOKEN for a Character
+	 * Generate a UNIQUE CHARACTER_TOKEN for a Character
 	 * 
 	 * @return string
 	 */
-	public static function generateUniqueCharacterToken() : string {
-		$token = self::generateCharacterToken();
-
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(Tables::CHARACTERS);
-		$stmt->addColumn(new Column("CHARACTER_TOKEN", Tables::CHARACTERS));
-
-		$stmt->execute();
-
-		$existingTokens = array_column($stmt->getResult(), "CHARACTER_TOKEN");
-
-		while (in_array($token, $existingTokens)) {
-			$token = self::generateCharacterToken();
-		}
-
-		return $token;
-	}
-
-	/**
-	 * Generate a CHARACTER_TOKEN for a Character
-	 * 
-	 * @return string token
-	 */
 	public static function generateCharacterToken() : string {
-		return self::generateToken(self::CHARACTER_TOKEN_LENGTH);
+		return self::generateUniqueToken(self::CHARACTER_TOKEN_LENGTH, Tables::CHARACTERS, "CHARACTER_TOKEN");
 	}
 
 	public static function generateUniqueCommissionTypeToken() : string {

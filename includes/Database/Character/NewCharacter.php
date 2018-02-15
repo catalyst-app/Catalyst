@@ -106,7 +106,7 @@ class NewCharacter {
 			VALUES
 				(:USER_ID, :CHARACTER_TOKEN, :NAME, :DESCRIPTION, UNHEX(:COLOR), :PUBLIC);");
 		$id = $_SESSION["user"]->getId();
-		$token = $insertToken = \Catalyst\Tokens::generateUniqueCharacterToken();
+		$token = $insertToken = \Catalyst\Tokens::generateCharacterToken();
 		$p = ($public ? 1 : 0);
 
 		$stmt->bindParam(":USER_ID", $id);
