@@ -11,7 +11,7 @@ use \Catalyst\Message\Message;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
-$user = null;
+$id = $user = null;
 if (isset($_GET["q"])) {
 	$id = User::getIdFromUsername($_GET["q"]); 
 	if ($id !== -1) {
