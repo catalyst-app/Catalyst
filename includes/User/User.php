@@ -105,14 +105,6 @@ class User implements Serializable {
 		}
 	}
 
-	public static function getAlreadyLoggedInHTML() : string {
-		return implode("\n", [
-			'			<div class="section">',
-			'				<p class="flow-text">You are already logged in.  <a href="'.ROOTDIR.'">Return home</a></p>',
-			'			</div>',
-		]);
-	}
-
 	public static function getNotLoggedInHTML() : string {
 		return implode("\n", [
 			'			<div class="section">',
