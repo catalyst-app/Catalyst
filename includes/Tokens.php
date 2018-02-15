@@ -67,14 +67,30 @@ class Tokens {
 		return self::generateUniqueToken(self::ARTIST_TOKEN_LENGTH, Tables::ARTIST_PAGES, "TOKEN");
 	}
 
+	/**
+	 * Generate a token for a user's email verification
+	 * 
+	 * @return string token
+	 */
 	public static function generateEmailVerificationToken() : string {
 		return self::generateToken(self::EMAIL_VERIFICATION_TOKEN_LENGTH);
 	}
 
+	/**
+	 * Generate a token used to reset TOTP authentication on a User's account
+	 * 
+	 * @return string token
+	 */
 	public static function generateTotpResetToken() : string {
 		return self::generateToken(self::TOTP_RESET_TOKEN_LENGTH);
 	}
 
+	/**
+	 * Generate a password reset token
+	 * 
+	 * See notes on generateToken for security-related concerns
+	 * @return string token
+	 */
 	public static function generatePasswordResetToken() : string {
 		return self::generateToken(self::PASSWORD_RESET_TOKEN_LENGTH);
 	}

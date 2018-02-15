@@ -29,7 +29,6 @@
 ./includes/Page/Values.php
 ./includes/phpqrcode.php
 ./includes/Secrets.php
-./includes/Tokens.php
 ./includes/User/User.php
 ./index.php
 ./js/main.js.php
