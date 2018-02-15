@@ -139,7 +139,7 @@ class NewArtist {
 
 		$stmt->closeCursor();
 
-		$token = \Catalyst\Tokens::generateUniqueArtistToken();
+		$token = \Catalyst\Tokens::generateArtistToken();
 		$img = \Catalyst\Form\FileUpload::uploadImages($img, \Catalyst\Form\FileUpload::ARTIST_IMAGE, $token);
 
 		$stmt = $GLOBALS["dbh"]->prepare("INSERT INTO `".DB_TABLES["artist_pages"]."`
