@@ -25,7 +25,7 @@ echo UniversalFunctions::createHeading("New Artist Page");
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
 } elseif (!User::isLoggedIn()) {
-	echo User::getNotLoggedInHTML();
+	echo User::getNotLoggedInHtml();
 } elseif ($_SESSION["user"]->isArtist()) { ?>
 		<div class="section">
 			<p class="flow-text">You are already an artist.</p>

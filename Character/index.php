@@ -73,7 +73,7 @@ switch ($page) {
 
 <?php if ($page == "LANDING"): ?>
 <?php if (!User::isLoggedIn()): ?>
-			<?= User::getNotLoggedInHTML() ?>
+			<?= User::getNotLoggedInHtml() ?>
 <?php else: ?>
 			<div class="section">
 				<div class="row">

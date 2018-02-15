@@ -38,7 +38,7 @@ echo UniversalFunctions::createHeading("Email Verification");
 
 ?>
 <?php if (!User::isLoggedIn()): ?>
-<?= User::getNotLoggedInHTML() ?>
+<?= User::getNotLoggedInHtml() ?>
 <?php elseif ($_SESSION["user"]->emailIsVerified()): ?>
 			<div class="section">
 				<p class="flow-text">Your email has been verified.  Return <a href="<?=ROOTDIR?>">home</a>?</p>

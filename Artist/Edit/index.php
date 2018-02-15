@@ -28,7 +28,7 @@ echo UniversalFunctions::createHeading("Edit Artist Page");
 if (FormHTML::testAjaxSubmissionFailed()) {
 	echo FormHTML::getAjaxSubmissionHtml();
 } elseif (!User::isLoggedIn()) {
-	echo User::getNotLoggedInHTML();
+	echo User::getNotLoggedInHtml();
 } elseif (!$_SESSION["user"]->isArtist()) { ?>
 		<div class="section">
 			<p class="flow-text">You do not have an artist page.</p>

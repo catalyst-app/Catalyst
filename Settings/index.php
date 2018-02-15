@@ -27,7 +27,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Settings");
 
 if (!User::isLoggedIn()):
-	echo User::getNotLoggedInHTML();
+	echo User::getNotLoggedInHtml();
 else: 
 	echo FormRepository::getSettingsForm($_SESSION["user"])->getHtml();
 ?>
