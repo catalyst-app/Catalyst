@@ -542,7 +542,7 @@ class User implements Serializable {
 	}
 
 	public static function isCurrentUserNsfw() : bool {
-		if (self::isLoggedOut()) {
+		if (!self::isLoggedIn()) {
 			return false;
 		}
 		if (!User::getCurrentUser()->isNsfw()) {
