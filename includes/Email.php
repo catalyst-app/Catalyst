@@ -21,6 +21,24 @@ class Email {
 	public const EMAIL_SMTP = ["catalystapp.co", 587, "tls"];
 
 	/**
+	 * Get <head> to go with a HTML e-mail
+	 * 
+	 * @param string $color Color to use
+	 * @return string
+	 */
+	public static function getEmailHeadHtml(string $color=Values::DEFAULT_COLOR) : string {
+		$str = "";
+		$str .= '<!DOCTYPE html>';
+		$str .= '<html>';
+		$str .= '<head>';
+		$str .= '<style>';
+		$str .= self::getCss($color);
+		$str .= '</style>';
+		$str .= '</head>';
+		return $str;
+	}
+
+	/**
 	 * Get e-mail CSS to go with a color, minified + simplified, not too much left in
 	 * 
 	 * @param string $color The hex color to use
