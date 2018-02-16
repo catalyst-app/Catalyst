@@ -51,7 +51,7 @@ class User implements Serializable {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(Tables::USERS);
-		$stmt->addColumn(new Column("ID", Tables::USERS));
+		$stmt->addColumn(new Column($column, Tables::USERS));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $this->getId()]);
