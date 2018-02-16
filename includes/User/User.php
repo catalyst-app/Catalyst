@@ -627,11 +627,23 @@ class User implements Serializable {
 		return $this->cache["WISHLIST_OBJECTS"] = $wishlistItems;
 	}
 
+	/**
+	 * Determine if a commission type ID is on the User's wishlist
+	 * 
+	 * @param int $id CommissionType ID
+	 * @return bool
+	 */
 	public function idIsOnWishlist(int $id) : bool {
 		return in_array($id, $this->getWishlistIds());
 	}
 
-	public function isOnWishlist(\Catalyst\CommissionType\CommissionType $type) : bool {
+	/**
+	 * Determine if a CommissionType is on the User's wishlist
+	 * 
+	 * @param CommissionType $type
+	 * @return bool
+	 */
+	public function isOnWishlist(CommissionType $type) : bool {
 		return $this->idIsOnWishlist($type->getId());
 	}
 
