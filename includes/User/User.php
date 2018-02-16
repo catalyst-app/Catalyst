@@ -629,14 +629,14 @@ class User implements Serializable {
 
 	public function getNavbarDropdown(int $bar) : string {
 		if ($bar == \Catalyst\Page\Navigation\Navbar::NAVBAR) {
-			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw(), "valign").$this->getNickname();
+			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->isProfilePictureNsfw(), "valign").$this->getNickname();
 		} else {
 			return "My Account";
 		}
 	}
 
 	public function getSidenavHTML() : string {
-		return '<li class="center">'.\Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->getProfilePictureNsfw()).'<h5>'.$this->getNickname().'</h5><p class="grey-text">'.$this->getUsername().'</p></li>';
+		return '<li class="center">'.\Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->isProfilePictureNsfw()).'<h5>'.$this->getNickname().'</h5><p class="grey-text">'.$this->getUsername().'</p></li>';
 	}
 
 	public function clearCache(?string $toClear=null) {
@@ -718,7 +718,7 @@ class User implements Serializable {
 
 		$stmt->closeCursor();
 
-		$this->cache = [
+		$this->cache = [];$a = [
 			"FILE_TOKEN" => $user["FILE_TOKEN"],
 			"USERNAME" => $user["USERNAME"],
 			"EMAIL" => $user["EMAIL"],
