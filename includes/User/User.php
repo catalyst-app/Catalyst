@@ -137,6 +137,15 @@ class User implements Serializable {
 	}
 
 	/**
+	 * Get the User's ID
+	 * 
+	 * @return int
+	 */
+	public function getId() : int {
+		return $this->id;
+	}
+
+	/**
 	 * Gets HTML for a message which designates a user-only page
 	 * 
 	 * @return string
@@ -563,10 +572,6 @@ class User implements Serializable {
 		}
 
 		return $this->cache["PROFILE_PHOTO"] = $this->getColumnFromDatabase("PICTURE_LOC");
-	}
-
-	public function getId() : int {
-		return $this->id;
 	}
 
 	public function getWishlist() : array {
