@@ -97,6 +97,11 @@ class User implements Serializable {
 		return array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
 	}
 
+	/**
+	 * Check if there is currently a 2FA authentication in progress
+	 * 
+	 * @return bool
+	 */
 	public static function isPending2FA() : bool {
 		return array_key_exists("pending_user",$_SESSION) && $_SESSION["pending_user"] instanceof self;
 	}
@@ -196,26 +201,34 @@ class User implements Serializable {
 		return $result;
 	}
 
+	/**
+	 * Get the user's TOTP key, or null if there is not one
+	 * @return string|null
+	 */
 	public function getTotpKey() : ?string {
 		if (array_key_exists("TOTP_KEY", $this->cache)) {
 			return $this->cache["TOTP_KEY"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_KEY` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOTP_KEY"] = $stmt->fetchAll()[0]["TOTP_KEY"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["COLOR"] = $this->getColumnFromDatabase("TOTP_KEY");
 	}
 
+	/**
+	 * Get whether or not the user has TOTP authentication enables
+	 * 
+	 * @return bool
+	 */
 	public function isTotpEnabled() : bool {
 		return !is_null($this->getTotpKey());
 	}
 
+	/**
+	 * Get a User's TOTP reset token, or null if none is set
+	 * 
+	 * The token will be null for users who have never had a TOTP token set.
+	 * If they have used a token to reset their account, an admin should reset this
+	 * @return null|string
+	 */
 	public function getTotpResetToken() : ?string {
 		if (array_key_exists("TOTP_RESET_TOKEN", $this->cache)) {
 			return $this->cache["TOTP_RESET_TOKEN"];
