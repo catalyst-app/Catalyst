@@ -10,7 +10,9 @@ use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Page\Navigation\Navbar;
+use \Catalyst\Page\UniversalFunctions;
 use \InvalidArgumentException;
+use \LogicException;
 use \Serializable;
 
 /**
@@ -678,7 +680,7 @@ class User implements Serializable {
 	/**
 	 * Get the HTML for the sidenav header (pfp, username, nick)
 	 * 
-	 * @return HTML
+	 * @return string HTML
 	 */
 	public function getSidenavHTML() : string {
 		$str = "";
@@ -775,29 +777,107 @@ class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Send the User a verification e-mail, if their email is not yet verified
+	 */
 	public function sendVerificationEmail() : void {
-		if ($this->emailIsVerified()) {
+		if (is_null($this->getEmail()) || $this->emailIsVerified()) {
 			return;
 		}
 
-		preg_match("/^(.*)(EmailVerification|Register|Settings|api).*/", \Catalyst\Page\UniversalFunctions::getRequestURI(), $out);
+		// get the base URL to use
+		// maybe change this to a hardcoded catalystapp.co ?
+		$out = [];
+		if (!preg_match("/^(.*)(EmailVerification|Register|Settings|api).*/", UniversalFunctions::getRequestURI(), $out)) {
+			throw new LogicException("User::sendVerificationEmail called from an unknown page");
+		}
 		$url = $out[1]."EmailVerification/?token=".$this->getEmailToken();
 
-		\Catalyst\Email::sendEmail(
-			[[$this->getEmail(), $this->getNickname()]],
-			"Catalyst - Email verification",
-			'<html><head><style>'.\Catalyst\Email::getCss($this->getColor()).'</style></head><body><div class="container"><div class="section"><h1 class="center header hide-on-small-only">Email Verification</h1><h3 class="center header hide-on-med-and-up">Email Verification</h3></div><div class="section"><p class="flow-text">Thank you for registering with Catalyst!</p><p class="flow-text">Please click the button below to activate your account.</p><div><a href="'.$url.'" class="btn">Verify</a></div><p>Alternatively, use the token <span style="font-weight: 700;">'.$this->getEmailToken().'</span> to verify your email.</p></div></div></body></html>',
-			implode("\r\n", [
-				"Email Verification",
-				"",
-				"Thank you for registering with Catalyst!",
-				"Please go to the following URL to verify your account:",
-				$url,
-				"Alternatively, use the token ".$this->getEmailToken()
-			]),
-			Email::NO_REPLY_EMAIL,
-			Email::NO_REPLY_PASSWORD
-		);
+		$recipient = [$this->getEmail(), $this->getNickname()];
+		$recipients = [$recipient];
+
+		$subject = "Catalyst - Email verification";
+
+		$htmlEmail = "";
+
+		$htmlEmail .= Email::getEmailHeadHtml($this->getColor());
+		
+		$htmlEmail .= '<div';
+		$htmlEmail .= ' class="container"';
+		$htmlEmail .= '>';
+
+		$htmlEmail .= UniversalFunctions::createHeading("Email Verification");
+
+		$htmlEmail .= '<div';
+		$htmlEmail .= ' class="section">';
+
+		$htmlEmail .= '<p';
+		$htmlEmail .= ' class="flow-text"';
+		$htmlEmail .= '>';
+
+		$htmlEmail .= 'Thank you for registering with Catalyst!';
+		
+		$htmlEmail .= '</p>';
+		
+		$htmlEmail .= '<p';
+		$htmlEmail .= ' class="flow-text">';
+		
+		$htmlEmail .= 'Please click the button below to activate your account.';
+		
+		$htmlEmail .= '</p>';
+		
+		$htmlEmail .= '<div>'; // wrapping in a block
+		
+		$htmlEmail .= '<a';
+		$htmlEmail .= ' href="'.$url.'"';
+		$htmlEmail .= ' class="btn"';
+		$htmlEmail .= '>';
+		
+		$htmlEmail .= 'Verify';
+		
+		$htmlEmail .= '</a>';
+		
+		$htmlEmail .= '</div>';
+
+		$htmlEmail .= '<p>';
+
+		
+		$htmlEmail .= 'Alternatively, use the token ';
+		
+		$htmlEmail .= '<span';
+		$htmlEmail .= ' style="';
+		$htmlEmail .= 'font-weight: 700;';
+		$htmlEmail .= 'font-family: monospace;';
+		$htmlEmail .= '"'; // bold
+		$htmlEmail .= '>';
+		
+		$htmlEmail .= ''.$this->getEmailToken().'';
+		
+		$htmlEmail .= '</span>';
+		
+		$htmlEmail .= ' to verify your email.';
+		
+		$htmlEmail .= '</p>';
+		
+		$htmlEmail .= '</div>';
+		
+		$htmlEmail .= '</div>';
+		
+		$htmlEmail .= '</body>';
+		
+		$htmlEmail .= '</html>';
+
+
+		$textEmail = '';
+		$textEmail .= 'Email Verification'."\r\n";
+		$textEmail .= "\r\n";
+		$textEmail .= 'Thank you for registering with Catalyst!'."\r\n";
+		$textEmail .= 'Please go to the following URL to verify your account:'."\r\n";
+		$textEmail .= $url."\r\n";
+		$textEmail .= "Alternatively, use the token ".$this->getEmailToken().' to verify your email'."\r\n";
+
+		
+		Email::sendEmail($recipients, $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
 	}
 
 	public function initializeImage() : void {
