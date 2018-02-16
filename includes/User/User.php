@@ -277,20 +277,17 @@ class User implements Serializable {
 		return $this->cache["NICK"] = $this->getColumnFromDatabase("NICK");
 	}
 
+	/**
+	 * Get the user's username
+	 * 
+	 * @return string
+	 */
 	public function getUsername() : string {
 		if (array_key_exists("USERNAME", $this->cache)) {
 			return $this->cache["USERNAME"];
 		}
-		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `USERNAME` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
 
-		$result = $this->cache["USERNAME"] = $stmt->fetchAll()[0]["USERNAME"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["USERNAME"] = $this->getColumnFromDatabase("USERNAME");
 	}
 
 	public function isNsfw() : bool {
