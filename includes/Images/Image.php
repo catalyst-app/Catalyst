@@ -212,14 +212,18 @@ class Image {
 	/**
 	 * Get the image's HTML as a strict circle
 	 * 
+	 * @param string[] Classes to add to the div
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
-	public function getStrictCircleHtml() : string {
+	public function getStrictCircleHtml(array $additionalClasses=[]) : string {
 		$str = '';
 		$str .= '<div';
 		$str .= ' class="img-strict-circle';
 		if ($this->isPixelArt()) {
 			$str .= " render-pixelated";
+		}
+		foreach ($additionalClasses as $class) {
+			$str .= " ".htmlspecialchars($class);
 		}
 		$str .= '"';
 		$str .= ' style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"';
