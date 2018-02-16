@@ -2,6 +2,7 @@
 
 namespace Catalyst\User;
 
+use \Catalyst\Artist\Artist;
 use \Catalyst\Database\{Column, SelectQuery, Tables, WhereClause};
 use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
@@ -506,28 +507,34 @@ class User implements Serializable {
 		return $this->cache["PICTURE_NSFW"] = (bool)$this->getColumnFromDatabase("PICTURE_NSFW");
 	}
 
+	/**
+	 * Get the ID of the user's artist page, or null if they do not have one
+	 * 
+	 * @return int|null
+	 */
 	public function getArtistPageId() : ?int {
 		if (array_key_exists("ARTIST_PAGE_ID", $this->cache)) {
 			return $this->cache["ARTIST_PAGE_ID"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ARTIST_PAGE_ID` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["ARTIST_PAGE_ID"] = $stmt->fetchAll()[0]["ARTIST_PAGE_ID"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["ARTIST_PAGE_ID"] = $this->getColumnFromDatabase("ARTIST_PAGE_ID");
 	}
 
-	public function getArtistPage() : ?\Catalyst\Artist\Artist {
+	/**
+	 * Get the artist page associated with the user
+	 * 
+	 * @return null|Artist
+	 */
+	public function getArtistPage() : ?Artist {
 		if (array_key_exists("ARTIST_PAGE", $this->cache)) {
 			return $this->cache["ARTIST_PAGE"];
 		}
 
-		return (is_null($this->getArtistPageId()) ? null : ($this->cache["ARTIST_PAGE"] = new \Catalyst\Artist\Artist($this->getArtistPageId())));
+		if (is_null($this->getArtistPageId())) {
+			return null;
+		} else {
+			return $this->cache["ARTIST_PAGE"] = new Artist($this->getArtistPageId());
+		}
 	}
 
 	public function getFileToken() : string {
