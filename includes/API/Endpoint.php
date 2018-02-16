@@ -137,19 +137,19 @@ class Endpoint {
 	 * @return bool if the keys are valid
 	 */
 	protected static function checkClientKeys(string $clientId, string $clientSecret) : bool {
-		$query = new SelectQuery();
-		$query->setTable(Tables::API_KEYS);
-		$query->addColumn(new Column("ID", Tables::API_KEYS));
+		$stmt = new SelectQuery();
+		$stmt->setTable(Tables::API_KEYS);
+		$stmt->addColumn(new Column("ID", Tables::API_KEYS));
 		
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("CLIENT_SECRET", Tables::API_KEYS), "=", $clientSecret]);
-		$query->addAdditionalCapability($whereClause);
+		$stmt->addAdditionalCapability($whereClause);
 
-		$query->execute();
+		$stmt->execute();
 
-		return !empty($query->getResult());
+		return !empty($stmt->getResult());
 	}
 
 	/**
@@ -162,16 +162,16 @@ class Endpoint {
 	 * @return bool if the keys are valid
 	 */
 	protected static function checkUserKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : bool {
-		$query = new SelectQuery();
-		$query->setTable(Tables::API_AUTHORIZATIONS);
-		$query->addColumn(new Column("ID",Tables::API_KEYS));
+		$stmt = new SelectQuery();
+		$stmt->setTable(Tables::API_AUTHORIZATIONS);
+		$stmt->addColumn(new Column("ID",Tables::API_KEYS));
 
 		$joinClause = new JoinClause();
 		$joinClause->setType(JoinClause::INNER);
 		$joinClause->setJoinTable(Tables::API_KEYS);
 		$joinClause->setLeftColumn(new Column("ID", Tables::API_KEYS));
 		$joinClause->setRightColumn(new Column("API_ID", Tables::API_AUTHORIZATIONS));
-		$query->addAdditionalCapability($joinClause);
+		$stmt->addAdditionalCapability($joinClause);
 		
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
@@ -181,11 +181,11 @@ class Endpoint {
 		$whereClause->addToClause([new Column("ACCESS_TOKEN", Tables::API_AUTHORIZATIONS), "=", $userToken]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("ACCESS_SECRET", Tables::API_AUTHORIZATIONS), "=", $userSecret]);
-		$query->addAdditionalCapability($whereClause);
+		$stmt->addAdditionalCapability($whereClause);
 		
-		$query->execute();
+		$stmt->execute();
 
-		return !empty($query->getResult());
+		return !empty($stmt->getResult());
 	}
 
 	/**
@@ -197,16 +197,16 @@ class Endpoint {
 	 * @param string $userSecret The user's secret for the app
 	 */
 	protected static function loginWithKeys(string $clientId, string $clientSecret, string $userToken, string $userSecret) : void {
-		$query = new SelectQuery();
-		$query->setTable(Tables::API_AUTHORIZATIONS);
-		$query->addColumn(new Column("USER_ID", Tables::API_AUTHORIZATIONS));
+		$stmt = new SelectQuery();
+		$stmt->setTable(Tables::API_AUTHORIZATIONS);
+		$stmt->addColumn(new Column("USER_ID", Tables::API_AUTHORIZATIONS));
 
 		$joinClause = new JoinClause();
 		$joinClause->setType(JoinClause::INNER);
 		$joinClause->setJoinTable(Tables::API_KEYS);
 		$joinClause->setLeftColumn(new Column("ID", Tables::API_KEYS));
 		$joinClause->setRightColumn(new Column("API_ID", Tables::API_AUTHORIZATIONS));
-		$query->addAdditionalCapability($joinClause);
+		$stmt->addAdditionalCapability($joinClause);
 		
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CLIENT_ID", Tables::API_KEYS), "=", $clientId]);
@@ -216,11 +216,11 @@ class Endpoint {
 		$whereClause->addToClause([new Column("ACCESS_TOKEN", Tables::API_AUTHORIZATIONS), "=", $userToken]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("ACCESS_SECRET", Tables::API_AUTHORIZATIONS), "=", $userSecret]);
-		$query->addAdditionalCapability($whereClause);
+		$stmt->addAdditionalCapability($whereClause);
 		
-		$query->execute();
+		$stmt->execute();
 
-		$_SESSION["user"] = new User($query->getResult()[0]["USER_ID"]);
+		$_SESSION["user"] = new User($stmt->getResult()[0]["USER_ID"]);
 	}
 
 	/**

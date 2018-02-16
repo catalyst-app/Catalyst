@@ -20,33 +20,33 @@ $id = $_SESSION["user"]->getId();
 
 
 // check username is free/own
-$query = new SelectQuery();
-$query->setTable(Tables::USERS);
-$query->addColumn(new Column("ID", Tables::USERS));
+$stmt = new SelectQuery();
+$stmt->setTable(Tables::USERS);
+$stmt->addColumn(new Column("ID", Tables::USERS));
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["username"]]);
 $whereClause->addToClause(WhereClause::AND);
 $whereClause->addToClause([new Column("ID", Tables::USERS), "!=", $id]);
-$query->addAdditionalCapability($whereClause);
-$query->execute();
+$stmt->addAdditionalCapability($whereClause);
+$stmt->execute();
 
-if (count($query->getResult()) != 0) {
+if (count($stmt->getResult()) != 0) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
 }
 
 // check email is free/own
 if (!empty($_POST["email"])) {
-	$query = new SelectQuery();
-	$query->setTable(Tables::USERS);
-	$query->addColumn(new Column("ID", Tables::USERS));
+	$stmt = new SelectQuery();
+	$stmt->setTable(Tables::USERS);
+	$stmt->addColumn(new Column("ID", Tables::USERS));
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("EMAIL", Tables::USERS), "=", $_POST["email"]]);
 	$whereClause->addToClause(WhereClause::AND);
 	$whereClause->addToClause([new Column("ID", Tables::USERS), "!=", $id]);
-	$query->addAdditionalCapability($whereClause);
-	$query->execute();
-	if (count($query->getResult()) != 0) {
+	$stmt->addAdditionalCapability($whereClause);
+	$stmt->execute();
+	if (count($stmt->getResult()) != 0) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
 	}
@@ -56,28 +56,28 @@ if (!empty($_POST["email"])) {
 	}
 }
 
-$query = new SelectQuery();
-$query->setTable(Tables::USERS);
-$query->addColumn(new Column("FILE_TOKEN", Tables::USERS));
-$query->addColumn(new Column("USERNAME", Tables::USERS));
-$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
-$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
-$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
-$query->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
-$query->addColumn(new Column("EMAIL", Tables::USERS));
-$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
-$query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
-$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-$query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-$query->addColumn(new Column("NSFW", Tables::USERS));
-$query->addColumn(new Column("COLOR", Tables::USERS));
-$query->addColumn(new Column("NICK", Tables::USERS));
+$stmt = new SelectQuery();
+$stmt->setTable(Tables::USERS);
+$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
+$stmt->addColumn(new Column("USERNAME", Tables::USERS));
+$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+$stmt->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
+$stmt->addColumn(new Column("TOTP_KEY", Tables::USERS));
+$stmt->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
+$stmt->addColumn(new Column("EMAIL", Tables::USERS));
+$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+$stmt->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
+$stmt->addColumn(new Column("PICTURE_LOC", Tables::USERS));
+$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
+$stmt->addColumn(new Column("NSFW", Tables::USERS));
+$stmt->addColumn(new Column("COLOR", Tables::USERS));
+$stmt->addColumn(new Column("NICK", Tables::USERS));
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
-$query->addAdditionalCapability($whereClause);
-$query->execute();
+$stmt->addAdditionalCapability($whereClause);
+$stmt->execute();
 
-$user = $query->getResult()[0];
+$user = $stmt->getResult()[0];
 
 if (!password_verify($_POST["password"], $user["HASHED_PASSWORD"])) {
 	HTTPCode::set(400);
@@ -85,19 +85,19 @@ if (!password_verify($_POST["password"], $user["HASHED_PASSWORD"])) {
 }
 
 
-$query = new UpdateQuery();
-$query->setTable(Tables::USERS);
+$stmt = new UpdateQuery();
+$stmt->setTable(Tables::USERS);
 if ($_POST["username"] != $user["USERNAME"]) {
-	$query->addColumn(new Column("USERNAME", Tables::USERS));
-	$query->addValue($_POST["username"]);
+	$stmt->addColumn(new Column("USERNAME", Tables::USERS));
+	$stmt->addValue($_POST["username"]);
 }
 
 if (!empty($_POST["new-password"])) {
-	$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
-	$query->addValue(password_hash($_POST["new-password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]));
+	$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+	$stmt->addValue(password_hash($_POST["new-password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]));
 	
-	$query->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
-	$query->addValue(Tokens::generatePasswordResetToken());
+	$stmt->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
+	$stmt->addValue(Tokens::generatePasswordResetToken());
 }
 
 $redirectToTotp = false;
@@ -105,36 +105,36 @@ if (is_null($user["TOTP_KEY"]) != ($_POST["two-factor"] == "false")) {
 	if ($_POST["two-factor"] == "true") {
 		$redirectToTotp = true;
 
-		$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
-		$query->addValue(TOTP::generateKey());
+		$stmt->addColumn(new Column("TOTP_KEY", Tables::USERS));
+		$stmt->addValue(TOTP::generateKey());
 	} else {
-		$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
-		$query->addValue(null);
+		$stmt->addColumn(new Column("TOTP_KEY", Tables::USERS));
+		$stmt->addValue(null);
 	}
 }
 if (is_null($user["TOTP_RESET_TOKEN"])) {
-	$query->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
-	$query->addValue(Tokens::generateTotpResetToken());
+	$stmt->addColumn(new Column("TOTP_RESET_TOKEN", Tables::USERS));
+	$stmt->addValue(Tokens::generateTotpResetToken());
 }
 
 $resendVerificationEmail = false;
 if (empty($_POST["email"]) && !is_null($user["EMAIL"])) {
-	$query->addColumn(new Column("EMAIL", Tables::USERS));
-	$query->addValue(null);
+	$stmt->addColumn(new Column("EMAIL", Tables::USERS));
+	$stmt->addValue(null);
 
-	$query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
-	$query->addValue(Tokens::generateEmailVerificationToken());
-	$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
-	$query->addValue(false);
+	$stmt->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
+	$stmt->addValue(Tokens::generateEmailVerificationToken());
+	$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+	$stmt->addValue(false);
 } else if ($_POST["email"] != $user["EMAIL"]) {
 	$resendVerificationEmail = true;
-	$query->addColumn(new Column("EMAIL", Tables::USERS));
-	$query->addValue($_POST["email"]);
+	$stmt->addColumn(new Column("EMAIL", Tables::USERS));
+	$stmt->addValue($_POST["email"]);
 
-	$query->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
-	$query->addValue(Tokens::generateEmailVerificationToken());
-	$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
-	$query->addValue(false);
+	$stmt->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
+	$stmt->addValue(Tokens::generateEmailVerificationToken());
+	$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+	$stmt->addValue(false);
 }
 
 $profilePicture = $user["PICTURE_LOC"];
@@ -147,40 +147,40 @@ if (isset($_FILES["profile-picture"])) {
 }
 
 if ($user["PICTURE_LOC"] !== $profilePicture) {
-	$query->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-	$query->addValue($profilePicture);
+	$stmt->addColumn(new Column("PICTURE_LOC", Tables::USERS));
+	$stmt->addValue($profilePicture);
 }
 
 if (is_null($profilePicture) && is_null($user["PICTURE_LOC"])) {
-	$query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-	$query->addValue(false);
+	$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
+	$stmt->addValue(false);
 } else if ($_POST["profile-picture-is-nsfw"] == "true") {
-	$query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-	$query->addValue(true);
+	$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
+	$stmt->addValue(true);
 } else {
-	$query->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-	$query->addValue(false);
+	$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
+	$stmt->addValue(false);
 }
 
 if (($_POST["nsfw-access"] == "true") != $user["NSFW"]) {
-	$query->addColumn(new Column("NSFW", Tables::USERS));
-	$query->addValue($_POST["nsfw-access"] == "true");
+	$stmt->addColumn(new Column("NSFW", Tables::USERS));
+	$stmt->addValue($_POST["nsfw-access"] == "true");
 }
 
 if ($_POST["color"] !== $_SESSION["user"]->getColor()) {
-	$query->addColumn(new Column("COLOR", Tables::USERS));
-	$query->addValue(hex2bin($_POST["color"]));
+	$stmt->addColumn(new Column("COLOR", Tables::USERS));
+	$stmt->addValue(hex2bin($_POST["color"]));
 }
 
 if ($_POST["nickname"] != $user["NICK"]) {
-	$query->addColumn(new Column("NICK", Tables::USERS));
-	$query->addValue($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
+	$stmt->addColumn(new Column("NICK", Tables::USERS));
+	$stmt->addValue($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
 }
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
-$query->addAdditionalCapability($whereClause);
-$query->execute();
+$stmt->addAdditionalCapability($whereClause);
+$stmt->execute();
 
 if ($resendVerificationEmail) {
 	$_SESSION["user"]->sendVerificationEmail();

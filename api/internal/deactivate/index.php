@@ -21,18 +21,18 @@ if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername(
 
 $userId = $_SESSION["user"]->getId();
 
-$query = new SelectQuery();
-$query->setTable(Tables::USERS);
+$stmt = new SelectQuery();
+$stmt->setTable(Tables::USERS);
 
-$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $userId]);
-$query->addAdditionalCapability($whereClause);
+$stmt->addAdditionalCapability($whereClause);
 
-$query->execute();
+$stmt->execute();
 
-$result = $query->getResult();
+$result = $stmt->getResult();
 
 if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
 	HTTPCode::set(400);

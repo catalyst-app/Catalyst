@@ -24,16 +24,16 @@ if ($_POST["token"] != $_SESSION["user"]->getEmailToken()) {
 	Response::sendErrorResponse(90402, ErrorCodes::ERR_90402);
 }
 
-$query = new UpdateQuery();
-$query->setTable(Tables::USERS);
+$stmt = new UpdateQuery();
+$stmt->setTable(Tables::USERS);
 
-$query->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
-$query->addValue(1);
+$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+$stmt->addValue(1);
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("ID", Tables::USERS), "=", $_SESSION["user"]->getId()]);
-$query->addAdditionalCapability($whereClause);
+$stmt->addAdditionalCapability($whereClause);
 
-$query->execute();
+$stmt->execute();
 
 Response::sendSuccessResponse("Success");
