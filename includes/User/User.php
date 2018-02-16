@@ -674,8 +674,37 @@ class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Get the HTML for the sidenav header (pfp, username, nick)
+	 * 
+	 * @return HTML
+	 */
 	public function getSidenavHTML() : string {
-		return '<li class="center">'.\Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->isProfilePictureNsfw()).'<h5>'.$this->getNickname().'</h5><p class="grey-text">'.$this->getUsername().'</p></li>';
+		$str = "";
+
+		$str .= '<li';
+		$str .= ' class="center"';
+		$str .= '>';
+
+		$str .= $this->getImage()->getStrictCircleHtml();
+		
+		$str .= '<h5>';
+		
+		$str .= htmlspecialchars($this->getNickname());
+
+		$str .= '</h5>';
+
+		$str .= '<p';
+		$str .= ' class="grey-text"';
+		$str .= '>';
+
+		$str .= htmlspecialchars($this->getUsername());
+		
+		$str .= '</p>';
+
+		$str .= '</li>';
+
+		return $str;
 	}
 
 	public function clearCache(?string $toClear=null) {
