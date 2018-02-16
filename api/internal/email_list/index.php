@@ -13,16 +13,16 @@ Endpoint::init(true, 0);
 
 FormRepository::getEmailListAdditionForm()->checkServerSide();
 
-$query = new ReplaceQuery();
-$query->setTable(Tables::EMAIL_LIST);
+$stmt = new ReplaceQuery();
+$stmt->setTable(Tables::EMAIL_LIST);
 
-$query->addColumn(new Column("EMAIL", Tables::EMAIL_LIST));
-$query->addValue($_POST["email"]);
+$stmt->addColumn(new Column("EMAIL", Tables::EMAIL_LIST));
+$stmt->addValue($_POST["email"]);
 
-$query->addColumn(new Column("CONTEXT", Tables::EMAIL_LIST));
-$query->addValue("Web registration: ".$_POST["context"]);
+$stmt->addColumn(new Column("CONTEXT", Tables::EMAIL_LIST));
+$stmt->addValue("Web registration: ".$_POST["context"]);
 
-$query->execute();
+$stmt->execute();
 
 Email::sendEmail(
 	[[$_POST["email"], $_POST["context"]]],

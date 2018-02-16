@@ -14,22 +14,22 @@ Endpoint::init(true, 2);
 
 FormRepository::getLoginForm()->checkServerSide();
 
-$query = new SelectQuery();
-$query->setTable(Tables::USERS);
+$stmt = new SelectQuery();
+$stmt->setTable(Tables::USERS);
 
-$query->addColumn(new Column("ID", Tables::USERS));
-$query->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
-$query->addColumn(new Column("TOTP_KEY", Tables::USERS));
-$query->addColumn(new Column("SUSPENDED", Tables::USERS));
-$query->addColumn(new Column("DEACTIVATED", Tables::USERS));
+$stmt->addColumn(new Column("ID", Tables::USERS));
+$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
+$stmt->addColumn(new Column("TOTP_KEY", Tables::USERS));
+$stmt->addColumn(new Column("SUSPENDED", Tables::USERS));
+$stmt->addColumn(new Column("DEACTIVATED", Tables::USERS));
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["username"]]);
-$query->addAdditionalCapability($whereClause);
+$stmt->addAdditionalCapability($whereClause);
 
-$query->execute();
+$stmt->execute();
 
-$result = $query->getResult();
+$result = $stmt->getResult();
 
 if (count($result) == 0) {
 	HTTPCode::set(400);
