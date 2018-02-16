@@ -35,27 +35,6 @@ if (count($stmt->getResult()) != 0) {
 	Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
 }
 
-// check email is free/own
-if (!empty($_POST["email"])) {
-	$stmt = new SelectQuery();
-	$stmt->setTable(Tables::USERS);
-	$stmt->addColumn(new Column("ID", Tables::USERS));
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("EMAIL", Tables::USERS), "=", $_POST["email"]]);
-	$whereClause->addToClause(WhereClause::AND);
-	$whereClause->addToClause([new Column("ID", Tables::USERS), "!=", $id]);
-	$stmt->addAdditionalCapability($whereClause);
-	$stmt->execute();
-	if (count($stmt->getResult()) != 0) {
-		HTTPCode::set(400);
-		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
-	}
-	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
-		HTTPCode::set(400);
-		Response::sendErrorResponse(90523, ErrorCodes::ERR_90523);
-	}
-}
-
 $stmt = new SelectQuery();
 $stmt->setTable(Tables::USERS);
 $stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
@@ -82,6 +61,27 @@ $user = $stmt->getResult()[0];
 if (!password_verify($_POST["password"], $user["HASHED_PASSWORD"])) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90522, ErrorCodes::ERR_90522);
+}
+
+// check email is free/own
+if (!empty($_POST["email"]) && $_POST["email"] != $user["EMAIL"]) {
+	$stmt = new SelectQuery();
+	$stmt->setTable(Tables::USERS);
+	$stmt->addColumn(new Column("ID", Tables::USERS));
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("EMAIL", Tables::USERS), "=", $_POST["email"]]);
+	$whereClause->addToClause(WhereClause::AND);
+	$whereClause->addToClause([new Column("ID", Tables::USERS), "!=", $id]);
+	$stmt->addAdditionalCapability($whereClause);
+	$stmt->execute();
+	if (count($stmt->getResult()) != 0) {
+		HTTPCode::set(400);
+		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
+	}
+	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
+		HTTPCode::set(400);
+		Response::sendErrorResponse(90523, ErrorCodes::ERR_90523);
+	}
 }
 
 
