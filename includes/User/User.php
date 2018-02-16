@@ -721,10 +721,20 @@ class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Get the table used to store a User's social media items
+	 * 
+	 * @return string
+	 */
 	public function getSocialChipTable() : string {
 		return Tables::USER_SOCIAL_MEDIA;
 	}
 
+	/**
+	 * Get the column which is a foreign key to $this->getId()
+	 * 
+	 * @return string
+	 */
 	public function getSocialChipIdColumn() : string {
 		return "USER_ID";
 	}
