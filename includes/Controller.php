@@ -94,8 +94,8 @@ class Controller {
 	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
 		ob_start();
 		$destinations = [];
-		if (array_key_exists("SERVER_NAME", $_SERVER) && $_SERVER["SERVER_NAME"] == "localhost") {
 			$destinations = ["discord","email","telegram"];
+		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
 		} else {
 			$destinations = ["discord","email","telegram"];
 		}
