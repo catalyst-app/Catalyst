@@ -647,6 +647,11 @@ class User implements Serializable {
 		return $this->idIsOnWishlist($type->getId());
 	}
 
+	/**
+	 * Determine if the user is an artist
+	 * 
+	 * @return bool
+	 */
 	public function isArtist() : bool {
 		return !is_null($this->getArtistPageId());
 	}
