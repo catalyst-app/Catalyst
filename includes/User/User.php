@@ -173,7 +173,7 @@ class User implements Serializable {
 			return $this->cache["COLOR"];
 		}
 
-		return $this->getColumnFromDatabase("COLOR");
+		return $this->cache["COLOR"] = $this->getColumnFromDatabase("COLOR");
 	}
 
 	public function emailIsVerified() : bool {
