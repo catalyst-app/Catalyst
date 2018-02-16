@@ -493,8 +493,6 @@ class User implements Serializable {
 		return $this->cache["NSFW"] = (bool)$this->getColumnFromDatabase("NSFW");
 	}
 
-	public function getProfilePictureNsfw() : bool {
-		if (array_key_exists("PICTURE_NSFW", $this->cache)) {
 			return $this->cache["PICTURE_NSFW"];
 		}
 		

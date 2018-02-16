@@ -43,7 +43,7 @@ if (!is_null($result["artist_page_url"])) {
 	$result["artist_page_url"] = $result["artist_page_url"]->getUrl();
 }
 $result["picture_loc"] = "profile_pictures/".$user->getProfilePicture();
-$result["picture_nsfw"] = $user->getProfilePictureNsfw();
+$result["picture_nsfw"] = $user->isProfilePictureNsfw();
 if ($isOwnUser) {
 	$result["nsfw"] = $user->isNsfw();
 }

@@ -559,7 +559,7 @@ class FormRepository {
 		$nsfwProfilePictureField->addError(90519, ErrorCodes::ERR_90519);
 		$nsfwProfilePictureField->setInvalidErrorCode(90519);
 		if (!is_null($user)) {
-			$nsfwProfilePictureField->setPrefilledValue($user->getProfilePictureNsfw());
+			$nsfwProfilePictureField->setPrefilledValue($user->isProfilePictureNsfw());
 		}
 		$form->addField($nsfwProfilePictureField);
 
