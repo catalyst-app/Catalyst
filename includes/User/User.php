@@ -537,38 +537,19 @@ class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Get the file token of the User
+	 * 
+	 * Used for storage of things like profile pictures
+	 * 
+	 * @return string
+	 */
 	public function getFileToken() : string {
 		if (array_key_exists("FILE_TOKEN", $this->cache)) {
 			return $this->cache["FILE_TOKEN"];
 		}
-		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `FILE_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
 
-		$result = $this->cache["FILE_TOKEN"] = $stmt->fetchAll()[0]["FILE_TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
-	public function getProfilePicture() : string {
-		if (array_key_exists("PICTURE_LOC", $this->cache)) {
-			return $this->cache["PICTURE_LOC"];
-		}
-		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_LOC` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$loc = $stmt->fetchAll()[0]["PICTURE_LOC"];
-
-		$result = $this->cache["PICTURE_LOC"] = ($loc ? $this->getFileToken().$loc : "default.png");
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["FILE_TOKEN"] = $this->getColumnFromDatabase("FILE_TOKEN");
 	}
 
 	public function getProfilePhoto() : ?string {
@@ -628,10 +609,6 @@ class User implements Serializable {
 
 	public function isArtist() : bool {
 		return !is_null($this->getArtistPageId());
-	}
-
-	public function getProfilePicturePath() : string {
-		return ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::PROFILE_PHOTO]."/".$this->getProfilePicture();
 	}
 
 	public function getNavbarDropdown(int $bar) : string {
