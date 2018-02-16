@@ -173,15 +173,7 @@ class User implements Serializable {
 			return $this->cache["COLOR"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `COLOR` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$hex = $this->cache["COLOR"] = bin2hex($stmt->fetchAll()[0]["COLOR"]);
-
-		$stmt->closeCursor();
-
-		return $hex;
+		return $this->getColumnFromDatabase("COLOR");
 	}
 
 	public function emailIsVerified() : bool {
