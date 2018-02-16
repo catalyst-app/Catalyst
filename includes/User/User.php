@@ -49,6 +49,7 @@ class User implements Serializable {
 	 * Returns the column's value from the database
 	 * 
 	 * @param string $column Column to get
+	 * @return mixed
 	 */
 	public function getColumnFromDatabase(string $column) {
 		$stmt = new SelectQuery();
@@ -707,7 +708,12 @@ class User implements Serializable {
 		return $str;
 	}
 
-	public function clearCache(?string $toClear=null) {
+	/**
+	 * Remove a selected item from the internal cache
+	 * 
+	 * @param string|null $toClear the item to remove, or null for all
+	 */
+	public function clearCache(?string $toClear=null) : void {
 		if (is_null($toClear)) {
 			$this->cache = [];
 		} else {
@@ -740,7 +746,7 @@ class User implements Serializable {
 		}
 	}
 
-	public function sendVerificationEmail() {
+	public function sendVerificationEmail() : void {
 		if ($this->emailIsVerified()) {
 			return;
 		}
@@ -773,7 +779,7 @@ class User implements Serializable {
 		return $this->id;
 	}
 
-	public function unserialize($data) {
+	public function unserialize($data) : void {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `FILE_TOKEN`,`USERNAME`,`EMAIL`,`EMAIL_VERIFIED`,`ARTIST_PAGE_ID`,`PICTURE_LOC`,`PICTURE_NSFW`,`NSFW`,`COLOR`,`NICK` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND  `DEACTIVATED` = 0 AND `SUSPENDED` = 0;");
 		$stmt->bindParam(":ID", $data);
 		$stmt->execute();
