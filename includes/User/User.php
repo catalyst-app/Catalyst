@@ -43,6 +43,27 @@ class User implements Serializable {
 	}
 
 	/**
+	 * Returns the column's value from the database
+	 * 
+	 * @param string $column Column to get
+	 */
+	public function getColumnFromDatabase(string $column) {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::USERS);
+		$stmt->addColumn(new Column("ID", Tables::USERS));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $this->getId()]);
+
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		return $stmt->getResult()[0][$column];
+	}
+
+	/**
 	 * Check if a given user ID exists in the database
 	 * 
 	 * @param int $id
