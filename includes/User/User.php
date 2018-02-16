@@ -176,22 +176,22 @@ class User implements Serializable {
 		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	}
 
+	/**
+	 * Determine whether or not the User's email is verified
+	 * 
+	 * WILL ALSO return true if the user has no email set
+	 * @return bool Whether the User's email address is verified
+	 */
 	public function emailIsVerified() : bool {
 		if (array_key_exists("EMAIL_VERIFIED", $this->cache)) {
 			return $this->cache["EMAIL_VERIFIED"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `EMAIL_VERIFIED` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND `EMAIL` IS NOT NULL;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		if ($stmt->rowCount() === 0) {
+		if (is_null($this->getEmail())) {
 			return $this->cache["EMAIL_VERIFIED"] = true;
 		}
 
-		$result = $this->cache["EMAIL_VERIFIED"] = (bool)($stmt->fetchAll()[0]["EMAIL_VERIFIED"]);
-
-		$stmt->closeCursor();
+		$result = $this->cache["EMAIL_VERIFIED"] = (bool)($this->getColumnFromDatabase("EMAIL_VERIFIED"));
 
 		return $result;
 	}
