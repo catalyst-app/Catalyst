@@ -57,6 +57,10 @@ class User implements Serializable {
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
 
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
 		if (count($stmt->getResult()) == 0) {
 			return false;
 		}
