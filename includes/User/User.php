@@ -237,36 +237,31 @@ class User implements Serializable {
 		return $this->cache["TOTP_RESET_TOKEN"] = $this->getColumnFromDatabase("TOTP_RESET_TOKEN");
 	}
 
+	/**
+	 * Get the User's email address, or null if none
+	 * 
+	 * @return string|null
+	 */
 	public function getEmail() : ?string {
 		if (array_key_exists("EMAIL", $this->cache)) {
 			return $this->cache["EMAIL"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `EMAIL` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["EMAIL"] = $stmt->fetchAll()[0]["EMAIL"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["EMAIL"] = $this->getColumnFromDatabase("EMAIL");
 	}
 
+	/**
+	 * Get the token used to verify the User's e-mail address
+	 * 
+	 * Will change upon email address change
+	 * @return string
+	 */
 	public function getEmailToken() : string {
 		if (array_key_exists("EMAIL_TOKEN", $this->cache)) {
 			return $this->cache["EMAIL_TOKEN"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `EMAIL_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["EMAIL_TOKEN"] = $stmt->fetchAll()[0]["EMAIL_TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["EMAIL_TOKEN"] = $this->getColumnFromDatabase("EMAIL_TOKEN");
 	}
 
 	public function getNickname() : string {
