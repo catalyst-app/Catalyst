@@ -552,20 +552,17 @@ class User implements Serializable {
 		return $this->cache["FILE_TOKEN"] = $this->getColumnFromDatabase("FILE_TOKEN");
 	}
 
+	/**
+	 * Get the User's profile photo
+	 * 
+	 * @return null|string The path, or null if there is none set (should default to default.png, per Images definition)
+	 */
 	public function getProfilePhoto() : ?string {
 		if (array_key_exists("PROFILE_PHOTO", $this->cache)) {
 			return $this->cache["PROFILE_PHOTO"];
 		}
-		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_LOC` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
 
-		$result = $this->cache["PROFILE_PHOTO"] = $stmt->fetchAll()[0]["PICTURE_LOC"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["PROFILE_PHOTO"] = $this->getColumnFromDatabase("PICTURE_LOC");
 	}
 
 	public function getId() : int {
