@@ -210,7 +210,7 @@ class User implements Serializable {
 			return $this->cache["TOTP_KEY"];
 		}
 
-		return $this->cache["COLOR"] = $this->getColumnFromDatabase("TOTP_KEY");
+		return $this->cache["TOTP_KEY"] = $this->getColumnFromDatabase("TOTP_KEY");
 	}
 
 	/**
