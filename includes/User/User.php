@@ -264,20 +264,17 @@ class User implements Serializable {
 		return $this->cache["EMAIL_TOKEN"] = $this->getColumnFromDatabase("EMAIL_TOKEN");
 	}
 
+	/**
+	 * Get the User's nickname
+	 * 
+	 * @return string
+	 */
 	public function getNickname() : string {
 		if (array_key_exists("NICK", $this->cache)) {
 			return $this->cache["NICK"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NICK` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["NICK"] = htmlspecialchars($stmt->fetchAll()[0]["NICK"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["NICK"] = $this->getColumnFromDatabase("NICK");
 	}
 
 	public function getUsername() : string {
