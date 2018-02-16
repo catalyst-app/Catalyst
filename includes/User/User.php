@@ -729,19 +729,38 @@ class User implements Serializable {
 		return "USER_ID";
 	}
 
+	/**
+	 * Get an ID if the username exists, and is unsuspended
+	 * 
+	 * @param string $username
+	 * @return int -1 if not found
+	 */
 	public static function getIdFromUsername(string $username) : int {
+		// check regex as not to sodomize the database
 		if (!preg_match("/^([A-Za-z0-9._-]){2,64}$/", $username)) {
 			return -1;
 		}
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["users"]."` WHERE `USERNAME` = :USERNAME AND `SUSPENDED` = 0 AND `DEACTIVATED` = 0;");
-		$stmt->bindParam(":USERNAME", $username);
+
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::USERS);
+		
+		$stmt->addColumn(new Column("ID", Tables::USERS));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $username]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("SUSPENDED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DEACTIVATED", Tables::USERS), "=", 0]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
+		if (empty($stmt->getResult())) {
 			return -1;
 		} else {
-			$result = $stmt->fetchAll()[0]["ID"];
-			$stmt->closeCursor();
+			$result = $stmt->getResult()[0]["ID"];
 			return $result;
 		}
 	}
