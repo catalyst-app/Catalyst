@@ -3,7 +3,8 @@
 namespace Catalyst\User;
 
 use \Catalyst\Artist\Artist;
-use \Catalyst\Database\{Column, SelectQuery, Tables, WhereClause};
+use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\Database\{Column, JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
@@ -574,35 +575,60 @@ class User implements Serializable {
 		return $this->cache["PROFILE_PHOTO"] = $this->getColumnFromDatabase("PICTURE_LOC");
 	}
 
-	public function getWishlist() : array {
-		if (array_key_exists("WISHLIST", $this->cache)) {
-			return $this->cache["WISHLIST"];
+	/**
+	 * Get the IDs of each item on the User's wishlist
+	 * 
+	 * @return int[]
+	 */
+	public function getWishlistIds() : array {
+		if (array_key_exists("WISHLIST_IDS", $this->cache)) {
+			return $this->cache["WISHLIST_IDS"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("
-			SELECT
-				`".DB_TABLES["user_wishlists"]."`.`COMMISSION_TYPE_ID`
-			FROM
-				`".DB_TABLES["user_wishlists"]."`
-			INNER JOIN `".DB_TABLES["commission_types"]."` ON
-					`".DB_TABLES["commission_types"]."`.`ID` = `".DB_TABLES["user_wishlists"]."`.`COMMISSION_TYPE_ID`
-			WHERE
-				`".DB_TABLES["user_wishlists"]."`.`USER_ID` = :USER_ID
-				AND
-				`".DB_TABLES["commission_types"]."`.`DELETED` = 0;"
-		);
-		$stmt->bindParam(":USER_ID", $this->id);
+		$stmt = new SelectQuery();
+		$stmt->setTable(Tables::USER_WISHLISTS);
+
+		$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
+
+		$joinClause = new JoinClause();
+		$joinClause->setType(JoinClause::INNER);
+		$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
+		$joinClause->setLeftColumn(new Column("ID", Tables::COMMISSION_TYPES));
+		$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
+		$stmt->addAdditionalCapability($joinClause);
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $this->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPES), "=", 0]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		return $result = $this->cache["WISHLIST"] = array_column($stmt->fetchAll(), "COMMISSION_TYPE_ID");
+		return $this->cache["WISHLIST_IDS"] = array_column($stmt->getResult(), "COMMISSION_TYPE_ID");
 	}
 
+	/**
+	 * Get all wishlist items as an array of CommissionType's
+	 * 
+	 * @return CommissionType[]
+	 */
 	public function getWishlistAsObjects() : array {
-		return array_map(function($in) { return (new \Catalyst\CommissionType\CommissionType($in)); }, $this->getWishlist());
+		if (array_key_exists("WISHLIST_OBJECTS", $this->cache)) {
+			return $this->cache["WISHLIST_OBJECTS"];
+		}
+
+		$wishlistItems = [];
+
+		foreach ($this->getWishlistIds() as $id) {
+			$wishlistItems[] = new CommissionType($id);
+		}
+
+		return $this->cache["WISHLIST_OBJECTS"] = $wishlistItems;
 	}
 
 	public function idIsOnWishlist(int $id) : bool {
-		return in_array($id, $this->getWishlist());
+		return in_array($id, $this->getWishlistIds());
 	}
 
 	public function isOnWishlist(\Catalyst\CommissionType\CommissionType $type) : bool {
