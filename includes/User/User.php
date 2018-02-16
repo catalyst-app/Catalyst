@@ -9,6 +9,7 @@ use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
+use \Catalyst\Page\Navigation\Navbar;
 use \InvalidArgumentException;
 use \Serializable;
 
@@ -656,10 +657,19 @@ class User implements Serializable {
 		return !is_null($this->getArtistPageId());
 	}
 
+	/**
+	 * Get the HTML for the User's account in the navigation bar
+	 * 
+	 * @param int $bar The type of navbar
+	 * @return string HTML
+	 */
 	public function getNavbarDropdown(int $bar) : string {
-		if ($bar == \Catalyst\Page\Navigation\Navbar::NAVBAR) {
-			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getProfilePicturePath(), $this->isProfilePictureNsfw(), "valign").$this->getNickname();
-		} else {
+		if ($bar == Navbar::NAVBAR) {
+			$str = "";
+			$str .= $this->getImage()->getStrictCircleHtml(["valign"]); // valign needed to make it play nice
+			$str .= htmlspecialchars($this->getNickname());
+			return $str;
+		} else { // sidebar
 			return "My Account";
 		}
 	}
