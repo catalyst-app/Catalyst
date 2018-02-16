@@ -76,7 +76,7 @@ if (!empty($_POST["email"]) && $_POST["email"] != $user["EMAIL"]) {
 	$stmt->execute();
 	if (count($stmt->getResult()) != 0) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
+		Response::sendErrorResponse(90508, ErrorCodes::ERR_90508);
 	}
 	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
 		HTTPCode::set(400);
