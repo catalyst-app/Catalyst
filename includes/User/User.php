@@ -493,34 +493,17 @@ class User implements Serializable {
 		return $this->cache["NSFW"] = (bool)$this->getColumnFromDatabase("NSFW");
 	}
 
-			return $this->cache["PICTURE_NSFW"];
-		}
-		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_NSFW` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["PICTURE_NSFW"] = (bool)($stmt->fetchAll()[0]["PICTURE_NSFW"]);
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
+	/**
+	 * If the users profile picture is NSFW
+	 * 
+	 * @return bool
+	 */
 	public function isProfilePictureNsfw() : bool {
 		if (array_key_exists("PICTURE_NSFW", $this->cache)) {
 			return $this->cache["PICTURE_NSFW"];
 		}
 		
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PICTURE_NSFW` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["PICTURE_NSFW"] = (bool)($stmt->fetchAll()[0]["PICTURE_NSFW"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["PICTURE_NSFW"] = (bool)$this->getColumnFromDatabase("PICTURE_NSFW");
 	}
 
 	public function getArtistPageId() : ?int {
