@@ -234,15 +234,7 @@ class User implements Serializable {
 			return $this->cache["TOTP_RESET_TOKEN"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOTP_RESET_TOKEN` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOTP_RESET_TOKEN"] = $stmt->fetchAll()[0]["TOTP_RESET_TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["TOTP_RESET_TOKEN"] = $this->getColumnFromDatabase("TOTP_RESET_TOKEN");
 	}
 
 	public function getEmail() : ?string {
