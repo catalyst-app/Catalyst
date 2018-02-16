@@ -1,6 +1,6 @@
 <?php
 
-define("ROOTDIR", "../../../");
+define("ROOTDIR", "");
 define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
@@ -42,7 +42,7 @@ $result["artist_page_url"] = $user->getArtistPage();
 if (!is_null($result["artist_page_url"])) {
 	$result["artist_page_url"] = $result["artist_page_url"]->getUrl();
 }
-$result["picture_loc"] = "profile_pictures/".$user->getProfilePicture();
+$result["picture_loc"] = $user->getImage()->getFullPath();
 $result["picture_nsfw"] = $user->isProfilePictureNsfw();
 if ($isOwnUser) {
 	$result["nsfw"] = $user->isNsfw();
