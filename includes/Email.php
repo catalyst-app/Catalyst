@@ -1468,7 +1468,7 @@ class Email {
 			$str .= 'font-weight: initial;';
 		$str .= '}';
 
-		// C O L O R S (colors), as apply
+		// C O L O R S (colors)
 		$str .= 'a {';
 			$str .= 'color: #'.$color.';';
 		$str .= '}';
@@ -1481,18 +1481,74 @@ class Email {
 			$str .= 'background-color: #'.Color::lightenHex($color, 0.5).'55;';
 		$str .= '}';
 		
+		$str .= '.switch label input[type=checkbox]:checked + .lever {';
+			$str .= 'background-color: #'.Color::lightenHex($color, 1.5).';';
+		$str .= '}';
+		$str .= '.switch label .lever::before {';
+			$str .= 'background-color: rgba('.implode(",", Color::getRGB($color)).', 0.15) !important;';
+		$str .= '}';
 		$str .= '.switch label input[type=checkbox]:checked + .lever::after,';
 		$str .= '.user-color, nav, footer.page-footer,.img-strict-circle[style*=\'/default.png");\'],';
 		$str .= '.img-strict-circle[style*="/default.png\');"],';
 		$str .= 'img[src$="/default.png"],[type="checkbox"].filled-in:checked + label:after,';
+		$str .= '[type="checkbox"].filled-in.tabbed:checked:focus + label:after,';
+		$str .= '.progress .indeterminate, .progress .determinate, .btn:not(.chosen-color),';
 		$str .= '.btn-large:not(.chosen-color) {';
 			$str .= 'background-color: #'.$color.';';
 		$str .= '}';
-		
+		$str .= '.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {';
+			$str .= 'color: #'.$color.' !important;';
+		$str .= '}';
+		$str .= '[type="checkbox"]:checked + label:before {';
+			$str .= 'border-right: 2px solid #'.$color.';';
+			$str .= 'border-bottom: 2px solid #'.$color.';';
+		$str .= '}';
+		$str .= '[type="checkbox"]:indeterminate + label:before {';
+			$str .= 'border-right: 2px solid #'.$color.';';
+		$str .= '}';
+		$str .= '[type="checkbox"].filled-in:checked + label:after {';
+			$str .= 'border: 2px solid #'.$color.';';
+		$str .= '}';
+		$str .= '[type="checkbox"].filled-in.tabbed:checked:focus + label:after {';
+			$str .= 'border-color: #'.$color.';';
+		$str .= '}';
+		$str .= 'input:not([type]):focus:not([readonly]),input[type=text]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=password]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=email]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=url]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=time]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=date]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=datetime]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=datetime-local]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=tel]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=number]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'input[type=search]:not(.browser-default):focus:not([readonly]),';
+		$str .= 'textarea.materialize-textarea:focus:not([readonly]) {';
+			$str .= 'border-bottom: 1px solid #'.$color.';';
+			$str .= '-webkit-box-shadow: 0 1px 0 0 #'.$color.';';
+			$str .= 'box-shadow: 0 1px 0 0 #'.$color.';';
+		$str .= '}';
+		$str .= 'input:not([type]):focus:not([readonly]) + label,';
+		$str .= 'input[type=text]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=password]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=email]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=url]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=time]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=date]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=tel]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=number]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'input[type=search]:not(.browser-default):focus:not([readonly]) + label,';
+		$str .= 'textarea.materialize-textarea:focus:not([readonly]) + label {';
+			$str .= 'color: #'.$color.';';
+		$str .= '}';
+		$str .= '.progress {';
+			$str .= 'background-color: #'.Color::lightenHex($color, 2).';';
+		$str .= '}';
 		$str .= '.btn:hover, .btn:focus, .btn-large:hover, .btn-large:focus {';
 			$str .= 'background-color: #'.Color::lightenHexByPercent($color, 5).';';
 		$str .= '}';
-
 		$str .= 'blockquote {';
 			$str .= 'border-left: 5px solid #'.$color.';';
 		$str .= '}';
