@@ -27,7 +27,7 @@ if ($_POST["dest"] === "Artist") {
 	}
 }
 
-if (strpos($_POST["url"], "javascript:")) {
+if (strpos($_POST["url"], "javascript:") === 0) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90711, ErrorCodes::ERR_90711);
 }
