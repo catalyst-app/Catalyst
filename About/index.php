@@ -507,9 +507,10 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<p>Catalyst does not endorse/support any of the below names, and the patrons listed below do not officially represent Catalyst.</p>
 
-					<h5 style="color: #B1560F;">Bronze ($10+):</h5>
+					<h5 style="color: #b1560f;">Bronze Patrons ($10+):</h5>
 					<ul class="browser-default">
-						<li class="flow-text"><strong>SINNERSCOUT</strong></li>
+						<li class="pink-text flow-text no-bottom-margin"><strong>SINNERSCOUT</strong></li>
+						<p class="pink-text no-top-margin"><em>since January 2018</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -522,10 +523,43 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@sinnerscout",
 	],
 	[
+		"NETWORK" => "TELEGRAM",
+		"SERVICE_URL" => "https://telegram.dog/sinnerscout",
+		"DISP_NAME" => "@sinnerscout",
+	],
+	[
 		"NETWORK" => "DISCORD",
 		"SERVICE_URL" => null,
 		"DISP_NAME" => "SINNERSCOUT#1276",
 	],
+])) ?>
+					</ul>
+
+					<h5 class="red-text">Patrons ($1+):</h5>
+					<ul class="browser-default">
+						<li class="flow-text no-bottom-margin"><strong>Coyote-Lovely</strong></li>
+						<p class="no-top-margin"><em>since February 2018</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/CoyoteLovelyDA/",
+		"DISP_NAME" => "@CoyoteLovelyDA",
+	],
+	[
+		"NETWORK" => "INSTAGRAM",
+		"SERVICE_URL" => "https://www.instagram.com/CoyoteLovelyDA/",
+		"DISP_NAME" => "@CoyoteLovelyDA",
+	],
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "Coyote-Lovely#2810",
+	],
+	[
+		"NETWORK" => "AMINO",
+		"SERVICE_URL" => "https://aminoapps.com/c/furry-amino/page/user/coyote-lovely/2vKW_21gi6fxgP1Z23WPn4ba2WbRYXJPeNW",
+		"DISP_NAME" => "Coyote-Lovely"
+	]
 ])) ?>
 					</ul>
 				</div>
