@@ -507,9 +507,26 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<p>Catalyst does not endorse/support any of the below names, and the patrons listed below do not officially represent Catalyst.</p>
 
-					<h5>Patrons:</h5>
+					<h5 style="color: #B1560F;">Bronze ($10+):</h5>
 					<ul class="browser-default">
-						<li class="flow-text"><a href="http://furaffinity.net/user/sinnerscout/">sinnerscout</a></li>
+						<li class="flow-text"><strong>SINNERSCOUT</strong></li>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "https://www.furaffinity.net/user/sinnerscout/",
+		"DISP_NAME" => "~sinnerscout",
+	],
+	[
+		"NETWORK" => "INSTAGRAM",
+		"SERVICE_URL" => "https://www.instagram.com/sinnerscout/",
+		"DISP_NAME" => "@sinnerscout",
+	],
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "SINNERSCOUT#1276",
+	],
+])) ?>
 					</ul>
 				</div>
 			</div>
