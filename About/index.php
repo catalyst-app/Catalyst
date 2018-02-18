@@ -500,7 +500,7 @@ echo UniversalFunctions::createHeading("About Us");
 					</div>
 				</div>
 				<div class="divider"></div>
-				<div class="section" id="patrons">
+				<div class="section" id="patreon">
 					<h4>Patrons</h4>
 
 					<p class="flow-text"><a href="https://patreon.com/Catalyst">Get your name on this list!</a></p>					
