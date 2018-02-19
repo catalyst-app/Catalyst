@@ -99,4 +99,8 @@ class Navbar {
 
 		return $items;
 	}
+
+	public static function getNavbarItemLabel(int $bar, array $navbarItem) : string {
+		return $navbarItem[1] == self::CALLABLE ? call_user_func($navbarItem[0], $bar) : htmlspecialchars($navbarItem[0]);
+	}
 }
