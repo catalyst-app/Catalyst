@@ -35,7 +35,7 @@ class Database {
 		if (self::$dbh instanceof PDO) {
 			return;
 		}
-		self::$dbh = new PDO(DB_DRIVER.":host=".DB_SERVER.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4", DB_USER, DB_PASSWORD);
+		self::$dbh = new PDO(self::DB_DRIVER.":host=".self::DB_SERVER.";port=".self::DB_PORT.";dbname=".self::DB_NAME.";charset=utf8mb4", self::DB_USER, self::DB_PASSWORD);
 		// raise errors
 		self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
