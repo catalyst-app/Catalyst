@@ -606,7 +606,7 @@ class User implements Serializable {
 		// get the base URL to use
 		// maybe change this to a hardcoded catalystapp.co ?
 		$out = [];
-		if (!preg_match("/^(.*)(EmailVerification|Register|Settings|api).*/", UniversalFunctions::getRequestURI(), $out)) {
+		if (!preg_match("/^(.*)(EmailVerification|Register|Settings|api).*/", UniversalFunctions::getRequestUrl(), $out)) {
 			throw new LogicException("User::sendVerificationEmail called from an unknown page");
 		}
 		$url = $out[1]."EmailVerification/?token=".$this->getEmailToken();
