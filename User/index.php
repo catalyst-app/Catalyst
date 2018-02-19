@@ -127,13 +127,13 @@ foreach ($types as $type) {
 	).'</div>';
 }
 ?>
-<?php if (count($cards) === 0): ?>
-				<p class="flow-text">This user's wishlist is empty!</p>
-<?php else: ?>
-				<div class="horizontal-scrollable-container row">
-<?= implode("", $cards) ?>
-				</div>
-<?php endif; ?>
+	<?php if (count($cards) === 0): ?>
+					<p class="flow-text">This user's wishlist is empty!</p>
+	<?php else: ?>
+					<div class="horizontal-scrollable-container row">
+	<?= implode("", $cards) ?>
+					</div>
+	<?php endif; ?>
 			</div>
 <?php endif; ?>
 <?php
