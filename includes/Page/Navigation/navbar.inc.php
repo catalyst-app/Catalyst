@@ -26,8 +26,7 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 								<?php break; ?>
 							<?php case Navbar::DROPDOWN_PARENT: ?>
 								<li<?= ($navbarItem[2] == PAGE_KEYWORD) ? ' class="active"' : "" ?>>
-									<a class="dropdown-button valign-wrapper" href="#!"
-									   data-activates="<?= $navbarItem[5] ?>">
+									<a class="dropdown-button valign-wrapper" href="#!" data-activates="<?= $navbarItem[5] ?>">
 										<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
 										<i class="material-icons right">arrow_drop_down</i>
 									</a>
@@ -35,14 +34,14 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 								<ul id="<?= $navbarItem[5] ?>" class="dropdown-content">
 								<?php break; ?>
 							<?php case Navbar::DROPDOWN_CHILD: ?>
-								<li>
-									<a href="<?= $navbarItem[3] ?>">
-										<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
-									</a>
-								</li>
+									<li>
+										<a href="<?= $navbarItem[3] ?>">
+											<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
+										</a>
+									</li>
 								<?php break; ?>
 							<?php case Navbar::DROPDOWN_DIVIDER: ?>
-								<li class="divider"></li>
+									<li class="divider"></li>
 								<?php break; ?>
 							<?php case Navbar::PSUEDO_DROPDOWN_END: ?>
 								</ul>
@@ -68,30 +67,30 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 				<?php case Navbar::DROPDOWN_PARENT: ?>
 				<!--    <li class="divider"></li> -->
 					<li class="no-padding<?= ($navbarItem[2] == PAGE_KEYWORD) ? ' active' : "" ?>">
-					<ul class="collapsible collapsible-accordion">
-					<li>
-					<a class="collapsible-header valign-wrapper" href="#!">
-						<?= Navbar::getNavbarItemLabel(Navbar::SIDENAV, $navbarItem) ?>
-						<i class="material-icons right">arrow_drop_down</i>
-					</a>
-					<div class="collapsible-body">
-					<ul>
+						<ul class="collapsible collapsible-accordion">
+							<li>
+								<a class="collapsible-header valign-wrapper" href="#!">
+									<?= Navbar::getNavbarItemLabel(Navbar::SIDENAV, $navbarItem) ?>
+									<i class="material-icons right">arrow_drop_down</i>
+								</a>
+								<div class="collapsible-body">
+									<ul>
 					<?php break; ?>
 				<?php case Navbar::DROPDOWN_CHILD: ?>
-					<li>
-						<a href="<?= $navbarItem[3] ?>">
-							<?= Navbar::getNavbarItemLabel(Navbar::SIDENAV, $navbarItem) ?>
-						</a>
-					</li>
+										<li>
+											<a href="<?= $navbarItem[3] ?>">
+												<?= Navbar::getNavbarItemLabel(Navbar::SIDENAV, $navbarItem) ?>
+											</a>
+										</li>
 					<?php break; ?>
 				<?php case Navbar::DROPDOWN_DIVIDER: ?>
 				  <!--  <li class="divider"></li> -->
 					<?php break; ?>
 				<?php case Navbar::PSUEDO_DROPDOWN_END: ?>
-					</ul>
-					</div>
-					</li>
-					</ul>
+									</ul>
+								</div>
+							</li>
+						</ul>
 					</li>
 				<!--    <li class="divider"></li> -->
 					<?php break; ?>
