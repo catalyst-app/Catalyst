@@ -59,7 +59,7 @@
 		<!-- opengraph -->
 		<meta property="og:title" content="<?= PAGE_TITLE ?>"/>
 		<meta property="og:type" content="business.business"/>
-		<meta property="og:url" content="<?= \Catalyst\Page\UniversalFunctions::getRequestURI() ?>"/>
+		<meta property="og:url" content="<?= \Catalyst\Page\UniversalFunctions::getRequestUrl() ?>"/>
 		<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>		
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
@@ -67,7 +67,7 @@
 
 		<!-- twitter -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="<?= \Catalyst\Page\UniversalFunctions::getRequestURI() ?>" />
+		<meta name="twitter:site" content="<?= \Catalyst\Page\UniversalFunctions::getRequestUrl() ?>" />
 		<meta name="twitter:title" content="<?= PAGE_TITLE ?> | Catalyst" />
 		<meta name="twitter:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more." />
 		<meta name="twitter:image" content="https://catalystapp.co/img/logo_big_white.png" />
@@ -75,7 +75,7 @@
 		<!-- link tags -->
 		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
 		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
-		<link rel="canonical" href="<?= \Catalyst\Page\UniversalFunctions::getRequestURI().(strpos(strrev(\Catalyst\Page\UniversalFunctions::getRequestURI()), "/") !== 0 ? "/" : "") ?>"/>
+		<link rel="canonical" href="<?= UniversalFunctions::getCanonicalRequestUrl ?>"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
 		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
 	</head>

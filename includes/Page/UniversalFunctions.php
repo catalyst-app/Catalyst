@@ -37,8 +37,13 @@ class UniversalFunctions {
 		'Y' => 8,
 	];
 
-	public static function getRequestURI() : string {
+	public static function getRequestUrl() : string {
 		return $_SERVER["REQUEST_SCHEME"]."://".((isset($_SERVER["HTTP_X_FORWARDED_HOST"])) ? $_SERVER["HTTP_X_FORWARDED_HOST"] : $_SERVER["SERVER_NAME"].(($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") ? "" : ":".$_SERVER["SERVER_PORT"])).$_SERVER["REQUEST_URI"];
+	}
+
+	public static function getCanonicalRequestUrl() : string {
+		// adds trailing slash
+		return self::getRequestUrl().(strpos(strrev(self::getRequestUrl()), "/") !== 0 ? "/" : "");
 	}
 
 	// adapted from https://github.com/mingalevme/utils/blob/master/src/Filesize.php
