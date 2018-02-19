@@ -9,8 +9,8 @@ use \Catalyst\Page\UniversalFunctions;
 					Website &copy;<?php echo date("Y"); ?> Catalyst, All rights reserved.
 				</p>
 				<p>
-					<?php chdir(realpath(REAL_ROOTDIR)); ?>
-					Version: <?= Controller::VERSION ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
+					<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
+					Version: <?= Controller::getVersion() ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
 				</p>
 				<p>
 					Hosted artwork copyright their respective owners unless otherwise stated.
