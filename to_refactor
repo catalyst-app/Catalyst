@@ -17,17 +17,11 @@
 ./includes/Character/Character.php
 ./includes/Color.php
 ./includes/CommissionType/CommissionType.php
-./includes/Form/FileUpload.php
-./includes/Integrations/SocialMedia.php
 ./includes/Message/Message.php
-./includes/Page/Footer/footer.inc.php
-./includes/Page/Header/Header.php
 ./includes/Page/Navigation/navbar.inc.php
 ./includes/Page/Navigation/Navbar.php
 ./includes/Page/UniversalFunctions.php
 ./includes/Page/Values.php
-./includes/phpqrcode.php
-./includes/User/User.php
 ./index.php
 ./js/main.js.php
 ./Markdown/Emoji/index.php
