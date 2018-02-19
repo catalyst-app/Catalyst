@@ -106,11 +106,13 @@ class User implements Serializable {
 	 * @param string $data Serialized data
 	 */
 	public function unserialize($data) : void {
-		$id = (int)unserialize($data);
+		$id = unserialize($data);
 
 		if (!is_numeric($id) || (int)$id != $id) {
 			throw new InvalidArgumentException("Invalid serialized data");
 		}
+
+		$id = (int)$id;
 
 		$stmt = new SelectQuery();
 
