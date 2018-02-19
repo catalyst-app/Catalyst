@@ -19,7 +19,6 @@
 ./includes/CommissionType/CommissionType.php
 ./includes/Message/Message.php
 ./includes/Page/Navigation/navbar.inc.php
-./includes/Page/Navigation/Navbar.php
 ./includes/Page/UniversalFunctions.php
 ./includes/Page/Values.php
 ./index.php

@@ -2,25 +2,42 @@
 
 namespace Catalyst\Page\Navigation;
 
-class Navbar {
-	public const NAME = 1;
-	public const CALLABLE = 2;
+use \Catalyst\User\User;
 
+/**
+ * Holds constants and functions for navigation bar things
+ */
+class Navbar {
+	// whether or not the item is a name, or should be called
+	public const NAME = 0;
+	public const CALLABLE = 1;
+
+	// type of navbar item
 	public const NORMAL_LINK = 1;
 	public const DROPDOWN_PARENT = 2;
 	public const DROPDOWN_CHILD = 3;
 	public const DROPDOWN_DIVIDER = 4;
 	public const PSUEDO_DROPDOWN_END = 5;
 
+	// if the bar this item is a part of is sidebar or navbar, used for callable
 	public const NAVBAR = 0;
 	public const SIDENAV = 1;
 
+	// html for the logo in the top left/center
 	public const LOGO_HTML = '
-<img alt="logo" class="hide-on-small-only" height="60px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
-<img alt="logo" class="hide-on-med-and-up" height="54px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
-';
+	<img alt="logo" class="hide-on-small-only" height="60px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
+	<img alt="logo" class="hide-on-med-and-up" height="54px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
+	';
 
+	/**
+	 * Get all possible navbar items
+	 * 
+	 * @return array[][]
+	 */
 	private static function getItems() : array {
+		// don't repeatedly call
+		$isLoggedIn = User::isLoggedIn();
+
 		// outermost key is access level
 		// inner arr is: name|callable, name|callable flag, keyword, path, type, [flags]
 		return [
@@ -37,22 +54,22 @@ class Navbar {
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"not_artist" => [
-				["Artist", self::NAME, "artist", ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["Artist", self::NAME, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
 					["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"artist" => [
-				[[(\Catalyst\User\User::isLoggedIn() ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
-				["My Page", self::NAME, null, ROOTDIR."Artist/".(\Catalyst\User\User::isLoggedIn() ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
+				[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
 				["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
 				["Commission Types", self::NAME, null, ROOTDIR."Artist/EditCommissionTypes", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"nsfw" => [
-				// 
+				// may be used for sfw toggle later
 			],
 			"logged_in" => [
-				[[(\Catalyst\User\User::isLoggedIn() ? $_SESSION["user"] : null), "getNavbarDropdown"], self::CALLABLE, "user", ROOTDIR."Dashboard", self::DROPDOWN_PARENT, "user-dropdown"],
+				[[($isLoggedIn ? $_SESSION["user"] : null), "getNavbarDropdown"], self::CALLABLE, "user", ROOTDIR."Dashboard", self::DROPDOWN_PARENT, "user-dropdown"],
 					["Dashboard", self::NAME, null, ROOTDIR."Dashboard", self::DROPDOWN_CHILD],
 					["Characters", self::NAME, null, ROOTDIR."Character", self::DROPDOWN_CHILD],
 					["Settings", self::NAME, null, ROOTDIR."Settings", self::DROPDOWN_CHILD],
@@ -67,6 +84,12 @@ class Navbar {
 		];
 	}
 
+	/**
+	 * Get navbar items for the current state
+	 * 
+	 * @param string[] $perms Permissions to use to get navbar items
+	 * @return string[] Array items
+	 */
 	public static function getNavbarItems(array $perms=["all"]) : array {
 		$items = array_filter(self::getItems(), function($in) use ($perms) {
 			return in_array($in, $perms);
