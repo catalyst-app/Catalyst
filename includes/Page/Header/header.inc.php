@@ -1,15 +1,19 @@
+<?php
+use \Catalyst\Page\Header\Header;
+use \Catalyst\Page\{UniversalFunctions, Values};
+?>
 <!DOCTYPE html>
 <html data-rootdir="<?= ROOTDIR ?>">
 	<head>
 		<title>
-			<?= PAGE_TITLE ?> | <?= \Catalyst\Page\Values::ROOT_TITLE ?> 
+			<?= PAGE_TITLE ?> | <?= Values::ROOT_TITLE ?> 
 		</title>
 
-<?php foreach (\Catalyst\Page\Header\Header::SCRIPTS as $script): ?>
+<?php foreach (Header::SCRIPTS as $script): ?>
 		<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
 <?php endforeach; ?>
 
-<?php foreach (\Catalyst\Page\Header\Header::STYLES as $style): ?>
+<?php foreach (Header::STYLES as $style): ?>
 		<link href="<?= $style ?>" rel="stylesheet" />
 <?php endforeach; ?>
 
@@ -37,7 +41,7 @@
 		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
 		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
 		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link rel="mask-icon" href="https://catalystapp.co/img/logo_square.png" color="black"/>
+		<link rel="mask-icon" href="https://catalystapp.co/img/logo_square.png" color="green"/>
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
@@ -53,13 +57,13 @@
 
 		<!-- win 8+ -->
 		<meta name="application-name" content="Catalyst"/>
-		<meta name="msapplication-TileColor" content="#1b5e20"/>
+		<meta name="msapplication-TileColor" content="#<?= PAGE_COLOR ?>"/>
 		<meta name="msapplication-square70x70logo" content="img/logo_square.png"/>
 
 		<!-- opengraph -->
 		<meta property="og:title" content="<?= PAGE_TITLE ?>"/>
 		<meta property="og:type" content="business.business"/>
-		<meta property="og:url" content="<?= \Catalyst\Page\UniversalFunctions::getRequestUrl() ?>"/>
+		<meta property="og:url" content="<?= UniversalFunctions::getCanonicalRequestUrl() ?>"/>
 		<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>		
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
@@ -67,7 +71,7 @@
 
 		<!-- twitter -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="<?= \Catalyst\Page\UniversalFunctions::getRequestUrl() ?>" />
+		<meta name="twitter:site" content="<?= UniversalFunctions::getCanonicalRequestUrl() ?>" />
 		<meta name="twitter:title" content="<?= PAGE_TITLE ?> | Catalyst" />
 		<meta name="twitter:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more." />
 		<meta name="twitter:image" content="https://catalystapp.co/img/logo_big_white.png" />
@@ -75,7 +79,7 @@
 		<!-- link tags -->
 		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
 		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
-		<link rel="canonical" href="<?= UniversalFunctions::getCanonicalRequestUrl ?>"/>
+		<link rel="canonical" href="<?= UniversalFunctions::getCanonicalRequestUrl() ?>"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
 		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
 	</head>
@@ -83,7 +87,7 @@
 	<body>
 <?php require_once REAL_ROOTDIR."includes/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
-<?php if (PAGE_TITLE != \Catalyst\Page\Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->emailIsVerified()): ?>
+<?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->emailIsVerified()): ?>
 			<div class="warning">
 				<p class="warning-subitem no-margin flow-text">
 					Please verify your email <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.

@@ -21,7 +21,6 @@
 ./includes/Integrations/SocialMedia.php
 ./includes/Message/Message.php
 ./includes/Page/Footer/footer.inc.php
-./includes/Page/Header/header.inc.php
 ./includes/Page/Header/Header.php
 ./includes/Page/Navigation/navbar.inc.php
 ./includes/Page/Navigation/Navbar.php
