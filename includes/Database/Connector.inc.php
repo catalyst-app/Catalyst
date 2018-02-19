@@ -2,6 +2,8 @@
 
 namespace Catalyst\Database;
 
+use \Catalyst\Secrets;
+
 // DEPRECATED
 
 define("DB_DRIVER", "mysql");
@@ -36,5 +38,5 @@ define("DB_TABLES", [
 	"users" => "users",
 ]);
 
-$GLOBALS["dbh"] = new \PDO(DB_DRIVER.":host=".DB_SERVER.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4", DB_USER, DB_PASSWORD);
+$GLOBALS["dbh"] = new \PDO(DB_DRIVER.":host=".DB_SERVER.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4", DB_USER, Secrets::DB_PASSWORD);
 $GLOBALS["dbh"]->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);
