@@ -162,7 +162,7 @@ for ($i=0; $i < count($cards); $i++) {
 							<br class="hide-on-med-and-up">
 							<h3 class="header hide-on-med-and-up no-margin"><?= htmlspecialchars($character->getName()) ?></h3>
 
-							<p class="flow-text no-margin">Owned by <a href="<?= ROOTDIR ?>User/<?= $character->getOwner()->getUsername() ?>"><?= $character->getOwner()->getNickname() ?></a></p>
+							<p class="flow-text no-margin">Owned by <a href="<?= ROOTDIR ?>User/<?= $character->getOwner()->getUsername() ?>"><?= htmlspecialchars($character->getOwner()->getNickname()) ?></a></p>
 						</div>
 					</div>
 				</div>
@@ -270,7 +270,7 @@ for ($i=0; $i < count($images); $i++) {
 							<br class="hide-on-med-and-up">
 							<h3 class="header hide-on-med-and-up no-margin"><?= htmlspecialchars($character->getName()) ?></h3>
 
-							<p class="flow-text no-margin">Owned by <a href="<?= ROOTDIR ?>User/<?= $character->getOwner()->getUsername() ?>"><?= $character->getOwner()->getNickname() ?></a></p>
+							<p class="flow-text no-margin">Owned by <a href="<?= ROOTDIR ?>User/<?= $character->getOwner()->getUsername() ?>"><?= htmlspecialchars($character->getOwner()->getNickname()) ?></a></p>
 
 <?php if (User::isLoggedIn() && $_SESSION["user"]->getId() == $character->getOwnerId()): ?>
 							<p class="flow-text"><a href="<?= ROOTDIR ?>Character/<?= $character->getToken() ?>/Edit/">Edit</a></p>

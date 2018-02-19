@@ -55,7 +55,7 @@ while ($i < $fiveCount) {
 
 $tmpfname = tempnam(sys_get_temp_dir(), 'FOO');
 
-\QRcode::png('otpauth://totp/Catalyst:'.$_SESSION["user"]->getNickname().'?secret='.$key.'&issuer=Catalyst&digits=6&period=30', $tmpfname, QR_ECLEVEL_L, 10, 0);
+\QRcode::png('otpauth://totp/Catalyst:'.$_SESSION["user"]->getUsername().'?secret='.$key.'&issuer=Catalyst&digits=6&period=30', $tmpfname, QR_ECLEVEL_L, 10, 0);
 
 $qr = base64_encode(file_get_contents($tmpfname));
 

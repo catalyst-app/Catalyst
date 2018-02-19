@@ -157,7 +157,7 @@ class User implements Serializable {
 			"PICTURE_NSFW" => (bool)($user["PICTURE_NSFW"]),
 			"NSFW" => (bool)($user["NSFW"]),
 			"COLOR" => bin2hex($user["COLOR"]),
-			"NICK" => htmlspecialchars($user["NICK"])
+			"NICK" => $user["NICK"]
 		];
 
 		$this->id = $id;

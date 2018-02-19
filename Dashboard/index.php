@@ -38,10 +38,10 @@ else: ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
-							<h2 class="header hide-on-small-only no-margin"><?= $_SESSION["user"]->getNickname() ?></h2>
+							<h2 class="header hide-on-small-only no-margin"><?= htmlspecialchars($_SESSION["user"]->getNickname()) ?></h2>
 							
 							<br class="hide-on-med-and-up">
-							<h3 class="header hide-on-med-and-up no-margin"><?= $_SESSION["user"]->getNickname() ?></h3>
+							<h3 class="header hide-on-med-and-up no-margin"><?= htmlspecialchars($_SESSION["user"]->getNickname()) ?></h3>
 
 							<p class="flow-text no-margin"><?= $_SESSION["user"]->getUsername() ?></p>
 							

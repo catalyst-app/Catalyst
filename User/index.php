@@ -24,7 +24,7 @@ if (isset($_GET["q"])) {
 }
 
 define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
-define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? $user->getNickname() : "Invalid User")]));
+define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? htmlspecialchars($user->getNickname()) : "Invalid User")]));
 
 if (!is_null($user)) {
 	define("PAGE_COLOR", $user->getColor());
@@ -51,10 +51,10 @@ echo UniversalFunctions::createHeading("User Profile");
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
-							<h2 class="header hide-on-small-only no-margin"><?= $user->getNickname() ?></h2>
+							<h2 class="header hide-on-small-only no-margin"><?= htmlspecialchars($user->getNickname()) ?></h2>
 							
 							<br class="hide-on-med-and-up">
-							<h3 class="header hide-on-med-and-up no-margin"><?= $user->getNickname() ?></h3>
+							<h3 class="header hide-on-med-and-up no-margin"><?= htmlspecialchars($user->getNickname()) ?></h3>
 
 							<p class="flow-text no-margin"><?= $user->getUsername() ?></p>
 
@@ -64,7 +64,7 @@ echo UniversalFunctions::createHeading("User Profile");
 							<br>
 <?php endif; ?>
 <?php if (!is_null($user->getArtistPage())): ?>
-							<p class="flow-text no-margin"><?= $user->getNickname() ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= $user->getArtistPage()->getName() ?></a></p>
+							<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= $user->getArtistPage()->getName() ?></a></p>
 <?php endif; ?>
 
 							<br>
