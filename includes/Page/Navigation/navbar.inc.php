@@ -3,7 +3,7 @@
 		<nav>
 			<div class="nav-wrapper">
 				<a class="brand-logo" href="<?= ROOTDIR ?>">
-					<?= \Catalyst\Page\Header\Header::LOGO_HTML ?>
+					<?= \Catalyst\Page\Header\Navbar::LOGO_HTML ?>
 				</a>
 				<a class="button-collapse" data-activates="mobile-menu" href="#">
 					<i class="material-icons">
