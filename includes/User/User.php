@@ -884,24 +884,62 @@ class User implements Serializable {
 		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->isProfilePictureNsfw()));
 	}
 
+	/**
+	 * Requirements from Serializable interface, gets a string representation of the User
+	 * 
+	 * Currently, this is the ID.  If this is changed, some form of versioning/verification will be needed
+	 * @return string
+	 */
 	public function serialize() : string {
-		return $this->id;
+		return serialize($this->id);
 	}
 
+	/**
+	 * Unserialize the User object, called upon session loading
+	 * 
+	 * @param string $data Serialized data
+	 */
 	public function unserialize($data) : void {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `FILE_TOKEN`,`USERNAME`,`EMAIL`,`EMAIL_VERIFIED`,`ARTIST_PAGE_ID`,`PICTURE_LOC`,`PICTURE_NSFW`,`NSFW`,`COLOR`,`NICK` FROM `".DB_TABLES["users"]."` WHERE `ID` = :ID AND  `DEACTIVATED` = 0 AND `SUSPENDED` = 0;");
-		$stmt->bindParam(":ID", $data);
-		$stmt->execute();
+		$id = (int)unserialize($data);
 
-		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
+		if (!is_numeric($id) || (int)$id != $id) {
+			throw new InvalidArgumentException("Invalid serialized data");
 		}
 
-		$user = $stmt->fetchAll()[0];
+		$stmt = new SelectQuery();
 
-		$stmt->closeCursor();
+		$stmt->setTable(Tables::USERS);
+		
+		$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
+		$stmt->addColumn(new Column("USERNAME", Tables::USERS));
+		$stmt->addColumn(new Column("EMAIL", Tables::USERS));
+		$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
+		$stmt->addColumn(new Column("ARTIST_PAGE_ID", Tables::USERS));
+		$stmt->addColumn(new Column("PICTURE_LOC", Tables::USERS));
+		$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
+		$stmt->addColumn(new Column("NSFW", Tables::USERS));
+		$stmt->addColumn(new Column("COLOR", Tables::USERS));
+		$stmt->addColumn(new Column("NICK", Tables::USERS));
 
-		$this->cache = [];$a = [
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("SUSPENDED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DEACTIVATED", Tables::USERS), "=", 0]);
+
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		if (empty($stmt->getResult())) {
+			throw new InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
+		}
+
+		$user = $stmt->getResult()[0];
+
+		// prefill frequently used items
+		$this->cache = [
 			"FILE_TOKEN" => $user["FILE_TOKEN"],
 			"USERNAME" => $user["USERNAME"],
 			"EMAIL" => $user["EMAIL"],
@@ -914,7 +952,7 @@ class User implements Serializable {
 			"NICK" => htmlspecialchars($user["NICK"])
 		];
 
-		$this->id = $data;
+		$this->id = $id;
 	}
 
 	public function getMessageUrlPath() : string {
