@@ -880,6 +880,9 @@ class User implements Serializable {
 		Email::sendEmail($recipients, $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
 	}
 
+	/**
+	 * Straight out of the HasImageTrait
+	 */
 	public function initializeImage() : void {
 		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->isProfilePictureNsfw()));
 	}
@@ -955,14 +958,29 @@ class User implements Serializable {
 		$this->id = $id;
 	}
 
+	/**
+	 * Part of IsMessagableTrait
+	 * 
+	 * @return string URL, relative to ROOTDIR/Message/New/, that can be used for messaging
+	 */
 	public function getMessageUrlPath() : string {
 		return 'User/'.$this->getUsername();
 	}
 
+	/**
+	 * Get a friendly name for the object, part of IsMessagableTrait
+	 * 
+	 * @return string The User's nickname
+	 */
 	public function getFriendlyName() : string {
 		return $this->getNickname();
 	}
 
+	/**
+	 * Whether or not the current user can see NSFW
+	 * 
+	 * @return bool false if sfw'd
+	 */
 	public static function isCurrentUserNsfw() : bool {
 		if (!self::isLoggedIn()) {
 			return false;
