@@ -100,6 +100,13 @@ class Navbar {
 		return $items;
 	}
 
+	/**
+	 * Get the navbar item text/contents
+	 * 
+	 * @param int $bar Navbar type, see class constants
+	 * @param array $navbarItem navbar item array, see spec in getNavbarItems
+	 * @return string html-ready contents
+	 */
 	public static function getNavbarItemLabel(int $bar, array $navbarItem) : string {
 		return $navbarItem[1] == self::CALLABLE ? call_user_func($navbarItem[0], $bar) : htmlspecialchars($navbarItem[0]);
 	}
