@@ -212,7 +212,7 @@ class Image {
 	/**
 	 * Get the image's HTML as a strict circle
 	 * 
-	 * @param string[] Classes to add to the div
+	 * @param string[] $additionalClasses Classes to add to the div
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
 	public function getStrictCircleHtml(array $additionalClasses=[]) : string {
