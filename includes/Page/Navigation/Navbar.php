@@ -15,6 +15,11 @@ class Navbar {
 	public const NAVBAR = 0;
 	public const SIDENAV = 1;
 
+	public const LOGO_HTML = '
+<img alt="logo" class="hide-on-small-only" height="60px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
+<img alt="logo" class="hide-on-med-and-up" height="54px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
+';
+
 	private static function getItems() : array {
 		// outermost key is access level
 		// inner arr is: name|callable, name|callable flag, keyword, path, type, [flags]

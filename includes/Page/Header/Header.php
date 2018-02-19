@@ -20,9 +20,4 @@ class Header {
 		ROOTDIR."css/overall.css",
 		ROOTDIR."css/color.css.php?hex=".PAGE_COLOR,
 	];
-
-	const LOGO_HTML = '
-<img alt="logo" class="hide-on-small-only" height="60px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
-<img alt="logo" class="hide-on-med-and-up" height="54px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
-';
 }
