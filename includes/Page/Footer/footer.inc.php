@@ -6,7 +6,7 @@ use \Catalyst\Page\UniversalFunctions;
 		<footer class="page-footer">
 			<div class="container white-text">
 				<p>
-					Website &copy;<?php echo date("Y"); ?> Catalyst, All rights reserved.
+					Website &copy;2017-<?php echo date("Y"); ?> Catalyst, All rights reserved.
 				</p>
 				<p>
 					<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
