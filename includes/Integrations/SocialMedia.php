@@ -16,7 +16,7 @@ class SocialMedia {
 	 */
 	protected static $meta = null;
 
-	// DEPRECATED
+	// DEPRECATED, @deprecated
 	public static function getArtistDisplayFromDatabase(\Catalyst\Artist\Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID ORDER BY `SORT` ASC;");
 		$id = $artist->getId();
@@ -206,10 +206,16 @@ class SocialMedia {
 				$str .= ' href="'.htmlspecialchars($chip["href"]).'"';
 				$str .= '>';
 			}
+
 			$str .= '<div';
-			$str .= ' class="chip hoverable tooltipped '.$chip["classes"];
+			$str .= ' class="';
+			$str .= 'chip';
+			$str .= ' hoverable';
+			$str .= ' '.$chip["classes"];
 			if ($editMode) {
-				$str .= " has-icon";
+				$str .= ' has-icon';
+			} else {
+				$str .= ' tooltipped';
 			}
 			$str .= '"';
 
