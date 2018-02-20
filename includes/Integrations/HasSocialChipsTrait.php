@@ -60,10 +60,10 @@ trait HasSocialChipsTrait {
 	/**
 	 * Get the HTML for the object's social chips
 	 * 
-	 * @param bool $clearButton if the clear button should be shown
+	 * @param bool $editMode if the chip is in edit mode
 	 * @return string The HTML for the object's chips
 	 */
-	public function getSocialChipHtml(bool $clearButton=false) : string {
-		return SocialMedia::getChipHtml(SocialMedia::getChipArray($this->getSocialChipsFromDatabase()), $clearButton);
+	public function getSocialChipHtml(bool $editMode=false) : string {
+		return SocialMedia::getChipHtml(SocialMedia::getChipArray($this->getSocialChipsFromDatabase()), $editMode);
 	}
 }
