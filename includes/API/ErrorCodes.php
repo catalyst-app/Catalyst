@@ -133,6 +133,10 @@ class ErrorCodes {
 	const ERR_90712 = 'No social media type passed';
 	const ERR_90713 = 'Invalid social media type passed';
 
+	// new character
+	const ERR_90801 = 'Missing name';
+	const ERR_90802 = 'Invalid name';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

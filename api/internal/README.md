@@ -120,3 +120,8 @@
 - **90711** - "javascript:" starts the url string (link only)
 - **90712** - No social media type passed ("other" only)
 - **90713** - Invalid social media type passed ("other" only)
+
+#### New Character
+
+- **90801** - No name passed
+- **90802** - Invalid name passed
