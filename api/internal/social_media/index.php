@@ -1,1 +1,0 @@
-{ "error": true, "http_code": 404, "error_code": 10001, "message": "Endpoint not found", "data": []}
