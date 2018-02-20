@@ -7,7 +7,8 @@ use \Catalyst\Form\CompletionAction\{
 	AutoClosingModalCompletionAction,
 	CallUserFuncCompletionAction,
 	ConcreteRedirectCompletionAction,
-	ConditionalCompletionAction
+	ConditionalCompletionAction,
+	DynamicRedirectCompletionAction
 };
 use \Catalyst\Form\Field\{
 	CaptchaField,

@@ -107,7 +107,7 @@
 
 #### Social Media Addition
 
-- **90701** - Invalid destination
+- **90701** - Invalid destination (user isn't an artist?)
 - **90702** - Missing label
 - **90703** - Invalid label
 - **90704** - URL/email not passed (link only)
