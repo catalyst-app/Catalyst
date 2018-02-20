@@ -229,8 +229,13 @@ label[data-error], label[data-success] {
 	min-height: 1em;
 }
 
-.social-chips .chip {
+.social-chips .chip.has-icon {
 	padding-right: 0;
+}
+
+.social-chips a {
+	font-size: 0;
+	line-height: 0;
 }
 
 .social-chips .chip i {
