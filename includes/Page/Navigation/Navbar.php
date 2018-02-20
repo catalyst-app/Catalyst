@@ -88,7 +88,7 @@ class Navbar {
 	 * Get navbar items for the current state
 	 * 
 	 * @param string[] $perms Permissions to use to get navbar items
-	 * @return string[] Array items
+	 * @return array[][] Navbar items
 	 */
 	public static function getNavbarItems(array $perms=["all"]) : array {
 		$items = array_filter(self::getItems(), function($in) use ($perms) {
