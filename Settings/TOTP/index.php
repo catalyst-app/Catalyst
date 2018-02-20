@@ -68,7 +68,10 @@ unlink($tmpfname);
 				<p class="flow-text">If you lose access to your two-factor authentication app, you will need the following recovery key.</p>
 				<p class="flow-text"><strong>Without it you will not be able to access your account if you lose access to your authentication app</strong></p>
 				<h4 class="code"><?= $_SESSION["user"]->getTotpResetToken() ?></h4>
-				<p class="flow-text">Your current code is: <span class="code totp-preview" data-secret="<?= $key ?>">......</span></p>
+				<!-- @todo this could be a source of error with deviations -->
+				<p class="flow-text no-bottom-margin">Your current codes are: <span class="code totp-preview" data-secret="<?= $humanReadableKey ?>">......</span></p>
+				<p class="no-top-margin">These 3 codes are from 30 seconds ago, now, and 30 seconds into the future in order to compensate for slight time variations</p>
+				<p class="flow-text">Not working?  Make sure your device's clock is correct, or try entering the code manually.</p>
 			</div>
 		</div>
 	</div>
