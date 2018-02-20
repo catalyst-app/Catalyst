@@ -136,6 +136,8 @@ class ErrorCodes {
 	// new character
 	const ERR_90801 = 'Missing name';
 	const ERR_90802 = 'Invalid name';
+	const ERR_90803 = 'Missing description';
+	const ERR_90804 = 'Invalid description';
 
 	/**
 	 * Get an associative array of code => message based on class constants
