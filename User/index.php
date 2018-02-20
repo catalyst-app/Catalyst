@@ -73,7 +73,9 @@ echo UniversalFunctions::createHeading("User Profile");
 
 							<br>
 
-							<?= $user->getSocialChipHtml() ?>
+							<div class="social-chips">
+								<?= $_SESSION["user"]->getSocialChipHtml(false) ?>
+							</div>
 						</div>
 					</div>
 				</div>

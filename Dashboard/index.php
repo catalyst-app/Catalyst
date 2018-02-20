@@ -49,11 +49,11 @@ else: ?>
 
 							<br>
 
-							<div class="social-chips">
+							<div class="social-chips social-chips-editable">
 								<?= $_SESSION["user"]->getSocialChipHtml(true) ?>
 							</div>
 							<?= SocialMedia::getAddChip() ?>
-							<?= SocialMedia::getAddModal() ?>
+							<?= SocialMedia::getAddModal("User") ?>
 						</div>
 					</div>
 				</div>
