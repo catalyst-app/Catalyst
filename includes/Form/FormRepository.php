@@ -768,6 +768,16 @@ class FormRepository {
 		$nameField->setInvalidErrorCode(90802);
 		$form->addField($nameField);
 
+		$descriptionField = new MarkdownField();
+		$descriptionField->setDistinguisher("description");
+		$descriptionField->setLabel("Description");
+		$descriptionField->setRequired(true);
+		$descriptionField->addError(90803, ErrorCodes::ERR_90803);
+		$descriptionField->setMissingErrorCode(90803);
+		$descriptionField->addError(90804, ErrorCodes::ERR_90804);
+		$descriptionField->setInvalidErrorCode(90804);
+		$form->addField($descriptionField);
+
 		return $form;
 	}
 
