@@ -39,11 +39,11 @@ if (FormHTML::testAjaxSubmissionFailed()) {
 		<div class="section">
 			<div class="row">
 				<div class="col s12">
-					<div class="social-chips">
-						<?= SocialMedia::getArtistChipHTML($_SESSION["user"]->getArtistPage()) ?>
+					<div class="social-chips social-chips-editable">
+						<?= $_SESSION["user"]->getArtistPage()->getSocialChipHtml(true) ?>
 					</div>
-					<?= SocialMedia::getAddChip() ?>
-					<?= SocialMedia::getAddModal() ?>
+					<?= SocialMedia::getAddChipHtml() ?>
+					<?= SocialMedia::getAddModal("Artist") ?>
 				</div>
 			</div>
 		</div>
