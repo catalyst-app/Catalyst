@@ -55,7 +55,6 @@ class FormRepository {
 	 * Get the form used to add a user to the mailing list.
 	 * 
 	 * See /About for form usage
-	 * 
 	 * @return Form Form for adding a user to the mailing list
 	 */
 	public static function getEmailListAdditionForm() : Form {
@@ -99,7 +98,6 @@ class FormRepository {
 	 * Login form
 	 * 
 	 * See /Login for form usage
-	 * 
 	 * @return Form Form for attempting a login
 	 */
 	public static function getLoginForm() : Form {
@@ -162,7 +160,6 @@ class FormRepository {
 	 * TOTP Login form
 	 * 
 	 * See /Login/TOTP for form usage
-	 * 
 	 * @return Form Form for attempting a TOTP login
 	 */
 	public static function getTotpLoginForm() : Form {
@@ -204,7 +201,6 @@ class FormRepository {
 	 * Register form
 	 * 
 	 * See /Register for form usage
-	 * 
 	 * @return Form Form for registering a new user
 	 */
 	public static function getRegisterForm() : Form {
@@ -364,7 +360,6 @@ class FormRepository {
 	 * Verifies an email address token
 	 * 
 	 * See /EmailVerification
-	 * 
 	 * @return Form Form for verifying a new email
 	 */
 	public static function getEmailVerificationForm() : Form {
@@ -598,7 +593,6 @@ class FormRepository {
 	 * Deactivation form
 	 * 
 	 * See /Settings for form usage (hidden in a modal)
-	 * 
 	 * @return Form Form for deactivating a user
 	 */
 	public static function getDeactivateForm() : Form {
@@ -643,7 +637,6 @@ class FormRepository {
 	 * Adding a social media network (link) form
 	 * 
 	 * See /Dashboard and other similar for fomr usage
-	 * 
 	 * @return Form Form for adding a social network via. a link
 	 */
 	public static function getAddNetworkLinkForm() : Form {
@@ -698,7 +691,6 @@ class FormRepository {
 	 * Adding a social media network (link) form
 	 * 
 	 * See /Dashboard and other similar for fomr usage
-	 * 
 	 * @return Form Form for adding a social network via. a link
 	 */
 	public static function getAddNetworkOtherForm() : Form {
