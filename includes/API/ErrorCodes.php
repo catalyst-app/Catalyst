@@ -10,6 +10,7 @@ use \ReflectionClass;
 class ErrorCodes {
 	// generic
 	const ERR_10001 = 'Endpoint not found';
+	const ERR_10002 = 'Invalid endpoint method';
 	const ERR_99999 = 'An internal error occured';
 
 	// api-related

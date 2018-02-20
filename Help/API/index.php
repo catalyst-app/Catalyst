@@ -50,6 +50,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<p class="flow-text">Generic error codes</p>
 				<ul class="browser-default">
 					<li class="flow-text"><strong>10001</strong>: Endpoint not found</li>
+					<li class="flow-text"><strong>10002</strong>: Invalid method ("GET", "POST", etc)</li>
 					<li class="flow-text"><strong>99999</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
 				</ul>
 			</div>
