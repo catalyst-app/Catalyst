@@ -36,33 +36,18 @@ elseif (!$_SESSION["user"]->isTotpEnabled()):
 
 $binaryKey = $_SESSION["user"]->getTotpKey();
 
-$map = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','2','3','4','5','6','7','='];
-
-$binaryKey = str_split($binaryKey);
-$binaryString = "";
-$inputCount = count($binaryKey);
-for ($i = 0; $i < $inputCount; $i++) {
-	$binaryString .= str_pad(base_convert(ord($binaryKey[$i]), 10, 2), 8, '0', STR_PAD_LEFT);
-}
-$fiveBitBinaryArray = str_split($binaryString, 5);
-$key = "";
-$i = 0;
-$fiveCount = count($fiveBitBinaryArray);
-while ($i < $fiveCount) {
-	$key .= $map[base_convert(str_pad($fiveBitBinaryArray[$i], 5, '0'), 2, 10)];
-	$i++;
-}
+$humanReadableKey = TOTP::getHumanKey($binaryKey);
 
 $tmpfname = tempnam(sys_get_temp_dir(), 'FOO');
 
-\QRcode::png('otpauth://totp/Catalyst:'.$_SESSION["user"]->getUsername().'?secret='.$key.'&issuer=Catalyst&digits=6&period=30', $tmpfname, QR_ECLEVEL_L, 10, 0);
+QRcode::png('otpauth://totp/Catalyst:'.$_SESSION["user"]->getUsername().'?secret='.$humanReadableKey.'&issuer=Catalyst&digits=6&period=30', $tmpfname, QR_ECLEVEL_L, 10, 0);
 
 $qr = base64_encode(file_get_contents($tmpfname));
 
 unlink($tmpfname);
 ?>
 				<img class="col s12 render-pixelated" src="data:image/png;base64,<?= $qr ?>">
-				<p class="code col s12 flow-text"><?= $key ?></h4>
+				<p class="code col s12 flow-text"><?= $humanReadableKey ?></h4>
 			</div>
 			<div class="col s12 m8">
 				<p class="flow-text">If you lose access to your two-factor authentication app, you will need the following recovery key.</p>

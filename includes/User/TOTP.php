@@ -115,4 +115,31 @@ class TOTP {
 
 		return $totpKey;
 	}
+
+	/**
+	 * Derive a human-readable 20-char key from the binary key
+	 * 
+	 * @param string $binaryKey Binary key
+	 * @return string Human-readable key
+	 */
+	public static function getHumanKey(string $binaryKey) : string {
+		$map = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','2','3','4','5','6','7','='];
+
+		$binaryKey = str_split($binaryKey);
+		$binaryString = "";
+		$inputCount = count($binaryKey);
+		for ($i = 0; $i < $inputCount; $i++) {
+			$binaryString .= str_pad(base_convert(ord($binaryKey[$i]), 10, 2), 8, '0', STR_PAD_LEFT);
+		}
+		$fiveBitBinaryArray = str_split($binaryString, 5);
+		$key = "";
+		$i = 0;
+		$fiveCount = count($fiveBitBinaryArray);
+		while ($i < $fiveCount) {
+			$key .= $map[base_convert(str_pad($fiveBitBinaryArray[$i], 5, '0'), 2, 10)];
+			$i++;
+		}
+
+		return $key;
+	}
 }
