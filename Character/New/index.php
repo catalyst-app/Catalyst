@@ -4,8 +4,8 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\Character\NewCharacter;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
+use \Catalyst\HTTPCode;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
@@ -18,11 +18,15 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (!User::isLoggedIn()) {
+	HTTPCode::set(401);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("New Character");
 
-if (User::isLoggedIn()) {
+if (!User::isLoggedIn()) {
 	echo User::getNotLoggedInHtml();
 } else {
 	echo FormRepository::getNewCharacterForm()->getHtml();
