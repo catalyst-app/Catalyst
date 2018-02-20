@@ -547,9 +547,9 @@ function totp(K,t) {
 
 		/* MOVE SOCIAL MEDIA */
 		try {
-			new Draggable.Sortable(document.querySelector('.social-chips > div'), {
-				draggable: '.social-chips > div > a, .social-chips > div > .chip',
-				appendTo: '.social-chips'
+			new Draggable.Sortable(document.querySelector('.social-chips-editable.social-chips > div'), {
+				draggable: '.social-chips-editable.social-chips > div > a, .social-chips-editable.social-chips > div > .chip',
+				appendTo: '.social-chips-editable.social-chips'
 			}).on("sortable:stop", function() {
 				setTimeout(function() {
 					var result = [];
