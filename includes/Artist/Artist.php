@@ -2,7 +2,12 @@
 
 namespace Catalyst\Artist;
 
+use \Catalyst\Database\Tables;
+use \Catalyst\Integrations\HasSocialChipsTrait;
+
 class Artist {
+	use HasSocialChipsTrait;
+
 	private $id;
 
 	private $cache = [];
@@ -198,5 +203,23 @@ class Artist {
 		$id = $stmt->fetchAll()[0]["ID"];
 		$stmt->closeCursor();
 		return $id;
+	}
+
+	/**
+	 * Get the table used to store a Artist's social media items
+	 * 
+	 * @return string
+	 */
+	public function getSocialChipTable() : string {
+		return Tables::ARTIST_SOCIAL_MEDIA;
+	}
+
+	/**
+	 * Get the column which is a foreign key to $this->getId()
+	 * 
+	 * @return string
+	 */
+	public function getSocialChipIdColumn() : string {
+		return "ARTIST_ID";
 	}
 }
