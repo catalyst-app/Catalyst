@@ -220,10 +220,11 @@ class SocialMedia {
 			$str .= '"';
 
 			if (!$editMode) {
-				$str .= ' data-id="'.$chip["id"].'"';
 				$str .= ' data-tooltip="'.$chip["tooltip"].'"';
 				$str .= ' data-position="bottom"';
 				$str .= ' data-delay="50"';
+			} else {
+				$str .= ' data-id="'.$chip["id"].'"';
 			}
 			
 			$str .= '>';
