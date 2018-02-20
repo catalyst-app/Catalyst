@@ -2,8 +2,10 @@
 
 namespace Catalyst\Form;
 
+use \Catalyst\API\{ErrorCodes, Response};
 use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
 use \Catalyst\Form\Field\{AbstractField,ImageField};
+use \Catalyst\HTTPCode;
 use \Exception;
 use \InvalidArgumentException;
 
@@ -520,7 +522,8 @@ class Form {
 	 */
 	public function checkServerSide() : void {
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
-			\Catalyst\Response::send405($this->getMethodString());
+			HTTPCode::set(405);
+			Response::sendErrorResponse(10002, ErrorCodes::ERR_10002);
 		}
 		// https://stackoverflow.com/a/9908619/
 		if ($this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($_POST) === 0) {
