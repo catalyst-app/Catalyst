@@ -19,6 +19,7 @@ use \Catalyst\Form\Field\{
 	HiddenInputField,
 	ImageField,
 	MarkdownField,
+	MultipleImageField,
 	PasswordField,
 	RawLabelCheckboxField,
 	SelectField,
