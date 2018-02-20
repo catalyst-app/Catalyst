@@ -5,4 +5,8 @@
   Require valid-user
 </If>
 
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+
 Options -Indexes
