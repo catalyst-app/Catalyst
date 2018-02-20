@@ -738,8 +738,40 @@ class FormRepository {
 	}
 
 	/**
-	 * Get all Forms functions defined in the repository
+	 * Get the form used to add a new character
 	 * 
+	 * See /Character/New
+	 * @return Form
+	 */
+	public static function getNewCharacterForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/character/create/");
+		$form->setButtonText("CREATE");
+		$form->setPrimary(false);
+
+		$completionAction = new DynamicRedirectCompletionAction();
+		$form->setCompletionAction($completionAction);
+
+		$nameField = new TextField();
+		$nameField->setDistinguisher("name");
+		$nameField->setLabel("Name");
+		$nameField->setRequired(true);
+		$nameField->setPattern('^.{2,255}$');
+		$nameField->setMaxLength(255);
+		$nameField->addError(90801, ErrorCodes::ERR_90801);
+		$nameField->setMissingErrorCode(90801);
+		$nameField->addError(90802, ErrorCodes::ERR_90802);
+		$nameField->setInvalidErrorCode(90802);
+		$form->addField($nameField);
+
+		return $form;
+	}
+
+	/**
+	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
 	 */
 	public static function getAllForms() : array {
