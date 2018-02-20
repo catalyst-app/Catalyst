@@ -5,7 +5,8 @@ define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Page\{UniversalFunctions, Values};
-use \Catalyst\User\User;
+use \Catalyst\User\{TOTP, User};
+use \Catalyst\HTTPCode;
 
 define("PAGE_KEYWORD", Values::SETTINGS[0]);
 define("PAGE_TITLE", Values::createTitle(Values::SETTINGS[1], ["name" => (isset($_SESSION["user"]) ? $_SESSION["user"]->getNickname() : "Logged Out")]));
@@ -16,18 +17,26 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
+if (!User::isLoggedIn()) {
+	HTTPCode::set(401);
+} elseif (!$_SESSION["user"]->isTotpEnabled()) {
+	HTTPCode::set(400);
+}
+
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("2FA Settings");
 
-if (!User::isLoggedIn()):
+if (!User::isLoggedIn()) {
 	echo User::getNotLoggedInHtml();
-elseif (!$_SESSION["user"]->isTotpEnabled()):
+} elseif (!$_SESSION["user"]->isTotpEnabled()) {
 ?>
 	<div class="section">
 		<p class="flow-text">Two factor authentication is disabled.  Enable it <a href="<?= ROOTDIR ?>Settings">here</a>.</p>
 	</div>
-<?php else: ?>
+<?php
+} else {
+?>
 	<div class="section">
 		<div class="row">
 			<p class="flow-text col s12">Use the following QR code or manual key below to add Catalyst to your authenticator app</p>
@@ -65,6 +74,6 @@ unlink($tmpfname);
 		<p class="flow-text">You may disable two factor authentication <a href="<?= ROOTDIR ?>Settings">here</a>.</p>
 	</div>
 <?php
-endif;
+}
 
 require_once Values::FOOTER_INC;
