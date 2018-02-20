@@ -958,7 +958,13 @@ function totp(K,t) {
 		$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
 		$(".totp-preview").each(function(a, b) {
 			setInterval(function() {
-				$(b).text(totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)));
+				$(b).text(
+					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)-1)+
+					","+
+					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000))+
+					","+
+					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)+1)
+				);
 			}, 1000);
 		});
 	});
