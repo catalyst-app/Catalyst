@@ -37,7 +37,7 @@ trait MessagableTrait {
 		$str .= ' href="'.ROOTDIR.'Message/New/'.htmlspecialchars($this->getMessageUrlPath()).'"';
 		$str .= ' class="btn"';
 		$str .= '>';
-		$str .= 'message '.$this->getFriendlyName();
+		$str .= 'message '.htmlspecialchars($this->getFriendlyName());
 		$str .= '</a>';
 		$str .= '</p>';
 		return $str;
