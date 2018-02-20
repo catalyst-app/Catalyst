@@ -24,7 +24,7 @@ if (isset($_GET["q"])) {
 }
 
 define("PAGE_KEYWORD", Values::USER_PROFILE[0]);
-define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? htmlspecialchars($user->getNickname()) : "Invalid User")]));
+define("PAGE_TITLE", Values::createTitle(Values::USER_PROFILE[1], ["name" => (isset($user) ? $user->getNickname() : "Invalid User")]));
 
 if (!is_null($user)) {
 	define("PAGE_COLOR", $user->getColor());
