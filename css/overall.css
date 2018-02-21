@@ -395,7 +395,7 @@ input[type=checkbox] + label + span.invalid-text {
 }
 
 .no-bottom-margin {
-	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 }
 
 .no-margin {
