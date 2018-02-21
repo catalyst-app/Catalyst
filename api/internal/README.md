@@ -125,6 +125,8 @@
 
 - **90801** - No name passed
 - **90802** - Invalid name passed
+- **90803** - No description passed
+- **90804** - Invalid description
 - **90805** - Files too large
 - **90806** - Not an image
 - **90807** - Invald image
