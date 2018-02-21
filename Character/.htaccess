@@ -1,4 +1,0 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^/]*)(/*)([^/]*(/*))$ index.php?q1=$1&level1=$2&q2=$3&level2=$4 [NC,L]
