@@ -1,6 +1,6 @@
 <?php
 
-define("ROOTDIR", "../".((isset($_GET["level1"]) && $_GET["level1"] == "/") ? "../" : "").((isset($_GET["level2"]) && $_GET["level2"] == "/") ? "../" : ""));
+define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
@@ -11,13 +11,13 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 if (!isset($_GET["q1"])) {
-	$page = "LANDING";
+	require_once 'landing_index.php';
 } elseif (isset($_GET["q2"]) && $_GET["q2"] == "Edit" || $_GET["q2"] == "Edit/") {
-	$page = "EDIT";
+	require_once 'edit_index.php';
 } elseif (isset($_GET["q2"]) && $_GET["q2"] == "EditImages" || $_GET["q2"] == "EditImages/") {
-	$page = "EDITIMG";
+	require_once 'edit_images_index.php';
 } else {
-	$page = "VIEW";
+	require_once 'view_index.php';
 }
 
 if ($page == "EDIT" || $page == "EDITIMG" || $page == "VIEW") {
