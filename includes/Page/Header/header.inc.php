@@ -83,7 +83,6 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
 		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
 	</head>
-	</head>
 	<body>
 <?php require_once REAL_ROOTDIR."includes/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
