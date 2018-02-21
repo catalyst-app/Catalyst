@@ -141,6 +141,8 @@ class ErrorCodes {
 	const ERR_90805 = 'These files are too large.  Upload them separately';
 	const ERR_90806 = 'This file is not an image';
 	const ERR_90807 = 'The image is invalid';
+	const ERR_90808 = 'Color was not entered';
+	const ERR_90809 = 'Invalid color';
 
 	/**
 	 * Get an associative array of code => message based on class constants

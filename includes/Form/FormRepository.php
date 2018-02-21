@@ -792,6 +792,19 @@ class FormRepository {
 		$imagesField->setTooLargeErrorCode(90807);
 		$form->addField($imagesField);
 
+		$colorField = new ColorField();
+		$colorField->setDistinguisher("color");
+		$colorField->setLabel("Color");
+		$colorField->setRequired(true);
+		if (User::isLoggedIn()) {
+			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
+		}
+		$colorField->addError(90808, ErrorCodes::ERR_90808);
+		$colorField->setMissingErrorCode(90808);
+		$colorField->addError(90809, ErrorCodes::ERR_90809);
+		$colorField->setInvalidErrorCode(90809);
+		$form->addField($colorField);
+
 		return $form;
 	}
 
