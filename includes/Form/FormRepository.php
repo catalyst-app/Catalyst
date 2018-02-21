@@ -779,6 +779,19 @@ class FormRepository {
 		$descriptionField->setInvalidErrorCode(90804);
 		$form->addField($descriptionField);
 
+		$imagesField = new MultipleImageField();
+		$imagesField->setDistinguisher("images");
+		$imagesField->setLabel("Images");
+		$imagesField->setRequired(false);
+		$imagesField->setMaxHumanSize('10MB');
+		$imagesField->addError(90805, ErrorCodes::ERR_90805);
+		$imagesField->setMissingErrorCode(90805);
+		$imagesField->addError(90806, ErrorCodes::ERR_90806);
+		$imagesField->setInvalidErrorCode(90806);
+		$imagesField->addError(90807, ErrorCodes::ERR_90807);
+		$imagesField->setTooLargeErrorCode(90807);
+		$form->addField($imagesField);
+
 		return $form;
 	}
 

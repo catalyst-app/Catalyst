@@ -138,6 +138,9 @@ class ErrorCodes {
 	const ERR_90802 = 'Invalid name';
 	const ERR_90803 = 'Missing description';
 	const ERR_90804 = 'Invalid description';
+	const ERR_90805 = 'These files are too large.  Upload them separately';
+	const ERR_90806 = 'This file is not an image';
+	const ERR_90807 = 'The image is invalid';
 
 	/**
 	 * Get an associative array of code => message based on class constants
