@@ -130,3 +130,5 @@
 - **90805** - Files too large
 - **90806** - Not an image
 - **90807** - Invald image
+- **90808** - Color was not passed
+- **90809** - Invalid color
