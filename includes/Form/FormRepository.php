@@ -805,6 +805,20 @@ class FormRepository {
 		$colorField->setInvalidErrorCode(90809);
 		$form->addField($colorField);
 
+		$publicCheckboxField = new CheckboxField();
+		$publicCheckboxField->setDistinguisher("public");
+		$publicCheckboxField->setLabel("Make this character public");
+		$publicCheckboxField->setRequired(false);
+		$publicCheckboxField->addError(90810, ErrorCodes::ERR_90810);
+		$publicCheckboxField->setMissingErrorCode(90810);
+		$publicCheckboxField->addError(90811, ErrorCodes::ERR_90811);
+		$publicCheckboxField->setInvalidErrorCode(90811);
+		$form->addField($publicCheckboxField);
+
+		$publicNotice = new StaticHTMLField();
+		$publicNotice->setHtml('<p class="col s12 no-margin">If this character is public, anyone can see it on your profile and access it with its link.  Otherwise, only you and artists you commission may see it.</p>');
+		$form->addField($publicNotice);
+
 		return $form;
 	}
 

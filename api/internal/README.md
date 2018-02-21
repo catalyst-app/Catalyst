@@ -132,3 +132,5 @@
 - **90807** - Invald image
 - **90808** - Color was not passed
 - **90809** - Invalid color
+- **90810** - No public checkbox value passed
+- **90811** - Invalid publicity checkbox value
