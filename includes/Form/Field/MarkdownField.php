@@ -24,6 +24,7 @@ class MarkdownField extends AbstractField {
 		$str .= 'Catalyst uses a modified version of Markdown in this field.  Please see ';
 		$str .= '<a';
 		$str .= ' href="'.ROOTDIR.'Markdown"';
+		$str .= ' tabindex="-1"';
 		$str .= '>';
 		$str .= 'this page';
 		$str .= '</a>';
