@@ -17,7 +17,7 @@ if (isset($_GET["q"])) {
 	if ($id !== -1) {
 		$user = new User($id);
 	} else {
-		HTTPCode::set(400);
+		HTTPCode::set(404);
 	}
 } else {
 	HTTPCode::set(400);
