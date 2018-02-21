@@ -143,6 +143,8 @@ class ErrorCodes {
 	const ERR_90807 = 'The image is invalid';
 	const ERR_90808 = 'Color was not entered';
 	const ERR_90809 = 'Invalid color';
+	const ERR_90810 = 'No publicity checkbox value';
+	const ERR_90811 = 'Invalid publicity checkbox value';
 
 	/**
 	 * Get an associative array of code => message based on class constants
