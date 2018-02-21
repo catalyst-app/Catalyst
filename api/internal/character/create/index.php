@@ -63,5 +63,5 @@ if (isset($_FILES["images"])) {
 }
 
 Response::sendSuccessResponse("Success", [
-	"redirect" => "Character/".$token
+	"redirect" => "Character/View/".$token
 ]);
