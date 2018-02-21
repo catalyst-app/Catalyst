@@ -392,4 +392,35 @@ class Image {
 
 		return new self($folder, $fileToken, $middle.$suffix);
 	}
+
+	/**
+	 * Upload a set of images to the server with the given parameters
+	 * 
+	 * @param array[] $images An uploaded images object, from the $_FILES array, should have multiple
+	 * @param string $folder Folder to place the uploaded image
+	 * @param string $fileToken Token to use for the new image
+	 * @return self[] The newly uploaded image, or null on failure
+	 */
+	public static function uploadMultiple(array $images, string $folder, string $fileToken) : array {
+		if (!array_key_exists("error",$images) || !is_array($images["error"])) {
+			$upload = self::upload($images, $folder, $fileToken);
+			if (is_null($upload)) {
+				return [];
+			} else {
+				return [$upload];
+			}
+		}
+
+		$arr = [];
+
+		for ($i=0; $i < count($images["error"]); $i++) { 
+			$image = [];
+			foreach ($images as $key => $value) {
+				$image[$key] = $value[$i];
+			}
+			$arr[] = self::upload($image, $folder, $fileToken);
+		}
+
+		return array_filter($arr);
+	}
 }
