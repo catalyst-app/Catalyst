@@ -79,7 +79,13 @@ class MultipleImageField extends ImageField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).')[0].files);';
+		$str = '';
+
+		$str .= 'for (var i=0; i<$('.json_encode("#".$this->getId()).')[0].files.length; i++) {';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', $('.json_encode("#".$this->getId()).')[0].files[i]);';
+		$str .= '}';
+
+		return $str;
 	}
 
 	/**
