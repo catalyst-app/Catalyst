@@ -17,7 +17,6 @@ use \Catalyst\Color;
 use \Catalyst\Database\Artist\EditArtist;
 use \Catalyst\Database\Artist\NewArtist;
 use \Catalyst\Database\Character\EditCharacter;
-use \Catalyst\Database\Character\NewCharacter;
 // the following series of whitespace is dedicated to SINNERSCOUT for being cool and a patron and stuff:
 /*
 U+0020	SPACE	foo bar, size: depends on font, typically 1/4 em, often adjusted
@@ -426,11 +425,6 @@ function totp(K,t) {
 				window.location="";
 			});
 		});
-
-		/* NEW CHARACTER */
-		<?php
-		echo FormJS::generateFormHandler(NewCharacter::getFormStructure());
-		?> 
 
 		/* EDIT CHARACTER */
 		<?php
