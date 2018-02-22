@@ -277,15 +277,19 @@ class Image {
 	 * Makes use of getCardFromRawHtml
 	 * 
 	 * @param string $title Card title
-	 * @param string $caption Card caption
+	 * @param string|null $caption Card caption, will use getCaption() if null
 	 * @param bool $link If the card should link to something
 	 * @param null|string $linkPath What the card should link to, null if image, no effect if $link=false
 	 * @param array $ribbon Ribbon color and text, as [hex, text]
 	 * @param bool $sendNsfw If there should be anything returned if the card is nsfw
 	 * @return string the card html
 	 */
-	public function getCard(string $title="", string $caption="", bool $link=false, ?string $linkPath=null, array $ribbon=[], bool $sendNsfw=false) : string {
+	public function getCard(string $title="", ?string $caption=null, bool $link=false, ?string $linkPath=null, array $ribbon=[], bool $sendNsfw=false) : string {
 		$html = '';
+
+		if (is_null($caption)) {
+			$caption = $this->getCaption();
+		}
 
 		if (!empty($title)) {
 			$html .= '<p';
