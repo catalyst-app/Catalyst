@@ -2,7 +2,7 @@
 
 namespace Catalyst\Character;
 
-use \Catalyst\Database\{Column, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
 
 class Character {
@@ -312,6 +312,11 @@ class Character {
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $this->id]);
 		$stmt->addAdditionalCapability($whereClause);
+
+		$orderByClause = new OrderByClause();
+		$orderByClause->setColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
+		$orderByClause->setOrder("ASC");
+		$stmt->addAdditionalCapability($orderByClause);
 
 		$stmt->execute();
 
