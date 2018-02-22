@@ -35,7 +35,7 @@ class Values {
 
 	const DEFAULT_COLOR = "1b5e20";
 
-	const BCRYPT_COST = 14;
+	const BCRYPT_COST = 12;
 
 	const ROOT_TITLE = "Catalyst";
 
