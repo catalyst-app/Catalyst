@@ -242,8 +242,10 @@ class Character {
 	}
 
 	public function visibleToMe() : bool {
-		if ($this->isPublic() ||
-			\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
+		if ($this->isPublic()) {
+			return true;
+		}
+		if (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
 			return true;
 		}
 
