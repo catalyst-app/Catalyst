@@ -29,6 +29,11 @@ class Image {
 	 * @var bool
 	 */
 	protected $nsfw;
+	/**
+	 * Image caption, optional
+	 * @var string
+	 */
+	protected $caption;
 
 	/**
 	 * Maximum size an image can be if it is pixel art
@@ -53,7 +58,7 @@ class Image {
 	 * @param string|null $path The path to the image, or null if default
 	 * @param bool $nsfw If the image is mature or explicit
 	 */
-	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw=false) {
+	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw=false, string $caption="") {
 		if ($path == "default.png") {
 			$path = null; // BC
 		}
@@ -61,6 +66,7 @@ class Image {
 		$this->setFileToken($fileToken);
 		$this->setPath($path);
 		$this->setNsfw($nsfw);
+		$this->setCaption($caption);
 	}
 
 	/**
@@ -117,6 +123,20 @@ class Image {
 	 */
 	public function setNsfw(bool $nsfw) : void {
 		$this->nsfw = $nsfw;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCaption() : string {
+		return $this->caption;
+	}
+
+	/**
+	 * @param string $caption
+	 */
+	public function setCaption(string $caption) : void {
+		$this->caption = $caption;
 	}
 
 	/**
