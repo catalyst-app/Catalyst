@@ -100,7 +100,7 @@ echo UniversalFunctions::createHeading("FAQ");
 						<ul>
 							<li>We use per-user salts - if two users have the same password, the hashes are different</li>
 							<li>Additionally, we require all passwords be 8 characters long, and that they have no maximum length.  This encourages the use of ridiculously long random passwords.</li>
-							<li>We store passwords after they are hashed with the bcrypt algorithm and a high work factor (currently 14).  If the user is to use a password of only 8 characters, the password would take (by current estimates) billions of years to crack.</li>
+							<li>We store passwords after they are hashed with the bcrypt algorithm and a high work factor (currently 12).  If the user is to use a password of only 8 characters, the password would take (by current estimates) millions of years to crack and billions of dollars.</li>
 						</ul>
 						<li class="flow-text">Two Factor Authentication</li>
 						<ul>
