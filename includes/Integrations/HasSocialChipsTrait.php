@@ -50,6 +50,7 @@ trait HasSocialChipsTrait {
 
 		$orderClause = new OrderByClause();
 		$orderClause->setColumn(new Column("SORT", $this->getSocialChipTable()));
+		$orderClause->setOrder("ASC");
 		$stmt->addAdditionalCapability($orderClause);
 
 		$stmt->execute();
