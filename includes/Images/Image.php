@@ -333,7 +333,7 @@ class Image {
 	 * @return string Card html
 	 */
 	public function getCardFromRawHtml(string $html, bool $link=false, ?string $linkPath=null, string $preHtml="", bool $sendNsfw=false) : string {
-		if ($this->isNsfw() && !$sendNsfw) {
+		if ($this->isNsfw() && !$sendNsfw && !User::isCurrentUserNsfw()) {
 			return '';
 		}
 		$str = '';
