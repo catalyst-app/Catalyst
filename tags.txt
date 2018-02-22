@@ -102,9 +102,9 @@
 	'URINE', 'Urine', 'Typical relating to watersports, this involves anything with urine'
 	'VORE', 'Vore', 'Consuming of another character through any means'
 ------Maturity Rating------
-	'SAFE', 'Safe', 'A piece with no sexual content or lightly suggestive'
-	'MATURE', 'Mature', 'Anything which is suggestive or contains extreme fetishes'
-	'EXPLICIT', 'Explicit', 'Anything containing sex toys or genitalia, including backsack'
+	'SAFE', 'Safe', 'A piece with no sexual content or lightly suggestive at worst'
+	'MATURE', 'Mature', 'No genitals, however moderately suggestive is allowed'
+	'EXPLICIT', 'Explicit', 'Genitals, explicititly sexual situations, fringe fetishes, including violence and gore'
 ------Types of Species That Fit This Commission------
 	'AQUATIC', 'Aquatic', 'Aquatic'
 	'AVIANS', 'Avians', 'Birds and other flying animals'
