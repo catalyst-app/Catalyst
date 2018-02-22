@@ -88,7 +88,10 @@ $characters = Character::getPublicCharactersFromUser($user);
 $cards = [];
 foreach ($characters as $character) {
 	$img = $character->getPrimaryImage();
-	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/", [], false).'</div>';
+	$cardContents = $character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/", [], false);
+	if (!empty($cardContents)) {
+		$cards[] = '<div class="col s8 m4 l3">'.$cardContents.'</div>';
+	}
 }
 ?>
 <?php if (count($cards) === 0): ?>
