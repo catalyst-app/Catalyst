@@ -72,7 +72,7 @@ $cards = [
 ];
 foreach ($characters as $character) {
 	$img = $character->getPrimaryImage();
-	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/".$character->getToken()."/", [], true).'</div>';
+	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], true).'</div>';
 }
 ?>
 <?= implode("", $cards) ?>
