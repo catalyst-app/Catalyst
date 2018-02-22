@@ -231,7 +231,11 @@ function totp(K,t) {
   j&&k.push(c<<(32-j));
   for(i=0;i<16;++i)l.push(0x6A6A6A6A^(k[i]=k[i]^0x5C5C5C5C));
   var s=sha1(k.concat(sha1(l.concat([0,t])))),o=s[4]&0xF;
-  return ((s[o>>2]<<8*(o&3)|(o&3?s[(o>>2)+1]>>>8*(4-o&3):0))&-1>>>1)%1000000;
+  var out=""+(((s[o>>2]<<8*(o&3)|(o&3?s[(o>>2)+1]>>>8*(4-o&3):0))&-1>>>1)%1000000);
+  while ((out).length < 6) {
+  	out = "0"+out;
+  }
+  return out;
 }
 
 (function($){
