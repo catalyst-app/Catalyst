@@ -41,7 +41,7 @@ class Image {
 	 * _before any pixel artists yell at me_, I am NOT transforming the image
 	 * This is used to change browser rendering so it doesn't antialias
 	 */
-	public const PIXEL_ART_MAX_SIZE = 100;
+	public const PIXEL_ART_MAX_SIZE = 150;
 
 	/**
 	 * Lenth of token used for midsection
