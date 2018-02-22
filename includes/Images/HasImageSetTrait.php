@@ -21,7 +21,7 @@ trait HasImageSetTrait {
 	 */
 	public function getImageSet() : array {
 		if (is_null($this->images)) {
-			$this->initializeImage();
+			$this->initializeImageSet();
 		}
 		return $this->images;
 	}
