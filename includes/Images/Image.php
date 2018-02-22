@@ -447,4 +447,8 @@ class Image {
 
 		return array_filter($arr);
 	}
+
+	public static function getNewItemImage() : self {
+		return new self(Folders::GLOBAL_IMG, "", "new.png", false);
+	}
 }
