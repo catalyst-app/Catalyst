@@ -2,10 +2,11 @@
 
 namespace Catalyst\Character;
 
-use \Catalyst\Images\{Folders, HasImageTrait, Image};
+use \Catalyst\Database\{Column, SelectQuery, Tables, WhereClause};
+use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
 
 class Character {
-	use HasImageTrait;
+	use HasImageTrait, HasImageSetTrait;
 
 	private $id;
 
@@ -294,5 +295,30 @@ class Character {
 
 	public function initializeImage() : void {
 		$this->setImage(new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
+	}
+
+	public function initializeImageSet() : void {
+		$images = [];
+
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $this->id]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		foreach ($stmt->getResult() as $row) {
+			$images[] = new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $row["PATH"], $row["NSFW"], $row["CAPTION"]);
+		}
+
+		$this->setImageSet($images);
 	}
 }
