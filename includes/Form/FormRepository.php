@@ -786,12 +786,12 @@ class FormRepository {
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
 		$imagesField->setInfoLabel('Artist/Source');
-		$imagesField->addError(90805, ErrorCodes::ERR_90805);
-		$imagesField->setMissingErrorCode(90805);
 		$imagesField->addError(90806, ErrorCodes::ERR_90806);
-		$imagesField->setInvalidErrorCode(90806);
+		$imagesField->setMissingErrorCode(90806);
 		$imagesField->addError(90807, ErrorCodes::ERR_90807);
-		$imagesField->setTooLargeErrorCode(90807);
+		$imagesField->setInvalidErrorCode(90807);
+		$imagesField->addError(90805, ErrorCodes::ERR_90805);
+		$imagesField->setTooLargeErrorCode(90805);
 		$form->addField($imagesField);
 
 		$colorField = new ColorField();
