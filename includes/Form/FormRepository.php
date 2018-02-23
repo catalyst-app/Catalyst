@@ -20,6 +20,7 @@ use \Catalyst\Form\Field\{
 	ImageField,
 	MarkdownField,
 	MultipleImageField,
+	MultipleImageFieldWithNsfwCaptionAndInfo,
 	PasswordField,
 	RawLabelCheckboxField,
 	SelectField,
@@ -779,7 +780,7 @@ class FormRepository {
 		$descriptionField->setInvalidErrorCode(90804);
 		$form->addField($descriptionField);
 
-		$imagesField = new MultipleImageField();
+		$imagesField = new MultipleImageFieldWithNsfwCaptionAndInfo();
 		$imagesField->setDistinguisher("images");
 		$imagesField->setLabel("Images");
 		$imagesField->setRequired(false);
