@@ -177,6 +177,9 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 			if ($_FILES[$this->getDistinguisher()]["error"][$i] !== 0 && $this->isRequired()) { // not uploaded
 				$this->throwMissingError();
 			}
+			if ($_FILES[$this->getDistinguisher()]["error"][$i] === 1) {
+				$this->throwTooLargeError();
+			}
 			if ($_FILES[$this->getDistinguisher()]["error"][$i] !== 0 && $_FILES[$this->getDistinguisher()]["error"][$i] !== 4) { // error
 				$this->throwInvalidError();
 			}
