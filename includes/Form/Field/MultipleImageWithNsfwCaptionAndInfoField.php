@@ -155,24 +155,6 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				return;
 			}
 		}
-		if (!array_key_exists($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX])) {
-			$_POST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
-			$_GET[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
-			$_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
-				[];
-		}
-		if (!array_key_exists($this->getDistinguisher().self::CAPTION_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX])) {
-			$_POST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
-			$_GET[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
-			$_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
-				[];
-		}
-		if (!array_key_exists($this->getDistinguisher().self::INFO_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
-			$_POST[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
-			$_GET[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
-			$_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
-				[];
-		}
 		for ($i=0; $i < count($_FILES[$this->getDistinguisher()]["name"]); $i++) { 
 			if ($_FILES[$this->getDistinguisher()]["error"][$i] !== 0 && $this->isRequired()) { // not uploaded
 				$this->throwMissingError();
