@@ -389,6 +389,7 @@ function totp(K,t) {
 
 					var nsfwCheckboxInput = $("<input>");
 					nsfwCheckboxInput.addClass("filled-in");
+					nsfwCheckboxInput.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CLASS) ?>);
 					nsfwCheckboxInput.attr("id", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 					nsfwCheckboxInput.attr("type", "checkbox");
 
