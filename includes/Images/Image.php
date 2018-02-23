@@ -448,6 +448,11 @@ class Image {
 		return array_filter($arr);
 	}
 
+	/**
+	 * Get the image for a new {item}
+	 * 
+	 * @return self
+	 */
 	public static function getNewItemImage() : self {
 		return new self(Folders::GLOBAL_IMG, "", "new.png", false);
 	}
