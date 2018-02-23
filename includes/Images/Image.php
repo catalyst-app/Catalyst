@@ -152,7 +152,7 @@ class Image {
 	}
 
 	/**
-	 * @param string $caption
+	 * @param string $uploadName
 	 */
 	protected function setUploadName(string $uploadName) : void {
 		$this->uploadName = $uploadName;
