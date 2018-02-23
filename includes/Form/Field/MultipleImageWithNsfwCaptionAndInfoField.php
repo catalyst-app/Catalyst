@@ -13,8 +13,14 @@ use \Catalyst\Page\UniversalFunctions;
  */
 class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public const NSFW_CHECKBOX_ID_SUFFIX = '-nsfw';
+	public const NSFW_CLASS = 'image-extra-info-nsfw';
 	public const CAPTION_ID_SUFFIX = '-caption';
+	public const CAPTION_CLASS = 'image-extra-info-caption';
 	public const INFO_ID_SUFFIX = '-info';
+	public const INFO_CLASS = 'image-extra-info-info';
+
+	public const ROW_ID_SUFFIX = '-data-row';
+	public const ROW_CLASS = 'image-extra-info-row';
 	
 	public const EL_ID_SUFFIX_EXPR = '+"-"+file.lastModified+"-"+file.size+"-"+file.name';
 
