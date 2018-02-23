@@ -345,13 +345,15 @@ function totp(K,t) {
 			for (var i = 0; i < toAdd.length; i++) {
 				// work around to clean scope, thanks to toish!
 				(function(toAdd, i, input) {
-					row = $("<div></div>");
+					var file = toAdd[i][2];
+
+					var row = $("<div></div>");
 					row.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>);
 					row.attr("id", toAdd[i][1]);
 					row.attr("data-input", $(input).attr("id"));
 					row.addClass("row");
 
-					imgPreviewWrapper = $("<div></div>");
+					var imgPreviewWrapper = $("<div></div>");
 					imgPreviewWrapper.addClass("center");
 					imgPreviewWrapper.addClass("force-square-contents");
 					imgPreviewWrapper.addClass("col s4 offset-s4 m3 l2");
@@ -361,24 +363,24 @@ function totp(K,t) {
 					imgPreview.attr("id", id)
 					imgPreview.addClass("img-strict-circle");
 
-					reader = new FileReader();
+					var reader = new FileReader();
 					reader.onload = function (e) {
 						$("#"+id).css("background-image", 'url('+e.target.result+')');
 						imgPreview.css("background-image", 'url('+e.target.result+')');
 					};
-					reader.readAsDataURL(toAdd[i][2]);
+					reader.readAsDataURL(file);
 	 
 					imgPreviewWrapper.append(imgPreview);
 
 					row.append(imgPreviewWrapper);
 
-					remainingRowWrapper = $("<div></div>");
+					var remainingRowWrapper = $("<div></div>");
 					remainingRowWrapper.addClass("left-align center-on-small-only");
 					remainingRowWrapper.addClass("col s12 m9 l10");
 
-					infoLine = $("<h4></h4>");
+					var infoLine = $("<h4></h4>");
 					infoLine.addClass("col s12");
-					infoLine.text(toAdd[i][2].name + " ("+humanFileSize(toAdd[i][2].size)+")");
+					infoLine.text(file.name + " ("+humanFileSize(file.size)+")");
 
 					remainingRowWrapper.append(infoLine);
 
