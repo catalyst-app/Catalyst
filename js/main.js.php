@@ -45,7 +45,7 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Form\FormJS;
 
-use \Catalyst\Field\MultipleImageFieldWithNsfwCaptionAndInfo;
+use \Catalyst\Field\MultipleImageWithNsfwCaptionAndInfoField;
 
 ?>
 // ~))))'> 
@@ -284,7 +284,7 @@ function totp(K,t) {
 	<?= $form->getAllJs(); ?>
 <?php endforeach; ?>
 
-		/* IMAGE UPLOADING WITH CAPTIONS */
+		/* IMAGE UPLOADING WITH NSFW, CAPTIONS, and INFO */
 
 		/* IMAGE ARRANGEMENT */
 		$(document).on("click", ".edit-cards .make-primary-button", function() {
