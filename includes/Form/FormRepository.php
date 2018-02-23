@@ -753,7 +753,7 @@ class FormRepository {
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/character/create/");
 		$form->setButtonText("CREATE");
-		$form->setPrimary(false);
+		$form->setPrimary(true);
 
 		$completionAction = new DynamicRedirectCompletionAction();
 		$form->setCompletionAction($completionAction);
