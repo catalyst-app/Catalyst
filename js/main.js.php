@@ -143,6 +143,10 @@ var markCaptchaInvalid = function(a) {
 var markCaptchaValid = function() {
 	$(".g-recaptcha").addClass("valid").removeClass("invalid");
 };
+var humanFileSize = function(size) {
+	var i = Math.floor( Math.log(size) / Math.log(1024) );
+	return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+};
 var showErrorMessageForCode = function(c) {
 	switch (c) {
 <?php foreach ($errors as $code => $message): ?>
