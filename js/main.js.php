@@ -335,46 +335,49 @@ function totp(K,t) {
 			}
 
 			for (var i = 0; i < toAdd.length; i++) {
-				row = $("<div></div>");
-				row.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>);
-				row.attr("id", toAdd[i][1]);
-				row.attr("data-input", $(this).attr("id"));
-				row.addClass("row");
+				// work around to clean scope, thanks to toish!
+				(function(toAdd, i, input) {
+					row = $("<div></div>");
+					row.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>);
+					row.attr("id", toAdd[i][1]);
+					row.attr("data-input", $(input).attr("id"));
+					row.addClass("row");
 
-				imgPreviewWrapper = $("<div></div>");
-				imgPreviewWrapper.addClass("center");
-				imgPreviewWrapper.addClass("force-square-contents");
-				imgPreviewWrapper.addClass("col s4 offset-s4 m3 l2");
+					imgPreviewWrapper = $("<div></div>");
+					imgPreviewWrapper.addClass("center");
+					imgPreviewWrapper.addClass("force-square-contents");
+					imgPreviewWrapper.addClass("col s4 offset-s4 m3 l2");
 
-				let imgPreview = $("<div></div>");
-				let id = toAdd[i][1]+"-img-preview";
-				imgPreview.attr("id", id)
-				imgPreview.addClass("img-strict-circle");
+					var imgPreview = $("<div></div>");
+					var id = toAdd[i][1]+"-img-preview";
+					imgPreview.attr("id", id)
+					imgPreview.addClass("img-strict-circle");
 
-				reader = new FileReader();
-				reader.onload = function (e) {
-					$("#"+id).css("background-image", 'url('+e.target.result+')');
-					imgPreview.css("background-image", 'url('+e.target.result+')');
-				};
-				reader.readAsDataURL(toAdd[i][2]);
+					reader = new FileReader();
+					reader.onload = function (e) {
+						$("#"+id).css("background-image", 'url('+e.target.result+')');
+						imgPreview.css("background-image", 'url('+e.target.result+')');
+					};
+					reader.readAsDataURL(toAdd[i][2]);
+	 
+					imgPreviewWrapper.append(imgPreview);
 
-				imgPreviewWrapper.append(imgPreview);
+					row.append(imgPreviewWrapper);
 
-				row.append(imgPreviewWrapper);
+					remainingRowWrapper = $("<div></div>");
+					remainingRowWrapper.addClass("left-align center-on-small-only");
+					remainingRowWrapper.addClass("col s12 m9 l10");
 
-				remainingRowWrapper = $("<div></div>");
-				remainingRowWrapper.addClass("left-align center-on-small-only");
-				remainingRowWrapper.addClass("col s12 m9 l10");
+					infoLine = $("<h4></h4>");
+					infoLine.addClass("col s12");
+					infoLine.text(toAdd[i][2].name + " ("+humanFileSize(toAdd[i][2].size)+")");
 
-				infoLine = $("<h4></h4>");
-				infoLine.addClass("col s12");
-				infoLine.text(toAdd[i][2].name + " ("+humanFileSize(toAdd[i][2].size)+")");
+					remainingRowWrapper.append(infoLine);
 
-				remainingRowWrapper.append(infoLine);
+					row.append(remainingRowWrapper);
 
-				row.append(remainingRowWrapper);
-
-				$("#"+$(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
+					$("#"+$(input).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
+				})(toAdd, i, this);
 			}
 		});
 
