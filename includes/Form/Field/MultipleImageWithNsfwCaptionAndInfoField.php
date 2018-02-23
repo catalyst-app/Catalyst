@@ -25,7 +25,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public const ROW_CONTAINER_ID_SUFFIX = '-info-row-container';
 	public const ROW_CONTAINER_CLASS = 'info-row-container';
 	
-	public const EL_ID_SUFFIX_EXPR = '+"-"+file.lastModified+"-"+file.size+"-"+file.name';
+	public const EL_ID_SUFFIX_EXPR = '+"-"+file.lastModified+"-"+file.size+"-"+file.name.replace(/[^a-zA-Z0-9-]/g, "")';
 
 	public const INPUT_CLASS = 'has-nsfw-caption-info';
 
