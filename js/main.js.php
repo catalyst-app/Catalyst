@@ -46,6 +46,7 @@ use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Form\FormJS;
 
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
+use \Catalyst\Images\MIMEType;
 
 ?>
 // ~))))'> 
@@ -296,7 +297,10 @@ function totp(K,t) {
 			var inputRowFileObjects = [];
 			
 			for (var i = 0; i < $(this)[0].files.length; i++) {
-				var file = $(this)[0].files[i];
+				file = $(this)[0].files[i];
+				if (file.type.length == 0 || !<?= json_encode(MIMEType::getMimeTypes()) ?>.includes(file.type)) {
+					continue;
+				}
 				inputRows.push(""<?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 				inputRowsFullId.push($(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 				inputRowFileObjects.push(file);
