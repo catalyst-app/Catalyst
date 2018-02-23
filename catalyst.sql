@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2018 at 01:38 AM
+-- Generation Time: Feb 23, 2018 at 08:22 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -170,6 +170,7 @@ CREATE TABLE `character_images` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique ID for the image',
   `CHARACTER_ID` int(11) UNSIGNED NOT NULL COMMENT 'Corresponds to the character the image is for',
   `CAPTION` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Image caption',
+  `CREDIT` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `PATH` varchar(15) CHARACTER SET ascii NOT NULL COMMENT 'Image path (appended to character token)',
   `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the image is nsfw',
   `PRIMARY` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '1 if the image is the primary character image',
