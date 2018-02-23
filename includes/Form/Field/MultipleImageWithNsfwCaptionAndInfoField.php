@@ -11,7 +11,7 @@ use \Catalyst\Page\UniversalFunctions;
 /**
  * Represents an image field with multiple images, captions, nsfw, and extra artist/owner info
  */
-class MultipleImageFieldWithNsfwCaptionAndInfo extends MultipleImageField {
+class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public const NSFW_CHECKBOX_ID_SUFFIX = '-nsfw';
 	public const CAPTION_ID_SUFFIX = '-caption';
 	public const INFO_ID_SUFFIX = '-info';
