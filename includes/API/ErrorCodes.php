@@ -146,6 +146,11 @@ class ErrorCodes {
 	const ERR_90810 = 'No publicity checkbox value';
 	const ERR_90811 = 'Invalid publicity checkbox value';
 
+	// delete character
+	const ERR_90901 = 'Missing character token';
+	const ERR_90902 = 'Invalid character token';
+	const ERR_90903 = 'This character is not yours';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

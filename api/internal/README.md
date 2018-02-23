@@ -134,3 +134,9 @@
 - **90809** - Invalid color
 - **90810** - No public checkbox value passed
 - **90811** - Invalid publicity checkbox value
+
+#### Delete Character
+
+- **90901** - Missing character token
+- **90902** - Invalid character token
+- **90903** - This character is not yours
