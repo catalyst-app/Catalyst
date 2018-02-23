@@ -34,6 +34,11 @@ class Image {
 	 * @var string
 	 */
 	protected $caption;
+	/**
+	 * Get the name of the file, if this image is the DIRECT result of an upload (from ::upload or ::uploadMultiple)
+	 * @var string
+	 */
+	protected $uploadName='';
 
 	/**
 	 * Maximum size an image can be if it is pixel art
@@ -137,6 +142,20 @@ class Image {
 	 */
 	public function setCaption(string $caption) : void {
 		$this->caption = $caption;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUploadName() : string {
+		return $this->uploadName;
+	}
+
+	/**
+	 * @param string $caption
+	 */
+	protected function setUploadName(string $uploadName) : void {
+		$this->uploadName = $uploadName;
 	}
 
 	/**
@@ -414,7 +433,10 @@ class Image {
 
 		move_uploaded_file($image["tmp_name"], REAL_ROOTDIR.$folder."/".$fileToken.$middle.$suffix);
 
-		return new self($folder, $fileToken, $middle.$suffix);
+		$obj = new self($folder, $fileToken, $middle.$suffix);
+		$obj->setUploadName($image["name"]);
+
+		return $obj;
 	}
 
 	/**
