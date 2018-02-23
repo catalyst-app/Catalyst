@@ -49,6 +49,41 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	}
 
 	/**
+	 * Get the extra fields for the input, based on provided parameters
+	 */
+	public static function getExtraFields(string $key, array $request) : array {
+		if (count($request[$key."-keys"]) != count($_FILES[$key]["name"]) ||
+			count($request[$key.self::NSFW_CHECKBOX_ID_SUFFIX]) != count($request[$key.self::CAPTION_ID_SUFFIX]) ||
+			count($request[$key.self::INFO_ID_SUFFIX]) != count($request[$key."-keys"])) {
+			HTTPCode::set(400);
+			Response::sendErrorResponse(99999, "Invalid image information");
+		}
+
+		$result = [];
+
+		for ($i=0; $i < count($request[$key."-keys"]); $i++) {
+			if (!in_array($request[$key."-keys"][$i], $_FILES[$key]["name"])) {
+				HTTPCode::set(400);
+				Response::sendErrorResponse(99999, "Image information is incorrectly associated with the uploaded images");
+			}
+			$result[$request[$key."-keys"][$i]] = [
+				"nsfw" => $request[$key.self::NSFW_CHECKBOX_ID_SUFFIX][$i] == 'true',
+				"caption" => $request[$key.self::CAPTION_ID_SUFFIX][$i],
+				"info" => $request[$key.self::INFO_ID_SUFFIX][$i]
+			];
+		}
+
+		foreach ($_FILES[$key]["name"] as $filename) {
+			if (!array_key_exists($filename, $result)) {
+				HTTPCode::set(400);
+				Response::sendErrorResponse(99999, "Image information is incorrectly associated with the uploaded images");
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
