@@ -61,7 +61,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= '<span>FILE</span>';
 
 		$str .= '<input';
-		$str .= ' class="'.self::INPUT_CLASS.'"';
+		$str .= ' class="'.htmlspecialchars(self::INPUT_CLASS).'"';
 		$str .= ' type="file"';
 		$str .= ' multiple="multiple"';
 		$str .= ' data-extra-info-prefix="'.htmlspecialchars($this->getId()).'"';
@@ -81,13 +81,13 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= '<input';
 		$str .= ' readonly="readonly"';
 		$str .= ' type="text"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).self::PATH_INPUT_SUFFIX.'"';
+		$str .= ' id="'.htmlspecialchars($this->getId().self::PATH_INPUT_SUFFIX).'"';
 		$str .= ' class="file-input-path"';
 		$str .= ' data-required="'.($this->isRequired() ? 'yes' : 'no').'"';
 		$str .= '>';
 
 		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).self::PATH_INPUT_SUFFIX.'"';
+		$str .= ' for="'.htmlspecialchars($this->getId().self::PATH_INPUT_SUFFIX).'"';
 		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= '>';
 		$str .= htmlspecialchars($this->getLabel());
