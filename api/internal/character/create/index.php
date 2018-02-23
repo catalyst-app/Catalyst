@@ -6,6 +6,7 @@ define("REAL_ROOTDIR", "../../../../");
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{Column, InsertQuery, MultiInsertQuery, RawColumn, SelectQuery, Tables, UpdateQuery, WhereClause};
+use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Images\{Folders,Image};
@@ -40,22 +41,30 @@ $characterId = $stmt->getResult();
 
 if (isset($_FILES["images"])) {
 	$images = Image::uploadMultiple($_FILES["images"], Folders::CHARACTER_IMAGE, $token);
+	$imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", $_POST);
+
 	if (count($images)) {
 		$stmt = new MultiInsertQuery();
 
 		$stmt->setTable(Tables::CHARACTER_IMAGES);
 
 		$stmt->addColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
 
-		$primarySet = false;
+		$primaryHasBeenAdded = false;
 
 		foreach ($images as $image) {
 			$stmt->addValue($characterId);
+			$stmt->addValue($imageMeta[$image->getUploadName()]["caption"]);
+			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
 			$stmt->addValue($image->getPath());
-			$stmt->addValue($primarySet ? 0 : 1); // if already set, then 0
-			$primarySet = true;
+			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
+			$stmt->addValue($primaryHasBeenAdded ? 0 : 1); // if already set, then 0
+			$primaryHasBeenAdded = true;
 		}
 
 		$stmt->execute();
