@@ -287,35 +287,53 @@ function totp(K,t) {
 		/* IMAGE UPLOADING WITH NSFW, CAPTIONS, and INFO */
 		$(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?>", function(e) {
 			var existingRows = [];
-			var inInputRows = [];
+			var inputRows = [];
+			var inputRowsFullId = [];
 			
 			for (var i = 0; i < $(this)[0].files.length; i++) {
 				var file = $(this)[0].files[i];
-				inInputRows.push(""<?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+				inputRows.push(""<?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+				inputRowsFullId.push($(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 			}
 
 			for (var i = 0; i < $(<?= json_encode(".".MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>+'[data-input='+$(this).attr("id")+']').length; i++) {
-				existingRows.append($($(<?= json_encode(".".MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>+'[data-input='+$(this).attr("id")+']')[i]).attr("id"));
+				existingRows.push($($(<?= json_encode(".".MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>+'[data-input='+$(this).attr("id")+']')[i]).attr("id"));
 			}
 
 			var toRemove = [];
 			var toAdd = [];
 			
 			for (var i = 0; i < existingRows.length; i++) {
-				if (!(inInputRows.includes(existingRows[i]))) {
+				if (!(inputRowsFullId.includes(existingRows[i]))) {
 					toRemove.push(existingRows[i]);
 				}
 			}
-			for (var i = 0; i < inInputRows.length; i++) {
-				if (!(existingRows.includes($(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_ID_SUFFIX) ?>+inInputRows[i]))) {
-					toAdd.push(inInputRows[i]);
+			for (var i = 0; i < inputRowsFullId.length; i++) {
+				if (!(existingRows.includes(inputRowsFullId[i]))) {
+					toAdd.push([inputRows[i], inputRowsFullId[i]]);
 				}
 			}
 
-			console.log(toAdd);
-			console.log(toRemove);
+			console.table({
+				existingRows: existingRows,
+				inputRows: inputRows,
+				inputRowsFullId: inputRowsFullId,
+				toAdd: toAdd,
+				toRemove: toRemove
+			});
 
-			var existingEls = $("#"+$(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX).MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+			for (var i = toRemove.length - 1; i >= 0; i--) {
+				$("#"+toRemove[i]).remove();
+			}
+
+			for (var i = toAdd.length - 1; i >= 0; i--) {
+				var row = $("<div></div>");
+				row.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>);
+				row.attr("id", toAdd[i][1]);
+				row.attr("data-input", $(this).attr("id"));
+
+				$("#"+$(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
+			}
 		});
 
 		/* IMAGE ARRANGEMENT */
