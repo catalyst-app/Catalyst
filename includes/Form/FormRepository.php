@@ -785,6 +785,7 @@ class FormRepository {
 		$imagesField->setLabel("Images");
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
+		$imagesField->setInfoLabel('Artist/Source');
 		$imagesField->addError(90805, ErrorCodes::ERR_90805);
 		$imagesField->setMissingErrorCode(90805);
 		$imagesField->addError(90806, ErrorCodes::ERR_90806);
