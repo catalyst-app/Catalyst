@@ -226,6 +226,9 @@ class ImageField extends AbstractField {
 		if ($_FILES[$this->getDistinguisher()]["error"] !== 0 && $this->isRequired()) { // not uploaded
 			$this->throwMissingError();
 		}
+		if ($_FILES[$this->getDistinguisher()]["error"] === 1) {
+			$this->throwTooLargeError();
+		}
 		if ($_FILES[$this->getDistinguisher()]["error"] !== 0 && $_FILES[$this->getDistinguisher()]["error"] !== 4) { // error
 			$this->throwInvalidError();
 		}
