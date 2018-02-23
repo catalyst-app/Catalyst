@@ -326,7 +326,15 @@ class Form {
 	 * @return string the opening tag
 	 */
 	public function getFormHeader() : string {
-		return '<form action="#'.htmlspecialchars($this->getId()).'" id="'.htmlspecialchars($this->getId()).'" method="'.htmlspecialchars($this->getMethodString()).'" enctype="multipart/form-data">';
+		$str = '';
+
+		$str .= '<form';
+		$str .= ' action="#'.htmlspecialchars($this->getId()).'"';
+		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' method="'.htmlspecialchars($this->getMethodString()).'"';
+		$str .= ' enctype="multipart/form-data">';
+
+		return $str;
 	}
 
 	/**
@@ -336,19 +344,54 @@ class Form {
 	 */
 	public function getSubmitButton() : string {
 		$str = '';
-		$str .= '<div class="row">';
+		$str .= '<div';
+		$str .= ' class="row"';
+		$str .= '>';
+
 		$str .= '<br>';
-		$str .= '<div id="'.htmlspecialchars($this->getSubmitWrapperId()).'">';
-		$str .= '<button id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_SUFFIX).'" class="btn waves-effect waves-light col s12 m4 l2">';
+
+		$str .= '<div';
+		$str .= ' id="'.htmlspecialchars($this->getSubmitWrapperId()).'"';
+		$str .= '>';
+
+		$str .= '<button';
+		$str .= ' id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_SUFFIX).'"';
+		$str .= ' class="';
+		$str .= 'btn waves-effect waves-light';
+		$str .= ' col s12 m4 l2';
+		if ($this->getButtonText() == "DELETE") {
+			$str .= ' red darken-1';
+		}
+		$str .= '"';
+		$str .= '>';
+
 		$str .= htmlspecialchars($this->getButtonText());
+		
 		$str .= '</button>';
+
 		$str .= '</div>';
-		$str .= '<div id="'.htmlspecialchars($this->getProgressWrapperId()).'" class="hide">';
-		$str .= '<div class="progress">';
-		$str .= '<div class="indeterminate"></div>';
+
+		$str .= '<div';
+		$str .= ' id="'.htmlspecialchars($this->getProgressWrapperId()).'"';
+		$str .= ' class="hide"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="progress"';
+		$str .= '>';
+		
+		$str .= '<div';
+		$str .= ' class="indeterminate"';
+		$str .= '>';
+		
 		$str .= '</div>';
+		
 		$str .= '</div>';
+		
 		$str .= '</div>';
+		
+		$str .= '</div>';
+		
 		return $str;
 	}
 
@@ -359,22 +402,36 @@ class Form {
 	 */
 	public function getHtml(bool $section=true) : string {
 		$str = '';
+		
 		if ($section) {
-			$str .= '<div class="section">';
+			$str .= '<div';
+			$str .= ' class="section"';
+			$str .= '>';
 		}
+
 		$str .= $this->getFormHeader();
-		$str .= '<div class="row">';
+		
+		$str .= '<div';
+		$str .= ' class="row"';
+		$str .= '>';
+		
 		$setPrimary = $this->isPrimary();
+
 		foreach ($this->fields as $field) {
 			$field->setPrimary($setPrimary);
 			$setPrimary = false;
 			$str .= $field->getHtml();
 		}
+		
 		$str .= '</div>';
+		
 		$str .= '<div class="divider">';
 		$str .= '</div>';
+
 		$str .= $this->getSubmitButton();
+		
 		$str .= '</form>';
+		
 		if ($section) {
 			$str .= '</div>';
 		}
