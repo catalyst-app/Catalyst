@@ -305,6 +305,7 @@ class Character {
 		$stmt->setTable(Tables::CHARACTER_IMAGES);
 
 		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
@@ -321,7 +322,7 @@ class Character {
 		$stmt->execute();
 
 		foreach ($stmt->getResult() as $row) {
-			$images[] = new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $row["PATH"], $row["NSFW"], $row["CAPTION"]);
+			$images[] = new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $row["PATH"], $row["NSFW"], trim($row["CAPTION"]."\nArtist: ".$row["CREDIT"]));
 		}
 
 		$this->setImageSet($images);
