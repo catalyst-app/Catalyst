@@ -424,6 +424,25 @@ function totp(K,t) {
 
 					remainingRowWrapper.append(captionWrapper);
 
+					var infoWrapper = $("<div></div>");
+					infoWrapper.addClass("input-field");
+					infoWrapper.addClass("col s12 m6");
+
+					var infoInput = $("<input>");
+					infoInput.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::INFO_CLASS) ?>);
+					infoInput.attr("type", "text");
+					infoInput.attr("id", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::INFO_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>)
+
+					infoWrapper.append(infoInput);
+
+					var infoLabel = $("<label></label>");
+					infoLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::INFO_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+					infoLabel.text($(input).attr("data-extra-info-name"));
+
+					infoWrapper.append(infoLabel);
+
+					remainingRowWrapper.append(infoWrapper);
+
 					row.append(remainingRowWrapper);
 
 					$("#"+$(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
