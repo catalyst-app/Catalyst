@@ -5,6 +5,7 @@ define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Character\Character;
+use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
@@ -57,7 +58,11 @@ elseif (is_null($pendingCharacter)): ?>
 			</div>
 <?php
 else:
+?>
+			<input type="hidden" id="character-token" value="<?= htmlspecialchars($character->getToken()) ?>">
+<?php
 	echo FormRepository::getEditCharacterForm($character)->getHtml();
+	echo FormRepository::getDeleteCharacterForm()->getHtml();
 endif;
 
 require_once Values::FOOTER_INC;
