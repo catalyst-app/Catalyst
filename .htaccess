@@ -9,4 +9,6 @@
     Options -MultiViews
 </IfModule>
 
+php_value upload_max_filesize 10M 
+
 Options -Indexes
