@@ -598,25 +598,6 @@ function totp(K,t) {
 			});
 		});
 
-		/* DELETE CHARACTER */
-		$(document).on("click", ".confirm-character-deletion-btn", function() {
-			var data = new FormData();
-			data.append("token", $(".token-input").val());
-
-			$.ajax($("html").attr("data-rootdir")+"Character/delete.php", {
-				data: data,
-				processData: false,
-				contentType: false,
-				method: "POST"
-			}).done(function(response) {
-				Materialize.toast("Saved", 4000);
-				window.location = $("html").attr("data-rootdir")+"Character/";
-			}).fail(function(response) {
-				alert("Unknown error.");
-				window.location="";
-			});
-		});
-
 		/* ADD SOCIAL MEDIA */
 		var addSocialMediaChip = function(data) {
 			$(".modal").modal("close");
