@@ -21,6 +21,9 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 
 	public const ROW_ID_SUFFIX = '-data-row';
 	public const ROW_CLASS = 'image-extra-info-row';
+
+	public const ROW_CONTAINER_ID_SUFFIX = '-info-row-container';
+	public const ROW_CONTAINER_CLASS = 'info-row-container';
 	
 	public const EL_ID_SUFFIX_EXPR = '+"-"+file.lastModified+"-"+file.size+"-"+file.name';
 
@@ -103,6 +106,13 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		
 		$str .= '</div>';
 		
+		$str .= '</div>';
+
+		$str .= '<div';
+		$str .= ' class="'.htmlspecialchars(self::ROW_CONTAINER_CLASS).' col s12"';
+		$str .= ' id="'.htmlspecialchars($this->getId().self::ROW_CONTAINER_ID_SUFFIX).'"';
+		$str .= '>';
+
 		$str .= '</div>';
 
 		return $str;
