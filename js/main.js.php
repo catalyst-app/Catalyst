@@ -16,7 +16,6 @@ $errors = ErrorCodes::getAssoc();
 use \Catalyst\Color;
 use \Catalyst\Database\Artist\EditArtist;
 use \Catalyst\Database\Artist\NewArtist;
-use \Catalyst\Database\Character\EditCharacter;
 // the following series of whitespace is dedicated to SINNERSCOUT for being cool and a patron and stuff:
 /*
 U+0020	SPACE	foo bar, size: depends on font, typically 1/4 em, often adjusted
@@ -424,47 +423,6 @@ function totp(K,t) {
 			}).done(function(response) {
 				Materialize.toast("Deleted", 4000);
 				window.location = $("html").attr("data-rootdir");
-			}).fail(function(response) {
-				alert("Unknown error.");
-				window.location="";
-			});
-		});
-
-		/* EDIT CHARACTER */
-		<?php
-		echo FormJS::generateFormHandler(EditCharacter::getFormStructure());
-		?> 
-
-		/* EDIT CHARACTER IMAGES */
-		try {
-			new Draggable.Swappable($(".edit-cards.character-images")[0], {
-				draggable: '.character-images .card',
-				handle: '.card-image'
-			});
-		} catch(e) {}
-
-		$(document).on("click", "#editcharimg-btn", function() {
-			var cards = getCardState().map(function(e) {
-				return [
-					$(e).find("input[type=hidden].path-input").val(),
-					$(e).find("input.caption-input").val().substring(0, 255),
-					$(e).find("input.nsfw-input").is(":checked"),
-					($(e).find("input.primary-input").val() == "true" ? true : false)
-				];
-			});
-
-			var data = new FormData();
-			data.append("body", JSON.stringify(cards));
-			data.append("token", $(".token-input").val());
-
-			$.ajax($("html").attr("data-rootdir")+"Character/editimg.php", {
-				data: data,
-				processData: false,
-				contentType: false,
-				method: "POST"
-			}).done(function(response) {
-				Materialize.toast("Saved", 4000);
-				window.location = $("html").attr("data-rootdir")+"Character/"+$(".token-input").val();
 			}).fail(function(response) {
 				alert("Unknown error.");
 				window.location="";
