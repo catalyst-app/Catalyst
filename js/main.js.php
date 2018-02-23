@@ -292,7 +292,7 @@ function totp(K,t) {
 		/* IMAGE UPLOADING WITH NSFW, CAPTIONS, and INFO */
 		$(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?>", function(e) {
 			if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-				$("#"+$(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).text("Your browser does not support the needed upload technologies.  Please upgrade your browser as soon as possible.");
+				$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).text("Your browser does not support the needed upload technologies.  Please upgrade your browser as soon as possible.");
 			}
 
 			var existingRows = [];
@@ -306,7 +306,7 @@ function totp(K,t) {
 					continue;
 				}
 				inputRows.push(""<?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
-				inputRowsFullId.push($(this).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+				inputRowsFullId.push($(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 				inputRowFileObjects.push(file);
 			}
 
@@ -404,7 +404,7 @@ function totp(K,t) {
 
 					row.append(remainingRowWrapper);
 
-					$("#"+$(input).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
+					$("#"+$(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
 				})(toAdd, i, this);
 			}
 		});
