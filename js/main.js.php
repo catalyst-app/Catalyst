@@ -44,6 +44,9 @@ use \Catalyst\Database\CommissionType\NewCommissionType;
 use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Form\FormJS;
+
+use \Catalyst\Field\MultipleImageFieldWithNsfwCaptionAndInfo;
+
 ?>
 // ~))))'> 
 //
@@ -280,6 +283,8 @@ function totp(K,t) {
 <?php foreach ($forms as $form): ?>
 	<?= $form->getAllJs(); ?>
 <?php endforeach; ?>
+
+		/* IMAGE UPLOADING WITH CAPTIONS */
 
 		/* IMAGE ARRANGEMENT */
 		$(document).on("click", ".edit-cards .make-primary-button", function() {
