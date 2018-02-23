@@ -403,6 +403,27 @@ function totp(K,t) {
 
 					remainingRowWrapper.append(nsfwCheckbox);
 
+					var captionWrapper = $("<div></div>");
+					captionWrapper.addClass("input-field");
+					captionWrapper.addClass("col s12 m6");
+
+					var captionInput = $("<input>");
+					captionInput.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::CAPTION_CLASS) ?>);
+					captionInput.attr("type", "text");
+					captionInput.attr("maxlength", 255);
+					captionInput.attr("id", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::CAPTION_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>)
+
+					captionWrapper.append(captionInput);
+
+					var captionLabel = $("<label></label>");
+					captionLabel.attr("data-error", "Caption cannot be longer than 255 characters");
+					captionLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::CAPTION_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+					captionLabel.text("Caption");
+
+					captionWrapper.append(captionLabel);
+
+					remainingRowWrapper.append(captionWrapper);
+
 					row.append(remainingRowWrapper);
 
 					$("#"+$(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
