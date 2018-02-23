@@ -138,6 +138,24 @@ class MultipleImageFieldWithNsfwCaptionAndInfo extends MultipleImageField {
 				return;
 			}
 		}
+		if (!array_key_exists($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX])) {
+			$_POST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
+			$_GET[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
+			$_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX] = 
+				[];
+		}
+		if (!array_key_exists($this->getDistinguisher().self::CAPTION_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX])) {
+			$_POST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
+			$_GET[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
+			$_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX] = 
+				[];
+		}
+		if (!array_key_exists($this->getDistinguisher().self::INFO_ID_SUFFIX, $_REQUEST) || !is_array($_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
+			$_POST[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
+			$_GET[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
+			$_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX] = 
+				[];
+		}
 		for ($i=0; $i < count($_FILES[$this->getDistinguisher()]["name"]); $i++) { 
 			if ($_FILES[$this->getDistinguisher()]["error"][$i] !== 0 && $this->isRequired()) { // not uploaded
 				$this->throwMissingError();
@@ -154,11 +172,15 @@ class MultipleImageFieldWithNsfwCaptionAndInfo extends MultipleImageField {
 			if ($_FILES[$this->getDistinguisher()]["size"][$i] > $this->getMaxSize()) {
 				$this->throwTooLargeError();
 			}
-		}
-		if (count($_FILES[$this->getDistinguisher()]) != count($_POST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX]) ||
-			count($_FILES[$this->getDistinguisher()]) != count($_POST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX]) ||
-			count($_FILES[$this->getDistinguisher()]) != count($_POST[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
-			$this->throwInvalidError();
+			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX])) {
+				$_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX][$i] = 'false';
+			}
+			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX])) {
+				$_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX][$i] = '';
+			}
+			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
+				$_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX][$i] = '';
+			}
 		}
 	}
 }
