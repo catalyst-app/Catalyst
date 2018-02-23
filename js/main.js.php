@@ -45,7 +45,7 @@ use \Catalyst\Database\FeatureBoard\Comment;
 use \Catalyst\Database\FeatureBoard\NewFeature;
 use \Catalyst\Form\FormJS;
 
-use \Catalyst\Field\MultipleImageWithNsfwCaptionAndInfoField;
+use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 
 ?>
 // ~))))'> 
