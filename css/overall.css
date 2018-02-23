@@ -1,3 +1,14 @@
+.info-row-container {
+	min-height: 6em !important;
+	text-align: center;
+}
+
+.info-row-container:empty::before {
+	content: "Your images will appear here once uploaded";
+	font-style: italic;
+	color: #999;
+}
+
 a.brand-logo {
 	padding-left: 10px;
 	padding-right: 10px;
