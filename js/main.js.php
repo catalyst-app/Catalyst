@@ -384,6 +384,24 @@ function totp(K,t) {
 
 					remainingRowWrapper.append(infoLine);
 
+					var nsfwCheckbox = $("<p></p>");
+					nsfwCheckbox.addClass("col s12");
+
+					var nsfwCheckboxInput = $("<input>");
+					nsfwCheckboxInput.addClass("filled-in");
+					nsfwCheckboxInput.attr("id", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+					nsfwCheckboxInput.attr("type", "checkbox");
+
+					nsfwCheckbox.append(nsfwCheckboxInput);
+
+					var nsfwCheckboxLabel = $("<label></label>");
+					nsfwCheckboxLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+					nsfwCheckboxLabel.text("This image is NSFW");
+
+					nsfwCheckbox.append(nsfwCheckboxLabel);
+
+					remainingRowWrapper.append(nsfwCheckbox);
+
 					row.append(remainingRowWrapper);
 
 					$("#"+$(input).attr("data-extra-info-prefix")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
