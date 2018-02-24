@@ -3,6 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
+use \Catalyst\Character\Character;
 use \Catalyst\Form\CompletionAction\{
 	AutoClosingModalCompletionAction,
 	CallUserFuncCompletionAction,
@@ -820,6 +821,24 @@ class FormRepository {
 		$publicNotice = new StaticHTMLField();
 		$publicNotice->setHtml('<p class="col s12 no-margin">If this character is public, anyone can see it on your profile and access it with its link.  Otherwise, only you and artists you commission may see it.</p>');
 		$form->addField($publicNotice);
+
+		return $form;
+	}
+
+	/**
+	 * Get the form used to edit a character
+	 * 
+	 * @param Character|null $character Character to prefill values with
+	 * @return Form
+	 */
+	public static function getEditCharacterForm(?Character $character=null) : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/character/edit/");
+		$form->setButtonText("SAVE");
+		$form->setPrimary(true);
 
 		return $form;
 	}
