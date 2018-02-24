@@ -80,6 +80,10 @@ class MarkdownField extends AbstractField {
 		$str .= ' data-field="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 
+		if ($this->isFieldPrefilled()) {
+			$str .= htmlspecialchars($this->getPrefilledValue());
+		}
+
 		$str .= '</div>';
 		
 		$str .= '</div>';
