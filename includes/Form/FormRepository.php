@@ -825,6 +825,32 @@ class FormRepository {
 	}
 
 	/**
+	 * Get the form used to delete a character
+	 * 
+	 * @return Form
+	 */
+	public static function getDeleteCharacterForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/character/delete/");
+		$form->setButtonText("DELETE");
+		$form->setPrimary(false);
+
+		$completionAction = new ConcreteRedirectCompletionAction();
+		$completionAction->setRedirectUrl("Character");
+		$form->setCompletionAction($completionAction);
+
+		$tokenField = new HiddenInputField();
+		$tokenField->setDistinguisher("token");
+		$tokenField->setSelector("#character-token");
+		$form->addField($tokenField);
+
+		return $form;
+	}
+
+	/**
 	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
 	 */
