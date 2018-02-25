@@ -330,16 +330,6 @@ function totp(K,t) {
 				}
 			}
 
-			/* console.table({
-				files: $(this)[0].files,
-				existingRows: existingRows,
-				inputRows: inputRows,
-				inputRowsFullId: inputRowsFullId,
-				inputRowFileObjects: inputRowFileObjects,
-				toAdd: toAdd,
-				toRemove: toRemove
-			}); */
-
 			for (var i = toRemove.length - 1; i >= 0; i--) {
 				$("#"+toRemove[i]).remove();
 			}
