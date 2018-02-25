@@ -322,9 +322,10 @@ class Image {
 
 		if (!empty($caption)) {
 			$html .= '<p';
+			$html .= ' class="raw-markdown"';
 			$html .= '>';
 
-			$html .= str_replace("\n", "</p><p>", htmlspecialchars($caption));
+			$html .= htmlspecialchars($caption);
 
 			$html .= '</p>';
 		}
