@@ -1075,3 +1075,39 @@ function totp(K,t) {
 		});
 	});
 })(jQuery);
+
+console.log("'''''''''''''''''''''''''''''''';''''';'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''''''''',,',:0Od;':,''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''''''''''',0MMMMMMMMMMW0:''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''',oOWMMMMMMMMMMMMMWkl'';;,'''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''''''cOMMMMMMMMMMMMMMMMMMMM0',,''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''''lKMMMMMMMMMMMMMMMMMMMMMMk',,''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''oXMMMMMMMMMMMMMMMMMNNXXKO;''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''';kNMMMMMMMMMMMMMMWKx:,'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''':0MMMMMMMMMMMMMMWOl,'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''oWMMMMMMMMMMMMMMO,''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''kMMMMMMMMMMMMMMMMc'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''xMMMMMMMMMMMMMMMMMk'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''lMMMMMMMMMMMMMMMMMMO'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''OMMMMMMMMMMMMMMMMMX''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''0MMMMMMMMMMMMMMMMM:''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''XMMMMMMMMMMMMMMMMMd''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''KMMMMMMMMMMMMMMMMMKc'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''';:c''''''''"+"\n"+
+"'''''''lMMMMMMMMMMMMMMMMMMMW0dc;,''''''''''''''''''''''''''''''''''''''''''''''''',cdO0NWMMMc'''''''"+"\n"+
+"''''''''xMMMMMMMMMMMMMMMMMMMMMMMMNKkl;''''''''''''''''''''''''':loxkO0KXXKK00OO0KNMMMMMMMMMMo'''''''"+"\n"+
+"'''''''''xMMMMMMMMMMMMMMMMMMMMMMMMMMMMNOc'''''''''''''''';lx0NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo'''''''"+"\n"+
+"''''''''''oMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXo'''''''''':d0WMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;'''''''"+"\n"+
+"'''''''''''lWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc;:cldkKWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMk''''''''"+"\n"+
+"''''''''''''cNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO'''''''''"+"\n"+
+"''''''''''''';KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMKc''''''''''"+"\n"+
+"'''''''''''''''dWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXx:''''''''''''"+"\n"+
+"'''''''''''''''',kWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX0OkxdoooooooodxkO000Oxdc,'''''''''''''''"+"\n"+
+"'''''''''''''''''',xNMMMMMMMMMMMMMMMMMMMMMX0NMMMMMMMN0ko:,''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''cxXMMMMMMMMMMMMMMMXkc'''',;::;'''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''''',:loxxkkkxxdl:,'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''' *notices you looking in the console* OwO what's this? '''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''''''' Do you like to code?  Want to talk about code? ''''''''''''''''''''''''''"+"\n"+
+"'''''''''''''''''''''''' Join us at discord.gg/EECUcnT or t.me/catalystapp '''''''''''''''''''''''''"+"\n"+
+"''''''''''''''''''''' We're also open source! github.com/catalyst-app/Catalyst '''''''''''''''''''''"+"\n"+
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"+"\n")
