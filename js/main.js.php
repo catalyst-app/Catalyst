@@ -367,7 +367,7 @@ function totp(K,t) {
 
 					var modalImgPreview = $("<div></div>");
 					modalImgPreview.addClass("img-strict-circle");
-					modalImgPreview.attr("data-row", toAdd[i][1]);
+					modalImgPreview.attr("data-container", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>);
 					modalImgPreview.attr("id", toAdd[i][1]+"-reorder-img")
 					modalImgPreview.css("margin", "1em");
 
