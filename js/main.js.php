@@ -450,6 +450,25 @@ function totp(K,t) {
 					$("#"+$(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).append(row);
 				})(toAdd, i, this);
 			}
+
+			if ($(<?= json_encode(".".MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>+'[data-input='+$(this).attr("id")+']').length === 0) {
+				$('#reorder-modal-button-'+$(this).attr("id")).parent().remove();
+			} else if ($('#reorder-modal-button-'+$(this).attr("id")).length == 0) {
+				var buttonWrapper = $("<div></div>");
+				buttonWrapper.addClass("col s12");
+
+				var button = $("<div></div>");
+				button.addClass("btn");
+				button.addClass("right");
+				button.addClass("modal-trigger");
+				button.attr("id", 'reorder-modal-button-'+$(this).attr("id"));
+				button.attr("data-target", 'new-character-form-input-images-modal');
+				button.text("reorder")
+
+				buttonWrapper.append(button);
+
+				$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).prepend(buttonWrapper);
+			}
 		});
 
 		/* IMAGE ARRANGEMENT */
