@@ -156,7 +156,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= '</div>';
 
 		$str .= '<div';
-		$str .= ' class="modal"';
+		$str .= ' class="modal rearrange-image-modal"';
 		$str .= ' id="'.htmlspecialchars($this->getId().self::MODAL_ID_SUFFIX).'"';
 		$str .= '>';
 
