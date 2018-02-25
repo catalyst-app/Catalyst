@@ -840,6 +840,78 @@ class FormRepository {
 		$form->setButtonText("SAVE");
 		$form->setPrimary(true);
 
+		$completionAction = new DynamicRedirectCompletionAction();
+		$form->setCompletionAction($completionAction);
+
+		$tokenField = new HiddenInputField();
+		$tokenField->setDistinguisher("token");
+		$tokenField->setSelector("#character-token");
+		$form->addField($tokenField);
+
+		$nameField = new TextField();
+		$nameField->setDistinguisher("name");
+		$nameField->setLabel("Name");
+		$nameField->setRequired(true);
+		$nameField->setPattern('^.{2,255}$');
+		$nameField->setMaxLength(255);
+		$nameField->addError(90801, ErrorCodes::ERR_90801);
+		$nameField->setMissingErrorCode(90801);
+		$nameField->addError(90802, ErrorCodes::ERR_90802);
+		$nameField->setInvalidErrorCode(90802);
+		if (!is_null($character)) {
+			$nameField->setPrefilledValue($character->getName());
+		}
+		$form->addField($nameField);
+
+		$descriptionField = new MarkdownField();
+		$descriptionField->setDistinguisher("description");
+		$descriptionField->setLabel("Description");
+		$descriptionField->setRequired(true);
+		$descriptionField->addError(90803, ErrorCodes::ERR_90803);
+		$descriptionField->setMissingErrorCode(90803);
+		$descriptionField->addError(90804, ErrorCodes::ERR_90804);
+		$descriptionField->setInvalidErrorCode(90804);
+		if (!is_null($character)) {
+			$descriptionField->setPrefilledValue($character->getDescription());
+		}
+		$form->addField($descriptionField);
+
+
+
+
+
+
+
+		$colorField = new ColorField();
+		$colorField->setDistinguisher("color");
+		$colorField->setLabel("Color");
+		$colorField->setRequired(true);
+		if (!is_null($character)) {
+			$colorField->setPrefilledValue($character->getColor());
+		}
+		$colorField->addError(90808, ErrorCodes::ERR_90808);
+		$colorField->setMissingErrorCode(90808);
+		$colorField->addError(90809, ErrorCodes::ERR_90809);
+		$colorField->setInvalidErrorCode(90809);
+		$form->addField($colorField);
+
+		$publicCheckboxField = new CheckboxField();
+		$publicCheckboxField->setDistinguisher("public");
+		$publicCheckboxField->setLabel("Make this character public");
+		$publicCheckboxField->setRequired(false);
+		$publicCheckboxField->addError(90810, ErrorCodes::ERR_90810);
+		$publicCheckboxField->setMissingErrorCode(90810);
+		$publicCheckboxField->addError(90811, ErrorCodes::ERR_90811);
+		$publicCheckboxField->setInvalidErrorCode(90811);
+		if (!is_null($character)) {
+			$publicCheckboxField->setPrefilledValue($character->isPublic());
+		}
+		$form->addField($publicCheckboxField);
+
+		$publicNotice = new StaticHTMLField();
+		$publicNotice->setHtml('<p class="col s12 no-margin">If this character is public, anyone can see it on your profile and access it with its link.  Otherwise, only you and artists you commission may see it.</p>');
+		$form->addField($publicNotice);
+
 		return $form;
 	}
 
