@@ -467,7 +467,7 @@ function totp(K,t) {
 				button.addClass("right");
 				button.addClass("modal-trigger");
 				button.attr("id", 'reorder-modal-button-'+$(this).attr("id"));
-				button.attr("data-target", 'new-character-form-input-images-modal');
+				button.attr("data-target", $(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::MODAL_ID_SUFFIX) ?>);
 				button.text("reorder")
 
 				buttonWrapper.append(button);
