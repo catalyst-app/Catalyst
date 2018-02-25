@@ -515,6 +515,7 @@ class Form {
 		// success
 		$str .= '.done(function(response) {';
 		$str .= 'console.log(response);';
+		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response);';
 		$str .= 'Materialize.toast("Success", 4000);';
 		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
@@ -522,6 +523,9 @@ class Form {
 		if (!is_null($this->getCompletionAction())) {
 			$str .= $this->getCompletionAction()->getJs();
 		}
+		$str .= '} catch (e) {';
+		$str .= 'showErrorMessageForCode(99999);';
+		$str .= '}';
 		$str .= '})';
 
 		// failure
