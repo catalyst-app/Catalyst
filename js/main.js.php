@@ -481,6 +481,25 @@ function totp(K,t) {
 			new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
 				draggable: '.image-rearranger > div',
 				appendTo: '.image-rearranger'
+			}).on("sortable:stop", function(e) {
+				if (e.oldIndex == e.newIndex) {
+					return;
+				} else if (e.oldIndex < e.newIndex) { // moving forwards
+					var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+					var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+					var beforeElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
+					beforeElement.after(originalElement);
+				} else if (e.newIndex == 0) {
+					var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+					var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+					$("#"+containerId).prepend(originalElement);
+					$("#"+containerId).prepend(originalElement.next()); // move reorder button back
+				} else { // backwards
+					var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+					var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+					var afterElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
+					afterElement.before(originalElement);
+				}
 			});
 		} catch(e) {}
 
