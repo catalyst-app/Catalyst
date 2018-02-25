@@ -39,7 +39,7 @@ class ColorField extends AbstractField {
 		$str .= '</div>';
 
 		$str .= '<div';
-		$str .= ' class="color-input-wrapper row">';
+		$str .= ' class="color-input-wrapper">';
 
 		$str .= '<div';
 		$str .= ' class="input-field col s12">';
