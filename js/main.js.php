@@ -365,9 +365,10 @@ function totp(K,t) {
 					modalImgRepresentation.addClass("col s4 m2");
 
 					var modalImgPreview = $("<div></div>");
+					modalImgPreview.addClass("img-strict-circle");
+					modalImgPreview.attr("data-row", toAdd[i][1]);
 					modalImgPreview.attr("id", toAdd[i][1]+"-reorder-img")
 					modalImgPreview.css("margin", "1em");
-					modalImgPreview.addClass("img-strict-circle");
 
 					modalImgRepresentation.append(modalImgPreview);
 
