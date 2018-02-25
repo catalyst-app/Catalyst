@@ -527,6 +527,8 @@ class Form {
 		// failure
 		$str .= '.fail(function(response) {';
 		$str .= 'console.log(response);';
+
+		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response.responseText);';
 		$str .= 'switch (data.error_code) {';
 		foreach ($this->getFields() as $field) {
@@ -543,6 +545,9 @@ class Form {
 		}
 		$str .= '}';
 		$str .= 'showErrorMessageForCode(data.error_code);';
+		$str .= '} catch (e) {';
+		$str .= 'showErrorMessageForCode(99999);';
+		$str .= '}';
 		$str .= '})';
 
 		// always
