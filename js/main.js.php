@@ -355,16 +355,31 @@ function totp(K,t) {
 					imgPreview.attr("id", id)
 					imgPreview.addClass("img-strict-circle");
 
-					var reader = new FileReader();
-					reader.onload = function (e) {
-						$("#"+id).css("background-image", 'url('+e.target.result+')');
-						imgPreview.css("background-image", 'url('+e.target.result+')');
-					};
-					reader.readAsDataURL(file);
-	 
 					imgPreviewWrapper.append(imgPreview);
 
 					row.append(imgPreviewWrapper);
+
+					var modalImgRepresentation = $("<div></div>");
+					modalImgRepresentation.addClass("center");
+					modalImgRepresentation.addClass("force-square-contents");
+					modalImgRepresentation.addClass("col s4 m2");
+
+					var modalImgPreview = $("<div></div>");
+					modalImgPreview.attr("id", toAdd[i][1]+"-reorder-img")
+					modalImgPreview.css("margin", "1em");
+					modalImgPreview.addClass("img-strict-circle");
+
+					modalImgRepresentation.append(modalImgPreview);
+
+					$("#"+$(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::IMAGE_REARRANGER_ID_SUFFIX) ?>).append(modalImgRepresentation);
+
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						imgPreview.css("background-image", 'url('+e.target.result+')');
+
+						modalImgPreview.css("background-image", 'url('+e.target.result+')');
+					};
+					reader.readAsDataURL(file);
 
 					var remainingRowWrapper = $("<div></div>");
 					remainingRowWrapper.addClass("left-align center-on-small-only");
