@@ -151,6 +151,19 @@ class ErrorCodes {
 	const ERR_90902 = 'Invalid character token';
 	const ERR_90903 = 'This character is not yours';
 
+	// edit character
+	const ERR_91001 = 'Missing name';
+	const ERR_91002 = 'Invalid name';
+	const ERR_91003 = 'Missing description';
+	const ERR_91004 = 'Invalid description';
+	const ERR_91005 = 'These files are too large.  Upload them separately';
+	const ERR_91006 = 'This file is not an image';
+	const ERR_91007 = 'The image is invalid';
+	const ERR_91008 = 'Color was not entered';
+	const ERR_91009 = 'Invalid color';
+	const ERR_91010 = 'No publicity checkbox value';
+	const ERR_91011 = 'Invalid publicity checkbox value';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

@@ -140,3 +140,17 @@
 - **90901** - Missing character token
 - **90902** - Invalid character token
 - **90903** - This character is not yours
+
+#### New Character
+
+- **91001** - No name passed
+- **91002** - Invalid name passed
+- **91003** - No description passed
+- **91004** - Invalid description
+- **91005** - Files too large
+- **91006** - Not an image
+- **91007** - Invald image
+- **91008** - Color was not passed
+- **91009** - Invalid color
+- **91010** - No public checkbox value passed
+- **91011** - Invalid publicity checkbox value
