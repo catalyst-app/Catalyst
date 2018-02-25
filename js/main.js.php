@@ -319,7 +319,9 @@ function totp(K,t) {
 			
 			for (var i = 0; i < existingRows.length; i++) {
 				if (!(inputRowsFullId.includes(existingRows[i]))) {
-					toRemove.push(existingRows[i]);
+					if (!$("#"+existingRows[i]).hasClass("pre-existing")) {
+						toRemove.push(existingRows[i]);
+					}
 				}
 			}
 			for (var i = 0; i < inputRowsFullId.length; i++) {
