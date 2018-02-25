@@ -29,6 +29,9 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 
 	public const INPUT_CLASS = 'has-nsfw-caption-info';
 
+	public const MODAL_ID_SUFFIX = '-modal';
+	public const IMAGE_REARRANGER_ID_SUFFIX = '-rearranger';
+
 	/**
 	 * What is shown to the user as this field's label
 	 */
@@ -70,6 +73,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 			$result[$request[$key."-keys"][$i]] = [
 				"nsfw" => $request[$key.self::NSFW_CHECKBOX_ID_SUFFIX][$i] == 'true',
 				"caption" => $request[$key.self::CAPTION_ID_SUFFIX][$i],
+				"sort" => $request[$key."-sort"][$i],
 				"info" => $request[$key.self::INFO_ID_SUFFIX][$i]
 			];
 		}
@@ -91,6 +95,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	 */
 	public function getHtml() : string {
 		$str = '';
+
 		$str .= '<div';
 		$str .= ' class="file-input-field col s12">';
 
@@ -147,6 +152,30 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= ' class="'.htmlspecialchars(self::ROW_CONTAINER_CLASS).' col s12"';
 		$str .= ' id="'.htmlspecialchars($this->getId().self::ROW_CONTAINER_ID_SUFFIX).'"';
 		$str .= '>';
+
+		$str .= '</div>';
+
+		$str .= '<div';
+		$str .= ' class="modal"';
+		$str .= ' id="'.htmlspecialchars($this->getId().self::MODAL_ID_SUFFIX).'"';
+		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="modal-content"';
+		$str .= '>';
+
+		$str .= '<h5>';
+		$str .= 'Drag the images to rearrange them';
+		$str .= '</h5>';
+
+		$str .= '<div';
+		$str .= ' class="image-rearranger"';
+		$str .= ' id="'.htmlspecialchars($this->getId().self::IMAGE_REARRANGER_ID_SUFFIX).'"';
+		$str .= '>';
+
+		$str .= '</div>';
+
+		$str .= '</div>';
 
 		$str .= '</div>';
 
