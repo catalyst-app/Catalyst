@@ -322,7 +322,7 @@ class Character {
 		$stmt->execute();
 
 		foreach ($stmt->getResult() as $row) {
-			$images[] = new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $row["PATH"], $row["NSFW"], trim($row["CAPTION"].($row["CREDIT"] ? ("\nArtist: ".$row["CREDIT"]) : '')));
+			$images[] = new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $row["PATH"], $row["NSFW"], trim($row["CAPTION"].($row["CREDIT"] ? ("\n**Artist:** ".$row["CREDIT"]) : '')));
 		}
 
 		$this->setImageSet($images);
