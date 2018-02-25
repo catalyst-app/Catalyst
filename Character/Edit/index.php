@@ -31,8 +31,8 @@ if (User::isLoggedIn()) {
 	HTTPCode::set(401);
 }
 
-define("PAGE_KEYWORD", Values::VIEW_CHARACTER[0]);
-define("PAGE_TITLE", Values::createTitle(Values::VIEW_CHARACTER[1], ["name" => (isset($character) ? $character->getName() : "Invalid Character")]));
+define("PAGE_KEYWORD", Values::EDIT_CHARACTER[0]);
+define("PAGE_TITLE", Values::createTitle(Values::EDIT_CHARACTER[1], ["name" => (isset($character) ? $character->getName() : "Invalid Character")]));
 
 if (!is_null($character)) {
 	define("PAGE_COLOR", $character->getColor());
@@ -44,7 +44,7 @@ if (!is_null($character)) {
 
 require_once Values::HEAD_INC;
 
-echo UniversalFunctions::createHeading("Character");
+echo UniversalFunctions::createHeading("Edit Character");
 
 if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHtml();
