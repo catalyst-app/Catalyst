@@ -54,7 +54,8 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public static function getExtraFields(string $key, array $request) : array {
 		if (count($request[$key."-keys"]) != count($_FILES[$key]["name"]) ||
 			count($request[$key.self::NSFW_CHECKBOX_ID_SUFFIX]) != count($request[$key.self::CAPTION_ID_SUFFIX]) ||
-			count($request[$key.self::INFO_ID_SUFFIX]) != count($request[$key."-keys"])) {
+			count($request[$key.self::INFO_ID_SUFFIX]) != count($request[$key."-keys"]) ||
+			count($request[$key."-keys"]) != count($request[$key."-sort"])) {
 			HTTPCode::set(400);
 			Response::sendErrorResponse(99999, "Invalid image information");
 		}
@@ -166,6 +167,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= 'var file = $('.json_encode("#".$this->getId()).')[0].files[i];';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', file);';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-keys[]').', file.name);';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', i);';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::NSFW_CHECKBOX_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').is(":checked"));';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::CAPTION_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::CAPTION_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::INFO_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::INFO_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
