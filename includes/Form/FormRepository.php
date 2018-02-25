@@ -854,10 +854,10 @@ class FormRepository {
 		$nameField->setRequired(true);
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
-		$nameField->addError(90801, ErrorCodes::ERR_90801);
-		$nameField->setMissingErrorCode(90801);
-		$nameField->addError(90802, ErrorCodes::ERR_90802);
-		$nameField->setInvalidErrorCode(90802);
+		$nameField->addError(91001, ErrorCodes::ERR_91001);
+		$nameField->setMissingErrorCode(91001);
+		$nameField->addError(91002, ErrorCodes::ERR_91002);
+		$nameField->setInvalidErrorCode(91002);
 		if (!is_null($character)) {
 			$nameField->setPrefilledValue($character->getName());
 		}
@@ -867,10 +867,10 @@ class FormRepository {
 		$descriptionField->setDistinguisher("description");
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
-		$descriptionField->addError(90803, ErrorCodes::ERR_90803);
-		$descriptionField->setMissingErrorCode(90803);
-		$descriptionField->addError(90804, ErrorCodes::ERR_90804);
-		$descriptionField->setInvalidErrorCode(90804);
+		$descriptionField->addError(91003, ErrorCodes::ERR_91003);
+		$descriptionField->setMissingErrorCode(91003);
+		$descriptionField->addError(91004, ErrorCodes::ERR_91004);
+		$descriptionField->setInvalidErrorCode(91004);
 		if (!is_null($character)) {
 			$descriptionField->setPrefilledValue($character->getDescription());
 		}
@@ -889,20 +889,20 @@ class FormRepository {
 		if (!is_null($character)) {
 			$colorField->setPrefilledValue($character->getColor());
 		}
-		$colorField->addError(90808, ErrorCodes::ERR_90808);
-		$colorField->setMissingErrorCode(90808);
-		$colorField->addError(90809, ErrorCodes::ERR_90809);
-		$colorField->setInvalidErrorCode(90809);
+		$colorField->addError(91008, ErrorCodes::ERR_91008);
+		$colorField->setMissingErrorCode(91008);
+		$colorField->addError(91009, ErrorCodes::ERR_91009);
+		$colorField->setInvalidErrorCode(91009);
 		$form->addField($colorField);
 
 		$publicCheckboxField = new CheckboxField();
 		$publicCheckboxField->setDistinguisher("public");
 		$publicCheckboxField->setLabel("Make this character public");
 		$publicCheckboxField->setRequired(false);
-		$publicCheckboxField->addError(90810, ErrorCodes::ERR_90810);
-		$publicCheckboxField->setMissingErrorCode(90810);
-		$publicCheckboxField->addError(90811, ErrorCodes::ERR_90811);
-		$publicCheckboxField->setInvalidErrorCode(90811);
+		$publicCheckboxField->addError(91010, ErrorCodes::ERR_91010);
+		$publicCheckboxField->setMissingErrorCode(91010);
+		$publicCheckboxField->addError(91011, ErrorCodes::ERR_91011);
+		$publicCheckboxField->setInvalidErrorCode(91011);
 		if (!is_null($character)) {
 			$publicCheckboxField->setPrefilledValue($character->isPublic());
 		}
