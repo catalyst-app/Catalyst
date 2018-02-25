@@ -525,7 +525,7 @@ class Form {
 		}
 		$str .= '} catch (e) {';
 		$str .= 'showErrorMessageForCode(99999);';
-		$str .= 'throw "Bad JSON: "+response;';
+		$str .= 'window.onerror("Bad JSON: "+response, "main js", -1);';
 		$str .= '}';
 		$str .= '})';
 
@@ -552,7 +552,7 @@ class Form {
 		$str .= 'showErrorMessageForCode(data.error_code);';
 		$str .= '} catch (e) {';
 		$str .= 'showErrorMessageForCode(99999);';
-		$str .= 'throw "Bad JSON: "+response;';
+		$str .= 'window.onerror("Bad JSON: "+response, "main js", -1);';
 		$str .= '}';
 		$str .= '})';
 
