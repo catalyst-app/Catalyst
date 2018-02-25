@@ -28,8 +28,8 @@ tr.feature-item {
 }
 
 div.section > h4:first-child {
-	margin-top: -80px;
-	padding-top: 80px;
+	margin-top: 0;
+	padding-top: 0;
 }
 
 .toggle-btn.off {
