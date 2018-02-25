@@ -332,6 +332,7 @@ function totp(K,t) {
 
 			for (var i = toRemove.length - 1; i >= 0; i--) {
 				$("#"+toRemove[i]).remove();
+				$("#"+toRemove[i]+"-reorder-img").parent().remove();
 			}
 
 			for (var i = 0; i < toAdd.length; i++) {
