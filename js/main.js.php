@@ -475,6 +475,12 @@ function totp(K,t) {
 				$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).prepend(buttonWrapper);
 			}
 		});
+		try {
+			new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
+				draggable: '.image-rearranger > div',
+				appendTo: '.image-rearranger'
+			});
+		} catch(e) {}
 
 		/* IMAGE ARRANGEMENT */
 		$(document).on("click", ".edit-cards .make-primary-button", function() {
