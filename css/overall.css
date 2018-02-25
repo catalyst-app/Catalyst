@@ -9,6 +9,10 @@
 	color: #999;
 }
 
+.navbar-fixed {
+	z-index: 996;
+}
+
 a.brand-logo {
 	padding-left: 10px;
 	padding-right: 10px;
