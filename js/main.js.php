@@ -1106,8 +1106,14 @@ function totp(K,t) {
 		echo FormJS::generateFormHandler(NewFeature::getFormStructure());
 		?> 
 
+		/* NEWS */
+		$(document).on("click", "#hide-news-button", function() {
+			document.cookie="last_news="+$("#hide-news-button").attr("data-cookie-val")+"; path=/";
+			$("#hide-news-button").parent().parent().remove();
+		});
+
 		/* ONLOADS */
-		$(document).on("keydown", function (event) {
+		$(document).on("keydown", function(event) {
 			if (event.which === 8 && $("form").length != 0 && $(event.target).parents("form").length == 0) {
 				event.preventDefault();
 			}

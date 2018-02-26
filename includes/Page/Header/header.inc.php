@@ -86,13 +86,13 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 	<body>
 <?php require_once REAL_ROOTDIR."includes/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
-<?php if (!array_key_exists("LAST_NEWS", $_COOKIE) || $_COOKIE["LAST_NEWS"] != Values::NEWEST_NEWS_LABEL): ?>
+<?php if (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID): ?>
 			<div class="news">
 				<p class="no-margin">
 					<span class="flow-text">
 						<strong><?= htmlspecialchars(Values::NEWEST_NEWS_DATE) ?> News: <?= htmlspecialchars(Values::NEWEST_NEWS_LABEL) ?></strong>
 					</span>
-					<a href="#" class="right green-text text-darken-4">hide</a>
+					<a href="#" class="right green-text text-darken-4" data-cookie-val="<?= Values::NEWEST_NEWS_ID ?>" id="hide-news-button">hide</a>
 				</p>
 				<p class="no-margin">
 					<?= htmlspecialchars(Values::NEWEST_NEWS_DESC) ?> (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>).
