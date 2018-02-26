@@ -204,6 +204,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= 'pre-existing ';
 				$str .= 'row ';
 				$str .= htmlspecialchars(self::ROW_CLASS).'"';
+				$str .= ' data-internal-filename="'.htmlspecialchars($image->getPath()).'"';
 				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
 				$str .= ' data-input="'.htmlspecialchars($this->getId()).'"';
 				$str .= '>';
@@ -370,7 +371,17 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= 'var file = $('.json_encode("#".$this->getId()).')[0].files[i];';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', file);';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-keys[]').', file.name);';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', $(".image-extra-info-row").index($('.json_encode("#".$this->getId().self::ROW_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.')));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', $('.json_encode('.'.self::ROW_CLASS).').index($('.json_encode("#".$this->getId().self::ROW_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.')));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::NSFW_CHECKBOX_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').is(":checked"));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::CAPTION_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::CAPTION_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::INFO_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::INFO_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
+		
+		$str .= '}';
+
+		$str .= 'for (var i=0; i<$('.json_encode(".".self::ROW_CLASS.'.pre-existing').').length; i++) {';
+		
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-keys[]').', $($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i]).attr("data-internal-filename"));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', $('.json_encode('.'.self::ROW_CLASS).').index($('.json_encode("#".$this->getId().self::ROW_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.')));';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::NSFW_CHECKBOX_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').is(":checked"));';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::CAPTION_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::CAPTION_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::INFO_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::INFO_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
