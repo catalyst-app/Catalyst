@@ -69,3 +69,97 @@ $stmt->addValue($_POST["public"] == "true");
 
 $stmt->execute();
 
+$imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", $_POST);
+
+$stmt = new SelectQuery();
+
+$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+$stmt->addColumn(new Column("ID", Tables::CHARACTER_IMAGES));
+$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $id]);
+$stmt->addAdditionalCapability($whereClause);
+
+$stmt->execute();
+
+$existingImages = $stmt->getResult();
+
+$toDelete = [];
+
+foreach ($existingImages as $image) {
+	if (!array_key_exists($image["PATH"], $imageMeta)) {
+		$toDelete[] = $image["ID"];
+		continue;
+	}
+	$stmt = new UpdateQuery();
+
+	$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+	$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+	$stmt->addValue($imageMeta[$image["PATH"]]["caption"]);
+	$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
+	$stmt->addValue($imageMeta[$image["PATH"]]["info"]);
+	$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+	$stmt->addValue($imageMeta[$image["PATH"]]["nsfw"] ? 1 : 0);
+	$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
+	$stmt->addValue($imageMeta[$image["PATH"]]["sort"] == 0);
+	$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
+	$stmt->addValue($imageMeta[$image["PATH"]]["sort"]);
+
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ID", Tables::CHARACTER_IMAGES), '=', $image["ID"]]);
+	$stmt->addAdditionalCapability($whereClause);
+
+	$stmt->execute();
+}
+
+if (count($toDelete)) {
+	$stmt = new DeleteQuery();
+
+	$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ID", Tables::CHARACTER_IMAGES), "IN", $toDelete]);
+	$stmt->addAdditionalCapability($whereClause);
+
+	$stmt->execute();
+}
+
+if (isset($_FILES["images"])) {
+	$images = Image::uploadMultiple($_FILES["images"], Folders::CHARACTER_IMAGE, $_POST["token"]);
+
+	if (count($images)) {
+		$stmt = new MultiInsertQuery();
+
+		$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+		$stmt->addColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
+
+		$primaryHasBeenAdded = false;
+
+		foreach ($images as $image) {
+			$stmt->addValue($id);
+			$stmt->addValue($imageMeta[$image->getUploadName()]["caption"]);
+			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
+			$stmt->addValue($image->getPath());
+			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
+			$stmt->addValue($primaryHasBeenAdded ? 0 : 1); // if already set, then 0
+			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
+			$primaryHasBeenAdded = true;
+		}
+
+		$stmt->execute();
+	}
+}
+
+Response::sendSuccessResponse("Success", [
+	"redirect" => "Character/View/".$_POST["token"]
+]);
