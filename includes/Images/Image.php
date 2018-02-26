@@ -252,9 +252,11 @@ class Image {
 	 * Get the image's HTML as a strict circle
 	 * 
 	 * @param string[] $additionalClasses Classes to add to the div
+	 * @param string[] $additionalStyles Styles to add to the div
+	 * @param string[] $additionalAttributes Attributes to add to the div
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
-	public function getStrictCircleHtml(array $additionalClasses=[]) : string {
+	public function getStrictCircleHtml(array $additionalClasses=[], array $additionalStyles=[], array $additionalAttributes=[]) : string {
 		$str = '';
 		$str .= '<div';
 		$str .= ' class="img-strict-circle';
@@ -265,7 +267,15 @@ class Image {
 			$str .= " ".htmlspecialchars($class);
 		}
 		$str .= '"';
-		$str .= ' style="background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');"';
+		$str .= ' style="';
+		foreach ($additionalStyles as $key => $value) {
+			$str .= htmlspecialchars($key).":".htmlspecialchars($value).";";
+		}
+		$str .= 'background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');';
+		$str .= '"';
+		foreach ($additionalAttributes as $key => $value) {
+			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
+		}
 		$str .= '></div>';
 		return $str;
 	}
