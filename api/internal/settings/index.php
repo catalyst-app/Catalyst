@@ -95,7 +95,7 @@ if ($_POST["username"] != $user["USERNAME"]) {
 if (!empty($_POST["new-password"])) {
 	$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
 	$stmt->addValue(password_hash($_POST["new-password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]));
-	
+
 	$stmt->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
 	$stmt->addValue(Tokens::generatePasswordResetToken());
 }

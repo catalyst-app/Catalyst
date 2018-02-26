@@ -137,5 +137,5 @@ echo UniversalFunctions::createHeading("API Documentation");
 		</div>
 <?php
 require_once Values::FOOTER_INC;
- 
- 
+
+

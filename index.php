@@ -25,5 +25,5 @@ echo UniversalFunctions::createHeading("Home");
 			</div>
 <?php
 require_once Values::FOOTER_INC;
- 
- 
+
+
