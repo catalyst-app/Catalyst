@@ -713,7 +713,10 @@ function totp(K,t) {
 		try {
 			new Draggable.Sortable(document.querySelector('.social-chips-editable.social-chips > div'), {
 				draggable: '.social-chips-editable.social-chips > div > a, .social-chips-editable.social-chips > div > .chip',
-				appendTo: '.social-chips-editable.social-chips'
+				appendTo: 'body'
+			}).on("mirror:created", function(e) {
+				$(e.mirror).css("max-width", $(e.originalSource).width());
+				$(e.mirror).find("i").remove(); // dont show remove button while dragging
 			}).on("sortable:stop", function() {
 				setTimeout(function() {
 					var result = [];
