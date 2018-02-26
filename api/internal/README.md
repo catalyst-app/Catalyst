@@ -154,3 +154,4 @@
 - **91009** - Invalid color
 - **91010** - No public checkbox value passed
 - **91011** - Invalid publicity checkbox value
+- **91012** - Invalid token or bad ownership
