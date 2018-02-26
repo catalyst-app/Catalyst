@@ -206,6 +206,12 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= 'col s12 m9 l10"';
 				$str .= '>';
 
+				$str .= '<h4';
+				$str .= ' class="col s12"';
+				$str .= '>';
+				$str .= 'Existing Image';
+				$str .= '</h4>';
+
 				$str .= '</div>';
 
 				$str .= '</div>';
