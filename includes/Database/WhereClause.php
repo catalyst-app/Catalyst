@@ -90,7 +90,12 @@ class WhereClause implements QueryAdditionInterface {
 				if (!$value[0] instanceof Column) {
 					throw new InvalidArgumentException("Column expected in WhereClause, found ".(gettype($value[0]) == "object" ? get_class($value[0]) : gettype($value[0])));
 				}
-				$str .= $value[0].' '.$value[1].' ?';
+				$str .= $value[0].' '.$value[1].' ';
+				if (is_array($value[2])) {
+					$str .= implode(",",array_fill(0, count($value[2]), '?'));
+				} else {
+					$str .= '?';
+				}
 			}
 		}
 		return trim($str);
@@ -105,7 +110,13 @@ class WhereClause implements QueryAdditionInterface {
 		$params = [];
 		foreach ($this->clause as $item) {
 			if (is_array($item)) {
-				$params[] = $item[2];
+				if (is_array($item[2])) {
+					foreach ($item[2] as $i) {
+						$params[] = $i;
+					}
+				} else {
+					$params[] = $item[2];
+				}
 			}
 		}
 		return $params;
