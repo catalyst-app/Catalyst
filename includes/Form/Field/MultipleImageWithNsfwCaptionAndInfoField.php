@@ -229,7 +229,13 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= '<h4';
 				$str .= ' class="col s12"';
 				$str .= '>';
+				
 				$str .= 'Existing Image';
+
+				$str .= '<i class="image-row-remove-icon material-icons clickable right">';
+				$str .= 'clear';
+				$str .= '</i>';
+
 				$str .= '</h4>';
 
 				$str .= '<p';
