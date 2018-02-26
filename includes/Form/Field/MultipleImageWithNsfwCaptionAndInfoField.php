@@ -87,10 +87,6 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$result = [];
 
 		for ($i=0; $i < count($request[$key."-keys"]); $i++) {
-			if (!in_array($request[$key."-keys"][$i], $_FILES[$key]["name"])) {
-				HTTPCode::set(400);
-				Response::sendErrorResponse(99999, "Image information is incorrectly associated with the uploaded images");
-			}
 			$result[$request[$key."-keys"][$i]] = [
 				"nsfw" => $request[$key.self::NSFW_CHECKBOX_ID_SUFFIX][$i] == 'true',
 				"caption" => $request[$key.self::CAPTION_ID_SUFFIX][$i],
@@ -99,10 +95,12 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 			];
 		}
 
-		foreach ($_FILES[$key]["name"] as $filename) {
-			if (!array_key_exists($filename, $result)) {
-				HTTPCode::set(400);
-				Response::sendErrorResponse(99999, "Image information is incorrectly associated with the uploaded images");
+		if (array_key_exists($key, $_FILES)) {
+			foreach ($_FILES[$key]["name"] as $filename) {
+				if (!array_key_exists($filename, $result)) {
+					HTTPCode::set(400);
+					Response::sendErrorResponse(99999, "Image information is incorrectly associated with the uploaded images");
+				}
 			}
 		}
 
