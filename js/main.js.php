@@ -406,7 +406,7 @@ function totp(K,t) {
 
 					var nsfwCheckboxLabel = $("<label></label>");
 					nsfwCheckboxLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
-					nsfwCheckboxLabel.text("This image is NSFW");
+					nsfwCheckboxLabel.text("This image is mature or explicit");
 
 					nsfwCheckbox.append(nsfwCheckboxLabel);
 
