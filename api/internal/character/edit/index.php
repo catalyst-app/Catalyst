@@ -47,3 +47,25 @@ if ($character["USER_ID"] != $_SESSION["user"]->getId()) {
 	Response::sendErrorResponse(91012, ErrorCodes::ERR_91012);
 }
 
+$stmt = new UpdateQuery();
+
+$stmt->setTable(Tables::CHARACTERS);
+
+if ($character["NAME"] != $_POST["name"]) {
+	$stmt->addColumn(new Column("NAME", Tables::CHARACTERS));
+	$stmt->addValue($_POST["name"]);
+}
+if ($character["DESCRIPTION"] != $_POST["description"]) {
+	$stmt->addColumn(new Column("DESCRIPTION", Tables::CHARACTERS));
+	$stmt->addValue($_POST["description"]);
+}
+if (bin2hex($character["COLOR"]) != $_POST["color"]) {
+	$stmt->addColumn(new Column("COLOR", Tables::CHARACTERS));
+	$stmt->addValue(hex2bin($_POST["color"]));
+}
+// must have at least one column, so lets do a simple bool
+$stmt->addColumn(new Column("PUBLIC", Tables::CHARACTERS));
+$stmt->addValue($_POST["public"] == "true");
+
+$stmt->execute();
+
