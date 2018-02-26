@@ -12,6 +12,8 @@ use \Catalyst\Page\UniversalFunctions;
  * Represents an image field with multiple images, captions, nsfw, and extra artist/owner info
  */
 class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
+	use SupportsPrefilledValueTrait;
+
 	public const NSFW_CHECKBOX_ID_SUFFIX = '-nsfw';
 	public const NSFW_CLASS = 'image-extra-info-nsfw';
 	public const CAPTION_ID_SUFFIX = '-caption';
@@ -172,6 +174,25 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= ' class="image-rearranger"';
 		$str .= ' id="'.htmlspecialchars($this->getId().self::IMAGE_REARRANGER_ID_SUFFIX).'"';
 		$str .= '>';
+
+		if ($this->isFieldPrefilled() && count($this->getPrefilledValue())) {
+			foreach ($this->getPrefilledValue() as $image) {
+				$str .= '<div';
+				$str .= ' class="';
+				$str .= 'center ';
+				$str .= 'force-square-contents ';
+				$str .= 'col s4 m2';
+				$str .= '"';
+				$str .= '>';
+
+				$str .= $image->getStrictCircleHtml([], ["margin" => "1em"], [
+					"data-container" => $this->getId().self::ROW_CONTAINER_ID_SUFFIX,
+					"id" => $this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()."-reorder-img",
+				]);
+
+				$str .= '</div>';
+			}
+		}
 
 		$str .= '</div>';
 
