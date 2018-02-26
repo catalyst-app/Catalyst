@@ -28,5 +28,9 @@
 				}
 			],
 		}
-	]
+	],
+	"syntax_override": {
+		"\\.js\\.php$": ["JavaScript", "JavaScript"],
+		"\\.css\\.php$": ["CSS", "CSS"]
+	}
 }
