@@ -163,6 +163,7 @@ class ErrorCodes {
 	const ERR_91009 = 'Invalid color';
 	const ERR_91010 = 'No publicity checkbox value';
 	const ERR_91011 = 'Invalid publicity checkbox value';
+	const ERR_91012 = 'Invalid character';
 
 	/**
 	 * Get an associative array of code => message based on class constants
