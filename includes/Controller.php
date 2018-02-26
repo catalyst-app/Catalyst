@@ -228,42 +228,42 @@ class Controller {
 			case E_ERROR:
 				self::sendErrorNotice("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown fatal error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown fatal error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_WARNING:
 				self::sendErrorNotice("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_PARSE:
 				self::sendErrorNotice("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_NOTICE:
 				self::sendErrorNotice("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline);
 				return true;
 			case E_CORE_ERROR:
 				self::sendErrorNotice("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_CORE_WARNING:
 				self::sendErrorNotice("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_COMPILE_ERROR:
 				self::sendErrorNotice("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_COMPILE_WARNING:
 				self::sendErrorNotice("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_USER_ERROR:
 				self::sendErrorNotice("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_USER_WARNING:
 				self::sendErrorNotice("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_USER_NOTICE:
 				self::sendErrorNotice("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline);
 				return true;
@@ -273,7 +273,7 @@ class Controller {
 			case E_RECOVERABLE_ERROR:
 				self::sendErrorNotice("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 			case E_DEPRECATED:
 				self::sendErrorNotice("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline);
 				return true;
@@ -283,7 +283,7 @@ class Controller {
 			default:
 				self::sendErrorNotice("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
 				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the developer team and we are working hard to fix it!");
+				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
 		}
 		return true;
 	}
