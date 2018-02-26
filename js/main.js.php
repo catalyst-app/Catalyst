@@ -342,9 +342,9 @@ function totp(K,t) {
 
 					var row = $("<div></div>");
 					row.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CLASS) ?>);
+					row.addClass("row");
 					row.attr("id", toAdd[i][1]);
 					row.attr("data-input", $(input).attr("id"));
-					row.addClass("row");
 
 					var imgPreviewWrapper = $("<div></div>");
 					imgPreviewWrapper.addClass("center");
@@ -470,7 +470,7 @@ function totp(K,t) {
 				button.addClass("modal-trigger");
 				button.attr("id", 'reorder-modal-button-'+$(this).attr("id"));
 				button.attr("data-target", $(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::MODAL_ID_SUFFIX) ?>);
-				button.text("reorder")
+				button.text("reorder");
 
 				buttonWrapper.append(button);
 
