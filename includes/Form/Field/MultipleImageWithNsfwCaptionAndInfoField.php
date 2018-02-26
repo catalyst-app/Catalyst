@@ -212,6 +212,27 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= 'Existing Image';
 				$str .= '</h4>';
 
+				$str .= '<p';
+				$str .= ' class="col s12"';
+				$str .= '>';
+
+				$str .= '<input';
+				$str .= ' class="filled-in '.htmlspecialchars(self::NSFW_CLASS).'"';
+				$str .= ' type="checkbox"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				if ($image->isNsfw()) {
+					$str .= ' checked="checked"';
+				}
+				$str .= '>';
+
+				$str .= '<label';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= '>';
+				$str .= 'This image is mature or explicit';
+				$str .= '</label>';
+
+				$str .= '</p>';
+
 				$str .= '</div>';
 
 				$str .= '</div>';
