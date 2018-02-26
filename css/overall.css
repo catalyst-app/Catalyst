@@ -13,6 +13,11 @@
 	z-index: 996;
 }
 
+.psuedo-hidden {
+	color: rgba(0,0,0,0);
+	font-size: 0;
+}
+
 a.brand-logo {
 	padding-left: 10px;
 	padding-right: 10px;
@@ -124,6 +129,12 @@ div.section > h4:first-child {
 
 .clickable {
 	cursor: pointer;
+}
+
+.emoji-preview-block {
+	width: 2em;
+	display: inline-block;
+	text-align: center;
 }
 
 #modifier-container-container {
