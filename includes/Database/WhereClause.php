@@ -92,7 +92,7 @@ class WhereClause implements QueryAdditionInterface {
 				}
 				$str .= $value[0].' '.$value[1].' ';
 				if (is_array($value[2])) {
-					$str .= implode(",",array_fill(0, count($value[2]), '?'));
+					$str .= '('.implode(",",array_fill(0, count($value[2]), '?')).')';
 				} else {
 					$str .= '?';
 				}
