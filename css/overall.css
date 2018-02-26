@@ -122,6 +122,10 @@ div.section > h4:first-child {
 	cursor: pointer;
 }
 
+.clickable {
+	cursor: pointer;
+}
+
 #modifier-container-container {
 	margin-bottom: 1em;
 }

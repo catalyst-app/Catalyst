@@ -502,6 +502,9 @@ function totp(K,t) {
 				}
 			});
 		} catch(e) {}
+		$(document).on("click", ".image-row-remove-icon", function(e) {
+			$(this).parent().parent().parent().remove();
+		});
 
 		/* IMAGE ARRANGEMENT */
 		$(document).on("click", ".edit-cards .make-primary-button", function() {
