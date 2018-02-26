@@ -155,6 +155,42 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= ' id="'.htmlspecialchars($this->getId().self::ROW_CONTAINER_ID_SUFFIX).'"';
 		$str .= '>';
 
+		if ($this->isFieldPrefilled() && count($this->getPrefilledValue())) {
+			// add the actual items
+			foreach ($this->getPrefilledValue() as $image) {
+				$str .= '<div';
+				$str .= ' class="';
+				$str .= 'pre-existing ';
+				$str .= 'row ';
+				$str .= htmlspecialchars(self::ROW_CLASS).'"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' data-input="'.htmlspecialchars($this->getId()).'"';
+				$str .= '>';
+
+				$str .= '<div';
+				$str .= ' class="';
+				$str .= 'center ';
+				$str .= 'force-square-contents ';
+				$str .= 'col s4 offset-s4 m3 l2"';
+				$str .= '>';
+
+				$str .= $image->getStrictCircleHtml();
+
+				$str .= '</div>';
+
+				$str .= '<div';
+				$str .= ' class="';
+				$str .= 'center-on-small-only ';
+				$str .= 'left-align ';
+				$str .= 'col s12 m9 l10"';
+				$str .= '>';
+
+				$str .= '</div>';
+
+				$str .= '</div>';
+			}
+		}
+
 		$str .= '</div>';
 
 		$str .= '<div';
