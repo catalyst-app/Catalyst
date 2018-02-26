@@ -86,13 +86,26 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 	<body>
 <?php require_once REAL_ROOTDIR."includes/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
+<?php if (!array_key_exists("LAST_NEWS", $_COOKIE) || $_COOKIE["LAST_NEWS"] != Values::NEWEST_NEWS_LABEL): ?>
+			<div class="news">
+				<p class="no-margin">
+					<span class="flow-text">
+						<strong><?= htmlspecialchars(Values::NEWEST_NEWS_DATE) ?> News: <?= htmlspecialchars(Values::NEWEST_NEWS_LABEL) ?></strong>
+					</span>
+					<a href="#" class="right green-text text-darken-4">hide</a>
+				</p>
+				<p class="no-margin">
+					<?= htmlspecialchars(Values::NEWEST_NEWS_DESC) ?> (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>).
+				</p>
+			</div>
+<?php endif; ?>
 <?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->emailIsVerified()): ?>
 			<div class="warning">
-				<p class="warning-subitem no-margin flow-text">
+				<p class="no-margin flow-text">
 					Please verify your email <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.
 				</p>
-				<p class="warning-subitem no-margin">
-					Click the link in your verification email.  If you have not received the email or the email is incorrect, please go <a href="<?=ROOTDIR?>EmailVerification">here</a>.
+				<p class="no-margin">
+					Click the link in your verification email.  If you have not received the email or the email is incorrect, please go <a href="<?=ROOTDIR?>EmailVerification" class="yellow-text text-darken-4">here</a>.
 				</p>
 			</div>
 <?php endif; ?>

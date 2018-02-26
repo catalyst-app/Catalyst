@@ -47,6 +47,11 @@ class Values {
 	const DEBUG_CAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 	const DEBUG_CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
 
+	const NEWEST_NEWS_ID = 0;
+	const NEWEST_NEWS_LABEL = 'Character page re-design';
+	const NEWEST_NEWS_DATE = 'Feb 26';
+	const NEWEST_NEWS_DESC = ' The new, super-awesome character pages have been pushed to the beta!  This includes a ton of things you\'ll notice throughout the site, including...';
+
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {
 			return $values[$in[1]];
