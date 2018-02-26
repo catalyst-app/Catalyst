@@ -77,8 +77,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	 * Get the extra fields for the input, based on provided parameters
 	 */
 	public static function getExtraFields(string $key, array $request) : array {
-		if (count($request[$key."-keys"]) != count($_FILES[$key]["name"]) ||
-			count($request[$key.self::NSFW_CHECKBOX_ID_SUFFIX]) != count($request[$key.self::CAPTION_ID_SUFFIX]) ||
+		if (count($request[$key.self::NSFW_CHECKBOX_ID_SUFFIX]) != count($request[$key.self::CAPTION_ID_SUFFIX]) ||
 			count($request[$key.self::INFO_ID_SUFFIX]) != count($request[$key."-keys"]) ||
 			count($request[$key."-keys"]) != count($request[$key."-sort"])) {
 			HTTPCode::set(400);
