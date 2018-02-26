@@ -56,17 +56,14 @@ if (isset($_FILES["images"])) {
 		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
 
-		$primaryHasBeenAdded = false;
-
 		foreach ($images as $image) {
 			$stmt->addValue($characterId);
 			$stmt->addValue($imageMeta[$image->getUploadName()]["caption"]);
 			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
 			$stmt->addValue($image->getPath());
 			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
-			$stmt->addValue($primaryHasBeenAdded ? 0 : 1); // if already set, then 0
+			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"] == 0);
 			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
-			$primaryHasBeenAdded = true;
 		}
 
 		$stmt->execute();
