@@ -525,3 +525,11 @@ input[type=checkbox] + label + span.invalid-text {
 	border-radius: 0.5em;
 	background-color: #fff9c4;
 }
+
+.news {
+	border: 1px solid #1b5e20;
+	padding: 0.8em 1em 1em 1em;
+	margin-top: 0.5em;
+	border-radius: 0.5em;
+	background-color: #c8e6c9;
+}
