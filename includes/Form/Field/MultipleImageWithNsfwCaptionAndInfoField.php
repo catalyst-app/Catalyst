@@ -233,6 +233,29 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 
 				$str .= '</p>';
 
+				$str .= '<div';
+				$str .= ' class="input-field col s12 m6"';
+				$str .= '>';
+
+				$str .= '<input';
+				$str .= ' class="'.htmlspecialchars(self::CAPTION_CLASS).'"';
+				$str .= ' type="text"';
+				$str .= ' maxlength="255"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$captionWithoutAuthor = trim(explode("**Artist:** ", " ".$image->getCaption())[0]);
+				$str .= ' value="'.htmlspecialchars($captionWithoutAuthor).'"';
+				$str .= '>';
+
+				$str .= '<label';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= $captionWithoutAuthor ? ' class="active"' : '';
+				$str .= ' data-error="Caption cannot be longer than 255 characters"';
+				$str .= '>';
+				$str .= 'Caption';
+				$str .= '</label>';
+
+				$str .= '</div>';
+
 				$str .= '</div>';
 
 				$str .= '</div>';
