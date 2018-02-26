@@ -36,8 +36,14 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 
 	/**
 	 * What is shown to the user as this field's label
+	 * @var string
 	 */
 	protected $infoLabel = '';
+	/**
+	 * What is used to delimit the caption vs info in the image's caption
+	 * @var string
+	 */
+	protected $infoCaptionDelimiter = '';
 
 	/**
 	 * @return string
@@ -51,6 +57,20 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	 */
 	public function setInfoLabel(string $infoLabel) : void {
 		$this->infoLabel = $infoLabel;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getInfoCaptionDelimiter() : string {
+		return $this->infoCaptionDelimiter;
+	}
+
+	/**
+	 * @param string $infoCaptionDelimiter
+	 */
+	public function setInfoCaptionDelimiter(string $infoCaptionDelimiter) : void {
+		$this->infoCaptionDelimiter = $infoCaptionDelimiter;
 	}
 
 	/**
@@ -242,16 +262,42 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= ' type="text"';
 				$str .= ' maxlength="255"';
 				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
-				$captionWithoutAuthor = trim(explode("**Artist:** ", " ".$image->getCaption())[0]);
-				$str .= ' value="'.htmlspecialchars($captionWithoutAuthor).'"';
+				$captionWithoutInfo = trim(explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption())[0]);
+				$str .= ' value="'.htmlspecialchars($captionWithoutInfo).'"';
 				$str .= '>';
 
 				$str .= '<label';
 				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
-				$str .= $captionWithoutAuthor ? ' class="active"' : '';
+				$str .= $captionWithoutInfo ? ' class="active"' : '';
 				$str .= ' data-error="Caption cannot be longer than 255 characters"';
 				$str .= '>';
 				$str .= 'Caption';
+				$str .= '</label>';
+
+				$str .= '</div>';
+
+				$str .= '<div';
+				$str .= ' class="input-field col s12 m6"';
+				$str .= '>';
+
+				$str .= '<input';
+				$str .= ' class="'.htmlspecialchars(self::INFO_CLASS).'"';
+				$str .= ' type="text"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$exploded = explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption(), 2);
+				if (count($exploded) > 1) {
+					$infoStr = trim($exploded[1]);
+				} else {
+					$infoStr = '';
+				}
+				$str .= ' value="'.htmlspecialchars($infoStr).'"';
+				$str .= '>';
+
+				$str .= '<label';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= $infoStr ? ' class="active"' : '';
+				$str .= '>';
+				$str .= htmlspecialchars($this->getInfoLabel());
 				$str .= '</label>';
 
 				$str .= '</div>';

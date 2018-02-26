@@ -888,6 +888,7 @@ class FormRepository {
 		$imagesField->setInvalidErrorCode(91007);
 		$imagesField->addError(91005, ErrorCodes::ERR_91005);
 		$imagesField->setTooLargeErrorCode(91005);
+		$imagesField->setInfoCaptionDelimiter("**Artist:**");
 		if (!is_null($character)) {
 			$imagesField->setPrefilledValue($character->getImageSet());
 		}
