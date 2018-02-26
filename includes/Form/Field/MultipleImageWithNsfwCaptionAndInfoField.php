@@ -156,6 +156,27 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= '>';
 
 		if ($this->isFieldPrefilled() && count($this->getPrefilledValue())) {
+			// add the reorder button
+			$str .= '<div';
+			$str .= ' class="col s12"';
+			$str .= '>';
+
+			$str .= '<div';
+			$str .= ' class="';
+			$str .= 'btn ';
+			$str .= 'right ';
+			$str .= 'modal-trigger';
+			$str .= '"';
+			$str .= ' id="reorder-modal-button-'.htmlspecialchars($this->getId()).'"';
+			$str .= ' data-target="'.htmlspecialchars($this->getId().self::MODAL_ID_SUFFIX).'"';
+			$str .= '>';
+
+			$str .= 'reorder';
+
+			$str .= '</div>';
+
+			$str .= '</div>';
+
 			// add the actual items
 			foreach ($this->getPrefilledValue() as $image) {
 				$str .= '<div';
