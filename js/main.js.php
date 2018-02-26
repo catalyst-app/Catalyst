@@ -480,7 +480,9 @@ function totp(K,t) {
 		try {
 			new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
 				draggable: '.image-rearranger > div',
-				appendTo: '.image-rearranger'
+				appendTo: 'body'
+			}).on("mirror:created", function(e) {
+				$(e.mirror).width($(e.originalSource).width()*.95);
 			}).on("sortable:stop", function(e) {
 				if (e.oldIndex == e.newIndex) {
 					return;

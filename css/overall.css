@@ -99,6 +99,10 @@ div.section > h4:first-child {
 	max-width: 10em;
 }
 
+.draggable-mirror {
+  z-index: 99999;
+}
+
 .draggable-mirror.commission-type * {
 	visibility: hidden;
 }
