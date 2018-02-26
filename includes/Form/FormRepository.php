@@ -876,11 +876,22 @@ class FormRepository {
 		}
 		$form->addField($descriptionField);
 
-
-
-
-
-
+		$imagesField = new MultipleImageWithNsfwCaptionAndInfoField();
+		$imagesField->setDistinguisher("images");
+		$imagesField->setLabel("Images");
+		$imagesField->setRequired(false);
+		$imagesField->setMaxHumanSize('10MB');
+		$imagesField->setInfoLabel('Artist/Source');
+		$imagesField->addError(91006, ErrorCodes::ERR_91006);
+		$imagesField->setMissingErrorCode(91006);
+		$imagesField->addError(91007, ErrorCodes::ERR_91007);
+		$imagesField->setInvalidErrorCode(91007);
+		$imagesField->addError(91005, ErrorCodes::ERR_91005);
+		$imagesField->setTooLargeErrorCode(91005);
+		if (!is_null($character)) {
+			$imagesField->setPrefilledValue($character->getImageSet());
+		}
+		$form->addField($imagesField);
 
 		$colorField = new ColorField();
 		$colorField->setDistinguisher("color");
