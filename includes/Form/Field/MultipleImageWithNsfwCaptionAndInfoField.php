@@ -380,10 +380,10 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= 'for (var i=0; i<$('.json_encode(".".self::ROW_CLASS.'.pre-existing').').length; i++) {';
 		
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-keys[]').', $($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i]).attr("data-internal-filename"));';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', $('.json_encode('.'.self::ROW_CLASS).').index($('.json_encode("#".$this->getId().self::ROW_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.')));';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::NSFW_CHECKBOX_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').is(":checked"));';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::CAPTION_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::CAPTION_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::INFO_ID_SUFFIX.'[]').', $('.json_encode("#".$this->getId().self::INFO_ID_SUFFIX).self::EL_ID_SUFFIX_EXPR.').val());';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'-sort[]').', $('.json_encode('.'.self::ROW_CLASS).').index($($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i])));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX.'[]').', $($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i]).find('.json_encode('.'.self::NSFW_CLASS).').is(":checked"));';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::CAPTION_ID_SUFFIX.'[]').', $($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i]).find('.json_encode('.'.self::CAPTION_CLASS).').val());';
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().self::INFO_ID_SUFFIX.'[]').', $($('.json_encode(".".self::ROW_CLASS.'.pre-existing').')[i]).find('.json_encode('.'.self::INFO_CLASS).').val());';
 		
 		$str .= '}';
 
