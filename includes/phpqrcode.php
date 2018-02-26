@@ -32,8 +32,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
- 
+
+
 
 /*
  * Version: 1.1.4
@@ -73,7 +73,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
 	// Encoding modes
 	 
 	define('QR_MODE_NUL', -1);
@@ -89,12 +89,12 @@
 	define('QR_ECLEVEL_M', 1);
 	define('QR_ECLEVEL_Q', 2);
 	define('QR_ECLEVEL_H', 3);
-	
+
 	// Supported output formats
-	
+
 	define('QR_FORMAT_TEXT', 0);
 	define('QR_FORMAT_PNG',  1);
-	
+
 	class qrstr {
 		public static function set(&$srctab, $x, $y, $repl, $replLen = false) {
 			$srctab[$y] = substr_replace($srctab[$y], ($replLen !== false)?substr($repl,0,$replLen):$repl, $x, ($replLen !== false)?$replLen:strlen($repl));
@@ -342,7 +342,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
     define('QRSPEC_VERSION_MAX', 40);
     define('QRSPEC_WIDTH_MAX',   177);
 
@@ -932,7 +932,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
     define('QR_IMAGE', true);
 
     class QRimage {
@@ -1037,7 +1037,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
     define('STRUCTURE_HEADER_BITS',  20);
     define('MAX_STRUCTURED_SYMBOLS', 16);
 
@@ -2282,7 +2282,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
     class QRrsItem {
     
         public $mm;                  // Bits per symbol 
@@ -2496,14 +2496,14 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
 	define('N1', 3);
 	define('N2', 3);
 	define('N3', 40);
 	define('N4', 10);
 
 	class QRmask {
-	
+
 		public $runLength = array();
 		
 		//----------------------------------------------------------------------
@@ -2832,7 +2832,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
- 
+
     class QRrsblock {
         public $dataLength;
         public $data = array();

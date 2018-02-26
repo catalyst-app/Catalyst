@@ -168,7 +168,7 @@ class UniversalFunctions {
 			'</div>',
 		]);
 	}
-	
+
 	public static function renderImageCardWithRibbon(string $filename, bool $nsfw, string $title, string $caption, string $link, string $ribbon, string $ribbonColor) : string {
 		if ($nsfw && (!\Catalyst\User\User::isLoggedIn() || !$_SESSION["user"]->isNsfw())) {
 			return self::renderImageCard(ROOTDIR.'img/nsfw.png', false, $title, $caption, $link);
