@@ -371,6 +371,7 @@ class Image {
 		if ($link) {
 			$str .= '<a';
 			if (is_null($linkPath)) {
+				$str .= ' target="_blank"';
 				$str .= ' href="'.htmlspecialchars($this->getFullPath()).'"';
 			} else {
 				$str .= ' href="'.htmlspecialchars($linkPath).'"';
