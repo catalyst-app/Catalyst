@@ -173,7 +173,6 @@ CREATE TABLE `character_images` (
   `CREDIT` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `PATH` varchar(15) CHARACTER SET ascii NOT NULL COMMENT 'Image path (appended to character token)',
   `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the image is nsfw',
-  `PRIMARY` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '1 if the image is the primary character image',
   `SORT` int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Image sort'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Images of a character';
 
