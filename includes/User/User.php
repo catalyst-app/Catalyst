@@ -258,7 +258,7 @@ class User implements Serializable {
 	 * @return string
 	 */
 	public static function getTable() : string {
-		return self::getTable();
+		return Tables::USERS;
 	}
 
 	/**
