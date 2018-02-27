@@ -87,7 +87,6 @@ echo UniversalFunctions::createHeading("User Profile");
 $characters = Character::getPublicCharactersFromUser($user);
 $cards = [];
 foreach ($characters as $character) {
-	$img = $character->getPrimaryImage();
 	$cardContents = $character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], false);
 	if (!empty($cardContents)) {
 		$cards[] = '<div class="col s8 m4 l3">'.$cardContents.'</div>';
