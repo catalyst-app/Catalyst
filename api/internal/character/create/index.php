@@ -53,7 +53,6 @@ if (isset($_FILES["images"])) {
 		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
 
 		foreach ($images as $image) {
@@ -62,7 +61,6 @@ if (isset($_FILES["images"])) {
 			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
 			$stmt->addValue($image->getPath());
 			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"] == 0);
 			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
 		}
 

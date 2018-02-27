@@ -103,8 +103,6 @@ foreach ($existingImages as $image) {
 	$stmt->addValue($imageMeta[$image["PATH"]]["info"]);
 	$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
 	$stmt->addValue($imageMeta[$image["PATH"]]["nsfw"] ? 1 : 0);
-	$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["sort"] == 0);
 	$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
 	$stmt->addValue($imageMeta[$image["PATH"]]["sort"]);
 
@@ -140,10 +138,7 @@ if (isset($_FILES["images"])) {
 		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
-
-		$primaryHasBeenAdded = false;
 
 		foreach ($images as $image) {
 			$stmt->addValue($id);
@@ -151,9 +146,7 @@ if (isset($_FILES["images"])) {
 			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
 			$stmt->addValue($image->getPath());
 			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
-			$stmt->addValue($primaryHasBeenAdded ? 0 : 1); // if already set, then 0
 			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
-			$primaryHasBeenAdded = true;
 		}
 
 		$stmt->execute();
