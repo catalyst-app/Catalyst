@@ -126,6 +126,10 @@ class Character {
 		return $this->id;
 	}
 
+	public static function getTable() : string {
+		return Tables::CHARACTERS;
+	}
+
 	public function getName() : string {
 		if (array_key_exists("NAME", $this->cache)) {
 			return $this->cache["NAME"];
