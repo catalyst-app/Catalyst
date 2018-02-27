@@ -249,7 +249,29 @@ class Character {
 		if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 			$aid = $_SESSION["user"]->getArtistPageId();
 
+			$stmt = new SelectQuery();
+
+			$stmt->setTable(Tables::COMMISSIONS);
+
+			$stmt->addColumn(new Column("ID", Tables::COMMISSIONS));
+
+			$joinClause = new JoinClause();
+			$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
+			$joinClause->setLeftColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSIONS));
+			$joinClause->setRightColumn(new Column("ID", Tables::COMMISSION_TYPES));
+			$stmt->addAdditionalCapability($joinClause);
 			
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::ARTIST_PAGES), '=', $aid]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("CHARACTER_ID_ARRAY", Tables::COMMISSIONS), 'LIKE', "%\"".$this->getId()."\"%"]);
+			$stmt->addAdditionalCapability($whereClause);
+
+			$stmt->execute();
+
+			if (count($stmt->getResult())) {
+				return true;
+			}
 		}
 
 		return false;
