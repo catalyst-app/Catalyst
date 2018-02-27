@@ -237,6 +237,8 @@ class Character {
 
 	/**
 	 * If the character is visible to the current user
+	 * 
+	 * @return bool
 	 */
 	public function visibleToMe() : bool {
 		if ($this->isPublic()) {
