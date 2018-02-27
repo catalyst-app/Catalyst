@@ -5,8 +5,6 @@
 ./Artist/index.php
 ./Artist/New/index.php
 ./Artist/NewCommissionType/index.php
-./Character/index.php
-./Character/New/index.php
 ./Commission/New/index.php
 ./FAQ/index.php
 ./FeatureBoard/index.php
@@ -20,7 +18,5 @@
 ./includes/Message/Message.php
 ./includes/Page/UniversalFunctions.php
 ./includes/Page/Values.php
-./index.php
 ./js/main.js.php
-./Markdown/Emoji/index.php
 ./Markdown/index.php
