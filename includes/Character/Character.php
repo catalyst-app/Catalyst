@@ -277,40 +277,6 @@ class Character {
 		return false;
 	}
 
-	public static function getCharactersFromUser(\Catalyst\User\User $user) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `DELETED` = 0 ORDER BY `ID` DESC;");
-		$uid = $user->getId();
-		$stmt->bindParam(":USER_ID", $uid);
-		$stmt->execute();
-
-		if ($stmt->rowCount() == 0) {
-			return [];
-		}
-
-		$arr = $stmt->fetchAll();
-		$stmt->closeCursor();
-		return array_map(function($in) {
-			return new self($in["ID"]);
-		}, $arr);
-	}
-
-	public static function getPublicCharactersFromUser(\Catalyst\User\User $user) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `PUBLIC` = 1 AND `DELETED` = 0 ORDER BY `ID` DESC;");
-		$uid = $user->getId();
-		$stmt->bindParam(":USER_ID", $uid);
-		$stmt->execute();
-
-		if ($stmt->rowCount() == 0) {
-			return [];
-		}
-
-		$arr = $stmt->fetchAll();
-		$stmt->closeCursor();
-		return array_map(function($in) {
-			return new self($in["ID"]);
-		}, $arr);
-	}
-
 	public function initializeImage() : void {
 		if (count($this->getImageSet()) === 0) {
 			$this->setImage(new Image(
@@ -357,5 +323,39 @@ class Character {
 		}
 
 		$this->setImageSet($images);
+	}
+
+	public static function getCharactersFromUser(\Catalyst\User\User $user) : array {
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `DELETED` = 0 ORDER BY `ID` DESC;");
+		$uid = $user->getId();
+		$stmt->bindParam(":USER_ID", $uid);
+		$stmt->execute();
+
+		if ($stmt->rowCount() == 0) {
+			return [];
+		}
+
+		$arr = $stmt->fetchAll();
+		$stmt->closeCursor();
+		return array_map(function($in) {
+			return new self($in["ID"]);
+		}, $arr);
+	}
+
+	public static function getPublicCharactersFromUser(\Catalyst\User\User $user) : array {
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `PUBLIC` = 1 AND `DELETED` = 0 ORDER BY `ID` DESC;");
+		$uid = $user->getId();
+		$stmt->bindParam(":USER_ID", $uid);
+		$stmt->execute();
+
+		if ($stmt->rowCount() == 0) {
+			return [];
+		}
+
+		$arr = $stmt->fetchAll();
+		$stmt->closeCursor();
+		return array_map(function($in) {
+			return new self($in["ID"]);
+		}, $arr);
 	}
 }
