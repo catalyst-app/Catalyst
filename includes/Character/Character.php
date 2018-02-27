@@ -279,6 +279,9 @@ class Character {
 		return false;
 	}
 
+	/**
+	 * Initialize the primary image
+	 */
 	public function initializeImage() : void {
 		if (count($this->getImageSet()) === 0) {
 			$this->setImage(new Image(
@@ -291,6 +294,9 @@ class Character {
 		}
 	}
 
+	/**
+	 * Initializes the list of images for the character.  Can be empty
+	 */
 	public function initializeImageSet() : void {
 		$images = [];
 
@@ -327,6 +333,12 @@ class Character {
 		$this->setImageSet($images);
 	}
 
+	/**
+	 * Get an array of all character objects for the user
+	 * 
+	 * @param User $user
+	 * @return self[]
+	 */
 	public static function getCharactersFromUser(User $user) : array {
 		$stmt = new SelectQuery();
 
@@ -339,7 +351,7 @@ class Character {
 		$whereClause->addToClause([new Column("USER_ID", self::getTable()), '=', $user->getId()]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
-		
+
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
@@ -353,6 +365,12 @@ class Character {
 		return $characters;
 	}
 
+	/**
+	 * Get an array of all public character objects for the user
+	 * 
+	 * @param User $user
+	 * @return self[]
+	 */
 	public static function getPublicCharactersFromUser(User $user) : array {
 		$stmt = new SelectQuery();
 
