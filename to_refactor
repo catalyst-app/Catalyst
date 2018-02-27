@@ -12,7 +12,6 @@
 ./FeatureBoard/Submit/index.php
 ./Help/API/index.php
 ./includes/Artist/Artist.php
-./includes/Character/Character.php
 ./includes/Color.php
 ./includes/CommissionType/CommissionType.php
 ./includes/Message/Message.php
