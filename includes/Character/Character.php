@@ -24,38 +24,71 @@ class Character {
 	 */
 	private $cache = [];
 
+	/**
+	 * Create a new Character object, DELETED or not
+	 * 
+	 * @param int $id
+	 * @throws InvalidArgumentException bad ID passed
+	 */
 	public function __construct(int $id) {
-		$stmt = $GLOBALS["dbh"]->prepare("
-			SELECT
-				`".DB_TABLES["characters"]."`.`USER_ID`,
-				`".DB_TABLES["characters"]."`.`CHARACTER_TOKEN`,
-				`".DB_TABLES["characters"]."`.`NAME`,
-				`".DB_TABLES["characters"]."`.`DESCRIPTION`,
-				`".DB_TABLES["characters"]."`.`COLOR`,
-				`".DB_TABLES["characters"]."`.`PUBLIC`,
-				`".DB_TABLES["character_images"]."`.`CAPTION`,
-				`".DB_TABLES["character_images"]."`.`PATH`,
-				`".DB_TABLES["character_images"]."`.`NSFW`,
-				`".DB_TABLES["character_images"]."`.`PRIMARY`
-			FROM
-				`".DB_TABLES["characters"]."`
-			LEFT JOIN
-				`".DB_TABLES["character_images"]."`
-				ON
-					`".DB_TABLES["characters"]."`.`ID` = `".DB_TABLES["character_images"]."`.`CHARACTER_ID`
-			WHERE
-				`".DB_TABLES["characters"]."`.`ID` = :ID
-			ORDER BY
-				`".DB_TABLES["character_images"]."`.`SORT` ASC;");
-		$stmt->bindParam(":ID", $id);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("USER_ID", self::getTable()));
+		$stmt->addColumn(new Column("CHARACTER_TOKEN", self::getTable()));
+		$stmt->addColumn(new Column("NAME", self::getTable()));
+		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
+		$stmt->addColumn(new Column("COLOR", self::getTable()));
+		$stmt->addColumn(new Column("PUBLIC", self::getTable()));
+
+		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+
+		$joinClause = new JoinClause();
+
+		$joinClause->setType(JoinClause::LEFT);
+
+		$joinClause->setJoinTable(Tables::CHARACTER_IMAGES);
+
+		$joinClause->setLeftColumn(new Column("ID", self::getTable()));
+		$joinClause->setRightColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
+
+		$stmt->addAdditionalCapability($joinClause);
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$orderByClause = new OrderByClause();
+		$orderByClause->setColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
+		$orderByClause->setOrder("ASC");
+		$stmt->addAdditionalCapability($orderByClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("Character ID ".$id." does not exist in the database.");
+		$results = $stmt->getResult();
+
+		if (!count($results)) {
+			throw new InvalidArgumentException("Character ID ".$id." does not exist in the database.");
 		}
 
-		$results = $stmt->fetchAll();
-		$stmt->closeCursor();
+		$images = [];
+
+		for ($i=0; $i < count($results); $i++) { 
+			if (is_null($results[$i]["PATH"])) {
+				break;
+			}
+			$images[] = new Image(
+				Folders::CHARACTER_IMAGE,
+				$results[$i]["CHARACTER_TOKEN"],
+				$results[$i]["PATH"],
+				(bool)$results[$i]["NSFW"],
+				trim($results[$i]["CAPTION"].($results[$i]["CREDIT"] ? ("\n**Artist:** ".$results[$i]["CREDIT"]) : ''))
+			);
+		}
 
 		$this->cache = [
 			"USER_ID" => $results[0]["USER_ID"],
@@ -64,18 +97,10 @@ class Character {
 			"NAME" => $results[0]["NAME"],
 			"DESCRIPTION" => $results[0]["DESCRIPTION"],
 			"COLOR" => bin2hex($results[0]["COLOR"]),
-			"PUBLIC" => (bool)($results[0]["PUBLIC"]),
-			// path, caption, nsfw, primary
-			"IMAGES" => (
-					is_null($results[0]["PATH"])
-				?
-					[["default.png", "", false, true]]
-				:
-					array_map(function($in) {
-						return [$in["CHARACTER_TOKEN"].$in["PATH"], $in["CAPTION"], (bool)$in["NSFW"], (bool)$in["PRIMARY"]];
-					}, $results)
-			)
+			"PUBLIC" => (bool)($results[0]["PUBLIC"])
 		];
+
+		$this->setImageSet($images);
 
 		$this->id = $id;
 	}
