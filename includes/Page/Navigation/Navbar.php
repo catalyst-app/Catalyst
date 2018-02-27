@@ -46,6 +46,7 @@ class Navbar {
 				["Browse", self::NAME, "browse", ROOTDIR."Browse", self::NORMAL_LINK],
 				["About", self::NAME, "about", ROOTDIR."About", self::DROPDOWN_PARENT, "about-dropdown"],
 				["About Us", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
+				["Blog", self::NAME, null, ROOTDIR."Blog", self::DROPDOWN_CHILD],
 				["Help Center", self::NAME, null, ROOTDIR."Help", self::DROPDOWN_CHILD],
 				["FAQ", self::NAME, null, ROOTDIR."FAQ", self::DROPDOWN_CHILD],
 				["Feature Board", self::NAME, null, ROOTDIR."FeatureBoard", self::DROPDOWN_CHILD],
