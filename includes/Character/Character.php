@@ -2,14 +2,26 @@
 
 namespace Catalyst\Character;
 
-use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, DatabaseModelTrait, JoinClause, OrderByClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
+use \InvalidArgumentException;
 
+/**
+ * Represents a Character in the database
+ */
 class Character {
-	use HasImageTrait, HasImageSetTrait;
+	use DatabaseModelTrait, HasImageTrait, HasImageSetTrait;
 
+	/**
+	 * The character's ID
+	 * @var int
+	 */
 	private $id;
 
+	/**
+	 * This is used as not to repeatedly hammer the database
+	 * @var array
+	 */
 	private $cache = [];
 
 	public function __construct(int $id) {
