@@ -122,118 +122,116 @@ class Character {
 		}
 	}
 
+	/**
+	 * Get the Character's ID
+	 * 
+	 * Specified in DatabaseModelTrait
+	 * @return int
+	 */
 	public function getId() : int {
 		return $this->id;
 	}
 
+	/**
+	 * Get the table the object's data is stored in
+	 * 
+	 * Specified in DatabaseModelTrait
+	 * @return string
+	 */
 	public static function getTable() : string {
 		return Tables::CHARACTERS;
 	}
 
+	/**
+	 * Get the character's name
+	 * 
+	 * @return string
+	 */
 	public function getName() : string {
 		if (array_key_exists("NAME", $this->cache)) {
 			return $this->cache["NAME"];
 		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NAME` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["NAME"] = $stmt->fetchAll()[0]["NAME"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		
+		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
 	}
 
+	/**
+	 * Get the color as a 6-character hex code
+	 * 
+	 * @return string
+	 */
 	public function getColor() : string {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `COLOR` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["COLOR"] = bin2hex($stmt->fetchAll()[0]["COLOR"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	}
 
+	/**
+	 * If the character is public
+	 * 
+	 * @return bool
+	 */
 	public function isPublic() : bool {
 		if (array_key_exists("PUBLIC", $this->cache)) {
 			return $this->cache["PUBLIC"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PUBLIC` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["PUBLIC"] = (bool)($stmt->fetchAll()[0]["PUBLIC"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["PUBLIC"] = (bool)($this->getColumnFromDatabase("PUBLIC"));
 	}
 
+	/**
+	 * Get the character's owner's id
+	 * 
+	 * @return int
+	 */
 	public function getOwnerId() : int {
 		if (array_key_exists("USER_ID", $this->cache)) {
 			return $this->cache["USER_ID"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `USER_ID` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["USER_ID"] = ($stmt->fetchAll()[0]["USER_ID"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["USER_ID"] = (bool)($this->getColumnFromDatabase("USER_ID"));
 	}
 
-	public function getOwner() : \Catalyst\User\User {
+	/**
+	 * Get the character's owner
+	 * 
+	 * @return User
+	 */
+	public function getOwner() : User {
 		if (array_key_exists("USER", $this->cache)) {
 			return $this->cache["USER"];
 		}
 
-		$result = $this->cache["USER"] = new \Catalyst\User\User($this->getOwnerId());
-
-		return $result;
+		// cache for db calls
+		return $this->cache["USER"] = new User($this->getOwnerId());
 	}
 
+	/**
+	 * Get the character's unique token
+	 * 
+	 * @return string
+	 */
 	public function getToken() : string {
 		if (array_key_exists("CHARACTER_TOKEN", $this->cache)) {
 			return $this->cache["CHARACTER_TOKEN"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `CHARACTER_TOKEN` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["CHARACTER_TOKEN"] = ($stmt->fetchAll()[0]["CHARACTER_TOKEN"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["CHARACTER_TOKEN"] = (bool)($this->getColumnFromDatabase("CHARACTER_TOKEN"));
 	}
 
+	/**
+	 * Get the character's description, as markdown
+	 * 
+	 * @return string
+	 */
 	public function getDescription() : string {
 		if (array_key_exists("DESCRIPTION", $this->cache)) {
 			return $this->cache["DESCRIPTION"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `DESCRIPTION` FROM `".DB_TABLES["characters"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["DESCRIPTION"] = ($stmt->fetchAll()[0]["DESCRIPTION"]);
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["DESCRIPTION"] = (bool)($this->getColumnFromDatabase("DESCRIPTION"));
 	}
 
 	public function visibleToMe() : bool {
