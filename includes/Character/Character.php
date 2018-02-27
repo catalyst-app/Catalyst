@@ -4,6 +4,7 @@ namespace Catalyst\Character;
 
 use \Catalyst\Database\{Column, DatabaseModelTrait, JoinClause, OrderByClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
+use \Catalyst\User\User;
 use \InvalidArgumentException;
 
 /**
@@ -191,7 +192,7 @@ class Character {
 			return $this->cache["USER_ID"];
 		}
 
-		return $this->cache["USER_ID"] = (bool)($this->getColumnFromDatabase("USER_ID"));
+		return $this->cache["USER_ID"] = $this->getColumnFromDatabase("USER_ID");
 	}
 
 	/**
@@ -218,7 +219,7 @@ class Character {
 			return $this->cache["CHARACTER_TOKEN"];
 		}
 
-		return $this->cache["CHARACTER_TOKEN"] = (bool)($this->getColumnFromDatabase("CHARACTER_TOKEN"));
+		return $this->cache["CHARACTER_TOKEN"] = $this->getColumnFromDatabase("CHARACTER_TOKEN");
 	}
 
 	/**
@@ -231,9 +232,12 @@ class Character {
 			return $this->cache["DESCRIPTION"];
 		}
 
-		return $this->cache["DESCRIPTION"] = (bool)($this->getColumnFromDatabase("DESCRIPTION"));
+		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
 	}
 
+	/**
+	 * If the character is visible to the current user
+	 */
 	public function visibleToMe() : bool {
 		if ($this->isPublic()) {
 			return true;
@@ -242,7 +246,7 @@ class Character {
 			return true;
 		}
 
-		if (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
+		if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 			$aid = $_SESSION["user"]->getArtistPageId();
 
 			
