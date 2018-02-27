@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
-use \Catalyst\Database\{Column, JoinClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, DatabaseModelTrait, JoinClause, SelectQuery, Tables, WhereClause};
 use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
@@ -19,7 +19,7 @@ use \Serializable;
  * Represents a user
  */
 class User implements Serializable {
-	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
+	use DatabaseModelTrait, HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
 	/**
 	 * The user's ID in the database
@@ -56,11 +56,11 @@ class User implements Serializable {
 	public static function idExists(int $id) : bool {
 		$stmt = new SelectQuery();
 		
-		$stmt->setTable(Tables::USERS);
-		$stmt->addColumn(new Column("ID", Tables::USERS));
+		$stmt->setTable(self::getTable());
+		$stmt->addColumn(new Column("ID", self::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+		$whereClause->addToClause([new Column("ID", self::getTable()), "=", $id]);
 
 		$stmt->addAdditionalCapability($whereClause);
 
@@ -116,25 +116,25 @@ class User implements Serializable {
 
 		$stmt = new SelectQuery();
 
-		$stmt->setTable(Tables::USERS);
+		$stmt->setTable(self::getTable());
 		
-		$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
-		$stmt->addColumn(new Column("USERNAME", Tables::USERS));
-		$stmt->addColumn(new Column("EMAIL", Tables::USERS));
-		$stmt->addColumn(new Column("EMAIL_VERIFIED", Tables::USERS));
-		$stmt->addColumn(new Column("ARTIST_PAGE_ID", Tables::USERS));
-		$stmt->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-		$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-		$stmt->addColumn(new Column("NSFW", Tables::USERS));
-		$stmt->addColumn(new Column("COLOR", Tables::USERS));
-		$stmt->addColumn(new Column("NICK", Tables::USERS));
+		$stmt->addColumn(new Column("FILE_TOKEN", self::getTable()));
+		$stmt->addColumn(new Column("USERNAME", self::getTable()));
+		$stmt->addColumn(new Column("EMAIL", self::getTable()));
+		$stmt->addColumn(new Column("EMAIL_VERIFIED", self::getTable()));
+		$stmt->addColumn(new Column("ARTIST_PAGE_ID", self::getTable()));
+		$stmt->addColumn(new Column("PICTURE_LOC", self::getTable()));
+		$stmt->addColumn(new Column("PICTURE_NSFW", self::getTable()));
+		$stmt->addColumn(new Column("NSFW", self::getTable()));
+		$stmt->addColumn(new Column("COLOR", self::getTable()));
+		$stmt->addColumn(new Column("NICK", self::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $id]);
+		$whereClause->addToClause([new Column("ID", self::getTable()), "=", $id]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("SUSPENDED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DEACTIVATED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
 
 		$stmt->addAdditionalCapability($whereClause);
 
@@ -161,28 +161,6 @@ class User implements Serializable {
 		];
 
 		$this->id = $id;
-	}
-
-	/**
-	 * Returns the column's value from the database
-	 * 
-	 * @param string $column Column to get
-	 * @return mixed
-	 */
-	public function getColumnFromDatabase(string $column) {
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(Tables::USERS);
-		$stmt->addColumn(new Column($column, Tables::USERS));
-
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", Tables::USERS), "=", $this->getId()]);
-
-		$stmt->addAdditionalCapability($whereClause);
-
-		$stmt->execute();
-
-		return $stmt->getResult()[0][$column];
 	}
 
 	/**
@@ -243,16 +221,16 @@ class User implements Serializable {
 
 		$stmt = new SelectQuery();
 
-		$stmt->setTable(Tables::USERS);
+		$stmt->setTable(self::getTable());
 		
-		$stmt->addColumn(new Column("ID", Tables::USERS));
+		$stmt->addColumn(new Column("ID", self::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $username]);
+		$whereClause->addToClause([new Column("USERNAME", self::getTable()), "=", $username]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("SUSPENDED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
 		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DEACTIVATED", Tables::USERS), "=", 0]);
+		$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
@@ -272,6 +250,15 @@ class User implements Serializable {
 	 */
 	public function getId() : int {
 		return $this->id;
+	}
+
+	/**
+	 * From DatabaseModelTrait
+	 * 
+	 * @return string
+	 */
+	public static function getTable() : string {
+		return self::getTable();
 	}
 
 	/**
