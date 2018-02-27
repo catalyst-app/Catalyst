@@ -327,37 +327,57 @@ class Character {
 		$this->setImageSet($images);
 	}
 
-	public static function getCharactersFromUser(\Catalyst\User\User $user) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `DELETED` = 0 ORDER BY `ID` DESC;");
-		$uid = $user->getId();
-		$stmt->bindParam(":USER_ID", $uid);
+	public static function getCharactersFromUser(User $user) : array {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+
+		$whereClause->addToClause([new Column("USER_ID", self::getTable()), '=', $user->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
+		
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
-			return [];
+		$characters = [];
+
+		foreach ($stmt->getResult() as $character) {
+			$characters[] = new self($character["ID"]);
 		}
 
-		$arr = $stmt->fetchAll();
-		$stmt->closeCursor();
-		return array_map(function($in) {
-			return new self($in["ID"]);
-		}, $arr);
+		return $characters;
 	}
 
-	public static function getPublicCharactersFromUser(\Catalyst\User\User $user) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `USER_ID` = :USER_ID AND `PUBLIC` = 1 AND `DELETED` = 0 ORDER BY `ID` DESC;");
-		$uid = $user->getId();
-		$stmt->bindParam(":USER_ID", $uid);
+	public static function getPublicCharactersFromUser(User $user) : array {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+		
+		$whereClause->addToClause([new Column("USER_ID", self::getTable()), '=', $user->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("PUBLIC", self::getTable()), '=', 1]);
+
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
-			return [];
+		$characters = [];
+
+		foreach ($stmt->getResult() as $character) {
+			$characters[] = new self($character["ID"]);
 		}
 
-		$arr = $stmt->fetchAll();
-		$stmt->closeCursor();
-		return array_map(function($in) {
-			return new self($in["ID"]);
-		}, $arr);
+		return $characters;
 	}
 }
