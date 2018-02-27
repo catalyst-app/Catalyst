@@ -288,7 +288,15 @@ class Character {
 	}
 
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::CHARACTER_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
+		if (count($this->getImageSet()) === 0) {
+			$this->setImage(new Image(
+				Folders::CHARACTER_IMAGE,
+				$this->getToken(),
+				null
+			));
+		} else {
+			$this->setImage($this->getImageSet()[0]);
+		}
 	}
 
 	public function initializeImageSet() : void {
@@ -302,7 +310,6 @@ class Character {
 		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("PRIMARY", Tables::CHARACTER_IMAGES));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $this->id]);
