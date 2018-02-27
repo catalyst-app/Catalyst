@@ -236,53 +236,6 @@ class Character {
 		return $result;
 	}
 
-	public function getImages() : array {
-		if (array_key_exists("IMAGES", $this->cache)) {
-			return $this->cache["IMAGES"];
-		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `CAPTION`, `PATH`, `NSFW`, `PRIMARY` FROM `".DB_TABLES["character_images"]."` WHERE `CHARACTER_ID` = :CHARACTER_ID ORDER BY `SORT` ASC;");
-		$stmt->bindParam(":CHARACTER_ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["IMAGES"] = (
-				$stmt->rowCount() == 0
-			?
-				[[null, "", false, true]]
-			:
-				array_map(function($in) {
-					return [$this->getToken().$in["PATH"], $in["CAPTION"], (bool)$in["NSFW"], (bool)$in["PRIMARY"]];
-				}, $stmt->fetchAll())
-		);
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
-	public function getPrimaryImage() : array {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		return (count($imagesThatArePrimary) ? $imagesThatArePrimary[0] : ["default.png", "", false, true]);
-	}
-
-	public function getPrimaryImagePath() : ?string {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		if (count($imagesThatArePrimary)) {
-			return str_replace($this->getToken(), "", $imagesThatArePrimary[0][0]); // TODO: REMOVE THE STR REPLACE
-		} else {
-			return null;
-		}
-	}
-
-	public function isPrimaryImageNsfw() : bool {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		if (count($imagesThatArePrimary)) {
-			return $imagesThatArePrimary[0][2];
-		} else {
-			return false;
-		}
-	}
-
 	public function visibleToMe() : bool {
 		if ($this->isPublic()) {
 			return true;
