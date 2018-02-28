@@ -35,9 +35,12 @@ elseif ($_SESSION["user"]->isArtist()): ?>
 			<p class="flow-text">You deleted your artist page.  In order to re-activate it, click below.</p>
 			<?= FormRepository::getUndeleteArtistPageForm()->getHtml(false) ?>
 		</div>
-<?php else:
-	// echo FormHTML::generateForm(NewArtist::getFormStructure());
-	echo '<p class="col s12">You will be able to list commission types after you create your page.</p>';
+<?php else: ?>
+		<div class="section">
+			<?= FormRepository::getCreateArtistPageForm()->getHtml(false) ?>
+			<p class="col s12">You will be able to list commission types after you create your page.</p>
+		</div>
+<?php
 endif;
 
 require_once Values::FOOTER_INC;
