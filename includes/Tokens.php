@@ -2,7 +2,8 @@
 
 namespace Catalyst;
 
-use \Catalyst\Database\{Column, SelectQuery, Tables};
+use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Database\Query\SelectQuery;
 
 /**
  * A class which facilitates generation of (potentially unique) tokens

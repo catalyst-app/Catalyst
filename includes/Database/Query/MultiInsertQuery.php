@@ -1,15 +1,15 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\Query;
 
 use \Catalyst\Database\Database;
 use \Catalyst\HTTPCode;
 use \Catalyst\API\{Endpoint, Response};
 
 /**
- * Represents a MySQL INSERT query
+ * Represents a MySQL INSERT query with multiple VALUES things
  */
-class InsertQuery extends AbstractQuery {
+class MultiInsertQuery extends AbstractQuery {
 	/**
 	 * Executes the query
 	 * 
@@ -25,7 +25,16 @@ class InsertQuery extends AbstractQuery {
 		$initialQuery .= "(".implode(",", $this->columns).")";
 
 		$initialQuery .= " VALUES ";
-		$initialQuery .= "(".implode(",",array_fill(0, count($this->values), "?")).")";
+
+		$numValueSets = (int)(count($this->values)/count($this->columns));
+
+		$arr = [];
+
+		for ($i=0; $i < $numValueSets; $i++) { 
+			$arr[] = '('.implode(",",array_fill(0, count($this->columns), "?")).')';
+		}
+
+		$initialQuery .= implode(",", $arr);
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {

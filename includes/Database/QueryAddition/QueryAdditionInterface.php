@@ -1,6 +1,6 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\QueryAddition;
 
 /**
  * Basic interface which contains the functions required in order to make the query addition

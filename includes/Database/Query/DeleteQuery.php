@@ -1,6 +1,6 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\Query;
 
 use \Catalyst\Database\Database;
 

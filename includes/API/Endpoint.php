@@ -2,7 +2,9 @@
 
 namespace Catalyst\API;
 
-use \Catalyst\Database\{Column, JoinClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
+use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
 use \InvalidArgumentException;

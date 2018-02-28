@@ -2,7 +2,9 @@
 
 namespace Catalyst\Character;
 
-use \Catalyst\Database\{Column, DatabaseModelTrait, JoinClause, OrderByClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
+use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
 use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
 use \Catalyst\User\User;
 use \InvalidArgumentException;
