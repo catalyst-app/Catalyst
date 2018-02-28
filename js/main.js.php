@@ -672,36 +672,34 @@ function totp(K,t) {
 				$(e.mirror).css("max-width", $(e.originalSource).width());
 				$(e.mirror).find("i").remove(); // dont show remove button while dragging
 			}).on("sortable:stop", function() {
-				setTimeout(function() {
-					var result = [];
-					for (var i = 0; i < $(".social-chips .chip:not(.draggable-mirror,.draggable-source--is-dragging)").length; i++) {
-						result.push($($(".social-chips .chip:not(.draggable-mirror,.draggable-source--is-dragging)")[i]).attr("data-id"));
-					}
-					
-					var data = new FormData();
-					data.append("rootdir", $("html").attr("data-rootdir"));
-					if ($("#social-dest-type").length !== 1) {
-						data.append("dest", "");
-					} else {
-						data.append("dest", $("#social-dest-type").val());
-					}
-					data.append("order", JSON.stringify(result));
+				var result = [];
+				for (var i = 0; i < $(".social-chips .chip:not(.draggable-mirror):visible").length; i++) {
+					result.push($($(".social-chips .chip:not(.draggable-mirror):visible")[i]).attr("data-id"));
+				}
+				
+				var data = new FormData();
+				data.append("rootdir", $("html").attr("data-rootdir"));
+				if ($("#social-dest-type").length !== 1) {
+					data.append("dest", "");
+				} else {
+					data.append("dest", $("#social-dest-type").val());
+				}
+				data.append("order", JSON.stringify(result));
 
-					$.ajax($("html").attr("data-rootdir") + "api\/internal\/social_media\/order\/", {
-						data: data,
-						processData: false,
-						contentType: false,
-						method: "POST"
-					}).done(function(response) {
-						console.log(response);
-						var data = JSON.parse(response);
-						Materialize.toast("Saved", 4000);
-					}).fail(function(response) {
-						console.log(response);
-						var data = JSON.parse(response.responseText);
-						showErrorMessageForCode(data.error_code);
-					});
-				}, 100);
+				$.ajax($("html").attr("data-rootdir") + "api\/internal\/social_media\/order\/", {
+					data: data,
+					processData: false,
+					contentType: false,
+					method: "POST"
+				}).done(function(response) {
+					console.log(response);
+					var data = JSON.parse(response);
+					Materialize.toast("Saved", 4000);
+				}).fail(function(response) {
+					console.log(response);
+					var data = JSON.parse(response.responseText);
+					showErrorMessageForCode(data.error_code);
+				});
 			});
 		} catch(e) {}
 
