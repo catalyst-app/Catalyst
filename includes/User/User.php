@@ -4,7 +4,9 @@ namespace Catalyst\User;
 
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
-use \Catalyst\Database\{Column, DatabaseModelTrait, JoinClause, SelectQuery, Tables, WhereClause};
+use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
+use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
+use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;

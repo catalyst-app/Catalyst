@@ -5,7 +5,8 @@ define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, Response};
-use \Catalyst\Database\{Column, Tables, ReplaceQuery};
+use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Database\Query\ReplaceQuery;
 use \Catalyst\Email;
 use \Catalyst\Form\FormRepository;
 

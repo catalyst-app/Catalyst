@@ -1,9 +1,10 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\QueryAddition;
 
-use \LogicException;
+use \Catalyst\Database\Column;
 use \InvalidArgumentException;
+use \LogicException;
 
 /**
  * Class which represents a WHERE clause in a MySQL query

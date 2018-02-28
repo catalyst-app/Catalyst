@@ -2,7 +2,9 @@
 
 namespace Catalyst\Integrations;
 
-use \Catalyst\Database\{Column, OrderByClause, SelectQuery, WhereClause};
+use \Catalyst\Database\Column;
+use \Catalyst\Database\QueryAddition\{OrderByClause, WhereClause};
+use \Catalyst\Database\Query\SelectQuery;
 
 /**
  * Used by classes which have social media chips

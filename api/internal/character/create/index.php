@@ -5,7 +5,9 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, InsertQuery, MultiInsertQuery, RawColumn, SelectQuery, Tables, UpdateQuery, WhereClause};
+use \Catalyst\Database\{Column, RawColumn, Tables};
+use \Catalyst\Database\Query\{InsertQuery, MultiInsertQuery, SelectQuery, UpdateQuery};
+use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\{HTTPCode, Tokens};

@@ -1,15 +1,16 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\Query;
 
-use \Catalyst\Database\Database;
-use \Catalyst\HTTPCode;
 use \Catalyst\API\{Endpoint, Response};
+use \Catalyst\Database\Database;
+use \Catalyst\Database\QueryAddition\JoinClause;
+use \Catalyst\HTTPCode;
 
 /**
- * Represents a MySQL REPLACE query
+ * Represents a MySQL UPDATE query
  */
-class ReplaceQuery extends AbstractQuery {
+class UpdateQuery extends AbstractQuery {
 	/**
 	 * Executes the query
 	 * 
@@ -20,17 +21,26 @@ class ReplaceQuery extends AbstractQuery {
 	public function execute() : bool {
 		$this->verifyIntegrity();
 
-		$initialQuery = "REPLACE INTO `".$this->table."` ";;
-		
-		$initialQuery .= "(".implode(",", $this->columns).")";
+		$initialQuery = "UPDATE `".$this->table."` ";
 
-		$initialQuery .= " VALUES ";
-		$initialQuery .= "(".implode(",",array_fill(0, count($this->values), "?")).")";
+		// join clauses go up here!
+		if (is_array($this->additionalCapabilities)) {
+			foreach ($this->additionalCapabilities as $additionalCapability) {
+				if ($additionalCapability instanceof JoinClause) {
+					$initialQuery .= $additionalCapability->getQueryString();
+					$initialQuery .= " ";
+				}
+			}
+		}
+		
+		$initialQuery .= " SET ".implode(" = ?, ", $this->columns)." = ? ";
 
 		// additional
 		if (is_array($this->additionalCapabilities)) {
 			foreach ($this->additionalCapabilities as $additionalCapability) {
-				$initialQuery .= " ";
+				if ($additionalCapability instanceof JoinClause) {
+					continue;
+				}
 				// each additional capability should verify integrity in its getQueryString
 				$initialQuery .= $additionalCapability->getQueryString();
 			}

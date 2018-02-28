@@ -2,7 +2,9 @@
 
 namespace Catalyst\Integrations;
 
-use \Catalyst\Database\{Column, OrderByClause, SelectQuery, Tables};
+use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Database\QueryAddition\OrderByClause;
+use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Images\Folders;
 

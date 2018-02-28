@@ -1,7 +1,8 @@
 <?php
 
-namespace Catalyst\Database;
+namespace Catalyst\Database\QueryAddition;
 
+use \Catalyst\Database\Column;
 use \LogicException;
 use \InvalidArgumentException;
 

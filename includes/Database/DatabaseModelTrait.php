@@ -2,6 +2,9 @@
 
 namespace Catalyst\Database;
 
+use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\QueryAddition\WhereClause;
+
 /**
  * Used by database models that need to get stuff 
  */
