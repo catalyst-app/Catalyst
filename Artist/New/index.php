@@ -4,15 +4,16 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\Artist\NewArtist;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::NEW_ARTIST_PAGE[0]);
 define("PAGE_TITLE", Values::createTitle(Values::NEW_ARTIST_PAGE[1], []));
 
-if (User::isLoggedIn()) {
+if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
+	define("PAGE_COLOR", $_SESSION["user"]->getArtistPage()->getColor());
+} elseif (User::isLoggedIn()) {
 	define("PAGE_COLOR", $_SESSION["user"]->getColor());
 } else {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
@@ -22,19 +23,21 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("New Artist Page");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (!User::isLoggedIn()) {
+if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHtml();
-} elseif ($_SESSION["user"]->isArtist()) { ?>
+elseif ($_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<p class="flow-text">You are already an artist.</p>
 			<p class="flow-text">You may view your page <a href="<?= ROOTDIR ?>Artist/<?= $_SESSION["user"]->getArtistPage()->getUrl() ?>">here</a>.</p>
 		</div>
-<?php
-} else {
-	echo FormHTML::generateForm(NewArtist::getFormStructure());
+<?php elseif ($_SESSION["user"]->wasArtist()): ?>
+		<div class="section">
+			<p class="flow-text">You deleted your artist page.  In order to re-activate it, click below.</p>
+			<?= FormRepository::getUndeleteArtistPageForm()->getHtml(false) ?>
+		</div>
+<?php else:
+	// echo FormHTML::generateForm(NewArtist::getFormStructure());
 	echo '<p class="col s12">You will be able to list commission types after you create your page.</p>';
-}
+endif;
 
 require_once Values::FOOTER_INC;
