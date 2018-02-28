@@ -1060,7 +1060,11 @@ function totp(K,t) {
 
 		/* NEWS */
 		$(document).on("click", "#hide-news-button", function() {
-			document.cookie="last_news="+$("#hide-news-button").attr("data-cookie-val")+"; path=/";
+			var now = new Date();
+			var time = now.getTime();
+			time += 1000 * 60 * 60 * 24 * 365; // a year
+			now.setTime(time);
+			document.cookie="last_news="+$("#hide-news-button").attr("data-cookie-val")+"; expires="+(now.toGMTString())+"; path=/";
 			$("#hide-news-button").parent().parent().remove();
 		});
 
