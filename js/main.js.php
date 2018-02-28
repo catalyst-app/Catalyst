@@ -579,11 +579,8 @@ function totp(K,t) {
 		});
 
 		/* NEW ARTIST PAGE */
-		<?php
-		echo FormJS::generateFormHandler(NewArtist::getFormStructure());
-		?>
-		$(document).on("input", "input#newartist-url", function() {
-			$("#newartist-url-sample").text($("#newartist-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
+		$(document).on("input", "#create-artist-page-form-input-url", function() {
+			$("#create-artist-page-url-sample").text($("#create-artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
 		});
 
 		/* EDIT ARTIST PAGE */
