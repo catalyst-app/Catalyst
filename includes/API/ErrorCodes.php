@@ -165,6 +165,10 @@ class ErrorCodes {
 	const ERR_91011 = 'Invalid publicity checkbox value';
 	const ERR_91012 = 'Invalid character';
 
+	// undelete artist
+	const ERR_91101 = 'You are currently an artist';
+	const ERR_91102 = 'You never were an artist';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
