@@ -755,6 +755,8 @@ class User implements Serializable {
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), '=', $this->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", Tables::ARTIST_PAGES), '=', 1]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
