@@ -279,7 +279,7 @@ function totp(K,t) {
 			cheet('b u l g e', function () {
 				$(".brand-logo").html("OwO what's this?");
 			});
-		} catch(e) {} // cheet doesn't like to be defined
+		} catch(e) {} // cheet doesn't like to be defined, and its not critical
 
 		/* FORMS */
 		$(document).on("input", ".marked-invalid", function(e) {
