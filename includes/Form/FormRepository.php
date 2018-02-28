@@ -975,6 +975,27 @@ class FormRepository {
 	}
 
 	/**
+	 * Get the form used to create an artist page
+	 * 
+	 * @return Form
+	 */
+	public static function getCreateArtistPageForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/artist/create/");
+		$form->setButtonText("CREATE");
+		$form->setPrimary(false);
+
+		$completionAction = new ConcreteRedirectCompletionAction();
+		$completionAction->setRedirectUrl("Artist");
+		$form->setCompletionAction($completionAction);
+
+		return $form;
+	}
+
+	/**
 	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
 	 */
