@@ -559,5 +559,3 @@ MD
 		</div>
 <?php
 require_once Values::FOOTER_INC;
-
-
