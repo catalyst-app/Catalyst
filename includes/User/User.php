@@ -742,6 +742,27 @@ class User implements Serializable {
 	}
 
 	/**
+	 * If the user was an artist, but hid their page
+	 * 
+	 * @return bool
+	 */
+	public function wasArtist() : bool {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::ARTIST_PAGES);
+
+		$stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), '=', $this->getId()]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		return count($stmt->getResult()) == 1;
+	}
+
+	/**
 	 * Get the artist page associated with the user
 	 * 
 	 * @return null|Artist
