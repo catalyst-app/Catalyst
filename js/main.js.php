@@ -508,52 +508,6 @@ function totp(K,t) {
 			$(this).parent().parent().parent().remove();
 		});
 
-		/* IMAGE ARRANGEMENT */
-		$(document).on("click", ".edit-cards .make-primary-button", function() {
-			$(".edit-cards .primary-input").val("false");
-			$(".edit-cards .make-primary-button").attr("disabled", false);
-			$(this).parent().parent().find(".primary-input").val("true");
-			$(this).parent().parent().find(".make-primary-button").attr("disabled", "disabled");
-		});
-
-		$(document).on("click", ".edit-cards .delete-button", function() {
-			if ($(this).hasClass("confirm")) {
-				if ($(".edit-cards .card:visible").length == 1) {
-					$(this).parent().parent().parent().parent().remove();
-					return;
-				}
-				var oldEl;
-				if ($(".edit-cards div.hide-on-large-only:visible").length == 0) {
-					switch ($(".edit-cards .card:visible").length % 3) {
-						case 0:
-							oldEl = $(".edit-cards > div.col.l4:eq(2) .card:last");
-							break;
-						case 1:
-							oldEl = $(".edit-cards > div.col.l4:eq(0) .card:last");
-							break;
-						case 2:
-							oldEl = $(".edit-cards > div.col.l4:eq(1) .card:last");
-							break;
-					}
-				} else {
-					var oldEl;
-					switch ($(".edit-cards .card:visible").length % 2) {
-						case 0:
-							oldEl = $(".edit-cards > div.col.m6:eq(1) .card:last");
-							break;
-						case 1:
-							oldEl = $(".edit-cards > div.col.m6:eq(0) .card:last");
-							break;
-					}
-				}
-				$(this).parent().parent().parent().parent().addClass("old-card-to-be-removed");
-				$($(this).parent().parent().parent().parent()).swapWith($(oldEl));
-				$(".old-card-to-be-removed").remove();
-			} else {
-				$(this).addClass("confirm").text("confirm");
-			}
-		});
-
 		/* FILE PICKER */
 		$(document).on("click", ".file-input-field, .file-input-field *", function(e) {
 			$(this).find("input[type=file]").focus().trigger("click");
