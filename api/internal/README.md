@@ -155,3 +155,8 @@
 - **91010** - No public checkbox value passed
 - **91011** - Invalid publicity checkbox value
 - **91012** - Invalid token or bad ownership
+
+#### Undelete artist
+
+- **91101** = User is currently an artist
+- **91102** - User never was an artist
