@@ -954,6 +954,27 @@ class FormRepository {
 	}
 
 	/**
+	 * Get the form used to un-delete an artist page
+	 * 
+	 * @return Form
+	 */
+	public static function getUndeleteArtistPageForm() : Form {
+		$form = new Form();
+
+		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
+		$form->setMethod(Form::POST);
+		$form->setEndpoint("internal/artist/undelete/");
+		$form->setButtonText("REACTIVATE");
+		$form->setPrimary(false);
+
+		$completionAction = new ConcreteRedirectCompletionAction();
+		$completionAction->setRedirectUrl("Artist/Edit");
+		$form->setCompletionAction($completionAction);
+
+		return $form;
+	}
+
+	/**
 	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
 	 */
