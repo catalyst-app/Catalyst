@@ -75,7 +75,7 @@ CREATE TABLE `artist_pages` (
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s name - displayed in title bar and page top',
   `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://catalystapp.co/Artist/<URL HERE>/',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s description, markdown',
-  `TOS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s TOS - shown only when you go to commission',
+  `TOS` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s TOS - shown only when you go to commission',
   `IMG` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Artist''s profile picture, null if default, file path (suffixed after token)',
   `COLOR` binary(3) NOT NULL COMMENT 'Artist''s color hex',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the artist is deleted.  Artist''s have a special ability to "undelete" their pages - rather than forcing them to contact us to create another one if they take it down, this is easier.  When they delete it, all their commission types and all are also marked deleted.'
