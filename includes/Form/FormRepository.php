@@ -1017,6 +1017,31 @@ class FormRepository {
 		$urlField->addError(91205, ErrorCodes::ERR_91205);
 		$form->addField($urlField);
 
+		$urlSample = new StaticHTMLField();
+		
+		$urlSampleHtml = '';
+
+		$urlSampleHtml .= '<p';
+		$urlSampleHtml .= ' class="col s12 no-top-margin"';
+		$urlSampleHtml .= '>';
+
+		$urlSampleHtml .= 'This will be the link to your page: ';
+		
+		$urlSampleHtml .= '<strong';
+		$urlSampleHtml .= ' id="create-artist-page-url-sample"';
+		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
+		$urlSampleHtml .= '>';
+		
+		$urlSampleHtml .= htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())));
+		
+		$urlSampleHtml .= '</strong>';
+		
+		$urlSampleHtml .= '</p>';
+		
+		$urlSample->setHtml($urlSampleHtml);
+		
+		$form->addField($urlSample);
+
 		return $form;
 	}
 
