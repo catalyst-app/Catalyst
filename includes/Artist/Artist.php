@@ -63,8 +63,8 @@ class Artist {
 			"NAME" => $results[0]["NAME"],
 			"URL" => $results[0]["URL"],
 			"DESCRIPTION" => $results[0]["DESCRIPTION"],
-			"IMG" => (is_null($results[0]["IMG"]) ? "default.png" : $results[0]["TOKEN"].$results[0]["IMG"]),
 			"TOS" => json_decode($results[0]["TOS"]),
+			"IMG" => $results[0]["IMG"],
 			"COLOR" => bin2hex($results[0]["COLOR"])
 		];
 
@@ -201,22 +201,17 @@ class Artist {
 		return $this->cache["URL"] = $this->getColumnFromDatabase("URL");
 	}
 
-	public function getImg() : string {
+	/**
+	 * Get the path to the artist's image, WITHOUT token
+	 * 
+	 * @return null|string
+	 */
+	public function getImagePath() : ?string {
 		if (array_key_exists("IMG", $this->cache)) {
 			return $this->cache["IMG"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `IMG` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$img = $stmt->fetchAll()[0]["IMG"];
-
-		$result = $this->cache["IMG"] = $img;
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["IMG"] = $this->getColumnFromDatabase("IMG");
 	}
 
 	public function getColor() : string {
