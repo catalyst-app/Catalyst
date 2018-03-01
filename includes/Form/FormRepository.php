@@ -1109,7 +1109,7 @@ class FormRepository {
 		$str .= '<p';
 		$str .= ' class="col s12 no-margin"';
 		$str .= '>';
-		$str .= 'We recommend including at least the following items: what you will not do, payment information, refund information, sharing of finished art, commercial use, and changes to the finished product.';
+		$str .= 'We recommend including at least the following items: what you will not do, payment information, refund information, shipping information, sharing of finished art, commercial use, and changes to the finished product.';
 		$str .= '</p>';
 
 		$str .= '<p';
