@@ -267,14 +267,11 @@ class Artist {
 
 		$stmt->execute();
 
-		if (!$stmt->rowCount()) {
-			$stmt->closeCursor();
+		if (count($stmt->getResult()) == 0) {
 			return -1;
 		}
 
-		$id = $stmt->fetchAll()[0]["ID"];
-		$stmt->closeCursor();
-		return $id;
+		return $stmt->fetchAll()[0]["ID"];
 	}
 
 	/**
