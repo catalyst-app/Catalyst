@@ -63,8 +63,8 @@ class Artist {
 			"NAME" => $results[0]["NAME"],
 			"URL" => $results[0]["URL"],
 			"DESCRIPTION" => $results[0]["DESCRIPTION"],
-			"TOS" => $results[0]["TOS"],
 			"IMG" => (is_null($results[0]["IMG"]) ? "default.png" : $results[0]["TOKEN"].$results[0]["IMG"]),
+			"TOS" => json_decode($results[0]["TOS"]),
 			"COLOR" => bin2hex($results[0]["COLOR"])
 		];
 
@@ -148,20 +148,44 @@ class Artist {
 		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
 	}
 
-	public function getTos() : string {
+	/**
+	 * Get the artist's current Terms of Service
+	 * 
+	 * @return string
+	 */
+	public function getCurrentTos() : string {
+		if (array_key_exists("TOS", $this->cache)) {
+			$str = '';
+
+			$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
+			$str .= "\n":
+			$str .= $this->cache["TOS"][0][1];
+
+			return $str;
+		}
+
+		$this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
+
+		$str = '';
+		
+		$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
+		$str .= "\n":
+		$str .= $this->cache["TOS"][0][1];
+
+		return $str;
+	}
+
+	/**
+	 * Get the artist's Terms of ServiceS
+	 * 
+	 * @return string[]
+	 */
+	public function getAllTos() : string {
 		if (array_key_exists("TOS", $this->cache)) {
 			return $this->cache["TOS"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOS` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOS"] = $stmt->fetchAll()[0]["TOS"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
 	}
 
 	public function getUrl() : string {
