@@ -1070,6 +1070,19 @@ class FormRepository {
 		$noNsfwWarning->setHtml('<p class="col s12 no-top-margin">Artist\'s profile images may <strong>not</strong> be mature or explicit.</p>');
 		$form->addField($noNsfwWarning);
 
+		$colorField = new ColorField();
+		$colorField->setDistinguisher("color");
+		$colorField->setLabel("Color");
+		$colorField->setRequired(true);
+		$colorField->addError(91211, ErrorCodes::ERR_91211);
+		$colorField->setMissingErrorCode(91211);
+		$colorField->addError(91212, ErrorCodes::ERR_91212);
+		$colorField->setInvalidErrorCode(91212);
+		if (User::isLoggedIn()) {
+			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
+		}
+		$form->addField($colorField);
+
 		return $form;
 	}
 
