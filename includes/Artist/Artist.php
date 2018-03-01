@@ -8,6 +8,7 @@ use \Catalyst\Database\QueryAddition\{WhereClause};
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
+use \Catalyst\Page\Navigation\Navbar;
 use \InvalidArgumentException;
 
 /**
@@ -227,11 +228,20 @@ class Artist {
 		return $this->cache["IMG"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	}
 
+	/**
+	 * Get the HTML for the dropdown in the navbar
+	 * 
+	 * @param int $bar
+	 * @return string html
+	 */
 	public function getNavbarDropdown(int $bar) : string {
-		if ($bar == \Catalyst\Page\Navigation\Navbar::NAVBAR) {
-			return \Catalyst\Page\UniversalFunctions::getStrictCircleImageHTML($this->getPicturePath(), false, "valign").$this->getName();
+		if ($bar == Navbar::NAVBAR) {
+			$str = "";
+			$str .= $this->getImage()->getStrictCircleHtml(["valign"]); // valign needed to make it play nice
+			$str .= htmlspecialchars($this->getName());
+			return $str;
 		} else {
-			return $this->getName();
+			return "Artist Page";
 		}
 	}
 
