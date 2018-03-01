@@ -19,7 +19,7 @@ class MarkdownField extends AbstractField {
 		$str = '';
 
 		$str .= '<p';
-		$str .= ' class="col s12"';
+		$str .= ' class="col s12 no-bottom-margin"';
 		$str .= '>';
 		$str .= 'Catalyst uses a modified version of Markdown in this field.  Please see ';
 		$str .= '<a';
