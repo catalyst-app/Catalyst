@@ -59,7 +59,7 @@ $stmt->addValue($_POST["url"]);
 $stmt->addColumn(new Column("DESCRIPTION", Tables::ARTIST_PAGES));
 $stmt->addValue($_POST["description"]);
 
-$tos = "*Effective as of ".date("l, F jS, Y")."*"."\n".$_POST["tos"];
+$tos = [date("l, F jS, Y"), $_POST["tos"];
 $tos = json_encode([$tos]);
 
 $stmt->addColumn(new Column("TOS", Tables::ARTIST_PAGES));
