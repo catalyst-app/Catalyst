@@ -22,6 +22,22 @@ if ($_SESSION["user"]->isArtist() || $_SESSION["user"]->wasArtist()) {
 	Response::sendErrorResponse(91215, ErrorCodes::ERR_91215);
 }
 
+$stmt = new SelectQuery();
+
+$stmt->setTable(Tables::ARTIST_PAGES);
+
+$stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES))
+
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("URL", Tables::ARTIST_PAGES), '=', $_POST["url"]]);
+
+$stmt->execute();
+
+if (count($stmt->getResult())) {
+	HTTPCode::set(400);
+	Response::sendErrorResponse(91205, ErrorCodes::ERR_91205);
+}
+
 $stmt = new InsertQuery();
 
 $stmt->setTable(Tables::ARTIST_PAGES);
