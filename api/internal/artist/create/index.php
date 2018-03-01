@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\Query\{InsertQuery, UpdateQuery};
+use \Catalyst\Database\Query\{InsertQuery, SelectQuery, UpdateQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Form\FormRepository;
@@ -26,7 +26,7 @@ $stmt = new SelectQuery();
 
 $stmt->setTable(Tables::ARTIST_PAGES);
 
-$stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES))
+$stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES));
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("URL", Tables::ARTIST_PAGES), '=', $_POST["url"]]);
