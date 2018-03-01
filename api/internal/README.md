@@ -158,5 +158,5 @@
 
 #### Undelete artist page
 
-- **91101** = User is currently an artist
+- **91101** - User is currently an artist
 - **91102** - User never was an artist
