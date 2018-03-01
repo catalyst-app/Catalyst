@@ -160,3 +160,20 @@
 
 - **91101** - User is currently an artist
 - **91102** - User never was an artist
+
+#### Create artist page
+
+- **91201** - Missing name
+- **91202** - Name too long
+- **91203** - Missing URL
+- **91204** - Invalid URL
+- **91205** - URL is already in use
+- **91206** - Missing description
+- **91207** - Invalid description
+- **91208** - Missing image
+- **91209** - Invalid image
+- **91210** - Image is too large
+- **91211** - Missing color
+- **91212** - Invalid color
+- **91213** - Missing ToS
+- **91214** - Invalid ToS
