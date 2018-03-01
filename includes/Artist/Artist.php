@@ -3,6 +3,8 @@
 namespace Catalyst\Artist;
 
 use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
+use \Catalyst\Database\Query\{SelectQuery};
+use \Catalyst\Database\QueryAddition\{WhereClause};
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
@@ -30,21 +32,30 @@ class Artist {
 	 * @param int $id
 	 */
 	public function __construct(int $id) {
-		if (!self::idExists($id)) {
-			throw new InvalidArgumentException("Artist ID ".$id." does not exist in the database.");
-		}
-		$stmt = $GLOBALS["dbh"]->prepare("
-			SELECT
-				`USER_ID`, `TOKEN`, `NAME`, `URL`, `DESCRIPTION`, `TOS`, `IMG`, `COLOR`
-			FROM
-				`".DB_TABLES["artist_pages"]."`
-			WHERE
-				`ID` = :ID;");
-		$stmt->bindParam(":ID", $id);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("USER_ID", self::getTable()));
+		$stmt->addColumn(new Column("TOKEN", self::getTable()));
+		$stmt->addColumn(new Column("NAME", self::getTable()));
+		$stmt->addColumn(new Column("URL", self::getTable()));
+		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
+		$stmt->addColumn(new Column("TOS", self::getTable()));
+		$stmt->addColumn(new Column("IMG", self::getTable()));
+		$stmt->addColumn(new Column("COLOR", self::getTable()));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		$results = $stmt->fetchAll();
-		$stmt->closeCursor();
+		$results = $stmt->getResult();
+
+		if (!count($results)) {
+			throw new InvalidArgumentException("Artist ID ".$id." does not exist in the database.");
+		}
 
 		$this->cache = [
 			"USER_ID" => $results[0]["USER_ID"],
