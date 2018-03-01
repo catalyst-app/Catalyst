@@ -96,68 +96,56 @@ class Artist {
 		$this->setImage(new Image(Folders::ARTIST_IMAGE, $this->getToken(), $this->getImagePath()));
 	}
 
+	/**
+	 * Get the page's user id
+	 * 
+	 * @return int
+	 */
 	public function getUserId() : int {
 		if (array_key_exists("USER_ID", $this->cache)) {
 			return $this->cache["USER_ID"];
 		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `USER_ID` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["USER_ID"] = $stmt->fetchAll()[0]["USER_ID"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		
+		return $this->cache["USER_ID"] = $this->getColumnFromDatabase("USER_ID");
 	}
 
+	/**
+	 * Get the artist's token
+	 * 
+	 * @return string
+	 */
 	public function getToken() : string {
 		if (array_key_exists("TOKEN", $this->cache)) {
 			return $this->cache["TOKEN"];
 		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOKEN` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOKEN"] = $stmt->fetchAll()[0]["TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		
+		return $this->cache["TOKEN"] = $this->getColumnFromDatabase("TOKEN");
 	}
 
+	/**
+	 * Get the artist's name
+	 * 
+	 * @return string
+	 */
 	public function getName() : string {
 		if (array_key_exists("NAME", $this->cache)) {
 			return $this->cache["NAME"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NAME` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["NAME"] = $stmt->fetchAll()[0]["NAME"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
 	}
 
+	/**
+	 * Get the artist's description
+	 * 
+	 * @return string
+	 */
 	public function getDescription() : string {
 		if (array_key_exists("DESCRIPTION", $this->cache)) {
 			return $this->cache["DESCRIPTION"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `DESCRIPTION` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["DESCRIPTION"] = $stmt->fetchAll()[0]["DESCRIPTION"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
 	}
 
 	public function getTos() : string {
