@@ -1083,6 +1083,43 @@ class FormRepository {
 		}
 		$form->addField($colorField);
 
+		$tosField = new MarkdownField();
+		$tosField->setDistinguisher("tos");
+		$tosField->setLabel("Terms of Service");
+		$tosField->setRequired(true);
+		$tosField->addError(91213, ErrorCodes::ERR_91213);
+		$tosField->setMissingErrorCode(91213);
+		$tosField->addError(91214, ErrorCodes::ERR_91214);
+		$tosField->setInvalidErrorCode(91214);
+		$form->addField($tosField);
+
+		$tosNote = new StaticHTMLField();
+		
+		$str = '';
+
+		$str .= '<p';
+		$str .= ' class="col s12 no-margin"';
+		$str .= '>';
+		$str .= 'We ';
+		$str .= '<strong>highly</strong>';
+		$str .= ' suggest that any creator, no matter what, have a ToS.';
+		$str .= '</p>';
+
+		$str .= '<p';
+		$str .= ' class="col s12 no-margin"';
+		$str .= '>';
+		$str .= 'We recommend including at least the following items: what you will not do, payment information, refund information, sharing of finished art, commercial use, and changes to the finished product.';
+		$str .= '</p>';
+
+		$str .= '<p';
+		$str .= ' class="col s12 no-top-margin"';
+		$str .= '>';
+		$str .= 'Want ideas for what to include?  Check out our <a href="'.ROOTDIR.'Help/ToGuide/">Terms of Service Guide</a>!';
+		$str .= '</p>';
+
+		$tosNote->setHtml($str);
+		$form->addField($tosNote);
+
 		return $form;
 	}
 
