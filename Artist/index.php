@@ -31,14 +31,14 @@ if (!array_key_exists("q", $_GET)) {
 	}
 }
 
-if (User::isLoggedIn() && isset($artist) && $_SESSION["user"]->getArtistPageId() == $artist->getId()) {
+if (User::isLoggedIn() && !is_null($artist) && $_SESSION["user"]->getArtistPageId() == $artist->getId()) {
 	define("PAGE_KEYWORD", "artist");
 } else {
 	define("PAGE_KEYWORD", Values::VIEW_ARTIST[0]);
 }
-define("PAGE_TITLE", Values::createTitle(Values::VIEW_ARTIST[1], ["name" => (isset($artist) ? $artist->getName() : "Invalid URL")]));
+define("PAGE_TITLE", Values::createTitle(Values::VIEW_ARTIST[1], ["name" => (!is_null($artist) ? $artist->getName() : "Invalid URL")]));
 
-if (isset($artist)) {
+if (!is_null($artist)) {
 	define("PAGE_COLOR", $artist->getColor());
 } elseif (User::isLoggedIn()) {
 	define("PAGE_COLOR", $_SESSION["user"]->getColor());
