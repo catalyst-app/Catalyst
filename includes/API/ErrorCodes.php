@@ -169,6 +169,22 @@ class ErrorCodes {
 	const ERR_91101 = 'You are currently an artist';
 	const ERR_91102 = 'You never were an artist';
 
+	// new artist
+	const ERR_91201 = 'Missing name';
+	const ERR_91202 = 'Name too long';
+	const ERR_91203 = 'Missing URL';
+	const ERR_91204 = 'Invalid URL';
+	const ERR_91205 = 'URL is already in use';
+	const ERR_91206 = 'Missing description';
+	const ERR_91207 = 'Invalid description';
+	const ERR_91208 = 'Missing image';
+	const ERR_91209 = 'Invalid image';
+	const ERR_91210 = 'Image is too large';
+	const ERR_91211 = 'Missing color';
+	const ERR_91212 = 'Invalid color';
+	const ERR_91213 = 'Missing ToS';
+	const ERR_91214 = 'Invalid ToS';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
