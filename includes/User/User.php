@@ -786,7 +786,7 @@ class User implements Serializable {
 	 * 
 	 * @return null|string The path, or null if there is none set (should default to default.png, per Images definition)
 	 */
-	public function getProfilePhoto() : ?string {
+	public function getProfilePhotoPath() : ?string {
 		if (array_key_exists("PROFILE_PHOTO", $this->cache)) {
 			return $this->cache["PROFILE_PHOTO"];
 		}
@@ -888,7 +888,7 @@ class User implements Serializable {
 	 * Straight out of the HasImageTrait
 	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhoto(), $this->isProfilePictureNsfw()));
+		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhotoPath(), $this->isProfilePictureNsfw()));
 	}
 
 	/**
