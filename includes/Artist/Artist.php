@@ -245,9 +245,26 @@ class Artist {
 		}
 	}
 
+	/**
+	 * Get an ID from the URL, -1 if none
+	 * 
+	 * @return int
+	 */
 	public static function getIdFromUrl(string $url) : int {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["artist_pages"]."` WHERE `URL` = :URL AND `DELETED` = 0;");
-		$stmt->bindParam(":URL", $url);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+
+		$whereClause->addToClause([new Column("URL", self::getTable()), '=', $url]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
+		
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
 		if (!$stmt->rowCount()) {
