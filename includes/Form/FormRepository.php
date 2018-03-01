@@ -992,6 +992,18 @@ class FormRepository {
 		$completionAction->setRedirectUrl("Artist");
 		$form->setCompletionAction($completionAction);
 
+		$nameField = new TextField();
+		$nameField->setDistinguisher("name");
+		$nameField->setLabel("Name");
+		$nameField->setRequired(true);
+		$nameField->setMaxLength(255);
+		$nameField->setPattern('^.{2,255}$');
+		$nameField->addError(91201, ErrorCodes::ERR_91201);
+		$nameField->setMissingErrorCode(91201);
+		$nameField->addError(91202, ErrorCodes::ERR_91202);
+		$nameField->setInvalidErrorCode(91202);
+		$form->addField($nameField);
+
 		return $form;
 	}
 
