@@ -29,6 +29,7 @@ use \Catalyst\Form\Field\{
 	TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Integrations\SocialMedia;
+use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\Secrets;
 use \Catalyst\Tokens;
 use \Catalyst\User\User;
