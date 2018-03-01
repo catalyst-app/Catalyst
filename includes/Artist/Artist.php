@@ -214,24 +214,17 @@ class Artist {
 		return $this->cache["IMG"] = $this->getColumnFromDatabase("IMG");
 	}
 
+	/**
+	 * Color of the artist page
+	 * 
+	 * @return string
+	 */
 	public function getColor() : string {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `COLOR` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["COLOR"] = bin2hex($stmt->fetchAll()[0]["COLOR"]);
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
-	public function getPicturePath() : string {
-		return ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::ARTIST_IMAGE]."/".$this->getImg();
+		return $this->cache["IMG"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	}
 
 	public function getNavbarDropdown(int $bar) : string {
