@@ -1004,6 +1004,19 @@ class FormRepository {
 		$nameField->setInvalidErrorCode(91202);
 		$form->addField($nameField);
 
+		$urlField = new TextField();
+		$urlField->setDistinguisher("url");
+		$urlField->setLabel("URL");
+		$urlField->setRequired(true);
+		$urlField->setMaxLength(255);
+		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
+		$urlField->addError(91203, ErrorCodes::ERR_91203);
+		$urlField->setMissingErrorCode(91203);
+		$urlField->addError(91204, ErrorCodes::ERR_91204);
+		$urlField->setInvalidErrorCode(91204);
+		$urlField->addError(91205, ErrorCodes::ERR_91205);
+		$form->addField($urlField);
+
 		return $form;
 	}
 
