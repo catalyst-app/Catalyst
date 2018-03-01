@@ -158,7 +158,7 @@ class Artist {
 			$str = '';
 
 			$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
-			$str .= "\n":
+			$str .= "\n";
 			$str .= $this->cache["TOS"][0][1];
 
 			return $str;
@@ -169,7 +169,7 @@ class Artist {
 		$str = '';
 		
 		$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
-		$str .= "\n":
+		$str .= "\n";
 		$str .= $this->cache["TOS"][0][1];
 
 		return $str;
