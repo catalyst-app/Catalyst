@@ -1066,6 +1066,10 @@ class FormRepository {
 		$profilePictureField->setTooLargeErrorCode(91210);
 		$form->addField($profilePictureField);
 
+		$noNsfwWarning = new StaticHTMLField();
+		$noNsfwWarning->setHtml('<p class="col s12 no-top-margin">Artist\'s profile images may <strong>not</strong> be mature or explicit.</p>');
+		$form->addField($noNsfwWarning);
+
 		return $form;
 	}
 
