@@ -71,10 +71,20 @@ class Artist {
 		$this->id = $id;
 	}
 
+	/**
+	 * Get the object's unique ID
+	 * 
+	 * @return int
+	 */
 	public function getId() : int {
 		return $this->id;
 	}
 
+	/**
+	 * Table in which all information is stored
+	 * 
+	 * @return string
+	 */
 	public static function getTable() : string {
 		return Tables::ARTIST_PAGES;
 	}
