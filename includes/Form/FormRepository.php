@@ -1054,7 +1054,7 @@ class FormRepository {
 		$form->addField($descriptionField);
 
 		$profilePictureField = new ImageField();
-		$profilePictureField->setDistinguisher("profile-picture");
+		$profilePictureField->setDistinguisher("image");
 		$profilePictureField->setLabel("Image");
 		$profilePictureField->setRequired(false);
 		$profilePictureField->setMaxHumanSize('10MB');
