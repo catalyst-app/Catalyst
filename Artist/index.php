@@ -6,18 +6,29 @@ define("REAL_ROOTDIR", "../");
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
-if (!isset($_GET["q"])) {
-	header("Location: ".ROOTDIR."Browse");
-	die("Redirecting...");
-}
-
-$artistId = Artist::getIdFromUrl($_GET["q"]);
-if ($artistId !== -1) {
-	$artist = new Artist($artistId);
+$artist = null;
+if (!array_key_exists("q", $_GET)) {
+	if (User::isLoggedIn()) {
+		if ($_SESSION["user"]->isArtist()) {
+			$artist = $_SESSION["user"]->getArtistPage();
+		} else {
+			HTTPCode::set(400);
+		}
+	} else {
+		HTTPCode::set(401);
+	}
+} else {
+	$artistId = Artist::getIdFromUrl($_GET["q"]);
+	if ($artistId !== -1) {
+		$artist = new Artist($artistId);
+	} else {
+		HTTPCode::set(404);
+	}
 }
 
 if (User::isLoggedIn() && isset($artist) && $_SESSION["user"]->getArtistPageId() == $artist->getId()) {
