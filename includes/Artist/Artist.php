@@ -188,20 +188,17 @@ class Artist {
 		return $this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
 	}
 
+	/**
+	 * Get the page's URL
+	 * 
+	 * @return string
+	 */
 	public function getUrl() : string {
 		if (array_key_exists("URL", $this->cache)) {
 			return $this->cache["URL"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `URL` FROM `".DB_TABLES["artist_pages"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["URL"] = $stmt->fetchAll()[0]["URL"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["URL"] = $this->getColumnFromDatabase("URL");
 	}
 
 	public function getImg() : string {
