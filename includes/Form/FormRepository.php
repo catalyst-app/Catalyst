@@ -1042,6 +1042,16 @@ class FormRepository {
 		
 		$form->addField($urlSample);
 
+		$descriptionField = new MarkdownField();
+		$descriptionField->setDistinguisher("description");
+		$descriptionField->setLabel("Description");
+		$descriptionField->setRequired(true);
+		$descriptionField->addError(91206, ErrorCodes::ERR_91206);
+		$descriptionField->setMissingErrorCode(91206);
+		$descriptionField->addError(91207, ErrorCodes::ERR_91207);
+		$descriptionField->setInvalidErrorCode(91207);
+		$form->addField($descriptionField);
+
 		return $form;
 	}
 
