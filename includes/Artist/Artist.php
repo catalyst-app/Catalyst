@@ -2,17 +2,37 @@
 
 namespace Catalyst\Artist;
 
-use \Catalyst\Database\Tables;
+use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
+use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
+use \Catalyst\Message\MessagableTrait;
+use \InvalidArgumentException;
 
+/**
+ * Represents an artist in the database
+ */
 class Artist {
-	use HasSocialChipsTrait;
+	use DatabaseModelTrait, HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
+	/**
+	 * Unique ID for the artist
+	 */
 	private $id;
 
+	/**
+	 * Used as not to hammer the database
+	 */
 	private $cache = [];
 
+	/**
+	 * Create a new artist object
+	 * 
+	 * @param int $id
+	 */
 	public function __construct(int $id) {
+		if (!self::idExists($id)) {
+			throw new InvalidArgumentException("Artist ID ".$id." does not exist in the database.");
+		}
 		$stmt = $GLOBALS["dbh"]->prepare("
 			SELECT
 				`USER_ID`, `TOKEN`, `NAME`, `URL`, `DESCRIPTION`, `TOS`, `IMG`, `COLOR`
@@ -22,10 +42,6 @@ class Artist {
 				`ID` = :ID;");
 		$stmt->bindParam(":ID", $id);
 		$stmt->execute();
-
-		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("Artist ID ".$id." does not exist in the database.");
-		}
 
 		$results = $stmt->fetchAll();
 		$stmt->closeCursor();
@@ -46,6 +62,14 @@ class Artist {
 
 	public function getId() : int {
 		return $this->id;
+	}
+
+	public static function getTable() : string {
+		return Tables::ARTIST_PAGES;
+	}
+
+	public function initializeImage() : void {
+		$this->setImage(new Image(Folders::ARTIST_IMAGE, $this->getToken(), $this->getImg()));
 	}
 
 	public function getUserId() : int {
@@ -155,7 +179,7 @@ class Artist {
 
 		$img = $stmt->fetchAll()[0]["IMG"];
 
-		$result = $this->cache["IMG"] = (is_null($img) ? "default.png" : $this->getToken().$img);
+		$result = $this->cache["IMG"] = $img;
 
 		$stmt->closeCursor();
 
@@ -221,5 +245,23 @@ class Artist {
 	 */
 	public function getSocialChipIdColumn() : string {
 		return "ARTIST_ID";
+	}
+
+	/**
+	 * Part of IsMessagableTrait
+	 * 
+	 * @return string URL, relative to ROOTDIR/Message/New/, that can be used for messaging
+	 */
+	public function getMessageUrlPath() : string {
+		return 'Artist/'.$this->getUrl();
+	}
+
+	/**
+	 * Get a friendly name for the object, part of IsMessagableTrait
+	 * 
+	 * @return string The Artist's name
+	 */
+	public function getFriendlyName() : string {
+		return $this->getName();
 	}
 }
