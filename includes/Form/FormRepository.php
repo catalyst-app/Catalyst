@@ -1052,6 +1052,20 @@ class FormRepository {
 		$descriptionField->setInvalidErrorCode(91207);
 		$form->addField($descriptionField);
 
+		$profilePictureField = new ImageField();
+		$profilePictureField->setDistinguisher("profile-picture");
+		$profilePictureField->setLabel("Image");
+		$profilePictureField->setRequired(false);
+		$profilePictureField->setMaxHumanSize('10MB');
+		// these lost some clarity as what means what due to ImageField
+		$profilePictureField->addError(91208, ErrorCodes::ERR_91208);
+		$profilePictureField->setMissingErrorCode(91208);
+		$profilePictureField->addError(91209, ErrorCodes::ERR_91209);
+		$profilePictureField->setInvalidErrorCode(91209);
+		$profilePictureField->addError(91210, ErrorCodes::ERR_91210);
+		$profilePictureField->setTooLargeErrorCode(91210);
+		$form->addField($profilePictureField);
+
 		return $form;
 	}
 
