@@ -89,8 +89,11 @@ class Artist {
 		return Tables::ARTIST_PAGES;
 	}
 
+	/**
+	 * Initialize the image for the artist
+	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::ARTIST_IMAGE, $this->getToken(), $this->getImg()));
+		$this->setImage(new Image(Folders::ARTIST_IMAGE, $this->getToken(), $this->getImagePath()));
 	}
 
 	public function getUserId() : int {
