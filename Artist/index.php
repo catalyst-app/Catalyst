@@ -74,6 +74,8 @@ echo UniversalFunctions::createHeading("Artist");
 							<?php endif; ?>
 							<p class="flow-text"><a href="<?= ROOTDIR ?>User/<?= (new User($artist->getUserId()))->getUsername() ?>/">User profile</a></p>
 
+							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/ToS/<?= $artist->getUrl() ?>/">Terms of Service</a></p>
+
 							<?= $artist->getSocialChipHtml(false) ?>
 						</div>
 					</div>
