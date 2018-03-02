@@ -51,11 +51,11 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Artist");
 ?>
 
-<?php if (isset($artist)): ?>
+<?php if (!is_null($artist)): ?>
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
-						<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::ARTIST_IMAGE]."/".$artist->getImg(), false) ?>
+						<?= $artist->getImage()->getStrictCircleHtml() ?>
 					</div>
 					<div class="col s12 m7 offset-m1">
 						<div class="col s12 center-on-small-only">
@@ -64,14 +64,14 @@ echo UniversalFunctions::createHeading("Artist");
 							<br class="hide-on-med-and-up">
 							<h3 class="header hide-on-med-and-up no-margin"><?= htmlspecialchars($artist->getName()) ?></h3>
 
-<?php if (User::isLoggedIn() && $_SESSION["user"]->getId() == $artist->getUserId()): ?>
-							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/Edit/">Edit</a></p>
-<?php else: ?>
-							<br>
-<?php endif; ?>
+							<?php if (User::isLoggedIn() && $_SESSION["user"]->getId() == $artist->getUserId()): ?>
+								<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/Edit/">Edit</a></p>
+							<?php else: ?>
+								<br>
+							<?php endif; ?>
 							<p class="flow-text"><a href="<?= ROOTDIR ?>User/<?= (new User($artist->getUserId()))->getUsername() ?>/">User profile</a></p>
 
-							<?= SocialMedia::getArtistChipHTML($artist) ?>
+							<?= $artist->getSocialChipHtml(false) ?>
 						</div>
 					</div>
 				</div>
@@ -79,9 +79,7 @@ echo UniversalFunctions::createHeading("Artist");
 			<div class="divider"></div>
 			<div class="section">
 				<div class="row">
-					<div class="col s12 raw-markdown">
-<?= htmlspecialchars($artist->getDescription()) ?>
-					</div>
+					<div class="col s12 raw-markdown"><?= htmlspecialchars($artist->getDescription()) ?></div>
 				</div>
 			</div>
 			<div class="divider"></div>
