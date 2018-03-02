@@ -510,7 +510,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<h5 style="color: #b1560f;">Bronze Patrons ($10+):</h5>
 					<ul class="browser-default">
 						<li class="pink-text flow-text no-bottom-margin"><strong>SINNERSCOUT</strong></li>
-						<p class="pink-text no-top-margin"><em>since January 2018</em></p>
+						<p class="pink-text no-margin"><em>since January 2018</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -537,9 +537,42 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<h5 class="red-text">Patrons ($1+):</h5>
 					<ul class="browser-default">
-						<li class="flow-text no-bottom-margin"><strong>Coyote-Lovely</strong></li>
-						<p class="no-top-margin"><em>since February 2018</em></p>
+						<li class="deep-purple-text flow-text no-bottom-margin"><strong>King Amdusias</strong></li>
+						<p class="deep-purple-text no-margin"><em>Since February 2018</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "King Amdusias#0276",
+	],
+])) ?>
+						<li class="flow-text no-bottom-margin" style="color: #c09a69;"><strong>Lykai</strong></li>
+						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "http://www.furaffinity.net/user/lykai/",
+		"DISP_NAME" => "~Lykai",
+	],
+	[
+		"NETWORK" => "TELEGRAM",
+		"SERVICE_URL" => "https://t.me/Lykai",
+		"DISP_NAME" => "@Lykai",
+	],
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Lykai#2495",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:lykai@catalystapp.co",
+		"DISP_NAME" => "lykai@catalystapp.co",
+	],
+])) ?>
+						<li class="yellow-text flow-text no-bottom-margin"><strong><s>Coyote-Lovely</s></strong></li>
+						<p class="yellow-text no-margin"><s><em>February 2018</em></s></p>
+<?= /*SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TWITTER",
 		"SERVICE_URL" => "https://twitter.com/CoyoteLovelyDA/",
@@ -560,7 +593,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"SERVICE_URL" => "https://aminoapps.com/c/furry-amino/page/user/coyote-lovely/2vKW_21gi6fxgP1Z23WPn4ba2WbRYXJPeNW",
 		"DISP_NAME" => "Coyote-Lovely"
 	]
-])) ?>
+]))*/'' ?>
 					</ul>
 				</div>
 			</div>
