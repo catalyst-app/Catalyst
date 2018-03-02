@@ -271,7 +271,7 @@ class Artist {
 			return -1;
 		}
 
-		return $stmt->fetchAll()[0]["ID"];
+		return $stmt->getResult()[0]["ID"];
 	}
 
 	/**
