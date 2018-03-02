@@ -152,38 +152,38 @@ foreach ($attrgs as $key => $attrs): ?>
 							<br><br>
 							<div class="col s12">
 								<p><strong>Options:</strong></p>
-<?php foreach ($type->getModifiers() as $a): ?>
+	<?php foreach ($type->getModifiers() as $a): ?>
 								<p class="no-margin"><?= htmlspecialchars(implode(", ", array_map(function($in) { return $in[0]." (+".$in[1].")"; }, $a["items"]))) ?></p>
-<?php endforeach; ?>
-<?php if (!count($type->getModifiers())): ?>
+	<?php endforeach; ?>
+		<?php if (!count($type->getModifiers())): ?>
 								<p>None</p>
-<?php endif; ?>
+		<?php endif; ?>
 							</div>
 							<div class="col s12">
 								<p><strong>You may pay with:</strong> <?= count($type->getPaymentOptions()) ? htmlspecialchars(implode(", ", array_column($type->getPaymentOptions(), 0))) : "None specified" ?></p>
 							</div>
 							<div class="row">
-<?php if ($type->getImages()[0][0] == "default.png"): ?>
+		<?php if ($type->getImages()[0][0] == "default.png"): ?>
 								<p class="col s12 flow-text">There are no images of this commission type yet!</p>
-<?php else: ?>
-<?php
-$images = $type->getImages();
-if (!\Catalyst\User\User::isLoggedIn() || !$_SESSION["user"]->isNsfw()) {
-	$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
-}
+		<?php else: ?>
+		<?php
+		$images = $type->getImages();
+		if (!\Catalyst\User\User::isLoggedIn() || !$_SESSION["user"]->isNsfw()) {
+			$images = array_values(array_filter($images, function($in) { return !$in[2]; }));
+		}
 
-$images = array_map(function($in) {
-	return UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], false, "", $in[1], "");
-}, $images);
+		$images = array_map(function($in) {
+			return UniversalFunctions::renderImageCard(ROOTDIR.\Catalyst\Form\FileUpload::FOLDERS[\Catalyst\Form\FileUpload::COMMISSION_TYPE_IMAGE]."/".$in[0], false, "", $in[1], "");
+		}, $images);
 
-$bisected = [[],[]];
-$trisected = [[],[],[]];
-for ($i=0; $i < count($images); $i++) { 
-	$bisected[$i%2][] = $images[$i];
-	$trisected[$i%3][] = $images[$i];
-}
+		$bisected = [[],[]];
+		$trisected = [[],[],[]];
+		for ($i=0; $i < count($images); $i++) { 
+			$bisected[$i%2][] = $images[$i];
+			$trisected[$i%3][] = $images[$i];
+		}
 
-?>
+		?>
 								<div class="col s12 m6 hide-on-large-only">
 									<?= implode("", $bisected[0]) ?>
 								</div>
@@ -199,13 +199,13 @@ for ($i=0; $i < count($images); $i++) {
 								<div class="col l4 hide-on-med-and-down">
 									<?= implode("", $trisected[2]) ?>
 								</div>
-<?php endif; ?>
+		<?php endif; ?>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="divider col s12 top-margin"></div>
-<?php endforeach; ?>
+	<?php endforeach; ?>
 <?php else: ?>
 				<h4>This artist has no commission types listed!</h4>
 <?php endif; ?>
