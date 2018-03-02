@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "82a516807c897120f5784d9d0901b656",
+    "content-hash": "20ee82547da6b023e93433d920fad6b0",
     "packages": [
+        {
+            "name": "iphis/finediff",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iphis/fine-diff.git",
+                "reference": "8f74823bb6a79e2f3820534518c5e9019f7dc1fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iphis/fine-diff/zipball/8f74823bb6a79e2f3820534518c5e9019f7dc1fb",
+                "reference": "8f74823bb6a79e2f3820534518c5e9019f7dc1fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "iphis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raymond Hill"
+                },
+                {
+                    "name": "Rob Crowe",
+                    "email": "rob@cogpowered.com"
+                },
+                {
+                    "name": "Tobias Knipping",
+                    "email": "knipping@tk-schulsoftware.de"
+                }
+            ],
+            "description": "PHP implementation of a Fine granularity Diff engine",
+            "homepage": "https://github.com/iphis/FineDiff",
+            "keywords": [
+                "diff",
+                "finediff",
+                "opcode",
+                "string",
+                "text"
+            ],
+            "time": "2017-06-09T16:40:33+00:00"
+        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.0.3",
