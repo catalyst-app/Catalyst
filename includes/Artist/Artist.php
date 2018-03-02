@@ -179,9 +179,9 @@ class Artist {
 	/**
 	 * Get the artist's Terms of ServiceS
 	 * 
-	 * @return string[]
+	 * @return string[][]
 	 */
-	public function getAllTos() : string {
+	public function getAllTos() : array {
 		if (array_key_exists("TOS", $this->cache)) {
 			return $this->cache["TOS"];
 		}
