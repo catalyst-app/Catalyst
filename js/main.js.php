@@ -581,6 +581,12 @@ function totp(K,t) {
 			$("#create-artist-page-url-sample").text($("#create-artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
 		});
 
+		/* ARTIST TOS PICKER */
+		$(document).on("change", "#terms-of-service-picker", function() {
+			$(".artist-tos").addClass("hide");
+			$("#"+$("#terms-of-service-picker").val()).removeClass("hide");
+		});
+
 		/* EDIT ARTIST PAGE */
 		$(document).on("input", "input#editartist-url", function() {
 			$("#editartist-url-sample").text($("#editartist-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
