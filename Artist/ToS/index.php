@@ -71,8 +71,6 @@ $terms = $artist->getAllTos();
 					<?php for ($i=0; $i < count($terms); $i++): ?>
 						<div class="col s12 artist-tos<?= $i != 0 ? ' hide' : '' ?>" id="terms-<?= $i ?>">
 							<div class="raw-markdown tos-plain"><?= htmlspecialchars($terms[$i][1]) ?></div>
-							<div class="tos-diff">
-							</div>
 						</div>
 					<?php endfor; ?>
 				</div>
