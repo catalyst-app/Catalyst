@@ -23,9 +23,18 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 		<div class="row">
 			<div class="col s12 m9 l10">
 				<div class="section hide-on-med-and-up">
-	<?= Values::createInlineTOC([
-		["intro", "Introduction"],
-	]) ?>
+					<?= Values::createInlineTOC([
+						["intro", "Introduction"],
+						["limits", "Limits"],
+						["contact-preferences", "Contact Preferences"],
+						["payment", "Payment"],
+						["cancellation", "Cancellation"],
+						["shipping", "Shipping"],
+						["sharing-of-finished-art", "Sharing Of Finished Art"],
+						["copyright", "Copyright"],
+						["changes", "Changes"],
+						["hall-of-fame", "Hall of Fame"],
+					]) ?>
 				</div>
 				<div class="divider hide-on-med-and-up"></div>
 				<div class="section" id="intro">
@@ -33,9 +42,18 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
-<?= Values::createTOC([
-	["intro", "Introduction"],
-]) ?>
+				<?= Values::createTOC([
+					["intro", "Introduction"],
+					["limits", "Limits"],
+					["contact-preferences", "Contact Preferences"],
+					["payment", "Payment"],
+					["cancellation", "Cancellation"],
+					["shipping", "Shipping"],
+					["sharing-of-finished-art", "Sharing Of Finished Art"],
+					["copyright", "Copyright"],
+					["changes", "Changes"],
+					["hall-of-fame", "Hall of Fame"],
+				]) ?>
 			</div>
 		</div>
 <?php
