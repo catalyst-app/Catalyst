@@ -33,6 +33,7 @@ class Values {
 	const EDIT_COMMISSION_TYPE_IMAGES = ["artist", "Edit Commission Type Images"];
 	const NEW_COMMISSION = ["browse", "New {type} Commission | {artist}"];
 	const BLOG = ["about", "Blog"];
+	const TOS_GUIDE = ["about", "Terms of Service Guide"];
 
 	const DEFAULT_COLOR = "1b5e20";
 
