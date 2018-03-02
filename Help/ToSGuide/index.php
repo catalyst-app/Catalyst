@@ -40,6 +40,42 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="section" id="intro">
 					<h4>Introduction</h4>
 				</div>
+				<div class="divider"></div>
+				<div class="section" id="limits">
+					<h4>Limits</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="contact-preferences">
+					<h4>Contact Preferences</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="payment">
+					<h4>Payment</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="cancellation">
+					<h4>Cancellation</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="shipping">
+					<h4>Shipping</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="sharing-of-finished-art">
+					<h4>Sharing Of Finished Art</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="copyright">
+					<h4>Copyright</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="changes">
+					<h4>Changes</h4>
+				</div>
+				<div class="divider"></div>
+				<div class="section" id="hall-of-fame">
+					<h4>Hall of Fame</h4>
+				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
 				<?= Values::createTOC([
