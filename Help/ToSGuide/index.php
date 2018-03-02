@@ -39,6 +39,12 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider hide-on-med-and-up"></div>
 				<div class="section" id="intro">
 					<h4>Introduction</h4>
+					<p class="flow-text">Welcome to our guide on creating personal terms of service!  We recommend all creators, of any kind, have a personal terms of service.  This is important as it ensures that the client have agreed upon a set of conditions, and it makes the client liable if they are not followed.</p>
+					<p class="flow-text">There are a few things that we think every creator should have.  We've made sections for each of these: <a href="#limits">limits</a>, <a href="#contact-preferences">contact preferences</a>, <a href="#payment">payment</a>, <a href="#cancellation">cancellation</a>, <a href="#shipping">shipping</a>, <a href="#sharing-of-finished-art">sharing of finished art</a>, <a href="#copyright">copyright</a>, and <a href="#changes">changes</a>.</p>
+					<p class="flow-text">Have any suggestions?  This is a living document, feel free to contact us with any suggestions or feedback you might have!</p>
+					<p class="flow-text">The information below is only provided as examples.  You are in no way required to use these, or only use items from this page when constructing your terms of service.  Under each section, you will see several examples, as well as an explaination.</p>
+					<p class="flow-text">When a client commissions a creator, they agree to the creator's current terms of service.  This date is recorded in our system, and the client is not held to any future changes a creator makes unless otherwise agreed upon.  You may view a creator's revision history under their main terms of service page.</p>
+					<p class="flow-text">If a client breaks the creator's terms of service, they should be reported to our staff accordingly.  We will look at the case and take reasonable actions, up to suspension of the account, depending on the severity.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="limits">
