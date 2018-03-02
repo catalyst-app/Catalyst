@@ -1,13 +1,11 @@
 <?php
 
-define("ROOTDIR", "../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
-define("REAL_ROOTDIR", "../");
+define("ROOTDIR", "../../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
+define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\Artist\Artist;
-use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\HTTPCode;
-use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
@@ -73,6 +71,8 @@ echo UniversalFunctions::createHeading("Artist");
 								<br>
 							<?php endif; ?>
 							<p class="flow-text"><a href="<?= ROOTDIR ?>User/<?= (new User($artist->getUserId()))->getUsername() ?>/">User profile</a></p>
+
+							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/ToS/<?= $artist->getUrl() ?>/">Terms of Service</a></p>
 
 							<?= $artist->getSocialChipHtml(false) ?>
 						</div>
@@ -209,10 +209,6 @@ for ($i=0; $i < count($images); $i++) {
 <?php else: ?>
 				<h4>This artist has no commission types listed!</h4>
 <?php endif; ?>
-			</div>
-<?php elseif (User::isLoggedIn() && !array_key_exists("q", $_GET)): ?>
-			<div class="section">
-				<p class="flow-text">You are not an artist.  <a href="<?= ROOTDIR ?>Artist/New">Become one</a>?</p>
 			</div>
 <?php else: ?>
 			<div class="section">
