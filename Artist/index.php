@@ -16,6 +16,9 @@ if (!array_key_exists("q", $_GET)) {
 	if (User::isLoggedIn()) {
 		if ($_SESSION["user"]->isArtist()) {
 			$artist = $_SESSION["user"]->getArtistPage();
+			HTTPCode::set(302);
+			header("Location: ".ROOTDIR."Artist/".$artist->getUrl());
+			die("Redirecting...");
 		} else {
 			HTTPCode::set(400);
 		}

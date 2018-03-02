@@ -14,6 +14,7 @@ class HTTPCode {
 		201 => "Created",
 		202 => "Deferred",
 		301 => "Moved",
+		302 => "Temporary Redirect",
 		304 => "Not Modified",
 		400 => "Bad Request",
 		401 => "Unauthorized",
