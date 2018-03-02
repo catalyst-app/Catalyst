@@ -18,20 +18,6 @@ class SocialMedia {
 	 */
 	protected static $meta = null;
 
-	// DEPRECATED, @deprecated
-	public static function getArtistDisplayFromDatabase(\Catalyst\Artist\Artist $artist) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID`,`NETWORK`,`SERVICE_URL`,`DISP_NAME` FROM `".DB_TABLES["artist_social_media"]."` WHERE `ARTIST_ID` = :ARTIST_ID ORDER BY `SORT` ASC;");
-		$id = $artist->getId();
-		$stmt->bindParam(":ARTIST_ID", $id);
-		$stmt->execute();
-
-		$result = $stmt->fetchAll();
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
 	/**
 	 * Get meta information
 	 * 
@@ -357,10 +343,5 @@ class SocialMedia {
 		$str .= '</div>';
 
 		return $str;
-	}
-
-	// DEPRECATED
-	public static function getArtistChipHTML(\Catalyst\Artist\Artist $artist) : string {
-		return self::getChipHtml(self::getChipArray(self::getArtistDisplayFromDatabase($artist)));
 	}
 }
