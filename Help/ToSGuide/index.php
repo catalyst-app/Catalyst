@@ -31,9 +31,9 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						["payment", "Payment"],
 						["cancellation", "Cancellation"],
 						["shipping", "Shipping"],
+						["changes", "Changes"],
 						["sharing-of-finished-art", "Sharing Of Finished Art"],
 						["copyright", "Copyright"],
-						["changes", "Changes"],
 						["hall-of-fame", "Hall of Fame"],
 					]) ?>
 				</div>
@@ -73,16 +73,16 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<h4>Shipping</h4>
 				</div>
 				<div class="divider"></div>
+				<div class="section" id="changes">
+					<h4>Changes</h4>
+				</div>
+				<div class="divider"></div>
 				<div class="section" id="sharing-of-finished-art">
 					<h4>Sharing Of Finished Art</h4>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="copyright">
 					<h4>Copyright</h4>
-				</div>
-				<div class="divider"></div>
-				<div class="section" id="changes">
-					<h4>Changes</h4>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="hall-of-fame">
@@ -98,9 +98,9 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					["payment", "Payment"],
 					["cancellation", "Cancellation"],
 					["shipping", "Shipping"],
+					["changes", "Changes"],
 					["sharing-of-finished-art", "Sharing Of Finished Art"],
 					["copyright", "Copyright"],
-					["changes", "Changes"],
 					["hall-of-fame", "Hall of Fame"],
 				]) ?>
 			</div>
