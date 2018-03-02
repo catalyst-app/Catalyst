@@ -1115,7 +1115,7 @@ class FormRepository {
 		$str .= '<p';
 		$str .= ' class="col s12 no-top-margin"';
 		$str .= '>';
-		$str .= 'Want ideas for what to include?  Check out our <a href="'.ROOTDIR.'Help/ToGuide/">Terms of Service Guide</a>!';
+		$str .= 'Want ideas for what to include?  Check out our <a href="'.ROOTDIR.'Help/ToSGuide/">Terms of Service Guide</a>!';
 		$str .= '</p>';
 
 		$tosNote->setHtml($str);
