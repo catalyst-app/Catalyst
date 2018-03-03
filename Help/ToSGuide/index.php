@@ -50,7 +50,16 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="general-terms">
 					<h4>General Terms</h4>
-					<p class="flow-text">Creators should be clear and definitive in what they will and will not create.  Our attribute system does this to some extent, but artists should always clearly state things they are not willing to draw.</p>
+					<p class="flow-text">This section contains overall things which do not fit into any category, and usually the main points for working with an artist.</p>
+					<p class="flow-text">Typically, we see notes about denying commissions, however we have seen creators describe many other things, such as deadline policies, etc.</p>
+					
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">Be prepared to provide clean references of your character(s), or be able to provide a detailed description of them.  Follow all rules in the commission information, as well as these terms of service.  I have a right to decline a commission for any reason, including you not following the rules provided by me.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="limits">
