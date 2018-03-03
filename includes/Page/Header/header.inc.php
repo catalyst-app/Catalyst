@@ -30,6 +30,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<meta name="author" content="Catalyst, catalyst@catalystapp.co"/>
 		<meta name="designer" content="Fauxil Fox"/>
 		<meta name="reply-to" content="catalyst@catalystapp.co"/>
+		<meta name="theme-color" content="#<?= PAGE_COLOR ?>"/>
 
 		<!-- Apple -->
 		<meta name="apple-mobile-web-app-title" content="Catalyst"/>
