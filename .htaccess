@@ -1,12 +1,17 @@
 <If "%{REMOTE_ADDR} !='::1'">
-  AuthType Basic
-  AuthName "Approved testers only"
-  AuthUserFile /home/catalyst/.htpasswd
-  Require valid-user
+	AuthType Basic
+	AuthName "Approved testers only"
+	AuthUserFile /home/catalyst/.htpasswd
+	Require valid-user
 </If>
 
+<IfModule mod_speling.c>
+	CheckCaseOnly on
+	CheckSpelling on
+</IfModule>
+
 <IfModule mod_negotiation.c>
-    Options -MultiViews
+	Options -MultiViews
 </IfModule>
 
 <IfModule mod_php5.c>
