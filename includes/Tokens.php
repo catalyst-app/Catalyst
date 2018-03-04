@@ -14,14 +14,14 @@ class Tokens {
 	public const TOKEN_CHARS = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"];
 	public const TOKEN_REGEX = '^[a-z0-9]*$';
 
-	public const ARTIST_TOKEN_LENGTH = 32;
-	public const CHARACTER_TOKEN_LENGTH = 50;
-	public const COMMISSION_TOKEN_LENGTH = 100;
-	public const COMMISSION_TYPE_TOKEN_LENGTH = 50;
+	public const ARTIST_TOKEN_LENGTH = 9;
+	public const CHARACTER_TOKEN_LENGTH = 7;
+	public const COMMISSION_TOKEN_LENGTH = 12;
+	public const COMMISSION_TYPE_TOKEN_LENGTH = 8;
 	public const EMAIL_VERIFICATION_TOKEN_LENGTH = 12;
 	public const PASSWORD_RESET_TOKEN_LENGTH = 16;
 	public const TOTP_RESET_TOKEN_LENGTH = 20;
-	public const USER_FILE_TOKEN_LENGTH = 32;
+	public const USER_FILE_TOKEN_LENGTH = 10;
 
 	public const ARTIST_TOKEN_REGEX = '^[a-z0-9]{'.self::ARTIST_TOKEN_LENGTH.'}$';
 	public const CHARACTER_TOKEN_REGEX = '^[a-z0-9]{'.self::CHARACTER_TOKEN_LENGTH.'}$';
