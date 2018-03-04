@@ -332,7 +332,9 @@ class Form {
 		$str .= ' action="#'.htmlspecialchars($this->getId()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' method="'.htmlspecialchars($this->getMethodString()).'"';
-		$str .= ' enctype="multipart/form-data">';
+		$str .= ' enctype="multipart/form-data"';
+		$str .= ' novalidate="novalidate"';
+		$str .= '>';
 
 		return $str;
 	}
