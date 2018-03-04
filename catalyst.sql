@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2018 at 08:22 PM
+-- Generation Time: Mar 04, 2018 at 04:14 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -71,7 +71,7 @@ CREATE TABLE `api_keys` (
 CREATE TABLE `artist_pages` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique ID for each artist page',
   `USER_ID` int(11) UNSIGNED NOT NULL COMMENT 'Corresponds to `users`.`ID`',
-  `TOKEN` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'Unique token for the artist page, used for profile picture',
+  `TOKEN` char(9) CHARACTER SET ascii NOT NULL COMMENT 'Unique token for the artist page, used for profile picture',
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s name - displayed in title bar and page top',
   `URL` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Artist URL, used as https://catalystapp.co/Artist/<URL HERE>/',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s description, markdown',
@@ -144,7 +144,7 @@ CREATE TABLE `artist_streaming_integrations` (
 CREATE TABLE `characters` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique identifier of the character',
   `USER_ID` int(11) UNSIGNED NOT NULL COMMENT 'Corresponds to the character''s owner',
-  `CHARACTER_TOKEN` varchar(64) CHARACTER SET ascii NOT NULL COMMENT 'Unique tokens used for files and URL',
+  `CHARACTER_TOKEN` char(7) CHARACTER SET ascii NOT NULL COMMENT 'Unique tokens used for files and URL',
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Character''s name',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Markdown description of character',
   `COLOR` binary(3) NOT NULL COMMENT 'Color of character',
@@ -402,7 +402,7 @@ CREATE TABLE `commissions` (
   `ID` int(11) UNSIGNED NOT NULL,
   `USER_ID` int(11) UNSIGNED NOT NULL,
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL,
-  `TOKEN` varchar(100) CHARACTER SET ascii NOT NULL,
+  `TOKEN` char(12) CHARACTER SET ascii NOT NULL,
   `INTERNAL_STATE` enum('WAITING_QUOTE','DENIED','WAITING_PAYMENT','WAITING_ART','WAITING_BUYER_CONFIRM','WAITING_REVIEW','COMPLETE','CANCELED') CHARACTER SET ascii NOT NULL DEFAULT 'WAITING_QUOTE',
   `CHARACTER_ID_ARRAY` mediumtext CHARACTER SET ascii NOT NULL,
   `OPTION_ARRAY` mediumtext CHARACTER SET ascii NOT NULL,
@@ -481,7 +481,7 @@ CREATE TABLE `commission_stages` (
 CREATE TABLE `commission_types` (
   `ID` int(11) UNSIGNED NOT NULL,
   `ARTIST_PAGE_ID` int(11) UNSIGNED NOT NULL,
-  `TOKEN` varchar(50) CHARACTER SET ascii NOT NULL,
+  `TOKEN` char(8) CHARACTER SET ascii NOT NULL,
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `BLURB` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1025,7 +1025,7 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 
 CREATE TABLE `users` (
   `ID` int(11) UNSIGNED NOT NULL,
-  `FILE_TOKEN` varchar(32) CHARACTER SET ascii DEFAULT NULL,
+  `FILE_TOKEN` char(10) CHARACTER SET ascii DEFAULT NULL,
   `USERNAME` varchar(64) CHARACTER SET ascii NOT NULL,
   `HASHED_PASSWORD` varchar(60) CHARACTER SET ascii NOT NULL,
   `PASSWORD_RESET_TOKEN` varchar(16) CHARACTER SET ascii NOT NULL,
