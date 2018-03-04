@@ -532,7 +532,7 @@ class FormRepository {
 		$colorField->setMissingErrorCode(90514);
 		$colorField->addError(90515, ErrorCodes::ERR_90515);
 		$colorField->setInvalidErrorCode(90515);
-		if (!is_null($user) && !is_null($user->getEmail())) {
+		if (!is_null($user)) {
 			$colorField->setPrefilledValue($user->getColor());
 		}
 		$form->addField($colorField);
