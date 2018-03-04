@@ -93,7 +93,6 @@ class TextField extends AbstractField {
 		
 		if ($this->getPattern() !== '') {
 			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-			$str .= ' title="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"'; // required to not be ugly on some browsers
 		}
 		
 		if ($this->getMaxLength() > 0) {

@@ -77,7 +77,6 @@ class EmailField extends AbstractField {
 		
 		if ($this->getPattern() !== '') {
 			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-			$str .= ' title="Please enter a valid email"';
 		}
 		
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
