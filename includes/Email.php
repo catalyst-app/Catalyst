@@ -61,6 +61,11 @@ class Email {
 
 		$str .= 'body{';
 			$str .= 'margin:0;';
+			$str .= 'color:#000;';
+		$str .= '}';
+
+		$str .= 'h1,h2,h3,h4,h5,p,*{';
+			$str .= 'color:#000;';
 		$str .= '}';
 
 		$str .= 'article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{';
@@ -1196,9 +1201,6 @@ class Email {
 			$str .= 'font-size:1.3rem;';
 			$str .= 'line-height:inherit;';
 		$str .= '}';
-		$str .= '.btn:focus, .btn-large:focus,.btn-floating:focus{';
-			$str .= 'background-color:#1d7d74;';
-		$str .= '}';
 		$str .= '.btn, .btn-large{';
 			$str .= 'text-decoration:none;';
 			$str .= 'color:#fff;';
@@ -1487,13 +1489,7 @@ class Email {
 		$str .= '.switch label .lever::before {';
 			$str .= 'background-color: rgba('.implode(",", Color::getRGB($color)).', 0.15) !important;';
 		$str .= '}';
-		$str .= '.switch label input[type=checkbox]:checked + .lever::after,';
-		$str .= '.user-color, nav, footer.page-footer,.img-strict-circle[style*=\'/default.png");\'],';
-		$str .= '.img-strict-circle[style*="/default.png\');"],';
-		$str .= 'img[src$="/default.png"],[type="checkbox"].filled-in:checked + label:after,';
-		$str .= '[type="checkbox"].filled-in.tabbed:checked:focus + label:after,';
-		$str .= '.progress .indeterminate, .progress .determinate, .btn:not(.chosen-color),';
-		$str .= '.btn-large:not(.chosen-color) {';
+		$str .= '.user-color, .btn, .btn-large {';
 			$str .= 'background-color: #'.$color.';';
 		$str .= '}';
 		$str .= '.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {';
