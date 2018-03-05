@@ -37,11 +37,7 @@ if (strpos($_POST["url"], "javascript:") === 0) {
 if (preg_match('/^.{2,}@.{2,}\..{2,}$/', $_POST["url"])) {
 	$finalUrl = 'mailto:'.$_POST["url"];
 } else {
-	// we have regex n stuff too don't worry!!
-	if (filter_var($_POST["url"], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED) === false) {
-		HTTPCode::set(400);
-		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
-	}
+	// we already verify regex
 	$parsed = parse_url($_POST["url"]);
 	if ($parsed === false) {
 		HTTPCode::set(400);
