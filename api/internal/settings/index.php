@@ -185,6 +185,8 @@ $stmt->addAdditionalCapability($whereClause);
 $stmt->execute();
 
 if ($resendVerificationEmail) {
+	$_SESSION["user"]->clearCache("EMAIL");
+	$_SESSION["user"]->clearCache("EMAIL_VERIFIED");
 	$_SESSION["user"]->sendVerificationEmail();
 }
 
