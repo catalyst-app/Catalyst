@@ -4,6 +4,7 @@ namespace Catalyst;
 
 use \Catalyst\Page\Values;
 use \Catalyst\Secrets;
+use \PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Class which makes sending of email easy
@@ -1565,7 +1566,7 @@ class Email {
 	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
 	 */
 	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, array $smtp=self::EMAIL_SMTP) : void {
-		$mail = new \PHPMailer\PHPMailer\PHPMailer(false);
+		$mail = new PHPMailer(false);
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
 		$mail->Host = $smtp[0];
