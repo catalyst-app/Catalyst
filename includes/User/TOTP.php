@@ -2,6 +2,7 @@
 
 namespace Catalyst\User;
 
+use \Catalyst\Tokens;
 use \InvalidArgumentException;
 
 /**
@@ -91,8 +92,8 @@ class TOTP {
 	 * @return string A new TOTP key
 	 */
 	public static function generateKey() : string {
-		$chars = "234567ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		$key = implode("",array_map(function($in) use ($chars) { return $chars[$in]; }, array_rand(str_split($chars), 16)));
+		$chars = ["2","3","4","5","6","7","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+		$key = Tokens::generateTokenFromCharset(16, $chars);
 		
 		$totpKey = "";
 
