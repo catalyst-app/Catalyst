@@ -519,7 +519,7 @@ class FormRepository {
 		$twoFactorField->setMissingErrorCode(90513);
 		$twoFactorField->addError(90513, ErrorCodes::ERR_90513);
 		$twoFactorField->setInvalidErrorCode(90513);
-		if (!is_null($user) && !is_null($user->getEmail())) {
+		if (!is_null($user)) {
 			$twoFactorField->setPrefilledValue($user->isTotpEnabled());
 		}
 		$form->addField($twoFactorField);
