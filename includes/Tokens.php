@@ -105,7 +105,19 @@ class Tokens {
 	 * @return string generated token
 	 */
 	public static function generateToken(int $length) : string {
-		$chars = self::TOKEN_CHARS;
+		return self::generateTokenFromCharset($length, self::TOKEN_CHARS);
+	}
+
+	/**
+	 * Generate a psuedorandom token from a given list of characters
+	 * 
+	 * This uses the Mersenne Twister algorithm (underlying for array_rand), which is secure enough
+	 * and a psuedo-random enough number
+	 * @param int $length
+	 * @param array $chars
+	 * @return string generated token
+	 */
+	public static function generateTokenFromCharset(int $length, array $chars) : string {
 		return str_shuffle(implode("", array_map(function ($in) use ($chars) { return $chars[array_rand($chars)]; }, range(1, $length))));
 	}
 
