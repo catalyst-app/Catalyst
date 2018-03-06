@@ -67,7 +67,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 
 						<li class="flow-text no-margin">
 							<p class="no-margin">I reserve the rights to deny/cancel any services at my discretion.  Some common reasons include: I’m not comfortable drawing your idea or it’s too much of a grey zone, empty/suspicious accounts, unclear reference pics, disregarding my boundaries, rude/difficult clients, I myself get busy/sick etc, and stressing/pushing deadlines (this is a general killer for many artists and can affect the quality of the artwork!)</p>
-							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>' ToS</em></p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
 						</li>
 					</ul>
 				</div>
@@ -82,6 +82,9 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="payment">
 					<h4>Payment</h4>
+					<p class="flow-text">Creators should detail exactly how they expect payment to work.  This includes every aspect, including methods, amounts, stages (if applicable), etc.</p>
+					<p class="flow-text">Through Catalyst, the possibilities for payment are nearly endless!  We've seen creators go nearly every direction, and we encourage it!</p>
+					<p class="flow-text">Here's a few spins we've seen people take:</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="cancellation">
