@@ -93,6 +93,20 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="contact-preferences">
 					<h4>Contact Preferences</h4>
+					<p class="flow-text">Clients need to know creator's contact preferences.  If a creator prefers all communication be kept to a certain channel, or if clients should only contact them so often, they should mention it in their terms of service.  Additionally, creators should put information about circumstances which may impede communication in order to put both parties at ease.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">Please be professional and polite when contacting me for any reason regarding commissions. Harassment, rudeness, or any other ill behavior may result in your commission being cancelled, and a refund will not be issued. Most commissions will not take more than a couple weeks. However, the completion time depends on many factors, including health, order of commission, complexity, work, school, or family issues. If any of these things occur, you will be notified ASAP.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">You may inquire about progress on your piece at any time.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="payment">
