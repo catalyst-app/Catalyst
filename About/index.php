@@ -510,7 +510,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<h5 style="color: #b1560f;">Bronze Patrons ($10+):</h5>
 					<ul class="browser-default">
 						<li class="pink-text flow-text no-bottom-margin"><strong>SINNERSCOUT</strong></li>
-						<p class="pink-text no-margin"><em>since January 2018</em></p>
+						<p class="pink-text no-margin"><em>since January 2018, $10 currently pledged, lifetime $13</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -538,7 +538,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<h5 class="red-text">Patrons ($1+):</h5>
 					<ul class="browser-default">
 						<li class="deep-purple-text flow-text no-bottom-margin"><strong>King Amdusias</strong></li>
-						<p class="deep-purple-text no-margin"><em>Since February 2018</em></p>
+						<p class="deep-purple-text no-margin"><em>Since February 2018, $1 currently pledged, lifetime $1</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
@@ -547,7 +547,7 @@ echo UniversalFunctions::createHeading("About Us");
 	],
 ])) ?>
 						<li class="flow-text no-bottom-margin" style="color: #c09a69;"><strong>Lykai</strong></li>
-						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018</em></p>
+						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018, $1 currently pledged</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
