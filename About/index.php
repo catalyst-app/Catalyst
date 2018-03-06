@@ -561,6 +561,30 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@kingamdusias",
 	],
 ])) ?>
+						<li class="red-text flow-text no-bottom-margin"><strong>Styx Y. Renegade</strong></li>
+						<p class="red-text no-margin"><em>Since March 2018, $5 currently pledged</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Styx Y. Renegade#5836",
+	],
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "https://www.furaffinity.net/user/eonlover380/",
+		"DISP_NAME" => "~EonLover380",
+	],
+	[
+		"NETWORK" => "YOUTUBE",
+		"SERVICE_URL" => "https://www.youtube.com/channel/UCXhmlLoK6clgNGrZ-02tsYg",
+		"DISP_NAME" => "Styx Y. Renegade",
+	],
+	[
+		"NETWORK" => "REDDIT",
+		"SERVICE_URL" => "https://www.reddit.com/user/Styx_Renegade/",
+		"DISP_NAME" => "/u/Styx_Renegade",
+	],
+])) ?>
 						<li class="flow-text no-bottom-margin" style="color: #c09a69;"><strong>Lykai</strong></li>
 						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018, $1 currently pledged</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
