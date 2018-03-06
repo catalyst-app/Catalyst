@@ -25,6 +25,7 @@ class MarkdownField extends AbstractField {
 		$str .= '<a';
 		$str .= ' href="'.ROOTDIR.'Markdown"';
 		$str .= ' tabindex="-1"';
+		$str .= ' target="_blank"';
 		$str .= '>';
 		$str .= 'this page';
 		$str .= '</a>';
