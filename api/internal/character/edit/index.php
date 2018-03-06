@@ -69,6 +69,10 @@ if (bin2hex($character["COLOR"]) != $_POST["color"]) {
 $stmt->addColumn(new Column("PUBLIC", Tables::CHARACTERS));
 $stmt->addValue($_POST["public"] == "true");
 
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::CHARACTERS), '=', $id]);
+$stmt->addAdditionalCapability($whereClause);
+
 $stmt->execute();
 
 $imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", $_POST);
