@@ -116,12 +116,23 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 
 					<p class="flow-text no-bottom-margin">Here's a few spins we've seen people take:</p>
 					<ul class="browser-default">
-						<li class="flow-text no-margin">Full payment up front: the client must pay 100% of the entire price before the commission will be started.</li>
-						<li class="flow-text no-margin">Deferred full payment: the client must pay 100% of the entire price by a certain stage (e.g. after sketching) before the commission will be completed.</li>
-						<li class="flow-text no-margin">Full payment upon completion (not recommended): the client must pay the entire price once the work has been completed.</li>
-						<li class="flow-text no-margin">Staged: The client must pay a certain percentage of the price by certain stages (e.g. 10% upon sketching, another 40% upon completion of coloring, etc.)</li>
-						<li class="flow-text no-margin">Half: The client must pay 50% of the price in order for the commission to be started, and the remaining 50% upon completion.</li>
-						<li class="flow-text no-margin">Payment plan: The client makes an initial down payment, then a schedule of payments is negotiated.  From there, the client makes scheduled payments.  This is typically used for high-price items.</li>
+						<li class="flow-text no-margin"><strong>Full payment up front: </strong>the client must pay 100% of the entire price before the commission will be started.</li>
+						<p class="flow-text no-top-margin">This is suitable for small projects, however is not recommended for larger ones as it requires the client to have the full payment ready.  It has the benefit that the creator immediately receives the funds, which can be helpful for assurance and emergencies.</p>
+						
+						<li class="flow-text no-margin"><strong>Deferred full payment: </strong>the client must pay 100% of the entire price by a certain stage (e.g. after sketching) before the commission will be completed.</li>
+						<p class="flow-text no-top-margin">This is recommended for projects which start with small stages (such as sketching) so that, if the client fails to follow through, the creator is not out much.</p>
+						
+						<li class="flow-text no-margin"><strong>Full payment upon completion (not recommended): </strong>the client must pay the entire price once the work has been completed.</li>
+						<p class="flow-text no-top-margin">This is not a good idea except for very, very, very few cases (yes, 3 "very"s, its that small).  Through this model, we find creators often get scammed.  A client can request a commission and then either waste the creator's time, or steal the piece entirely without paying.  Creators with this model face a serious risk of being scammed.</p>
+						
+						<li class="flow-text no-margin"><strong>Staged: </strong>The client must pay a certain percentage of the price by certain stages (e.g. 10% upon sketching, another 40% upon completion of coloring, etc.)</li>
+						<p class="flow-text no-top-margin">This works well for somewhat-large projects, as it allows for both parties to have assurance.  The client knows the commission is being worked on, and the creator knows that the client has money.</p>
+						
+						<li class="flow-text no-margin"><strong>Half: </strong>The client must pay 50% of the price in order for the commission to be started, and the remaining 50% upon completion.</li>
+						<p class="flow-text no-top-margin">This is similar to staged, however it requires less constant interaction.  It works similarly and shares the same benefits.</p>
+						
+						<li class="flow-text no-margin"><strong>Payment plan: </strong>The client makes an initial down payment, then a schedule of payments is negotiated.  From there, the client makes scheduled payments.  This is typically used for high-price items.</li>
+						<p class="flow-text no-top-margin">This is recommended for large commissions, especially ones which may cost thousands of dollars.  It is unreasonable to ask the client to pay such an amount at once, however the commission may have too few stages for the staged method to be practical.  Through this method, the client and creator work together in order to agree on a payment plan, which may involve an initial down-payment and further monthly/weekly payments from there.</p>
 					</ul>
 
 					<p class="flow-text">There are tons of other possibilities as well!  Creators are welcome to take payments on whatever schedule you want, however, keep in mind that it should protect both parties.</p>
@@ -137,7 +148,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 							<p class="no-margin">​YCH's​ must always be paid upfront within 48 hours after the winner is announced.  Withdrawing yourself from an ongoing auction will lead to being blacklisted.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
 						</li>
-						
+
 						<li class="flow-text no-margin">
 							<p class="no-margin">All payments must be made in full upfront.  The only currencies accepted are DeviantART Points and USD.  Points will only be accepted via the Commission Widget, unless stated otherwise. USD will be accepted via PayPal.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
