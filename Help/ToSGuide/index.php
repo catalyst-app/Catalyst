@@ -163,6 +163,14 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="cancellation">
 					<h4>Cancellation</h4>
+
+					<p class="flow-text no-bottom-margin">Cancellations and refunds are almost as important to think about as payment!  As with payment, there are many routes creators can take:</p>
+					
+					<ul class="browser-default">
+						<li class="flow-text"><strong>No refunds at any time: </strong>once the client has paid, the money is non-refundable.</li>
+						<li class="flow-text"><strong>Refunds before starting: </strong>the money (or a portion thereof) may be refunded before the creator has started, however refunds are not offered after the creator has begun work.</li>
+						<li class="flow-text"><strong>Incremental: </strong>depending upon the progress of the commission, certain amounts will be refunded.</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="shipping">
