@@ -545,6 +545,21 @@ echo UniversalFunctions::createHeading("About Us");
 		"SERVICE_URL" => null,
 		"DISP_NAME" => "King Amdusias#0276",
 	],
+	[
+		"NETWORK" => "PATREON",
+		"SERVICE_URL" => "https://www.patreon.com/KingAmdusias",
+		"DISP_NAME" => "KingAmdusias",
+	],
+	[
+		"NETWORK" => "INSTAGRAM",
+		"SERVICE_URL" => "https://instagram.com/amdusias.png",
+		"DISP_NAME" => "@amdusias.png",
+	],
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/kingamdusias",
+		"DISP_NAME" => "@kingamdusias",
+	],
 ])) ?>
 						<li class="flow-text no-bottom-margin" style="color: #c09a69;"><strong>Lykai</strong></li>
 						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018, $1 currently pledged</em></p>
