@@ -113,7 +113,41 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<h4>Payment</h4>
 					<p class="flow-text">Creators should detail exactly how they expect payment to work.  This includes every aspect, including methods, amounts, stages (if applicable), etc.</p>
 					<p class="flow-text">Through Catalyst, the possibilities for payment are nearly endless!  We've seen creators go nearly every direction, and we encourage it!</p>
-					<p class="flow-text">Here's a few spins we've seen people take:</p>
+
+					<p class="flow-text no-bottom-margin">Here's a few spins we've seen people take:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">Full payment up front: the client must pay 100% of the entire price before the commission will be started.</li>
+						<li class="flow-text no-margin">Deferred full payment: the client must pay 100% of the entire price by a certain stage (e.g. after sketching) before the commission will be completed.</li>
+						<li class="flow-text no-margin">Full payment upon completion (not recommended): the client must pay the entire price once the work has been completed.</li>
+						<li class="flow-text no-margin">Staged: The client must pay a certain percentage of the price by certain stages (e.g. 10% upon sketching, another 40% upon completion of coloring, etc.)</li>
+						<li class="flow-text no-margin">Half: The client must pay 50% of the price in order for the commission to be started, and the remaining 50% upon completion.</li>
+						<li class="flow-text no-margin">Payment plan: The client makes an initial down payment, then a schedule of payments is negotiated.  From there, the client makes scheduled payments.  This is typically used for high-price items.</li>
+					</ul>
+
+					<p class="flow-text">There are tons of other possibilities as well!  Creators are welcome to take payments on whatever schedule you want, however, keep in mind that it should protect both parties.</p>
+
+					<p class="flow-text">Additionally, you should include information about currency.  If you are in high-demand, you should note that only clients who pay first will have slots reserved.</p>
+
+					<p class="flow-text">See our <a href="<?= ROOTDIR ?>FAQ/#protect">FAQ</a> for additional things you should keep in mind.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">Claimed slots have to be paid upfront within 48 hours, via PayPal invoice only! No eCheck payments! They take too long and sometimes get declined! If you fail to pay in time I will scrap your commission and reopen the slot. Don’t claim a slot if you lack the funds!</p>
+							<p class="no-margin">​YCH's​ must always be paid upfront within 48 hours after the winner is announced.  Withdrawing yourself from an ongoing auction will lead to being blacklisted.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
+						</li>
+						
+						<li class="flow-text no-margin">
+							<p class="no-margin">All payments must be made in full upfront.  The only currencies accepted are DeviantART Points and USD.  Points will only be accepted via the Commission Widget, unless stated otherwise. USD will be accepted via PayPal.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">Payment upfront - your slot is secured once I have received full payment!</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="cancellation">
