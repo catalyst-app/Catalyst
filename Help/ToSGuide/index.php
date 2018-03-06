@@ -74,6 +74,21 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="limits">
 					<h4>Limits</h4>
+					<p class="flow-text">Creators should be clear and definitive in what they will and will not create.  Our attribute system does this to some extent, but artists should always clearly state things they are not willing to draw.  This helps prevent both unwanted quotes and rejection.</p>
+					<p class="flow-text">Some common examples creators may wish to include are canon characters (those from TV shows/movies), as well as various scenarious like macro/micro, etc.  What is listed in a creator's ToS may not fully encompass all they will/will not do.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">I only do SFW content. Risque, pinup, and very simple nudity is allowed, but I reserve the right to refuse any commission I don’t feel comfortable taking.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">No copyrighted characters or OC's without their given permission.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="contact-preferences">
