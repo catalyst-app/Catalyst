@@ -164,7 +164,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="section" id="cancellation">
 					<h4>Cancellation</h4>
 
-					<p class="flow-text no-bottom-margin">Cancellations and refunds are almost as important to think about as payment!  As with payment, there are many routes creators can take:</p>
+					<p class="flow-text no-bottom-margin">Cancellations and refunds are almost as important to think about as payment!  As with payment, there are many routes creators can take, however they usually fall into the following categories:</p>
 					
 					<ul class="browser-default">
 						<li class="flow-text"><strong>No refunds at any time: </strong>once the client has paid, the money is non-refundable.</li>
