@@ -196,6 +196,19 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 
 					<p class="flow-text no-margin">Creators should be sure to cover anything related to shipping, if applicable.  If the work is digital, ensure the commissioner knows that they will not receive any physical items.</p>
 					<p class="flow-text no-margin">Creators may also wish to denote types of shipping, related costs, etc.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">This is a digital item and won't be shipped.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">Items currently only ship within the continental United States and Canada.  They will be shipped through bubble mailers via ground (estimate a week).  If you need faster delivery, please let me know before I being work.</p>
+							<p class="right-align no-margin"><em>(Fauxil made this one up)</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="changes">
