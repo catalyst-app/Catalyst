@@ -193,6 +193,9 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="shipping">
 					<h4>Shipping</h4>
+
+					<p class="flow-text no-margin">Creators should be sure to cover anything related to shipping, if applicable.  If the work is digital, ensure the commissioner knows that they will not receive any physical items.</p>
+					<p class="flow-text no-margin">Creators may also wish to denote types of shipping, related costs, etc.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="changes">
