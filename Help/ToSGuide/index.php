@@ -40,6 +40,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider hide-on-med-and-up"></div>
 				<div class="section" id="intro">
 					<h4>Introduction</h4>
+
 					<p class="flow-text">Welcome to our guide on creating personal terms of service!  We recommend all creators, of any kind, have a personal terms of service.  This is important as it ensures that the client have agreed upon a set of conditions, and it makes the client liable if they are not followed.</p>
 					<p class="flow-text">There are a few things that we think every creator should have.  We've made sections for each of these: <a href="#general-terms">general terms</a>, <a href="#limits">limits</a>, <a href="#contact-preferences">contact preferences</a>, <a href="#payment">payment</a>, <a href="#cancellation">cancellation</a>, <a href="#shipping">shipping</a>, <a href="#sharing-of-finished-work">sharing of finished work</a>, <a href="#copyright">copyright</a>, and <a href="#changes">changes</a>.</p>
 					<p class="flow-text">Have any suggestions?  This is a living document, feel free to contact us with any suggestions or feedback you might have!  If your your terms of service is stellar, we might even include it in our <a href="#hall-of-fame">hall of fame</a>!</p>
@@ -50,6 +51,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="general-terms">
 					<h4>General Terms</h4>
+
 					<p class="flow-text">This section contains overall things which do not fit into any category, and usually the main points for working with an artist.</p>
 					<p class="flow-text">Typically, we see notes about denying commissions, however we have seen creators describe many other things, such as deadline policies, etc.</p>
 					
@@ -74,6 +76,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="limits">
 					<h4>Limits</h4>
+
 					<p class="flow-text">Creators should be clear and definitive in what they will and will not create.  Our attribute system does this to some extent, but artists should always clearly state things they are not willing to draw.  This helps prevent both unwanted quotes and rejection.</p>
 					<p class="flow-text">Some common examples creators may wish to include are canon characters (those from TV shows/movies), as well as various scenarious like macro/micro, etc.  What is listed in a creator's ToS may not fully encompass all they will/will not do.</p>
 
@@ -93,6 +96,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="contact-preferences">
 					<h4>Contact Preferences</h4>
+
 					<p class="flow-text">Clients need to know creator's contact preferences.  If a creator prefers all communication be kept to a certain channel, or if clients should only contact them so often, they should mention it in their terms of service.  Additionally, creators should put information about circumstances which may impede communication in order to put both parties at ease.</p>
 
 					<p class="flow-text no-bottom-margin">Examples we like:</p>
@@ -111,6 +115,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="payment">
 					<h4>Payment</h4>
+
 					<p class="flow-text">Creators should detail exactly how they expect payment to work.  This includes every aspect, including methods, amounts, stages (if applicable), etc.</p>
 					<p class="flow-text">Through Catalyst, the possibilities for payment are nearly endless!  We've seen creators go nearly every direction, and we encourage it!</p>
 
