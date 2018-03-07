@@ -30,6 +30,7 @@ $stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES));
 
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("URL", Tables::ARTIST_PAGES), '=', $_POST["url"]]);
+$stmt->addAdditionalCapability($whereClause);
 
 $stmt->execute();
 
