@@ -32,7 +32,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						["cancellation", "Cancellation"],
 						["shipping", "Shipping"],
 						["changes", "Changes"],
-						["sharing-of-finished-art", "Sharing Of Finished Art"],
+						["sharing-of-finished-work", "Sharing Of Finished Work"],
 						["copyright", "Copyright"],
 						["hall-of-fame", "Hall of Fame"],
 					]) ?>
@@ -41,7 +41,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="section" id="intro">
 					<h4>Introduction</h4>
 					<p class="flow-text">Welcome to our guide on creating personal terms of service!  We recommend all creators, of any kind, have a personal terms of service.  This is important as it ensures that the client have agreed upon a set of conditions, and it makes the client liable if they are not followed.</p>
-					<p class="flow-text">There are a few things that we think every creator should have.  We've made sections for each of these: <a href="#general-terms">general terms</a>, <a href="#limits">limits</a>, <a href="#contact-preferences">contact preferences</a>, <a href="#payment">payment</a>, <a href="#cancellation">cancellation</a>, <a href="#shipping">shipping</a>, <a href="#sharing-of-finished-art">sharing of finished art</a>, <a href="#copyright">copyright</a>, and <a href="#changes">changes</a>.</p>
+					<p class="flow-text">There are a few things that we think every creator should have.  We've made sections for each of these: <a href="#general-terms">general terms</a>, <a href="#limits">limits</a>, <a href="#contact-preferences">contact preferences</a>, <a href="#payment">payment</a>, <a href="#cancellation">cancellation</a>, <a href="#shipping">shipping</a>, <a href="#sharing-of-finished-work">sharing of finished work</a>, <a href="#copyright">copyright</a>, and <a href="#changes">changes</a>.</p>
 					<p class="flow-text">Have any suggestions?  This is a living document, feel free to contact us with any suggestions or feedback you might have!  If your your terms of service is stellar, we might even include it in our <a href="#hall-of-fame">hall of fame</a>!</p>
 					<p class="flow-text">The information below is only provided as examples.  You are in no way required to use these, or only use items from this page when constructing your terms of service.  Under each section, you will see several examples, as well as an explaination.</p>
 					<p class="flow-text">When a client commissions a creator, they agree to the creator's current terms of service.  This date is recorded in our system, and the client is not held to any future changes a creator makes unless otherwise agreed upon.  You may view a creator's revision history under their main terms of service page.</p>
@@ -181,8 +181,8 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<h4>Changes</h4>
 				</div>
 				<div class="divider"></div>
-				<div class="section" id="sharing-of-finished-art">
-					<h4>Sharing Of Finished Art</h4>
+				<div class="section" id="sharing-of-finished-work">
+					<h4>Sharing Of Finished Work</h4>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="copyright">
@@ -203,7 +203,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					["cancellation", "Cancellation"],
 					["shipping", "Shipping"],
 					["changes", "Changes"],
-					["sharing-of-finished-art", "Sharing Of Finished Art"],
+					["sharing-of-finished-work", "Sharing Of Finished Work"],
 					["copyright", "Copyright"],
 					["hall-of-fame", "Hall of Fame"],
 				]) ?>
