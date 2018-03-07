@@ -171,6 +171,19 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						<li class="flow-text"><strong>Refunds before starting: </strong>the money (or a portion thereof) may be refunded before the creator has started, however refunds are not offered after the creator has begun work.</li>
 						<li class="flow-text"><strong>Incremental: </strong>depending upon the progress of the commission, certain amounts will be refunded.</li>
 					</ul>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">If you want to cancel a commission before I've begun working on it, you'll be refunded 90% of the original cost.  If a commission is already in progress, you will be partially refunded depending on how much I've completed. No refunds on completed work or YCH's!</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">I have the right to cancel and refund the money to you for your commission at any time.  You have no right to cancel or demand a refund from the artist under any circumstances after payment is received.  If payment has not been made, the commissioner has the right to cancel the commission.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="shipping">
