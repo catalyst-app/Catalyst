@@ -5,6 +5,7 @@ namespace Catalyst;
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Exception;
+use \ReflectionClass;
 use \Throwable;
 
 /**
@@ -124,6 +125,15 @@ class Controller {
 				Email::ERROR_LOG_PASSWORD
 			);
 		}
+
+		$reflectedClass = new ReflectionClass(Secrets::class);
+		$constants = $reflectedClass->getConstants();
+
+		$result = [];
+		foreach ($constants as $value) {
+			$errstr = str_replace($value, "{REDACTED}", $errstr);
+		}
+
 		if (in_array("discord", $destinations)) {
 			$trace = self::getTrace(false);
 			$traceEmbeds = [];
@@ -133,6 +143,7 @@ class Controller {
 					"value" => $row
 				];
 			}
+
 			try {
 				file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BUG_WEBHOOK_TOKEN, false, stream_context_create([
 					"http" => [
