@@ -19,6 +19,7 @@ use \Catalyst\Form\Field\{
 	EmailField,
 	HiddenInputField,
 	ImageField,
+	JSConfirmField,
 	MarkdownField,
 	MultipleImageField,
 	MultipleImageWithNsfwCaptionAndInfoField,
