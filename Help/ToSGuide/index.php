@@ -260,11 +260,6 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						</li>
 
 						<li class="flow-text no-margin">
-							<p class="no-margin">Please contact me about edits if you need them. If I forget something that was in the reference(s) provided, I will gladly change them without an extra charge.  You may be charged for additional edits (outside of mistakes on my part) at my discretion.</p>
-							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
-						</li>
-
-						<li class="flow-text no-margin">
 							<p class="no-margin">When the artwork is finished you will be sent one larger resolution for personal use and one smaller resolution for public use.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
 						</li>
