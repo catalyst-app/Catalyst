@@ -213,6 +213,12 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="changes">
 					<h4>Changes</h4>
+
+					<p class="flow-text">Creators and clients should have a clear understanding on what changes can be made on finished pieces, and the process surrounding any of these changes.</p>
+
+					<p class="flow-text">We recommend creators provide frequent WIPs (work-in-progress) to the client.  Therefore, changes can be made as soon as possible.</p>
+
+					<p class="flow-text">If a creator accepts written references, they may wish to add additional restrictions regarding those.  Catalyst's Character feature makes it easy to compile artwork, descriptions, and errata in one place, and it is highly recommended that they be used.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="sharing-of-finished-work">
