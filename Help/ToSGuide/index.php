@@ -308,6 +308,26 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="hall-of-fame">
 					<h4>Hall of Fame</h4>
+
+					<p class="flow-text">Thanks to the generosity of several people, we were able to compile this guide!  Below is a list of all the terms of services we used as examples or as a general guide!</p>
+					
+					<p class="flow-text">Think your Terms of Service is worthy of being listed here?  Feel free to contact us!</p>
+
+					<ul class="browser-default">
+						<li class="flow-text"><a href="https://twitter.com/NaahvaDoesArt">Naahva</a></li>
+						<li class="flow-text"><a href="https://noelanieternal.deviantart.com/journal/Noelani-s-Terms-of-Service-717799406">NoelaniEternal</a></li>
+						<li class="flow-text"><a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/">Hettie</a></li>
+						<li class="flow-text"><a href="http://stealthnachos.weebly.com/terms-of-service.html">stealthnachos</a></li>
+						<li class="flow-text"><a href="https://docs.google.com/document/d/1d5yqWdobmAwc4rJh6cfvABh-CarNI6zzxh-QXP8fSr4/">Bunnybb</a></li>
+						<li class="flow-text"><a href="http://www.matrices.net/terms.htm">Matrices</a></li>
+						<li class="flow-text"><a href="https://docs.google.com/document/d/1Y9fS46TTZd6s0CulveOoXLq4bkbIhMjXBWoyrnfJQ0c/">Snofu</a></li>
+						<li class="flow-text"><a href="http://www.furaffinity.net/user/reshiram/">Reshiram</a></li>
+						<li class="flow-text"><a href="https://dancrescentwolf.wixsite.com/dcw-art/kopie-von-kopie-von-commissions">Dan Crescent Wolf</a></li>
+						<li class="flow-text"><a href="https://www.furaffinity.net/journal/7420703/">Otakuwolf</a></li>
+						<li class="flow-text"><a href="https://mottenfest.weebly.com/">Mottenfest/Urban Coyote</a></li>
+						<li class="flow-text"><a href="http://www.furaffinity.net/journal/8551643/">Jonas-Puppeh</a></li>
+						<li class="flow-text"><a href="http://www.furaffinity.net/view/5941153/">Endium</a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="col s12 m3 l2 hide-on-small-only">
