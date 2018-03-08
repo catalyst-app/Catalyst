@@ -247,9 +247,9 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="section" id="sharing-of-finished-work">
 					<h4>Sharing Of Finished Work</h4>
 
-					<p class="flow-text">Protecting a creator's intellectual property is important both in terms of recognition and to prevent improper use of the artwork by the commissioner. While making a ToS, creators should think of a few key aspects: can their artwork be modified, where it can be shown, the conditions for being able to showcase the art, can a commissioner use the artwork for profit and the rights that the creator keeps over the artwork (the idea, setting, recreating the work, right to profit from the artwork). 
+					<p class="flow-text">Protecting a creator's intellectual property is important both in terms of recognition and to prevent improper use of the artwork by the client. While making a ToS, creators should think of a few key aspects: can their artwork be modified, where it can be shown, the conditions for being able to showcase the art, can a client use the artwork for profit and the rights that the creator keeps over the artwork (the idea, setting, recreating the work, right to profit from the artwork).</p>
 					
-					<p class="flow-text">We recommend that creators and commissioners establish thorough boundaries ahead of time so that both the commissioner and artist knows what can or cannot done with the artwork and to prevent creating any disputes in the future. </p>
+					<p class="flow-text">We recommend that creators and clients establish thorough boundaries ahead of time so that both the client and artist knows what can or cannot done with the artwork and to prevent creating any disputes in the future. </p>
 					
 					<p class="flow-text no-bottom-margin">Examples we like:</p>
 					<ul class="browser-default">
