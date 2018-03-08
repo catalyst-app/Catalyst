@@ -281,6 +281,29 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<p class="flow-text">Copyright can often become a contested issue, especially for some types of commissions (channel introduction animations, for example).  We suggest that creators specify who holds the copyrights of the piece, and any additional limitations relating to those.</p>
 					
 					<p class="flow-text">Creators should discuss rights for selling, printing, claiming it as their own, <strong>commerical use</strong>, etc.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">The commissioner is allowed to use the copyrighted artwork for personal use only, print the art, and claim the right of their character(s) but not the drawing itself. Use the art to promote themselves with proper credit given to me. They may NOT sell the picture in any way (prints, stickers, etc), nor claim it as something created by you.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">I reserve the rights to use any commissioned art for showcasing, portfolios or artbooks.  All rights are reserved. You may not copy, trace, claim or use any of my art or characters without my given permission. You may not use my art for any commercial use!  My art should always be credited back to me.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">I retain copyright to every work of art I produce. This includes the rights to reproduce the work to sell as prints and merchandise.  Under no circumstances may any artwork produced under these Terms of Service be used for commercial purposes.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">I, the artist, hold every right to the artwork produced, not the commissioner.  Therefore, I am allowed to use the copyrighted artwork to promote myself within any place or site, display it anywhere to my liking, and post it wherever I want.  The commissioner is allowed to use the copyrighted artwork for personal use only unless agreed otherwise, print the art, claim the right of their character(s) but not the drawing itself, and use the art to promote themselves with proper credit given to the artist.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="hall-of-fame">
