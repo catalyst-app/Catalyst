@@ -238,7 +238,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						</li>
 
 						<li class="flow-text no-margin">
-							<p class="no-marin">Work In Progress (WIP) will only be given if the commissioner personally asks for it.  I will also provide WIPs if I need to clarify something with the commission.  I will do anything to make my customers happy, however, after a commission is completed, only small changes can be made to them, such as small coloring/marking mistakes.  Any large changes will come with a fee.  Large changes include outfit change, background change, or anything else that would require me to redraw something completely.  If your original description/reference was not clear enough, then you are not allowed to do minor changes without a fee.  Try to be as clear as possible when commissioning to avoid any fees.</p>
+							<p class="no-margin">Work In Progress (WIP) will only be given if the commissioner personally asks for it.  I will also provide WIPs if I need to clarify something with the commission.  I will do anything to make my customers happy, however, after a commission is completed, only small changes can be made to them, such as small coloring/marking mistakes.  Any large changes will come with a fee.  Large changes include outfit change, background change, or anything else that would require me to redraw something completely.  If your original description/reference was not clear enough, then you are not allowed to do minor changes without a fee.  Try to be as clear as possible when commissioning to avoid any fees.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
 						</li>
 					</ul>
@@ -246,6 +246,41 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="sharing-of-finished-work">
 					<h4>Sharing Of Finished Work</h4>
+					<p class="flow-text">Protecting a creator's intellectual property is important both in terms of recognition and to prevent improper use of the artwork by the commissioner. While making a ToS, creators should think of a few key aspects: can their artwork be modified, where it can be shown, the conditions for being able to showcase the art, can a commissioner use the artwork for profit and the rights that the creator keeps over the artwork (the idea, setting, recreating the work, right to profit from the artwork). 
+					<p class="flow-text">We recommend that creators and commissioners establish thorough boundaries ahead of time so that both the commissioner and artist knows what can or cannot done with the artwork and to prevent creating any disputes in the future. </p>
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">I hold the rights to the produced artwork.
+								You can not use or repost my art in any way, shape, or form without my permission unless you're the Commissioner. </p>
+								<p class="no-margin">I may use the artwork for art collections, sale and presentation.
+								If you want to make it private (I won't post it and/or  I won't use it for Sale) let me know.
+								Not using it as Sales is free - but not posting it aka 'Make it Private' comes with a fee. </p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">Please contact me about edits if you need them. If I forget something that was in the reference(s) provided, I will gladly change them without an extra charge.  You may be charged for additional edits (outside of mistakes on my part) at my discretion.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">When the artwork is finished you will be sent one larger resolution for personal use and one smaller resolution for public use.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1lk_aEoxVO1KroiscbitTNh8u1EAMXr_o63SHlErLPTA/edit">Hettie</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">You may upload the piece to any website so long as you give credit to me in the description.</p>
+							<p class="no-margin"> I take private commissions (commissions I will not post or use for prints), but require a privacy fee of 40% to cover advertisement and possible revenue losses.</p>
+							<p class="no-margin"> Under no circumstances will I remove art from my gallery if the privacy fee hasn’t been paid.	This does not give the user commercial rights, simply the right to keep the commission private or released only at their discretion. This does not apply to timed privacy up to a month. In the instance of a gift that you’d rather not have me post before a certain time, I do not charge the additional fee, as long as it’s within one calendar month from the time of completion. </p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+						<li class="flow-text no-margin">
+							<p class="no-margin">Once completed I will link the files to you via dropbox unless you have provided me with a designated email address for the files to be sent to. </p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1d5yqWdobmAwc4rJh6cfvABh-CarNI6zzxh-QXP8fSr4/edit">Bunnybb</a>'s TOS</em></p>
+						</li>
+					</ul>
+
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="copyright">
