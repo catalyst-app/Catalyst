@@ -126,6 +126,9 @@ window.onerror = function(message, url, lineNumber) {
 
 /* GENERAL FUNCTIONS */
 var markInputInvalid = function(e, a) {
+	if ($(e).length == 0) {
+		return;
+	}
 	if ($(e).hasClass("g-recaptcha")) {
 		markCaptchaInvalid(a);
 	} else {
