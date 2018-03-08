@@ -1124,7 +1124,7 @@ ALTER TABLE `artist_pages`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `USER` (`USER_ID`, `DELETED`),
   ADD UNIQUE KEY `URL_DELETED` (`URL`, `DELETED`),
-  ADD KEY `DELETED` (`DELETED`),
+  ADD KEY `DELETED` (`DELETED`);
 
 --
 -- Indexes for table `artist_social_media`
