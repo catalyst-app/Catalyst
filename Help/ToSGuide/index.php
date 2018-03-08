@@ -219,6 +219,29 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<p class="flow-text">We recommend creators provide frequent WIPs (work-in-progress) to the client.  Therefore, changes can be made as soon as possible.</p>
 
 					<p class="flow-text">If a creator accepts written references, they may wish to add additional restrictions regarding those.  Catalyst's Character feature makes it easy to compile artwork, descriptions, and errata in one place, and it is highly recommended that they be used.</p>
+
+					<p class="flow-text no-bottom-margin">Examples we like:</p>
+					<ul class="browser-default">
+						<li class="flow-text no-margin">
+							<p class="no-margin">I will keep you updated with WIPs for the sketch and line art during the process of the commission to make sure you are still satisfied with the project.  Major adjustments are only available during sketch phase. Minor adjustments are available during lineart phase.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://docs.google.com/document/d/1d5yqWdobmAwc4rJh6cfvABh-CarNI6zzxh-QXP8fSr4/edit">bunnybb</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">Please contact me about edits if you need them. If I forget something that was in the reference(s) provided, I will gladly change them without an extra charge.  You may be charged for additional edits (outside of mistakes on my part) at my discretion.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-margin">I'm not responsible for inaccuracies or for fixing a piece, if what you are requesting was not included in your description, or your ref-sheet, or if you didn't speak up during the rough-sketch or lineart-phase.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
+						</li>
+
+						<li class="flow-text no-margin">
+							<p class="no-marin">Work In Progress (WIP) will only be given if the commissioner personally asks for it.  I will also provide WIPs if I need to clarify something with the commission.  I will do anything to make my customers happy, however, after a commission is completed, only small changes can be made to them, such as small coloring/marking mistakes.  Any large changes will come with a fee.  Large changes include outfit change, background change, or anything else that would require me to redraw something completely.  If your original description/reference was not clear enough, then you are not allowed to do minor changes without a fee.  Try to be as clear as possible when commissioning to avoid any fees.</p>
+							<p class="right-align no-margin"><em>Adapted from <a href="https://noelanieternal.deviantart.com/">NoelaniEternal</a>'s ToS</em></p>
+						</li>
+					</ul>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="sharing-of-finished-work">
