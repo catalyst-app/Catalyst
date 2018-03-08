@@ -952,6 +952,12 @@ class FormRepository {
 		$tokenField->setSelector("#character-token");
 		$form->addField($tokenField);
 
+		$confirmField = new JSConfirmField();
+		$confirmField->setDistinguisher("confirm");
+		$confirmField->setRequired(true);
+		$confirmField->setPrompt("Are you sure you want to delete this character?");
+		$form->addField($confirmField);
+
 		return $form;
 	}
 
