@@ -277,6 +277,10 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 				<div class="divider"></div>
 				<div class="section" id="copyright">
 					<h4>Copyright</h4>
+
+					<p class="flow-text">Copyright can often become a contested issue, especially for some types of commissions (channel introduction animations, for example).  We suggest that creators specify who holds the copyrights of the piece, and any additional limitations relating to those.</p>
+					
+					<p class="flow-text">Creators should discuss rights for selling, printing, claiming it as their own, <strong>commerical use</strong>, etc.</p>
 				</div>
 				<div class="divider"></div>
 				<div class="section" id="hall-of-fame">
