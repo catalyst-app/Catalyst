@@ -251,11 +251,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 					<p class="flow-text no-bottom-margin">Examples we like:</p>
 					<ul class="browser-default">
 						<li class="flow-text no-margin">
-							<p class="no-margin">I hold the rights to the produced artwork.
-								You can not use or repost my art in any way, shape, or form without my permission unless you're the Commissioner. </p>
-								<p class="no-margin">I may use the artwork for art collections, sale and presentation.
-								If you want to make it private (I won't post it and/or  I won't use it for Sale) let me know.
-								Not using it as Sales is free - but not posting it aka 'Make it Private' comes with a fee. </p>
+							<p class="no-margin">I hold the rights to the produced artwork. You can not use or repost my art in any way, shape, or form without my permission unless you're the Commissioner.  I may use the artwork for art collections, sale and presentation.  If you want to make it private (I won't post it and/or I won't use it for marketing purposes), let me know.  Not using it for marketing is free - but not posting it aka 'Make it Private' comes with a fee.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="https://twitter.com/NaahvaDoesArt">Naahva</a>'s ToS</em></p>
 						</li>
 
@@ -265,9 +261,7 @@ echo UniversalFunctions::createHeading("Terms of Service Guide");
 						</li>
 
 						<li class="flow-text no-margin">
-							<p class="no-margin">You may upload the piece to any website so long as you give credit to me in the description.</p>
-							<p class="no-margin"> I take private commissions (commissions I will not post or use for prints), but require a privacy fee of 40% to cover advertisement and possible revenue losses.</p>
-							<p class="no-margin"> Under no circumstances will I remove art from my gallery if the privacy fee hasn’t been paid.	This does not give the user commercial rights, simply the right to keep the commission private or released only at their discretion. This does not apply to timed privacy up to a month. In the instance of a gift that you’d rather not have me post before a certain time, I do not charge the additional fee, as long as it’s within one calendar month from the time of completion. </p>
+							<p class="no-margin">You may upload the piece to any website so long as you give credit to me in the description.  I do take private commissions (commissions I will not post or use for prints), but require a privacy fee of 40% to cover advertisement and possible revenue losses.  Under no circumstances will I remove art from my gallery if the privacy fee hasn’t been paid.	This does not give the user commercial rights, simply the right to keep the commission private or released only at their discretion. This does not apply to timed privacy up to a month.  In the instance of a gift that you’d rather not have me post before a certain time, I do not charge the additional fee, as long as it’s within one calendar month from the time of completion.</p>
 							<p class="right-align no-margin"><em>Adapted from <a href="http://stealthnachos.weebly.com/terms-of-service.html">Stealthnachos</a>' ToS</em></p>
 						</li>
 						<li class="flow-text no-margin">
