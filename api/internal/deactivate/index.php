@@ -164,6 +164,15 @@ if ($_SESSION["user"]->isArtist()) {
 	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
 	$deleteCommissionTypeStages->addAdditionalCapability($whereClause);
 	$deleteCommissionTypeStages->execute();
+
+	$deleteCommissionTypes = new UpdateQuery();
+	$deleteCommissionTypes->setTable(Tables::COMMISSION_TYPES);
+	$deleteCommissionTypes->addColumn(new Column("DELETED", Tables::COMMISSION_TYPES));
+	$deleteCommissionTypes->addValue(true);
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $artistId]);
+	$deleteCommissionTypes->addAdditionalCapability($whereClause);
+	$deleteCommissionTypes->execute();
 }
 
 $deleteCharactersQuery = new UpdateQuery();
