@@ -597,22 +597,6 @@ function totp(K,t) {
 			$("#editartist-url-sample").text($("#editartist-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
 		});
 
-		/* DELETE ARTIST PAGE */
-		$(document).on("click", ".confirm-artist-page-deletion-btn", function() {
-			$.ajax("delete.php", {
-				data: new FormData(), // no data needed
-				processData: false,
-				contentType: false,
-				method: "POST"
-			}).done(function(response) {
-				Materialize.toast("Deleted", 4000);
-				window.location = $("html").attr("data-rootdir");
-			}).fail(function(response) {
-				alert("Unknown error.");
-				window.location="";
-			});
-		});
-
 		/* ADD SOCIAL MEDIA */
 		var addSocialMediaChip = function(data) {
 			$(".modal").modal("close");
