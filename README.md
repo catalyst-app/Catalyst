@@ -1,5 +1,7 @@
 # Catalyst - Facilitating Commissions
 
+### Both this project and README are undergoing rewrites/refactors, and may not be up to date or even close to correct
+
 # Table of Contents
 
 - [Introduction](#introduction)
