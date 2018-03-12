@@ -91,8 +91,9 @@ class Controller {
 	 * @param string $errstr Error string/message
 	 * @param string $errfile File the error occured in
 	 * @param int $errline Line the error occured on
+	 * @param string $trackingId Unique ID for the error
 	 */
-	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline) : void {
+	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline, string $trackingId) : void {
 		ob_start();
 		$destinations = [];
 		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
@@ -109,7 +110,9 @@ class Controller {
 				'<p><strong>Error string:</strong> '.htmlspecialchars($errstr).'</p>'.
 				'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
 				'<p><strong>Error line:</strong> '.$errline.'</p>'.
-				'<p><strong>User:</strong> '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown').'</p>'.
+				'<p><strong>Tracking ID:</strong> '.$trackingId.'</p>'.
+				'<p><strong>Site User:</strong> '.(array_key_exists("user", $_SESSION) ? $_SESSION['user']->getUsername() : 'not logged in').'</p>'.
+				'<p><strong>Beta User:</strong> '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown').'</p>'.
 				'<p><strong>Trace:</strong></p>'.
 				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
 				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
@@ -117,7 +120,9 @@ class Controller {
 				"Error string: ".$errstr."\r\n\r\n".
 				"Error file: ".$errfile."\r\n\r\n".
 				"Error line: ".$errline."\r\n\r\n".
-				'User: '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\r\n\r\n".
+				"Tracking ID: ".$trackingId."\r\n\r\n".
+				'Site User: '.(array_key_exists("user", $_SESSION) ? $_SESSION['user']->getUsername() : 'not logged in')."\r\n\r\n".
+				'Beta User: '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,$_SESSION]),
@@ -129,7 +134,6 @@ class Controller {
 		$reflectedClass = new ReflectionClass(Secrets::class);
 		$constants = $reflectedClass->getConstants();
 
-		$result = [];
 		foreach ($constants as $value) {
 			$errstr = str_replace($value, "{REDACTED}", $errstr);
 		}
@@ -173,7 +177,15 @@ class Controller {
 											"value" => $errline
 										],
 										[
-											"name" => 'User',
+											"name" => 'Tracking ID',
+											"value" => $trackingId
+										],
+										[
+											"name" => 'Site User',
+											"value" => (array_key_exists("user", $_SESSION) ? $_SESSION['user']->getUsername() : 'not logged in')
+										],
+										[
+											"name" => 'Beta User',
 											"value" => (array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')
 										],
 									], $traceEmbeds),
@@ -193,7 +205,9 @@ class Controller {
 				$telegramStr .= "<b>Error:</b> ".str_replace("<br>", "\r\n", $errstr)."\n";
 				$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
 				$telegramStr .= "<b>Line:</b> ".$errline."\n";
-				$telegramStr .= "<b>User:</b> ".(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\n";
+				$telegramStr .= "<b>Tracking ID:</b> ".$trackingId."\n";
+				$telegramStr .= "<b>Site User:</b> ".(array_key_exists("user", $_SESSION) ? $_SESSION['user']->getUsername() : 'not logged in')."\n";
+				$telegramStr .= "<b>Beta User:</b> ".(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\n";
 				$telegramStr .= "<b>Trace:</b>\n";
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
@@ -215,12 +229,13 @@ class Controller {
 	 * @param string $errstr Error string/message
 	 * @param string $errfile File the error occured in
 	 * @param int $errline Line the error occured on
+	 * @param string $trackingId Unique tracking ID
 	 */
-	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline) : void {
+	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline, string $trackingId) : void {
 		if (!headers_sent()) {
 			HTTPCode::set(500);
 			if (Endpoint::isEndpoint()) {
-				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, [$errno,$errstr,basename($errfile),$errline]);
+				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, ["tracking_id" => $trackingId]);
 			}
 		}
 	}
@@ -235,67 +250,59 @@ class Controller {
 	 * @return bool Whether or not the handler worked
 	 */
 	public static function handleError(int $errno, string $errstr, string $errfile, int $errline) : bool {
+		$trackingId = ((string)time())."-".$errno."-".md5($errstr.$errfile.$errline)."-".uniqid();
 		switch ($errno) {
 			case E_ERROR:
-				self::sendErrorNotice("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown fatal error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_ERROR", "E_ERROR", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_WARNING:
-				self::sendErrorNotice("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_WARNING", "E_WARNING", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_PARSE:
-				self::sendErrorNotice("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_PARSE", "E_PARSE", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_NOTICE:
-				self::sendErrorNotice("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_NOTICE", "E_NOTICE", $errno, $errstr, $errfile, $errline, $trackingId);
 				return true;
 			case E_CORE_ERROR:
-				self::sendErrorNotice("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_CORE_ERROR", "E_CORE_ERROR", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_CORE_WARNING:
-				self::sendErrorNotice("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_CORE_WARNING", "E_CORE_WARNING", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_COMPILE_ERROR:
-				self::sendErrorNotice("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_COMPILE_ERROR", "E_COMPILE_ERROR", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_COMPILE_WARNING:
-				self::sendErrorNotice("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_COMPILE_WARNING", "E_COMPILE_WARNING", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_USER_ERROR:
-				self::sendErrorNotice("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_USER_ERROR", "E_USER_ERROR", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_USER_WARNING:
-				self::sendErrorNotice("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_USER_WARNING", "E_USER_WARNING", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_USER_NOTICE:
-				self::sendErrorNotice("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_USER_NOTICE (API misuse?)", "E_USER_NOTICE", $errno, $errstr, $errfile, $errline, $trackingId);
 				return true;
 			case E_STRICT:
-				self::sendErrorNotice("E_STRICT", "E_STRICT", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_STRICT", "E_STRICT", $errno, $errstr, $errfile, $errline, $trackingId);
 				return true;
 			case E_RECOVERABLE_ERROR:
-				self::sendErrorNotice("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting E_RECOVERABLE_ERROR", "E_RECOVERABLE_ERROR", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 			case E_DEPRECATED:
-				self::sendErrorNotice("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_DEPRECATED", "E_DEPRECATED", $errno, $errstr, $errfile, $errline, $trackingId);
 				return true;
 			case E_USER_DEPRECATED:
-				self::sendErrorNotice("E_USER_DEPRECATED", "E_USER_DEPRECATED", $errno, $errstr, $errfile, $errline);
+				self::sendErrorNotice("E_USER_DEPRECATED", "E_USER_DEPRECATED", $errno, $errstr, $errfile, $errline, $trackingId);
 				return true;
 			default:
-				self::sendErrorNotice("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline);
-				self::send500Error($errno, $errstr, $errfile, $errline);
-				die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!");
+				self::sendErrorNotice("Halting unknown (".$errno.")", "unknown ('.$errno.')", $errno, $errstr, $errfile, $errline, $trackingId);
+				break;
 		}
+		self::send500Error($errno, $errstr, $errfile, $errline, $trackingId);
+		die("An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!  Error ID: ".$trackingId);
 		return true;
 	}
 
