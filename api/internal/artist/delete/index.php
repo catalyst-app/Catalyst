@@ -23,13 +23,20 @@ if (!$_SESSION["user"]->isArtist()) {
 $artistId = $_SESSION["user"]->getArtistPageId();
 
 $stmt = new UpdateQuery();
-
 $stmt->setTable(Tables::ARTIST_PAGES);
-
 $stmt->addColumn(new Column("DELETED", Tables::ARTIST_PAGES));
 $stmt->addValue(1);
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), '=', $_SESSION["user"]->getId()]);
+$stmt->addAdditionalCapability($whereClause);
+$stmt->execute();
+
+$stmt = new UpdateQuery();
+$stmt->setTable(Tables::USERS);
+$stmt->addColumn(new Column("ARTIST_PAGE_ID", Tables::USERS));
+$stmt->addValue(null);
+$whereClause = new WhereClause();
+$whereClause->addToClause([new Column("ID", Tables::USERS), '=', $_SESSION["user"]->getId()]);
 $stmt->addAdditionalCapability($whereClause);
 $stmt->execute();
 
