@@ -4,8 +4,7 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
-use \Catalyst\Database\Artist\EditArtist;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Form\FormRepository;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
@@ -25,17 +24,14 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Edit Artist Page");
 
-if (FormHTML::testAjaxSubmissionFailed()) {
-	echo FormHTML::getAjaxSubmissionHtml();
-} elseif (!User::isLoggedIn()) {
+if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHtml();
-} elseif (!$_SESSION["user"]->isArtist()) { ?>
+elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<p class="flow-text">You do not have an artist page.</p>
-			<p class="flow-text">You may create one <a href="<?= ROOTDIR ?>Artist/New">here</a>.</p>
+			<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/New">Create one?</a></p>
 		</div>
-<?php } else { ?>
-
+<?php else: ?>
 		<div class="section">
 			<div class="row">
 				<div class="col s12">
@@ -48,31 +44,13 @@ if (FormHTML::testAjaxSubmissionFailed()) {
 			</div>
 		</div>
 		<div class="divider"></div>
-<?php echo FormHTML::generateForm(EditArtist::getFormStructure()); ?>
-
+		<?= /*FormRepository::getEditArtistPageForm()*/'' ?>
 		<div class="divider"></div>
 		<div class="section">
 			<p class="col s12 flow-text">Please go <a href="../EditCommissionTypes/">here</a> to edit commission types.</p>
-		</div>
-		<div class="divider"></div>
-		<div class="section">
-			<div class="row"><div data-target="deactivate" class="btn col s12 m4 l2 red darken-1 modal-trigger">DELETE</div></div>
-
-			<div id="deactivate" class="modal">
-				<div class="modal-content">
-					<h4>Delete artist page</h4>
-					<h5><strong>This action is IRREVERSIBLE.</strong></h5>
-					<p class="flow-text">
-						You will lose all of the information on your page and it will become inaccessible immediately.
-					</p>
-					<p class="flow-text">
-						In order to delete the page, click the button below.
-					</p>
-					<div class="row"><div class="confirm-artist-page-deletion-btn btn red darken-1">confirm</div></div>
-				</div>
-			</div>
+			<?= FormRepository::getDeleteArtistPageForm()->getHtml(false) ?>
 		</div>
 <?php
-}
+endif;
 
 require_once Values::FOOTER_INC;
