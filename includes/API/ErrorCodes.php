@@ -186,6 +186,9 @@ class ErrorCodes {
 	const ERR_91214 = 'Invalid ToS';
 	const ERR_91215 = 'You are already an artist';
 
+	// delete artist
+	const ERR_91301 = 'You are not an artist';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

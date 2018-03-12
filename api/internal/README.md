@@ -178,3 +178,7 @@
 - **91213** - Missing ToS
 - **91214** - Invalid ToS
 - **91215** - Already an artist
+
+#### Delete artist page
+
+- **91301** - Current user is not an artist
