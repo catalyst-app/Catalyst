@@ -20,12 +20,16 @@ class Header {
 		["https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"'],
 		// crossorigin doesn't like to behave here
 		["https://www.google.com/recaptcha/api.js", "defer"],
-		// md parser
-		[ROOTDIR."js/markdown-it.js", "defer"],
-		// ajax upload progress
-		[ROOTDIR."js/jq-ajax-progress.js", "defer"],
-		// main javascripts
-		[ROOTDIR."js/main.js.php"],
+		
+		[ROOTDIR."js/modules/error_handler.js"],
+		
+		[ROOTDIR."js/modules/markdown_parser.js", "defer"],
+		[ROOTDIR."js/modules/ajax_progress.js", "defer"],
+		[ROOTDIR."js/modules/console_message.js", "defer"],
+		[ROOTDIR."js/modules/input_functions.js", "defer"],
+		[ROOTDIR."js/modules/polyfills.js", "defer"],
+		[ROOTDIR."js/modules/totp_preview.js", "defer"],
+		[ROOTDIR."js/modules/onload.js"],
 	];
 
 	/**
