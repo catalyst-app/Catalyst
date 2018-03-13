@@ -182,3 +182,21 @@
 #### Delete artist page
 
 - **91301** - Current user is not an artist
+
+#### Edit artist page
+
+- **91401** - Missing name
+- **91402** - Name too long
+- **91403** - Missing URL
+- **91404** - Invalid URL
+- **91405** - URL is already in use
+- **91406** - Missing description
+- **91407** - Invalid description
+- **91408** - Missing image
+- **91409** - Invalid image
+- **91410** - Image is too large
+- **91411** - Missing color
+- **91412** - Invalid color
+- **91413** - Missing ToS
+- **91414** - Invalid ToS
+- **91415** - Not an artist
