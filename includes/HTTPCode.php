@@ -43,7 +43,7 @@ class HTTPCode {
 	 * @param int $code the new code
 	 * @throws InvalidArgumentException on invalid code
 	 */
-	public static function set(int $code) {
+	public static function set(int $code) : void {
 		if (!array_key_exists($code, self::CODE_MAP)) {
 			throw new \InvalidArgumentException($code." is not a known HTTP status code");
 		}
