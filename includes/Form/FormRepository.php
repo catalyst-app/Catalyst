@@ -1167,7 +1167,7 @@ class FormRepository {
 		$form = new Form();
 
 		$isArtist = User::isLoggedIn() && $_SESSION["user"]->isArtist();
-		$artist = $_SESSION["user"]->getArtistPage();
+		$artist = $isArtist ? $_SESSION["user"]->getArtistPage() : null;
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
