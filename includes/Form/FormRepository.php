@@ -1166,6 +1166,9 @@ class FormRepository {
 	public static function getEditArtistPageForm() : Form {
 		$form = new Form();
 
+		$isArtist = User::isLoggedIn() && $_SESSION["user"]->isArtist();
+		$artist = $_SESSION["user"]->getArtistPage();
+
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/artist/edit/");
@@ -1186,6 +1189,9 @@ class FormRepository {
 		$nameField->setMissingErrorCode(91401);
 		$nameField->addError(91402, ErrorCodes::ERR_91402);
 		$nameField->setInvalidErrorCode(91402);
+		if ($isArtist) {
+			$nameField->setPrefilledValue($artist->getName());
+		}
 		$form->addField($nameField);
 
 		$urlField = new TextField();
@@ -1199,6 +1205,9 @@ class FormRepository {
 		$urlField->addError(91404, ErrorCodes::ERR_91404);
 		$urlField->setInvalidErrorCode(91404);
 		$urlField->addError(91405, ErrorCodes::ERR_91405);
+		if ($isArtist) {
+			$urlField->setPrefilledValue($artist->getUrl());
+		}
 		$form->addField($urlField);
 
 		$urlSample = new StaticHTMLField();
@@ -1216,7 +1225,11 @@ class FormRepository {
 		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/Edit\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
 		$urlSampleHtml .= '>';
 		
-		$urlSampleHtml .= htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())));
+		$urlSampleHtml .= htmlspecialchars((preg_replace('/Edit\/?$/', '', UniversalFunctions::getRequestUrl())));
+
+		if ($isArtist) {
+			$urlSampleHtml .= htmlspecialchars($artist->getUrl()).'/';
+		}
 		
 		$urlSampleHtml .= '</strong>';
 		
@@ -1234,6 +1247,9 @@ class FormRepository {
 		$descriptionField->setMissingErrorCode(91406);
 		$descriptionField->addError(91407, ErrorCodes::ERR_91407);
 		$descriptionField->setInvalidErrorCode(91407);
+		if ($isArtist) {
+			$descriptionField->setPrefilledValue($artist->getDescription());
+		}
 		$form->addField($descriptionField);
 
 		$profilePictureField = new ImageField();
@@ -1262,8 +1278,8 @@ class FormRepository {
 		$colorField->setMissingErrorCode(91411);
 		$colorField->addError(91412, ErrorCodes::ERR_91412);
 		$colorField->setInvalidErrorCode(91412);
-		if (User::isLoggedIn()) {
-			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
+		if ($isArtist) {
+			$colorField->setPrefilledValue($artist->getColor());
 		}
 		$form->addField($colorField);
 
@@ -1275,6 +1291,9 @@ class FormRepository {
 		$tosField->setMissingErrorCode(91413);
 		$tosField->addError(91414, ErrorCodes::ERR_91414);
 		$tosField->setInvalidErrorCode(91414);
+		if ($isArtist) {
+			$tosField->setPrefilledValue($artist->getCurrentTosWithoutDate());
+		}
 		$form->addField($tosField);
 
 		$tosNote = new StaticHTMLField();
