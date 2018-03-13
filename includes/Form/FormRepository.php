@@ -994,7 +994,7 @@ class FormRepository {
 		$form->setMethod(Form::POST);
 		$form->setEndpoint("internal/artist/create/");
 		$form->setButtonText("CREATE");
-		$form->setPrimary(false);
+		$form->setPrimary(true);
 
 		$completionAction = new ConcreteRedirectCompletionAction();
 		$completionAction->setRedirectUrl("Artist");
