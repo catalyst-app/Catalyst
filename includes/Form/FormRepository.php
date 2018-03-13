@@ -1036,7 +1036,7 @@ class FormRepository {
 		$urlSampleHtml .= 'This will be the link to your page: ';
 		
 		$urlSampleHtml .= '<strong';
-		$urlSampleHtml .= ' id="create-artist-page-url-sample"';
+		$urlSampleHtml .= ' id="artist-page-url-sample"';
 		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
 		$urlSampleHtml .= '>';
 		
@@ -1212,8 +1212,8 @@ class FormRepository {
 		$urlSampleHtml .= 'This will be the link to your page: ';
 		
 		$urlSampleHtml .= '<strong';
-		$urlSampleHtml .= ' id="create-artist-page-url-sample"';
-		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
+		$urlSampleHtml .= ' id="artist-page-url-sample"';
+		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/Edit\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
 		$urlSampleHtml .= '>';
 		
 		$urlSampleHtml .= htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())));

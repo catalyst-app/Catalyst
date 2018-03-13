@@ -582,8 +582,8 @@ function totp(K,t) {
 		});
 
 		/* NEW ARTIST PAGE */
-		$(document).on("input", "#create-artist-page-form-input-url", function() {
-			$("#create-artist-page-url-sample").text($("#create-artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
+		$(document).on("input", "#create-artist-page-form-input-url, #edit-artist-page-form-input-url", function() {
+			$("#artist-page-url-sample").text($("#artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
 		});
 
 		/* ARTIST TOS PICKER */
