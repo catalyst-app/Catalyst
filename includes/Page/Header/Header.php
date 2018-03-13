@@ -26,6 +26,7 @@ class Header {
 		[ROOTDIR."js/modules/markdown_parser.js", "defer"],
 		[ROOTDIR."js/modules/ajax_progress.js", "defer"],
 		[ROOTDIR."js/modules/console_message.js", "defer"],
+		[ROOTDIR."js/modules/color_functions.js", "defer"],
 		[ROOTDIR."js/modules/input_functions.js", "defer"],
 		[ROOTDIR."js/modules/polyfills.js", "defer"],
 		[ROOTDIR."js/modules/totp_preview.js", "defer"],
