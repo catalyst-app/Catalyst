@@ -225,7 +225,7 @@ class Artist {
 			return $this->cache["COLOR"];
 		}
 
-		return $this->cache["IMG"] = bin2hex($this->getColumnFromDatabase("COLOR"));
+		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	}
 
 	/**
