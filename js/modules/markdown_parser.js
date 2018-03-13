@@ -1,3 +1,9 @@
+function renderMarkdownArea(area) {
+  $(area).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
+  $(area).find('.collapsible').collapsible();
+}
+
+// FROM WEBPACK
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
