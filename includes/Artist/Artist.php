@@ -177,6 +177,21 @@ class Artist {
 	}
 
 	/**
+	 * Get the artist's current Terms of Service, without the date bit
+	 * 
+	 * @return string
+	 */
+	public function getCurrentTosWithoutDate() : string {
+		if (array_key_exists("TOS", $this->cache)) {
+			return $this->cache["TOS"][0][1];
+		}
+
+		$this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
+
+		return $this->cache["TOS"][0][1];
+	}
+
+	/**
 	 * Get the artist's Terms of ServiceS
 	 * 
 	 * @return string[][]
