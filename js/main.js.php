@@ -1083,6 +1083,7 @@ function totp(K,t) {
 				);
 			}, 1000);
 		});
+		$('textarea').trigger('autoresize');
 	});
 })(jQuery);
 
