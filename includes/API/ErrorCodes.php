@@ -189,6 +189,23 @@ class ErrorCodes {
 	// delete artist
 	const ERR_91301 = 'You are not an artist';
 
+	// edit artist
+	const ERR_91401 = 'Missing name';
+	const ERR_91402 = 'Name too long';
+	const ERR_91403 = 'Missing URL';
+	const ERR_91404 = 'Invalid URL';
+	const ERR_91405 = 'URL is already in use';
+	const ERR_91406 = 'Missing description';
+	const ERR_91407 = 'Invalid description';
+	const ERR_91408 = 'Missing image';
+	const ERR_91409 = 'Invalid image';
+	const ERR_91410 = 'Image is too large';
+	const ERR_91411 = 'Missing color';
+	const ERR_91412 = 'Invalid color';
+	const ERR_91413 = 'Missing ToS';
+	const ERR_91414 = 'Invalid ToS';
+	const ERR_91415 = 'You are not an artist';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
