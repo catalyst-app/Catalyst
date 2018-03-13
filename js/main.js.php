@@ -16,26 +16,26 @@ $errors = ErrorCodes::getAssoc();
 use \Catalyst\Color;
 // the following series of whitespace is dedicated to SINNERSCOUT for being cool and a patron and stuff:
 /*
-U+0020	SPACE	foo bar, size: depends on font, typically 1/4 em, often adjusted
-U+00A0	NO-BREAK SPACE	foo bar, size: as a space, but often not adjusted
-U+1680	OGHAM SPACE MARK	foo bar, size: unspecified; usually not really a space but a dash
-U+180E	MONGOLIAN VOWEL SEPARATOR	foo᠎bar, size: no width
-U+2000	EN QUAD	foo bar, size: 1 en (= 1/2 em)
-U+2001	EM QUAD	foo bar, size: 1 em (nominally, the height of the font)
-U+2002	EN SPACE	foo bar, size: 1 en (= 1/2 em)
-U+2003	EM SPACE	foo bar, size: 1 em
-U+2004	THREE-PER-EM SPACE	foo bar, size: 1/3 em
-U+2005	FOUR-PER-EM SPACE	foo bar, size: 1/4 em
-U+2006	SIX-PER-EM SPACE	foo bar, size: 1/6 em
-U+2007	FIGURE SPACE	foo bar, size: “tabular width”, the width of digits
-U+2008	PUNCTUATION SPACE	foo bar, size: the width of a period “.”
-U+2009	THIN SPACE	foo bar, size: 1/5 em (or sometimes 1/6 em)
-U+200A	HAIR SPACE	foo bar, size: narrower than thin space
-U+200B	ZERO WIDTH SPACE	foo​bar, size: nominally no width, but may expand
-U+202F	NARROW NO-BREAK SPACE	foo bar, size: narrower than no-break space (or space)
-U+205F	MEDIUM MATHEMATICAL SPACE	foo bar, size: 4/18 em
-U+3000	IDEOGRAPHIC SPACE	foo　bar, size: the width of ideographic (cjk) characters.
-U+FEFF	ZERO WIDTH NO-BREAK SPACE	foo﻿bar, size: no width (the character is invisible)
+U+0020  SPACE   foo bar, size: depends on font, typically 1/4 em, often adjusted
+U+00A0  NO-BREAK SPACE  foo bar, size: as a space, but often not adjusted
+U+1680  OGHAM SPACE MARK    foo bar, size: unspecified; usually not really a space but a dash
+U+180E  MONGOLIAN VOWEL SEPARATOR   foo᠎bar, size: no width
+U+2000  EN QUAD foo bar, size: 1 en (= 1/2 em)
+U+2001  EM QUAD foo bar, size: 1 em (nominally, the height of the font)
+U+2002  EN SPACE    foo bar, size: 1 en (= 1/2 em)
+U+2003  EM SPACE    foo bar, size: 1 em
+U+2004  THREE-PER-EM SPACE  foo bar, size: 1/3 em
+U+2005  FOUR-PER-EM SPACE   foo bar, size: 1/4 em
+U+2006  SIX-PER-EM SPACE    foo bar, size: 1/6 em
+U+2007  FIGURE SPACE    foo bar, size: “tabular width”, the width of digits
+U+2008  PUNCTUATION SPACE   foo bar, size: the width of a period “.”
+U+2009  THIN SPACE  foo bar, size: 1/5 em (or sometimes 1/6 em)
+U+200A  HAIR SPACE  foo bar, size: narrower than thin space
+U+200B  ZERO WIDTH SPACE    foo​bar, size: nominally no width, but may expand
+U+202F  NARROW NO-BREAK SPACE   foo bar, size: narrower than no-break space (or space)
+U+205F  MEDIUM MATHEMATICAL SPACE   foo bar, size: 4/18 em
+U+3000  IDEOGRAPHIC SPACE   foo　bar, size: the width of ideographic (cjk) characters.
+U+FEFF  ZERO WIDTH NO-BREAK SPACE   foo﻿bar, size: no width (the character is invisible)
 */
 use \Catalyst\Database\CommissionType\EditCommissionType;
 use \Catalyst\Database\CommissionType\NewCommissionType;
@@ -56,54 +56,53 @@ use \Catalyst\Images\MIMEType;
 
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 if (!Array.prototype.includes) {
-  Object.defineProperty(Array.prototype, 'includes', {
-	value: function(searchElement, fromIndex) {
-
-	  if (this == null) {
-		throw new TypeError('"this" is null or not defined');
-	  }
-
-	  // 1. Let O be ? ToObject(this value).
-	  var o = Object(this);
-
-	  // 2. Let len be ? ToLength(? Get(O, "length")).
-	  var len = o.length >>> 0;
-
-	  // 3. If len is 0, return false.
-	  if (len === 0) {
-		return false;
-	  }
-
-	  // 4. Let n be ? ToInteger(fromIndex).
-	  //	(If fromIndex is undefined, this step produces the value 0.)
-	  var n = fromIndex | 0;
-
-	  // 5. If n ≥ 0, then
-	  //  a. Let k be n.
-	  // 6. Else n < 0,
-	  //  a. Let k be len + n.
-	  //  b. If k < 0, let k be 0.
-	  var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-
-	  function sameValueZero(x, y) {
-		return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-	  }
-
-	  // 7. Repeat, while k < len
-	  while (k < len) {
-		// a. Let elementK be the result of ? Get(O, ! ToString(k)).
-		// b. If SameValueZero(searchElement, elementK) is true, return true.
-		if (sameValueZero(o[k], searchElement)) {
-		  return true;
+	Object.defineProperty(Array.prototype, 'includes', {
+		value: function(searchElement, fromIndex) {
+			if (this == null) {
+				throw new TypeError('"this" is null or not defined');
+			}
+	  
+			// 1. Let O be ? ToObject(this value).
+			var o = Object(this);
+	  
+			// 2. Let len be ? ToLength(? Get(O, "length")).
+			var len = o.length >>> 0;
+	  
+			// 3. If len is 0, return false.
+			if (len === 0) {
+				return false;
+			}
+	  
+			// 4. Let n be ? ToInteger(fromIndex).
+			//    (If fromIndex is undefined, this step produces the value 0.)
+			var n = fromIndex | 0;
+	  
+			// 5. If n ≥ 0, then
+			//  a. Let k be n.
+			// 6. Else n < 0,
+			//  a. Let k be len + n.
+			//  b. If k < 0, let k be 0.
+			var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+	  
+			function sameValueZero(x, y) {
+				return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+			}
+	  
+			// 7. Repeat, while k < len
+			while (k < len) {
+				// a. Let elementK be the result of ? Get(O, ! ToString(k)).
+				// b. If SameValueZero(searchElement, elementK) is true, return true.
+				if (sameValueZero(o[k], searchElement)) {
+					return true;
+				}
+			  // c. Increase k by 1. 
+			  k++;
+			}
+	  
+			// 8. Return false
+			return false;
 		}
-		// c. Increase k by 1. 
-		k++;
-	  }
-
-	  // 8. Return false
-	  return false;
-	}
-  });
+	});
 }
 
 window.onerror = function(message, url, lineNumber) {  
@@ -243,7 +242,7 @@ function totp(K,t) {
   var s=sha1(k.concat(sha1(l.concat([0,t])))),o=s[4]&0xF;
   var out=""+(((s[o>>2]<<8*(o&3)|(o&3?s[(o>>2)+1]>>>8*(4-o&3):0))&-1>>>1)%1000000);
   while ((out).length < 6) {
-  	out = "0"+out;
+	out = "0"+out;
   }
   return out;
 }
