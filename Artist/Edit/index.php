@@ -44,7 +44,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 			</div>
 		</div>
 		<div class="divider"></div>
-		<?= FormRepository::getEditArtistPageForm() ?>
+		<?= FormRepository::getEditArtistPageForm()->getHtml() ?>
 		<div class="divider"></div>
 		<div class="section">
 			<p class="col s12 flow-text">Please go <a href="../EditCommissionTypes/">here</a> to edit commission types.</p>
