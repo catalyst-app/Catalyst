@@ -39,6 +39,6 @@ class Header {
 		// overall styles and such, mostly just small things
 		ROOTDIR."css/overall.css",
 		// used for styling, takes ?hex=###### as a URL param
-		ROOTDIR."css/color.css.php?hex=".PAGE_COLOR,
+		ROOTDIR."css/color-".PAGE_COLOR.".css",
 	];
 }
