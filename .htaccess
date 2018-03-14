@@ -3,16 +3,6 @@
 	AuthName "Approved testers only"
 	AuthUserFile /home/catalyst/.htpasswd
 	Require valid-user
-
-	RewriteEngine On 
-	RewriteCond %{HTTP_HOST} ^beta\.catalystapp\.co [NC]
-	RewriteCond %{SERVER_PORT} 80 
-	RewriteRule ^(.*)$ https://beta.catalystapp.co/$1 [R=301,L]
-	RewriteBase /home/catalyst/beta/
-	RewriteRule ^index\.php$ - [L]
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule . /index.php [L]
 </If>
 
 <IfModule mod_speling.c>
