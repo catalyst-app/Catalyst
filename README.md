@@ -113,14 +113,14 @@ Email: catalyst@catalystapp.co
 - [ ] SideNav needs dividers (what i have doesn't cut it)
 - [x] Emoji no work (thanks foxxo)
 - [x] Login is case sensitive username
-- [ ] Something fucky with the color picker that disallows certain *valid* colors
-- [ ] Very light colors are hard on navbar and links
-  - [ ] shadow?
-- [ ] Somethings really weird with the dragging/dropping/sorting plugins, seems to be worsening, requiring bad overrides
-  - [ ] New library?
-  - [ ] Longboi chips
-  - [ ] Commission types
-  - [ ] Images
+- [x] Something fucky with the color picker that disallows certain *valid* colors
+- [x] Very light colors are hard on navbar and links
+  - [x] ~~shadow?~~
+- [x] ~~Somethings really weird with the dragging/dropping/sorting plugins, seems to be worsening, requiring bad overrides~~ Improper usage
+  - [x] ~~New library?~~
+  - [x] Longboi chips
+  - [x] Commission types
+  - [x] Images
 - [ ] Default images of something do not stay the same color when viewed on another page (e.g. character displayed on dashboard)
 
 **Broken Links**
@@ -216,59 +216,59 @@ Email: catalyst@catalystapp.co
 
 **Commission Type**  
 
-- [x] Create
-  - [x] Basic data
-  - [x] Modifiers
-  - [x] Attributes
-    - [x] ~~Global el type?~~
-  - [x] Payment opts
-  - [x] Stage opts
-- [x] Type (for searching)
-  - [x] Specie
-  - [x] Type
-  - [x] SFW
-  - [x] Viewing, handle db
-- [x] Edit
-  - [x] Basic data
-    - [x] db
-  - [x] Modifiers
-    - [x] db
-  - [x] Attributes
-    - [x] db
-  - [x] Payment opts
-    - [x] db
-  - [x] Stage opts
-    - [x] db
-  - [x] Images
-- [x] View
-  - [x] "Collapisble"
-  - [x] Basic info
-  - [x] NSFW
-  - [x] Blurb
-  - [x] Modifiers
-  - [x] Images
-  - [x] Options
-  - [x] Payment Options
-  - [x] Closed/open
-- [x] NSFW handling
-- [x] Modifiers
-- [x] ~~Creation in a form (collapsible?)~~
-- [x] Wishlist
+- [ ] Create
+  - [ ] Basic data
+  - [ ] Modifiers
+  - [ ] Attributes
+    - [ ] ~~Global el type?~~
+  - [ ] Payment opts
+  - [ ] Stage opts
+- [ ] Type (for searching)
+  - [ ] Specie
+  - [ ] Type
+  - [ ] SFW
+  - [ ] Viewing, handle db
+- [ ] Edit
+  - [ ] Basic data
+    - [ ] db
+  - [ ] Modifiers
+    - [ ] db
+  - [ ] Attributes
+    - [ ] db
+  - [ ] Payment opts
+    - [ ] db
+  - [ ] Stage opts
+    - [ ] db
+  - [ ] Images
+- [ ] View
+  - [ ] "Collapisble"
+  - [ ] Basic info
+  - [ ] NSFW
+  - [ ] Blurb
+  - [ ] Modifiers
+  - [ ] Images
+  - [ ] Options
+  - [ ] Payment Options
+  - [ ] Closed/open
+- [ ] NSFW handling
+- [ ] Modifiers
+- [ ] ~~Creation in a form (collapsible?)~~
+- [ ] Wishlist
 
 **Commission**  
 
-- [x] Trades?
+- [ ] Trades?
 - [ ] NSFW picture handling
 - [ ] Multiple character chooser
 - [ ] A neat display for assigned characters
 - [ ] Payment
-  - [x] Multiple
+  - [ ] Multiple
 - [ ] States
   - [ ] Pending approval
   - [ ] **Denied**
   - [ ] Approved; pending payment
   - [ ] Waiting for artist
-    - [x] Customizable statuses (lineart, sketch, shading, etc)
+    - [ ] Customizable statuses (lineart, sketch, shading, etc)
   - [ ] Finished
 - [ ] WIPs
   - [ ] Multiple
@@ -296,7 +296,7 @@ Email: catalyst@catalystapp.co
   - [x] Social medias
   - [x] ~~story?~~
   - [x] ~~helpers/testers~~
-- [ ] ToS
+- [x] ToS
 - [ ] Help center?
   - [ ] Support desk
   - [ ] reporting
