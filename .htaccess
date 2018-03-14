@@ -1,8 +1,12 @@
 <If "%{REMOTE_ADDR} !='::1'">
-	AuthType Basic
-	AuthName "Approved testers only"
-	AuthUserFile /home/catalyst/.htpasswd
-	Require valid-user
+	<DirectoryMatch "^/home/catalyst/beta/[^A][^r][^t][^i][^s][^t]/">
+		<DirectoryMatch "^/home/catalyst/beta/[^U][^s][^e][^r]/">
+			AuthType Basic
+			AuthName "Approved testers only"
+			AuthUserFile /home/catalyst/.htpasswd
+			Require valid-user
+		</DirectoryMatch>
+	</DirectoryMatch>
 </If>
 
 <IfModule mod_speling.c>
