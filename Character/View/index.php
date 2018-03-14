@@ -16,6 +16,7 @@ if (isset($_GET["q"])) {
 		$pendingCharacter = new Character($id);
 		if ($pendingCharacter->visibleToMe()) {
 			$character = $pendingCharacter;
+			define("PAGE_IMAGE", $character->getImage()->getFullPath());
 		} else {
 			HTTPCode::set(403);
 		}

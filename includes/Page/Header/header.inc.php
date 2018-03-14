@@ -65,7 +65,11 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<meta property="og:title" content="<?= htmlspecialchars(PAGE_TITLE) ?>"/>
 		<meta property="og:type" content="business.business"/>
 		<meta property="og:url" content="<?= htmlspecialchars(UniversalFunctions::getCanonicalRequestUrl()) ?>"/>
-		<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>		
+		<?php if (defined("PAGE_IMAGE")): ?>
+			<meta property="og:image" content="<?= PAGE_IMAGE ?>"/>
+		<?php else: ?>
+			<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>
+		<?php endif; ?>
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
 		<meta property="og:locale" content="en_US"/>
@@ -75,7 +79,11 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<meta name="twitter:site" content="<?= htmlspecialchars(UniversalFunctions::getCanonicalRequestUrl()) ?>" />
 		<meta name="twitter:title" content="<?= htmlspecialchars(PAGE_TITLE) ?> | Catalyst" />
 		<meta name="twitter:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more." />
-		<meta name="twitter:image" content="https://catalystapp.co/img/logo_big_white.png" />
+		<?php if (defined("PAGE_IMAGE")): ?>
+			<meta property="twitter:image" content="<?= PAGE_IMAGE ?>"/>
+		<?php else: ?>
+			<meta property="twitter:image" content="https://catalystapp.co/img/logo_big_white.png"/>
+		<?php endif; ?>
 
 		<!-- link tags -->
 		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>

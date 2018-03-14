@@ -16,6 +16,7 @@ if (isset($_GET["q"])) {
 	$id = User::getIdFromUsername($_GET["q"]); 
 	if ($id !== -1) {
 		$user = new User($id);
+		define("PAGE_IMAGE", $user->getImage()->getFullPath());
 	} else {
 		HTTPCode::set(404);
 	}
