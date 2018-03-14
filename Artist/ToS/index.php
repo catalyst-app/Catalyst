@@ -27,6 +27,7 @@ if (!array_key_exists("q", $_GET)) {
 	$artistId = Artist::getIdFromUrl($_GET["q"]);
 	if ($artistId !== -1) {
 		$artist = new Artist($artistId);
+		define("PAGE_IMAGE", $artist->getImage()->getFullPath());
 	} else {
 		HTTPCode::set(404);
 	}
