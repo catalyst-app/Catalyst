@@ -4,8 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "82a516807c897120f5784d9d0901b656",
+    "content-hash": "d6ce8a87ccff3de29e125e0416464b37",
     "packages": [
+        {
+            "name": "pguardiario/phpuri",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monkeysuffrage/phpuri.git",
+                "reference": "ad0a5ec033fe616cfef55578b9c7f2458be8fbfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monkeysuffrage/phpuri/zipball/ad0a5ec033fe616cfef55578b9c7f2458be8fbfc",
+                "reference": "ad0a5ec033fe616cfef55578b9c7f2458be8fbfc",
+                "shasum": ""
+            },
+            "type": "project",
+            "autoload": {
+                "files": [
+                    "phpuri.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A php library for converting relative urls to absolute.",
+            "time": "2015-05-24T09:13:17+00:00"
+        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.0.3",
