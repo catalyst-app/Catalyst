@@ -73,7 +73,7 @@ class TextField extends AbstractField {
 	}
 
 	/**
-	 * @param string[]
+	 * @param string[] $disallowed
 	 */
 	public function setDisallowed(array $disallowed) : void {
 		$this->disallowed = $disallowed;
