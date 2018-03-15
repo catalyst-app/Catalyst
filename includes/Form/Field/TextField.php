@@ -168,7 +168,7 @@ class TextField extends AbstractField {
 		}
 
 		$str .= 'if (';
-		$str .= '!'.json_encode($this->getDisallowed()).'.includes($('.json_encode("#".$this->getId()).').val())';
+		$str .= json_encode($this->getDisallowed()).'.includes($('.json_encode("#".$this->getId()).').val())';
 		$str .= ') {';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
