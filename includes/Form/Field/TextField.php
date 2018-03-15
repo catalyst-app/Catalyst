@@ -21,6 +21,12 @@ class TextField extends AbstractField {
 	 * @var int
 	 */
 	protected $maxLength = 0;
+	/**
+	 * Disallowed values
+	 * 
+	 * @var string[]
+	 */
+	protected $disallowed = [];
 
 	/**
 	 * Get the current regex to match
@@ -57,6 +63,20 @@ class TextField extends AbstractField {
 	 */
 	public function setMaxLength(int $maxLength) : void {
 		$this->maxLength = $maxLength;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getDisallowed() : array {
+		return $this->disallowed;
+	}
+
+	/**
+	 * @param string[]
+	 */
+	public function setDisallowed(array $disallowed) : void {
+		$this->disallowed = $disallowed;
 	}
 
 	/**
@@ -146,6 +166,14 @@ class TextField extends AbstractField {
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
 		}
+
+		$str .= 'if (';
+		$str .= '!'.json_encode($this->getDisallowed()).'.includes($('.json_encode("#".$this->getId()).').val())';
+		$str .= ') {';
+		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
+		$str .= Form::CANCEL_SUBMISSION_JS;
+		$str .= '}';
+
 		$str .= 'if (';
 		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
 		$str .= ') {';
@@ -192,6 +220,9 @@ class TextField extends AbstractField {
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
+			$this->throwInvalidError();
+		}
+		if (in_array($_REQUEST[$this->getDistinguisher()], $this->getDisallowed())) {
 			$this->throwInvalidError();
 		}
 	}
