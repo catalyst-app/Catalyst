@@ -1018,7 +1018,7 @@ class FormRepository {
 		$urlField->setRequired(true);
 		$urlField->setMaxLength(255);
 		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
-		$urlField->setDisallowed(["Edit", "New", "ToS"]);
+		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
 		$urlField->addError(91203, ErrorCodes::ERR_91203);
 		$urlField->setMissingErrorCode(91203);
 		$urlField->addError(91204, ErrorCodes::ERR_91204);
@@ -1201,7 +1201,7 @@ class FormRepository {
 		$urlField->setRequired(true);
 		$urlField->setMaxLength(255);
 		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
-		$urlField->setDisallowed(["Edit", "New", "ToS"]);
+		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
 		$urlField->addError(91403, ErrorCodes::ERR_91403);
 		$urlField->setMissingErrorCode(91403);
 		$urlField->addError(91404, ErrorCodes::ERR_91404);
