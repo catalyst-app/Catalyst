@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2018 at 04:14 AM
+-- Generation Time: Mar 16, 2018 at 09:20 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 7.2.0
 
@@ -507,136 +507,150 @@ CREATE TABLE `commission_types` (
 --
 
 CREATE TABLE `commission_type_attributes` (
-  `SET_KEY` varchar(13) NOT NULL,
+  `SET_KEY` varchar(40) NOT NULL,
   `NAME` varchar(64) NOT NULL,
   `DESCRIPTION` varchar(255) NOT NULL,
-  `GROUP` varchar(7) NOT NULL,
+  `GROUP_ID` int(2) UNSIGNED NOT NULL,
   `SORT` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 --
 -- RELATIONSHIPS FOR TABLE `commission_type_attributes`:
---   `GROUP`
---       `commission_type_attribute_groups` -> `GROUP`
+--   `GROUP_ID`
+--       `commission_type_attribute_groups` -> `ID`
 --
 
 --
 -- Dumping data for table `commission_type_attributes`
 --
 
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ABSTRACT', 'Abstract', 'Expresses the character in a non-standard way', 'STYLES', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ACCESSORY', 'Accessories', 'Harnesses, collars, etc.', 'FURSUIT', 11);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ADOPT', 'Adoptables', 'Pre-made characters', 'ART', 11);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ANIMATION', 'Animation', 'Animated artwork', 'TYPES', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ANTHRO', 'Anthropomorphic', 'Anthropomorphic or human-like characters', 'MISC', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('APPAREL', 'Apparel', 'Examples include hoodies, kigurumi, etc.', 'TYPES', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('AQUATIC', 'Aquatic', 'Aquatic', 'SPECIES', 12);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('AUDIO', 'Audio', 'Any type of audio, whether it be a tape, song, etc.', 'TYPES', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('AVIAN', 'Avians', 'Birds and other flying animals', 'SPECIES', 11);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BABYFUR', 'Babyfur', 'Adult-baby characters (The chararacter must be over 18 for NSFW art)', 'NICHES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BADGE', 'Badge', 'Typically a bust of a character and their name, can be worn at conventions', 'ART', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BEAR', 'Bear', 'Bears', 'SPECIES', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BODYSUIT', 'Bodysuit', 'The portion of the suit which covers the torso and legs', 'FURSUIT', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BONDAGE', 'Bondage', 'Anything including restraining a character', 'NICHES', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BUGS', 'Bugs', 'Bugs, such as insects', 'SPECIES', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('BUST', 'Bust', 'Shows the head, neck, and some chest/shoulders', 'ART', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CANDY_GORE', 'Candy Gore', 'This includes any type of gore except the blood-and-guts kind, such as fruit gore or crystal gore', 'NICHES', 10);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CANON', 'Canon', 'Canon characters, such as those from cartoons, Pokemon, etc.', 'SPECIES', 17);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CATS', 'Cats', 'Domesticated cats', 'SPECIES', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CELL_SHADING', 'Cell shading', 'Basic shading', 'ACTIONS', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CENTAURS', 'Centaurs', 'A character which has a body of a horce', 'SPECIES', 14);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CHIBI', 'Chibi', 'Small, cartoon-like characters with oversized heads', 'ART', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('COMIC', 'Comic', 'A set of pages containing one or more panels that tell a story', 'ART', 8);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('COUPLE', 'Couple', 'The art involves 2 characters, likely as a couple', 'MISC', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_ACT', 'Crafting', 'Crafting a physical object, like a plush', 'ACTIONS', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CRAFTING_TYPE', 'Crafting', 'Crafted objects, like a plushie or similar', 'TYPES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (Catalyst does not allow NSFW art of minors)', 'NICHES', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('CUSTOM', 'Custom', 'Suits custom-made to match a character', 'FURSUIT', 13);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DEER', 'Deer', 'Deer', 'SPECIES', 10);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DIGITAL', 'Digital Artwork', 'Artwork made on a computer', 'TYPES', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DIGITIGRADE', 'Digitigrade', 'Legs with padding to look more like an animal', 'FURSUIT', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DOGS', 'Dogs', 'Any domesticated dog, including examples like German Shepards, Beagles, etc.', 'SPECIES', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('DRAGON', 'Dragons', 'Dragons', 'SPECIES', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('EQUESTRIAN', 'Equestrians', 'Horses and similar', 'SPECIES', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('EXPLICIT', 'Explicit', 'Anything containing sex toys or genetalia, including backsack', 'NSFW', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FAT', 'Fat/Obese', 'Fat and obese characters', 'NICHES', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FEET', 'Feetpaws', 'The shows/feet of the costume', 'FURSUIT', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FEMALE', 'Female', 'A female character', 'GENDER', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FERAL', 'Feral', 'Characters which are natural, do not stand on 2 legs, etc', 'MISC', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FLAT', 'Flat Color', '\"Bucket-fill\" art, contains no shading', 'ACTIONS', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FOXES', 'Foxes', 'Foxes, including Fennecs', 'SPECIES', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FULLBODY', 'Full-body', 'Shows the character\'s entire body', 'ART', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FULLSUIT', 'Fullsuit', 'Contains all the parts of the suit, including the body', 'FURSUIT', 8);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('FURSUITS', 'Fursuit', 'A costume similar to one of a mascot for a character', 'TYPES', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('GAME', 'Game', 'A custom-created game', 'TYPES', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('GORE', 'Gore', 'Anything which involves mutilation/gashes of a character, or anything similar to that, including death', 'NICHES', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HALFBODY', 'Half-body', 'Shows the character from the waist up', 'ART', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HEAD', 'Head', 'The head of the costume', 'FURSUIT', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HEADSHOT', 'Headshot', 'A piece of art detailing a character\'s head', 'ART', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HERM', 'Hermaphrodite', 'Contains parts of both female and males', 'GENDER', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HUMAN', 'Human', 'Human characters', 'MISC', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HYENA', 'Hyenas', 'Hyenas', 'SPECIES', 8);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HYPER', 'Hyper', 'Any character with certain body parts much larger than their normal size', 'NICHES', 8);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('HYPNOSIS', 'Hypnosis', 'Any form of mind control, including corruption, falls under this category', 'NICHES', 17);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ICONS', 'Icons', 'Art which is designed to be used as a profile picture', 'ART', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('INFLATION', 'Inflation', 'Forced feeding or otherwise inflating a character with a substance', 'NICHES', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('KEMONO', 'Kemono', '\"Anime-style\" art, originated in Japan', 'STYLES', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LATEX_RUBBER', 'Latex/Rubber', 'Art in which latex or rubber may be drawn', 'NICHES', 18);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LEGS', 'Legs', 'Just the legs of the costume', 'FURSUIT', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('LINEART', 'Lineart', 'Cleaned-up sketch, thick, definitive lines', 'ACTIONS', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MACHINE', 'Machines', 'Aeromorphs and other vehicle-related characters', 'SPECIES', 16);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MAICRO', 'Macro/Micro', 'Characters who are either giants (macro) or tiny (micro)', 'NICHES', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MALE', 'Male', 'A male character', 'GENDER', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MANUFACTURING', 'Manufacturing', 'Includes anything like 3D-Printing', 'ACTIONS', 8);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MATURE', 'Mature', 'Anything which is suggestive or contains extreme fetishes', 'NSFW', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MULTIPLE_CHAR', 'Multiple Characters', 'The art may involve 3 or more characters', 'MISC', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MUSCLES', 'Muscles', 'Characters with defined or exaggerated muscles', 'NICHES', 16);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('MUSTELIDS', 'Mustelids', 'Includes weasels, otters, etc.', 'SPECIES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ODOR', 'Odor/Musk', 'Any strong odors, including in the context of feet, pits, or musk in general', 'NICHES', 11);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('ORIG_SPECIES', 'Original Species', 'Other original species such as Dutch Angel Dragons, Protogens, etc.', 'SPECIES', 19);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER', 'Other', 'Something not listed in the other options', 'SPECIES', 22);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_ACTION', 'Other', 'Something not listed in the other options', 'ACTIONS', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_ART', 'Other', 'Something not listed in the other options', 'ART', 13);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_CANINE', 'Other Canine', 'Other animals from the canine family', 'SPECIES', 20);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_FELINE', 'Other Felines', 'Other felines like tigers, lions, etc.', 'SPECIES', 21);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_GENDER', 'Other', 'Something not listed in the other options', 'GENDER', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_STYLE', 'Other', 'Something not listed in the other options', 'STYLES', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_SUIT', 'Other', 'Something not listed in the other options', 'FURSUIT', 14);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('OTHER_TYPES', 'Other', 'Something not listed in the other options', 'TYPES', 9);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PAINTING', 'Painting', 'Either physically painting, or creating a similar effect digitally', 'ACTIONS', 5);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PARTIAL', 'Partial', 'Typically consists of the head, paws, and tail', 'FURSUIT', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PARTS', 'Parts', 'Individual parts of the suit', 'FURSUIT', 6);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PAWS', 'Paws', 'The gloves of the costume', 'FURSUIT', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PAWS_NICHE', 'Paws', 'Anything in which a main aspect are feet', 'NICHES', 19);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PIXEL', 'Pixel Art', 'Art constructed from a small number of pixels (squares)', 'ART', 12);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PLANTIGRADE', 'Plantigrade', 'Flat, human-like legs', 'FURSUIT', 10);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PLUSH', 'Plushes', 'The drawing of a character to look like a plush', 'NICHES', 15);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('PREMADE', 'Pre-mades', 'Pre-made suits for sale', 'FURSUIT', 12);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('REALISTIC', 'Realistic', 'Shows the character as though it was real', 'STYLES', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('REF', 'Reference Sheets', 'Art which depicts multiple views of a character, showing all their aspects and markings', 'ART', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('REPTILES', 'Reptiles', 'Reptiles like lizards, dinosuars, etc.', 'SPECIES', 15);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('RODENTS', 'Rodents', 'Rats, mice, etc.', 'SPECIES', 13);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SCAT', 'Scat', 'Anything with poop', 'NICHES', 13);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SCULPTING', 'Sculpting', 'Physically sculpting an object', 'ACTIONS', 7);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SEMI_REAL', 'Semi-realistic', 'Realistic but with a few cartoony elements', 'STYLES', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SERGALS', 'Sergals', 'The cheese-shaped fantasy animal', 'SPECIES', 18);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SFW', 'SFW', 'A peice with no sexual content or lightly suggestive', 'NSFW', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SHADED', 'Shaded', 'Fully shaded with gradients and smoothing', 'ACTIONS', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SKETCH', 'Sketch', 'A rough sketch', 'ACTIONS', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SM', 'Sadism/Masochism', 'Giving or recieving pain or otherwise asserting dominance over another character', 'NICHES', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SOLO', 'Solo', 'The art only involves may only involve one character', 'MISC', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('STICKERS', 'Stickers', 'A set of busts and half-bodies which show expressions', 'ART', 2);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('SURREAL', 'Surreal', 'Shows a surreal representation of the character', 'STYLES', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('TAIL', 'Tail', 'The tail', 'FURSUIT', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('TF', 'Transformation', 'A character being transformed into another species or similar, may be through magic or other means', 'NICHES', 4);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('TOONY', 'Cartoony', 'Typically contains non-realistic qualities like large, flat eyes, flat colors, etc.', 'STYLES', 0);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('TRADITIONAL', 'Traditional Artwork', 'Hand drawn or painted', 'TYPES', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('TRANS', 'Transgender', 'Someone who either feels they have no gender (genderless) or do not fit the one they were born with', 'GENDER', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('URINE', 'Urine', 'Typical relating to watersports, this involves anything with urine', 'NICHES', 12);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('VORE', 'Vore', 'Consuming of another character through any means', 'NICHES', 14);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('WOLVES', 'Wolves', 'Wolves, including derivatives like Dingoes', 'SPECIES', 1);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('WRITING', 'Writing', 'Stories and other literature', 'TYPES', 3);
-INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP`, `SORT`) VALUES('YCH', 'YCH', 'Your Character Here - pre-made lineart which will be colored to fit a custom character', 'ART', 10);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('3D_MODELING', '3D Modeling', 'Includes anything like 3D-Printing', 1, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ABSTRACT', 'Abstract', 'Expresses the character in a non-standard way', 10, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ADOPTABLES', 'Adoptables', 'Pre-made characters', 1, 11);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ANIMATION', 'Animation', 'Animated artwork', 0, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ANTHROPOMORPHIC', 'Anthropomorphic', 'Anthropomorphic or human-like characters', 6, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('APPAREL', 'Apparel', 'Hoodies, clothing, kigurumi, etc.', 0, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('AQUATIC', 'Aquatic', 'Aquatic', 9, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ARMOR', 'Armor', 'Suits of armor and other really cool stuff', 2, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('AUDIO', 'Audio', 'Any type of audio, whether it be a tape, song, theme, instrumental, etc.', 0, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('AVIANS', 'Avians', 'Birds and other flying animals', 9, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BABYFUR', 'Babyfur', 'Adult-baby characters (The character must be over 18 for NSFW art)', 7, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BADGE', 'Badge', 'Typically a bust of a character and their name, can be worn at conventions', 1, 13);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BEAR', 'Bear', 'Bears', 9, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BODYSUIT', 'Bodysuit', 'The portion of the suit which covers the torso and legs', 2, 7);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BONDAGE', 'Bondage', 'Anything including restraining a character', 7, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BUGS', 'Bugs', 'Bugs, such as insects', 9, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('BUST', 'Bust', 'Shows the head, neck, and some chest/shoulders', 1, 14);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CANDY_GORE', 'Candy Gore', 'This includes any type of gore except the blood-and-guts kind, such as fruit gore or crystal gore', 7, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CANON', 'Canon', 'Canon characters, such as those from cartoons, Pokemon, etc.', 9, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CARTOONY', 'Cartoony', 'Typically contains non-realistic qualities like large, flat eyes, flat colors, etc.', 10, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CELL_SHADING', 'Cell shading', 'Basic shading', 1, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CENTAURS', 'Centaurs', 'A character which has a body of a horse', 9, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CHARACTER_SUMMARY', 'Character Summary', 'A quick biography for a character, typically for a ref-sheet text', 3, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CHIBI', 'Chibi', 'Small, cartoon-like characters with over sized heads', 1, 17);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('COMIC', 'Comic', 'A set of pages containing one or more panels that tell a story', 1, 18);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('COUPLE', 'Couple', 'The art involves 2 characters, likely as a couple', 6, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CRAFTING', 'Crafting', 'Crafted objects, like a plushie or similar', 0, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CUB', 'Cub', 'Characters who are underage (Catalyst does not allow NSFW art of minors)', 7, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CUSTOM', 'Custom', 'Suits custom-made to match a character', 2, 8);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('CUSTOM_T_SHIRTS', 'Custom T-Shirts', 'Custom-printed T-Shirts', 2, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('DEER', 'Deer', 'antler bois', 9, 7);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('DIGITAL_ARTWORK', 'Digital Artwork', 'Artwork made on a computer', 0, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('DIGITIGRADE', 'Digitigrade', 'Legs with padding to look more like an animal', 2, 10);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('DOGS', 'Dogs', 'Any domesticated dog, including examples like German Shepards, Beagles, etc.', 9, 8);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('DRAGONS', 'Dragons', 'Dragons', 9, 9);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('EQUESTRIANS', 'Equestrians', 'Horses and similar', 9, 10);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('EXPLICIT', 'Explicit', 'Genitals, explicititly sexual situations, fringe fetishes, including violence and gore', 8, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FAN_FICTION', 'FanFiction', 'Writing of characters in a TV show/movie/etc.', 3, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FAT_OBESE', 'Fat/Obese', 'Fat and obese characters', 7, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FEETPAWS', 'Feetpaws', 'The shows/feet of the costume', 2, 14);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FELINES', 'Felines', 'Domesticated cats', 9, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FEMALE', 'Female', 'A female character', 5, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FERAL', 'Feral', 'Characters which are natural, do not stand on 2 legs, etc', 6, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FLAT_COLOR', 'Flat Color', '\"Bucket-fill\" art, contains no shading', 1, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FOXES', 'Foxes', 'Foxes, including Fennecs', 9, 11);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FULLSUIT', 'Fullsuit', 'Contains all the parts of the suit, including the body', 2, 15);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FULL_BODY', 'Full-body', 'Shows the character\'s entire body', 1, 16);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FURSUIT', 'Fursuit', 'A costume similar to one of a mascot for a character', 0, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('FURSUIT_ACCESSORIES', 'Fursuit Accessories', 'Harnesses, collars, etc.', 2, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('GAME', 'Game', 'A custom-created game', 0, 7);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('GORE', 'Gore', 'Anything which involves mutilation/gashes of a character, or anything similar to that, including death', 7, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HALF_BODY', 'Half-body', 'Shows the character from the waist up', 1, 15);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HANDPAWS', 'Handpaws', 'The gloves of the costume', 2, 12);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HEAD', 'Head', 'The head of the costume', 2, 11);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HEADSHOT', 'Headshot', 'A piece of art detailing a character\'s head', 1, 12);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HUMAN', 'Human', 'Human characters', 6, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HYENAS', 'Hyenas', 'Hyenas', 9, 12);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HYPER', 'Hyper', 'Any character with certain body parts much larger than their normal size', 7, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('HYPNOSIS', 'Hypnosis', 'Any form of mind control, including corruption, falls under this category', 7, 7);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ICONS', 'Icons', 'Art which is designed to be used as a profile picture', 1, 19);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('INFLATION', 'Inflation', 'Forced feeding or otherwise inflating a character with a substance', 7, 8);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('INTERSEX', 'Intersex', 'Shares both male and female parts', 5, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('JEWELRY', 'Jewelry', 'Fancy overpriced shiny stuff', 2, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('KEMONO', 'Kemono', '\"Anime-style\" art, originated in Japan', 10, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('KIGURUMI', 'Kigurumi', 'A suit designed to look like a cartoon animal, typically used as pajamas', 2, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('LATEX_RUBBER', 'Latex/Rubber', 'Art in which latex or rubber may be drawn', 7, 9);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('LEGS', 'Legs', 'Just the legs of the costume', 2, 16);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('LINEART', 'Lineart', 'Cleaned-up sketch: thick, definitive lines', 1, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('LONG', 'Long', '2m+ animation', 4, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MACHINES', 'Machines', 'Aeromorphs and other vehicle-related characters', 9, 13);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MACRO_MICRO', 'Macro/Micro', 'Characters who are either giants (macro) or tiny (micro)', 7, 10);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MALE', 'Male', 'A male character', 5, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MANUFACTURING', 'Manufacturing', 'Includes anything like 3D-Printing, etching', 1, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MATURE', 'Mature', 'No genitals, however moderately suggestive is allowed', 8, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MEDIUM', 'Medium', '30s-2m animation', 4, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MULTIPLE_CHARACTERS', 'Multiple Characters', 'The art may involve 3 or more characters', 6, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MULTI_CHAPTER', 'Multi-Chapter', 'A multiple-chapter fiction', 3, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MUSCLES', 'Muscles', 'Characters with defined or exaggerated muscles', 7, 11);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('MUSTELIDS', 'Mustelids', 'Includes weasels, otters, etc.', 9, 14);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ODOR_MUSK', 'Odor/Musk', 'Any strong odors, including in the context of feet, pits, or musk in general', 7, 12);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('ORIGINAL_SPECIES', 'Original Species', 'Other original species such as Dutch Angel Dragons, Protogens, etc.', 9, 19);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_ANIMATION', 'Other', 'Something not covered by the other options', 4, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_APPAREL', 'Other', 'Something not listed in the other options', 2, 18);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_ART', 'Other', 'Something not listed in the other options', 1, 23);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_ARTS', 'Other', 'Something not listed in the other options', 10, 6);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_CANINE', 'Other Canine', 'Other animals from the canine family', 9, 21);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_CLOTHING', 'Other Clothing', 'Sewed clothing, costumes, etc.', 2, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_GENDER', 'Other', 'Something not listed in the other options', 5, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_SPECIES', 'Other', 'Something not listed in the other options', 9, 20);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_TYPE', 'Other', 'Something not listed in the other options', 0, 9);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('OTHER_WRITING', 'Other', 'Something not covered by the other options', 3, 5);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PAINTING', 'Painting', 'Either physically painting, or creating a similar effect digitally', 1, 8);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PARTIAL', 'Partial', 'Typically consists of the head, paws, and tail', 2, 17);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PAWS', 'Paws', 'Anything in which a main aspect are feet', 7, 13);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PIXEL_ART', 'Pixel Art', 'Art constructed from a small number of pixels (squares)', 1, 20);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PLANTIGRADE', 'Plantigrade', 'Flat, human-like legs', 2, 9);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('PLUSHES', 'Plushes', 'The drawing of a character to look like a plush', 7, 14);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('POETRY', 'Poetry', 'A poem such as free-verse, haiku, limerick, etc', 3, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('REALISTIC', 'Realistic', 'Shows the character as though it was real', 10, 2);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('REFERENCE_SHEETS', 'Reference Sheets', 'Art which depicts multiple views of a character, showing all their aspects and markings', 1, 22);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('REPTILES', 'Reptiles', 'Reptiles like lizards, dinosaurs, etc.', 9, 15);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('RODENTS', 'Rodents', 'Rats, mice, etc.', 9, 16);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SADISM_MASOCHISM', 'Sadism/Masochism', 'Giving or receiving pain or otherwise asserting dominance over another character', 7, 16);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SAFE', 'Safe', 'A piece with no sexual content or lightly suggestive at worst', 8, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SCAT', 'Scat', 'Anything with poop', 7, 15);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SCENERY', 'Scenery', 'Landscapes and the like', 1, 9);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SCULPTING', 'Sculpting', 'Physically sculpting an object', 1, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SEMI_REALISTIC', 'Semi-realistic', 'Realistic but with a few cartoony elements', 10, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SERGALS', 'Sergals', 'The cheese-shaped fantasy animal', 9, 17);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SHADED', 'Shaded', 'Fully shaded with gradients and smoothing', 1, 7);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SHORT', 'Short', '<30s animation', 4, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SHORT_STORY', 'Short Story', 'A short story, typically only a chapter', 3, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SKETCH', 'Sketch', 'A rough sketch', 1, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SOLO', 'Solo', 'The art only involves one character', 6, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('STICKERS', 'Stickers', 'A set of busts and half-bodies which show expressions', 1, 21);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('SURREAL', 'Surreal', 'Shows a surreal representation of the character', 10, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('TAIL', 'Tail', 'The tail of the suit', 2, 13);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('TRADITIONAL_ARTWORK', 'Traditional Artwork', 'Hand drawn or painted', 0, 1);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('TRANSFORMATION', 'Transformation', 'A character being transformed into another species or similar, may be through magic or other means', 7, 17);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('TRANSGENDER', 'Transgender', 'Someone who either feels they have no gender (genderless) or do not fit the one they were born with', 5, 3);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('URINE', 'Urine', 'Typical relating to watersports, this involves anything with urine', 7, 18);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('VIDEO_INTRO', 'Video Intro', 'An introduction for a video, typically YouTube', 4, 0);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('VORE', 'Vore', 'Consuming of another character through any means', 7, 19);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('WIGS', 'Wigs', 'Custom-made hair pieces', 2, 4);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('WOLVES', 'Wolves', 'Wolves, including derivatives like dingoes', 9, 18);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('WRITING', 'Writing', 'Stories and other literature', 0, 8);
+INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('YCH', 'YCH', 'Your Character Here - pre-made lineart which will be colored to fit a custom character', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -645,9 +659,8 @@ INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GRO
 --
 
 CREATE TABLE `commission_type_attribute_groups` (
-  `GROUP` varchar(7) NOT NULL,
-  `LABEL` varchar(255) NOT NULL,
-  `SORT` int(1) UNSIGNED NOT NULL
+  `ID` int(2) UNSIGNED NOT NULL,
+  `LABEL` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 --
@@ -658,16 +671,17 @@ CREATE TABLE `commission_type_attribute_groups` (
 -- Dumping data for table `commission_type_attribute_groups`
 --
 
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('ACTIONS', 'Further Classification of Commissions', 4);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('ART', 'Specific Classifications of Art', 1);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('FURSUIT', 'Fursuit Parts and Accessories', 2);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('GENDER', 'Genders', 6);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('MISC', 'Miscellaneous', 9);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('NICHES', 'Certain Niche Types of Art', 8);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('NSFW', 'Whether the Commission is Explicit, Safe, or Suggestive', 7);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('SPECIES', 'Types of Species That Fit This Commission', 5);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('STYLES', 'Art and Craft Styles', 3);
-INSERT INTO `commission_type_attribute_groups` (`GROUP`, `LABEL`, `SORT`) VALUES('TYPES', 'General Type of Commission', 0);
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(4, 'Animation Specifics');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(2, 'Apparel, Cosplay, and Fursuit Specifics');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(10, 'Art and Craft Styles');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(1, 'Art Specifics');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(5, 'Genders');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(0, 'General Type of Commission');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(8, 'Maturity Rating');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(6, 'Miscellaneous');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(7, 'Niche Art');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(9, 'Types of Species That Fit This Commission');
+INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES(3, 'Writing and Story Specifics');
 
 -- --------------------------------------------------------
 
@@ -1213,16 +1227,15 @@ ALTER TABLE `commission_types`
 --
 ALTER TABLE `commission_type_attributes`
   ADD PRIMARY KEY (`SET_KEY`),
-  ADD KEY `NAME` (`NAME`),
-  ADD KEY `GROUP` (`GROUP`),
+  ADD KEY `GROUP_ID` (`GROUP_ID`),
   ADD KEY `SORT` (`SORT`);
 
 --
 -- Indexes for table `commission_type_attribute_groups`
 --
 ALTER TABLE `commission_type_attribute_groups`
-  ADD PRIMARY KEY (`GROUP`),
-  ADD KEY `SORT` (`SORT`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `LABEL_2` (`LABEL`);
 
 --
 -- Indexes for table `commission_type_images`
@@ -1585,7 +1598,7 @@ ALTER TABLE `commission_types`
 -- Constraints for table `commission_type_attributes`
 --
 ALTER TABLE `commission_type_attributes`
-  ADD CONSTRAINT `commission_type_attributes_ibfk_1` FOREIGN KEY (`GROUP`) REFERENCES `commission_type_attribute_groups` (`GROUP`);
+  ADD CONSTRAINT `commission_type_attributes_ibfk_1` FOREIGN KEY (`GROUP_ID`) REFERENCES `commission_type_attribute_groups` (`ID`);
 
 --
 -- Constraints for table `commission_type_images`
