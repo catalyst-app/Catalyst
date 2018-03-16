@@ -1,3 +1,6 @@
+<?php
+
+$tags = <<<IN
 ------General Type of Commission------
 	'DIGITAL_ARTWORK', 'Digital Artwork', 'Artwork made on a computer'
 	'TRADITIONAL_ARTWORK', 'Traditional Artwork', 'Hand drawn or painted'
@@ -8,7 +11,7 @@
 	'FURSUIT', 'Fursuit', 'A costume similar to one of a mascot for a character'
 	'GAME', 'Game', 'A custom-created game'
 	'WRITING', 'Writing', 'Stories and other literature'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_TYPE', 'Other', 'Something not listed in the other options'
 ------Art Specifics------
 	'3D_MODELING', '3D Modeling', 'Includes anything like 3D-Printing'
 	'SCULPTING', 'Sculpting', 'Physically sculpting an object'
@@ -33,7 +36,7 @@
 	'PIXEL_ART', 'Pixel Art', 'Art constructed from a small number of pixels (squares)'
 	'STICKERS', 'Stickers', 'A set of busts and half-bodies which show expressions'
 	'REFERENCE_SHEETS', 'Reference Sheets', 'Art which depicts multiple views of a character, showing all their aspects and markings'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_ART', 'Other', 'Something not listed in the other options'
 ------Apparel, Cosplay, and Fursuit Specifics------
 	'CUSTOM_T_SHIRTS', 'Custom T-Shirts', 'Custom-printed T-Shirts'
 	'KIGURUMI', 'Kigurumi', 'A suit designed to look like a cartoon animal, typically used as pajamas'
@@ -47,32 +50,32 @@
 	'PLANTIGRADE', 'Plantigrade', 'Flat, human-like legs'
 	'DIGITIGRADE', 'Digitigrade', 'Legs with padding to look more like an animal'
 	'HEAD', 'Head', 'The head of the costume'
-	'PAWS', 'Paws', 'The gloves of the costume'
+	'HANDPAWS', 'Handpaws', 'The gloves of the costume'
 	'TAIL', 'Tail', 'The tail of the suit'
 	'FEETPAWS', 'Feetpaws', 'The shows/feet of the costume'
 	'FULLSUIT', 'Fullsuit', 'Contains all the parts of the suit, including the body'
 	'LEGS', 'Legs', 'Just the legs of the costume'
 	'PARTIAL', 'Partial', 'Typically consists of the head, paws, and tail'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_APPAREL', 'Other', 'Something not listed in the other options'
 ------Writing and Story Specifics------
 	'POETRY', 'Poetry', 'A poem such as free-verse, haiku, limerick, etc'
 	'SHORT_STORY', 'Short Story', 'A short story, typically only a chapter'
 	'MULTI_CHAPTER', 'Multi-Chapter', 'A multiple-chapter fiction'
 	'CHARACTER_SUMMARY', 'Character Summary', 'A quick biography for a character, typically for a ref-sheet text'
 	'FAN_FICTION', 'FanFiction', 'Writing of characters in a TV show/movie/etc.'
-	'OTHER', 'Other', 'Something not covered by the other options'
+	'OTHER_WRITING', 'Other', 'Something not covered by the other options'
 ------Animation Specifics------
 	'VIDEO_INTRO', 'Video Intro', 'An introduction for a video, typically YouTube'
 	'SHORT', 'Short', '<30s animation'
 	'MEDIUM', 'Medium', '30s-2m animation'
 	'LONG', 'Long', '2m+ animation'
-	'OTHER', 'Other', 'Something not covered by the other options'
+	'OTHER_ANIMATION', 'Other', 'Something not covered by the other options'
 ------Genders------
 	'MALE', 'Male', 'A male character'
 	'FEMALE', 'Female', 'A female character'
 	'INTERSEX', 'Intersex', 'Shares both male and female parts'
 	'TRANSGENDER', 'Transgender', 'Someone who either feels they have no gender (genderless) or do not fit the one they were born with'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_GENDER', 'Other', 'Something not listed in the other options'
 ------Miscellaneous------
 	'HUMAN', 'Human', 'Human characters'
 	'ANTHROPOMORPHIC', 'Anthropomorphic', 'Anthropomorphic or human-like characters'
@@ -126,7 +129,7 @@
 	'SERGALS', 'Sergals', 'The cheese-shaped fantasy animal'
 	'WOLVES', 'Wolves', 'Wolves, including derivatives like dingoes'
 	'ORIGINAL_SPECIES', 'Original Species', 'Other original species such as Dutch Angel Dragons, Protogens, etc.'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_SPECIES', 'Other', 'Something not listed in the other options'
 	'OTHER_CANINE', 'Other Canine', 'Other animals from the canine family'
 ------Art and Craft Styles------
 	'ABSTRACT', 'Abstract', 'Expresses the character in a non-standard way'
@@ -135,4 +138,21 @@
 	'SEMI_REALISTIC', 'Semi-realistic', 'Realistic but with a few cartoony elements'
 	'SURREAL', 'Surreal', 'Shows a surreal representation of the character'
 	'CARTOONY', 'Cartoony', 'Typically contains non-realistic qualities like large, flat eyes, flat colors, etc.'
-	'OTHER', 'Other', 'Something not listed in the other options'
+	'OTHER_ARTS', 'Other', 'Something not listed in the other options'
+IN;
+
+$in = array_map("trim",explode("\n",trim($tags)));
+
+echo "TRUNCATE `commission_type_attribute_groups`;\n";
+echo "TRUNCATE `commission_type_attributes`;\n";
+
+$i = -1;
+$j = 0;
+foreach ($in as $value) {
+	if (strpos($value,"-") === 0) {
+		echo 'INSERT INTO `commission_type_attribute_groups` (`ID`, `LABEL`) VALUES('.++$i.", '".trim($value, "-")."');\n";
+		$j = 0;
+	} else {
+		echo 'INSERT INTO `commission_type_attributes` (`SET_KEY`, `NAME`, `DESCRIPTION`, `GROUP_ID`, `SORT`) VALUES('.$value.', '.$i.', '.$j++.');'."\n";
+	}
+}
