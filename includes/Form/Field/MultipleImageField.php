@@ -19,6 +19,15 @@ class MultipleImageField extends ImageField {
 	 */
 	public function getHtml() : string {
 		$str = '';
+
+		$str .= '<p';
+		$str .= ' class="col s12 grey-text no-top-margin"';
+		$str .= '>';
+
+		$str .= "You can upload multiple files here.  Just hold ⌘ or ctrl while selecting your files!";
+
+		$str .= '</p>';
+		
 		$str .= '<div';
 		$str .= ' class="file-input-field col s12">';
 
