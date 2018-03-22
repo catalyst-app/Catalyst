@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/Controller.php";
 use \Catalyst\CommissionType\CommissionType;
-use \Catalyst\Form\FormHTML;
+use \Catalyst\Images\Image;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
@@ -35,11 +35,11 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<div class="row">
 				<p class="col s12">You may drag to reorder these.</p>
-				<a href="<?= ROOTDIR ?>Artist/NewCommissionType/">
+				<a href="<?= ROOTDIR ?>Artist/CommissionType/New/">
 					<div class="commission-type new-commission-type row">
 						<div class="divider col s12 bottom-margin"></div>
 						<div class="col s6 offset-s3 m3 l2 center force-square-contents">
-							<?= UniversalFunctions::getStrictCircleImageHTML(ROOTDIR."img/new.png", false) ?>
+							<?= Image::getNewItemImage()->getStrictCircleHtml() ?>
 						</div>
 						<div class="col s12 m7 l9 row-inside">
 							<div class="col s12 no-padding">
@@ -48,15 +48,13 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 								</h3>
 							</div>
 							<p>Create a new commission type</p>
-							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/NewCommissionType/">Go</a></p>
+							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
 						</div>
 						<div class="divider col s12 top-margin"></div>
 					</div>
 				</a>
 				<div class="commission-types commission-types-rearrangeable">
-<?php foreach ($types as $type): ?>
-				<!-- oof -->
-<?php endforeach; ?>
+					<!-- oof -->
 				</div>
 				<div id="save-commission-type-order" class="btn col s12 m4 l2">save</div>
 			</div>
