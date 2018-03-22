@@ -1,19 +1,33 @@
 window.onerror = function(message, url, lineNumber) {  
 	try {
-		var data = new FormData();
-		data.append("message", message);
-		data.append("url", url);
-		data.append("lineNumber", lineNumber);
-		$.ajax($("html").attr("data-rootdir")+"api/internal/js_error/", {
-			data: data,
-			processData: false,
-			contentType: false,
-			method: "POST"
-		}).done(function(response) {
-			Materialize.toast("An error occured", 4000);
-		}).fail(function(response) {
-			Materialize.toast("An error occured", 4000);
-		});
+		if ($ === undefined) {
+			alert("An unreportable error occured.  Upgrading your browser or reloading the page may fix the issue.");
+		} else {
+			var data = new FormData();
+			data.append("message", message);
+			data.append("url", url);
+			data.append("lineNumber", lineNumber);
+
+			$.ajax($("html").attr("data-rootdir")+"api/internal/js_error/", {
+				data: data,
+				processData: false,
+				contentType: false,
+				method: "POST"
+			}).done(function(response) {
+				if (Materialize !== undefined) {
+					Materialize.toast("An error occured", 4000);
+				} else {
+					alert("An unknown error occured.");
+				}
+			}).fail(function(response) {
+				if (Materialize !== undefined) {
+					Materialize.toast("An error occured", 4000);
+				} else {
+					alert("An unknown error occured.");
+				}
+				Materialize.toast("An error occured", 4000);
+			});
+		}
 	} catch (e) {}
 	return false;
 };
