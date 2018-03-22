@@ -10,6 +10,7 @@ use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
 use \Catalyst\Database\Query\{DeleteQuery, SelectQuery, UpdateQuery};
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
+use \Catalyst\Tokens;
 
 Endpoint::init(true, 1);
 
@@ -24,11 +25,17 @@ $artistId = $_SESSION["user"]->getArtistPageId();
 
 $stmt = new UpdateQuery();
 $stmt->setTable(Tables::ARTIST_PAGES);
+
+$stmt->addColumn(new Column("URL", Tables::ARTIST_PAGES));
+$stmt->addValue(Tokens::generateDeletedArtistUrl($_SESSION["user"]->getArtistPage()->getUrl()));
+
 $stmt->addColumn(new Column("DELETED", Tables::ARTIST_PAGES));
 $stmt->addValue(1);
+
 $whereClause = new WhereClause();
 $whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), '=', $_SESSION["user"]->getId()]);
 $stmt->addAdditionalCapability($whereClause);
+
 $stmt->execute();
 
 $stmt = new UpdateQuery();
