@@ -47,7 +47,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		<?= FormRepository::getEditArtistPageForm()->getHtml() ?>
 		<div class="divider"></div>
 		<div class="section">
-			<p class="col s12 flow-text">Please go <a href="../EditCommissionTypes/">here</a> to edit commission types.</p>
+			<p class="col s12 flow-text">Please go <a href="../CommissionTypes/">here</a> to edit commission types.</p>
 			<?= FormRepository::getDeleteArtistPageForm()->getHtml(false) ?>
 		</div>
 <?php
