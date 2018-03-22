@@ -63,7 +63,7 @@ class Navbar {
 				[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
 				["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
 				["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
-				["Commission Types", self::NAME, null, ROOTDIR."Artist/EditCommissionTypes", self::DROPDOWN_CHILD],
+				["Commission Types", self::NAME, null, ROOTDIR."Artist/CommissionTypes", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"nsfw" => [
