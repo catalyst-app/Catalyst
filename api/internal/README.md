@@ -200,3 +200,32 @@
 - **91413** - Missing ToS
 - **91414** - Invalid ToS
 - **91415** - Not an artist
+
+#### New commission type
+
+- **91501** - Missing name
+- **91502** - Invalid name
+- **91503** - Missing blurb
+- **91504** - Invalid blurb
+- **91505** - Missing description
+- **91506** - Invalid description
+- **91507** - Missing base cost
+- **91508** - Invalid base cost
+- **91509** - Missing usd cost
+- **91510** - Invalid usd cost
+- **91511** - Missing attrs
+- **91512** - Invalid attrs
+- **91513** - Invalid physical address checkbox
+- **91514** - Invalid accepting quotes checkbox
+- **91515** - Invalid accepting requests checkbox
+- **91516** - Invalid accepting trades checkbox
+- **91517** - Invalid accepting commissions checkbox
+- **91518** - Missing modifier structure
+- **91519** - Invalid modifier structure
+- **91520** - Missing payment structure
+- **91521** - Invalid payment structure
+- **91522** - Missing stages structure
+- **91523** - Invalid stages structure
+- **91524** - Files too large
+- **91525** - Not an image
+- **91526** - Invald image
