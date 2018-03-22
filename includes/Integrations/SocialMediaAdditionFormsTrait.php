@@ -2,6 +2,11 @@
 
 namespace Catalyst\Integrations;
 
+use \Catalyst\API\ErrorCodes;
+use \Catalyst\Form\CompletionAction\CallUserFuncCompletionAction;
+use \Catalyst\Form\Field\{HiddenInputField,SelectField,TextField};
+use \Catalyst\Form\Form;
+
 /**
  * Forms to add social networks to a model which supports them
  */
