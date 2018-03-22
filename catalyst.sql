@@ -742,7 +742,7 @@ CREATE TABLE `commission_type_payment_options` (
   `ID` int(11) UNSIGNED NOT NULL,
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL,
   `TYPE` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ADDRESS` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ADDRESS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `INSTRUCTIONS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
