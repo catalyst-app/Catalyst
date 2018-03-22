@@ -11,7 +11,7 @@ use \Catalyst\Secrets;
 /**
  * delete character form
  */
-trait EditCharacterFormTrait {
+trait DeleteCharacterFormTrait {
 	/**
 	 * Get the form used to delete a character
 	 * 
