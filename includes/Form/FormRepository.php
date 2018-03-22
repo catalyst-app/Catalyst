@@ -3,6 +3,8 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
+use \Catalyst\Artist\{
+	UndeleteArtistPageFormTrait};
 use \Catalyst\Character\{
 	Character,
 	DeleteCharacterFormTrait,
@@ -87,26 +89,7 @@ class FormRepository {
 	use EditCharacterFormTrait;
 	use DeleteCharacterFormTrait;
 
-	/**
-	 * Get the form used to un-delete an artist page
-	 * 
-	 * @return Form
-	 */
-	public static function getUndeleteArtistPageForm() : Form {
-		$form = new Form();
-
-		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
-		$form->setMethod(Form::POST);
-		$form->setEndpoint("internal/artist/undelete/");
-		$form->setButtonText("REACTIVATE");
-		$form->setPrimary(false);
-
-		$completionAction = new ConcreteRedirectCompletionAction();
-		$completionAction->setRedirectUrl("Artist/Edit");
-		$form->setCompletionAction($completionAction);
-
-		return $form;
-	}
+	use UndeleteArtistPageFormTrait;
 
 	/**
 	 * Get the form used to create an artist page
