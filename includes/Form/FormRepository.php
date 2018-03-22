@@ -5,6 +5,7 @@ namespace Catalyst\Form;
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Character\{
 	Character,
+	DeleteCharacterFormTrait,
 	EditCharacterFormTrait,
 	NewCharacterFormTrait};
 use \Catalyst\Form\CompletionAction\{
@@ -12,8 +13,7 @@ use \Catalyst\Form\CompletionAction\{
 	CallUserFuncCompletionAction,
 	ConcreteRedirectCompletionAction,
 	ConditionalCompletionAction,
-	DynamicRedirectCompletionAction
-};
+	DynamicRedirectCompletionAction};
 use \Catalyst\Form\Field\{
 	CaptchaField,
 	CheckboxField,
@@ -85,6 +85,7 @@ class FormRepository {
 
 	use NewCharacterFormTrait;
 	use EditCharacterFormTrait;
+	use DeleteCharacterFormTrait;
 
 	/**
 	 * Get the form used to un-delete an artist page
