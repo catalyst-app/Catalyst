@@ -30,7 +30,6 @@ class Values {
 	const EDIT_ARTIST_PAGE_COMMISSION_TYPES = ["artist", "Commission Types"];
 	const NEW_COMMISSION_TYPE = ["artist", "New Commission Type"];
 	const EDIT_COMMISSION_TYPE = ["artist", "Edit Commission Type"];
-	const EDIT_COMMISSION_TYPE_IMAGES = ["artist", "Edit Commission Type Images"];
 	const NEW_COMMISSION = ["browse", "New {type} Commission | {artist}"];
 	const BLOG = ["about", "Blog"];
 	const TOS_GUIDE = ["about", "Terms of Service Guide"];
