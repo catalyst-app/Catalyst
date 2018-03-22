@@ -33,7 +33,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		</div>
 <?php
 else:
-	echo FormRepository::getNewCommissionTypeForm();
+	echo FormRepository::getNewCommissionTypeForm()->getHtml();
 endif;
 
 require_once Values::FOOTER_INC;
