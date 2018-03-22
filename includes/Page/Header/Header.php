@@ -13,7 +13,7 @@ class Header {
 		// jQuery may be able to drop once materialize does
 		["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", 'crossorigin="anonymous"'],
 		// migrate to 1.0.0 alpha?
-		["https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.js", 'crossorigin="anonymous"'],
+		["https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js", 'crossorigin="anonymous"'],
 		// this is garbage but its the best i've found so far
 		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.3/draggable.bundle.min.js", 'crossorigin="anonymous"'],
 		// not vital
