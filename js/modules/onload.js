@@ -14,20 +14,20 @@ $forms = FormRepository::getAllForms();
 /*
 U+0020  SPACE   foo bar, size: depends on font, typically 1/4 em, often adjusted
 U+00A0  NO-BREAK SPACE  foo bar, size: as a space, but often not adjusted
-U+1680  OGHAM SPACE MARK    foo bar, size: unspecified; usually not really a space but a dash
+U+1680  OGHAM SPACE MARK	foo bar, size: unspecified; usually not really a space but a dash
 U+180E  MONGOLIAN VOWEL SEPARATOR   foo᠎bar, size: no width
 U+2000  EN QUAD foo bar, size: 1 en (= 1/2 em)
 U+2001  EM QUAD foo bar, size: 1 em (nominally, the height of the font)
-U+2002  EN SPACE    foo bar, size: 1 en (= 1/2 em)
-U+2003  EM SPACE    foo bar, size: 1 em
+U+2002  EN SPACE	foo bar, size: 1 en (= 1/2 em)
+U+2003  EM SPACE	foo bar, size: 1 em
 U+2004  THREE-PER-EM SPACE  foo bar, size: 1/3 em
 U+2005  FOUR-PER-EM SPACE   foo bar, size: 1/4 em
-U+2006  SIX-PER-EM SPACE    foo bar, size: 1/6 em
-U+2007  FIGURE SPACE    foo bar, size: “tabular width”, the width of digits
+U+2006  SIX-PER-EM SPACE	foo bar, size: 1/6 em
+U+2007  FIGURE SPACE	foo bar, size: “tabular width”, the width of digits
 U+2008  PUNCTUATION SPACE   foo bar, size: the width of a period “.”
 U+2009  THIN SPACE  foo bar, size: 1/5 em (or sometimes 1/6 em)
 U+200A  HAIR SPACE  foo bar, size: narrower than thin space
-U+200B  ZERO WIDTH SPACE    foo​bar, size: nominally no width, but may expand
+U+200B  ZERO WIDTH SPACE	foo​bar, size: nominally no width, but may expand
 U+202F  NARROW NO-BREAK SPACE   foo bar, size: narrower than no-break space (or space)
 U+205F  MEDIUM MATHEMATICAL SPACE   foo bar, size: 4/18 em
 U+3000  IDEOGRAPHIC SPACE   foo　bar, size: the width of ideographic (cjk) characters.
@@ -126,34 +126,47 @@ var humanFileSize = function(size) {
 			$("#hide-news-button").parent().parent().remove();
 		});
 
-		/* ONLOADS */
+		/* FORM SUBMISSION KEYS */
 		$(document).on("keydown", function(event) {
 			if (event.which === 8 && $("form").length != 0 && $(event.target).parents("form").length == 0) {
 				event.preventDefault();
 			}
 		});
+		$(document).on("keydown", "textarea", function(e) {
+			if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+				$(document.activeElement.form).submit();
+			}
+		});
 
-		$(".button-collapse").sideNav();
-		$(".modal").modal();
-		$('select').attr("required", false).material_select();
-		$('.pushpin').pushpin({
-			top: 200,
-			offset: 72
-		});
-		$('.psuedo-required, .psuedo-required input').attr("required", false);
-		$(".raw-markdown").each(function() {renderMarkdownArea(this);});
-		$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
-		$(".totp-preview").each(function(a, b) {
-			setInterval(function() {
-				$(b).text(
-					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)-1)+
-					","+
-					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000))+
-					","+
-					totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)+1)
-				);
-			}, 1000);
-		});
-		$('textarea').trigger('autoresize');
+		// toish: "Put it in a closure":tm:
+		function materializeOnload() {
+			if ($ === undefined || Materialize === undefined) {
+				console.log("Deferring materialize onload for 100ms (even though I'm not happy about it...)");
+				setTimeout(materializeOnload, 100);
+				return;
+			}
+			$(".button-collapse").sideNav();
+			$(".modal").modal();
+			$('select').attr("required", false).material_select();
+			$('.pushpin').pushpin({
+				top: 200,
+				offset: 72
+			});
+			$('.psuedo-required, .psuedo-required input').attr("required", false);
+			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
+			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
+			$(".totp-preview").each(function(a, b) {
+				setInterval(function() {
+					$(b).text(
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)-1)+
+						","+
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000))+
+						","+
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)+1)
+					);
+				}, 1000);
+			});
+			$('textarea').trigger('autoresize');
+		}
 	});
 })(jQuery);
