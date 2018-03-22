@@ -13,6 +13,7 @@ use \Catalyst\Character\{
 	DeleteCharacterFormTrait,
 	EditCharacterFormTrait,
 	NewCharacterFormTrait};
+use \Catalyst\CommissionType\NewCommissionTypeTrait;
 use \Catalyst\Form\CompletionAction\{
 	AutoClosingModalCompletionAction,
 	CallUserFuncCompletionAction,
@@ -96,7 +97,9 @@ class FormRepository {
 	use CreateArtistPageFormTrait;
 	use DeleteArtistPageFormTrait;
 	use EditArtistPageFormTrait;
-	
+
+	use NewCommissionTypeTrait;
+
 	/**
 	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
