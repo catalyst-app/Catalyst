@@ -89,9 +89,9 @@ var humanFileSize = function(size) {
 		$(document).on("input", ".marked-invalid", function(e) {
 			$(this).removeClass("invalid").removeClass("invalid");
 		});
-<?php foreach ($forms as $form): ?>
-	<?= $form->getAllJs(); ?>
-<?php endforeach; ?>
+		<?php foreach ($forms as $form): ?>
+			<?= $form->getAllJs(); ?>
+		<?php endforeach; ?>
 
 		/* IMAGE UPLOADING WITH NSFW, CAPTIONS, and INFO */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'image_upload_arranger.js'; ?>
@@ -168,5 +168,7 @@ var humanFileSize = function(size) {
 			});
 			$('textarea').trigger('autoresize');
 		}
+
+		materializeOnload();
 	});
 })(jQuery);
