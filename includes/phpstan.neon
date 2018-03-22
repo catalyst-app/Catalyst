@@ -5,6 +5,10 @@ parameters:
 	bootstrap: includes/phpstan-init.php
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
+		- '/Constant PAGE_IMAGE not found\./'
+		- '/incorrect case: getMIME/'
+		- '/Catalyst\\Database\\CommissionType\\Wishlist/'
+		- '/Call to static method test\(\) on an unknown class Catalyst\\Form\\Captcha\./'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
 
