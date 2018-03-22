@@ -1140,9 +1140,10 @@ ALTER TABLE `api_keys`
 --
 ALTER TABLE `artist_pages`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `USER` (`USER_ID`, `DELETED`),
-  ADD UNIQUE KEY `URL_DELETED` (`URL`, `DELETED`),
-  ADD KEY `DELETED` (`DELETED`);
+  ADD UNIQUE KEY `USER` (`USER_ID`,`DELETED`),
+  ADD UNIQUE KEY `URL_DELETED` (`URL`,`DELETED`),
+  ADD KEY `DELETED` (`DELETED`),
+  ADD KEY `artist_pages_ibfk_2` (`COLOR`);
 
 --
 -- Indexes for table `artist_social_media`
