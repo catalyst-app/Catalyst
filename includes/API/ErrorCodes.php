@@ -206,6 +206,34 @@ class ErrorCodes {
 	const ERR_91414 = 'Invalid ToS';
 	const ERR_91415 = 'You are not an artist';
 
+	// new commission type
+	const ERR_91501 = 'Missing name';
+	const ERR_91502 = 'Invalid name';
+	const ERR_91503 = 'Missing blurb';
+	const ERR_91504 = 'Invalid blurb';
+	const ERR_91505 = 'Missing description';
+	const ERR_91506 = 'Invalid description';
+	const ERR_91507 = 'Missing base cost';
+	const ERR_91508 = 'Invalid base cost';
+	const ERR_91509 = 'Missing usd cost';
+	const ERR_91510 = 'Invalid usd cost';
+	const ERR_91511 = 'Missing attrs';
+	const ERR_91512 = 'An unknown error occured';
+	const ERR_91513 = 'An unknown error occured';
+	const ERR_91514 = 'An unknown error occured';
+	const ERR_91515 = 'An unknown error occured';
+	const ERR_91516 = 'An unknown error occured';
+	const ERR_91517 = 'An unknown error occured';
+	const ERR_91518 = 'An unknown error occured';
+	const ERR_91519 = 'An unknown error occured';
+	const ERR_91520 = 'An unknown error occured';
+	const ERR_91521 = 'An unknown error occured';
+	const ERR_91522 = 'An unknown error occured';
+	const ERR_91523 = 'An unknown error occured';
+	const ERR_91524 = 'Files too large';
+	const ERR_91525 = 'Not an image';
+	const ERR_91526 = 'Invald image';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
