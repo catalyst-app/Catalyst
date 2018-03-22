@@ -126,6 +126,9 @@ class CaptchaField extends AbstractField {
 		if (empty($this->getSecretKey())) {
 			throw new InvalidArgumentException("CaptchaField must have a secret key set");
 		}
+		if (Controller::isDevelMode()) {
+			return;
+		}
 		$opts = [
 			"http" => [
 				"method"  => "POST",
@@ -135,9 +138,6 @@ class CaptchaField extends AbstractField {
 					"response" => $this->getDistinguisher(),
 					"remoteip" => $_SERVER["REMOTE_ADDR"]
 				])
-			],
-			"ssl" => [
-				// "verify_peer" => false
 			]
 		];
 		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify", false, stream_context_create($opts));
