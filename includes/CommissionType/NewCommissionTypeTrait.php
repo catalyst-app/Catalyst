@@ -15,11 +15,6 @@ sort=0
 base cost <64
 base usd (num, step=2, min=0, max=1000000)
 attrs
-bool phys addy
-bool quotes
-bool requests
-bool trades
-bool commissions
 modifier groups creator
 	modifiers:
 		name <60
@@ -34,6 +29,12 @@ payments
 stages
 	label
 	sorting
+bool phys addy
+bool quotes
+bool requests
+bool trades
+bool commissions
+images
  */
 
 /**
