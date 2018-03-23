@@ -217,7 +217,7 @@ class ErrorCodes {
 	const ERR_91508 = 'Invalid range (0-1000000)';
 	const ERR_91509 = 'Missing usd cost';
 	const ERR_91510 = 'Invalid usd cost';
-	const ERR_91511 = 'Missing attrs';
+	const ERR_91511 = 'An unknown error occured';
 	const ERR_91512 = 'An unknown error occured';
 	const ERR_91513 = 'An unknown error occured';
 	const ERR_91514 = 'An unknown error occured';
