@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, StaticHTMLField, TextField};
+use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField};
 use \Catalyst\Form\Form;
 
 /*
@@ -95,6 +95,35 @@ trait NewCommissionTypeTrait {
 		$descriptionField->addError(91506, ErrorCodes::ERR_91506);
 		$descriptionField->setInvalidErrorCode(91506);
 		$form->addField($descriptionField);
+
+		$costsNote = new StaticHTMLField();
+		$costsNote->setHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging.  The base cost in USD is not shown to users, but is used for searching and analytics.</p>');
+		$form->addField($costsNote);
+
+		$baseCostField = new TextField();
+		$baseCostField->setDistinguisher("base-cost");
+		$baseCostField->setLabel("Base Cost");
+		$baseCostField->setRequired(true);
+		$baseCostField->setPattern('^.{2,64}$');
+		$baseCostField->setMaxLength(255);
+		$baseCostField->addError(91507, ErrorCodes::ERR_91507);
+		$baseCostField->setMissingErrorCode(91507);
+		$baseCostField->addError(91508, ErrorCodes::ERR_91508);
+		$baseCostField->setInvalidErrorCode(91508);
+		$form->addField($baseCostField);
+
+		$baseCostUsdField = new NumberField();
+		$baseCostUsdField->setDistinguisher("base-cost-usd");
+		$baseCostUsdField->setLabel("Base Cost (USD)");
+		$baseCostUsdField->setRequired(true);
+		$baseCostUsdField->setPrecision(2);
+		$baseCostUsdField->setMin(0);
+		$baseCostUsdField->setMax(1000000);
+		$baseCostUsdField->addError(91509, ErrorCodes::ERR_91509);
+		$baseCostUsdField->setMissingErrorCode(91509);
+		$baseCostUsdField->addError(91510, ErrorCodes::ERR_91510);
+		$baseCostUsdField->setInvalidErrorCode(91510);
+		$form->addField($baseCostUsdField);
 
 		return $form;
 	}
