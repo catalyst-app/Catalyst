@@ -70,6 +70,10 @@ trait NewCommissionTypeTrait {
 		$nameField->setInvalidErrorCode(91502);
 		$form->addField($nameField);
 
+		$blurbNote = new StaticHTMLField();
+		$blurbNote->setHtml('<p class="col s12 no-bottom-margin">Blurbs are shown in search results, wishlists, etc.</p>');
+		$form->addField($blurbNote);
+
 		$blurbField = new TextField();
 		$blurbField->setDistinguisher("blurb");
 		$blurbField->setLabel("Blurb");
@@ -81,10 +85,6 @@ trait NewCommissionTypeTrait {
 		$blurbField->addError(91504, ErrorCodes::ERR_91504);
 		$blurbField->setInvalidErrorCode(91504);
 		$form->addField($blurbField);
-
-		$blurbNote = new StaticHTMLField();
-		$blurbNote->setHtml('<p class="col s12 no-top-margin">This will be shown in search results, wishlists, etc.</p>');
-		$form->addField($blurbNote);
 
 		$descriptionField = new MarkdownField();
 		$descriptionField->setDistinguisher("description");
