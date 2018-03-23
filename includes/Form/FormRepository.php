@@ -14,36 +14,10 @@ use \Catalyst\Character\{
 	EditCharacterFormTrait,
 	NewCharacterFormTrait};
 use \Catalyst\CommissionType\NewCommissionTypeTrait;
-use \Catalyst\Form\CompletionAction\{
-	AutoClosingModalCompletionAction,
-	CallUserFuncCompletionAction,
-	ConcreteRedirectCompletionAction,
-	ConditionalCompletionAction,
-	DynamicRedirectCompletionAction};
-use \Catalyst\Form\Field\{
-	CaptchaField,
-	CheckboxField,
-	ColorField,
-	ConfirmPasswordField,
-	EmailField,
-	HiddenInputField,
-	ImageField,
-	JSConfirmField,
-	MarkdownField,
-	MultipleImageField,
-	MultipleImageWithNsfwCaptionAndInfoField,
-	PasswordField,
-	RawLabelCheckboxField,
-	SelectField,
-	StaticHTMLField,
-	TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Integrations\{
 	SocialMedia,
 	SocialMediaAdditionFormsTrait};
-use \Catalyst\Page\UniversalFunctions;
-use \Catalyst\Secrets;
-use \Catalyst\Tokens;
 use \Catalyst\User\{
 	DeactivateFormTrait,
 	EmailListFormTrait,
