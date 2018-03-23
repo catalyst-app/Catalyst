@@ -214,7 +214,7 @@ class ErrorCodes {
 	const ERR_91505 = 'Missing description';
 	const ERR_91506 = 'Invalid description';
 	const ERR_91507 = 'Missing base cost';
-	const ERR_91508 = 'Invalid base cost';
+	const ERR_91508 = 'Invalid range (0-1000000)';
 	const ERR_91509 = 'Missing usd cost';
 	const ERR_91510 = 'Invalid usd cost';
 	const ERR_91511 = 'Missing attrs';
