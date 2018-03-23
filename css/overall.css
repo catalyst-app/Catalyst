@@ -97,6 +97,10 @@ div.section > h4:first-child {
 
 .toggle-btn {
 	margin: 5px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
 }
 
 .draggable-mirror.commission-type-mod {
