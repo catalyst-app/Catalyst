@@ -35,7 +35,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<div class="row">
 				<p class="col s12">You may drag to reorder these.</p>
-				<a href="<?= ROOTDIR ?>Artist/CommissionType/New/">
+				<a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">
 					<div class="commission-type new-commission-type row">
 						<div class="divider col s12 bottom-margin"></div>
 						<div class="col s6 offset-s3 m3 l2 center force-square-contents">
