@@ -5,7 +5,7 @@ namespace Catalyst\Form\Field;
 use \Catalyst\Form\Form;
 
 /**
- * Represents a text field
+ * Represents a numeric field
  */
 class NumberField extends AbstractField {
 	use LabelTrait, SupportsPrefilledValueTrait;
