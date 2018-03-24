@@ -109,7 +109,7 @@ trait NewCommissionTypeTrait {
 		$baseCostField->setLabel("Base Cost");
 		$baseCostField->setRequired(true);
 		$baseCostField->setPattern('^.{2,64}$');
-		$baseCostField->setMaxLength(255);
+		$baseCostField->setMaxLength(64);
 		$baseCostField->addError(91507, ErrorCodes::ERR_91507);
 		$baseCostField->setMissingErrorCode(91507);
 		$baseCostField->addError(91508, ErrorCodes::ERR_91508);
