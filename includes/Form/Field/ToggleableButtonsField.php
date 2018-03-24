@@ -5,7 +5,7 @@ namespace Catalyst\Form\Field;
 use \Catalyst\Form\Form;
 
 /**
- * Represents a text field
+ * Represents a set of buttons field
  */
 class ToggleableButtonsField extends AbstractField {
 	use LabelTrait, SupportsPrefilledValueTrait;
