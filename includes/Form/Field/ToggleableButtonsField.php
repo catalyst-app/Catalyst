@@ -51,14 +51,14 @@ class ToggleableButtonsField extends AbstractField {
 		$str .= '</p>';
 
 		$str .= '<div';
-		$str .= ' class="attr-container col s12"';
+		$str .= ' class="toggle-btn-set-container col s12"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 
 		foreach ($this->getButtons() as $button) {
 			$str .= '<div';
 			$str .= ' class="';
-			$str .= 'btn attr-button toggle-btn tooltipped ';
+			$str .= 'btn toggle-btn-set-button toggle-btn tooltipped ';
 
 			if ($this->isFieldPrefilled() && in_array($button[0], $this->getPrefilledValue())) {
 				$str .= 'on';
@@ -98,7 +98,7 @@ class ToggleableButtonsField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', JSON.stringify($('.json_encode("#".$this->getId()." .attr-button.toggle-btn.on").').get().map(function(e) {return $(e).attr("data-key");})));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', JSON.stringify($('.json_encode("#".$this->getId()." .toggle-btn-set-button.toggle-btn.on").').get().map(function(e) {return $(e).attr("data-key");})));';
 	}
 
 	/**
