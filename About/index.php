@@ -490,6 +490,11 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@JikiScott",
 	],
 	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "Jiki Scott#7840",
+	],
+	[
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:jiki@catalystapp.co",
 		"DISP_NAME" => "jiki@catalystapp.co",
