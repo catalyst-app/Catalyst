@@ -1,7 +1,5 @@
 # Catalyst - Facilitating Commissions
 
-### Both this project and README are undergoing rewrites/refactors, and may not be up to date or even close to correct
-
 # Table of Contents
 
 - [Introduction](#introduction)
@@ -107,7 +105,7 @@ Email: catalyst@catalystapp.co
 # Known Bugs
 
 - [ ] CAPTCHAs show message about testing only **NOT AN ISSUE**
-- [ ] SideNav doesn't work on first load
+- [x] SideNav doesn't work on first load
 - [x] Dropdown `.active`
 - [x] Autocomplete on settings page
 - [ ] SideNav needs dividers (what i have doesn't cut it)
@@ -121,13 +119,7 @@ Email: catalyst@catalystapp.co
   - [x] Longboi chips
   - [x] Commission types
   - [x] Images
-- [ ] Default images of something do not stay the same color when viewed on another page (e.g. character displayed on dashboard)
-
-**Broken Links**
-
-- Navbar things
-- Message link on user profile
-- Message link on artist profile
+- [x] ~~Default images of something do not stay the same color when viewed on another page (e.g. character displayed on dashboard)~~
 
 # Feature List
 
@@ -141,191 +133,187 @@ Email: catalyst@catalystapp.co
   * Easily create a profile for your character full of art, refs, bio, etc and share it with an artist!
 * Commission management - easily keep track of commissions and their status, possibly with trello integration
 * Intuitive, simple design which is fully mobile-friendly!
+* Strong security - two factor authentication and constant verifications site-wide
 
-# Basic Features
+# Basic Feature List
 
-**Highest Priority**  
-
-- [x] Basic class restructure of the base namespace
-- [x] Info website setup
-- [x] Remove secrets and publicise repo: https://github.com/catalyst-app/Catalyst
-- [x] Resolve trademark issues and get a new name
-- [x] ~~Find~~ Build a markdown editor
-
-**User Account Fundamentals: Complete**  
-
-- [x] Registration
-- [x] Login
-- [x] Email Verification
-- [x] CAPTCHA on important forms
-- [x] Settings/Update
-- [x] NSFW profile photo control
-- [x] Deactivation
-
-**Dashboard/User Profile**  
-
-- [x] Social Networks
-  - [x] Add
-  - [x] Re-order
-  - [x] Remove
-  - [x] Potential XSS
-- [x] Artist page widget
-- [x] Display scrollability
-  - [x] Mousewheel/scroll down?
-- [x] Characters
-  - [x] A pretty display _that works on mobile_
-- [x] Wishlist
-  - [x] A pretty display _that works on mobile_
-  - [x] Check for deleted
-- [ ] Commissions
-  - [ ] A pretty table _that works on mobile_
-
-**Characters**  
-
-- [x] Landing page
-- [x] Creation
-  - [x] Multi-file upload
-- [x] Editing
-- [x] Editing Images
-- [x] Public/private
-- [x] NSFW picture handling
-- [x] Removal
-  - [x] UI
-  - [x] Database cascading with existing commissions and such
-
-**Artists**  
-
-- [x] Create a page
-  - [x] Check for deleted
-- [x] NSFW picture handling
-- [x] Edit
-  - [x] Social media
-    - [x] Display
-    - [x] Order
-    - [x] New
-    - [x] Edit
-  - [x] Info
-  - [x] Commission types
-    - [x] Rearrange
-    - [x] Delete
-- [x] Show commission types
-- [x] Basic information
-- [x] Social medias
-- [ ] Ratings
-- [ ] Recent commissioners
-
-**Commission Type**  
-
-- [ ] Create
-  - [ ] Basic data
-  - [ ] Modifiers
-  - [ ] Attributes
-    - [ ] ~~Global el type?~~
-  - [ ] Payment opts
-  - [ ] Stage opts
-- [ ] Type (for searching)
-  - [ ] Specie
-  - [ ] Type
-  - [ ] SFW
-  - [ ] Viewing, handle db
-- [ ] Edit
-  - [ ] Basic data
-    - [ ] db
-  - [ ] Modifiers
-    - [ ] db
-  - [ ] Attributes
-    - [ ] db
-  - [ ] Payment opts
-    - [ ] db
-  - [ ] Stage opts
-    - [ ] db
-  - [ ] Images
-- [ ] View
-  - [ ] "Collapisble"
-  - [ ] Basic info
-  - [ ] NSFW
-  - [ ] Blurb
-  - [ ] Modifiers
-  - [ ] Images
-  - [ ] Options
-  - [ ] Payment Options
-  - [ ] Closed/open
-- [ ] NSFW handling
-- [ ] Modifiers
-- [ ] ~~Creation in a form (collapsible?)~~
-- [ ] Wishlist
-
-**Commission**  
-
-- [ ] Trades?
-- [ ] NSFW picture handling
-- [ ] Multiple character chooser
-- [ ] A neat display for assigned characters
-- [ ] Payment
-  - [ ] Multiple
-- [ ] States
-  - [ ] Pending approval
-  - [ ] **Denied**
-  - [ ] Approved; pending payment
-  - [ ] Waiting for artist
-    - [ ] Customizable statuses (lineart, sketch, shading, etc)
-  - [ ] Finished
-- [ ] WIPs
-  - [ ] Multiple
-- [ ] Review afterwards
-- [ ] Messaging integrations
-- [ ] Viewing page
-  - [ ] Table+?
-  - [ ] For artist
-  - [ ] For commissioner
-- [ ] Timestamps
-
-**Searching**  
-
-- [ ] Artist name
-- [ ] Reviews
-- [ ] Prices
-- [ ] Attributes
-- [ ] Commission type name
-
-**Text things**
-
-- [x] About Page
-  - [x] Staff
-  - [x] Official accounts of staff
-  - [x] Social medias
-  - [x] ~~story?~~
-  - [x] ~~helpers/testers~~
-- [x] ToS
-- [ ] Help center?
-  - [ ] Support desk
-  - [ ] reporting
-  - [ ] DMCA
-  - [ ] General rules + code of conduct
-  - [ ] Explaination of all features
-  - [ ] Verification of artists
-  - [ ] Getting started
-  - [ ] Glossary/vocabulary
-- [ ] FAQ
-  - [ ] What does it cost?
-  - [ ] What sets us apart?
-  - [ ] How can we be free?
-  - [ ] Encryption/security
-  - [ ] Paying artists
-
-**Universal**  
-
-- [ ] Messages
-  - [ ] Threads
-- [x] Pixel art handling
-- [x] NSFW image handling (fallback)
-- [x] Markdown editor
-  - [x] Markdown spec
-    - [x] Custom containers
-    - [x] Color
-    - [x] Documentation
-  - [x] Live preview
-  - [x] ~~Quick buttons~~
+- [ ] Forms
+  - [ ] Structure
+    - [ ] Highly extensible and versatile class system
+  - [ ] AJAX
+  - [ ] HTML generation
+    - [ ] Move to pQuery?
+  - [ ] JS validation
+  - [ ] Server-side validation
+  - [ ] Fields
+    - [ ] Abstract
+    - [ ] Captcha
+      - [ ] Development mode
+    - [ ] Checkbox
+      - [ ] Label with HTML
+    - [ ] Color Picker
+    - [ ] Password fields
+      - [ ] Confirmation password field
+    - [ ] Text field
+      - [ ] Email field
+    - [ ] Hidden input field
+    - [ ] Image field
+      - [ ] ~~Inline rendering/preview?~~
+    - [ ] Multiple image field
+    - [ ] Multiple image field with preview and options
+      - [ ] Reorder
+      - [ ] Drag and drop uploading
+      - [ ] Ability to change the credit/character inner field
+      - [ ] Make it so it accepts a Form itself?
+    - [ ] Numeric field
+      - [ ] iOS kbd support?
+    - [ ] Select field
+    - [ ] Static HTML
+      - [ ] Maybe a better p element thing for standardization? idk
+    - [ ] Prefilling of values
+    - [ ] Toggleable button clumps
+      - [ ] Multiple/singular allowed
+    - [ ] Toggleable button set of sets
+    - [ ] Custom sets of forms that can be added/removed
+    - [ ] Modifier generator
+    - [ ] Radio buttons
+  - [ ] Uploading images safely
+    - [ ] Token handling
+    - [ ] MIME type handling
+  - [ ] Completion actions
+    - [ ] Abstract
+    - [ ] Auto-closing modal
+    - [ ] JS function on data
+    - [ ] Redirection
+      - [ ] Redirect based on data
+    - [ ] Conditional
+  - [ ] Repository
+    - [ ] Pretty up with traits
+- [ ] Images
+  - [ ] Better standardization
+  - [ ] Versatile class
+  - [ ] Handling of not-found errors
+  - [ ] Generate card
+    - [ ] With title/content
+    - [ ] With HTML
+    - [ ] With ribbon
+  - [ ] Generate circular image
+  - [ ] Handle pixel art
+  - [ ] Traits
+  - [ ] MIME handling class
+  - [ ] Folders
+- [ ] Social media integrations
+  - [ ] Trait?
+  - [ ] Addition forms
+    - [ ] Links
+      - [ ] Auto-guess network
+    - [ ] Text
+  - [ ] Moving
+  - [ ] Fix issue on dragging mirrors
+- [ ] Messages\*
+  - [ ] Threading
+  - [ ] Replies
+  - [ ] Referencing commissions
+  - [ ] Handling to/fro
+  - [ ] Composition forms
+  - [ ] System user
+- [ ] Page stuff
+  - [ ] Centralized navbar
+  - [ ] Centralized footer
+    - [ ] Add stats?
+  - [ ] UniversalFunctions/Values cleanup
+- [ ] User
+  - [ ] TOTP authentication
+    - [ ] Key provisioning
+    - [ ] Checking with potentially bad time
+    - [ ] QR code generation with that weird library
+    - [ ] Clearing login well
+  - [ ] Settings form
+    - [ ] Requiring old password
+    - [ ] Deactivation
+- [ ] Static analysis
+  - [ ] PHPStan
+  - [ ] Sublime build systems
+- [ ] Database
+  - [ ] Central database class for DBH
+  - [ ] Column classes
+  - [ ] Tables reference map
+  - [ ] Database model? trait
+  - [ ] Queries
+    - [ ] Abstract
+    - [ ] SELECT
+      - [ ] DISTINCT
+      - [ ] Custom columns
+    - [ ] DELETE
+    - [ ] INSERT
+      - [ ] Multiple inserts
+    - [ ] REPLACE
+    - [ ] UPDATE
+  - [ ] Clauses
+    - [ ] ~~Abstract~~ Interface
+    - [ ] WHERE
+    - [ ] GROUP BY
+    - [ ] ORDER BY
+      - [ ] Multiple
+    - [ ] JOIN
+      - [ ] 4 types
+- [ ] Commission types
+  - [ ] Creation form
+    - [ ] Modifiers
+    - [ ] Payment types
+    - [ ] Stages
+  - [ ] Editing
+  - [ ] Deletion/marking correctly
+  - [ ] Handling of images/examples
+  - [ ] Frontend UI for actions that can be performed
+  - [ ] Better UI for displaying it on artist page?
+  - [ ] Rearranging
+  - [ ] Trades
+  - [ ] Wishlists
+    - [ ] Addition
+    - [ ] Removal
+    - [ ] Purging?
+- [ ] Commissions\*
+  - [ ] Handling of trades
+  - [ ] NSFW correctly
+  - [ ] Character choosing
+    - [ ] Multiple?
+    - [ ] Allow other public ones (send the owner a message)
+  - [ ] Quote process
+    - [ ] Request -> quote -> approval/denial -> re-request, etc
+  - [ ] Adding payment proof at any time
+  - [ ] Stage workflow  
+    - [ ] Fuzzy estimations
+    - [ ] Concrete dates
+    - [ ] Just tracking, no dates
+  - [ ] Work in progresses
+  - [ ] Pretty table to show in progress
+  - [ ] Review
+    - [ ] Of client
+    - [ ] Of creator
+    - [ ] Starts + comment
+    - [ ] Recent clients/commissioned list
+- [ ] Searching
+  - [ ] Tage (attributes)
+  - [ ] Artist fields
+  - [ ] Commission type fields themselves
+  - [ ] Reviews
+- [ ] Writing
+  - [ ] Help center?
+    - [ ] Support desk
+    - [ ] reporting
+    - [ ] DMCA
+    - [ ] General rules + code of conduct
+    - [ ] Explaination of all features
+    - [ ] Verification of artists
+    - [ ] Getting started
+    - [ ] Glossary/vocabulary
+  - [ ] FAQ
+    - [ ] What does it cost?
+    - [ ] What sets us apart?
+    - [ ] How can we be free?
+    - [ ] Encryption/security
+    - [ ] Paying artists
 
 # Additional Features
 
@@ -336,11 +324,7 @@ Email: catalyst@catalystapp.co
 - [ ] Better suspended/disabled notice
 - [ ] Integration Profile Photos
 - [ ] Reporting spam/fake/stolen/inappropriate
-- [ ] Blob-based uploading (show inline)
-- [ ] Social media URL form things
-- [ ] Drag and drop uploading
-- [ ] Let artists write reviews for buyers
-- [ ] Example account
+- [ ] Examples
 
 **Dashboard/User Profile**  
 
@@ -349,11 +333,7 @@ Email: catalyst@catalystapp.co
 
 **Characters**  
 
-- [ ] Blob-based uploading (show inline)
 - [ ] Report spam/fake/stolen/inappropriate
-- [ ] Drag and drop uploading
-- [ ] Sharing
-- [ ] URL access?
 - [ ] Example character
 
 **Artists**  
@@ -413,14 +393,11 @@ Email: catalyst@catalystapp.co
 **Universal**  
 
 - [ ] SFW button (like FA's)
-- [ ] Messaging "concerning" attr
 - [ ] Pretty 404's
-- [ ] Handle input error messages better
 - [ ] Messages to email
 - [ ] Dark theme
 - [ ] Import images from FA and similar
 - [ ] Localization
-- [ ] Reporting of broken site and such
 - [ ] Blacklisting attrs
 
 **Easter eggs**  
