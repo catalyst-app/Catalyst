@@ -87,7 +87,7 @@ div.section > h4:first-child {
 	left:100%;
 }
 
-.attr-container, #payment-type-container, .payment-type {
+.toggle-btn-set-container, .subform-entry-container {
 	margin-bottom: 0.4em;
 }
 

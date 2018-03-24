@@ -51,7 +51,7 @@ class ToggleableButtonSetField extends ToggleableButtonsField {
 		$str .= '</p>';
 
 		$str .= '<div';
-		$str .= ' class="attr-container col s12"';
+		$str .= ' class="toggle-btn-set-container col s12"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 
@@ -66,14 +66,14 @@ class ToggleableButtonSetField extends ToggleableButtonsField {
 			$str .= '</p>';
 
 			$str .= '<div';
-			$str .= ' class="attr-container col s12"';
+			$str .= ' class="toggle-btn-set-container col s12"';
 			$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 			$str .= '>';
 
 			foreach ($buttonSet as $button) {
 				$str .= '<div';
 				$str .= ' class="';
-				$str .= 'btn attr-button toggle-btn tooltipped ';
+				$str .= 'btn toggle-btn-set-button toggle-btn tooltipped ';
 
 				if ($this->isFieldPrefilled() && in_array($button[0], $this->getPrefilledValue())) {
 					$str .= 'on';
