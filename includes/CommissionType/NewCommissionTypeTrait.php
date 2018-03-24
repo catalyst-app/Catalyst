@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField};
+use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField, ToggleableButtonSetField};
 use \Catalyst\Form\Form;
 
 /*
@@ -125,6 +125,16 @@ trait NewCommissionTypeTrait {
 		$baseCostUsdField->addError(91510, ErrorCodes::ERR_91510);
 		$baseCostUsdField->setInvalidErrorCode(91510);
 		$form->addField($baseCostUsdField);
+
+		$attributesGroupField = new ToggleableButtonSetField();
+		$attributesGroupField->setDistinguisher("attr-test");
+		$attributesGroupField->setLabel("Attributes");
+		$attributesGroupField->setButtons(CommissionTypeAttributes::getButtonSet());
+		$attributesGroupField->addError(91511, ErrorCodes::ERR_91511);
+		$attributesGroupField->setMissingErrorCode(91511);
+		$attributesGroupField->addError(91512, ErrorCodes::ERR_91512);
+		$attributesGroupField->setInvalidErrorCode(91512);
+		$form->addField($attributesGroupField);
 
 		return $form;
 	}
