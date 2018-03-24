@@ -117,7 +117,7 @@ class SocialMedia {
 			['/(sofurry\.com|is(feathery|fluffy|furry|rubbery|scaly|winged)\.com)$/', 'SOFURRY'],
 			['/(snd\.sc|soundcloud\.com)$/', 'SOUNDCLOUD'],
 			['/spotify\.com$/', 'SPOTIFY'],
-			['/steampowered\.com$/', 'STEAM'],
+			['/((3|5)games1box\.com|aheadofthegame(the)?movie\.com|aperturelabo?ratories\.com|aperturescience\.com|as32590\.net|counter-?strike(tv|\d)?\.(com|net)(\.tw)?|counter-?strike(\.com)?\.tw|cs-conditionzero\.com|csonline\.com\.t(r|w)|csoturkey\.(info|net|com\.tr)|dayofdefeat(\d|mod|tv)?\.(com|net)|deathmatchclassic\.com|do(d|ta)\d?\.(net|com)|freetoplaythemovie\.com|gamerlife(the)?movie\.com|getinsidetheorangebox\.com|(half-?life|hl)\d?(|themovie|movie|portal|sucks|minerva|mac|auth)\.(com|net|org)|l4d2?\.com(\.cn)?|learn(ing)?withportals\.com|leftfourdead\.(com|net)|midnight-riders\.(com|net)|minervametastasis\.com|modexpo\.com|opposing-?force\.(com|net|org)|portal2-?(the)?game\.(com|net)|poweredbysteam\.net|shopatvalve\.com|sourcefilmmaker\.com|steam(|community|content|cybercafe|devdays|games|moves|movies|powered(games)?|server|static|user(content|s)|vr)\.(net|com|org|co\.nz|us)|teachwithportals\.com|team-?fortress(|classic|2|ii|tv)\.com|tf-?(classic|ii|2|c|source)\.(com|net|org)|theheartofracing\.org|thinkwithportals\.com|valve(store|sucks|s?softwares?|corp(|orat(e|ion)))?\.(net|org|com)|what(is|sinside)theorangebox\.com)$/', 'STEAM'],
 			['/(t\.me|telegram\.(me|dog))$/', 'TELEGRAM'],
 			['/trello\.com$/', 'TRELLO'],
 			['/tumblr\.com$/', 'TUMBLR'],
