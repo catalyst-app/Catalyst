@@ -12,7 +12,7 @@ use \Catalyst\Database\Query\SelectQuery;
 class CommissionTypeAttributes {
 	/**
 	 * Cache of attributes, in DB format
-	 * @var null|string
+	 * @var null|array
 	 */
 	protected static $attributes = null;
 
