@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField, ToggleableButtonSetField};
+use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /*
@@ -101,6 +101,9 @@ trait NewCommissionTypeTrait {
 		$costsNote->setHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging.  The base cost in USD is not shown to users, but is used for searching and analytics.</p>');
 		$form->addField($costsNote);
 
+		$baseCostFieldWrapper = new WrappedField();
+		$baseCostFieldWrapper->setWrapperClasses("col s12 m6");
+
 		$baseCostField = new TextField();
 		$baseCostField->setDistinguisher("base-cost");
 		$baseCostField->setLabel("Base Cost");
@@ -111,7 +114,12 @@ trait NewCommissionTypeTrait {
 		$baseCostField->setMissingErrorCode(91507);
 		$baseCostField->addError(91508, ErrorCodes::ERR_91508);
 		$baseCostField->setInvalidErrorCode(91508);
-		$form->addField($baseCostField);
+
+		$baseCostFieldWrapper->setField($baseCostField);
+		$form->addField($baseCostFieldWrapper);
+
+		$baseCostUsdFieldWrapper = new WrappedField();
+		$baseCostUsdFieldWrapper->setWrapperClasses("col s12 m6");
 
 		$baseCostUsdField = new NumberField();
 		$baseCostUsdField->setDistinguisher("base-cost-usd");
@@ -124,7 +132,9 @@ trait NewCommissionTypeTrait {
 		$baseCostUsdField->setMissingErrorCode(91509);
 		$baseCostUsdField->addError(91510, ErrorCodes::ERR_91510);
 		$baseCostUsdField->setInvalidErrorCode(91510);
-		$form->addField($baseCostUsdField);
+
+		$baseCostUsdFieldWrapper->setField($baseCostUsdField);
+		$form->addField($baseCostUsdFieldWrapper);
 
 		$attributesGroupField = new ToggleableButtonSetField();
 		$attributesGroupField->setDistinguisher("attr-test");
