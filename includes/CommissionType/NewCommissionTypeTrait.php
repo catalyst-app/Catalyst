@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, TextField, ToggleableButtonSetField, WrappedField};
+use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, SubformMultipleEntryField, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /*
@@ -144,6 +144,32 @@ trait NewCommissionTypeTrait {
 		$attributesGroupField->setMissingErrorCode(91511);
 		$attributesGroupField->addError(91512, ErrorCodes::ERR_91512);
 		$attributesGroupField->setInvalidErrorCode(91512);
+		$form->addField($attributesGroupField);
+
+		$stagesField = new SubformMultipleEntryField();
+
+		$stagesField->setDistinguisher("stages");
+		$stagesField->setLabel("Stages (steps of the commission type, can be used to track progress/deadlines)");
+
+		$stageEntryField = new TextField();
+		$stageEntryField->setDistinguisher("stage-psuedo-field");
+		$stageEntryField->setLabel("Stage");
+		$stageEntryField->setRequired(true);
+		$stageEntryField->setPattern('^.{2,255}$');
+		$stageEntryField->setMaxLength(255);
+
+		$stageEntryField->addError(99999, "Please enter a stage name");
+		$stageEntryField->setMissingErrorCode(99999);
+		$stageEntryField->addError(99999, "No more than 255 characters");
+		$stageEntryField->setInvalidErrorCode(99999);
+
+		$stagesField->addField($stageEntryField);
+
+		$stagesField->addError(91511, ErrorCodes::ERR_91511);
+		$stagesField->setMissingErrorCode(91511);
+		$stagesField->addError(91512, ErrorCodes::ERR_91512);
+		$stagesField->setInvalidErrorCode(91512);
+
 		$form->addField($attributesGroupField);
 
 		return $form;
