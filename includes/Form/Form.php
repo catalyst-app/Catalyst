@@ -358,6 +358,7 @@ class Form {
 
 		$str .= '<button';
 		$str .= ' id="'.htmlspecialchars($this->getDistinguisher().self::SUBMIT_BUTTON_SUFFIX).'"';
+		$str .= ' type="submit"';
 		$str .= ' class="';
 		$str .= 'btn waves-effect waves-light';
 		$str .= ' col s12 m4 l2';
