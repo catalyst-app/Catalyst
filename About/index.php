@@ -102,6 +102,10 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/u/catalystapp</h5></span>
 							</a>
+							<a href="https://steamcommunity.com/groups/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/sc_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Catalystapp</h5></span>
+							</a>
 						</div>
 						<div class="col s12 m6 hide-on-large-only">
 							<a href="https://instagram.com/catalyst.app" class="black-text center col s12">
@@ -165,6 +169,10 @@ echo UniversalFunctions::createHeading("About Us");
 							<a href="https://weasyl.com/~catalystapp/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/w_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">weasyl.com/~catalystapp</h5></span>
+							</a>
+							<a href="https://steamcommunity.com/groups/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/sc_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Catalystapp</h5></span>
 							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
