@@ -575,6 +575,7 @@ class Form {
 	 */
 	public function getAllJs() : string {
 		$str = '';
+		
 		$str .= '$(document).on("submit", '.json_encode("#".$this->getId()).', function(e) {';
 		$str .= 'e.preventDefault();';
 		$str .= $this->getJsValidation();
@@ -582,6 +583,11 @@ class Form {
 		$str .= $this->getShowProgressBarJs();
 		$str .= $this->getJsAjaxRequest();
 		$str .= '});';
+
+		foreach ($this->getFields() as $field) {
+			$str .= $field->getJsOnload();
+		}
+
 		return $str;
 	}
 
