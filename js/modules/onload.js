@@ -102,6 +102,9 @@ var humanFileSize = function(size) {
 		/* COLOR PICKER */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'color_picker.js'; ?>
 
+		/* TOGGLEABLE BUTTONS */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'toggle_buttons.js'; ?>
+
 		/* ARTIST PAGE LINK PREVIEW */
 		$(document).on("input", "#create-artist-page-form-input-url, #edit-artist-page-form-input-url", function() {
 			$("#artist-page-url-sample").text($("#artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
