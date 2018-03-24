@@ -291,6 +291,15 @@ abstract class AbstractField {
 	abstract public function getJsAggregator(string $formDataName) : string;
 
 	/**
+	 * Return JS code which should be added in the main onload closure
+	 * 
+	 * @return string
+	 */
+	public function getJsOnload() : string {
+		return '';
+	}
+
+	/**
 	 * Check the field's forms on the servers side
 	 * 
 	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
