@@ -250,6 +250,7 @@ class Controller {
 	 * @return bool Whether or not the handler worked
 	 */
 	public static function handleError(int $errno, string $errstr, string $errfile, int $errline) : bool {
+		file_put_contents(REAL_ROOTDIR."error_log", json_encode(func_get_args(), JSON_PRETTY_PRINT)."\n", FILE_APPEND);
 		$trackingId = ((string)time())."-".$errno."-".md5($errstr.$errfile.$errline)."-".uniqid();
 		switch ($errno) {
 			case E_ERROR:
