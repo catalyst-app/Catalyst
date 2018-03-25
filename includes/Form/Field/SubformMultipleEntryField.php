@@ -165,8 +165,15 @@ class SubformMultipleEntryField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return '';
-		// return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		$str = '';
+
+		$str .= 'for (var entry of $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).')) {';
+
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', $(entry).attr("data-data"));';
+
+		$str .= '}';
+
+		return $str;
 	}
 
 	/**
