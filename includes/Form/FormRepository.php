@@ -13,7 +13,7 @@ use \Catalyst\Character\{
 	DeleteCharacterFormTrait,
 	EditCharacterFormTrait,
 	NewCharacterFormTrait};
-use \Catalyst\CommissionType\NewCommissionTypeTrait;
+use \Catalyst\CommissionType\NewCommissionTypeFormTrait;
 use \Catalyst\Form\Form;
 use \Catalyst\Integrations\{
 	SocialMedia,
@@ -72,7 +72,7 @@ class FormRepository {
 	use DeleteArtistPageFormTrait;
 	use EditArtistPageFormTrait;
 
-	use NewCommissionTypeTrait;
+	use NewCommissionTypeFormTrait;
 
 	/**
 	 * Get all Forms functions defined in the repository
