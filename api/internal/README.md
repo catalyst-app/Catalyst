@@ -232,3 +232,7 @@
 - **91527** - Not an artist
 - **91528** - Stage field empty
 - **91529** - Stage field invalid
+- **91530** - Payemnt type field empty
+- **91531** - Payment type field invalid
+- **91532** - Payment address field empty
+- **91533** - Payment instructions field empty
