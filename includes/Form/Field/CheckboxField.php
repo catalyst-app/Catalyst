@@ -89,14 +89,17 @@ class CheckboxField extends AbstractField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
-		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
+		if (!isset($requestArr[$this->getDistinguisher()])) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if ($_REQUEST[$this->getDistinguisher()] !== "true") {
+			if ($requestArr[$this->getDistinguisher()] !== "true") {
 				$this->throwMissingError();
 			}
 		}

@@ -66,25 +66,28 @@ class ConfirmPasswordField extends PasswordField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
 		if (is_null($this->getLinkedField())) {
 			throw new InvalidArgumentException("No field was linked to ConfirmPasswordField");
 		}
-		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+		if (!isset($requestArr[$this->getDistinguisher()])) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if ($_REQUEST[$this->getDistinguisher()] !== $_REQUEST[$this->getLinkedField()->getDistinguisher()]) {
+		if ($requestArr[$this->getDistinguisher()] !== $requestArr[$this->getLinkedField()->getDistinguisher()]) {
 			$this->throwInvalidError();
 		}
 	}

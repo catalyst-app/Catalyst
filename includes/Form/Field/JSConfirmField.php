@@ -78,7 +78,7 @@ class JSConfirmField extends AbstractField {
 	 * 
 	 * No validation
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
 		return;
 	}
 }

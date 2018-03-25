@@ -128,23 +128,26 @@ class SelectField extends AbstractField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
-		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
+		if (!isset($requestArr[$this->getDistinguisher()])) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				return;
 			}
 		}
 		foreach ($this->getOptions() as list($value, $text)) {
-			if ($_REQUEST[$this->getDistinguisher()] == $value) {
+			if ($requestArr[$this->getDistinguisher()] == $value) {
 				return;
 			}
 		}

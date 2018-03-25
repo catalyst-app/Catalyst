@@ -408,9 +408,12 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
 		if ($this->isRequired()) {
 			if (!isset($_FILES[$this->getDistinguisher()])) {
 				$this->throwMissingError();
@@ -439,14 +442,14 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 			if ($_FILES[$this->getDistinguisher()]["size"][$i] > $this->getMaxSize()) {
 				$this->throwTooLargeError();
 			}
-			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX])) {
-				$_REQUEST[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX][$i] = 'false';
+			if (!array_key_exists($i, $requestArr[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX])) {
+				$requestArr[$this->getDistinguisher().self::NSFW_CHECKBOX_ID_SUFFIX][$i] = 'false';
 			}
-			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX])) {
-				$_REQUEST[$this->getDistinguisher().self::CAPTION_ID_SUFFIX][$i] = '';
+			if (!array_key_exists($i, $requestArr[$this->getDistinguisher().self::CAPTION_ID_SUFFIX])) {
+				$requestArr[$this->getDistinguisher().self::CAPTION_ID_SUFFIX][$i] = '';
 			}
-			if (!array_key_exists($i, $_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
-				$_REQUEST[$this->getDistinguisher().self::INFO_ID_SUFFIX][$i] = '';
+			if (!array_key_exists($i, $requestArr[$this->getDistinguisher().self::INFO_ID_SUFFIX])) {
+				$requestArr[$this->getDistinguisher().self::INFO_ID_SUFFIX][$i] = '';
 			}
 		}
 	}
