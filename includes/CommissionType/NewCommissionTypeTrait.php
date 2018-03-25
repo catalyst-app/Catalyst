@@ -150,6 +150,7 @@ trait NewCommissionTypeTrait {
 
 		$stagesField->setDistinguisher("stages");
 		$stagesField->setLabel("Stages (steps of the commission type, can be used to track progress/deadlines)");
+		$stagesField->setDisplayHtml('<p class="'.SubformMultipleEntryField::ENTRY_ITEM.'">{stage-psuedo-field}<i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></p>');
 
 		$stageEntryField = new TextField();
 		$stageEntryField->setDistinguisher("stage-psuedo-field");
