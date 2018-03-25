@@ -134,7 +134,7 @@ class SelectField extends AbstractField {
 		if (is_null($requestArr)) {
 			$requestArr = $_REQUEST;
 		}
-		if (!isset($requestArr[$this->getDistinguisher()])) {
+		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {

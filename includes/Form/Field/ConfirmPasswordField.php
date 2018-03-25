@@ -75,7 +75,7 @@ class ConfirmPasswordField extends PasswordField {
 		if (is_null($this->getLinkedField())) {
 			throw new InvalidArgumentException("No field was linked to ConfirmPasswordField");
 		}
-		if (!isset($requestArr[$this->getDistinguisher()])) {
+		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
