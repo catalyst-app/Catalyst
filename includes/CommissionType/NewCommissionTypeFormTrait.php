@@ -149,13 +149,14 @@ trait NewCommissionTypeFormTrait {
 		$stagesField = new SubformMultipleEntryField();
 
 		$stagesField->setDistinguisher("stages");
+		$stagesField->setRequired(false);
 		$stagesField->setLabel("Stages (steps of the commission type, can be used to track progress/deadlines)");
 		$stagesField->setDisplayHtml('<p class="'.SubformMultipleEntryField::ENTRY_ITEM.'">{stage-psuedo-field}<i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></p>');
 
 		$stageEntryField = new TextField();
 		$stageEntryField->setDistinguisher("stage-psuedo-field");
 		$stageEntryField->setLabel("Stage");
-		$stageEntryField->setRequired(false);
+		$stageEntryField->setRequired(true);
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
 
