@@ -127,7 +127,7 @@ class CaptchaField extends AbstractField {
 			throw new InvalidArgumentException("CaptchaField must have a secret key set");
 		}
 		if (Controller::isDevelMode()) {
-			return;
+			return; // dont verify captchas in dev mode
 		}
 		$opts = [
 			"http" => [
@@ -135,7 +135,7 @@ class CaptchaField extends AbstractField {
 				"header"  => "Content-type: application/x-www-form-urlencoded",
 				"content" => http_build_query([
 					"secret" => $this->getSecretKey(),
-					"response" => $this->getDistinguisher(),
+					"response" => $_REQUEST[$this->getDistinguisher()],
 					"remoteip" => $_SERVER["REMOTE_ADDR"]
 				])
 			]
