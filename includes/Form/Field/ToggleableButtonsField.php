@@ -130,8 +130,16 @@ class ToggleableButtonsField extends AbstractField {
 			if (!is_string($item)) {
 				$this->throwInvalidError();
 			}
-			if (!in_array($item, array_column($this->getButtons(), 0))) {
-				$this->throwInvalidError();
+			if (is_array(array_values($this->getButtons())[0])) {
+				$allButtons = array_merge(...array_values($this->getButtons()));
+				if (!in_array($item, array_column($allButtons, 0))) {
+					$this->throwInvalidError();
+				}
+			} else {
+				echo json_encode($this->getButtons());
+				if (!in_array($item, array_column($this->getButtons(), 0))) {
+					$this->throwInvalidError();
+				}
 			}
 		}
 	}
