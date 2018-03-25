@@ -11,6 +11,16 @@ class ErrorCodes {
 	// generic
 	const ERR_10001 = 'Endpoint not found';
 	const ERR_10002 = 'Invalid endpoint method';
+	// we have several of these for various reasons/reusage
+	const ERR_99990 = 'An internal error occured';
+	const ERR_99991 = 'An internal error occured';
+	const ERR_99992 = 'An internal error occured';
+	const ERR_99993 = 'An internal error occured';
+	const ERR_99994 = 'An internal error occured';
+	const ERR_99995 = 'An internal error occured';
+	const ERR_99996 = 'An internal error occured';
+	const ERR_99997 = 'An internal error occured';
+	const ERR_99998 = 'An internal error occured';
 	const ERR_99999 = 'An internal error occured';
 
 	// api-related
