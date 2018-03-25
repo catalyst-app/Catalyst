@@ -174,6 +174,67 @@ trait NewCommissionTypeFormTrait {
 
 		$form->addField($stagesField);
 
+		$paymentsField = new SubformMultipleEntryField();
+
+		$paymentsField->setDistinguisher("payments");
+		$paymentsField->setRequired(false);
+		$paymentsField->setLabel("Payment Options");
+		$paymentsField->setDisplayHtml('<div class="'.SubformMultipleEntryField::ENTRY_ITEM.'"><div class="raw-markdown">**{type-psuedo-field}** ({address-psuedo-field})'."\n".'{instructions-psuedo-field}</div><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></div>');
+
+		$typeEntryWrapper = new WrappedField();
+		$typeEntryWrapper->setWrapperClasses("col s12 m5 l4");
+
+		$typeEntryField = new TextField();
+		$typeEntryField->setDistinguisher("type-psuedo-field");
+		$typeEntryField->setLabel("Payment Type");
+		$typeEntryField->setRequired(true);
+		$typeEntryField->setPattern('^.{2,64}$');
+		$typeEntryField->setMaxLength(64);
+		$typeEntryField->addError(91530, ErrorCodes::ERR_91530);
+		$typeEntryField->setMissingErrorCode(91530);
+		$typeEntryField->addError(91531, ErrorCodes::ERR_91531);
+		$typeEntryField->setInvalidErrorCode(91531);
+
+		$typeEntryWrapper->setField($typeEntryField);
+		$paymentsField->addField($typeEntryWrapper);
+
+		$addressEntryWrapper = new WrappedField();
+		$addressEntryWrapper->setWrapperClasses("col s12 m7 l8");
+
+		$addressEntryField = new TextField();
+		$addressEntryField->setDistinguisher("address-psuedo-field");
+		$addressEntryField->setLabel("Address");
+		$addressEntryField->setRequired(true);
+		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
+		$addressEntryField->setMissingErrorCode(91532);
+		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
+		$addressEntryField->setInvalidErrorCode(91532);
+
+		$addressEntryWrapper->setField($addressEntryField);
+		$paymentsField->addField($addressEntryWrapper);
+
+		$instructionsEntryWrapper = new WrappedField();
+		$instructionsEntryWrapper->setWrapperClasses("col s12");
+
+		$instructionsField = new TextField();
+		$instructionsField->setDistinguisher("instructions-psuedo-field");
+		$instructionsField->setLabel("Instructions/Notes");
+		$instructionsField->setRequired(false);
+		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
+		$instructionsField->setMissingErrorCode(91533);
+		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
+		$instructionsField->setInvalidErrorCode(91533);
+		
+		$instructionsEntryWrapper->setField($instructionsField);
+		$paymentsField->addField($instructionsEntryWrapper);
+
+		$paymentsField->addError(91520, ErrorCodes::ERR_91520);
+		$paymentsField->setMissingErrorCode(91520);
+		$paymentsField->addError(91521, ErrorCodes::ERR_91521);
+		$paymentsField->setInvalidErrorCode(91521);
+
+		$form->addField($paymentsField);
+
 		return $form;
 	}
 }
