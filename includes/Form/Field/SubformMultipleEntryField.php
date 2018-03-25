@@ -177,7 +177,41 @@ class SubformMultipleEntryField extends AbstractField {
 	 * @return string
 	 */
 	public function getJsOnload() : string {
-		return '';
+		$str = '';
+
+		$str .= '$(document).on("keypress", '.json_encode('#'.$this->getId().'-subform').', function(e) {';
+		$str .= 'if (e.keyCode == 13) {';
+		$str .= 'e.preventDefault && e.preventDefault();';
+		$str .= '$('.json_encode('#'.$this->getId().'-subform'.' button').').trigger("click");';
+		$str .= '}';
+		$str .= '});';
+
+		$str .= '$(document).on("click", '.json_encode('#'.$this->getId().'-subform'.' button').', function(e) {';
+		
+		foreach ($this->getFields() as $field) {
+			$field->setForm($this->getForm());
+			$str .= $field->getJsValidator();
+		}
+
+		$str .= 'var psuedoAggregator = new FormData();';
+		foreach ($this->getFields() as $field) {
+			$str .= $field->getJsAggregator("psuedoAggregator");
+		}
+
+		$str .= 'var htmlToAdd = '.json_encode($this->getDisplayHtml()).';';
+
+		$str .= 'for (var pair of psuedoAggregator.entries()) {';
+		$str .= 'console.log([htmlToAdd, pair, psuedoAggregator]);';
+		$str .= 'htmlToAdd = htmlToAdd.replace("{"+pair[0]+"}", $("<div></div>").text(pair[1]).html());';
+		$str .= '}';
+
+		$str .= '$('.json_encode("#".$this->getId()).').append(htmlToAdd);';
+
+		$str .= '$('.json_encode('#'.$this->getId().'-subform').').find(":input").val("");';
+
+		$str .= '});';
+
+		return $str;
 	}
 
 	/**
