@@ -15,6 +15,9 @@ class Response {
 	 * @param array $data Additional data
 	 */
 	public static function sendSuccessResponse(string $message, array $data=[]) : void {
+		if (HTTPCode::get() > 400) {
+			HTTPCode::set(200);
+		}
 		echo json_encode([
 			"error" => false,
 			"http_code" => HTTPCode::get(),
@@ -36,6 +39,9 @@ class Response {
 	 * @param array $data Additional data
 	 */
 	public static function sendErrorResponse(int $code, string $message, array $data=[]) : void {
+		if (HTTPCode::get() < 300) {
+			HTTPCode::set(400);
+		}
 		echo json_encode([
 			"error" => true,
 			"http_code" => HTTPCode::get(),
@@ -43,7 +49,7 @@ class Response {
 			"message" => $message,
 			"data" => $data,
 			"_debug" => [
-				"_trace" => Controller::getTrace(false),
+				"_trace" => Controller::getTrace(true),
 				"_request" => (isset($_REQUEST)) ? $_REQUEST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION
