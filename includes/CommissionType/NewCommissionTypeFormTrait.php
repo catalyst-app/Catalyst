@@ -159,7 +159,6 @@ trait NewCommissionTypeFormTrait {
 		$stageEntryField->setRequired(true);
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
-
 		$stageEntryField->addError(91528, ErrorCodes::ERR_91528);
 		$stageEntryField->setMissingErrorCode(91528);
 		$stageEntryField->addError(91529, ErrorCodes::ERR_91529);
