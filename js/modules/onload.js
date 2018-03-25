@@ -99,6 +99,9 @@ var humanFileSize = function(size) {
 		/* FILE PICKER */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'file_picker.js'; ?>
 
+		/* SUBFORM THING */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'subform_entry_field.js'; ?>
+
 		/* COLOR PICKER */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'color_picker.js'; ?>
 
