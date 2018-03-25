@@ -246,6 +246,10 @@ class ErrorCodes {
 	const ERR_91527 = 'You are not an artist';
 	const ERR_91528 = 'You must enter a stage to do this';
 	const ERR_91529 = 'Please use between 2 and 255 characters';
+	const ERR_91530 = 'You must enter a payment type';
+	const ERR_91531 = 'Payment types may not be longer than 64 characters';
+	const ERR_91532 = 'You must enter a payment address';
+	const ERR_91533 = 'You must enter payment instructions';
 
 	/**
 	 * Get an associative array of code => message based on class constants
