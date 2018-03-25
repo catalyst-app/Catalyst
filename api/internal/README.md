@@ -227,5 +227,8 @@
 - **91522** - Missing stages structure
 - **91523** - Invalid stages structure
 - **91524** - Files too large
-- **91525** - Not an image
-- **91526** - Invald image
+- **91525** - Not an images
+- **91526** - Invald images
+- **91527** - Not an artist
+- **91528** - Stage field empty
+- **91529** - Stage field invalid

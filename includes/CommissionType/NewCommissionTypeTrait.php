@@ -159,10 +159,10 @@ trait NewCommissionTypeTrait {
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
 
-		$stageEntryField->addError(99998, "Please enter a stage name");
-		$stageEntryField->setMissingErrorCode(99998);
-		$stageEntryField->addError(99999, "Between 2 and 255 characters");
-		$stageEntryField->setInvalidErrorCode(99999);
+		$stageEntryField->addError(91528, ErrorCodes::ERR_91528);
+		$stageEntryField->setMissingErrorCode(91528);
+		$stageEntryField->addError(91529, ErrorCodes::ERR_91529);
+		$stageEntryField->setInvalidErrorCode(91529);
 
 		$stagesField->addField($stageEntryField);
 
