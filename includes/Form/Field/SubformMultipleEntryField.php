@@ -15,6 +15,10 @@ class SubformMultipleEntryField extends AbstractField {
 	 * Class name given to remove buttons
 	 */
 	public const REMOVE_BUTTON_CLASS = "subform-user-created-entry-remove-btn";
+	/**
+	 * Class name given to items added
+	 */
+	public const ENTRY_ITEM = "subform-user-created-entry-item";
 
 	/**
 	 * Array of fields
