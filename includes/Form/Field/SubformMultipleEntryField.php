@@ -234,8 +234,25 @@ class SubformMultipleEntryField extends AbstractField {
 			$requestArr = &$_REQUEST;
 		}
 		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+			if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 				$this->throwMissingError();
+			}
+		} else {
+			if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
+				return;
+			}
+		}
+		if (!is_array($requestArr[$this->getDistinguisher()])) {
+			$this->throwInvalidError();
+		}
+		foreach ($requestArr[$this->getDistinguisher()] as &$entry) {
+			if (json_decode($entry) === false) {
+				$this->throwInvalidError();
+			}
+			$entry = json_decode($entry, true);
+			foreach ($this->getFields() as $field) {
+				$field->setForm($this->getForm());
+				$field->checkServerSide($entry);
 			}
 		}
 	}
