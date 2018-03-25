@@ -106,6 +106,42 @@ class SubformMultipleEntryField extends AbstractField {
 	public function getHtml() : string {
 		$str = '';
 
+		$str .= '<p';
+		$str .= ' class="no-bottom-margin col s12">';
+
+		$str .= '<strong>';
+		$str .= htmlspecialchars($this->getLabel());
+		$str .= '</strong>';
+
+		$str .= '</p>';
+
+		$str .= '<div';
+		$str .= ' class="subform-entry-container col s12"';
+		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= '>';
+
+		$str .= '</div>';
+
+		$str .= '<div';
+		$str .= ' id="'.htmlspecialchars($this->getId()).'-subform"';
+		$str .= '>';
+
+		foreach ($this->getFields() as $field) {
+			$field->setForm($this->getForm());
+			$str .= $field->getHtml();
+		}
+
+		$str .= '<button';
+		$str .= ' type="button"';
+		$str .= ' class="btn waves-effect waves-light '.htmlspecialchars($this->getAdditionButtonClasses()).'"';
+		$str .= '>';
+
+		$str .= "add";
+		
+		$str .= '</button>';
+
+		$str .= '</div>';
+
 		return $str;
 	}
 
