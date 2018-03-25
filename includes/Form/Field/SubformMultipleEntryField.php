@@ -199,11 +199,16 @@ class SubformMultipleEntryField extends AbstractField {
 		}
 
 		$str .= 'var htmlToAdd = '.json_encode($this->getDisplayHtml()).';';
+		
+		$str .= 'var serializedData = {};';
 
 		$str .= 'for (var pair of psuedoAggregator.entries()) {';
-		$str .= 'console.log([htmlToAdd, pair, psuedoAggregator]);';
+		$str .= 'serializedData[pair[0]] = pair[1];';
 		$str .= 'htmlToAdd = htmlToAdd.replace("{"+pair[0]+"}", $("<div></div>").text(pair[1]).html());';
 		$str .= '}';
+
+		$str .= 'htmlToAdd = $(htmlToAdd);';
+		$str .= 'htmlToAdd.attr("data-data", JSON.stringify(serializedData));';
 
 		$str .= '$('.json_encode("#".$this->getId()).').append(htmlToAdd);';
 
