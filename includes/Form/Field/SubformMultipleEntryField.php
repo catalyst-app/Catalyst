@@ -155,9 +155,7 @@ class SubformMultipleEntryField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-		
-		return $str;
+		return '';
 	}
 
 	/**
