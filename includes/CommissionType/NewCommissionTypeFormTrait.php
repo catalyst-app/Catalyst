@@ -40,7 +40,7 @@ images
 /**
  * trait which contains the new commission type form
  */
-trait NewCommissionTypeTrait {
+trait NewCommissionTypeFormTrait {
 	/**
 	 * Get the form used to create a new commission type
 	 * 
@@ -155,7 +155,7 @@ trait NewCommissionTypeTrait {
 		$stageEntryField = new TextField();
 		$stageEntryField->setDistinguisher("stage-psuedo-field");
 		$stageEntryField->setLabel("Stage");
-		$stageEntryField->setRequired(true);
+		$stageEntryField->setRequired(false);
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
 
