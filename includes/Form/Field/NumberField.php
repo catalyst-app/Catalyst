@@ -211,7 +211,7 @@ class NumberField extends AbstractField {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!preg_match('/^[0-9]+(\.[0-9][0-9]?)?%/', $requestArr[$this->getDistinguisher()])) {
+		if (!preg_match('/^[0-9]+(\.[0-9][0-9]?)?$/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 		$requestArr[$this->getDistinguisher()] = round((float)$requestArr[$this->getDistinguisher()], $this->getPrecision());
