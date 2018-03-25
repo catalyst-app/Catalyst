@@ -134,7 +134,7 @@ class WrappedField extends AbstractField {
 	 * 
 	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide(?array $requestArr=null) : void {
+	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($this->getField())) {
 			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
 		}

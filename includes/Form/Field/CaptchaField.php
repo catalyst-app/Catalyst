@@ -118,9 +118,9 @@ class CaptchaField extends AbstractField {
 	 * @param array $requestArr Array to find the form data in
 	 * @throws LogicException Field is not required
 	 */
-	public function checkServerSide(?array $requestArr=null) : void {
+	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
-			$requestArr = $_REQUEST;
+			$requestArr = &$_REQUEST;
 		}
 		if (!$this->isRequired()) {
 			throw new LogicException("CaptchaField must be required");

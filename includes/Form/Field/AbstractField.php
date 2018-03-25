@@ -304,5 +304,5 @@ abstract class AbstractField {
 	 * 
 	 * @param array $requestArr Array to find the form data in
 	 */
-	abstract public function checkServerSide(?array $requestArr=null) : void;
+	abstract public function checkServerSide(?array &$requestArr=null) : void;
 }

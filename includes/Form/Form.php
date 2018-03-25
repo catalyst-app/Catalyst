@@ -598,9 +598,9 @@ class Form {
 	 * @param array $requestArr Array to find the form data in
 	 * @param bool $checkContentLength If it should check (and return an appropriate error) if the requestArr is empty but data was sent
 	 */
-	public function checkServerSide(?array $requestArr=null, bool $checkContentLength=true) : void {
+	public function checkServerSide(?array &$requestArr=null, bool $checkContentLength=true) : void {
 		if (is_null($requestArr)) {
-			$requestArr = $_REQUEST;
+			$requestArr = &$_REQUEST;
 		}
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
 			HTTPCode::set(405);

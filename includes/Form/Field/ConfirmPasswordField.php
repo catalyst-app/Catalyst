@@ -68,9 +68,9 @@ class ConfirmPasswordField extends PasswordField {
 	 * 
 	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide(?array $requestArr=null) : void {
+	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
-			$requestArr = $_REQUEST;
+			$requestArr = &$_REQUEST;
 		}
 		if (is_null($this->getLinkedField())) {
 			throw new InvalidArgumentException("No field was linked to ConfirmPasswordField");
