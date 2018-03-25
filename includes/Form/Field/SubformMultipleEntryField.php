@@ -217,6 +217,8 @@ class SubformMultipleEntryField extends AbstractField {
 
 		$str .= '$('.json_encode("#".$this->getId()).').append(htmlToAdd);';
 
+		$str .= '$('.json_encode("#".$this->getId()).').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
+
 		$str .= '$('.json_encode('#'.$this->getId().'-subform').').find(":input").val("");';
 
 		$str .= '});';
