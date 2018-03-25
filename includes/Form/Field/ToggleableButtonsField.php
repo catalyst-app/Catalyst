@@ -111,7 +111,7 @@ class ToggleableButtonsField extends AbstractField {
 			$requestArr = &$_REQUEST;
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$requestArr[$this->getDistinguisher()] = [];
 		}
 		if ($this->isRequired()) {
 			if (empty($requestArr[$this->getDistinguisher()])) {
