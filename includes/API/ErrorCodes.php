@@ -240,9 +240,12 @@ class ErrorCodes {
 	const ERR_91521 = 'An unknown error occured';
 	const ERR_91522 = 'An unknown error occured';
 	const ERR_91523 = 'An unknown error occured';
-	const ERR_91524 = 'Files too large';
+	const ERR_91524 = 'File(s) too large';
 	const ERR_91525 = 'Not an image';
-	const ERR_91526 = 'Invald image';
+	const ERR_91526 = 'Invald image(s)';
+	const ERR_91527 = 'You are not an artist';
+	const ERR_91528 = 'You must enter a stage to do this';
+	const ERR_91529 = 'Please use between 2 and 255 characters';
 
 	/**
 	 * Get an associative array of code => message based on class constants
