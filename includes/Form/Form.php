@@ -595,15 +595,19 @@ class Form {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
+	 * @param bool $checkContentLength If it should check (and return an appropriate error) if the requestArr is empty but data was sent
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null, bool $checkContentLength=true) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
 			HTTPCode::set(405);
 			Response::sendErrorResponse(10002, ErrorCodes::ERR_10002);
 		}
 		// https://stackoverflow.com/a/9908619/
-		if ($this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($_POST) === 0) {
+		if ($this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($requestArr) === 0) {
 			foreach ($this->getFields() as $field) {
 				if ($field instanceof ImageField) {
 					$field->throwTooLargeError();
@@ -612,7 +616,7 @@ class Form {
 			throw new Exception('PHP discarded POST data because of request exceeding post_max_size, but there are no ImageField\'s in the form');
 		}
 		foreach ($this->fields as $field) {
-			$field->checkServerSide();
+			$field->checkServerSide($requestArr);
 		}
 	}
 

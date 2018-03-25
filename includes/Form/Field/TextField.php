@@ -199,30 +199,33 @@ class TextField extends AbstractField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
-		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
+		if (!isset($requestArr[$this->getDistinguisher()])) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				return; // not required and empty, don't do further checks
 			}
 		}
 		if ($this->getMaxLength() > 0) {
-			if (strlen($_REQUEST[$this->getDistinguisher()]) > $this->getMaxLength()) {
+			if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
 				$this->throwInvalidError();
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
-		if (in_array($_REQUEST[$this->getDistinguisher()], $this->getDisallowed())) {
+		if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
 			$this->throwInvalidError();
 		}
 	}

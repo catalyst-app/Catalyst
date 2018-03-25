@@ -115,11 +115,13 @@ class CaptchaField extends AbstractField {
 	/**
 	 * Verify the ReCaptcha v2
 	 * 
-	 * No parameters as the fields have concrete names
-	 * 
+	 * @param array $requestArr Array to find the form data in
 	 * @throws LogicException Field is not required
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
 		if (!$this->isRequired()) {
 			throw new LogicException("CaptchaField must be required");
 		}
@@ -135,7 +137,7 @@ class CaptchaField extends AbstractField {
 				"header"  => "Content-type: application/x-www-form-urlencoded",
 				"content" => http_build_query([
 					"secret" => $this->getSecretKey(),
-					"response" => $_REQUEST[$this->getDistinguisher()],
+					"response" => $requestArr[$this->getDistinguisher()],
 					"remoteip" => $_SERVER["REMOTE_ADDR"]
 				])
 			]

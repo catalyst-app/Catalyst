@@ -193,26 +193,29 @@ class NumberField extends AbstractField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
-		if (!isset($_REQUEST[$this->getDistinguisher()])) {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
+		if (!isset($requestArr[$this->getDistinguisher()])) {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($_REQUEST[$this->getDistinguisher()])) {
+			if (empty($requestArr[$this->getDistinguisher()])) {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!preg_match('/^[0-9]+(\.[0-9][0-9]?)?%/', $_REQUEST[$this->getDistinguisher()])) {
+		if (!preg_match('/^[0-9]+(\.[0-9][0-9]?)?%/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
-		$_REQUEST[$this->getDistinguisher()] = round((float)$_REQUEST[$this->getDistinguisher()], $this->getPrecision());
-		if ($_REQUEST[$this->getDistinguisher()] > $this->getMax() || $_REQUEST[$this->getDistinguisher()] < $this->getMin()) {
+		$requestArr[$this->getDistinguisher()] = round((float)$requestArr[$this->getDistinguisher()], $this->getPrecision());
+		if ($requestArr[$this->getDistinguisher()] > $this->getMax() || $requestArr[$this->getDistinguisher()] < $this->getMin()) {
 			$this->throwInvalidError();
 		}
 	}

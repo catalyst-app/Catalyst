@@ -58,7 +58,7 @@ class StaticHTMLField extends AbstractField {
 	/**
 	 * Nothing to be done, as it is just static HTML
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
 		return;
 	}
 }

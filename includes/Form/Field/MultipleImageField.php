@@ -100,9 +100,12 @@ class MultipleImageField extends ImageField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide() : void {
+	public function checkServerSide(?array $requestArr=null) : void {
+		if (is_null($requestArr)) {
+			$requestArr = $_REQUEST;
+		}
 		if ($this->isRequired()) {
 			if (!isset($_FILES[$this->getDistinguisher()])) {
 				$this->throwMissingError();

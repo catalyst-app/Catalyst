@@ -302,7 +302,7 @@ abstract class AbstractField {
 	/**
 	 * Check the field's forms on the servers side
 	 * 
-	 * No parameters as the fields have concrete names, and no return as appropriate errors are returned
+	 * @param array $requestArr Array to find the form data in
 	 */
-	abstract public function checkServerSide() : void;
+	abstract public function checkServerSide(?array $requestArr=null) : void;
 }
