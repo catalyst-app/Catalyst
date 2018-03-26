@@ -224,9 +224,9 @@ class ErrorCodes {
 	const ERR_91505 = 'Missing description';
 	const ERR_91506 = 'Invalid description';
 	const ERR_91507 = 'Missing base cost';
-	const ERR_91508 = 'Invalid range (0-1000000)';
+	const ERR_91508 = 'Please use less than 64 characters';
 	const ERR_91509 = 'Missing usd cost';
-	const ERR_91510 = 'Invalid usd cost';
+	const ERR_91510 = 'Invalid usd cost (0-1000000)';
 	const ERR_91511 = 'An unknown error occured';
 	const ERR_91512 = 'An unknown error occured';
 	const ERR_91513 = 'An unknown error occured';
@@ -250,6 +250,12 @@ class ErrorCodes {
 	const ERR_91531 = 'Payment types may not be longer than 64 characters';
 	const ERR_91532 = 'You must enter a payment address';
 	const ERR_91533 = 'You must enter payment instructions';
+	const ERR_91534 = 'Please enter a modifier name';
+	const ERR_91535 = 'Please use less than 60 characters';
+	const ERR_91536 = 'Please enter a cost';
+	const ERR_91537 = 'Please use less than 64 characters';
+	const ERR_91538 = 'Please enter a USD cost';
+	const ERR_91539 = 'USD cost is too large';
 
 	/**
 	 * Get an associative array of code => message based on class constants
