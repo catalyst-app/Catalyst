@@ -236,3 +236,9 @@
 - **91531** - Payment type field invalid
 - **91532** - Payment address field empty
 - **91533** - Payment instructions field empty
+- **91534** - No modifier name
+- **91535** - Invalid modifier name
+- **91536** - No base cost
+- **91537** - Invalid base cost
+- **91538** - Missing USD cost
+- **91539** - Invalid USD cost
