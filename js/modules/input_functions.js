@@ -40,6 +40,19 @@ function markInputInvalid(e, a) {
 	}
 	if ($(e).hasClass("g-recaptcha")) {
 		markCaptchaInvalid(a);
+	} else if ($(e).attr("type") == "checkbox") {
+		$(e).addClass("invalid").addClass("marked-invalid").focus();
+		
+		var labelSpan = $(e).next();
+		if ($(labelSpan).attr("data-original") === undefined) {
+			$(labelSpan).attr("data-original", $(labelSpan).text());
+		}
+		// restore original text (if applicable)
+		$(labelSpan).text($(labelSpan).attr("data-original"));
+		var errorSpan = $("<span></span>").text(a);
+		errorSpan.html("&nbsp;("+errorSpan.html()+")");
+		errorSpan.addClass("red-text");
+		$(labelSpan).append(errorSpan);
 	} else {
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
 		$("label[for="+$(e).attr("id")+"]").addClass("active");
