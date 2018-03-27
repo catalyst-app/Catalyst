@@ -13,10 +13,15 @@ class RawLabelCheckboxField extends CheckboxField {
 	 */
 	public function getHtml() : string {
 		$str = '';
-		$str .= '<p';
-		$str .= ' class="col s12">';
+		
+		$str .= '<p>';
+
+		$str .= '<label';
+		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
+		$str .= '>';
 
 		$str .= '<input';
+		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= ' type="checkbox"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' class="filled-in"';
@@ -32,10 +37,25 @@ class RawLabelCheckboxField extends CheckboxField {
 			$str .= ' required="required"';
 		}
 		$str .= '>';
+
+		$str .= '<span';
+		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		$str .= '>';
+
+		$str .= $this->getLabel();
 		
-		$str .= $this->getLabelHtml(true);
+		if ($this->isRequired()) {
+			$str .= '<span class="red-text">';
+			$str .= '&nbsp;*';
+			$str .= '</span>';
+		}
+
+		$str .= '</span>';
+
+		$str .= '</label>';
 
 		$str .= '</p>';
+
 		return $str;
 	}
 }
