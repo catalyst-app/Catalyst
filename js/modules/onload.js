@@ -146,18 +146,20 @@ var humanFileSize = function(size) {
 
 		// toish: "Put it in a closure":tm:
 		function materializeOnload() {
-			if ($ === undefined || Materialize === undefined) {
+			if ($ === undefined || M === undefined) {
 				console.log("Deferring materialize onload for 100ms (even though I'm not happy about it...)");
 				setTimeout(materializeOnload, 100);
 				return;
 			}
-			$(".button-collapse").sideNav();
+			window.Materialize = window.M; // legacy
+			$('select').attr("required", false);
+			$(".sidenav").sidenav();
 			$(".modal").modal();
-			$('select').attr("required", false).material_select();
 			$('.pushpin').pushpin({
 				top: 200,
 				offset: 72
 			});
+			$(".dropdown-trigger").dropdown();
 			$('.psuedo-required, .psuedo-required input').attr("required", false);
 			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
 			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
