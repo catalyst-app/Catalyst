@@ -6,6 +6,10 @@ html, html * {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
+.flow-text {
+	font-weight: 300;
+}
+
 .info-row-container {
 	min-height: 6em !important;
 	text-align: center;
