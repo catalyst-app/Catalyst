@@ -101,7 +101,7 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 			<?php endswitch; ?>
 		<?php endforeach; ?>
 	</ul>
-	<a class="button-collapse sidenav-trigger hide-on-large-only" data-activates="mobile-menu" data-target="mobile-menu" href="#">
+	<a class="button-collapse sidenav-trigger hide-on-large-only red-text" data-activates="mobile-menu" data-target="mobile-menu" href="#">
 		<i class="material-icons">
 			menu
 		</i>
