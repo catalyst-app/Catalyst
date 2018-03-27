@@ -4,6 +4,27 @@ use \Catalyst\User\User;
 $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 ?>
 <header>
+	<?php foreach ($navbarItems as $navbarItem): ?>
+		<?php switch ($navbarItem[4]): ?><?php case Navbar::DROPDOWN_PARENT: ?>
+				<ul id="<?= $navbarItem[5] ?>" class="dropdown-content">
+				<?php break; ?>
+			<?php case Navbar::DROPDOWN_CHILD: ?>
+					<li>
+						<a href="<?= $navbarItem[3] ?>">
+							<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
+						</a>
+					</li>
+				<?php break; ?>
+			<?php case Navbar::DROPDOWN_DIVIDER: ?>
+					<li class="divider"></li>
+				<?php break; ?>
+			<?php case Navbar::PSUEDO_DROPDOWN_END: ?>
+				</ul>
+				<?php break; ?>
+			<?php default: ?>
+				<?php break; ?>
+		<?php endswitch; ?>
+	<?php endforeach; ?>
 	<div class="navbar-fixed">
 		<nav>
 			<div class="nav-wrapper">
@@ -21,25 +42,13 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 								<?php break; ?>
 							<?php case Navbar::DROPDOWN_PARENT: ?>
 								<li<?= ($navbarItem[2] == PAGE_KEYWORD) ? ' class="active"' : "" ?>>
-									<a class="dropdown-button valign-wrapper" href="#!" data-activates="<?= $navbarItem[5] ?>">
+									<a class="dropdown-trigger valign-wrapper" href="#!" data-target="<?= $navbarItem[5] ?>">
 										<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
 										<i class="material-icons right">arrow_drop_down</i>
 									</a>
 								</li>
-								<ul id="<?= $navbarItem[5] ?>" class="dropdown-content">
 								<?php break; ?>
-							<?php case Navbar::DROPDOWN_CHILD: ?>
-									<li>
-										<a href="<?= $navbarItem[3] ?>">
-											<?= Navbar::getNavbarItemLabel(Navbar::NAVBAR, $navbarItem) ?>
-										</a>
-									</li>
-								<?php break; ?>
-							<?php case Navbar::DROPDOWN_DIVIDER: ?>
-									<li class="divider"></li>
-								<?php break; ?>
-							<?php case Navbar::PSUEDO_DROPDOWN_END: ?>
-								</ul>
+							<?php default: ?>
 								<?php break; ?>
 						<?php endswitch; ?>
 					<?php endforeach; ?>
