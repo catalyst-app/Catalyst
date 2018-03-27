@@ -41,6 +41,8 @@ class Header {
 		"https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.css",
 		// icon set
 		"https://fonts.googleapis.com/icon?family=Material+Icons",
+		// roboto
+		"https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i",
 		// overall styles and such, mostly just small things
 		ROOTDIR."css/overall.css",
 		// used for styling, takes ?hex=###### as a URL param
