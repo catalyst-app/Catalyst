@@ -163,6 +163,7 @@ var humanFileSize = function(size) {
 				top: 200,
 				offset: 72
 			});
+			$(".collapsible").collapsible();
 			$(".dropdown-trigger").dropdown();
 			$('.psuedo-required, .psuedo-required input').attr("required", false);
 			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
