@@ -82,17 +82,8 @@ class EmailField extends AbstractField {
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
 		$str .= '>';
 		
-		$str .= '<label';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
+		
 		$str .= '</div>';
 		return $str;
 	}

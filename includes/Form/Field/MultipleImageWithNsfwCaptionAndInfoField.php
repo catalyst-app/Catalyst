@@ -35,6 +35,12 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public const IMAGE_REARRANGER_ID_SUFFIX = '-rearranger';
 
 	/**
+	 * Helper text for the field's label
+	 * @var string
+	 */
+	protected $helperText = "You can upload multiple files here.  Just hold ⌘ or ctrl while selecting your files!";
+
+	/**
 	 * What is shown to the user as this field's label
 	 * @var string
 	 */
@@ -118,14 +124,6 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public function getHtml() : string {
 		$str = '';
 
-		$str .= '<p';
-		$str .= ' class="col s12 grey-text no-top-margin"';
-		$str .= '>';
-
-		$str .= "You can upload multiple files here.  Just hold ⌘ or ctrl while selecting your files!";
-
-		$str .= '</p>';
-
 		$str .= '<div';
 		$str .= ' class="file-input-field col s12">';
 
@@ -159,18 +157,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= ' data-required="'.($this->isRequired() ? 'yes' : 'no').'"';
 		$str .= '>';
 
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId().self::PATH_INPUT_SUFFIX).'"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span';
-			$str .= ' class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
 		
 		$str .= '</div>';
 		

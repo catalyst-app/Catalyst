@@ -60,19 +60,7 @@ class MarkdownField extends AbstractField {
 
 		$str .= '</textarea>';
 
-		$str .= '<label';
-		$str .= ' type="text"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span';
-			$str .= ' class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
 
 		$str .= '</div>';
 

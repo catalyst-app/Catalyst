@@ -33,21 +33,7 @@ class RawLabelCheckboxField extends CheckboxField {
 		}
 		$str .= '>';
 		
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-		$str .= $this->getLabel();
-		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
-		
-		// required due to the way materialize draws the checkbox
-		$str .= '<span';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '></span>';
+		$str .= $this->getLabelHtml(true);
 
 		$str .= '</p>';
 		return $str;
