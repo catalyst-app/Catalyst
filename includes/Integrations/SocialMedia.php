@@ -165,7 +165,7 @@ class SocialMedia {
 				"id" => array_key_exists("ID", $row) ? $row["ID"] : 0,
 				"src" => $meta[$row["NETWORK"]]["path"],
 				"label" => $row["DISP_NAME"],
-				"href" => $row["SERVICE_URL"],
+				"href" => ($row["NETWORK"] == "EMAIL" ? "mailto:".$row["SERVICE_URL"] : $row["SERVICE_URL"]),
 				"classes" => $meta[$row["NETWORK"]]["classes"],
 				"tooltip" => $meta[$row["NETWORK"]]["name"]
 			];
