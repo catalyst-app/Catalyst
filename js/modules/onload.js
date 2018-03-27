@@ -151,6 +151,10 @@ var humanFileSize = function(size) {
 				setTimeout(materializeOnload, 100);
 				return;
 			}
+			// its bullshit that they removed the old toast function API
+			window.M["escapeToast"] = function(a) {
+				M.toast({html: $("<span></span>").text(a).html()});
+			};
 			window.Materialize = window.M; // legacy
 			$('select').attr("required", false);
 			$(".sidenav").sidenav();

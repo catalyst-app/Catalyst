@@ -15,17 +15,16 @@ window.onerror = function(message, url, lineNumber) {
 				method: "POST"
 			}).done(function(response) {
 				if (Materialize !== undefined) {
-					Materialize.toast("An error occured", 4000);
+					Materialize.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
 			}).fail(function(response) {
 				if (Materialize !== undefined) {
-					Materialize.toast("An error occured", 4000);
+					Materialize.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
-				Materialize.toast("An error occured", 4000);
 			});
 		}
 	} catch (e) {}

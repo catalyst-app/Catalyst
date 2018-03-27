@@ -36,7 +36,7 @@ $(document).on("click", ".social-chips .chip i", function(e) {
 	}).done(function(response) {
 		console.log(response);
 		var data = JSON.parse(response);
-		Materialize.toast("Removed", 4000);
+		Materialize.escapeToast("Removed", 4000);
 	}).fail(function(response) {
 		console.log(response);
 		var data = JSON.parse(response.responseText);
@@ -80,7 +80,7 @@ try {
 		}).done(function(response) {
 			console.log(response);
 			var data = JSON.parse(response);
-			Materialize.toast("Saved", 4000);
+			Materialize.escapeToast("Saved", 4000);
 		}).fail(function(response) {
 			console.log(response);
 			var data = JSON.parse(response.responseText);
