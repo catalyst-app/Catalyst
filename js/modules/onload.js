@@ -86,8 +86,16 @@ var humanFileSize = function(size) {
 		} catch(e) {} // cheet doesn't like to be defined, and its not critical
 
 		/* FORMS */
+		$(document).on("change", ":checkbox", function(e) {
+			var labelSpan = $(this).next();
+			// restore original text (if applicable)
+			$(labelSpan).text($(labelSpan).attr("data-original"));
+		});
 		$(document).on("input", ".marked-invalid", function(e) {
-			$(this).removeClass("invalid").removeClass("invalid");
+			if ($(this).attr("type") == "checkbox") {
+				return; // should be caught in :checkbox.change
+			}
+			$(this).removeClass("marked-invalid").removeClass("invalid");
 		});
 		<?php foreach ($forms as $form): ?>
 			<?= $form->getAllJs(); ?>
