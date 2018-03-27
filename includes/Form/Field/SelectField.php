@@ -41,12 +41,15 @@ class SelectField extends AbstractField {
 	 */
 	public function getHtml() : string {
 		$str = '';
-		$str .= '<div';
-		$str .= ' class="input-field col s12">';
+		
+		// $str .= '<div';
+		// $str .= ' class="input-field col s12">';
+
+		$str .= $this->getLabelHtml();
 
 		$inputClasses = [];
 		$str .= '<select';
-		$str .= ' type="text"';
+		$str .= ' class="browser-default"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isRequired()) {
@@ -80,9 +83,8 @@ class SelectField extends AbstractField {
 
 		$str .= '</select>';
 
-		$str .= $this->getLabelHtml();
-
-		$str .= '</div>';
+		// $str .= '</div>';
+		
 		return $str;
 	}
 
