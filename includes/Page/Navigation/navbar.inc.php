@@ -10,11 +10,6 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 				<a class="brand-logo" href="<?= ROOTDIR ?>">
 					<?= Navbar::LOGO_HTML ?>
 				</a>
-				<a class="button-collapse" data-activates="mobile-menu" href="#">
-					<i class="material-icons">
-						menu
-					</i>
-				</a>
 				<ul class="right hide-on-med-and-down">
 					<?php foreach ($navbarItems as $navbarItem): ?>
 						<?php switch ($navbarItem[4]): ?><?php case Navbar::NORMAL_LINK: ?>
@@ -52,7 +47,7 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 			</div>
 		</nav>
 	</div>
-	<ul class="side-nav" id="mobile-menu">
+	<ul class="side-nav sidenav" id="mobile-menu">
 		<?php if (User::isLoggedIn()): ?>
 			<?= $_SESSION["user"]->getSidenavHTML() ?>
 		<?php endif; ?>
@@ -97,4 +92,9 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 			<?php endswitch; ?>
 		<?php endforeach; ?>
 	</ul>
+	<a class="button-collapse sidenav-trigger hide-on-large-only" data-activates="mobile-menu" data-target="mobile-menu" href="#">
+		<i class="material-icons">
+			menu
+		</i>
+	</a>
 </header>
