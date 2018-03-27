@@ -33,7 +33,7 @@ class MarkdownField extends AbstractField {
 		$str .= '</p>';
 
 		$str .= '<div';
-		$str .= ' class="input-field col s12"';
+		$str .= ' class="col s12"';
 		$str .= '>';
 
 		$str .= '<div';
@@ -41,7 +41,7 @@ class MarkdownField extends AbstractField {
 		$str .= '>';
 
 		$str .= '<div';
-		$str .= ' class="col s12 m6"';
+		$str .= ' class="input-field col s12 m6"';
 		$str .= '>';
 
 		$str .= '<textarea';
