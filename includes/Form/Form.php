@@ -520,7 +520,7 @@ class Form {
 		$str .= 'console.log(response);';
 		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response);';
-		$str .= 'Materialize.toast("Success", 4000);';
+		$str .= 'Materialize.escapeToast("Success", 4000);';
 		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
 		$str .= '$('.json_encode('#'.$this->getId()).'+" input[type=text], textarea").removeClass("active").blur();';
 		if (!is_null($this->getCompletionAction())) {
