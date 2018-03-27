@@ -20,13 +20,44 @@ a {
 	background-color: #<?= Color::lightenHex($_GET["hex"], 0.5) ?>55;
 }
 
-.switch label input[type=checkbox]:checked + .lever {
-	background-color: #<?= Color::lightenHex($_GET["hex"], 1.5) ?>;
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid #<?= $_GET["hex"] ?>;
+  border-bottom: 2px solid #<?= $_GET["hex"] ?>;
 }
 
-.switch label .lever::before {
-	background-color: rgba(<?= implode(",", Color::getRGB($_GET["hex"])) ?>, 0.15) !important;
+/* Indeterminate checkbox */
+[type="checkbox"]:indeterminate + span:not(.lever):before {
+  border-right: 2px solid #<?= $_GET["hex"] ?>;
 }
+
+[type="checkbox"].filled-in:checked + span:not(.lever):after {
+  border: 2px solid #<?= $_GET["hex"] ?>;
+  background-color: #<?= $_GET["hex"] ?>;
+}
+
+[type="checkbox"].filled-in.tabbed:checked:focus + span:not(.lever):after {
+  background-color: #<?= $_GET["hex"] ?>;
+  border-color: #<?= $_GET["hex"] ?>;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #<?= Color::lightenHex($_GET["hex"], 1.5) ?>;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #<?= $_GET["hex"] ?>;
+}
+
+.switch label .lever:before {
+  background-color: rgba(<?= implode(",", Color::getRGB($_GET["hex"])) ?>, 0.15);
+}
+
+input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before,
+input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
+  background-color: rgba(<?= implode(",", Color::getRGB($_GET["hex"])) ?>, 0.15);
+}
+
 
 .switch label input[type=checkbox]:checked + .lever::after, .user-color, nav, footer.page-footer,
 .img-strict-circle[style*='/default.png");'], .img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
