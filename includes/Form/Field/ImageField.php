@@ -133,18 +133,7 @@ class ImageField extends AbstractField {
 		$str .= ' data-required="'.($this->isRequired() ? 'yes' : 'no').'"';
 		$str .= '>';
 
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).self::PATH_INPUT_SUFFIX.'"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span';
-			$str .= ' class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
 		
 		$str .= '</div>';
 		

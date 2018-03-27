@@ -80,17 +80,8 @@ class SelectField extends AbstractField {
 
 		$str .= '</select>';
 
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span';
-			$str .= ' class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
+
 		$str .= '</div>';
 		return $str;
 	}

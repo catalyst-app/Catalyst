@@ -42,8 +42,12 @@ function markInputInvalid(e, a) {
 		markCaptchaInvalid(a);
 	} else {
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
-		$("label[for="+$(e).attr("id")+"]").attr("data-error", a);
 		$("label[for="+$(e).attr("id")+"]").addClass("active");
+		// add helper text if it doesn't exist, BC
+		if ($("span.helper-text[for="+$(e).attr("id")+"]").length == 0) {
+			$(e).parent().append($("<span></span>").addClass("helper-text").attr("for", $(e).attr("id")));
+		}
+		$("span.helper-text[for="+$(e).attr("id")+"]").attr("data-error", a);
 	}
 }
 

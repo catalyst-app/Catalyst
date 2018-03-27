@@ -13,6 +13,12 @@ use \Catalyst\Page\UniversalFunctions;
  */
 class MultipleImageField extends ImageField {
 	/**
+	 * Helper text for the field's label
+	 * @var string
+	 */
+	protected $helperText = "You can upload multiple files here.  Just hold ⌘ or ctrl while selecting your files!";
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
@@ -20,14 +26,6 @@ class MultipleImageField extends ImageField {
 	public function getHtml() : string {
 		$str = '';
 
-		$str .= '<p';
-		$str .= ' class="col s12 grey-text no-top-margin"';
-		$str .= '>';
-
-		$str .= "You can upload multiple files here.  Just hold ⌘ or ctrl while selecting your files!";
-
-		$str .= '</p>';
-		
 		$str .= '<div';
 		$str .= ' class="file-input-field col s12">';
 
@@ -59,18 +57,7 @@ class MultipleImageField extends ImageField {
 		$str .= ' data-required="'.($this->isRequired() ? 'yes' : 'no').'"';
 		$str .= '>';
 
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).self::PATH_INPUT_SUFFIX.'"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span';
-			$str .= ' class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
 		
 		$str .= '</div>';
 		

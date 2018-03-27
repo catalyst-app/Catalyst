@@ -56,17 +56,7 @@ class ColorField extends AbstractField {
 		}
 		$str .= '>';
 
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '>';
-		$str .= htmlspecialchars($this->getLabel());
-		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-		$str .= '</label>';
+		$str .= $this->getLabelHtml();
 		
 		$str .= '</div>';
 		
