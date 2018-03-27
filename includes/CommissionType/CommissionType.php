@@ -21,7 +21,7 @@ class CommissionType {
 				`".DB_TABLES["commission_types"]."`.`DESCRIPTION`,
 				`".DB_TABLES["commission_types"]."`.`SORT`,
 				`".DB_TABLES["commission_types"]."`.`BASE_COST`,
-				`".DB_TABLES["commission_types"]."`.`BASE_USDEQ`,
+				`".DB_TABLES["commission_types"]."`.`BASE_USD_COST`,
 				`".DB_TABLES["commission_types"]."`.`ATTRS`,
 				`".DB_TABLES["commission_types"]."`.`PHYSICAL_ADDR_NEEDED`,
 				`".DB_TABLES["commission_types"]."`.`OPEN`,
@@ -57,7 +57,7 @@ class CommissionType {
 			"DESCRIPTION" => $results[0]["DESCRIPTION"],
 			"SORT" => $results[0]["SORT"],
 			"BASE_COST" => $results[0]["BASE_COST"],
-			"BASE_USDEQ" => $results[0]["BASE_USDEQ"],
+			"BASE_USD_COST" => $results[0]["BASE_USD_COST"],
 			"ATTRS" => $results[0]["ATTRS"],
 			"PHYSICAL_ADDR_NEEDED" => (bool)$results[0]["PHYSICAL_ADDR_NEEDED"],
 			"OPEN" => $results[0]["OPEN"],
@@ -212,15 +212,15 @@ class CommissionType {
 	}
 
 	public function getBaseCostUsd() : string {
-		if (array_key_exists("BASE_USDEQ", $this->cache)) {
-			return $this->cache["BASE_USDEQ"];
+		if (array_key_exists("BASE_USD_COST", $this->cache)) {
+			return $this->cache["BASE_USD_COST"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `BASE_USDEQ` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
+		$stmt = $GLOBALS["dbh"]->prepare("SELECT `BASE_USD_COST` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
 		$stmt->bindParam(":ID", $this->id);
 		$stmt->execute();
 
-		$result = $this->cache["BASE_USDEQ"] = $stmt->fetchAll()[0]["BASE_USDEQ"];
+		$result = $this->cache["BASE_USD_COST"] = $stmt->fetchAll()[0]["BASE_USD_COST"];
 
 		$stmt->closeCursor();
 
