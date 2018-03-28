@@ -28,6 +28,11 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 	<div class="navbar-fixed">
 		<nav>
 			<div class="nav-wrapper">
+				<a class="button-collapse sidenav-trigger hide-on-large-only white-text" data-activates="mobile-menu" data-target="mobile-menu" href="#">
+					<i class="material-icons">
+						menu
+					</i>
+				</a>
 				<a class="brand-logo" href="<?= ROOTDIR ?>">
 					<?= Navbar::LOGO_HTML ?>
 				</a>
@@ -101,9 +106,4 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 			<?php endswitch; ?>
 		<?php endforeach; ?>
 	</ul>
-	<a class="button-collapse sidenav-trigger hide-on-large-only red-text" data-activates="mobile-menu" data-target="mobile-menu" href="#">
-		<i class="material-icons">
-			menu
-		</i>
-	</a>
 </header>
