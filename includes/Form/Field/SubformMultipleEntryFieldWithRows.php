@@ -92,6 +92,56 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	}
 
 	/**
+	 * Return JS code which should be added in the main onload closure
+	 * 
+	 * @return string
+	 */
+	public function getJsOnload() : string {
+		$str = '';
+
+		$str .= '$(document).on("keypress", '.json_encode('#'.$this->getId().'-subform').', function(e) {';
+		$str .= 'if (e.keyCode == 13) {';
+		$str .= 'e.preventDefault && e.preventDefault();';
+		$str .= '$('.json_encode('#'.$this->getId().'-subform'.' button').').trigger("click");';
+		$str .= '}';
+		$str .= '});';
+
+		$str .= '$(document).on("click", '.json_encode('#'.$this->getId().'-subform'.' button').', function(e) {';
+		
+		foreach ($this->getFields() as $field) {
+			$field->setForm($this->getForm());
+			$str .= $field->getJsValidator();
+		}
+
+		$str .= 'var psuedoAggregator = new FormData();';
+		foreach ($this->getFields() as $field) {
+			$str .= $field->getJsAggregator("psuedoAggregator");
+		}
+
+		$str .= 'var htmlToAdd = '.json_encode($this->getDisplayHtml()).';';
+		
+		$str .= 'var serializedData = {};';
+
+		$str .= 'for (var pair of psuedoAggregator.entries()) {';
+		$str .= 'serializedData[pair[0]] = pair[1];';
+		$str .= 'htmlToAdd = htmlToAdd.replace("{"+pair[0]+"}", $("<div></div>").text(pair[1]).html());';
+		$str .= '}';
+
+		$str .= 'htmlToAdd = $(htmlToAdd);';
+		$str .= 'htmlToAdd.attr("data-data", JSON.stringify(serializedData));';
+
+		$str .= '$('.json_encode("#".$this->getId()." .subform-entry-sub-container:last").').append(htmlToAdd);';
+
+		$str .= '$('.json_encode("#".$this->getId()).').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
+
+		$str .= '$('.json_encode('#'.$this->getId().'-subform').').find(":input").val("");';
+
+		$str .= '});';
+
+		return $str;
+	}
+
+	/**
 	 * Check the field's forms on the servers side
 	 * 
 	 * @param array $requestArr Array to find the form data in
