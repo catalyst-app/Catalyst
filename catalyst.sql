@@ -453,28 +453,6 @@ CREATE TABLE `commission_payments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commission_stages`
---
-
-CREATE TABLE `commission_stages` (
-  `ID` int(11) UNSIGNED NOT NULL,
-  `COMMISSION_ID` int(11) UNSIGNED NOT NULL,
-  `COMMISSION_TYPE_STAGE_ID` int(11) UNSIGNED NOT NULL,
-  `ESTIMATE` datetime DEFAULT NULL,
-  `COMPLETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `commission_stages`:
---   `COMMISSION_TYPE_STAGE_ID`
---       `commission_type_stages` -> `ID`
---   `COMMISSION_ID`
---       `commissions` -> `ID`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `commission_types`
 --
 
@@ -1207,17 +1185,6 @@ ALTER TABLE `commission_payments`
   ADD KEY `ARTIST_VERDICT` (`ARTIST_VERDICT`);
 
 --
--- Indexes for table `commission_stages`
---
-ALTER TABLE `commission_stages`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `COMMISSION_ID` (`COMMISSION_ID`),
-  ADD KEY `COMMISSION_TYPE_STAGE_ID` (`COMMISSION_TYPE_STAGE_ID`),
-  ADD KEY `ESTIMATE` (`ESTIMATE`),
-  ADD KEY `COMPLETED` (`COMPLETED`),
-  ADD KEY `ESTIMATE_2` (`ESTIMATE`,`COMPLETED`);
-
---
 -- Indexes for table `commission_types`
 --
 ALTER TABLE `commission_types`
@@ -1439,12 +1406,6 @@ ALTER TABLE `commission_payments`
   MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identifier of the payment';
 
 --
--- AUTO_INCREMENT for table `commission_stages`
---
-ALTER TABLE `commission_stages`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `commission_types`
 --
 ALTER TABLE `commission_types`
@@ -1585,13 +1546,6 @@ ALTER TABLE `commissions`
 ALTER TABLE `commission_payments`
   ADD CONSTRAINT `commission_payments_ibfk_1` FOREIGN KEY (`COMMISSION_ID`) REFERENCES `commissions` (`ID`),
   ADD CONSTRAINT `commission_payments_ibfk_2` FOREIGN KEY (`COMMISSION_TYPE_PAYMENT_ID`) REFERENCES `commission_type_payment_options` (`ID`);
-
---
--- Constraints for table `commission_stages`
---
-ALTER TABLE `commission_stages`
-  ADD CONSTRAINT `commission_stages_ibfk_1` FOREIGN KEY (`COMMISSION_TYPE_STAGE_ID`) REFERENCES `commission_type_stages` (`ID`),
-  ADD CONSTRAINT `commission_stages_ibfk_2` FOREIGN KEY (`COMMISSION_ID`) REFERENCES `commissions` (`ID`);
 
 --
 -- Constraints for table `commission_types`
