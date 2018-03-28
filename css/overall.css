@@ -10,6 +10,20 @@ html, html * {
 	font-weight: 300;
 }
 
+.subform-entry-sub-container {
+	min-height: 3em !important;
+	display: block;
+	border-top: 1px solid grey;
+}
+
+.subform-entry-sub-container:last-child {
+	border-bottom: 1px solid grey;
+}
+
+.add-sub-container-field-btn {
+	margin-bottom: 1em;
+}
+
 .info-row-container {
 	min-height: 6em !important;
 	text-align: center;
