@@ -41,6 +41,7 @@ trait SettingsFormTrait {
 		$usernameField->setRequired(true);
 		$usernameField->setMaxLength(64);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$usernameField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
 		$usernameField->addError(90501, ErrorCodes::ERR_90501);
 		$usernameField->setMissingErrorCode(90501);
 		$usernameField->addError(90502, ErrorCodes::ERR_90502);
@@ -50,10 +51,6 @@ trait SettingsFormTrait {
 			$usernameField->setPrefilledValue($user->getUsername());
 		}
 		$form->addField($usernameField);
-
-		$usernameAcceptedCharactersMessage = new StaticHTMLField();
-		$usernameAcceptedCharactersMessage->setHtml('<p class="no-top-margin col s12">2-64 characters of letters, numbers, period, dashes, and underscores only.</p>');
-		$form->addField($usernameAcceptedCharactersMessage);
 
 		$nicknameField = new TextField();
 		$nicknameField->setDistinguisher("nickname");

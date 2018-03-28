@@ -50,6 +50,7 @@ trait CreateArtistPageFormTrait {
 		$urlField->setMaxLength(255);
 		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
 		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
+		$urlField->setHelperText("Between 4 and 255 characters, containing letters, numbers, dashes, underscores, and dots (not at the end)");
 		$urlField->addError(91203, ErrorCodes::ERR_91203);
 		$urlField->setMissingErrorCode(91203);
 		$urlField->addError(91204, ErrorCodes::ERR_91204);
@@ -97,6 +98,7 @@ trait CreateArtistPageFormTrait {
 		$profilePictureField->setLabel("Image");
 		$profilePictureField->setRequired(false);
 		$profilePictureField->setMaxHumanSize('10MB');
+		$profilePictureField->setHelperText("Artist's profile images may not be mature or explicit.");
 		// these lost some clarity as what means what due to ImageField
 		$profilePictureField->addError(91208, ErrorCodes::ERR_91208);
 		$profilePictureField->setMissingErrorCode(91208);
@@ -105,10 +107,6 @@ trait CreateArtistPageFormTrait {
 		$profilePictureField->addError(91210, ErrorCodes::ERR_91210);
 		$profilePictureField->setTooLargeErrorCode(91210);
 		$form->addField($profilePictureField);
-
-		$noNsfwWarning = new StaticHTMLField();
-		$noNsfwWarning->setHtml('<p class="col s12 no-top-margin">Artist\'s profile images may <strong>not</strong> be mature or explicit.</p>');
-		$form->addField($noNsfwWarning);
 
 		$colorField = new ColorField();
 		$colorField->setDistinguisher("color");

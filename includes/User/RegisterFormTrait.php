@@ -37,16 +37,13 @@ trait RegisterFormTrait {
 		$usernameField->setRequired(true);
 		$usernameField->setMaxLength(64);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$usernameField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
 		$usernameField->addError(90301, ErrorCodes::ERR_90301);
 		$usernameField->setMissingErrorCode(90301);
 		$usernameField->addError(90302, ErrorCodes::ERR_90302);
 		$usernameField->setInvalidErrorCode(90302);
 		$usernameField->addError(90303, ErrorCodes::ERR_90303);
 		$form->addField($usernameField);
-
-		$usernameAcceptedCharactersMessage = new StaticHTMLField();
-		$usernameAcceptedCharactersMessage->setHtml('<p class="no-top-margin col s12">2-64 characters of letters, numbers, period, dashes, and underscores only.</p>');
-		$form->addField($usernameAcceptedCharactersMessage);
 
 		$nicknameField = new TextField();
 		$nicknameField->setDistinguisher("nickname");
