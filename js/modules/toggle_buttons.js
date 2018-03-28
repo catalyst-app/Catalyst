@@ -6,6 +6,11 @@ $(document).on("click", ".toggle-btn", function(e) {
 	}
 });
 
+$(document).on("click", ".btn[href^=\"#\"]", function(e) {
+	e.preventDefault && e.preventDefault();
+	e.stopPropogation && e.stopPropogation();
+});
+
 $(document).on("mousedown", ".toggle-btn", function(e) {
 	e.preventDefault && e.preventDefault();
 });
