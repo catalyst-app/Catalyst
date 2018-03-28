@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, SubformMultipleEntryField, TextField, ToggleableButtonSetField, WrappedField};
+use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /*
@@ -233,6 +233,72 @@ trait NewCommissionTypeFormTrait {
 		$paymentsField->setInvalidErrorCode(91521);
 
 		$form->addField($paymentsField);
+
+		$modifiersField = new SubformMultipleEntryFieldWithRows();
+
+		$modifiersField->setDistinguisher("modifiers");
+		$modifiersField->setRequired(false);
+		$modifiersField->setLabel("Modifiers (these can be added to a commission like pizza toppings to a pizza order)");
+		$modifiersField->setDisplayHtml('<a href="#" class="'.SubformMultipleEntryField::ENTRY_ITEM.' btn commission-type-mod"><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i>{modifier-psuedo-field} (+{base-cost-psuedo-field})</div>');
+
+		$modifierEntryWrapper = new WrappedField();
+		$modifierEntryWrapper->setWrapperClasses("col s12");
+
+		$modifierEntryField = new TextField();
+		$modifierEntryField->setDistinguisher("modifier-psuedo-field");
+		$modifierEntryField->setLabel("Modifier Name");
+		$modifierEntryField->setRequired(true);
+		$modifierEntryField->setPattern('^.{2,60}$');
+		$modifierEntryField->setMaxLength(60);
+		$modifierEntryField->addError(91534, ErrorCodes::ERR_91534);
+		$modifierEntryField->setMissingErrorCode(91534);
+		$modifierEntryField->addError(91535, ErrorCodes::ERR_91535);
+		$modifierEntryField->setInvalidErrorCode(91535);
+
+		$modifierEntryWrapper->setField($modifierEntryField);
+		$modifiersField->addField($modifierEntryWrapper);
+
+		$baseCostEntryWrapper = new WrappedField();
+		$baseCostEntryWrapper->setWrapperClasses("col s12 m6");
+
+		$baseCostEntryField = new TextField();
+		$baseCostEntryField->setDistinguisher("base-cost-psuedo-field");
+		$baseCostEntryField->setLabel("Base Cost");
+		$baseCostEntryField->setRequired(true);
+		$baseCostEntryField->setPattern('^.{2,64}$');
+		$baseCostEntryField->setMaxLength(64);
+		$baseCostEntryField->addError(91536, ErrorCodes::ERR_91536);
+		$baseCostEntryField->setMissingErrorCode(91536);
+		$baseCostEntryField->addError(91537, ErrorCodes::ERR_91537);
+		$baseCostEntryField->setInvalidErrorCode(91537);
+
+		$baseCostEntryWrapper->setField($baseCostEntryField);
+		$modifiersField->addField($baseCostEntryWrapper);
+
+		$baseCostUsdEntryWrapper = new WrappedField();
+		$baseCostUsdEntryWrapper->setWrapperClasses("col s12 m6");
+
+		$baseCostUsdEntryField = new NumberField();
+		$baseCostUsdEntryField->setDistinguisher("base-cost-usd-psuedo-field");
+		$baseCostUsdEntryField->setLabel("Base Cost (USD)");
+		$baseCostUsdEntryField->setRequired(true);
+		$baseCostUsdEntryField->setPrecision(2);
+		$baseCostUsdEntryField->setMin(0);
+		$baseCostUsdEntryField->setMax(1000000);
+		$baseCostUsdEntryField->addError(91538, ErrorCodes::ERR_91538);
+		$baseCostUsdEntryField->setMissingErrorCode(91538);
+		$baseCostUsdEntryField->addError(91539, ErrorCodes::ERR_91539);
+		$baseCostUsdEntryField->setInvalidErrorCode(91539);
+		
+		$baseCostUsdEntryWrapper->setField($baseCostUsdEntryField);
+		$modifiersField->addField($baseCostUsdEntryWrapper);
+
+		$modifiersField->addError(91518, ErrorCodes::ERR_91518);
+		$modifiersField->setMissingErrorCode(91518);
+		$modifiersField->addError(91519, ErrorCodes::ERR_91519);
+		$modifiersField->setInvalidErrorCode(91519);
+
+		$form->addField($modifiersField);
 
 		return $form;
 	}

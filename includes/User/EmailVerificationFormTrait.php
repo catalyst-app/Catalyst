@@ -38,6 +38,7 @@ trait EmailVerificationFormTrait {
 		if (array_key_exists("email_token", $_SESSION) && 
 			preg_match('/'.Tokens::EMAIL_VERIFICATION_TOKEN_REGEX.'/', $_SESSION["email_token"])) {
 			$tokenField->setPrefilledValue($_SESSION["email_token"]);
+			$tokenField->setHelperText("This field was populated with the link from your e-mail!");
 		}
 		$tokenField->setMaxLength(Tokens::EMAIL_VERIFICATION_TOKEN_LENGTH);
 		$tokenField->setPattern(Tokens::EMAIL_VERIFICATION_TOKEN_REGEX);
