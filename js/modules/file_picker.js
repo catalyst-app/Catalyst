@@ -22,4 +22,5 @@ $(document).on('change', '.file-input-field input[type="file"]', function () {
 	}
 	pathInput.val(fileNames.join(", "));
 	pathInput.trigger('change');
+	pathInput.parent().find("label").addClass("active");
 });
