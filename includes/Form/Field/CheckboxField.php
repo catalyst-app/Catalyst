@@ -17,7 +17,9 @@ class CheckboxField extends AbstractField {
 	public function getHtml() : string {
 		$str = '';
 		
-		$str .= '<p>';
+		$str .= '<p';
+		$str .= ' class="col s12"';
+		$str .= '>';
 
 		$str .= '<label';
 		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
