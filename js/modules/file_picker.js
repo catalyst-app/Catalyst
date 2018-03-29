@@ -13,13 +13,13 @@ $(document).on('change', '.file-input-field .file-input-path', function () {
 	}
 });
 $(document).on('change', '.file-input-field input[type="file"]', function () {
-	var file_field = $(this).closest('.file-input-field');
-	var path_input = file_field.find('input.file-input-path');
+	var fileField = $(this).closest('.file-input-field');
+	var pathInput = fileField.find('input.file-input-path');
 	var files = $(this)[0].files;
-	var file_names = [];
+	var fileNames = [];
 	for (var i = 0; i < files.length; i++) {
-		file_names.push(files[i].name);
+		fileNames.push(files[i].name);
 	}
-	path_input.val(file_names.join(", "));
-	path_input.trigger('change');
+	pathInput.val(fileNames.join(", "));
+	pathInput.trigger('change');
 });
