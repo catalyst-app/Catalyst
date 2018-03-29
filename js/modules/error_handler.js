@@ -1,3 +1,4 @@
+// this garbage is dedicated to Lazlo (@ElongatedMuskrat)
 window.onerror = function(message, url, lineNumber) {  
 	try {
 		if ($ === undefined) {
