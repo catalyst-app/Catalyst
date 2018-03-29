@@ -108,17 +108,21 @@ $(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndIn
 			var nsfwCheckbox = $("<p></p>");
 			nsfwCheckbox.addClass("col s12");
 
+			var nsfwCheckboxLabel = $("<label></label>");
+			nsfwCheckboxLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
+			
 			var nsfwCheckboxInput = $("<input>");
 			nsfwCheckboxInput.addClass("filled-in");
 			nsfwCheckboxInput.addClass(<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CLASS) ?>);
 			nsfwCheckboxInput.attr("id", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
 			nsfwCheckboxInput.attr("type", "checkbox");
+			
+			nsfwCheckboxLabel.append(nsfwCheckboxInput);
 
-			nsfwCheckbox.append(nsfwCheckboxInput);
+			nsfwCheckboxLabelSpan = $("<span></span>");
+			nsfwCheckboxLabelSpan.text("This image is mature or explicit");
 
-			var nsfwCheckboxLabel = $("<label></label>");
-			nsfwCheckboxLabel.attr("for", $(input).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::NSFW_CHECKBOX_ID_SUFFIX) ?><?= MultipleImageWithNsfwCaptionAndInfoField::EL_ID_SUFFIX_EXPR ?>);
-			nsfwCheckboxLabel.text("This image is mature or explicit");
+			nsfwCheckboxLabel.append(nsfwCheckboxLabelSpan);
 
 			nsfwCheckbox.append(nsfwCheckboxLabel);
 
