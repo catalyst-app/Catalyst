@@ -10,6 +10,14 @@ html, html * {
 	font-weight: 300;
 }
 
+.subform-form-container {
+	margin-bottom: 1rem;
+}
+
+.subform-add-btn {
+	margin-top: -2rem;
+}
+
 .subform-entry-sub-container {
 	min-height: 3em !important;
 	display: block;
