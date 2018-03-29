@@ -58,7 +58,7 @@ class HiddenInputField extends AbstractField {
 		}
 		$str .= ') {';
 
-		$str .= 'Materialize.escapeToast("An unknown error has occured.", 4000);';
+		$str .= 'M.escapeToast("An unknown error has occured.", 4000);';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 
 		$str .= '}';

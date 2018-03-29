@@ -14,14 +14,14 @@ window.onerror = function(message, url, lineNumber) {
 				contentType: false,
 				method: "POST"
 			}).done(function(response) {
-				if (Materialize !== undefined) {
-					Materialize.escapeToast("An error occured", 4000);
+				if (M !== undefined) {
+					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
 			}).fail(function(response) {
-				if (Materialize !== undefined) {
-					Materialize.escapeToast("An error occured", 4000);
+				if (M !== undefined) {
+					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
