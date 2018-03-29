@@ -54,7 +54,7 @@ class JSConfirmField extends AbstractField {
 			$str .= 'if (';
 			$str .= '!confirm('.json_encode($this->getPrompt()).')';
 			$str .= ') {';
-			$str .= 'Materialize.escapeToast("Action canceled", 4000);';
+			$str .= 'M.escapeToast("Action canceled", 4000);';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
 		}

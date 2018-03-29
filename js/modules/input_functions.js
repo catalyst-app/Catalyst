@@ -76,11 +76,11 @@ function showErrorMessageForCode(c) {
 	switch (c) {
 <?php foreach ($errors as $code => $message): ?>
 		case <?= $code ?>:
-			Materialize.escapeToast(<?= json_encode($message) ?>, 4000);
+			M.escapeToast(<?= json_encode($message) ?>, 4000);
 			break;
 <?php endforeach; ?>
 		default:
-			Materialize.escapeToast("An unknown error occured", 4000);
+			M.escapeToast("An unknown error occured", 4000);
 	}
 }
 function updateUploadIndicator(f, e) {
