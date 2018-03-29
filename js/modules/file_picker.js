@@ -22,5 +22,9 @@ $(document).on('change', '.file-input-field input[type="file"]', function () {
 	}
 	pathInput.val(fileNames.join(", "));
 	pathInput.trigger('change');
-	pathInput.parent().find("label").addClass("active");
+	if (filed.length == 0) {
+		pathInput.parent().find("label").removeClass("active");
+	} else {
+		pathInput.parent().find("label").addClass("active");
+	}
 });
