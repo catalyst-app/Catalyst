@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
+use \Catalyst\Form\Field\{MarkdownField, MultipleImageWithNsfwCaptionAndInfoField, NumberField, StaticHTMLField, SubformMultipleEntryField, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /*
@@ -299,6 +299,20 @@ trait NewCommissionTypeFormTrait {
 		$modifiersField->setInvalidErrorCode(91519);
 
 		$form->addField($modifiersField);
+
+		$imagesField = new MultipleImageWithNsfwCaptionAndInfoField();
+		$imagesField->setDistinguisher("images");
+		$imagesField->setLabel("Images");
+		$imagesField->setRequired(false);
+		$imagesField->setMaxHumanSize('10MB');
+		$imagesField->setInfoLabel('Commissioner');
+		$imagesField->addError(91525, ErrorCodes::ERR_91525);
+		$imagesField->setMissingErrorCode(91525);
+		$imagesField->addError(91526, ErrorCodes::ERR_91526);
+		$imagesField->setInvalidErrorCode(91526);
+		$imagesField->addError(91524, ErrorCodes::ERR_91524);
+		$imagesField->setTooLargeErrorCode(91524);
+		$form->addField($imagesField);
 
 		return $form;
 	}
