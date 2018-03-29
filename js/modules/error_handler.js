@@ -14,13 +14,13 @@ window.onerror = function(message, url, lineNumber) {
 				contentType: false,
 				method: "POST"
 			}).done(function(response) {
-				if (M !== undefined) {
+				if (M !== undefined && M.escapeToast !== undefined) {
 					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
 			}).fail(function(response) {
-				if (M !== undefined) {
+				if (M !== undefined && M.escapeToast !== undefined) {
 					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
