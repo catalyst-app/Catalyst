@@ -234,7 +234,7 @@ trait NewCommissionTypeFormTrait {
 
 		$form->addField($paymentsField);
 
-		$modifiersField = new SubformMultipleEntryFieldWithRows();
+		$modifiersField = new SubformMultipleEntryField();
 
 		$modifiersField->setDistinguisher("modifiers");
 		$modifiersField->setRequired(false);
