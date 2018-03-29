@@ -62,6 +62,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= '<div';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'-subform"';
+		$str .= ' class="subform-form-container"';
 		$str .= '>';
 
 		foreach ($this->getFields() as $field) {
@@ -71,7 +72,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= '<button';
 		$str .= ' type="button"';
-		$str .= ' class="btn waves-effect waves-light '.htmlspecialchars($this->getAdditionButtonClasses()).'"';
+		$str .= ' class="btn subform-add-btn waves-effect waves-light '.htmlspecialchars($this->getAdditionButtonClasses()).'"';
 		$str .= '>';
 
 		$str .= "add";
