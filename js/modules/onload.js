@@ -51,6 +51,46 @@ var humanFileSize = function(size) {
 
 (function($){
 	$(function(){
+		// toish: "Put it in a closure":tm:
+		function materializeOnload() {
+			if ($ === undefined || M === undefined) {
+				console.log("Deferring materialize onload for 100ms (even though I'm not happy about it...)");
+				setTimeout(materializeOnload, 100);
+				return;
+			}
+			// its bullshit that they removed the old toast function API
+			window.M["escapeToast"] = function(a) {
+				M.toast({html: $("<span></span>").text(a).html()});
+			};
+			window.Materialize = window.M; // legacy
+			$('select').attr("required", false);
+			$(".sidenav").sidenav();
+			$(".modal").modal();
+			$('.pushpin').pushpin({
+				top: 200,
+				offset: 72
+			});
+			$(".collapsible").collapsible();
+			$(".dropdown-trigger").dropdown();
+			$('.psuedo-required, .psuedo-required input').attr("required", false);
+			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
+			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
+			$(".totp-preview").each(function(a, b) {
+				setInterval(function() {
+					$(b).text(
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)-1)+
+						","+
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000))+
+						","+
+						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)+1)
+					);
+				}, 1000);
+			});
+			$('textarea').trigger('autoresize');
+		}
+
+		materializeOnload();
+		
 		/* GENERIC FUNCTIONS */
 		jQuery.fn.swapWith = function(to) {
 			return this.each(function() {
@@ -152,44 +192,5 @@ var humanFileSize = function(size) {
 			}
 		});
 
-		// toish: "Put it in a closure":tm:
-		function materializeOnload() {
-			if ($ === undefined || M === undefined) {
-				console.log("Deferring materialize onload for 100ms (even though I'm not happy about it...)");
-				setTimeout(materializeOnload, 100);
-				return;
-			}
-			// its bullshit that they removed the old toast function API
-			window.M["escapeToast"] = function(a) {
-				M.toast({html: $("<span></span>").text(a).html()});
-			};
-			window.Materialize = window.M; // legacy
-			$('select').attr("required", false);
-			$(".sidenav").sidenav();
-			$(".modal").modal();
-			$('.pushpin').pushpin({
-				top: 200,
-				offset: 72
-			});
-			$(".collapsible").collapsible();
-			$(".dropdown-trigger").dropdown();
-			$('.psuedo-required, .psuedo-required input').attr("required", false);
-			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
-			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
-			$(".totp-preview").each(function(a, b) {
-				setInterval(function() {
-					$(b).text(
-						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)-1)+
-						","+
-						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000))+
-						","+
-						totp($(b).attr("data-secret"), Math.floor(new Date().getTime()/30000)+1)
-					);
-				}, 1000);
-			});
-			$('textarea').trigger('autoresize');
-		}
-
-		materializeOnload();
 	});
 })(jQuery);
