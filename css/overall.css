@@ -13,11 +13,11 @@ html, html * {
 .subform-entry-sub-container {
 	min-height: 3em !important;
 	display: block;
-	border-top: 1px solid grey;
+	border-top: 1px solid #a5a5a5;
 }
 
 .subform-entry-sub-container:last-child {
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid #a5a5a5;
 }
 
 .add-sub-container-field-btn {
