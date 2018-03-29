@@ -2,6 +2,7 @@
 
 namespace Catalyst\Form\Field;
 
+use \Catalyst\Controller;
 use \Catalyst\Form\Form;
 
 /**
@@ -15,7 +16,9 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * Currently throws an error because the JS isn't here to support this yet.
 	 */
 	public function __construct() {
-		trigger_error("SubformMultipleEntryFieldWithRows isn't a thing yet", E_USER_ERROR);
+		if (!Controller::isDevelMode()) {
+			trigger_error("SubformMultipleEntryFieldWithRows isn't a thing yet", E_USER_ERROR);
+		}
 	}
 
 	/**
