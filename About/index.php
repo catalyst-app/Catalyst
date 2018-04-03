@@ -522,9 +522,9 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<h5 style="color: #b1560f;">Bronze Patrons ($10+):</h5>
 					<ul class="browser-default">
-						<li class="pink-text flow-text no-bottom-margin"><strong>SINNERSCOUT</strong></li>
-						<p class="pink-text no-margin"><em>since January 2018, $10 currently pledged, lifetime $13</em></p>
-<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+						<li class="pink-text flow-text no-bottom-margin"><strong><s>SINNERSCOUT</s></strong></li>
+						<p class="pink-text no-margin"><em><s>since January 2018, $10 currently pledged, lifetime $13</s></em></p>
+<?= /*SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
 		"SERVICE_URL" => "https://www.furaffinity.net/user/sinnerscout/",
@@ -545,37 +545,13 @@ echo UniversalFunctions::createHeading("About Us");
 		"SERVICE_URL" => null,
 		"DISP_NAME" => "SINNERSCOUT#1276",
 	],
-])) ?>
+]))*/"" ?>
 					</ul>
 
 					<h5 class="red-text">Patrons ($1+):</h5>
 					<ul class="browser-default">
-						<li class="deep-purple-text flow-text no-bottom-margin"><strong>King Amdusias</strong></li>
-						<p class="deep-purple-text no-margin"><em>Since February 2018, $1 currently pledged, lifetime $1</em></p>
-<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
-	[
-		"NETWORK" => "DISCORD",
-		"SERVICE_URL" => null,
-		"DISP_NAME" => "King Amdusias#0276",
-	],
-	[
-		"NETWORK" => "PATREON",
-		"SERVICE_URL" => "https://www.patreon.com/KingAmdusias",
-		"DISP_NAME" => "KingAmdusias",
-	],
-	[
-		"NETWORK" => "INSTAGRAM",
-		"SERVICE_URL" => "https://instagram.com/amdusias.png",
-		"DISP_NAME" => "@amdusias.png",
-	],
-	[
-		"NETWORK" => "TWITTER",
-		"SERVICE_URL" => "https://twitter.com/kingamdusias",
-		"DISP_NAME" => "@kingamdusias",
-	],
-])) ?>
 						<li class="red-text flow-text no-bottom-margin"><strong>Styx Y. Renegade</strong></li>
-						<p class="red-text no-margin"><em>Since March 2018, $5 currently pledged</em></p>
+						<p class="red-text no-margin"><em>Since March 2018, $5 currently pledged, $5 lifetime</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
@@ -598,8 +574,41 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "/u/Styx_Renegade",
 	],
 ])) ?>
+						<li class="red-text flow-text no-bottom-margin indigo-text text-darken-1"><strong>AnalogHorse</strong></li>
+						<p class="red-text no-margin indigo-text text-darken-1"><em>Since April 2018, $5 currently pledged</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@AnalogHorse#0621",
+	],
+])) ?>
+						<li class="deep-purple-text flow-text no-bottom-margin"><strong>King Amdusias</strong></li>
+						<p class="deep-purple-text no-margin"><em>Since February 2018, $1 currently pledged, lifetime $2</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "King Amdusias#0276",
+	],
+	[
+		"NETWORK" => "PATREON",
+		"SERVICE_URL" => "https://www.patreon.com/KingAmdusias",
+		"DISP_NAME" => "KingAmdusias",
+	],
+	[
+		"NETWORK" => "INSTAGRAM",
+		"SERVICE_URL" => "https://instagram.com/amdusias.png",
+		"DISP_NAME" => "@amdusias.png",
+	],
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/kingamdusias",
+		"DISP_NAME" => "@kingamdusias",
+	],
+])) ?>
 						<li class="flow-text no-bottom-margin" style="color: #c09a69;"><strong>Lykai</strong></li>
-						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018, $1 currently pledged</em></p>
+						<p class="no-margin" style="color: #c09a69;"><em>Since March 2018, $1 currently pledged, $1 lifetime</em></p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -620,6 +629,15 @@ echo UniversalFunctions::createHeading("About Us");
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:lykai@catalystapp.co",
 		"DISP_NAME" => "lykai@catalystapp.co",
+	],
+])) ?>
+						<li class="flow-text no-bottom-margin teal-text text-darken-2"><strong>nyawenyye</strong></li>
+						<p class="no-margin teal-text text-darken-2"><em>Since March 2018, $1 currently pledged, $1 lifetime</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@nyawenyye#8583",
 	],
 ])) ?>
 						<li class="yellow-text flow-text no-bottom-margin"><strong><s>Coyote-Lovely</s></strong></li>
