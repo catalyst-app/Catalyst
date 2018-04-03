@@ -523,7 +523,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<h5 style="color: #b1560f;">Bronze Patrons ($10+):</h5>
 					<ul class="browser-default">
 						<li class="pink-text flow-text no-bottom-margin"><strong><s>SINNERSCOUT</s></strong></li>
-						<p class="pink-text no-margin"><em><s>since January 2018, $10 currently pledged, lifetime $13</s></em></p>
+						<p class="pink-text no-margin"><em><s>January 2018 to February, $10 highest pledged, total $13</s></em></p>
 <?= /*SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
