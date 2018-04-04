@@ -258,6 +258,7 @@ class ErrorCodes {
 	const ERR_91537 = 'Please use less than 64 characters';
 	const ERR_91538 = 'Please enter a USD cost';
 	const ERR_91539 = 'USD cost is too large';
+	const ERR_91540 = 'You are not an artist';
 
 	/**
 	 * Get an associative array of code => message based on class constants
