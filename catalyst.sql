@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 04, 2018 at 03:55 PM
+-- Generation Time: Apr 04, 2018 at 04:00 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.4
 
@@ -699,8 +699,6 @@ CREATE TABLE `commission_type_modifiers` (
   `NAME` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `PRICE` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `USDEQ` decimal(6,2) UNSIGNED NOT NULL,
-  `GROUP` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `MULTIPLE` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
