@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0-rc1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2018 at 08:25 PM
+-- Generation Time: Apr 04, 2018 at 03:55 PM
 -- Server version: 5.7.21-log
--- PHP Version: 7.2.3
+-- PHP Version: 7.2.4
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -1036,6 +1036,7 @@ CREATE TABLE `users` (
   `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `COLOR` binary(3) NOT NULL DEFAULT '^ ',
   `NICK` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mistake',
+  `REFERRER` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `SUSPENDED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `DEACTIVATED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1328,7 +1329,8 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `FILE_TOKEN` (`FILE_TOKEN`),
   ADD UNIQUE KEY `EMAIL` (`EMAIL`),
   ADD UNIQUE KEY `CREATOR_PAGE_ID` (`ARTIST_PAGE_ID`) USING BTREE,
-  ADD KEY `COLOR` (`COLOR`);
+  ADD KEY `COLOR` (`COLOR`),
+  ADD KEY `REFERRER` (`REFERRER`);
 
 --
 -- Indexes for table `user_social_media`
