@@ -36,6 +36,26 @@ if (count($result) != 0) {
 	Response::sendErrorResponse(90303, ErrorCodes::ERR_90303);
 }
 
+// check referrer
+if (!empty($_POST["referrer"])) {
+	$stmt = new SelectQuery();
+	$stmt->setTable(Tables::USERS);
+	$stmt->addColumn(new Column("ID", Tables::USERS));
+
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["referrer"]]);
+	$stmt->addAdditionalCapability($whereClause);
+
+	$stmt->execute();
+
+	$result = $stmt->getResult();
+
+	if (count($result) == 0) {
+		HTTPCode::set(400);
+		Response::sendErrorResponse(90326, ErrorCodes::ERR_90326);
+	}
+}
+
 // check email
 if (!empty($_POST["email"])) {
 	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
