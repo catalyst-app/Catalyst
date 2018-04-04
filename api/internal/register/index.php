@@ -117,6 +117,8 @@ $stmt->addColumn(new Column("COLOR", Tables::USERS));
 $stmt->addValue(hex2bin($_POST["color"]));
 $stmt->addColumn(new Column("NICK", Tables::USERS));
 $stmt->addValue($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]); // if none is set set it as the username
+$stmt->addColumn(new Column("REFERRER", Tables::USERS));
+$stmt->addValue($_POST["referrer"] ? $_POST["referrer"] : null); // empty = false = null
 
 $stmt->execute();
 
