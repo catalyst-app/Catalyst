@@ -63,6 +63,8 @@
 - **90322** - CAPTCHA response was not sent
 - **90323** - CAPTCHA is invalid
 - **90324** - @catalystapp.co emails are not allowed
+- **90325** - Invalid referrer
+- **90326** - Unknown referrer
 
 #### Email Verification
 

@@ -89,6 +89,8 @@ class ErrorCodes {
 	const ERR_90322 = 'CAPTCHA was not sent';
 	const ERR_90323 = 'CAPTCHA response was invalid';
 	const ERR_90324 = '@catalystapp.co emails are not allowed';
+	const ERR_90325 = 'Referrer is invalid';
+	const ERR_90326 = 'Unknown referrer';
 
 	// email verification
 	const ERR_90401 = 'Token was not entered';
