@@ -154,6 +154,18 @@ trait RegisterFormTrait {
 		$tosAcceptanceField->setInvalidErrorCode(90321);
 		$form->addField($tosAcceptanceField);
 
+		$referrerField = new TextField();
+		$referrerField->setDistinguisher("referrer");
+		$referrerField->setLabel("Referrer (leave blank if none)");
+		$referrerField->setRequired(false);
+		$referrerField->setMaxLength(64);
+		$referrerField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$referrerField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
+		$referrerField->addError(90325, ErrorCodes::ERR_90325);
+		$referrerField->setInvalidErrorCode(90325);
+		$referrerField->addError(90326, ErrorCodes::ERR_90326);
+		$form->addField($referrerField);
+
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
