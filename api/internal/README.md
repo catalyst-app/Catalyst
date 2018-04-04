@@ -244,3 +244,4 @@
 - **91537** - Invalid base cost
 - **91538** - Missing USD cost
 - **91539** - Invalid USD cost
+- **91540** - User is not an artist
