@@ -119,11 +119,9 @@ var humanFileSize = function(size) {
 		$(document).on("click", ".markdown-rendered-checkbox", function(e) { e.preventDefault(); if (e.stopPropogation()) { e.stopPropogation(); } return false; });
 
 		/* EASTER EGGS */
-		try {
-			cheet('b u l g e', function () {
-				$(".brand-logo").html("OwO what's this?");
-			});
-		} catch(e) {} // cheet doesn't like to be defined, and its not critical
+		cheet('b u l g e', function () {
+			$(".brand-logo").html("OwO what's this?");
+		});
 
 		/* FORMS */
 		$(document).on("change", ":checkbox", function(e) {
