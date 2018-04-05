@@ -14,12 +14,14 @@ use \Catalyst\HTTPCode;
 
 Endpoint::init(true, 1);
 
-FormRepository::getNewCommissionTypeForm()->checkServerSide();
+FormRepository::getNewCommissionTypeForm()->checkServerSide($_POST);
 
 if (!$_SESSION["user"]->isArtist()) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(91540, ErrorCodes::ERR_91540);
 }
+
+trigger_error(json_encode($_POST, false, JSON_PRETTY_PRINT), E_USER_ERROR);
 
 // do magic
 
