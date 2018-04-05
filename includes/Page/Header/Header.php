@@ -15,7 +15,7 @@ class Header {
 		// migrate to 1.0.0 alpha?
 		["https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js", 'crossorigin="anonymous"'],
 		// best i've found so far, works well
-		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.3/draggable.bundle.min.js", 'crossorigin="anonymous"'],
+		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.6/draggable.bundle.min.js", 'crossorigin="anonymous"'],
 		// not vital
 		["https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"'],
 		// crossorigin doesn't like to behave here
