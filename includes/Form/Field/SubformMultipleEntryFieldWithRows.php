@@ -11,14 +11,7 @@ use \Catalyst\Form\Form;
  */
 class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	/**
-	 * Construct a SubformMultipleEntryFieldWithRows
-	 *
-	 * Currently throws an error because the JS isn't here to support this yet.
 	 */
-	public function __construct() {
-		if (!Controller::isDevelMode()) {
-			trigger_error("SubformMultipleEntryFieldWithRows isn't a thing yet", E_USER_ERROR);
-		}
 	}
 
 	/**
