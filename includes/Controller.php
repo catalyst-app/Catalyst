@@ -17,6 +17,12 @@ class Controller {
 	const APRIL_FOOLS = true;
 
 	/**
+	 * Current commit
+	 * @var null|string
+	 */
+	protected static $commit = null;
+
+	/**
 	 * Autoloads classes, will be registered with spl_autoload_register
 	 * 
 	 * @param string $name Name of class to attempt to load
@@ -345,6 +351,18 @@ class Controller {
 	 */
 	public static function getVersion() : string {
 		return self::VERSION;
+	}
+
+	/**
+	 * Get the commit
+	 * 
+	 * @return string commit short hash
+	 */
+	public static function getCommit() : string {
+		if (is_null(self::$commit)) {
+			self::$commit = trim(`git log -1 --pretty="%h"`);
+		}
+		return self::$commit;
 	}
 }
 
