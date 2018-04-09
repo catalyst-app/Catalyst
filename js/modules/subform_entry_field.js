@@ -17,7 +17,7 @@ $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::A
 
 	newContainer.append(itemContainer);
 
-	var rightBar = $("<div></div>").addClass(<?= json_encode(SubformMultipleEntryFieldWithRows::PROTECTED_RIGHT_CONTAINER_CLASS) ?>);
+	var rightBar = $("<div></div>").addClass(<?= json_encode(SubformMultipleEntryFieldWithRows::PROTECTED_RIGHT_CONTAINER_CLASS) ?>).addClass("right-align");
 
 	rightBar.html($(this).prev().attr("data-right-bar").replace(/{uniq}/g, Date.now()));
 
