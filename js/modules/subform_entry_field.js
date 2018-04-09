@@ -4,6 +4,9 @@ use \Catalyst\Form\Field\{SubformMultipleEntryField, SubformMultipleEntryFieldWi
 $(document).on("click", ".<?= SubformMultipleEntryField::REMOVE_BUTTON_CLASS ?>", function(e) {
 	$(this).closest(<?= json_encode('.'.SubformMultipleEntryField::ENTRY_ITEM) ?>).remove();
 });
+$(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS) ?>, function(e) {
+	$(this).closest(".subform-entry-sub-container").remove();
+});
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::ADD_CONTAINER_BUTTON_CLASS) ?>, function(e) {
 	var newContainer = $("<div></div>").addClass("subform-entry-sub-container col s12");
 
