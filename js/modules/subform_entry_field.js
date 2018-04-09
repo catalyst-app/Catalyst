@@ -13,6 +13,10 @@ $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::R
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::ADD_CONTAINER_BUTTON_CLASS) ?>, function(e) {
 	var newContainer = $("<div></div>").addClass("subform-entry-sub-container col s12");
 
+	var itemContainer = $("<div></div>").addClass("subform-entry-sub-container-items");
+
+	newContainer.append(itemContainer);
+
 	var rightBar = $("<div></div>").addClass(<?= json_encode(SubformMultipleEntryFieldWithRows::PROTECTED_RIGHT_CONTAINER_CLASS) ?>);
 
 	rightBar.html($(this).prev().attr("data-right-bar").replace(/{uniq}/g, Date.now()));
@@ -21,12 +25,12 @@ $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::A
 
 	$(this).prev().append(newContainer);
 	
-	$(this).prev().data("sortable").addContainer($(this).prev().find(".subform-entry-sub-container:last").get(0));
+	$(this).prev().data("sortable").addContainer($(this).prev().find(".subform-entry-sub-container-items:last").get(0));
 });
 for (var i = $(".subform-entry-container").length - 1; i >= 0; i--) {
 	if ($($(".subform-entry-container")[i]).find(".subform-entry-sub-container").length > 0) {
 		var container = $(".subform-entry-container")[i];
-		var sortable = window.sortablee = new Draggable.Sortable($(container).find(".subform-entry-sub-container").get(), {
+		var sortable = new Draggable.Sortable($(container).find(".subform-entry-sub-container-items").get(), {
 			draggable: <?= json_encode('.'.SubformMultipleEntryField::ENTRY_ITEM) ?>,
 		});
 		

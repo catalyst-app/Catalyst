@@ -64,6 +64,12 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= '>';
 
 		$str .= '<div';
+		$str .= ' class="subform-entry-sub-container-items"';
+		$str .= '>';
+
+		$str .= '</div>';
+
+		$str .= '<div';
 		$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.'"';
 		$str .= '>';
 
@@ -167,7 +173,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= 'htmlToAdd = $(htmlToAdd);';
 		$str .= 'htmlToAdd.attr("data-data", JSON.stringify(serializedData));';
 
-		$str .= '$('.json_encode("#".$this->getId()." .subform-entry-sub-container:last").').append(htmlToAdd);';
+		$str .= '$('.json_encode("#".$this->getId()." .subform-entry-sub-container-items:last").').append(htmlToAdd);';
 
 		$str .= '$('.json_encode("#".$this->getId()).').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
 
