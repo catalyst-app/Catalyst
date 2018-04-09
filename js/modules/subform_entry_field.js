@@ -5,7 +5,16 @@ $(document).on("click", ".<?= SubformMultipleEntryField::REMOVE_BUTTON_CLASS ?>"
 	$(this).closest(<?= json_encode('.'.SubformMultipleEntryField::ENTRY_ITEM) ?>).remove();
 });
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::ADD_CONTAINER_BUTTON_CLASS) ?>, function(e) {
-	$(this).prev().append($("<div></div>").addClass("subform-entry-sub-container col s12"));
+	var newContainer = $("<div></div>").addClass("subform-entry-sub-container col s12");
+
+	var rightBar = $("<div></div>").addClass(<?= json_encode(SubformMultipleEntryFieldWithRows::PROTECTED_RIGHT_CONTAINER_CLASS) ?>);
+
+	rightBar.html($(this).prev().attr("data-right-bar"));
+
+	newContainer.append(rightBar);
+
+	$(this).prev().append(newContainer);
+	
 	$(this).prev().data("sortable").addContainer($(this).prev().find(".subform-entry-sub-container:last").get(0));
 });
 for (var i = $(".subform-entry-container").length - 1; i >= 0; i--) {
