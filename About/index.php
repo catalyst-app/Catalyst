@@ -640,6 +640,20 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@nyawenyye#8583",
 	],
 ])) ?>
+						<li class="flow-text no-bottom-margin" style="color: #36393e;"><strong>RD</strong></li>
+						<p class="no-margin" style="color: #36393e;"><em>Since April 2018, $1 currently pledged</em></p>
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@RD#8935",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:readrdo@gmail.com",
+		"DISP_NAME" => "@RD#8935",
+	],
+])) ?>
 						<li class="yellow-text flow-text no-bottom-margin"><strong><s>Coyote-Lovely</s></strong></li>
 						<p class="yellow-text no-margin"><s><em>February 2018</em></s></p>
 <?= /*SocialMedia::getChipHtml(SocialMedia::getChipArray([
