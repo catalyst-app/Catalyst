@@ -183,6 +183,7 @@ class Artist {
 	 */
 	public function getCurrentTosWithoutDate() : string {
 		if (array_key_exists("TOS", $this->cache)) {
+			trigger_error(json_encode($this->cache["TOS"]), E_USER_ERROR);
 			return $this->cache["TOS"][0][1];
 		}
 
