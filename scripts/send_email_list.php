@@ -50,7 +50,7 @@ if (!file_exists(".emaillist")) {
 sort($emails);
 
 foreach ($emails as $email) {
-	if (!preg_match('/^.{2,254}@.{2,254}\.{2,32}$/', $email) || strlen($email) > 255) {
+	if (!preg_match('/^.{2,254}@.{2,254}\..{2,32}$/', $email) || strlen($email) > 255) {
 		throw new InvalidArgumentException($email." is not a valid e-mail address");
 	}
 }
@@ -61,7 +61,7 @@ $subject = "Catalyst Updates - ".$date;
 
 echo "\nCatalyst email list mailer\n";
 echo "------------\n";
-echo "There are (".count($emails).") addresses which will be sent e-mails, with no definitive alias: ".implode(",", $emails)."\n";
+echo "There are (".count($emails).") addresses which will be sent e-mails, with no definitive alias: \n".implode(",", $emails)."\n";
 echo "------------\n";
 echo "Subject: ".$subject."\n";
 echo "------------\n";
