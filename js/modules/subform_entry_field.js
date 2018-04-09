@@ -1,7 +1,7 @@
 <?php
 use \Catalyst\Form\Field\{SubformMultipleEntryField, SubformMultipleEntryFieldWithRows};
 ?>
-$(document).on("click", ".<?= SubformMultipleEntryField::REMOVE_BUTTON_CLASS ?>", function(e) {
+$(document).on("click", <?= json_encode('.'.SubformMultipleEntryField::REMOVE_BUTTON_CLASS) ?>, function(e) {
 	$(this).closest(<?= json_encode('.'.SubformMultipleEntryField::ENTRY_ITEM) ?>).remove();
 });
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS) ?>, function(e) {
