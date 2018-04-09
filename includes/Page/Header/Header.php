@@ -2,6 +2,8 @@
 
 namespace Catalyst\Page\Header;
 
+use Catalyst\Controller;
+
 /**
  * Used to hold data about what scripts and other resources should belong in the <head> element
  */
@@ -21,16 +23,16 @@ class Header {
 		// crossorigin doesn't like to behave here
 		["https://www.google.com/recaptcha/api.js", "defer"],
 		
-		[ROOTDIR."js/modules/error_handler.js"],
+		[ROOTDIR."js/modules/error_handler.js?{commit}"],
 		
-		[ROOTDIR."js/modules/markdown_parser.js", "defer"],
-		[ROOTDIR."js/modules/ajax_progress.js", "defer"],
-		[ROOTDIR."js/modules/console_message.js", "defer"],
-		[ROOTDIR."js/modules/color_functions.js", "defer"],
-		[ROOTDIR."js/modules/input_functions.js", "defer"],
-		[ROOTDIR."js/modules/polyfills.js", "defer"],
-		[ROOTDIR."js/modules/totp_preview.js", "defer"],
-		[ROOTDIR."js/modules/onload.js"],
+		[ROOTDIR."js/modules/markdown_parser.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/ajax_progress.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/console_message.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/color_functions.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/input_functions.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/polyfills.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/totp_preview.js?{commit}", "defer"],
+		[ROOTDIR."js/modules/onload.js?{commit}"],
 	];
 
 	/**
@@ -39,6 +41,9 @@ class Header {
 	 */
 	public static function getScripts() : array {
 		$scripts = self::SCRIPTS;
+		foreach ($scripts as &$script) {
+			$script[0] = str_replace("{commit}", Controller::getCommit(), $script[0]);
+		}
 		return $scripts;
 	}
 
@@ -53,9 +58,9 @@ class Header {
 		// roboto
 		"https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i",
 		// overall styles and such, mostly just small things
-		ROOTDIR."css/overall.css",
+		ROOTDIR."css/overall.css?{commit}",
 		// used for styling, takes ?hex=###### as a URL param
-		ROOTDIR."css/color-".PAGE_COLOR.".css",
+		ROOTDIR."css/color-".PAGE_COLOR.".css?{commit}",
 	];
 
 	/**
@@ -64,6 +69,9 @@ class Header {
 	 */
 	public static function getStyles() : array {
 		$styles = self::STYLES;
+		foreach ($styles as &$style) {
+			$style = str_replace("{commit}", Controller::getCommit(), $style);
+		}
 		return $styles;
 	}
 }
