@@ -67,7 +67,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.'"';
 		$str .= '>';
 
-		$str .= $this->getRightBarContents();
+		$str .= str_replace("{uniq}", microtime(true), $this->getRightBarContents());
 
 		$str .= '</div>';
 

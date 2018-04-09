@@ -240,7 +240,7 @@ trait NewCommissionTypeFormTrait {
 		$modifiersField->setRequired(false);
 		$modifiersField->setLabel("Modifiers (these can be added to a commission like pizza toppings to a pizza order)");
 		$modifiersField->setDisplayHtml('<a href="#" class="'.SubformMultipleEntryField::ENTRY_ITEM.' btn commission-type-mod"><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i>{modifier-psuedo-field} (+{base-cost-psuedo-field})</div>');
-		$modifiersField->setRightBarContents('<i class="material-icons right '.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS.'">clear</i>');
+		$modifiersField->setRightBarContents('<i class="material-icons right '.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS.'">{uniq}clear</i>');
 
 		$modifierEntryWrapper = new WrappedField();
 		$modifierEntryWrapper->setWrapperClasses("col s12");
