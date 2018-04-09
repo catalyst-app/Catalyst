@@ -135,6 +135,8 @@ div.section > h4:first-child {
 
 .toggle-btn-set-container, .subform-entry-container {
 	margin-bottom: 0.4em;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .commission-type-collapsible-header i {
