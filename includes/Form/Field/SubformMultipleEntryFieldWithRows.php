@@ -11,6 +11,7 @@ use \Catalyst\Form\Form;
  */
 class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	const PROTECTED_RIGHT_CONTAINER_CLASS = 'subform-entry-row-right-protected-container';
+	const ADD_CONTAINER_BUTTON_CLASS = 'add-sub-container-field-btn';
 
 	/**
 	 * @var string
@@ -65,7 +66,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= '<button';
 		$str .= ' type="button"';
-		$str .= ' class="btn waves-effect waves-light add-sub-container-field-btn"';
+		$str .= ' class="btn waves-effect waves-light '.self::ADD_CONTAINER_BUTTON_CLASS.'"';
 		$str .= '>';
 
 		$str .= "add row";
