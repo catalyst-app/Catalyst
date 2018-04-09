@@ -14,6 +14,7 @@ use \Throwable;
 class Controller {
 	const DEVEL = true;
 	const VERSION = "0.0.1~alpha";
+	const APRIL_FOOLS = true;
 
 	/**
 	 * Autoloads classes, will be registered with spl_autoload_register
@@ -326,6 +327,15 @@ class Controller {
 	 */
 	public static function isDevelMode() : bool {
 		return self::DEVEL;
+	}
+
+	/**
+	 * Return if the platform is in april fools mode
+	 * 
+	 * @return bool If it is april fools, or similar pranks should be pulled
+	 */
+	public static function isAprilFools() : bool {
+		return self::APRIL_FOOLS;
 	}
 
 	/**
