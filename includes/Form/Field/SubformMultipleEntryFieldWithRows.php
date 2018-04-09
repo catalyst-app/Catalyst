@@ -10,8 +10,10 @@ use \Catalyst\Form\Form;
  * Use cases: commission type stages, payemnt options
  */
 class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
+	// the holy codepen: https://codepen.io/anon/pen/Wzadvm
 	const PROTECTED_RIGHT_CONTAINER_CLASS = 'subform-entry-row-right-protected-container';
 	const ADD_CONTAINER_BUTTON_CLASS = 'add-sub-container-field-btn';
+	const REMOVE_CONTAINER_BUTTON_CLASS = 'subform-remove-container-btn';
 
 	/**
 	 * @var string

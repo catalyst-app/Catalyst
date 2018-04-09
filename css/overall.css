@@ -19,6 +19,9 @@ html, html * {
 }
 
 .subform-entry-sub-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 	min-height: 3em !important;
 	display: block;
 	border-top: 1px solid #a5a5a5;
@@ -30,6 +33,11 @@ html, html * {
 
 .add-sub-container-field-btn {
 	margin-bottom: 1em;
+}
+
+.subform-entry-row-right-protected-container {
+	margin-left: auto;
+	margin-right: .5em;;
 }
 
 .info-row-container {
@@ -66,7 +74,7 @@ a .card-content p, .new-commission-type *:not(a) {
 	color: #000;
 }
 
-tr.feature-item, .subform-user-created-entry-remove-btn {
+tr.feature-item, .subform-user-created-entry-remove-btn, .subform-remove-container-btn {
 	cursor: pointer;
 }
 
