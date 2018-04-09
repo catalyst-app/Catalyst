@@ -21,3 +21,8 @@ subl-project.sublime-workspace
 update.php
 
 error_log
+
+scripts/.emaillist
+scripts/.htmlemail
+scripts/.txtemail
+
