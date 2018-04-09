@@ -9,7 +9,7 @@ class Header {
 	/**
 	 * JS libraries n such
 	 */
-	public const SCRIPTS = [
+	protected const SCRIPTS = [
 		// jQuery may be able to drop once materialize does
 		["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", 'crossorigin="anonymous"'],
 		// migrate to 1.0.0 alpha?
@@ -34,9 +34,18 @@ class Header {
 	];
 
 	/**
+	 * Get the scripts and attributes
+	 * @return string[][]
+	 */
+	public static function getScripts() : array {
+		$scripts = self::SCRIPTS;
+		return $scripts;
+	}
+
+	/**
 	 * CSS-es
 	 */
-	public const STYLES = [
+	protected const STYLES = [
 		// materialize main
 		"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.css",
 		// icon set
@@ -48,4 +57,13 @@ class Header {
 		// used for styling, takes ?hex=###### as a URL param
 		ROOTDIR."css/color-".PAGE_COLOR.".css",
 	];
+
+	/**
+	 * Get the styles
+	 * @return string[]
+	 */
+	public static function getStyles() : array {
+		$styles = self::STYLES;
+		return $styles;
+	}
 }
