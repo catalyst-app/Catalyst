@@ -35,7 +35,7 @@ trait TOTPLoginFormTrait {
 		$usernameField->setDistinguisher("totp-code");
 		$usernameField->setLabel("Authentication Code");
 		$usernameField->setRequired(true);
-		$usernameField->setPattern('^[0-9]{6}$');
+		$usernameField->setPattern('[0-9]*');
 		$usernameField->addError(90202, ErrorCodes::ERR_90202);
 		$usernameField->setMissingErrorCode(90202);
 		$usernameField->addError(90203, ErrorCodes::ERR_90203);
