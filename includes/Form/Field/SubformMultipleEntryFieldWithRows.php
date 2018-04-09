@@ -11,7 +11,24 @@ use \Catalyst\Form\Form;
  */
 class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	/**
+	 * @var string
 	 */
+	protected $rightBarContents = '';
+
+	/**
+	 * @return string
+	 */
+	public function getRightBarContents() : string {
+		return $this->rightBarContents;
+	}
+
+	/**
+	 * Should contain the clear (remove row) button
+	 * 
+	 * @param string $rightBarContents
+	 */
+	public function setRightBarContents(string $rightBarContents) : void {
+		$this->rightBarContents = $rightBarContents;
 	}
 
 	/**
