@@ -55,12 +55,21 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= '<div';
 		$str .= ' class="subform-entry-container col s12"';
+		$str .= ' data-right-bar="'.htmlspecialchars($this->getRightBarContents()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 
 		$str .= '<div';
 		$str .= ' class="subform-entry-sub-container col s12"';
 		$str .= '>';
+
+		$str .= '<div';
+		$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.'"';
+		$str .= '>';
+
+		$str .= $this->getRightBarContents();
+
+		$str .= '</div>';
 
 		$str .= '</div>';
 
