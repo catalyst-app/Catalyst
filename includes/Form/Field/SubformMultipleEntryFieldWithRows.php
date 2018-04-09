@@ -10,6 +10,8 @@ use \Catalyst\Form\Form;
  * Use cases: commission type stages, payemnt options
  */
 class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
+	const PROTECTED_RIGHT_CONTAINER_CLASS = 'subform-entry-row-right-protected-container';
+
 	/**
 	 * @var string
 	 */
