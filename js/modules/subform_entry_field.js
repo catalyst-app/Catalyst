@@ -5,6 +5,9 @@ $(document).on("click", <?= json_encode('.'.SubformMultipleEntryField::REMOVE_BU
 	$(this).closest(<?= json_encode('.'.SubformMultipleEntryField::ENTRY_ITEM) ?>).remove();
 });
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS) ?>, function(e) {
+	if ($(this).closest(".subform-entry-container").find(".subform-entry-sub-container").length == 1) {
+		$(this).closest(".subform-entry-container").next().click();
+	}
 	$(this).closest(".subform-entry-sub-container").remove();
 });
 $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::ADD_CONTAINER_BUTTON_CLASS) ?>, function(e) {
