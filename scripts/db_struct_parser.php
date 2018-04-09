@@ -1,5 +1,9 @@
 <?php
 
+if (php_sapi_name() !== 'cli') {
+	die("No");
+}
+
 $input = @file_get_contents($argv[1]);
 
 if ($input === false) {
