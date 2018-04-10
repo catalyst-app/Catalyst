@@ -15,13 +15,13 @@ class Header {
 		// jQuery may be able to drop once materialize does
 		["https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", 'crossorigin="anonymous"'],
 		// migrate to 1.0.0 alpha?
-		["https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js", 'crossorigin="anonymous"'],
+		["https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.js", 'crossorigin="anonymous"'],
 		// best i've found so far, works well
-		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.6/draggable.bundle.min.js", 'crossorigin="anonymous"'],
+		["https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.6/draggable.bundle.legacy.js", 'crossorigin="anonymous"'],
 		// not vital
 		["https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"'],
 		// crossorigin doesn't like to behave here
-		["https://www.google.com/recaptcha/api.js", "defer"],
+		["https://google.com/recaptcha/api.js", "defer"],
 		
 		[ROOTDIR."js/modules/error_handler.js?{commit}"],
 		
