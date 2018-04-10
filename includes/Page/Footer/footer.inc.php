@@ -20,7 +20,7 @@ use \Catalyst\Page\UniversalFunctions;
 		</footer>
 	</body>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-112460506-1"></script>
+	<script src="https://www.googletagmanager.com/gtag/js?id=UA-112460506-1" async defer></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
