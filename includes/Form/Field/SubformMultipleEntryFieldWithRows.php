@@ -152,12 +152,13 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= 'for (var entry of $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).')) {';
 
-		$str .= 'var itemData = JSON.stringify($(entry).attr("data-data"));';
+		$str .= 'var itemData = JSON.parse($(entry).attr("data-data"));';
 
 		$str .= $this->getCustomJsAggregator()("itemData", "entry");
 
-		$str .= 'itemData["row"] = $(entry).index();';
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', JSON.parse(itemData));';
+		$str .= 'itemData["row"] = $(entry).closest(".subform-entry-sub-container").index();';
+
+		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', JSON.stringify(itemData));';
 
 		$str .= '}';
 
