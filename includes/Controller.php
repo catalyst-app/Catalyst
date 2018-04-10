@@ -219,7 +219,7 @@ class Controller {
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
 				}
-				file_get_contents("https://api.telegram.org/bot".Secrets::TELEGRAM_TOKEN."/sendMessage?chat_id=".Secrets::TELEGRAM_CHAT."&disable_notification=true&parse_mode=HTML&text=".urlencode($telegramStr), false, stream_context_create([
+				file_get_contents("https://api.telegram.org/bot".Secrets::TELEGRAM_TOKEN."/sendMessage?chat_id=".Secrets::TELEGRAM_CHAT."&parse_mode=HTML&text=".urlencode($telegramStr), false, stream_context_create([
 					"http" => [
 						"ignore_errors" => true,
 					]
