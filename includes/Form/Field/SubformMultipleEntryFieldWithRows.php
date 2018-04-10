@@ -19,6 +19,10 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * @var string
 	 */
 	protected $rightBarContents = '';
+	/**
+	 * @var callable|null
+	 */
+	protected $customJsAggregator = null;
 
 	/**
 	 * @return string
@@ -34,6 +38,29 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 */
 	public function setRightBarContents(string $rightBarContents) : void {
 		$this->rightBarContents = $rightBarContents;
+	}
+
+	/**
+	 * @return callable
+	 */
+	public function getCustomJsAggregator() : callable {
+		if (is_null($this->customJsAggregator)) {
+			return function(string $dataArrayName, string $entry) : string {
+				return '';
+			};
+		}
+		return $this->customJsAggregator;
+	}
+
+	/**
+	 * Give null to "reset"
+	 * 
+	 * @param null|callable $customJsAggregator
+	 *   Should accept 2 arguments, string $dataArrayName and string $entry, and return JS string
+	 *   function(string $dataArrayName, string $entry) : string
+	 */
+	public function setCustomJsAggregator(?callable $customJsAggregator) : void {
+		$this->customJsAggregator = $customJsAggregator;
 	}
 
 	/**
@@ -126,6 +153,9 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= 'for (var entry of $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).')) {';
 
 		$str .= 'var itemData = JSON.stringify($(entry).attr("data-data"));';
+
+		$str .= $this->getCustomJsAggregator()("itemData", "entry");
+
 		$str .= 'itemData["row"] = $(entry).index();';
 		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', JSON.parse(itemData));';
 
