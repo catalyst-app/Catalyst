@@ -241,6 +241,9 @@ trait NewCommissionTypeFormTrait {
 		$modifiersField->setLabel("Modifiers (these can be added to a commission like pizza toppings to a pizza order)");
 		$modifiersField->setDisplayHtml('<a href="#" class="'.SubformMultipleEntryField::ENTRY_ITEM.' btn commission-type-mod"><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i>{modifier-psuedo-field} (+{base-cost-psuedo-field})</div>');
 		$modifiersField->setRightBarContents('<p class="inline-block no-bottom-margin"><label for="{uniq}"><input type="checkbox" class="filled-in" id="{uniq}"><span>Multiple</span></label></p><i class="material-icons '.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS.'">clear</i>');
+		$modifiersField->setCustomJsAggregator(function(string $dataArrayName, string $entry) : string {
+			return $dataArrayName.'["multiple"] = $('.$entry.').closest(".subform-entry-sub-container").find("input[type=checkbox]").is(":checked");';
+		});
 
 		$modifierEntryWrapper = new WrappedField();
 		$modifierEntryWrapper->setWrapperClasses("col s12");
