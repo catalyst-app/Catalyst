@@ -137,6 +137,10 @@ div.section > h4:first-child {
 	left:100%;
 }
 
+.subform-user-created-entry-item .rendered-markdown {
+	display: inline-block;
+}
+
 .toggle-btn-set-container, .subform-entry-container {
 	margin-bottom: 0.4em;
 	user-select: none;
