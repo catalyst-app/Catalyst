@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{MarkdownField, MultipleImageWithNsfwCaptionAndInfoField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
+use \Catalyst\Form\Field\{CheckboxField, MarkdownField, MultipleImageWithNsfwCaptionAndInfoField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /*
@@ -322,6 +322,22 @@ trait NewCommissionTypeFormTrait {
 		$imagesField->addError(91524, ErrorCodes::ERR_91524);
 		$imagesField->setTooLargeErrorCode(91524);
 		$form->addField($imagesField);
+
+		$acceptingHeader = new StaticHTMLField();
+		$acceptingHeader->setHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
+		$form->addField($acceptingHeader);
+
+		$acceptingCheckboxGeneric = new CheckboxField();
+		$acceptingCheckboxGeneric->setRequired(false);
+		$acceptingCheckboxGeneric->addError(91541, ErrorCodes::ERR_91541);
+		$acceptingCheckboxGeneric->setMissingErrorCode(91541);
+		$acceptingCheckboxGeneric->addError(91542, ErrorCodes::ERR_91542);
+		$acceptingCheckboxGeneric->setInvalidErrorCode(91542);
+		foreach (["Quotes", "Requests", "Trades", "Commissions"] as $item) {
+			$acceptingCheckboxGeneric->setLabel($item);
+			$acceptingCheckboxGeneric->setDistinguisher(strtolower($item));
+			$form->addField(clone $acceptingCheckboxGeneric);
+		}
 
 		return $form;
 	}
