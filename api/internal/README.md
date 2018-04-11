@@ -247,3 +247,5 @@
 - **91540** - User is not an artist
 - **91541** - An accepting checkbox is missing
 - **91542** - An accepting checkbox is invalid
+- **91543** - Visibility checkbox is missing
+- **91544** - Visibility checkbox is invalid
