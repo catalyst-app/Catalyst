@@ -1520,7 +1520,6 @@ $emojis = [
 ];
 foreach ($emojis as $emoji): ?>
 					<span class="tooltipped raw-emoji emoji-preview-block" data-delay="50" data-position="bottom" data-tooltip="<?= htmlspecialchars($emoji[1]) ?>"><?= htmlspecialchars($emoji[0]) ?></span>
-					<span class="psuedo-hidden"><?= htmlspecialchars($emoji[1]) ?></span>
 <?php endforeach; ?>
 				</div>
 			</div>
