@@ -72,7 +72,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 */
 	public function getCustomServerSideCheck() : callable {
 		if (is_null($this->customSeverSideCheck)) {
-			return function(?array &$entry=null) : void {
+			return function(array &$entry) : void {
 				return;
 			};
 		}
@@ -84,7 +84,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * 
 	 * @param null|callable $customSeverSideCheck
 	 *   Should accept 1 argument:
-	 *      ?array &$entry=null
+	 *      array &$entry
 	 *  and specify : void
 	 */
 	public function setCustomServerSideCheck(?callable $customSeverSideCheck) : void {
