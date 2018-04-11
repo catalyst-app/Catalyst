@@ -209,6 +209,11 @@ div.section > h4:first-child {
 	margin-bottom: 1em;
 }
 
+.small-margin {
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+}
+
 .small-padding {
 	padding: 10px;
 }

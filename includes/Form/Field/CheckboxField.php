@@ -18,7 +18,7 @@ class CheckboxField extends AbstractField {
 		$str = '';
 		
 		$str .= '<p';
-		$str .= ' class="col s12"';
+		$str .= ' class="col s12 small-margin"';
 		$str .= '>';
 
 		$str .= '<label';
