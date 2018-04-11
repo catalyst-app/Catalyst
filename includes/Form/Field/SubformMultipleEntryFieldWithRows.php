@@ -49,7 +49,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 */
 	public function getCustomJsAggregator() : callable {
 		if (is_null($this->customJsAggregator)) {
-			return function(string $dataArrayName, string $entry) : string {
+			return static function(string $dataArrayName, string $entry, SubformMultipleEntryFieldWithRows $form) : string {
 				return '';
 			};
 		}
@@ -60,8 +60,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * Give null to "reset"
 	 * 
 	 * @param null|callable $customJsAggregator
-	 *   Should accept 2 arguments, string $dataArrayName and string $entry, and return JS string
-	 *   function(string $dataArrayName, string $entry) : string
+	 *   static function(string $dataArrayName, string $entry, SubformMultipleEntryFieldWithRows $form) : string
 	 */
 	public function setCustomJsAggregator(?callable $customJsAggregator) : void {
 		$this->customJsAggregator = $customJsAggregator;
@@ -83,9 +82,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * Give null to "reset"
 	 * 
 	 * @param null|callable $customSeverSideCheck
-	 *   Should accept 1 argument:
-	 *      array &$entry
-	 *  and specify : void
+	 *   function(array &$entry) : void
 	 */
 	public function setCustomServerSideCheck(?callable $customSeverSideCheck) : void {
 		$this->customSeverSideCheck = $customSeverSideCheck;
@@ -182,7 +179,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= 'var itemData = JSON.parse($(entry).attr("data-data"));';
 
-		$str .= $this->getCustomJsAggregator()("itemData", "entry");
+		$str .= $this->getCustomJsAggregator()("itemData", "entry", $this);
 
 		$str .= 'itemData["row"] = $(entry).closest(".subform-entry-sub-container").index();';
 
@@ -279,7 +276,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 				$field->setForm($this->getForm());
 				$field->checkServerSide($entry);
 			}
-			$this->getCustomServerSideCheck()($entry);
+			$this->getCustomServerSideCheck()->bindTo($this, $this)($entry);
 		}
 	}
 }
