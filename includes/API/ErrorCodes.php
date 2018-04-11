@@ -259,6 +259,8 @@ class ErrorCodes {
 	const ERR_91538 = 'Please enter a USD cost';
 	const ERR_91539 = 'USD cost is too large';
 	const ERR_91540 = 'You are not an artist';
+	const ERR_91541 = 'An unknown error occured';
+	const ERR_91542 = 'An unknown error occured';
 
 	/**
 	 * Get an associative array of code => message based on class constants
