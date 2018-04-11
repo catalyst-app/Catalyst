@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 04, 2018 at 04:00 PM
+-- Generation Time: Apr 11, 2018 at 10:24 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.4
 
@@ -467,7 +467,6 @@ CREATE TABLE `commission_types` (
   `BASE_COST` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `BASE_USD_COST` decimal(7,4) UNSIGNED NOT NULL,
   `ATTRS` mediumtext CHARACTER SET ascii NOT NULL,
-  `PHYSICAL_ADDRESS_NEEDED` tinyint(1) NOT NULL DEFAULT '0',
   `ACCEPTING_QUOTES` tinyint(1) NOT NULL DEFAULT '1',
   `ACCEPTING_REQUESTS` tinyint(1) NOT NULL DEFAULT '1',
   `ACCEPTING_TRADES` tinyint(1) NOT NULL DEFAULT '1',
