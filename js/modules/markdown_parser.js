@@ -2,7 +2,7 @@
 header("Cache-Control: max-age=86400");
 ?>
 function renderMarkdownArea(area) {
-  $(area).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
+  $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
   $(area).find('.collapsible').collapsible();
 }
 
