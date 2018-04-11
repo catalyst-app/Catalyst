@@ -23,6 +23,10 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 * @var callable|null
 	 */
 	protected $customJsAggregator = null;
+	/**
+	 * @var callable|null
+	 */
+	protected $customSeverSideCheck = null;
 
 	/**
 	 * @return string
@@ -61,6 +65,30 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	 */
 	public function setCustomJsAggregator(?callable $customJsAggregator) : void {
 		$this->customJsAggregator = $customJsAggregator;
+	}
+
+	/**
+	 * @return callable
+	 */
+	public function getCustomServerSideCheck() : callable {
+		if (is_null($this->customSeverSideCheck)) {
+			return function(?array &$entry=null) : void {
+				return;
+			};
+		}
+		return $this->customSeverSideCheck;
+	}
+
+	/**
+	 * Give null to "reset"
+	 * 
+	 * @param null|callable $customSeverSideCheck
+	 *   Should accept 1 argument:
+	 *      ?array &$entry=null
+	 *  and specify : void
+	 */
+	public function setCustomServerSideCheck(?callable $customSeverSideCheck) : void {
+		$this->customSeverSideCheck = $customSeverSideCheck;
 	}
 
 	/**
@@ -251,6 +279,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 				$field->setForm($this->getForm());
 				$field->checkServerSide($entry);
 			}
+			$this->getCustomServerSideCheck()($entry);
 		}
 	}
 }
