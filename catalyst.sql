@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 11, 2018 at 10:24 PM
+-- Generation Time: Apr 11, 2018 at 10:32 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.4
 
@@ -1191,6 +1191,7 @@ ALTER TABLE `commission_types`
   ADD KEY `SORT` (`SORT`),
   ADD KEY `BASE_USD_COST` (`BASE_USD_COST`),
   ADD KEY `DELETED` (`DELETED`);
+ALTER TABLE `commission_types` ADD FULLTEXT KEY `ATTRS` (`ATTRS`);
 
 --
 -- Indexes for table `commission_type_attributes`
