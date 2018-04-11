@@ -23,7 +23,6 @@ class CommissionType {
 				`".DB_TABLES["commission_types"]."`.`BASE_COST`,
 				`".DB_TABLES["commission_types"]."`.`BASE_USD_COST`,
 				`".DB_TABLES["commission_types"]."`.`ATTRS`,
-				`".DB_TABLES["commission_types"]."`.`PHYSICAL_ADDR_NEEDED`,
 				`".DB_TABLES["commission_types"]."`.`OPEN`,
 				`".DB_TABLES["commission_type_images"]."`.`CAPTION`,
 				`".DB_TABLES["commission_type_images"]."`.`PATH`,
