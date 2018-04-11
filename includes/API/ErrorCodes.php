@@ -261,6 +261,8 @@ class ErrorCodes {
 	const ERR_91540 = 'You are not an artist';
 	const ERR_91541 = 'An unknown error occured';
 	const ERR_91542 = 'An unknown error occured';
+	const ERR_91543 = 'An unknown error occured';
+	const ERR_91544 = 'An unknown error occured';
 
 	/**
 	 * Get an associative array of code => message based on class constants

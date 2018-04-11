@@ -327,6 +327,16 @@ trait NewCommissionTypeFormTrait {
 		$acceptingHeader->setHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
 		$form->addField($acceptingHeader);
 
+		$visibleCheckbox = new CheckboxField();
+		$visibleCheckbox->setRequired(false);
+		$visibleCheckbox->setLabel("This commission type should be listed publicly on my page");
+		$visibleCheckbox->setDistinguisher("visible");
+		$visibleCheckbox->addError(91543, ErrorCodes::ERR_91543);
+		$visibleCheckbox->setMissingErrorCode(91543);
+		$visibleCheckbox->addError(91544, ErrorCodes::ERR_91544);
+		$visibleCheckbox->setInvalidErrorCode(91544);
+		$form->addField($visibleCheckbox);
+
 		$acceptingCheckboxGeneric = new CheckboxField();
 		$acceptingCheckboxGeneric->setRequired(false);
 		$acceptingCheckboxGeneric->addError(91541, ErrorCodes::ERR_91541);
@@ -335,7 +345,7 @@ trait NewCommissionTypeFormTrait {
 		$acceptingCheckboxGeneric->setInvalidErrorCode(91542);
 		foreach (["Quotes", "Requests", "Trades", "Commissions"] as $item) {
 			$acceptingCheckboxGeneric->setLabel($item);
-			$acceptingCheckboxGeneric->setDistinguisher(strtolower($item));
+			$acceptingCheckboxGeneric->setDistinguisher("accepting-".strtolower($item));
 			$form->addField(clone $acceptingCheckboxGeneric);
 		}
 
