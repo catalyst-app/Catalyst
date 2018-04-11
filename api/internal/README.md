@@ -245,3 +245,5 @@
 - **91538** - Missing USD cost
 - **91539** - Invalid USD cost
 - **91540** - User is not an artist
+- **91541** - An accepting checkbox is missing
+- **91542** - An accepting checkbox is invalid
