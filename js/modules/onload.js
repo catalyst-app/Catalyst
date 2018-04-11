@@ -116,7 +116,11 @@ var humanFileSize = function(size) {
 			renderMarkdownArea($(".markdown-target[data-field="+$(this).attr("id")+"]"));
 		});
 
-		$(document).on("click", ".markdown-rendered-checkbox", function(e) { e.preventDefault(); if (e.stopPropogation()) { e.stopPropogation(); } return false; });
+		$(document).on("click", ".markdown-rendered-checkbox", function(e) {
+			e.preventDefault && e.preventDefault();
+			e.stopPropogation && e.stopPropogation();
+			return false;
+		});
 
 		/* EASTER EGGS */
 		cheet('b u l g e', function () {
