@@ -9361,11 +9361,19 @@ checkboxReplace = function(md, options, Token) {
       nodes.push(token);
     }
 
+    id = options.idPrefix + lastId;
+    lastId += 1;
+
+    /**
+     * <label for="checkbox{n}">
+     */
+    token = new Token("label_open", "label", 1);
+    token.attrs = [["for", id]];
+    nodes.push(token);
+
     /**
      * <input type="checkbox" id="checkbox{n}" checked="true">
      */
-    id = options.idPrefix + lastId;
-    lastId += 1;
     token = new Token("checkbox_input", "input", 0);
     // added the readonly attribute
     token.attrs = [["type", "checkbox"], ["id", id], ["class", "filled-in markdown-rendered-checkbox"], ["readonly", "readonly"]];
@@ -9375,10 +9383,9 @@ checkboxReplace = function(md, options, Token) {
     nodes.push(token);
 
     /**
-     * <label for="checkbox{n}">
+     * content of label tag
      */
-    token = new Token("label_open", "label", 1);
-    token.attrs = [["for", id]];
+    token = new Token("checkbox_label_span", "span", 1);
     nodes.push(token);
 
     /**
@@ -9389,12 +9396,19 @@ checkboxReplace = function(md, options, Token) {
     nodes.push(token);
 
     /**
+     * content of label tag
+     */
+    token = new Token("checkbox_label_span_close", "span", -1);
+    nodes.push(token);
+
+    /**
      * closing tags
      */
     nodes.push(new Token("label_close", "label", -1));
     if (options.divWrap) {
       nodes.push(new Token("checkbox_close", "div", -1));
     }
+    console.log(nodes);
     return nodes;
   };
   splitTextToken = function(original, Token) {
