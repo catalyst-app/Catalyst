@@ -244,6 +244,11 @@ trait NewCommissionTypeFormTrait {
 		$modifiersField->setCustomJsAggregator(function(string $dataArrayName, string $entry) : string {
 			return $dataArrayName.'["multiple"] = $('.$entry.').closest(".subform-entry-sub-container").find("input[type=checkbox]").is(":checked");';
 		});
+		$modifiersField->setCustomServerSideCheck(function(array &$entry) : void {
+			if (!is_bool($entry["multiple"])) {
+				$this->throwInvalidError();
+			}
+		});
 
 		$modifierEntryWrapper = new WrappedField();
 		$modifierEntryWrapper->setWrapperClasses("col s12");
