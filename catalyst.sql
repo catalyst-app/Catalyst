@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 11, 2018 at 10:32 PM
+-- Generation Time: Apr 11, 2018 at 11:04 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.4
 
@@ -674,9 +674,9 @@ CREATE TABLE `commission_type_images` (
   `ID` int(11) UNSIGNED NOT NULL,
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL,
   `CAPTION` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `COMMISSIONER` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `PATH` varchar(15) CHARACTER SET ascii NOT NULL,
   `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `PRIMARY` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `SORT` int(11) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1213,8 +1213,7 @@ ALTER TABLE `commission_type_attribute_groups`
 --
 ALTER TABLE `commission_type_images`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`),
-  ADD KEY `PRIMARY_2` (`PRIMARY`);
+  ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`);
 
 --
 -- Indexes for table `commission_type_modifiers`
