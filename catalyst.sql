@@ -411,7 +411,7 @@ CREATE TABLE `commissions` (
   `SHIPPING_INSTRUCTIONS` mediumtext COLLATE utf8mb4_unicode_ci,
   `NSFW` tinyint(1) UNSIGNED NOT NULL,
   `QUOTE_PRICE` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `QUOTE_USDEQ` decimal(6,2) UNSIGNED DEFAULT NULL,
+  `QUOTE_USDEQ` decimal(8,2) UNSIGNED DEFAULT NULL,
   `QUOTE_MADE_AT` datetime DEFAULT NULL,
   `ARCHIVED_ARTIST` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ARCHIVED_BUYER` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
@@ -465,7 +465,7 @@ CREATE TABLE `commission_types` (
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `SORT` int(11) UNSIGNED NOT NULL,
   `BASE_COST` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `BASE_USD_COST` decimal(7,4) UNSIGNED NOT NULL,
+  `BASE_USD_COST` decimal(9,4) UNSIGNED NOT NULL,
   `ATTRS` mediumtext CHARACTER SET ascii NOT NULL,
   `ACCEPTING_QUOTES` tinyint(1) NOT NULL DEFAULT '1',
   `ACCEPTING_REQUESTS` tinyint(1) NOT NULL DEFAULT '1',
@@ -697,7 +697,7 @@ CREATE TABLE `commission_type_modifiers` (
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL,
   `NAME` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `PRICE` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `USDEQ` decimal(6,2) UNSIGNED NOT NULL,
+  `USDEQ` decimal(8,2) UNSIGNED NOT NULL,
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
