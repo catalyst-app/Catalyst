@@ -10,7 +10,7 @@ parameters:
 		- '/Catalyst\\Database\\CommissionType\\Wishlist/'
 		- '/Call to static method test\(\) on an unknown class Catalyst\\Form\\Captcha\./'
 		- '/Call to an undefined method callable::bindTo\(\)/'
-		- '/Call to an undefined method Catalyst\Form\FormRepository::throwInvalidError/'
-		- '/Using $this in static method Catalyst\Form\FormRepository::getNewCommissionTypeForm()/'
+		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
+		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getNewCommissionTypeForm/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
