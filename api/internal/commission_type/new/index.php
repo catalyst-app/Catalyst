@@ -180,6 +180,4 @@ if (array_key_exists("stages", $_POST) && count($_POST["stages"])) {
 	$stmt->execute();
 }
 
-var_dump($_POST);
-
-// Response::sendSuccessResponse("Success");
+Response::sendSuccessResponse("Success");
