@@ -293,7 +293,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostUsdEntryField->setRequired(true);
 		$baseCostUsdEntryField->setPrecision(2);
 		$baseCostUsdEntryField->setMin(0);
-		$baseCostUsdEntryField->setMax(1000000);
+		$baseCostUsdEntryField->setMax(10000);
 		$baseCostUsdEntryField->addError(91538, ErrorCodes::ERR_91538);
 		$baseCostUsdEntryField->setMissingErrorCode(91538);
 		$baseCostUsdEntryField->addError(91539, ErrorCodes::ERR_91539);
