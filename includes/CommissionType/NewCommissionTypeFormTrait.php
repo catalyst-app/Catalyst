@@ -323,10 +323,6 @@ trait NewCommissionTypeFormTrait {
 		$imagesField->setTooLargeErrorCode(91524);
 		$form->addField($imagesField);
 
-		$acceptingHeader = new StaticHTMLField();
-		$acceptingHeader->setHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
-		$form->addField($acceptingHeader);
-
 		$visibleCheckbox = new CheckboxField();
 		$visibleCheckbox->setRequired(false);
 		$visibleCheckbox->setLabel("This commission type should be listed publicly on my page");
@@ -336,6 +332,10 @@ trait NewCommissionTypeFormTrait {
 		$visibleCheckbox->addError(91544, ErrorCodes::ERR_91544);
 		$visibleCheckbox->setInvalidErrorCode(91544);
 		$form->addField($visibleCheckbox);
+
+		$acceptingHeader = new StaticHTMLField();
+		$acceptingHeader->setHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
+		$form->addField($acceptingHeader);
 
 		$acceptingCheckboxGeneric = new CheckboxField();
 		$acceptingCheckboxGeneric->setRequired(false);
