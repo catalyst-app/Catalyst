@@ -265,7 +265,6 @@ abstract class AbstractQuery {
 	 * Returns the result from ->execute
 	 * 
 	 * @return mixed bool for certain types, id, or data if applicable
-	 * @throws LogicException if the query has not been executed
 	 */
 	public function getResult() {
 		return $this->result;
