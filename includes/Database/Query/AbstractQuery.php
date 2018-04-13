@@ -45,6 +45,12 @@ abstract class AbstractQuery {
 	protected $result = null;
 
 	/**
+	 * Count the number of queries run
+	 * @var int
+	 */
+	protected static $totalQueries = 0;
+
+	/**
 	 * Creates a Query object
 	 * 
 	 * @param string $table Table to affect/target
@@ -263,5 +269,13 @@ abstract class AbstractQuery {
 	 */
 	public function getResult() {
 		return $this->result;
+	}
+
+	/**
+	 * Total queries ran
+	 * @return int
+	 */
+	public static function getTotalQueries() : int {
+		return self::$totalQueries;
 	}
 }
