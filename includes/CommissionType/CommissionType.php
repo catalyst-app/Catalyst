@@ -3,6 +3,7 @@
 namespace Catalyst\CommissionType;
 
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
+use \InvalidArgumentException;
 
 class CommissionType {
 	use HasImageTrait;
@@ -42,7 +43,7 @@ class CommissionType {
 		$stmt->execute();
 
 		if ($stmt->rowCount() == 0) {
-			throw new \InvalidArgumentException("Commission type ID ".$id." does not exist in the database.");
+			throw new InvalidArgumentException("Commission type ID ".$id." does not exist in the database.");
 		}
 
 		$results = $stmt->fetchAll();
