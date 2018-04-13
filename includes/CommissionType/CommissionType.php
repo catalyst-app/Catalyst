@@ -118,20 +118,35 @@ class CommissionType {
 		$this->id = $id;
 	}
 
+	/**
+	 * Get ID from token, if exists
+	 * @param string $token commission type token
+	 * @return int ID if exists, -1 if not
+	 */
 	public static function getIdFromToken(string $token) : int {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["commission_types"]."` WHERE `TOKEN` = :TOKEN AND `DELETED` = 0;");
-		$stmt->bindParam(":TOKEN", $token);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("TOKEN", self::getTable()), '=', $token]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 0]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
+		$result = $stmt->getResult();
+
+		if (count($result) == 0) {
 			return -1;
 		}
 
-		$result = $stmt->fetchAll()[0]["ID"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $result[0]["ID"];
 	}
 
 	public function getId() : int {
