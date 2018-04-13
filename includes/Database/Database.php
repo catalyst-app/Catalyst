@@ -38,6 +38,10 @@ class Database {
 		self::$dbh = new PDO(self::DB_DRIVER.":host=".self::DB_SERVER.";port=".self::DB_PORT.";dbname=".self::DB_NAME.";charset=utf8mb4", self::DB_USER, self::DB_PASSWORD);
 		// raise errors
 		self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		if (Controller::isDevelMode()) {
+			self::$dbh->query("set profiling=1");
+		}
 	}
 
 	/**
