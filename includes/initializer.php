@@ -5,6 +5,8 @@ use \Catalyst\User\User;
 
 spl_autoload_register("\\Catalyst\\Controller::loadClass");
 
+define("EXEC_START_TIME", microtime(true));
+
 // Choose what error handling we want to do
 if (Controller::isDevelMode()) {
 	error_reporting(E_ALL);
