@@ -120,6 +120,7 @@ class CommissionType {
 
 	/**
 	 * Get ID from token, if exists
+	 * 
 	 * @param string $token commission type token
 	 * @return int ID if exists, -1 if not
 	 */
