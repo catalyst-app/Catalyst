@@ -3,16 +3,16 @@
 namespace Catalyst\CommissionType;
 
 use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
-use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Database\Query\{SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
+use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
 use \InvalidArgumentException;
 
 /**
  * Represents a commision type
  */
 class CommissionType {
-	use DatabaseModelTrait, HasImageTrait;
+	use DatabaseModelTrait, HasImageTrait, HasImageSetTrait;
 
 	/**
 	 * The user's ID in the database
@@ -480,5 +480,46 @@ class CommissionType {
 
 	public function initializeImage() : void {
 		$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
+	}
+
+	public function initializeImageSet() : void {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::COMMISSION_TYPE_IMAGES);
+
+		$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("PATH", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES), '=', $this->id]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$orderByClause = new OrderByClause();
+		$orderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
+		$orderByClause->setOrder("ASC");
+		$stmt->addAdditionalCapability($orderByClause);
+
+		$stmt->execute();
+
+		$results = $stmt->getResult();
+
+		$images = [];
+
+		for ($i=0; $i < count($results); $i++) { 
+			if (is_null($results[$i]["PATH"])) {
+				break;
+			}
+			$images[] = new Image(
+				Folders::COMMISSION_TYPE_IMAGE,
+				$results[$i]["TOKEN"],
+				$results[$i]["PATH"],
+				(bool)$results[$i]["NSFW"],
+				trim($results[$i]["CAPTION"].($results[$i]["COMMISSIONER"] ? ("\n**Client:** ".$results[$i]["COMMISSIONER"]) : ''))
+			);
+		}
+
+		$this->setImageSet($images);
 	}
 }
