@@ -1,5 +1,7 @@
 <?php
 use \Catalyst\Controller;
+use \Catalyst\Database\Database;
+use \Catalyst\Database\Query\AbstractQuery;
 use \Catalyst\Page\UniversalFunctions;
 ?>
 		</div>
@@ -12,6 +14,15 @@ use \Catalyst\Page\UniversalFunctions;
 					<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
 					Version: <?= Controller::getVersion() ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
 				</p>
+				<?php if (Controller::isDevelMode()): ?>
+<?php
+$stmt = Database::getDbh()->query("show profiles");
+$rows = $stmt->fetchAll();
+?>
+					<p>
+						<strong>Debug information:</strong> Page generated in <?= microtime(true)-EXEC_START_TIME ?>s, requiring <?= AbstractQuery::getTotalQueries() ?> database queries (which took <?= array_sum(array_column($rows, "Duration")) ?>s).
+					</p>
+				<?php endif; ?>
 				<p>
 					Hosted artwork copyright their respective owners unless otherwise stated.
 				</p>
