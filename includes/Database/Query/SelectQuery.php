@@ -41,6 +41,8 @@ class SelectQuery extends AbstractQuery {
 
 		$this->result = $stmt->fetchAll();
 
+		self::$totalQueries++;
+
 		return true;
 	}
 }

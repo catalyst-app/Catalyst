@@ -34,6 +34,8 @@ class DeleteQuery extends AbstractQuery {
 
 		$stmt->execute($this->getParamtersToBind());
 
+		self::$totalQueries++;
+
 		return true;
 	}
 }

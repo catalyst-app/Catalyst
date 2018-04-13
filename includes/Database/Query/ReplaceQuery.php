@@ -43,6 +43,8 @@ class ReplaceQuery extends AbstractQuery {
 
 		$this->result = Database::getDbh()->lastInsertId();
 
+		self::$totalQueries++;
+
 		return true;
 	}
 }

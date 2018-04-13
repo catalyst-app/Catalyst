@@ -52,6 +52,8 @@ class MultiInsertQuery extends AbstractQuery {
 
 		$this->result = Database::getDbh()->lastInsertId();
 
+		self::$totalQueries++;
+
 		return true;
 	}
 }
