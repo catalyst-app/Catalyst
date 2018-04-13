@@ -159,6 +159,11 @@ class CommissionType {
 		return $this->id;
 	}
 
+	/**
+	 * Get the table for the object, as specified in DatabaseModelTrait
+	 *
+	 * @return string
+	 */
 	public static function getTable() : string {
 		return Tables::COMMISSION_TYPES;
 	}
