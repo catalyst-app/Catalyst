@@ -150,6 +150,11 @@ class CommissionType {
 		return $result[0]["ID"];
 	}
 
+	/**
+	 * Get the commission type's ID
+	 * 
+	 * @return int
+	 */
 	public function getId() : int {
 		return $this->id;
 	}
