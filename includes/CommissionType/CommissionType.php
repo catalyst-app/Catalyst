@@ -5,13 +5,29 @@ namespace Catalyst\CommissionType;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \InvalidArgumentException;
 
+/**
+ * Represents a commision type
+ */
 class CommissionType {
 	use HasImageTrait;
 
+	/**
+	 * The user's ID in the database
+	 * @var int
+	 */
 	private $id;
 
+	/**
+	 * This is used as not to repeatedly hammer the database
+	 * @var array
+	 */
 	private $cache = [];
 
+	/**
+	 * Create a new commission type object
+	 * 
+	 * @param int $id
+	 */
 	public function __construct(int $id) {
 		$stmt = $GLOBALS["dbh"]->prepare("
 			SELECT
