@@ -2,6 +2,7 @@
 
 namespace Catalyst\CommissionType;
 
+use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \InvalidArgumentException;
 
@@ -9,7 +10,7 @@ use \InvalidArgumentException;
  * Represents a commision type
  */
 class CommissionType {
-	use HasImageTrait;
+	use DatabaseModelTrait, HasImageTrait;
 
 	/**
 	 * The user's ID in the database
@@ -109,6 +110,10 @@ class CommissionType {
 
 	public function getId() : int {
 		return $this->id;
+	}
+
+	public static function getTable() : string {
+		return Tables::COMMISSION_TYPES;
 	}
 
 	public function getArtistPageId() : int {
