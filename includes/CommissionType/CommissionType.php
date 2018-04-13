@@ -4,6 +4,8 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
+use \Catalyst\Database\Query\{SelectQuery};
+use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
 use \InvalidArgumentException;
 
 /**
@@ -30,41 +32,68 @@ class CommissionType {
 	 * @param int $id
 	 */
 	public function __construct(int $id) {
-		$stmt = $GLOBALS["dbh"]->prepare("
-			SELECT
-				`".DB_TABLES["commission_types"]."`.`ARTIST_PAGE_ID`,
-				`".DB_TABLES["commission_types"]."`.`TOKEN`,
-				`".DB_TABLES["commission_types"]."`.`NAME`,
-				`".DB_TABLES["commission_types"]."`.`BLURB`,
-				`".DB_TABLES["commission_types"]."`.`DESCRIPTION`,
-				`".DB_TABLES["commission_types"]."`.`SORT`,
-				`".DB_TABLES["commission_types"]."`.`BASE_COST`,
-				`".DB_TABLES["commission_types"]."`.`BASE_USD_COST`,
-				`".DB_TABLES["commission_types"]."`.`ATTRS`,
-				`".DB_TABLES["commission_types"]."`.`OPEN`,
-				`".DB_TABLES["commission_type_images"]."`.`CAPTION`,
-				`".DB_TABLES["commission_type_images"]."`.`PATH`,
-				`".DB_TABLES["commission_type_images"]."`.`NSFW`,
-				`".DB_TABLES["commission_type_images"]."`.`PRIMARY`
-			FROM
-				`".DB_TABLES["commission_types"]."`
-			LEFT JOIN
-				`".DB_TABLES["commission_type_images"]."`
-				ON
-					`".DB_TABLES["commission_types"]."`.`ID` = `".DB_TABLES["commission_type_images"]."`.`COMMISSION_TYPE_ID`
-			WHERE
-				`".DB_TABLES["commission_types"]."`.`ID` = :ID
-			ORDER BY
-				`".DB_TABLES["commission_type_images"]."`.`SORT`;");
-		$stmt->bindParam(":ID", $id);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ARTIST_PAGE_ID", self::getTable()));
+		$stmt->addColumn(new Column("TOKEN", self::getTable()));
+		$stmt->addColumn(new Column("NAME", self::getTable()));
+		$stmt->addColumn(new Column("BLURB", self::getTable()));
+		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
+		$stmt->addColumn(new Column("SORT", self::getTable()));
+		$stmt->addColumn(new Column("BASE_COST", self::getTable()));
+		$stmt->addColumn(new Column("BASE_USD_COST", self::getTable()));
+		$stmt->addColumn(new Column("ATTRS", self::getTable()));
+		$stmt->addColumn(new Column("ACCEPTING_QUOTES", self::getTable()));
+		$stmt->addColumn(new Column("ACCEPTING_REQUESTS", self::getTable()));
+		$stmt->addColumn(new Column("ACCEPTING_TRADES", self::getTable()));
+		$stmt->addColumn(new Column("ACCEPTING_COMMISSIONS", self::getTable()));
+		$stmt->addColumn(new Column("VISIBLE", self::getTable()));
+
+		$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("PATH", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
+
+		$joinClause = new JoinClause();
+		$joinClause->setType(JoinClause::LEFT);
+		$joinClause->setJoinTable(Tables::COMMISSION_TYPE_IMAGES);
+		$joinClause->setLeftColumn(new Column("ID", self::getTable()));
+		$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addAdditionalCapability($joinClause);
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$orderByClause = new OrderByClause();
+		$orderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
+		$orderByClause->setOrder("ASC");
+		$stmt->addAdditionalCapability($orderByClause);
+
 		$stmt->execute();
 
-		if ($stmt->rowCount() == 0) {
+		$results = $stmt->getResult();
+
+		if (count($results) == 0) {
 			throw new InvalidArgumentException("Commission type ID ".$id." does not exist in the database.");
 		}
 
-		$results = $stmt->fetchAll();
-		$stmt->closeCursor();
+		$images = [];
+
+		for ($i=0; $i < count($results); $i++) { 
+			if (is_null($results[$i]["PATH"])) {
+				break;
+			}
+			$images[] = new Image(
+				Folders::COMMISSION_TYPE_IMAGE,
+				$results[$i]["TOKEN"],
+				$results[$i]["PATH"],
+				(bool)$results[$i]["NSFW"],
+				trim($results[$i]["CAPTION"].($results[$i]["COMMISSIONER"] ? ("\n**Client:** ".$results[$i]["COMMISSIONER"]) : ''))
+			);
+		}
 
 		$this->cache = [
 			"ARTIST_PAGE_ID" => $results[0]["ARTIST_PAGE_ID"],
@@ -76,18 +105,15 @@ class CommissionType {
 			"BASE_COST" => $results[0]["BASE_COST"],
 			"BASE_USD_COST" => $results[0]["BASE_USD_COST"],
 			"ATTRS" => $results[0]["ATTRS"],
-			"PHYSICAL_ADDR_NEEDED" => (bool)$results[0]["PHYSICAL_ADDR_NEEDED"],
 			"OPEN" => $results[0]["OPEN"],
-			"IMAGES" => (
-					is_null($results[0]["PATH"])
-				?
-					[["default.png", "", false, true]]
-				:
-					array_map(function($in) {
-						return [$in["TOKEN"].$in["PATH"], $in["CAPTION"], (bool)$in["NSFW"], (bool)$in["PRIMARY"]];
-					}, $results)
-			)
+			"ACCEPTING_QUOTES" => $results[0]["ACCEPTING_QUOTES"],
+			"ACCEPTING_REQUESTS" => $results[0]["ACCEPTING_REQUESTS"],
+			"ACCEPTING_TRADES" => $results[0]["ACCEPTING_TRADES"],
+			"ACCEPTING_COMMISSIONS" => $results[0]["ACCEPTING_COMMISSIONS"],
+			"VISIBLE" => $results[0]["VISIBLE"],
 		];
+
+		$this->setImageSet($images);
 
 		$this->id = $id;
 	}
