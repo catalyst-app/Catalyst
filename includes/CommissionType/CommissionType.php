@@ -168,20 +168,17 @@ class CommissionType {
 		return Tables::COMMISSION_TYPES;
 	}
 
+	/**
+	 * Get the artist page's ID
+	 *
+	 * @return int
+	 */
 	public function getArtistPageId() : int {
 		if (array_key_exists("ARTIST_PAGE_ID", $this->cache)) {
 			return $this->cache["ARTIST_PAGE_ID"];
 		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ARTIST_PAGE_ID` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOKEN"] = $stmt->fetchAll()[0]["TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		
+		return $this->cache["ARTIST_PAGE_ID"] = $this->getColumnFromDatabase("ARTIST_PAGE_ID");
 	}
 
 	public function getArtistPage() : \Catalyst\Artist\Artist {
