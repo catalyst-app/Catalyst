@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: application/javascript; charset=UTF-8");
 
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
