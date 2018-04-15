@@ -1,5 +1,4 @@
 AddHandler application/x-httpd-php .js
-AddType application/javascript .js
 
 Satisfy Any
 Require all granted

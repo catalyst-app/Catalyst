@@ -5,8 +5,6 @@ RewriteRule ^color-([a-z0-9]{6}).css$ color.css?hex=$1 [NC,L]
 
 AddHandler application/x-httpd-php .css
 
-AddType text/css .css
-
 Satisfy Any
 Require all granted
 Allow from all
