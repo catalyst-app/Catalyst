@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: text/css; charset=UTF-8");
 header("Cache-Control: max-age=259200"); // 3 days
 
 define("ROOTDIR", "../");
