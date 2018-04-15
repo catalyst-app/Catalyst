@@ -32,10 +32,13 @@ require_once __DIR__."/Database/Connector.inc.php";
 require_once __DIR__."/vendor/autoload.php";
 
 if (!session_id()) {
-	ini_set("session.cookie_lifetime", 24*60*60);
-	ini_set("session.gc_maxlifetime", 24*60*60);
-	ini_set("session.name", "catalyst");
-	session_start();
+	session_start([
+		"name" => "catalyst",
+		"gc_maxlifetime" => 24*60*60,
+		"cookie_lifetime" => 24*60*60,
+		"cookie_httponly" => true,
+		"cookie_secure" => true,
+	]);
 }
 
 // remove pending_user if not actively logging in
