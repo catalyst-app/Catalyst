@@ -3,7 +3,7 @@
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Database\CommissionType\Wishlist;
 use \Catalyst\Form\FormPHP;
 use \Catalyst\Response;

@@ -5,7 +5,7 @@ header("Cache-Control: max-age=259200"); // 3 days
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Color;
 ?>
 a {

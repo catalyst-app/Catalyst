@@ -3,7 +3,7 @@
 define("ROOTDIR", isset($_POST["rootdir"]) ? $_POST["rootdir"] : "");
 define("REAL_ROOTDIR", "../../../../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{Column, RawColumn, Tables};
 use \Catalyst\Database\QueryAddition\WhereClause;

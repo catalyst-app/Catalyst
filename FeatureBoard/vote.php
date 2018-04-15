@@ -3,7 +3,7 @@
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Database\FeatureBoard\Groups;
 use \Catalyst\Database\FeatureBoard\Item;
 use \Catalyst\Response;

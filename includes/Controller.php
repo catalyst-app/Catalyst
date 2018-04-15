@@ -365,5 +365,3 @@ class Controller {
 		return self::$commit;
 	}
 }
-
-require_once __DIR__.DIRECTORY_SEPARATOR."initializer.php";

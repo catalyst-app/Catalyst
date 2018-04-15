@@ -3,7 +3,7 @@
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
