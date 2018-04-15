@@ -3,7 +3,7 @@
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Character\Character;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Images\{Folders,Image};

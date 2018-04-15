@@ -1,11 +1,13 @@
 <?php
 
-use \Catalyst\Controller;
-use \Catalyst\User\User;
+define("EXEC_START_TIME", microtime(true));
+
+require_once __DIR__.DIRECTORY_SEPARATOR.'Controller.php';
 
 spl_autoload_register("\\Catalyst\\Controller::loadClass");
 
-define("EXEC_START_TIME", microtime(true));
+use \Catalyst\Controller;
+use \Catalyst\User\User;
 
 // Choose what error handling we want to do
 if (Controller::isDevelMode()) {

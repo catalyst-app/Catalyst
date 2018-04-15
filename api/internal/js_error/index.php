@@ -3,7 +3,7 @@
 define("ROOTDIR", isset($_POST["rootdir"]) ? $_POST["rootdir"] : "");
 define("REAL_ROOTDIR", "../../../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\API\{Endpoint, Response};
 
 Endpoint::init(true, 0);

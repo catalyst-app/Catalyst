@@ -4,7 +4,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\API\ErrorCodes;
 
 $errors = ErrorCodes::getAssoc();

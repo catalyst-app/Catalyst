@@ -3,7 +3,7 @@
 define("ROOTDIR", "../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."includes/Controller.php";
+require_once REAL_ROOTDIR."includes/initializer.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\HTTPCode;
