@@ -13,6 +13,7 @@ class HTTPCode {
 		200 => "OK",
 		201 => "Created",
 		202 => "Deferred",
+		204 => "No Content",
 		301 => "Moved",
 		302 => "Temporary Redirect",
 		304 => "Not Modified",
