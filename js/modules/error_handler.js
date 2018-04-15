@@ -1,3 +1,6 @@
+<?php
+header("Content-Type: application/javascript; charset=UTF-8");
+?>
 // this garbage is dedicated to Lazlo (@ElongatedMuskrat)
 window.onerror = function(message, url, lineNumber) {  
 	try {
