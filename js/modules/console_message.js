@@ -1,3 +1,6 @@
+<?php
+header("Content-Type: application/javascript; charset=UTF-8");
+?>
 // dont tell toish but i actually kinda like JS
 // its neat and fairly powerful, plus the community seems really neat
 // but dont you dare try to run it on the server

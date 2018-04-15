@@ -1,3 +1,6 @@
+<?php
+header("Content-Type: application/javascript; charset=UTF-8");
+?>
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 if (!Array.prototype.includes) {
 	Object.defineProperty(Array.prototype, 'includes', {
