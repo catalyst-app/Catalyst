@@ -20,6 +20,9 @@ a {
 	background-color: #<?= Color::lightenHex($_GET["hex"], 0.5) ?>55;
 }
 
+.social-chips .chip:focus {
+  background-color: #<?= $_GET["hex"] ?>;
+}
 
 [type="checkbox"]:checked + span:not(.lever):before {
   border-right: 2px solid #<?= $_GET["hex"] ?>;
