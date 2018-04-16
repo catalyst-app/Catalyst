@@ -2,6 +2,7 @@
 
 namespace Catalyst\CommissionType;
 
+use \Catalyst\Artist\Artist;
 use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
 use \Catalyst\Database\Query\{SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
@@ -181,8 +182,17 @@ class CommissionType {
 		return $this->cache["ARTIST_PAGE_ID"] = $this->getColumnFromDatabase("ARTIST_PAGE_ID");
 	}
 
-	public function getArtistPage() : \Catalyst\Artist\Artist {
-		return (new \Catalyst\Artist\Artist($this->getArtistPageId()));
+	/**
+	 * Get the artist's page as an object
+	 *
+	 * @return Artist
+	 */
+	public function getArtistPage() : Artist {
+		if (array_key_exists("ARTIST_PAGE", $this->cache)) {
+			return $this->cache["ARTIST_PAGE"];
+		}
+		
+		return $this->cache["ARTIST_PAGE"] = new Artist($this->getArtistPageId());
 	}
 
 	public function getToken() : string {
