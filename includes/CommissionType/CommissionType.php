@@ -195,68 +195,48 @@ class CommissionType {
 		return $this->cache["ARTIST_PAGE"] = new Artist($this->getArtistPageId());
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getToken() : string {
 		if (array_key_exists("TOKEN", $this->cache)) {
 			return $this->cache["TOKEN"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TOKEN` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["TOKEN"] = $stmt->fetchAll()[0]["TOKEN"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["TOKEN"] = $this->getColumnFromDatabase("TOKEN");
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() : string {
 		if (array_key_exists("NAME", $this->cache)) {
 			return $this->cache["NAME"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NAME` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["NAME"] = $stmt->fetchAll()[0]["NAME"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getBlurb() : string {
 		if (array_key_exists("BLURB", $this->cache)) {
 			return $this->cache["BLURB"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `BLURB` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["BLURB"] = $stmt->fetchAll()[0]["BLURB"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["BLURB"] = $this->getColumnFromDatabase("BLURB");
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getDescription() : string {
 		if (array_key_exists("DESCRIPTION", $this->cache)) {
 			return $this->cache["DESCRIPTION"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `DESCRIPTION` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["DESCRIPTION"] = $stmt->fetchAll()[0]["DESCRIPTION"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
 	}
 
 	public function getSort() : int {
