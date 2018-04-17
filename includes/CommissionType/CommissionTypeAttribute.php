@@ -9,7 +9,7 @@ use \Catalyst\Database\Query\SelectQuery;
 /**
  * Used to handle array of commission type attributes
  */
-class CommissionTypeAttributes {
+class CommissionTypeAttribute {
 	/**
 	 * Cache of attributes, in DB format
 	 * @var null|array
@@ -21,7 +21,7 @@ class CommissionTypeAttributes {
 	 * 
 	 * @return array attributes
 	 */
-	protected static function getAttributes() : array {
+	protected static function getAllAttributes() : array {
 		if (!is_null(self::$attributes)) {
 			return self::$attributes;
 		}
@@ -76,6 +76,6 @@ class CommissionTypeAttributes {
 	 * @return array
 	 */
 	public static function getButtonSet() : array {
-		return self::getAttributes();
+		return self::getAllAttributes();
 	}
 }
