@@ -11,8 +11,11 @@ use \Catalyst\Page\UniversalFunctions;
 					Website &copy;2017-<?php echo date("Y"); ?> Catalyst, All rights reserved.
 				</p>
 				<p>
-					<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
-					Version: <?= Controller::getVersion() ?>, <?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
+					Version: <?= Controller::getVersion() ?>
+					<?php if (Controller::isDevelMode()): ?>
+						<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
+						<?= `git log -1 --pretty="(%h) %B by %cN %cr"` ?>
+					<?php endif; ?>
 				</p>
 				<?php if (Controller::isDevelMode()): ?>
 <?php
