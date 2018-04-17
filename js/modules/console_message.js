@@ -1,12 +1,19 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8");
+
+define("ROOTDIR", "../../");
+define("REAL_ROOTDIR", "../../");
+
+require_once REAL_ROOTDIR."includes/initializer.php";
+
+use \Catalyst\Controller;
 ?>
 // dont tell toish but i actually kinda like JS
 // its neat and fairly powerful, plus the community seems really neat
 // but dont you dare try to run it on the server
 console.log("'''''''''''''''''''''''''''''''';''''';'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("'''''''''''''''''''''''''''',,',:0Od;':,''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
-console.log("''''''''''''''''''''''''',0MMMMMMMMMMW0:''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+console.log("''''''''''''''''''''''''',0MMMMMMMMMMW0:''''''''''''v<?= Controller::getVersion() ?> (<?= Controller::getCommit() ?>)<?= str_repeat("'", 37-strlen(Controller::getVersion())) ?>");
 console.log("'''''''''''''''''''''',oOWMMMMMMMMMMMMMWkl'';;,'''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("''''''''''''''''''''cOMMMMMMMMMMMMMMMMMMMM0',,''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("''''''''''''''''''lKMMMMMMMMMMMMMMMMMMMMMMk',,''''''''''''''''''''''''''''''''''''''''''''''''''''''");
