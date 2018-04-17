@@ -27,6 +27,11 @@ class CommissionTypeModifier {
 
 	/**
 	 * Constructor
+	 *
+	 * @param int $id
+	 * @param string $name
+	 * @param string $price
+	 * @param float $usdEquivalent
 	 */
 	public function __construct(int $id, string $name="", string $price="", float $usdEquivalent=0) {
 		$this->id = $id;
