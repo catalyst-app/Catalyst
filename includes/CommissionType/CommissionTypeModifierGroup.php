@@ -2,12 +2,14 @@
 
 namespace Catalyst\CommissionType;
 
+use \Iterator;
+
 /**
  * Represents a group of multiple commission type modifiers
  *
  * Basic model class, nothing fancy
  */
-class CommissionTypeModifierGroup {
+class CommissionTypeModifierGroup implements Iterator {
 	/**
 	 * @var int
 	 */
@@ -22,6 +24,13 @@ class CommissionTypeModifierGroup {
 	protected $allowingMultiple = false;
 
 	/**
+	 * For Iterable implementation
+	 * 
+	 * @var int
+	 */
+	private $position = 0;
+
+	/**
 	 * Basic constructor
 	 */
 	public function __construct(int $id, array $modifiers=[], bool $allowingMultiple=false) {
@@ -30,6 +39,9 @@ class CommissionTypeModifierGroup {
 			$this->addModifier($modifier);
 		}
 		$this->setAllowingMultiple($allowingMultiple);
+
+		// iterator
+		$this->position = 0;
 	}
 
 	/**
@@ -72,5 +84,44 @@ class CommissionTypeModifierGroup {
 	 */
 	public function setAllowingMultiple(bool $allowingMultiple) : void {
 		$this->allowingMultiple = $allowingMultiple;
+	}
+
+	/* ITERATOR IMPLEMENTATION */
+
+	/**
+	 * @see Iterator
+	 */
+	public function rewind() : void {
+		$this->position = 0;
+	}
+
+	/**
+	 * @see Iterator
+	 * @return CommissionTypeModifier
+	 */
+	public function current() : CommissionTypeModifier {
+		return $this->modifiers[$this->position];
+	}
+
+	/**
+	 * @see Iterator
+	 */
+	public function next() : void {
+		$this->position++;
+	}
+
+	/**
+	 * @see Iterator
+	 * @return int
+	 */
+	public function key() : int {
+		return $this->position;
+	}
+
+	/**
+	 * @see Iterator
+	 */
+	public function valid() : bool {
+		return array_key_exists($this->position, $this->position);
 	}
 }
