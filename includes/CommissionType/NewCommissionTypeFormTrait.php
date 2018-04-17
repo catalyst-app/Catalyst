@@ -109,7 +109,7 @@ trait NewCommissionTypeFormTrait {
 		$attributesGroupField = new ToggleableButtonSetField();
 		$attributesGroupField->setDistinguisher("attributes");
 		$attributesGroupField->setLabel("Attributes (used when searching for your page - please select all relevant items)");
-		$attributesGroupField->setButtons(CommissionTypeAttributes::getButtonSet());
+		$attributesGroupField->setButtons(CommissionTypeAttribute::getButtonSet());
 		$attributesGroupField->addError(91511, ErrorCodes::ERR_91511);
 		$attributesGroupField->setMissingErrorCode(91511);
 		$attributesGroupField->addError(91512, ErrorCodes::ERR_91512);
