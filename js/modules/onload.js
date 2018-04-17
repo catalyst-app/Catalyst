@@ -5,6 +5,9 @@ define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."includes/initializer.php";
+use \Catalyst\Controller;
+use \Catalyst\Database\Database;
+use \Catalyst\Database\Query\AbstractQuery;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\API\ErrorCodes;
 
@@ -197,3 +200,18 @@ var humanFileSize = function(size) {
 
 	});
 })(jQuery);
+
+<?php if (Controller::isDevelMode()): ?>
+<?php
+$overallTime = microtime(true)-EXEC_START_TIME;
+$stmt = Database::getDbh()->query("show profiles");
+$rows = $stmt->fetchAll();
+$dbDuration = array_sum(array_column($rows, "Duration"));
+?>
+console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+console.log("''Main JS generation debug: ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+console.log("''''''Overall: <?= $overallTime ?>s <?= str_repeat("'", 83-strlen($overallTime)) ?>");
+console.log("''''''Database queries: <?= AbstractQuery::getTotalQueries() ?> <?= str_repeat("'", 75-strlen(AbstractQuery::getTotalQueries())) ?>");
+console.log("''''''Database queries time usage: <?= $dbDuration ?>s <?= str_repeat("'", 63-strlen($dbDuration)) ?>");
+console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+<?php endif; ?>
