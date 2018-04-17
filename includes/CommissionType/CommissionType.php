@@ -269,49 +269,18 @@ class CommissionType {
 			return $this->cache["BASE_USD_COST"];
 		}
 
-	public function getHumanAttrs() : array {
-		if (array_key_exists("HUMAN_ATTRS", $this->cache)) {
-			return $this->cache["HUMAN_ATTRS"];
-		}
-
-		$result = $this->getAttrs();
-
-		$attrs = \Catalyst\Database\CommissionType\Attributes::get();
-
-		$keyedAttrs = [];
-
-		foreach ($attrs as $attrg) {
-			$i = 0;
-			foreach (array_intersect($result, array_column($attrg["items"], 0)) as $attr) {
-				if ($i++ == 0) {
-					$keyedAttrs[$attrg["label"]] = [];
-				}
-				$keyedAttrs[$attrg["label"]][] = array_values(array_filter($attrg["items"], function($in) use ($attr) {
-					return $in[0] == $attr;
-				}))[0][1];
-			}
-		}
-
-		$result = $this->cache["HUMAN_ATTRS"] = $keyedAttrs;
-
-		return $result;
 		return $this->cache["BASE_USD_COST"] = (float)$this->getColumnFromDatabase("BASE_USD_COST");
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getAttrs() : array {
 		if (array_key_exists("ATTRS", $this->cache)) {
-			return json_decode($this->cache["ATTRS"], true);
+			return $this->cache["ATTRS"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ATTRS` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["ATTRS"] = $stmt->fetchAll()[0]["ATTRS"];
-
-		$stmt->closeCursor();
-
-		return json_decode($result, true);
+		return $this->cache["ATTRS"] = explode(" ", $this->getColumnFromDatabase("ATTRS"));
 	}
 
 	public function isPhysicalAddrNeeded() : bool {
