@@ -32,12 +32,19 @@ require_once __DIR__."/Database/Connector.inc.php";
 require_once __DIR__."/vendor/autoload.php";
 
 if (!session_id()) {
+	ini_set("session.name", "catalyst");
+	ini_set("session.gc_maxlifetime", 24*60*60);
+	ini_set("session.cookie_lifetime", 24*60*60);
+	ini_set("session.cookie_httponly", true);
+	if (array_key_exists("SERVER_NAME", $_SERVER) && $_SERVER["SERVER_NAME"] != "localhost") {
+		ini_set("session.cookie_secure", true);
+	}
 	session_start([
 		"name" => "catalyst",
 		"gc_maxlifetime" => 24*60*60,
 		"cookie_lifetime" => 24*60*60,
 		"cookie_httponly" => true,
-		"cookie_secure" => true,
+		"cookie_secure" => array_key_exists("SERVER_NAME", $_SERVER) && $_SERVER["SERVER_NAME"] != "localhost",
 	]);
 }
 
