@@ -5,25 +5,105 @@ namespace Catalyst\CommissionType;
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\QueryAddition\{JoinClause, MultipleOrderByClause, OrderByClause};
 use \Catalyst\Database\Query\SelectQuery;
+use \InvalidArgumentException;
 
 /**
  * Used to handle array of commission type attributes
  */
 class CommissionTypeAttribute {
 	/**
-	 * Cache of attributes, in DB format
+	 * Cache of attributes, in db-esque keyed format
 	 * @var null|array
 	 */
-	protected static $attributes = null;
+	protected static $attributeMetadataCache = null;
+	/**
+	 * Cache of attributes, as objects
+	 * @var null|self[]
+	 */
+	protected static $allAttributes = null;
+	/**
+	 * Cache of groups, in id => label
+	 * @var null|string[]
+	 */
+	protected static $groups = null;
 
 	/**
-	 * Gets the attributes in an internal format, pulls from DB if needed
+	 * Effectively an ID for attributes
+	 *
+	 * _Also can be thought of as a tag_
 	 * 
-	 * @return array attributes
+	 * @var string
+	 */
+	protected $setKey = '';
+
+	/**
+	 * Create an attribute object
+	 *
+	 * @param string $setKey the ID/key of the attribute
+	 */
+	public function __construct(string $setKey = '') {
+		if (is_null(self::$attributeMetadataCache)) {
+			self::getAllAttributes(); // fill cache
+		}
+
+		if (!array_key_exists($setKey, self::$attributeMetadataCache)) {
+			throw new InvalidArgumentException($setKey." is not a known key");
+		}
+
+		$this->setKey = $setKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSetKey() : string {
+		return $this->setKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() : string {
+		return self::$attributeMetadataCache[$this->getSetKey()]["NAME"];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription() : string {
+		return self::$attributeMetadataCache[$this->getSetKey()]["DESCRIPTION"];
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getGroupId() : int {
+		return self::$attributeMetadataCache[$this->getSetKey()]["GROUP_ID"];
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getGroupLabel() : string {
+		return self::$groups[self::$attributeMetadataCache[$this->getSetKey()]["GROUP_ID"]];
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSort() : int {
+		return self::$attributeMetadataCache[$this->getSetKey()]["SORT"];
+	}
+
+
+	/**
+	 * Gets all attributes as self and populates metadata
+	 * 
+	 * @return self[] attributes
 	 */
 	protected static function getAllAttributes() : array {
-		if (!is_null(self::$attributes)) {
-			return self::$attributes;
+		if (!is_null(self::$allAttributes)) {
+			return self::$allAttributes;
 		}
 		$stmt = new SelectQuery();
 
@@ -32,7 +112,9 @@ class CommissionTypeAttribute {
 		$stmt->addColumn(new Column("SET_KEY", Tables::COMMISSION_TYPE_ATTRIBUTES));
 		$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPE_ATTRIBUTES));
 		$stmt->addColumn(new Column("DESCRIPTION", Tables::COMMISSION_TYPE_ATTRIBUTES));
+		$stmt->addColumn(new Column("GROUP_ID", Tables::COMMISSION_TYPE_ATTRIBUTES));
 		$stmt->addColumn(new Column("LABEL", Tables::COMMISSION_TYPE_ATTRIBUTE_GROUPS));
+		$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_ATTRIBUTES));
 
 		$joinClause = new JoinClause();
 		$joinClause->setType(JoinClause::LEFT);
@@ -57,25 +139,53 @@ class CommissionTypeAttribute {
 
 		$stmt->execute();
 
-		$result = $stmt->getResult();
+		$rawAttributes = $stmt->getResult();
 
-		$realResult = [];
+		self::$attributeMetadataCache = [];
+		self::$groups = [];
+		self::$allAttributes = [];
 
-		foreach ($result as $row) {
-			if (!array_key_exists($row["LABEL"], $realResult)) {
-				$realResult[$row["LABEL"]] = [];
+		foreach ($rawAttributes as $row) {
+			// the logic in this clusterfuck is as follows:
+			// if the group isn't known, define it
+			// then, fill in the metadata for the attribute
+			// then construct the attribute object (as it relies on the other two due to standardization by attribute key)
+			if (!array_key_exists($row["GROUP_ID"], self::$groups)) {
+				self::$groups[$row["GROUP_ID"]] = $row["LABEL"];
 			}
-			$realResult[$row["LABEL"]][] = [$row["SET_KEY"],$row["NAME"],$row["DESCRIPTION"]];
+			self::$attributeMetadataCache[$row["SET_KEY"]] = [
+				"SET_KEY" => $row["SET_KEY"],
+				"NAME" => $row["NAME"],
+				"DESCRIPTION" => $row["DESCRIPTION"],
+				"GROUP_ID" => $row["GROUP_ID"],
+				"SORT" => $row["SORT"],
+			];
+			self::$allAttributes[] = new self($row["SET_KEY"]);
 		}
 
-		return self::$attributes = $realResult;
+		return self::$allAttributes;
 	}
 
 	/**
 	 * Get the attributes in such a way that the resulting array can be used in a ToggleableButtonSetField
+	 * 
 	 * @return array
 	 */
 	public static function getButtonSet() : array {
-		return self::getAllAttributes();
+		$buttonSet = [];
+		
+		foreach (self::getAllAttributes() as $attribute) {
+			if (!array_key_exists($attribute->getGroupLabel(), $buttonSet)) {
+				$buttonSet[$attribute->getGroupLabel()] = [];
+			}
+
+			$buttonSet[$attribute->getGroupLabel()][] = [
+				$attribute->getSetKey(),
+				$attribute->getName(),
+				$attribute->getDescription(),
+			];
+		}
+
+		return $buttonSet;
 	}
 }
