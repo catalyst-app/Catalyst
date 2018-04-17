@@ -283,36 +283,70 @@ class CommissionType {
 		return $this->cache["ATTRS"] = explode(" ", $this->getColumnFromDatabase("ATTRS"));
 	}
 
-	public function isPhysicalAddrNeeded() : bool {
-		if (array_key_exists("PHYSICAL_ADDR_NEEDED", $this->cache)) {
-			return $this->cache["PHYSICAL_ADDR_NEEDED"];
-		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `PHYSICAL_ADDR_NEEDED` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["PHYSICAL_ADDR_NEEDED"] = (bool)$stmt->fetchAll()[0]["PHYSICAL_ADDR_NEEDED"];
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
-
+	/**
+	 * @return bool
+	 */
 	public function isOpen() : bool {
 		if (array_key_exists("OPEN", $this->cache)) {
 			return $this->cache["OPEN"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `OPEN` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
+		return $this->cache["OPEN"] = (bool)$this->getColumnFromDatabase("OPEN");
+	}
 
-		$result = $this->cache["OPEN"] = $stmt->fetchAll()[0]["OPEN"];
+	/**
+	 * @return bool
+	 */
+	public function isAcceptingQuotes() : bool {
+		if (array_key_exists("ACCEPTING_QUOTES", $this->cache)) {
+			return $this->cache["ACCEPTING_QUOTES"];
+		}
 
-		$stmt->closeCursor();
+		return $this->cache["ACCEPTING_QUOTES"] = (bool)$this->getColumnFromDatabase("ACCEPTING_QUOTES");
+	}
 
-		return $result;
+	/**
+	 * @return bool
+	 */
+	public function isAcceptingRequests() : bool {
+		if (array_key_exists("ACCEPTING_REQUESTS", $this->cache)) {
+			return $this->cache["ACCEPTING_REQUESTS"];
+		}
+
+		return $this->cache["ACCEPTING_REQUESTS"] = (bool)$this->getColumnFromDatabase("ACCEPTING_REQUESTS");
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isAcceptingTrades() : bool {
+		if (array_key_exists("ACCEPTING_TRADES", $this->cache)) {
+			return $this->cache["ACCEPTING_TRADES"];
+		}
+
+		return $this->cache["ACCEPTING_TRADES"] = (bool)$this->getColumnFromDatabase("ACCEPTING_TRADES");
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isAcceptingCommissions() : bool {
+		if (array_key_exists("ACCEPTING_COMMISSIONS", $this->cache)) {
+			return $this->cache["ACCEPTING_COMMISSIONS"];
+		}
+
+		return $this->cache["ACCEPTING_COMMISSIONS"] = (bool)$this->getColumnFromDatabase("ACCEPTING_COMMISSIONS");
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVisible() : bool {
+		if (array_key_exists("VISIBLE", $this->cache)) {
+			return $this->cache["VISIBLE"];
+		}
+
+		return $this->cache["VISIBLE"] = (bool)$this->getColumnFromDatabase("VISIBLE");
 	}
 
 	public function getImages() : array {
