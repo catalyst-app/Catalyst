@@ -21,6 +21,9 @@ class CommissionTypeModifierGroup {
 	 */
 	protected $allowingMultiple = false;
 
+	/**
+	 * Basic constructor
+	 */
 	public function __construct(int $id, array $modifiers=[], bool $allowingMultiple=false) {
 		$this->setId($id);
 		foreach ($modifiers as $modifier) {
