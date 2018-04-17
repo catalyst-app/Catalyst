@@ -239,53 +239,35 @@ class CommissionType {
 		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getSort() : int {
 		if (array_key_exists("SORT", $this->cache)) {
 			return $this->cache["SORT"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `SORT` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["SORT"] = $stmt->fetchAll()[0]["SORT"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["SORT"] = (int)$this->getColumnFromDatabase("SORT");
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getBaseCost() : string {
 		if (array_key_exists("BASE_COST", $this->cache)) {
 			return $this->cache["BASE_COST"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `BASE_COST` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["BASE_COST"] = $stmt->fetchAll()[0]["BASE_COST"];
-
-		$stmt->closeCursor();
-
-		return $result;
+		return $this->cache["BASE_COST"] = $this->getColumnFromDatabase("BASE_COST");
 	}
 
-	public function getBaseCostUsd() : string {
+	/**
+	 * @return float
+	 */
+	public function getBaseUsdCost() : float {
 		if (array_key_exists("BASE_USD_COST", $this->cache)) {
 			return $this->cache["BASE_USD_COST"];
 		}
-
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `BASE_USD_COST` FROM `".DB_TABLES["commission_types"]."` WHERE `ID` = :ID;");
-		$stmt->bindParam(":ID", $this->id);
-		$stmt->execute();
-
-		$result = $this->cache["BASE_USD_COST"] = $stmt->fetchAll()[0]["BASE_USD_COST"];
-
-		$stmt->closeCursor();
-
-		return $result;
-	}
 
 	public function getHumanAttrs() : array {
 		if (array_key_exists("HUMAN_ATTRS", $this->cache)) {
@@ -313,6 +295,7 @@ class CommissionType {
 		$result = $this->cache["HUMAN_ATTRS"] = $keyedAttrs;
 
 		return $result;
+		return $this->cache["BASE_USD_COST"] = (float)$this->getColumnFromDatabase("BASE_USD_COST");
 	}
 
 	public function getAttrs() : array {
