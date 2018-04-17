@@ -349,57 +349,12 @@ class CommissionType {
 		return $this->cache["VISIBLE"] = (bool)$this->getColumnFromDatabase("VISIBLE");
 	}
 
-	public function getImages() : array {
-		if (array_key_exists("IMAGES", $this->cache)) {
-			return $this->cache["IMAGES"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `CAPTION`, `PATH`, `NSFW`, `PRIMARY` FROM `".DB_TABLES["commission_type_images"]."` WHERE `COMMISSION_TYPE_ID` = :ARTIST_PAGE_ID ORDER BY `SORT` ASC;");
-		$stmt->bindParam(":COMMISSION_TYPE_ID", $this->id);
-		$stmt->execute();
 
-		$result = $this->cache["IMAGES"] = (
-				$stmt->rowCount() == 0
-			?
-				[["default.png", "", false, true]]
-			:
-				array_map(function($in) {
-					return [$this->getToken().$in["PATH"], $in["CAPTION"], (bool)$in["NSFW"], (bool)$in["PRIMARY"]];
-				}, $stmt->fetchAll())
-		);
+		$stmt->setTable(Tables::COMMISSION_TYPE_MODIFIERS);
 
-		$stmt->closeCursor();
 
-		return $result;
-	}
-
-	public function getPrimaryImage() : array {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		return (count($imagesThatArePrimary) ? $imagesThatArePrimary[0] : ["default.png", "", false, true]);
-	}
-
-	public function getPrimaryImagePath() : ?string {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		if (count($imagesThatArePrimary)) {
-			return str_replace($this->getToken(), "", $imagesThatArePrimary[0][0]); // TODO: REMOVE THE STR REPLACE
-		} else {
-			return null;
-		}
-	}
-
-	public function isPrimaryImageNsfw() : bool {
-		$imagesThatArePrimary = array_values(array_filter($this->getImages(), function($in) { return $in[3]; }));
-		if (count($imagesThatArePrimary)) {
-			return $imagesThatArePrimary[0][2];
-		} else {
-			return false;
-		}
-	}
-
-	public function getModifiers() : array {
-		if (array_key_exists("MODS", $this->cache)) {
-			return $this->cache["MODS"];
-		}
 
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NAME`, `PRICE`, `USDEQ`, `GROUP`, `MULTIPLE` FROM `".DB_TABLES["commission_type_modifiers"]."` WHERE `COMMISSION_TYPE_ID` = :COMMISSION_TYPE_ID AND `DELETED` = 0;");
 		$stmt->bindParam(":COMMISSION_TYPE_ID", $this->id);
@@ -478,7 +433,11 @@ class CommissionType {
 	}
 
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), $this->getPrimaryImagePath(), $this->isPrimaryImageNsfw()));
+		if (count($this->getImageSet())) {
+			$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), null, false));
+		} else {
+			$this->setImage($this->getImageSet()[0]);
+		}
 	}
 
 	public function initializeImageSet() : void {
