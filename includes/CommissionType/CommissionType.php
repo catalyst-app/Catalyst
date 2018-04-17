@@ -349,39 +349,49 @@ class CommissionType {
 		return $this->cache["VISIBLE"] = (bool)$this->getColumnFromDatabase("VISIBLE");
 	}
 
+	/**
+	 * Returns an array of CommissionTypeModifierGroup
+	 * 
+	 * @return CommissionTypeModifierGroup[]
+	 */
+	public function getModifiers() : array {
+		if (array_key_exists("MODIFIERS", $this->cache)) {
+			return $this->cache["MODIFIERS"];
 		}
 
+		$stmt = new SelectQuery();
 
 		$stmt->setTable(Tables::COMMISSION_TYPE_MODIFIERS);
 
+		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_MODIFIERS));
+		$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPE_MODIFIERS));
+		$stmt->addColumn(new Column("PRICE", Tables::COMMISSION_TYPE_MODIFIERS));
+		$stmt->addColumn(new Column("USDEQ", Tables::COMMISSION_TYPE_MODIFIERS));
+		$stmt->addColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
+		$stmt->addColumn(new Column("MULTIPLE", Tables::COMMISSION_TYPE_MODIFIERS));
 
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS), '=', $this->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_MODIFIERS), '=', 0]);
+		$stmt->addAdditionalCapability($whereClause);
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `NAME`, `PRICE`, `USDEQ`, `GROUP`, `MULTIPLE` FROM `".DB_TABLES["commission_type_modifiers"]."` WHERE `COMMISSION_TYPE_ID` = :COMMISSION_TYPE_ID AND `DELETED` = 0;");
-		$stmt->bindParam(":COMMISSION_TYPE_ID", $this->id);
 		$stmt->execute();
 
-		$db = $stmt->fetchAll();
-		$stmt->closeCursor();
+		$rawModifiers = $stmt->getResult();
+		// will be keyed by GROUP
+		$modifiers = [];
 
-		$arr = [];
-
-		foreach ($db as $row) {
-			if (!isset($arr[$row["GROUP"]])) {
-				$arr[$row["GROUP"]] = [
-					"multiple" => $row["MULTIPLE"],
-					"items" => []
-				];
+		foreach ($rawModifiers as $modifier) {
+			if (!array_key_exists($modifier["GROUP"], $modifiers)) {
+				$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"]);
 			}
-			$arr[$row["GROUP"]]["items"][] = [
-				$row["NAME"],
-				$row["PRICE"],
-				$row["USDEQ"]
-			];
+
+			$modifierObject = new CommissionTypeModifier($modifier["ID"], $modifier["NAME"], $modifier["PRICE"], (float)$modifier["BASE_USD_COST"]);
+			$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
 		}
 
-		$result = $this->cache["MODS"] = array_values($arr);
-
-		return $result;
+		return array_values($modifiers);
 	}
 
 	public function getPaymentOptions() : array {
