@@ -32,6 +32,10 @@ class CommissionTypeModifierGroup implements Iterator {
 
 	/**
 	 * Basic constructor
+	 *
+	 * @param int $id
+	 * @param bool $allowingMultiple
+	 * @param CommissionTypeModifier[] $modifiers
 	 */
 	public function __construct(int $id, bool $allowingMultiple=false, array $modifiers=[]) {
 		$this->setId($id);
