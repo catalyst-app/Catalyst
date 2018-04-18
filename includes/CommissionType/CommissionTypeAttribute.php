@@ -188,4 +188,16 @@ class CommissionTypeAttribute {
 
 		return $buttonSet;
 	}
+
+	/**
+	 * Get the attributes from a space-delimited string
+	 *
+	 * @param string $in
+	 * @return self[]
+	 */
+	public static function getObjectsFromString(string $in) : array {
+		return array_map(function($key) {
+			return new self($key);
+		}, explode(" ", $in));
+	}
 }
