@@ -105,7 +105,7 @@ class CommissionType {
 			"SORT" => (int)$results[0]["SORT"],
 			"BASE_COST" => $results[0]["BASE_COST"],
 			"BASE_USD_COST" => (float)$results[0]["BASE_USD_COST"],
-			"ATTRS" => explode(" ", $results[0]["ATTRS"]),
+			"ATTRS" => CommissionTypeAttribute::getObjectsFromString($results[0]["ATTRS"]),
 			"OPEN" => (bool)$results[0]["OPEN"],
 			"ACCEPTING_QUOTES" => (bool)$results[0]["ACCEPTING_QUOTES"],
 			"ACCEPTING_REQUESTS" => (bool)$results[0]["ACCEPTING_REQUESTS"],
@@ -273,14 +273,14 @@ class CommissionType {
 	}
 
 	/**
-	 * @return string[]
+	 * @return CommissionTypeAttribute[]
 	 */
 	public function getAttrs() : array {
 		if (array_key_exists("ATTRS", $this->cache)) {
 			return $this->cache["ATTRS"];
 		}
 
-		return $this->cache["ATTRS"] = explode(" ", $this->getColumnFromDatabase("ATTRS"));
+		return $this->cache["ATTRS"] = CommissionTypeAttribute::getObjectsFromString($this->getColumnFromDatabase("ATTRS"));
 	}
 
 	/**
