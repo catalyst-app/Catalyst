@@ -275,7 +275,7 @@ class CommissionType {
 	/**
 	 * @return CommissionTypeAttribute[]
 	 */
-	public function getAttrs() : array {
+	public function getAttributes() : array {
 		if (array_key_exists("ATTRS", $this->cache)) {
 			return $this->cache["ATTRS"];
 		}
@@ -391,7 +391,7 @@ class CommissionType {
 			$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
 		}
 
-		return array_values($modifiers);
+		return $this->cache["MODIFIERS"] = array_values($modifiers);
 	}
 
 	public function getPaymentOptions() : array {
