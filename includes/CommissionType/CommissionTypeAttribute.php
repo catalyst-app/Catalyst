@@ -82,7 +82,7 @@ class CommissionTypeAttribute {
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getGroupLabel() : string {
 		return self::$groups[self::$attributeMetadataCache[$this->getSetKey()]["GROUP_ID"]];
