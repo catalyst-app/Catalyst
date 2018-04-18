@@ -427,7 +427,7 @@ class CommissionType {
 			$options[] = new CommissionTypePaymentOption($option["ID"], $option["TYPE"], $option["ADDRESS"], $option["INSTRUCTIONS"]);
 		}
 
-		return $this->cache["PAYMENT_OPTIONS"] = $modifiers;
+		return $this->cache["PAYMENT_OPTIONS"] = $options;
 	}
 
 	public function getStages() : array {
