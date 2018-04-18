@@ -394,23 +394,40 @@ class CommissionType {
 		return $this->cache["MODIFIERS"] = array_values($modifiers);
 	}
 
+	/**
+	 * @return CommissionTypePaymentOption[]
+	 */
 	public function getPaymentOptions() : array {
 		if (array_key_exists("PAYMENT_OPTIONS", $this->cache)) {
 			return $this->cache["PAYMENT_OPTIONS"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `TYPE`, `ADDRESS`, `INSTRUCTIONS` FROM `".DB_TABLES["commission_type_payment_options"]."` WHERE `COMMISSION_TYPE_ID` = :COMMISSION_TYPE_ID AND `DELETED` = 0;");
-		$stmt->bindParam(":COMMISSION_TYPE_ID", $this->id);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
+
+		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+		$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+		$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+		$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', $this->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', 0]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		$db = $stmt->fetchAll();
-		$stmt->closeCursor();
+		$rawOptions = $stmt->getResult();
+		// will be keyed by GROUP
+		$options = [];
 
-		$result = $this->cache["PAYMENT_OPTIONS"] = array_map(function($in) {
-			return [$in["TYPE"], $in["ADDRESS"], $in["INSTRUCTIONS"]];
-		}, $db);
+		foreach ($rawOptions as $option) {
+			$options[] = new CommissionTypePaymentOption($option["ID"], $option["TYPE"], $option["ADDRESS"], $option["INSTRUCTIONS"]);
+		}
 
-		return $result;
+		return $this->cache["PAYMENT_OPTIONS"] = $modifiers;
 	}
 
 	public function getStages() : array {
