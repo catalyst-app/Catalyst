@@ -420,7 +420,7 @@ class CommissionType {
 		$stmt->execute();
 
 		$rawOptions = $stmt->getResult();
-		// will be keyed by GROUP
+
 		$options = [];
 
 		foreach ($rawOptions as $option) {
