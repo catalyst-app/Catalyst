@@ -52,28 +52,28 @@ class CommissionTypePaymentOption {
 	 * @return string
 	 */
 	public function getType() : string {
-		return $this->name;
+		return $this->type;
 	}
 
 	/**
 	 * @param string $type
 	 */
 	public function setType(string $type) : void {
-		$this->name = $type;
+		$this->type = $type;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getAddress() : string {
-		return $this->price;
+		return $this->address;
 	}
 
 	/**
 	 * @param string $address
 	 */
 	public function setAddress(string $address) : void {
-		$this->price = $address;
+		$this->address = $address;
 	}
 
 	/**
