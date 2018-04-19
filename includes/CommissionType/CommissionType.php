@@ -430,23 +430,41 @@ class CommissionType {
 		return $this->cache["PAYMENT_OPTIONS"] = $options;
 	}
 
+	/**
+	 * @return CommissionTypeStage[]
+	 */
 	public function getStages() : array {
 		if (array_key_exists("STAGES", $this->cache)) {
 			return $this->cache["STAGES"];
 		}
 
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `STAGE` FROM `".DB_TABLES["commission_type_stages"]."` WHERE `COMMISSION_TYPE_ID` = :COMMISSION_TYPE_ID AND `DELETED` = 0;");
-		$stmt->bindParam(":COMMISSION_TYPE_ID", $this->id);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
+
+		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_STAGES));
+		$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES), '=', $this->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_STAGES), '=', 0]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
-		$stmt->closeCursor();
+		$rawStages = $stmt->getResult();
 
-		$result = $this->cache["STAGES"] = array_column($stmt->fetchAll(), "STAGE");
+		$stages = [];
 
-		return $result;
+		foreach ($rawStages as $stage) {
+			$stages[] = new CommissionTypePaymentOption($stage["ID"], $stage["STAGE"]);
+		}
+
+		return $this->cache["STAGES"] = $stages;
 	}
 
-	public static function getForArtist(\Catalyst\Artist\Artist $artist) : array {
+	public static function getForArtist(Artist $artist) : array {
 		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["commission_types"]."` WHERE `ARTIST_PAGE_ID` = :ARTIST_PAGE_ID AND `DELETED` = 0 ORDER BY `SORT` ASC;");
 		$aid = $artist->getId();
 		$stmt->bindParam(":ARTIST_PAGE_ID", $aid);
