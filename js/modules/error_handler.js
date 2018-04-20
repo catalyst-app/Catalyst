@@ -32,6 +32,7 @@ window.onerror = function(message, url, lineNumber) {
 			});
 		}
 	} catch (e) {}
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "An error was encountered and logged", true);
 	return false;
 };
 
