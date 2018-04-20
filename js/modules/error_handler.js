@@ -38,7 +38,7 @@ window.onerror = function(message, url, lineNumber) {
 
 window.log = function(category, message, bold=false) {
 	if (bold) {
-		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: bold;");
+		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: 900; font-style: oblique;");
 	} else {
 		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "");
 	}
