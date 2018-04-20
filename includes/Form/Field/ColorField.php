@@ -101,7 +101,7 @@ class ColorField extends AbstractField {
 			$str .= 'if (';
 			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
 			$str .= ') {';
-			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." is required, but is empty (???)").', true);';
+			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." is required, but is empty (???)").', true);';
 			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
@@ -114,7 +114,7 @@ class ColorField extends AbstractField {
 		$str .= 'if (';
 		$str .= '!'.json_encode(array_keys(Color::HEX_MAP)).'.includes($('.json_encode("#".$this->getId()).').val())';
 		$str .= ') {';
-		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - color ").'+$('.json_encode("#".$this->getId()).').val()+'.json_encode(" was somehow not in the valid color list, per .includes").', true);';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - color ").'+$('.json_encode("#".$this->getId()).').val()+'.json_encode(" was somehow not in the valid color list, per .includes").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';

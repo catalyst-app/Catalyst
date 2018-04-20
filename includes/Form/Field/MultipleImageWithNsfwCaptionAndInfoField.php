@@ -369,6 +369,8 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public function getJsAggregator(string $formDataName) : string {
 		$str = '';
 
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating ").'+$('.json_encode("#".$this->getId()).')[0].files.length+'.json_encode(" images").');';
+
 		$str .= 'for (var i=0; i<$('.json_encode("#".$this->getId()).')[0].files.length; i++) {';
 		
 		$str .= 'var file = $('.json_encode("#".$this->getId()).')[0].files[i];';

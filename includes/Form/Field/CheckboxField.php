@@ -76,7 +76,7 @@ class CheckboxField extends AbstractField {
 			$str .= 'if (';
 			$str .= '!$('.json_encode("#".$this->getId()).').is(":checked")';
 			$str .= ') {';
-			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is required, but was not checked").', true);';
+			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but was not checked").', true);';
 			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';

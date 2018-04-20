@@ -100,7 +100,7 @@ class SelectField extends AbstractField {
 			$str .= 'if (';
 			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
 			$str .= ') {';
-			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is required, but empty").', true);';
+			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
 			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';

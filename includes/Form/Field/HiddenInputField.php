@@ -58,7 +58,7 @@ class HiddenInputField extends AbstractField {
 		}
 		$str .= ') {';
 
-		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - zero or multiple fields with selector ".$this->getSelector()." were found").', true);';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - zero or multiple fields with selector ".$this->getSelector()." were found").', true);';
 		$str .= 'M.escapeToast("An unknown error has occured.", 4000);';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 

@@ -18,7 +18,7 @@ class DynamicRedirectCompletionAction extends AbstractCompletionAction {
 	 */
 	public function getJs() : string {
 		$str = '';
-		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("dynamically redirecting to /").'+data.data["redirect"]);';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode("dynamically redirecting to /").'+data.data["redirect"]);';
 		$str .= 'window.location = $("html").attr("data-rootdir")+data.data["redirect"];';
 		return $str;
 	}

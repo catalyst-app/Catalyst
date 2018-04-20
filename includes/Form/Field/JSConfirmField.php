@@ -54,7 +54,7 @@ class JSConfirmField extends AbstractField {
 			$str .= 'if (';
 			$str .= '!confirm('.json_encode($this->getPrompt()).')';
 			$str .= ') {';
-			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - JS confirmation dialog not accepted, aborting").', true);';
+			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - JS confirmation dialog not accepted, aborting").', true);';
 			$str .= 'M.escapeToast("Action canceled", 4000);';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';

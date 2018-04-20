@@ -65,7 +65,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function setForm(Form $form) : void {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		$this->form = $form;
 		$this->getField()->setForm($form);
@@ -78,7 +78,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function getHtml() : string {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		$str = '';
 
@@ -99,7 +99,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function getJsValidator() : string {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		return $this->getField()->getJsValidator();
 	}
@@ -112,7 +112,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function getJsAggregator(string $formDataName) : string {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		return $this->getField()->getJsAggregator($formDataName);
 	}
@@ -124,7 +124,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function getJsOnload() : string {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		return $this->getField()->getJsOnload();
 	}
@@ -136,7 +136,7 @@ class WrappedField extends AbstractField {
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(__CLASS__." not given a field to wrap");
+			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
 		}
 		$this->getField()->checkServerSide($requestArr);
 	}
