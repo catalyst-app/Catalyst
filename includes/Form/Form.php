@@ -448,6 +448,7 @@ class Form {
 	 */
 	public function getShowProgressBarJs() : string {
 		$str = '';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - showing progress bar").');';
 		$str .= '$('.json_encode('#'.$this->getProgressWrapperId()).').removeClass("hide");';
 		$str .= '$('.json_encode('#'.$this->getSubmitWrapperId()).').addClass("hide");';
 		return $str;
@@ -460,6 +461,7 @@ class Form {
 	 */
 	public function getHideProgressBarJs() : string {
 		$str = '';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - hiding progress bar").');';
 		$str .= '$('.json_encode('#'.$this->getSubmitWrapperId()).').removeClass("hide");';
 		$str .= '$('.json_encode('#'.$this->getProgressWrapperId()).').addClass("hide");';
 		return $str;
@@ -472,6 +474,7 @@ class Form {
 	 */
 	public function getJsValidation() : string {
 		$str = '';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - starting validation").');';
 		foreach ($this->fields as $field) {
 			$str .= $field->getJsValidator();
 		}
@@ -484,7 +487,9 @@ class Form {
 	 * @return string Aggregation code
 	 */
 	public function getJsAggregator() : string {
-		$str = 'var '.self::FORM_DATA_VAR_NAME.' = new FormData();';
+		$str = '';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - starting aggregation as ".self::FORM_DATA_VAR_NAME).');';
+		$str .= 'var '.self::FORM_DATA_VAR_NAME.' = new FormData();';
 		$str .= self::FORM_DATA_VAR_NAME.'.append("rootdir", $("html").attr("data-rootdir"));';
 		foreach ($this->fields as $field) {
 			$str .= $field->getJsAggregator(self::FORM_DATA_VAR_NAME);
@@ -499,6 +504,9 @@ class Form {
 	 */
 	public function getJsAjaxRequest() : string {
 		$str = '';
+
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - sending ".json_encode($this->getMethodString())." AJAX request to ".$this->getEndpoint()).');';
+
 		$str .= '$.ajax(';
 		$str .= '$("html").attr("data-rootdir")+'.json_encode(self::BASE_URI.$this->getEndpoint());
 		$str .= ',';
@@ -517,16 +525,19 @@ class Form {
 
 		// success
 		$str .= '.done(function(response) {';
-		$str .= 'console.log(response);';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - successful response").');';
 		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response);';
 		$str .= 'M.escapeToast("Success", 4000);';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - resetting fields").');';
 		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
 		$str .= '$('.json_encode('#'.$this->getId()).'+" input[type=text], textarea").removeClass("active").blur();';
 		if (!is_null($this->getCompletionAction())) {
+			$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - invoking completion action ".get_class($this->getCompletionAction())).');';
 			$str .= $this->getCompletionAction()->getJs();
 		}
 		$str .= '} catch (e) {';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - Bad JSON").', true);';
 		$str .= 'showErrorMessageForCode(99999);';
 		$str .= 'window.onerror("Bad JSON: "+response, "main js", -1);';
 		$str .= '}';
@@ -534,7 +545,8 @@ class Form {
 
 		// failure
 		$str .= '.fail(function(response) {';
-		$str .= 'console.log(response);';
+
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - recieved error response").', true);';
 
 		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response.responseText);';
@@ -542,18 +554,21 @@ class Form {
 		foreach ($this->getFields() as $field) {
 			foreach ($field->getErrors() as $code => $message) {
 				$str .= 'case '.json_encode($code).':';
+				$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - marking ".get_class($field)." ".$field->getId()." invalid").');';
 				$str .= 'markInputInvalid('.'$('.json_encode("#".$field->getId()).'), data.message);';
 				$str .= 'break;';
 			}
 		}
 		foreach ($this->getAdditionalCases() as $code => $additionalCase) {
 			$str .= 'case '.json_encode($code).':';
+				$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - additional case for ".$code." invoked").');';
 			$str .= $additionalCase->getJs();
 			$str .= 'break;';
 		}
 		$str .= '}';
 		$str .= 'showErrorMessageForCode(data.error_code);';
 		$str .= '} catch (e) {';
+		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - Bad JSON").', true);';
 		$str .= 'showErrorMessageForCode(99999);';
 		$str .= 'window.onerror("Bad JSON: "+response, "main js", -1);';
 		$str .= '}';
@@ -578,7 +593,7 @@ class Form {
 		$str = '';
 		
 		$str .= '$(document).on("submit", '.json_encode("#".$this->getId()).', function(e) {';
-		$str .= 'e.preventDefault();';
+		$str .= 'e.preventDefault && e.preventDefault();';
 		$str .= $this->getJsValidation();
 		$str .= $this->getJsAggregator();
 		$str .= $this->getShowProgressBarJs();
