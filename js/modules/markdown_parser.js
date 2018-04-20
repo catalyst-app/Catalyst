@@ -3,6 +3,7 @@ header("Content-Type: application/javascript; charset=UTF-8");
 header("Cache-Control: max-age=86400");
 ?>
 function renderMarkdownArea(area) {
+  window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering "$(area).attr("id"));
   $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
   $(area).find('.collapsible').collapsible();
 }
