@@ -1314,11 +1314,14 @@ md.use(__webpack_require__(71), {
 md.use(__webpack_require__(77));
 md.use(__webpack_require__(79), "textcolor", {
     render: function(tokens, idx) {
-        var m = tokens[idx].info.trim().match(/^textcolor\s+#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
-        console.log(m);
+        var m = tokens[idx].info.trim().match(/^textcolor\s+#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
         if (tokens[idx].nesting === 1) {
             // opening tag
-            return '<div style="color: #'+m[1]+'">';
+            if (m && m.length > 1) {
+              return '<div style="color: #'+m[1]+'">';
+            } else {
+              return '<div>';
+            }
         } else {
             // closing tag
             return '</div>\n';
@@ -1327,10 +1330,14 @@ md.use(__webpack_require__(79), "textcolor", {
 });
 md.use(__webpack_require__(79), "backcolor", {
     render: function(tokens, idx) {
-        var m = tokens[idx].info.trim().match(/^backcolor\s+#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
+        var m = tokens[idx].info.trim().match(/^backcolor\s+#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
         if (tokens[idx].nesting === 1) {
             // opening tag
-            return '<div style="background-color: #'+m[1]+'">';
+            if (m && m.length > 1) {
+              return '<div style="color: #'+m[1]+'">';
+            } else {
+              return '<div>';
+            }
         } else {
             // closing tag
             return '</div>\n';
