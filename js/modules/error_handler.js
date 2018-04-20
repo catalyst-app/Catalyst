@@ -34,3 +34,11 @@ window.onerror = function(message, url, lineNumber) {
 	} catch (e) {}
 	return false;
 };
+
+window.log = function(category, message, trace=false) {
+	if (trace) {
+		console.warn((new Date().toLocaleString())+" ["+category+"] "+message);
+	} else {
+		console.log((new Date().toLocaleString())+" ["+category+"] "+message);
+	}
+};
