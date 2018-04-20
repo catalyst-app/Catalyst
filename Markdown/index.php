@@ -279,14 +279,14 @@ MD
 					<div class="col s12 m6"><div class="code-block"><p>
 <?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
 Below is a sample image:
-![](http://via.placeholder.com/200x150)
+![](https://via.placeholder.com/200x150)
 MD
 ))) ?> 
 </p></div></div>
 				<div class="raw-markdown markdown-preview col s12 m6">
 <?= htmlspecialchars(<<<MD
 Below is a sample image:
-![](http://via.placeholder.com/200x150)
+![](https://via.placeholder.com/200x150)
 MD
 ) ?> 
 </div>
