@@ -175,6 +175,8 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 	public function getJsAggregator(string $formDataName) : string {
 		$str = '';
 
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating ").'+$('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).').length+'.json_encode(" entries of data").');';
+
 		$str .= 'for (var entry of $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).')) {';
 
 		$str .= 'var itemData = JSON.parse($(entry).attr("data-data"));';
@@ -201,16 +203,23 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= '$(document).on("keypress", '.json_encode('#'.$this->getId().'-subform').', function(e) {';
 		$str .= 'if (e.keyCode == 13) {';
 		$str .= 'e.preventDefault && e.preventDefault();';
+		$str .= 'e.stopPropogation && e.stopPropogation();';
+		$str .= 'e.stopImmediatePropogation && e.stopImmediatePropogation();';
 		$str .= '$('.json_encode('#'.$this->getId().'-subform'.' button').').trigger("click");';
 		$str .= '}';
 		$str .= '});';
 
 		$str .= '$(document).on("click", '.json_encode('#'.$this->getId().'-subform'.' button').', function(e) {';
 		
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - subform addition button clicked, verifying fields").');';
+
 		foreach ($this->getFields() as $field) {
 			$field->setForm($this->getForm());
 			$str .= $field->getJsValidator();
 		}
+
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating fields into psuedoAggregator").');';
+
 
 		$str .= 'var psuedoAggregator = new FormData();';
 		foreach ($this->getFields() as $field) {
@@ -231,7 +240,12 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= '$('.json_encode("#".$this->getId()." .subform-entry-sub-container-items:last").').append(htmlToAdd);';
 
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - appending generated HTML").');';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - rendering markdown").');';
+
 		$str .= '$('.json_encode("#".$this->getId()).').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
+
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - reseting form").');';
 
 		$str .= '$('.json_encode('#'.$this->getId().'-subform').').find(":input").val("");';
 

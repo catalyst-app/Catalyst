@@ -47,7 +47,7 @@ class CallUserFuncCompletionAction extends AbstractCompletionAction {
 	 */
 	public function getJs() : string {
 		$str = '';
-		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("invoking ".$this->getFunc()." with data.data as parameter").');';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode("invoking ".$this->getFunc()." with data.data as parameter").');';
 		$str .= $this->getFunc().'(data.data);';
 		return $str;
 	}

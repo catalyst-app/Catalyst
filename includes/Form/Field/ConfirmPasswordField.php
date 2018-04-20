@@ -54,7 +54,7 @@ class ConfirmPasswordField extends PasswordField {
 		$str .= '!==';
 		$str .= '$('.json_encode("#".$this->getLinkedField()->getId()).').val()';
 		$str .= ') {';
-		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - does not match linked field (".$this->getLinkedField()->getId().")").', true);';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - does not match linked field (".$this->getLinkedField()->getId().")").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';
