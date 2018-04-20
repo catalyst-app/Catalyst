@@ -4,7 +4,9 @@ use \Catalyst\Images\MIMEType;
 ?>
 $(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?>", function(e) {
 	if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "Browser does not support nifty file APIs", true);
 		$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).text("Your browser does not support the needed upload technologies.  Please upgrade your browser as soon as possible.");
+		return;
 	}
 
 	var existingRows = [];
