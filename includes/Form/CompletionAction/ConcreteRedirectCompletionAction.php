@@ -47,6 +47,7 @@ class ConcreteRedirectCompletionAction extends AbstractCompletionAction {
 	 */
 	public function getJs() : string {
 		$str = '';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("redirecting to ".$this->getRedirectUrl()).');';
 		$str .= 'window.location = $("html").attr("data-rootdir")+'.json_encode($this->getRedirectUrl()).';';
 		return $str;
 	}

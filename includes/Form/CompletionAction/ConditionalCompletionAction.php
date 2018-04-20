@@ -97,6 +97,7 @@ class ConditionalCompletionAction extends AbstractCompletionAction {
 			}
 		}
 		$str = '';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("checking ".count($this->getConditions())." conditions").');';
 		for ($i=0; $i < count($this->getConditions()); $i++) { 
 			if ($i == 0) {
 				$str .= 'if';
@@ -105,12 +106,14 @@ class ConditionalCompletionAction extends AbstractCompletionAction {
 			}
 			$str .= '('.$this->getConditions()[$i][0].')';
 			$str .= '{';
+			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("condition ".$i." (".$this->getConditions()[$i][0].") is true, invoking result").');';
 			$str .= $this->getConditions()[$i][1]->getJs();
 			$str .= '}';
 		}
 		if (!is_null($this->getElse())) {
 			$str .= 'else';
 			$str .= '{';
+			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("no conditions passed, invoking else").');';
 			$str .= $this->getElse()->getJs();
 			$str .= '}';
 		}
