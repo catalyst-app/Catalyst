@@ -117,8 +117,17 @@ var humanFileSize = function(size) {
 
 		/* MARKDOWN */
 		$(document).on("input", ".markdown-field", function() {
-			$(".markdown-target[data-field="+$(this).attr("id")+"]").removeClass("rendered-markdown").addClass("raw-markdown").text($(this).val());
-			renderMarkdownArea($(".markdown-target[data-field="+$(this).attr("id")+"]"));
+			if (window.markdownCurrentlyParsing.hasOwnProperty($(this).attr("id"))) {
+				window.log(".on input for .markdown-field", $(this).attr("id")+" - clearing existing render timeout");
+				clearTimeout(window.markdownCurrentlyParsing[$(this).attr("id")]);
+			}
+			window.log(".on input for .markdown-field", $(this).attr("id")+" - setting render timeout for 3000ms");
+			var field = this; // fucky JS shit
+			window.markdownCurrentlyParsing[$(this).attr("id")] = setTimeout(function() {
+				window.log("Markdown field surrogate", $(field).attr("id")+" - rendering");
+				$(".markdown-target[data-field="+$(field).attr("id")+"]").removeClass("rendered-markdown").addClass("raw-markdown").text($(field).val());
+				renderMarkdownArea($(".markdown-target[data-field="+$(field).attr("id")+"]"));
+			}, 3000);
 		});
 
 		$(document).on("click", ".markdown-rendered-checkbox", function(e) {
