@@ -142,6 +142,7 @@ class NumberField extends AbstractField {
 			$str .= 'if (';
 			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
 			$str .= ') {';
+			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is required, but empty").', true);';
 			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
@@ -154,6 +155,7 @@ class NumberField extends AbstractField {
 		$str .= 'if (';
 		$str .= '$('.json_encode("#".$this->getId()).').val() < '.json_encode($this->getMin());
 		$str .= ') {';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is smaller than minumum (".$this->getMin().")").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';
@@ -161,6 +163,7 @@ class NumberField extends AbstractField {
 		$str .= 'if (';
 		$str .= '$('.json_encode("#".$this->getId()).').val() > '.json_encode($this->getMax());
 		$str .= ') {';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is larger than maximum (".$this->getMax().")").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';

@@ -97,7 +97,11 @@ class CaptchaField extends AbstractField {
 	 */
 	public function getJsValidator() : string {
 		$str = '';
-		$str .= 'if (grecaptcha.getResponse() == "") { markCaptchaInvalid(); '.Form::CANCEL_SUBMISSION_JS.' }';
+		$str .= 'if (grecaptcha.getResponse() == "") {';
+		$str .= 'window.log('.json_encode(__CLASS__).', "captcha - grecaptcha.getResponse() returned an empty string.  Invoking markCaptchaInvalid.", true);';
+		$str .= 'markCaptchaInvalid();';
+		$str .= Form::CANCEL_SUBMISSION_JS;
+		$str .= '}';
 
 		return $str;
 	}
