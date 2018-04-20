@@ -13,6 +13,8 @@ function initializeColorPicker() {
 			backgroundColor: "#"+Object.keys(colors)[i]
 		}, 100);
 	}
+
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "Color picker initialized");
 }
 
 $(document).on("click", ".color-field", function(e) {
@@ -32,13 +34,18 @@ $(document).on("click", ".color-swatch", function(e) {
 		backgroundColor: $(this).css("backgroundColor")
 	}, 200);
 
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "Color "+$(this).css("backgroundColor")+" chosen");
+
 	if (Array.isArray(colors)) {
 		for (var i = 0; i < colors.length; i++) {
 			$(swatches[i]).show().css({
 				backgroundColor: "#"+colors[i]
 			}, 200);
 		}
+
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "Color swatches updated");
 	} else {
 		$(".color-picker-modal").modal("close");
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "Modal closed");
 	}
 });
