@@ -46,6 +46,7 @@ echo UniversalFunctions::createHeading("Markdown");
 			<div class="section" id="playground">
 				<h4>Playground</h4>
 				<p class="flow-text">Feel free to use the box below and see how it will look!  Output will appear&nbsp;<span class="hide-on-med-and-up">below it</span><span class="hide-on-small-only">to the right</span>.</p>
+				<p class="flow-text">Please note, the markdown will only be parsed after you stop typing for three seconds.  This helps keep performance high, especially for mobile users.</p>
 				<div class="row">
 					<div class="col s12 m6">
 						<div class="input-field col s12">
