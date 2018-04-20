@@ -192,34 +192,34 @@ $(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndIn
 
 		$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).prepend(buttonWrapper);
 	}
+
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "Image upload arranger was refreshed with new files");
 });
-try {
-	new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
-		draggable: '.image-rearranger > div',
-		appendTo: 'body'
-	}).on("mirror:created", function(e) {
-		$(e.mirror).width($(e.originalSource).width()*.95);
-	}).on("sortable:stop", function(e) {
-		if (e.oldIndex == e.newIndex) {
-			return;
-		} else if (e.oldIndex < e.newIndex) { // moving forwards
-			var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
-			var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
-			var beforeElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
-			beforeElement.after(originalElement);
-		} else if (e.newIndex == 0) {
-			var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
-			var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
-			$("#"+containerId).prepend(originalElement);
-			$("#"+containerId).prepend(originalElement.next()); // move reorder button back
-		} else { // backwards
-			var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
-			var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
-			var afterElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
-			afterElement.before(originalElement);
-		}
-	});
-} catch(e) {}
+new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
+	draggable: '.image-rearranger > div',
+	appendTo: 'body'
+}).on("mirror:created", function(e) {
+	$(e.mirror).width($(e.originalSource).width()*.95);
+}).on("sortable:stop", function(e) {
+	if (e.oldIndex == e.newIndex) {
+		return;
+	} else if (e.oldIndex < e.newIndex) { // moving forwards
+		var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+		var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+		var beforeElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
+		beforeElement.after(originalElement);
+	} else if (e.newIndex == 0) {
+		var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+		var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+		$("#"+containerId).prepend(originalElement);
+		$("#"+containerId).prepend(originalElement.next()); // move reorder button back
+	} else { // backwards
+		var containerId = $($(".image-rearranger .img-strict-circle:not(.draggable-mirror,.draggable-source--is-dragging):visible")[e.oldIndex]).attr("data-container");
+		var originalElement = $("#"+containerId).find(".image-extra-info-row").eq(e.oldIndex);
+		var afterElement = $("#"+containerId).find(".image-extra-info-row").eq(e.newIndex);
+		afterElement.before(originalElement);
+	}
+});
 $(document).on("click", ".image-row-remove-icon", function(e) {
 	$(this).parent().parent().parent().remove();
 });
