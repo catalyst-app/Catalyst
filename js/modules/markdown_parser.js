@@ -5,9 +5,11 @@ header("Cache-Control: max-age=-1");
 window.markdownCurrentlyParsing = {};
 
 function renderMarkdownArea(area) {
+  var startTime = Date.now();
   window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
   $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
   $(area).find('.collapsible').collapsible();
+  window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
 }
 
 // FROM WEBPACK
