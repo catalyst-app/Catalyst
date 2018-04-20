@@ -38,7 +38,7 @@ $(document).on("click", ".social-chips .chip i", function(e) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - request complete, toasting");
 		M.escapeToast("Removed", 4000);
 	}).fail(function(response) {
-		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - request failed, parsing error and showing toast");
+		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - request failed, parsing error and showing toast", true);
 		console.log(response);
 		var data = JSON.parse(response.responseText);
 		showErrorMessageForCode(data.error_code);
