@@ -1,23 +1,22 @@
 function addSocialMediaChip(data) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "addSocialMediaChip - new social media chip recieved from upstream, adding");
 	$(".modal").modal("close");
 	$(".social-chips > div").append($(data.html).html());
 }
 
 $(document).on("click", ".social-chips .chip i", function(e) {
 	var id = $(this).parent().attr("data-id");
-	try {
-		$(this).parent().tooltip('remove');
-		$(this).parent().velocity("finish").velocity("stop");
-		if ($(this).parent().parent()[0].tagName.toLowerCase() == "a") {
-			$(this).parent().parent().fadeOut(400, function() {
-				$(this).remove();
-			});
-		} else {
-			$(this).parent().fadeOut(400, function() {
-				$(this).remove();
-			});
-		}
-	} catch (e) {}
+	if ($(this).parent().parent()[0].tagName.toLowerCase() == "a") {
+		$(this).parent().parent().fadeOut(400, function() {
+			$(this).remove();
+		});
+	} else {
+		$(this).parent().fadeOut(400, function() {
+			$(this).remove();
+		});
+	}
+
+	window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - removing chip from DOM");
 
 	var data = new FormData();
 	data.append("id", id);
@@ -28,16 +27,18 @@ $(document).on("click", ".social-chips .chip i", function(e) {
 		data.append("dest", $("#social-dest-type").val());
 	}
 
+	window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - sending AJAX request to remove "+id);
+
 	$.ajax($("html").attr("data-rootdir") + "api\/internal\/social_media\/delete\/", {
 		data: data,
 		processData: false,
 		contentType: false,
 		method: "POST"
 	}).done(function(response) {
-		console.log(response);
-		var data = JSON.parse(response);
+		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - request complete, toasting");
 		M.escapeToast("Removed", 4000);
 	}).fail(function(response) {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click .social-chip .chip i - request failed, parsing error and showing toast");
 		console.log(response);
 		var data = JSON.parse(response.responseText);
 		showErrorMessageForCode(data.error_code);
@@ -45,7 +46,7 @@ $(document).on("click", ".social-chips .chip i", function(e) {
 
 	if (e.stopPropogation) e.stopPropogation();
 	if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-	e.preventDefault();
+	if (e.preventDefault) e.preventDefault();
 	return false;
 });
 
