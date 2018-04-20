@@ -36,11 +36,15 @@ U+FEFF  ZERO WIDTH NO-BREAK SPACE   foo﻿bar, size: no width (the character is 
 ?>
 function markInputInvalid(e, a) {
 	if ($(e).length == 0) {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - called but no elements were given!", true);
 		return;
 	}
 	if ($(e).hasClass("g-recaptcha")) {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - CAPTCHA invalidation has been delegated to markCaptchaInvalid");
 		markCaptchaInvalid(a);
 	} else if ($(e).attr("type") == "checkbox") {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") was a checkbox, treating as such");
+
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
 		
 		var labelSpan = $(e).next();
@@ -54,6 +58,8 @@ function markInputInvalid(e, a) {
 		errorSpan.addClass("red-text");
 		$(labelSpan).append(errorSpan);
 	} else {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") treated as a generic form element");
+
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
 		$("label[for="+$(e).attr("id")+"]").addClass("active");
 		// add helper text if it doesn't exist, BC
@@ -65,14 +71,20 @@ function markInputInvalid(e, a) {
 }
 
 function markCaptchaInvalid(a) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "markCaptchaInvalid - calling grecaptcha.reset()");
+
 	$(".g-recaptcha").attr("data-error", a).addClass("invalid").removeClass("valid");
 	grecaptcha.reset();
 }
 function markCaptchaValid() {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "markCaptchaValid - invoked, applying valid class to CAPTCHA");
+
 	$(".g-recaptcha").addClass("valid").removeClass("invalid");
 }
 
 function showErrorMessageForCode(c) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "showErrorMessageForCode - called for error code "+c);
+
 	switch (c) {
 <?php foreach ($errors as $code => $message): ?>
 		case <?= $code ?>:
@@ -84,9 +96,12 @@ function showErrorMessageForCode(c) {
 	}
 }
 function updateUploadIndicator(f, e) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "updateUploadIndicator - an upload (f="+f+") on this page has reached "+((e.loaded*100)/e.total)+"% completion");
+
 	$(f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
 	$(f+" .determinate").css("width", ((e.loaded*100)/e.total)+"%");
 	if (e.loaded == e.total) {
+		window.log(<?= json_encode(basename(__FILE__)) ?>, "updateUploadIndicator - an upload (f="+f+") has completed.  Removing determinate progress.");
 		$(f+" .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
 	}
 }
