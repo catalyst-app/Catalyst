@@ -4,7 +4,7 @@ use \Catalyst\Images\MIMEType;
 ?>
 $(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?>", function(e) {
 	if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-		window.log(<?= json_encode(basename(__FILE__)) ?>, "Browser does not support nifty file APIs", true);
+		window.log(<?= json_encode(basename(__FILE__)) ?>, ".on change for .<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?> - browser does not support nifty file APIs", true);
 		$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).text("Your browser does not support the needed upload technologies.  Please upgrade your browser as soon as possible.");
 		return;
 	}
@@ -195,14 +195,18 @@ $(document).on("change", "input[type=file].<?= MultipleImageWithNsfwCaptionAndIn
 		$("#"+$(this).attr("id")+<?= json_encode(MultipleImageWithNsfwCaptionAndInfoField::ROW_CONTAINER_ID_SUFFIX) ?>).prepend(buttonWrapper);
 	}
 
-	window.log(<?= json_encode(basename(__FILE__)) ?>, "Image upload arranger was refreshed with new files");
+	window.log(<?= json_encode(basename(__FILE__)) ?>, ".on change for .<?= MultipleImageWithNsfwCaptionAndInfoField::INPUT_CLASS ?> - image upload arranger was refreshed with new files");
 });
 new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
 	draggable: '.image-rearranger > div',
 	appendTo: 'body'
 }).on("mirror:created", function(e) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "mirror:created - setting mirror width");
+
 	$(e.mirror).width($(e.originalSource).width()*.95);
 }).on("sortable:stop", function(e) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "sortable:stop - we are done sorting.  Rearranging corresponding elements to match surrogates");
+	
 	if (e.oldIndex == e.newIndex) {
 		return;
 	} else if (e.oldIndex < e.newIndex) { // moving forwards
@@ -223,5 +227,7 @@ new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
 	}
 });
 $(document).on("click", ".image-row-remove-icon", function(e) {
+	window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click for .image-row-remove-icon - removing an image row");
+
 	$(this).parent().parent().parent().remove();
 });
