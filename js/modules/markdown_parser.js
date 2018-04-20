@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8");
-header("Cache-Control: max-age=86400");
+header("Cache-Control: max-age=-1");
 ?>
 function renderMarkdownArea(area) {
   window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
@@ -1311,6 +1311,7 @@ md.use(__webpack_require__(77));
 md.use(__webpack_require__(79), "textcolor", {
     render: function(tokens, idx) {
         var m = tokens[idx].info.trim().match(/^textcolor\s+#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
+        console.log(m);
         if (tokens[idx].nesting === 1) {
             // opening tag
             return '<div style="color: #'+m[1]+'">';
