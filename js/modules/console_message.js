@@ -46,3 +46,5 @@ console.log("'''''''''''''''''''''''''' Do you like to code?  Want to talk about
 console.log("'''''''''''''''''''''''' Join us at discord.gg/EECUcnT or t.me/catalystapp '''''''''''''''''''''''''");
 console.log("''''''''''''''''''''' We're also open source! github.com/catalyst-app/Catalyst '''''''''''''''''''''");
 console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+
+window.log("console_message", "Message displayed");
