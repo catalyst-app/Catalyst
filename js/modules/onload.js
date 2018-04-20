@@ -57,10 +57,11 @@ var humanFileSize = function(size) {
 		// toish: "Put it in a closure":tm:
 		function materializeOnload() {
 			if ($ === undefined || M === undefined) {
-				console.log("Deferring materialize onload for 100ms (even though I'm not happy about it...)");
+				window.log(<?= json_encode(basename(__FILE__)) ?>, "materializeOnload - deferring for 100ms (even though I'm not happy about it...)");
 				setTimeout(materializeOnload, 100);
 				return;
 			}
+			window.log(<?= json_encode(basename(__FILE__)) ?>, "materializeOnload - invoked");
 			// its bullshit that they removed the old toast function API
 			window.M["escapeToast"] = function(a) {
 				M.toast({html: $("<span></span>").text(a).html()});
@@ -178,6 +179,7 @@ var humanFileSize = function(size) {
 
 		/* NEWS */
 		$(document).on("click", "#hide-news-button", function() {
+			window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click #hide-new-button - news will be hidden, cookie set");
 			var now = new Date();
 			var time = now.getTime();
 			time += 1000 * 60 * 60 * 24 * 365; // a year
@@ -189,11 +191,13 @@ var humanFileSize = function(size) {
 		/* FORM SUBMISSION KEYS */
 		$(document).on("keydown", function(event) {
 			if (event.which === 8 && $("form").length != 0 && $(event.target).parents("form").length == 0) {
+				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown - recieved a backspace event, however there are (unfocused) forms on the page.  Suppressing...");
 				event.preventDefault();
 			}
 		});
 		$(document).on("keydown", "textarea", function(e) {
 			if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown in textarea - ctrl+enter recieved, attempting form submission");
 				$(document.activeElement.form).submit();
 			}
 		});
