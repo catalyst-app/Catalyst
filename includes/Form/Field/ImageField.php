@@ -155,6 +155,7 @@ class ImageField extends AbstractField {
 			$str .= 'if (';
 			$str .= '$('.json_encode("#".$this->getId()).')[0].files.length === 0';
 			$str .= ') {';
+			$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - field is required, but empty").', true);';
 			$str .= 'markInputInvalid('.json_encode('#'.$this->getId().self::PATH_INPUT_SUFFIX).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
 			$str .= Form::CANCEL_SUBMISSION_JS;
 			$str .= '}';
@@ -169,6 +170,7 @@ class ImageField extends AbstractField {
 		$str .= 'if (';
 		$str .= '$('.json_encode("#".$this->getId()).')[0].files[i].size >= '.json_encode($this->getMaxSize());
 		$str .= ') {';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - file ").'+i+'.json_encode(" is too large").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId().self::PATH_INPUT_SUFFIX).', '.json_encode($this->getErrorMessage($this->getTooLargeErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';
@@ -176,6 +178,7 @@ class ImageField extends AbstractField {
 		$str .= 'if (';
 		$str .= '!'.json_encode(MIMEType::getMimeTypes()).'.includes($('.json_encode("#".$this->getId()).')[0].files[i].type)';
 		$str .= ') {';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode($this->getId()." - file ").'+i+'.json_encode(" is not a supported type (").'+$('.json_encode("#".$this->getId()).')[0].files[i].type+'.json_encode(")").', true);';
 		$str .= 'markInputInvalid('.json_encode('#'.$this->getId().self::PATH_INPUT_SUFFIX).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 		$str .= '}';
