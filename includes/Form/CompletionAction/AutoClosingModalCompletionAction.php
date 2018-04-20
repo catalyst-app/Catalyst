@@ -88,10 +88,13 @@ class AutoClosingModalCompletionAction extends AbstractCompletionAction {
 				$str .= ')';
 			$str .= ')';
 		$str .= ');';
-		$str .= '$("#"+modalId).modal("open");';
+		$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("created modal ").'+modalId);';
+		$str .= 'var modal = M.Modal.init(document.querySelector("#"+modalId));';
+		$str .= 'modal.open();';
 		$str .= 'setTimeout(';
 			$str .= 'function() {';
-				$str .= '$("#"+modalId).modal("close");';
+				$str .= 'window.log('.json_encode(__CLASS__).', '.json_encode("closing modal ").'+modalId);';
+				$str .= 'modal.close();';
 			$str .= '},';
 			$str .= $this->getDelay()*1000;
 		$str .= ');';
