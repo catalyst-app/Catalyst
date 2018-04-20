@@ -36,10 +36,10 @@ window.onerror = function(message, url, lineNumber) {
 	return false;
 };
 
-window.log = function(category, message, trace=false) {
-	if (trace) {
-		console.warn((new Date().toLocaleString())+" ["+category+"] "+message);
+window.log = function(category, message, bold=false) {
+	if (bold) {
+		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: bold;");
 	} else {
-		console.log((new Date().toLocaleString())+" ["+category+"] "+message);
+		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "");
 	}
 };
