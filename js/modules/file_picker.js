@@ -1,7 +1,10 @@
 $(document).on("click", ".file-input-field, .file-input-field *", function(e) {
 	$(this).find("input[type=file]").focus().trigger("click");
+
 	if (e.stopPropogation) e.stopPropogation();
 	if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "File input field click caught and deferred to real input");
 });
 $(document).on('change', '.file-input-field .file-input-path', function () {
 	if ($(this).val().length == 0 && $(this).attr("data-required") == "yes") {
@@ -11,6 +14,7 @@ $(document).on('change', '.file-input-field .file-input-path', function () {
 	} else {
 		$(this).addClass('valid').removeClass('invalid');
 	}
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "File input populated with new data");
 });
 $(document).on('change', '.file-input-field input[type="file"]', function () {
 	var fileField = $(this).closest('.file-input-field');
