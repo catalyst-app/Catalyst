@@ -16,7 +16,7 @@ $(document).on("mousedown", ".toggle-btn", function(e) {
 });
 
 $(document).on("click", ".toggle-btn-invert-btn", function(e) {
-	e.preventDefault();
+	e.preventDefault && e.preventDefault();
 	$($(this).parent().next().children()).each(function(i, a) {
 		if ($(a).hasClass("off")) {
 			$(a).addClass("on").removeClass("off");
