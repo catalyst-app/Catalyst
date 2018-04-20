@@ -12,7 +12,7 @@ $(document).on('change', '.file-input-field .file-input-path', function () {
 	} else if ($(this).val().length == 0) {
 		$(this).removeClass('valid');
 	} else {
-		$(this).addClass('valid').removeClass('invalid');
+		$(this).removeClass('invalid');
 	}
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "File input populated with new data");
 });
