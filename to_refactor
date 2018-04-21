@@ -1,14 +1,7 @@
-./Artist/EditCommissionType/index.php
-./Artist/EditCommissionTypeImages/index.php
-./Artist/EditCommissionTypes/index.php
-./Artist/NewCommissionType/index.php
-./Commission/New/index.php
 ./FAQ/index.php
 ./FeatureBoard/index.php
 ./FeatureBoard/Item/index.php
 ./FeatureBoard/Submit/index.php
-./Help/API/index.php
-./includes/Artist/Artist.php
 ./includes/Color.php
 ./includes/CommissionType/CommissionType.php
 ./includes/Message/Message.php
