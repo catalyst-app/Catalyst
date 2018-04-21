@@ -55,9 +55,6 @@ class Response {
 				"_session" => $_SESSION
 			]
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
-		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
-			$_SESSION = [];
-		}
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {
 			trigger_error("API Error RESPONSE given: ".$code." ".$message." ".serialize($data));
 		}
