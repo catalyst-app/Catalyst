@@ -1,4 +1,6 @@
 ErrorDocument 403 '{ "error": true, "http_code": 404, "error_code": 10001, "message": "Endpoint not found", "data": []}'
 ErrorDocument 404 '{ "error": true, "http_code": 404, "error_code": 10001, "message": "Endpoint not found", "data": []}'
 
-php_flag display_startup_errors off
+<IfModule mod_php7.c>
+	php_flag display_startup_errors off
+</IfModule>
