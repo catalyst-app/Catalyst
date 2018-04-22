@@ -109,6 +109,13 @@ class Character {
 	}
 
 	public static function getIdFromToken(string $token) : int {
+		switch (strtolower($token)) {
+			case 'fauxil':
+				return self::getIdFromToken("sv2j6qy");
+			case 'lykai':
+				return self::getIdFromToken("fwce5ym");
+		}
+
 		if (!preg_match("/".\Catalyst\Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
 			return -1;
 		}
