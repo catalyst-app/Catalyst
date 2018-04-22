@@ -58,6 +58,9 @@ class Response {
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {
 			trigger_error("API Error RESPONSE given: ".$code." ".$message." ".serialize($data));
 		}
+		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
+			$_SESSION = [];
+		}
 		die();
 	}
 }
