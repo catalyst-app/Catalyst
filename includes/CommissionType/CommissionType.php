@@ -491,6 +491,9 @@ class CommissionType {
 		return array_map(function($in) { return new self($in["ID"]); }, $rows);
 	}
 
+	/**
+	 * initialize image
+	 */
 	public function initializeImage() : void {
 		if (count($this->getImageSet())) {
 			$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), null, false));
@@ -499,6 +502,9 @@ class CommissionType {
 		}
 	}
 
+	/**
+	 * initialize all images
+	 */
 	public function initializeImageSet() : void {
 		$stmt = new SelectQuery();
 
