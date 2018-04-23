@@ -464,15 +464,29 @@ class CommissionType {
 		return $this->cache["STAGES"] = $stages;
 	}
 
+	/**
+	 * @param Artist $artist
+	 * @m_returnstatus( self[], identifier)
+	 */
 	public static function getForArtist(Artist $artist) : array {
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["commission_types"]."` WHERE `ARTIST_PAGE_ID` = :ARTIST_PAGE_ID AND `DELETED` = 0 ORDER BY `SORT` ASC;");
-		$aid = $artist->getId();
-		$stmt->bindParam(":ARTIST_PAGE_ID", $aid);
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ARTIST_PAGE_ID", self::getTable()), '=', $artist->getId()]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$orderByClause = new OrderByClause();
+		$orderByClause->setColumn(new Column("SORT", self::getTable()));
+		$orderByClause->setOrder("ASC");
+		$stmt->addAdditionalCapability($orderByClause);
+
 		$stmt->execute();
 
-		$rows = $stmt->fetchAll();
-
-		$stmt->closeCursor();
+		$rows = $stmt->getResult();
 
 		return array_map(function($in) { return new self($in["ID"]); }, $rows);
 	}
