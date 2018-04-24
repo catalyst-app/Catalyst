@@ -52,6 +52,8 @@ $nextSortWhereClause = new WhereClause();
 $nextSortWhereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), '=', $_SESSION["user"]->getArtistPageId()]);
 $nextSortStmt->addAdditionalCapability($nextSortWhereClause);
 
+$nextSortStmt->execute();
+
 $nextSort = $nextSortStmt->getResult()[0]["NEXT_SORT"];
 
 if (is_null($nextSort)) {
