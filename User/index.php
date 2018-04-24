@@ -106,11 +106,5 @@ foreach ($characters as $character) {
 			<!-- <div class="section"> -->
 				<!-- <h4>Wishlist</h4> -->
 <?php
-$types = $user->getWishlistAsObjects();
-	<?= implode("", $cards) ?>
-					</div>
-	<?php endif; ?>
-			</div>
-<?php endif; ?>
-<?php
+endif;
 require_once Values::FOOTER_INC;
