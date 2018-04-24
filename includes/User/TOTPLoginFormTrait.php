@@ -31,16 +31,16 @@ trait TOTPLoginFormTrait {
 		$completionAction->setRedirectUrl("Dashboard");
 		$form->setCompletionAction($completionAction);
 
-		$usernameField = new TextField();
-		$usernameField->setDistinguisher("totp-code");
-		$usernameField->setLabel("Authentication Code");
-		$usernameField->setRequired(true);
-		$usernameField->setPattern('[0-9]*');
-		$usernameField->addError(90202, ErrorCodes::ERR_90202);
-		$usernameField->setMissingErrorCode(90202);
-		$usernameField->addError(90203, ErrorCodes::ERR_90203);
-		$usernameField->setInvalidErrorCode(90203);
-		$form->addField($usernameField);
+		$tokenField = new TextField();
+		$tokenField->setDistinguisher("totp-code");
+		$tokenField->setLabel("Authentication Code");
+		$tokenField->setRequired(true);
+		$tokenField->setPattern('[0-9]*');
+		$tokenField->addError(90202, ErrorCodes::ERR_90202);
+		$tokenField->setMissingErrorCode(90202);
+		$tokenField->addError(90203, ErrorCodes::ERR_90203);
+		$tokenField->setInvalidErrorCode(90203);
+		$form->addField($tokenField);
 
 		$goBackNotice = new StaticHTMLField();
 		$goBackNotice->setHtml('<p class="col s12 no-margin">If you would like to go back and login with a different account, click <a href="'.ROOTDIR.'/Login/">here</a></p>');
