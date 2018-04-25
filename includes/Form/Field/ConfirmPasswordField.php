@@ -9,7 +9,6 @@ use \InvalidArgumentException;
  * Represents a text field
  */
 class ConfirmPasswordField extends PasswordField {
-	use LabelTrait;
 	/**
 	 * Minimum length for the password
 	 * @var PasswordField|null
