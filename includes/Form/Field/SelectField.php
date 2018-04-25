@@ -155,6 +155,6 @@ class SelectField extends AbstractField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return AutocompleteValues::$on;
+		return AutocompleteValues::ON;
 	}
 }
