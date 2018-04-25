@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{CaptchaField, CheckboxField, ColorField, ConfirmPasswordField, EmailField, ImageField, PasswordField, RawLabelCheckboxField, StaticHTMLField, TextField};
+use \Catalyst\Form\Field\{AutocompleteValues, CaptchaField, CheckboxField, ColorField, ConfirmPasswordField, EmailField, ImageField, PasswordField, RawLabelCheckboxField, StaticHTMLField, TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -38,6 +38,7 @@ trait RegisterFormTrait {
 		$usernameField->setMaxLength(64);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$usernameField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
+		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
 		$usernameField->addError(90301, ErrorCodes::ERR_90301);
 		$usernameField->setMissingErrorCode(90301);
 		$usernameField->addError(90302, ErrorCodes::ERR_90302);
@@ -51,6 +52,7 @@ trait RegisterFormTrait {
 		$nicknameField->setRequired(false);
 		$nicknameField->setMaxLength(100);
 		$nicknameField->setPattern('^.{2,100}$');
+		$nicknameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$nicknameField->addError(90304, ErrorCodes::ERR_90304);
 		$nicknameField->setMissingErrorCode(90304);
 		$nicknameField->addError(90305, ErrorCodes::ERR_90305);
@@ -61,6 +63,7 @@ trait RegisterFormTrait {
 		$emailField->setDistinguisher("email");
 		$emailField->setLabel("Email");
 		$emailField->setRequired(false);
+		$emailField->setAutocompleteAttribute(AutocompleteValues::EMAIL);
 		$emailField->addError(90306, ErrorCodes::ERR_90306);
 		$emailField->setMissingErrorCode(90306);
 		$emailField->addError(90307, ErrorCodes::ERR_90307);
@@ -74,6 +77,7 @@ trait RegisterFormTrait {
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
 		$passwordField->setMinLength(8);
+		$passwordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
 		$passwordField->addError(90309, ErrorCodes::ERR_90309);
 		$passwordField->setMissingErrorCode(90309);
 		$passwordField->addError(90310, ErrorCodes::ERR_90310);
@@ -89,6 +93,7 @@ trait RegisterFormTrait {
 		$confirmPasswordField->setLabel("Confirm Password");
 		$confirmPasswordField->setRequired(true);
 		$confirmPasswordField->setMinLength(8);
+		$confirmPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
 		$confirmPasswordField->addError(90311, ErrorCodes::ERR_90311);
 		$confirmPasswordField->setMissingErrorCode(90311);
 		$confirmPasswordField->addError(90312, ErrorCodes::ERR_90312);
@@ -100,6 +105,7 @@ trait RegisterFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
+		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$colorField->addError(90313, ErrorCodes::ERR_90313);
 		$colorField->setMissingErrorCode(90313);
 		$colorField->addError(90314, ErrorCodes::ERR_90314);
@@ -111,6 +117,7 @@ trait RegisterFormTrait {
 		$profilePictureField->setLabel("Profile Picture");
 		$profilePictureField->setRequired(false);
 		$profilePictureField->setMaxHumanSize('10MB');
+		$profilePictureField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		// these lost some clarity as what means what due to ImageField
 		$profilePictureField->addError(90317, ErrorCodes::ERR_90317);
 		$profilePictureField->setMissingErrorCode(90317);
@@ -161,6 +168,7 @@ trait RegisterFormTrait {
 		$referrerField->setMaxLength(64);
 		$referrerField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$referrerField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
+		$referrerField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$referrerField->addError(90325, ErrorCodes::ERR_90325);
 		$referrerField->setInvalidErrorCode(90325);
 		$referrerField->addError(90326, ErrorCodes::ERR_90326);
