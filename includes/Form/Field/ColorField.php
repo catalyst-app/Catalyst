@@ -10,7 +10,7 @@ use \Catalyst\Page\Values;
  * Represents a field to pick a color from the allowed values
  */
 class ColorField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Return the field's HTML input
 	 * 
@@ -48,6 +48,7 @@ class ColorField extends AbstractField {
 		$str .= ' readonly="readonly"';
 		$str .= ' type="text"';
 		$str .= ' class="active"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		if ($this->isFieldPrefilled()) {
 			$str .= ' value="'.$this->getPrefilledValue().'"';
@@ -158,5 +159,14 @@ class ColorField extends AbstractField {
 		if (!in_array($_POST[$this->getDistinguisher()], array_keys(Color::HEX_MAP))) {
 			$this->throwInvalidError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$on;
 	}
 }
