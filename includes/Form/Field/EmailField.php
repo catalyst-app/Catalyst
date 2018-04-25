@@ -14,7 +14,7 @@ class EmailField extends AbstractField {
 	 * 
 	 * @var string
 	 */
-	protected $pattern = '^.{2,}@.{2,}\..{2,}$';
+	protected $pattern = '^.{1,}@.{1,}\..{1,}$';
 	/**
 	 * Maximum string length, <= 0 means none
 	 * 
