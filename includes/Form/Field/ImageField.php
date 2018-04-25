@@ -12,7 +12,7 @@ use \Catalyst\Page\UniversalFunctions;
  * Represents a singular image field
  */
 class ImageField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait;
 	/**
 	 * Maximum size of the image, in bytes
 	 * 
@@ -113,6 +113,7 @@ class ImageField extends AbstractField {
 
 		$str .= '<input';
 		$str .= ' type="file"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' accept="image/*"'; // we must use image/* for most phone compatability
 		$str .= '>';
@@ -236,5 +237,14 @@ class ImageField extends AbstractField {
 		if ($_FILES[$this->getDistinguisher()]["size"] > $this->getMaxSize()) {
 			$this->throwTooLargeError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$photo;
 	}
 }
