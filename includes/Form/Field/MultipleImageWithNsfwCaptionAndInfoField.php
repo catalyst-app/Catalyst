@@ -136,6 +136,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 		$str .= ' class="'.htmlspecialchars(self::INPUT_CLASS).'"';
 		$str .= ' type="file"';
 		$str .= ' multiple="multiple"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' data-extra-info-name="'.htmlspecialchars($this->getInfoLabel()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' accept="image/*"'; // we must use image/* for most phone compatability
