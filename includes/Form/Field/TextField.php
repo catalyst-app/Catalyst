@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a text field
  */
 class TextField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Pattern to match user input against
 	 * 
@@ -91,6 +91,7 @@ class TextField extends AbstractField {
 
 		$inputClasses = [];
 		$str .= '<input';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' type="text"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
@@ -222,5 +223,14 @@ class TextField extends AbstractField {
 		if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
 			$this->throwInvalidError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return AutocompleteValues::ON;
 	}
 }
