@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a text field
  */
 class PasswordField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait;
 	/**
 	 * Minimum length for the password
 	 * @var int
@@ -134,5 +134,14 @@ class PasswordField extends AbstractField {
 		if (strlen($requestArr[$this->getDistinguisher()]) < $this->getMinLength()) {
 			$this->throwInvalidError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$currentPassword;
 	}
 }

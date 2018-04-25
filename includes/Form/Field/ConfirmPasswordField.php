@@ -91,4 +91,13 @@ class ConfirmPasswordField extends PasswordField {
 			$this->throwInvalidError();
 		}
 	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$newPassword;
+	}
 }
