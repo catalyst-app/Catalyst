@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -36,6 +36,7 @@ trait TOTPLoginFormTrait {
 		$tokenField->setLabel("Authentication Code");
 		$tokenField->setRequired(true);
 		$tokenField->setPattern('[0-9]*');
+		$tokenField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$tokenField->addError(90202, ErrorCodes::ERR_90202);
 		$tokenField->setMissingErrorCode(90202);
 		$tokenField->addError(90203, ErrorCodes::ERR_90203);
