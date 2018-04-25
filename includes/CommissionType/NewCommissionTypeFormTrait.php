@@ -4,7 +4,7 @@ namespace Catalyst\CommissionType;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{CheckboxField, MarkdownField, MultipleImageWithNsfwCaptionAndInfoField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
+use \Catalyst\Form\Field\{AutocompleteValues, CheckboxField, MarkdownField, MultipleImageWithNsfwCaptionAndInfoField, NumberField, StaticHTMLField, SubformMultipleEntryField, SubformMultipleEntryFieldWithRows, TextField, ToggleableButtonSetField, WrappedField};
 use \Catalyst\Form\Form;
 
 /**
@@ -35,6 +35,7 @@ trait NewCommissionTypeFormTrait {
 		$nameField->setRequired(true);
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
+		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$nameField->addError(91501, ErrorCodes::ERR_91501);
 		$nameField->setMissingErrorCode(91501);
 		$nameField->addError(91502, ErrorCodes::ERR_91502);
@@ -51,6 +52,7 @@ trait NewCommissionTypeFormTrait {
 		$blurbField->setRequired(true);
 		$blurbField->setPattern('^.{2,255}$');
 		$blurbField->setMaxLength(255);
+		$blurbField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$blurbField->addError(91503, ErrorCodes::ERR_91503);
 		$blurbField->setMissingErrorCode(91503);
 		$blurbField->addError(91504, ErrorCodes::ERR_91504);
@@ -61,6 +63,7 @@ trait NewCommissionTypeFormTrait {
 		$descriptionField->setDistinguisher("description");
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
+		$descriptionField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$descriptionField->addError(91505, ErrorCodes::ERR_91505);
 		$descriptionField->setMissingErrorCode(91505);
 		$descriptionField->addError(91506, ErrorCodes::ERR_91506);
@@ -80,6 +83,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostField->setRequired(true);
 		$baseCostField->setPattern('^.{2,64}$');
 		$baseCostField->setMaxLength(64);
+		$baseCostField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$baseCostField->addError(91507, ErrorCodes::ERR_91507);
 		$baseCostField->setMissingErrorCode(91507);
 		$baseCostField->addError(91508, ErrorCodes::ERR_91508);
@@ -98,6 +102,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostUsdField->setPrecision(2);
 		$baseCostUsdField->setMin(0);
 		$baseCostUsdField->setMax(1000000);
+		$baseCostUsdField->setAutocompleteAttribute(AutocompleteValues::TRANSACTION_AMOUNT);
 		$baseCostUsdField->addError(91509, ErrorCodes::ERR_91509);
 		$baseCostUsdField->setMissingErrorCode(91509);
 		$baseCostUsdField->addError(91510, ErrorCodes::ERR_91510);
@@ -129,6 +134,7 @@ trait NewCommissionTypeFormTrait {
 		$stageEntryField->setRequired(true);
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
+		$stageEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$stageEntryField->addError(91528, ErrorCodes::ERR_91528);
 		$stageEntryField->setMissingErrorCode(91528);
 		$stageEntryField->addError(91529, ErrorCodes::ERR_91529);
@@ -159,6 +165,7 @@ trait NewCommissionTypeFormTrait {
 		$typeEntryField->setRequired(true);
 		$typeEntryField->setPattern('^.{2,64}$');
 		$typeEntryField->setMaxLength(64);
+		$typeEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$typeEntryField->addError(91530, ErrorCodes::ERR_91530);
 		$typeEntryField->setMissingErrorCode(91530);
 		$typeEntryField->addError(91531, ErrorCodes::ERR_91531);
@@ -174,6 +181,7 @@ trait NewCommissionTypeFormTrait {
 		$addressEntryField->setDistinguisher("address-psuedo-field");
 		$addressEntryField->setLabel("Address");
 		$addressEntryField->setRequired(true);
+		$addressEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
 		$addressEntryField->setMissingErrorCode(91532);
 		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
@@ -189,6 +197,7 @@ trait NewCommissionTypeFormTrait {
 		$instructionsField->setDistinguisher("instructions-psuedo-field");
 		$instructionsField->setLabel("Instructions/Notes");
 		$instructionsField->setRequired(false);
+		$instructionsField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
 		$instructionsField->setMissingErrorCode(91533);
 		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
@@ -229,6 +238,7 @@ trait NewCommissionTypeFormTrait {
 		$modifierEntryField->setRequired(true);
 		$modifierEntryField->setPattern('^.{2,60}$');
 		$modifierEntryField->setMaxLength(60);
+		$modifierEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$modifierEntryField->addError(91534, ErrorCodes::ERR_91534);
 		$modifierEntryField->setMissingErrorCode(91534);
 		$modifierEntryField->addError(91535, ErrorCodes::ERR_91535);
@@ -246,6 +256,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostEntryField->setRequired(true);
 		$baseCostEntryField->setPattern('^.{2,64}$');
 		$baseCostEntryField->setMaxLength(64);
+		$baseCostEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$baseCostEntryField->addError(91536, ErrorCodes::ERR_91536);
 		$baseCostEntryField->setMissingErrorCode(91536);
 		$baseCostEntryField->addError(91537, ErrorCodes::ERR_91537);
@@ -264,6 +275,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostUsdEntryField->setPrecision(2);
 		$baseCostUsdEntryField->setMin(0);
 		$baseCostUsdEntryField->setMax(10000);
+		$baseCostUsdEntryField->setAutocompleteAttribute(AutocompleteValues::TRANSACTION_AMOUNT);
 		$baseCostUsdEntryField->addError(91538, ErrorCodes::ERR_91538);
 		$baseCostUsdEntryField->setMissingErrorCode(91538);
 		$baseCostUsdEntryField->addError(91539, ErrorCodes::ERR_91539);
@@ -285,6 +297,7 @@ trait NewCommissionTypeFormTrait {
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
 		$imagesField->setInfoLabel('Commissioner');
+		$imagesField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		$imagesField->addError(91525, ErrorCodes::ERR_91525);
 		$imagesField->setMissingErrorCode(91525);
 		$imagesField->addError(91526, ErrorCodes::ERR_91526);

@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{CaptchaField, StaticHTMLField, TextField};
+use \Catalyst\Form\Field\{AutocompleteValues, CaptchaField, StaticHTMLField, TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\{Secrets,Tokens};
 
@@ -42,6 +42,7 @@ trait EmailVerificationFormTrait {
 		}
 		$tokenField->setMaxLength(Tokens::EMAIL_VERIFICATION_TOKEN_LENGTH);
 		$tokenField->setPattern(Tokens::EMAIL_VERIFICATION_TOKEN_REGEX);
+		$tokenField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$tokenField->addError(90401, ErrorCodes::ERR_90401);
 		$tokenField->setMissingErrorCode(90401);
 		$tokenField->addError(90402, ErrorCodes::ERR_90402);

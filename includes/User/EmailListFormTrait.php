@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\AutoClosingModalCompletionAction;
-use \Catalyst\Form\Field\{EmailField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField};
 use \Catalyst\Form\Form;
 
 /**
@@ -36,6 +36,7 @@ trait EmailListFormTrait {
 		$emailField->setDistinguisher("email");
 		$emailField->setLabel("Email");
 		$emailField->setRequired(true);
+		$emailField->setAutocompleteAttribute(AutocompleteValues::EMAIL);
 		$emailField->addError(90001, ErrorCodes::ERR_90001);
 		$emailField->setMissingErrorCode(90001);
 		$emailField->addError(90002, ErrorCodes::ERR_90002);
@@ -46,6 +47,7 @@ trait EmailListFormTrait {
 		$contextField->setDistinguisher("context");
 		$contextField->setLabel("Name or other information");
 		$contextField->setRequired(true);
+		$contextField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$contextField->addError(90003, ErrorCodes::ERR_90003);
 		$contextField->setMissingErrorCode(90003);
 		$contextField->addError(90004, ErrorCodes::ERR_90004);
