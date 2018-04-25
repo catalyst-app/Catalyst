@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a numeric field
  */
 class NumberField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Maximum number
 	 * 
@@ -211,5 +211,14 @@ class NumberField extends AbstractField {
 		if ($requestArr[$this->getDistinguisher()] > $this->getMax() || $requestArr[$this->getDistinguisher()] < $this->getMin()) {
 			$this->throwInvalidError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$on;
 	}
 }
