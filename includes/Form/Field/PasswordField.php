@@ -45,6 +45,7 @@ class PasswordField extends AbstractField {
 		$inputClasses = [];
 		$str .= '<input';
 		$str .= ' type="password"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isRequired()) {
