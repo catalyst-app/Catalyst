@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a markdown field
  */
 class MarkdownField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 
 	/**
 	 * Return the field's HTML input
@@ -45,6 +45,7 @@ class MarkdownField extends AbstractField {
 		$str .= '>';
 
 		$str .= '<textarea';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' class="materialize-textarea markdown-field"';
 
 		if ($this->isRequired()) {
@@ -130,5 +131,14 @@ class MarkdownField extends AbstractField {
 				$this->throwMissingError();
 			}
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$on;
 	}
 }
