@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents a select (dropdown) field
  */
 class SelectField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Options, [value, label]
 	 * 
@@ -49,6 +49,7 @@ class SelectField extends AbstractField {
 
 		$inputClasses = [];
 		$str .= '<select';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' class="browser-default"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
@@ -146,5 +147,14 @@ class SelectField extends AbstractField {
 			}
 		}
 		$this->throwInvalidError();
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return AutocompleteValues::$on;
 	}
 }
