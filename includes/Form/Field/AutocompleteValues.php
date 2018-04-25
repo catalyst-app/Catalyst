@@ -8,9 +8,9 @@ class AutocompleteValues {
 	const NICKNAME = "nickname";
 	const EMAIL = "email";
 	const USERNAME = "username";
-	const NEW_PASSWORD = "off";
-	const CURRENT_PASSWORD = "off";
-	const TRANSACTION_AMOUNT = "off";
+	const NEW_PASSWORD = "new-password";
+	const CURRENT_PASSWORD = "current-password";
+	const TRANSACTION_AMOUNT = "transaction-amount";
 	const URL = "url";
 	const PHOTO = "photo";
 }
