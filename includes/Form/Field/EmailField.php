@@ -177,6 +177,6 @@ class EmailField extends AbstractField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return SupportsAutocompleteAttributeTrait::$email;
+		return AutocompleteValues::$email;
 	}
 }

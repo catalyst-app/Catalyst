@@ -245,6 +245,6 @@ class ImageField extends AbstractField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return SupportsAutocompleteAttributeTrait::$photo;
+		return AutocompleteValues::$photo;
 	}
 }

@@ -167,6 +167,6 @@ class ColorField extends AbstractField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return SupportsAutocompleteAttributeTrait::$on;
+		return AutocompleteValues::$on;
 	}
 }
