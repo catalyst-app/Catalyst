@@ -466,7 +466,7 @@ class CommissionType {
 
 	/**
 	 * @param Artist $artist
-	 * @m_returnstatus( self[], identifier)
+	 * @return self[]
 	 */
 	public static function getForArtist(Artist $artist) : array {
 		$stmt = new SelectQuery();
