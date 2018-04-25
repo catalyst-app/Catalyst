@@ -85,34 +85,34 @@ trait SettingsFormTrait {
 		}
 		$form->addField($emailField);
 
-		$passwordField = new PasswordField();
-		$passwordField->setDistinguisher("new-password");
-		$passwordField->setLabel("New Password");
-		$passwordField->setRequired(false);
-		$passwordField->setMinLength(8);
-		$passwordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$passwordField->addError(90509, ErrorCodes::ERR_90509);
-		$passwordField->setMissingErrorCode(90509);
-		$passwordField->addError(90510, ErrorCodes::ERR_90510);
-		$passwordField->setInvalidErrorCode(90510);
-		$form->addField($passwordField);
+		$newPasswordField = new PasswordField();
+		$newPasswordField->setDistinguisher("new-password");
+		$newPasswordField->setLabel("New Password");
+		$newPasswordField->setRequired(false);
+		$newPasswordField->setMinLength(8);
+		$newPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
+		$newPasswordField->addError(90509, ErrorCodes::ERR_90509);
+		$newPasswordField->setMissingErrorCode(90509);
+		$newPasswordField->addError(90510, ErrorCodes::ERR_90510);
+		$newPasswordField->setInvalidErrorCode(90510);
+		$form->addField($newPasswordField);
 
 		$passwordMinimumMessage = new StaticHTMLField();
 		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Only use this field if you wish to change your password.</p>');
 		$form->addField($passwordMinimumMessage);
 
-		$confirmPasswordField = new ConfirmPasswordField();
-		$confirmPasswordField->setDistinguisher("confirm-new-password");
-		$confirmPasswordField->setLabel("Confirm New Password");
-		$confirmPasswordField->setRequired(false);
-		$confirmPasswordField->setMinLength(8);
-		$confirmPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$confirmPasswordField->addError(90511, ErrorCodes::ERR_90511);
-		$confirmPasswordField->setMissingErrorCode(90511);
-		$confirmPasswordField->addError(90512, ErrorCodes::ERR_90512);
-		$confirmPasswordField->setInvalidErrorCode(90512);
-		$confirmPasswordField->setLinkedField($passwordField);
-		$form->addField($confirmPasswordField);
+		$confirmNewPasswordField = new ConfirmPasswordField();
+		$confirmNewPasswordField->setDistinguisher("confirm-new-password");
+		$confirmNewPasswordField->setLabel("Confirm New Password");
+		$confirmNewPasswordField->setRequired(false);
+		$confirmNewPasswordField->setMinLength(8);
+		$confirmNewPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
+		$confirmNewPasswordField->addError(90511, ErrorCodes::ERR_90511);
+		$confirmNewPasswordField->setMissingErrorCode(90511);
+		$confirmNewPasswordField->addError(90512, ErrorCodes::ERR_90512);
+		$confirmNewPasswordField->setInvalidErrorCode(90512);
+		$confirmNewPasswordField->setLinkedField($newPasswordField);
+		$form->addField($confirmNewPasswordField);
 
 		$twoFactorField = new CheckboxField();
 		$twoFactorField->setDistinguisher("two-factor");
