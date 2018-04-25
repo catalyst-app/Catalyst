@@ -4,7 +4,7 @@ namespace Catalyst\Character;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\DynamicRedirectCompletionAction;
-use \Catalyst\Form\Field\{CheckboxField,ColorField,HiddenInputField,MarkdownField,MultipleImageWithNsfwCaptionAndInfoField,StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,CheckboxField,ColorField,HiddenInputField,MarkdownField,MultipleImageWithNsfwCaptionAndInfoField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -41,6 +41,7 @@ trait EditCharacterFormTrait {
 		$nameField->setRequired(true);
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
+		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$nameField->addError(91001, ErrorCodes::ERR_91001);
 		$nameField->setMissingErrorCode(91001);
 		$nameField->addError(91002, ErrorCodes::ERR_91002);
@@ -54,6 +55,7 @@ trait EditCharacterFormTrait {
 		$descriptionField->setDistinguisher("description");
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
+		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$descriptionField->addError(91003, ErrorCodes::ERR_91003);
 		$descriptionField->setMissingErrorCode(91003);
 		$descriptionField->addError(91004, ErrorCodes::ERR_91004);
@@ -69,6 +71,7 @@ trait EditCharacterFormTrait {
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
 		$imagesField->setInfoLabel('Artist/Source');
+		$imagesField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		$imagesField->addError(91006, ErrorCodes::ERR_91006);
 		$imagesField->setMissingErrorCode(91006);
 		$imagesField->addError(91007, ErrorCodes::ERR_91007);
@@ -85,13 +88,14 @@ trait EditCharacterFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		if (!is_null($character)) {
-			$colorField->setPrefilledValue($character->getColor());
-		}
+		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$colorField->addError(91008, ErrorCodes::ERR_91008);
 		$colorField->setMissingErrorCode(91008);
 		$colorField->addError(91009, ErrorCodes::ERR_91009);
 		$colorField->setInvalidErrorCode(91009);
+		if (!is_null($character)) {
+			$colorField->setPrefilledValue($character->getColor());
+		}
 		$form->addField($colorField);
 
 		$publicCheckboxField = new CheckboxField();
