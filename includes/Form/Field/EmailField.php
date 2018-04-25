@@ -8,7 +8,7 @@ use \Catalyst\Form\Form;
  * Represents an email field
  */
 class EmailField extends AbstractField {
-	use LabelTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Pattern to match user input against
 	 * 
@@ -54,6 +54,7 @@ class EmailField extends AbstractField {
 		$inputClasses = [];
 		$str .= '<input';
 		$str .= ' type="email"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isFieldPrefilled()) {
@@ -168,5 +169,14 @@ class EmailField extends AbstractField {
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
+	}
+
+	/**
+	 * Get the default autocomplete attribute value
+	 *
+	 * @return string
+	 */
+	public static function getDefaultAutocompleteAttribute() : string {
+		return SupportsAutocompleteAttributeTrait::$email;
 	}
 }
