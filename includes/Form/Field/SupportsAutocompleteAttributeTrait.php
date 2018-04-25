@@ -6,17 +6,6 @@ namespace Catalyst\Form\Field;
  * Used by fields which support autocomplete attributes
  */
 trait SupportsAutocompleteAttributeTrait {
-	static $off = "off";
-	static $on = "on";
-	static $nickname = "nickname";
-	static $email = "email";
-	static $username = "username";
-	static $newPassword = "off";
-	static $currentPassword = "off";
-	static $transactionAmount = "off";
-	static $url = "url";
-	static $photo = "photo";
-
 	/**
 	 * attribute value
 	 * 

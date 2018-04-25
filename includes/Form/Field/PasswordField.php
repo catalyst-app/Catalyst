@@ -143,6 +143,6 @@ class PasswordField extends AbstractField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return SupportsAutocompleteAttributeTrait::$currentPassword;
+		return AutocompleteValues::$currentPassword;
 	}
 }

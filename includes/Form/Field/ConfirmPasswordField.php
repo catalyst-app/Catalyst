@@ -98,6 +98,6 @@ class ConfirmPasswordField extends PasswordField {
 	 * @return string
 	 */
 	public static function getDefaultAutocompleteAttribute() : string {
-		return SupportsAutocompleteAttributeTrait::$newPassword;
+		return AutocompleteValues::$newPassword;
 	}
 }
