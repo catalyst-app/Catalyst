@@ -4,7 +4,7 @@ namespace Catalyst\Artist;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{TextField,StaticHTMLField,MarkdownField,ImageField,ColorField};
+use \Catalyst\Form\Field\{AutocompleteValues,ColorField,ImageField,MarkdownField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\User\User;
@@ -37,6 +37,7 @@ trait CreateArtistPageFormTrait {
 		$nameField->setRequired(true);
 		$nameField->setMaxLength(255);
 		$nameField->setPattern('^.{2,255}$');
+		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$nameField->addError(91201, ErrorCodes::ERR_91201);
 		$nameField->setMissingErrorCode(91201);
 		$nameField->addError(91202, ErrorCodes::ERR_91202);
@@ -51,6 +52,7 @@ trait CreateArtistPageFormTrait {
 		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
 		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
 		$urlField->setHelperText("Between 4 and 255 characters, containing letters, numbers, dashes, underscores, and dots (not at the end)");
+		$urlField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
 		$urlField->addError(91203, ErrorCodes::ERR_91203);
 		$urlField->setMissingErrorCode(91203);
 		$urlField->addError(91204, ErrorCodes::ERR_91204);
@@ -87,6 +89,7 @@ trait CreateArtistPageFormTrait {
 		$descriptionField->setDistinguisher("description");
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
+		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$descriptionField->addError(91206, ErrorCodes::ERR_91206);
 		$descriptionField->setMissingErrorCode(91206);
 		$descriptionField->addError(91207, ErrorCodes::ERR_91207);
@@ -99,6 +102,7 @@ trait CreateArtistPageFormTrait {
 		$profilePictureField->setRequired(false);
 		$profilePictureField->setMaxHumanSize('10MB');
 		$profilePictureField->setHelperText("Artist's profile images may not be mature or explicit.");
+		$profilePictureField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		// these lost some clarity as what means what due to ImageField
 		$profilePictureField->addError(91208, ErrorCodes::ERR_91208);
 		$profilePictureField->setMissingErrorCode(91208);
@@ -112,6 +116,7 @@ trait CreateArtistPageFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
+		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$colorField->addError(91211, ErrorCodes::ERR_91211);
 		$colorField->setMissingErrorCode(91211);
 		$colorField->addError(91212, ErrorCodes::ERR_91212);
@@ -125,6 +130,7 @@ trait CreateArtistPageFormTrait {
 		$tosField->setDistinguisher("tos");
 		$tosField->setLabel("Terms of Service");
 		$tosField->setRequired(true);
+		$tosField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$tosField->addError(91213, ErrorCodes::ERR_91213);
 		$tosField->setMissingErrorCode(91213);
 		$tosField->addError(91214, ErrorCodes::ERR_91214);
