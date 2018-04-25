@@ -34,7 +34,7 @@ if (strpos($_POST["url"], "javascript:") === 0) {
 	Response::sendErrorResponse(90711, ErrorCodes::ERR_90711);
 }
 
-if (preg_match('/^.{2,}@.{2,}\..{2,}$/', $_POST["url"])) {
+if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	$finalUrl = 'mailto:'.$_POST["url"];
 } else {
 	// we already verify regex

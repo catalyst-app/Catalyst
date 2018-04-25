@@ -50,7 +50,7 @@ trait SocialMediaAdditionFormsTrait {
 		$urlField->setDistinguisher("url");
 		$urlField->setLabel("URL or email");
 		$urlField->setRequired(true);
-		$urlField->setPattern('^(https?://.{2,}\..{2,}|.{2,}@.{2,}\..{2,})$');
+		$urlField->setPattern('^(https?://.{2,}\..{2,}|.{1,}@.{1,}\..{1,})$');
 		$urlField->addError(90704, ErrorCodes::ERR_90704);
 		$urlField->setMissingErrorCode(90704);
 		$urlField->addError(90705, ErrorCodes::ERR_90705);
