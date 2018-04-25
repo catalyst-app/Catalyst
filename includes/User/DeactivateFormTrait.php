@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{PasswordField,StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,PasswordField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\{Secrets,Tokens};
 
@@ -36,6 +36,7 @@ trait DeactivateFormTrait {
 		$usernameField->setLabel("Username");
 		$usernameField->setRequired(true);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
+		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
 		$usernameField->addError(90601, ErrorCodes::ERR_90601);
 		$usernameField->setMissingErrorCode(90601);
 		$usernameField->addError(90602, ErrorCodes::ERR_90602);
@@ -47,6 +48,7 @@ trait DeactivateFormTrait {
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
 		$passwordField->setMinLength(8);
+		$passwordField->setAutocompleteAttribute(AutocompleteValues::CURRENT_PASSWORD);
 		$passwordField->addError(90603, ErrorCodes::ERR_90603);
 		$passwordField->setMissingErrorCode(90603);
 		$passwordField->addError(90604, ErrorCodes::ERR_90604);

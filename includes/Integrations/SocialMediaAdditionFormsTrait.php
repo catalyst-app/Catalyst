@@ -4,7 +4,7 @@ namespace Catalyst\Integrations;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\CallUserFuncCompletionAction;
-use \Catalyst\Form\Field\{HiddenInputField,SelectField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,HiddenInputField,SelectField,TextField};
 use \Catalyst\Form\Form;
 
 /**
@@ -40,6 +40,7 @@ trait SocialMediaAdditionFormsTrait {
 		$labelField->setLabel("Label");
 		$labelField->setRequired(true);
 		$labelField->setPattern('^.{2,64}$');
+		$labelField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$labelField->addError(90702, ErrorCodes::ERR_90702);
 		$labelField->setMissingErrorCode(90702);
 		$labelField->addError(90703, ErrorCodes::ERR_90703);
@@ -51,6 +52,7 @@ trait SocialMediaAdditionFormsTrait {
 		$urlField->setLabel("URL or email");
 		$urlField->setRequired(true);
 		$urlField->setPattern('^(https?://.{2,}\..{2,}|.{1,}@.{1,}\..{1,})$');
+		$urlField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$urlField->addError(90704, ErrorCodes::ERR_90704);
 		$urlField->setMissingErrorCode(90704);
 		$urlField->addError(90705, ErrorCodes::ERR_90705);
@@ -94,6 +96,7 @@ trait SocialMediaAdditionFormsTrait {
 		$typeField->setLabel("Social Network");
 		$typeField->setOptions(SocialMedia::getOtherNetworkAddSelectArray());
 		$typeField->setRequired(true);
+		$typeField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$typeField->addError(90712, ErrorCodes::ERR_90712);
 		$typeField->setMissingErrorCode(90712);
 		$typeField->addError(90713, ErrorCodes::ERR_90713);
@@ -105,6 +108,7 @@ trait SocialMediaAdditionFormsTrait {
 		$labelField->setLabel("Label");
 		$labelField->setRequired(true);
 		$labelField->setPattern('^.{2,64}$');
+		$labelField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$labelField->addError(90702, ErrorCodes::ERR_90702);
 		$labelField->setMissingErrorCode(90702);
 		$labelField->addError(90703, ErrorCodes::ERR_90703);
