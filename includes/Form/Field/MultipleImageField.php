@@ -37,6 +37,7 @@ class MultipleImageField extends ImageField {
 		$str .= '<input';
 		$str .= ' type="file"';
 		$str .= ' multiple="multiple"';
+		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' accept="image/*"'; // we must use image/* for most phone compatability
 		$str .= '>';
