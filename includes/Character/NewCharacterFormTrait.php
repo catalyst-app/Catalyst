@@ -4,7 +4,7 @@ namespace Catalyst\Character;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\DynamicRedirectCompletionAction;
-use \Catalyst\Form\Field\{CheckboxField,ColorField,HiddenInputField,MarkdownField,MultipleImageWithNsfwCaptionAndInfoField,StaticHTMLField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,CheckboxField,ColorField,HiddenInputField,MarkdownField,MultipleImageWithNsfwCaptionAndInfoField,StaticHTMLField,TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\User\User;
 use \Catalyst\Secrets;
@@ -37,6 +37,7 @@ trait NewCharacterFormTrait {
 		$nameField->setRequired(true);
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
+		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$nameField->addError(90801, ErrorCodes::ERR_90801);
 		$nameField->setMissingErrorCode(90801);
 		$nameField->addError(90802, ErrorCodes::ERR_90802);
@@ -47,6 +48,7 @@ trait NewCharacterFormTrait {
 		$descriptionField->setDistinguisher("description");
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
+		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$descriptionField->addError(90803, ErrorCodes::ERR_90803);
 		$descriptionField->setMissingErrorCode(90803);
 		$descriptionField->addError(90804, ErrorCodes::ERR_90804);
@@ -59,6 +61,7 @@ trait NewCharacterFormTrait {
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
 		$imagesField->setInfoLabel('Artist/Source');
+		$imagesField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		$imagesField->addError(90806, ErrorCodes::ERR_90806);
 		$imagesField->setMissingErrorCode(90806);
 		$imagesField->addError(90807, ErrorCodes::ERR_90807);
@@ -74,6 +77,7 @@ trait NewCharacterFormTrait {
 		if (User::isLoggedIn()) {
 			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
 		}
+		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
 		$colorField->addError(90808, ErrorCodes::ERR_90808);
 		$colorField->setMissingErrorCode(90808);
 		$colorField->addError(90809, ErrorCodes::ERR_90809);
