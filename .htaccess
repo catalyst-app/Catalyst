@@ -6,8 +6,9 @@
 </If>
 
 <IfModule mod_speling.c>
-	CheckCaseOnly on
 	CheckSpelling on
+	CheckCaseOnly on
+	checkcaseonly on
 </IfModule>
 
 <IfModule mod_negotiation.c>
@@ -31,6 +32,6 @@ Options -Indexes
 # Header always set Content-Security-Policy "default-src 'unsafe-inline' 'unsafe-eval' 'self' blob: data: https:; script-src 'unsafe-inline' 'unsafe-eval'  'self' https://google.com https://*.google.com https://cdnjs.cloudflare.com https://www.gstatic.com https://gstatic.com https://google-analytics.com https://*.google-analytics.com https://googletagmanager.com https://*.googletagmanager.com https://cdn.rawgit.com; object-src 'none'; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https: http:; media-src https: data: blob: 'self'; frame-src https://google.com https://*.google.com https://*.googletagmanager.com https://googletagmanager.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https:; sandbox allow-modals allow-popups allow-same-origin allow-top-navigation allow-forms allow-pointer-lock allow-popups allow-scripts; report-uri https://beta.catalystapp.co/api/internal/ssl_report_uri/"
 # Header always set X-Content-Security-Policy "default-src 'unsafe-inline' 'unsafe-eval' 'self' blob: data: https:; script-src 'unsafe-inline' 'unsafe-eval'  'self' https://google.com https://*.google.com https://cdnjs.cloudflare.com https://www.gstatic.com https://gstatic.com https://google-analytics.com https://*.google-analytics.com https://googletagmanager.com https://*.googletagmanager.com https://cdn.rawgit.com; object-src 'none'; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https: http:; media-src https: data: blob: 'self'; frame-src https://google.com https://*.google.com https://*.googletagmanager.com https://googletagmanager.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https:; sandbox allow-modals allow-popups allow-same-origin allow-top-navigation allow-forms allow-pointer-lock allow-popups allow-scripts; report-uri https://beta.catalystapp.co/api/internal/ssl_report_uri/"
 # Header always set X-Frame-Options "SAMEORIGIN"
-# Header always set X-Xss-Protection "0"
+# Header always set X-XSS-Protection "1; mode=block"
 # Header always set X-Content-Type-Options "nosniff"
 # Header always set Referrer-Policy "strict-origin-when-cross-origin"
