@@ -106,7 +106,6 @@ class CommissionType {
 			"BASE_COST" => $results[0]["BASE_COST"],
 			"BASE_USD_COST" => (float)$results[0]["BASE_USD_COST"],
 			"ATTRS" => CommissionTypeAttribute::getObjectsFromString($results[0]["ATTRS"]),
-			"OPEN" => (bool)$results[0]["OPEN"],
 			"ACCEPTING_QUOTES" => (bool)$results[0]["ACCEPTING_QUOTES"],
 			"ACCEPTING_REQUESTS" => (bool)$results[0]["ACCEPTING_REQUESTS"],
 			"ACCEPTING_TRADES" => (bool)$results[0]["ACCEPTING_TRADES"],
@@ -281,17 +280,6 @@ class CommissionType {
 		}
 
 		return $this->cache["ATTRS"] = CommissionTypeAttribute::getObjectsFromString($this->getColumnFromDatabase("ATTRS"));
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isOpen() : bool {
-		if (array_key_exists("OPEN", $this->cache)) {
-			return $this->cache["OPEN"];
-		}
-
-		return $this->cache["OPEN"] = (bool)$this->getColumnFromDatabase("OPEN");
 	}
 
 	/**
