@@ -198,6 +198,6 @@ class CommissionTypeAttribute {
 	public static function getObjectsFromString(string $in) : array {
 		return array_map(function($key) {
 			return new self($key);
-		}, explode(" ", $in));
+		}, array_filter(explode(" ", $in)));
 	}
 }
