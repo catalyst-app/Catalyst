@@ -375,7 +375,7 @@ class CommissionType {
 				$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"]);
 			}
 
-			$modifierObject = new CommissionTypeModifier($modifier["ID"], $modifier["NAME"], $modifier["PRICE"], (float)$modifier["BASE_USD_COST"]);
+			$modifierObject = new CommissionTypeModifier($modifier["ID"], $modifier["NAME"], $modifier["PRICE"], (float)$modifier["USDEQ"]);
 			$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
 		}
 
