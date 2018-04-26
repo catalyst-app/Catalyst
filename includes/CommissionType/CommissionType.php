@@ -483,7 +483,7 @@ class CommissionType {
 	 * initialize image
 	 */
 	public function initializeImage() : void {
-		if (count($this->getImageSet())) {
+		if (count($this->getImageSet()) == 0) {
 			$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), null, false));
 		} else {
 			$this->setImage($this->getImageSet()[0]);
