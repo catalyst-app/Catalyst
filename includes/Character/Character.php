@@ -112,6 +112,8 @@ class Character {
 		switch (strtolower($token)) {
 			case 'fauxil':
 				return self::getIdFromToken("sv2j6qy");
+			case 'wew':
+				return self::getIdFromToken("sq641rb");
 			case 'lykai':
 				return self::getIdFromToken("fwce5ym");
 		}
