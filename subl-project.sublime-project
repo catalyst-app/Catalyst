@@ -3,7 +3,7 @@
 		{
 			"path": ".",
 			"name": "Catalyst",
-			"folder_exclude_patterns": ["includes/vendor","artist_images","character_images","commission_type_images","img","integration_icons","profile_pictures"]
+			"folder_exclude_patterns": ["src/vendor","artist_images","character_images","commission_type_images","img","integration_icons","profile_pictures"]
 		},
 	],
 	"settings": {

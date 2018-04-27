@@ -1,8 +1,8 @@
 parameters:
 	excludes_analyse:
-		- includes/vendor
-		- includes/phpqrcode.php
-	bootstrap: includes/phpstan-init.php
+		- src/vendor
+		- src/phpqrcode.php
+	bootstrap: src/phpstan-init.php
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
 		- '/Constant PAGE_IMAGE not found\./'

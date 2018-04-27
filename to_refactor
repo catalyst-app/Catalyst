@@ -2,8 +2,8 @@
 ./FeatureBoard/index.php
 ./FeatureBoard/Item/index.php
 ./FeatureBoard/Submit/index.php
-./includes/Color.php
-./includes/CommissionType/CommissionType.php
-./includes/Message/Message.php
-./includes/Page/UniversalFunctions.php
-./includes/Page/Values.php
+./src/Color.php
+./src/CommissionType/CommissionType.php
+./src/Message/Message.php
+./src/Page/UniversalFunctions.php
+./src/Page/Values.php
