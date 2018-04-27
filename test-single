@@ -1,1 +1,1 @@
-./includes/vendor/bin/phpstan analyse -c includes/phpstan.neon -l max --autoload-file=includes/phpstan-init.php $1
+./src/vendor/bin/phpstan analyse -c src/phpstan.neon -l max --autoload-file=src/phpstan-init.php $1

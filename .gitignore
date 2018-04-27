@@ -1,5 +1,5 @@
-includes/vendor
-includes/Secrets.php
+src/vendor
+src/Secrets.php
 profile_pictures/*
 !profile_pictures/default.png
 !profile_pictures/.htaccess

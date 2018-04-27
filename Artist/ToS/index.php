@@ -3,7 +3,7 @@
 define("ROOTDIR", "../../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
 define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."includes/initializer.php";
+require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\HTTPCode;
 use \Catalyst\Page\{UniversalFunctions, Values};
