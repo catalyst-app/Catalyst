@@ -32,6 +32,9 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 			<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/New">Create one?</a></p>
 		</div>
 <?php else: ?>
+<?php
+$commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
+?>
 		<div class="section">
 			<div class="row">
 				<p class="col s12">You may drag to reorder these.</p>
@@ -47,6 +50,26 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 				</div>
 				<div id="save-commission-type-order" class="btn col s12 m4 l2">save</div>
 			</div>
+			<?php foreach ($commissionTypes as $commissionType): ?>
+				<div class="row">
+					<div class="col s6 offset-s3 m3 l2 center force-square-contents">
+						<?= $commissionType->getImage()->getStrictCircleHtml() ?>
+					</div>
+					<div class="col s12 m9 l10">
+						<h3 class="no-margin">
+							<?= htmlspecialchars($commissionType->getName()) ?>
+						</h3>
+						<p class="flow-text no-margin">
+							<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
+								<?= htmlspecialchars($commissionType->getBaseCost()) ?>
+							</span>
+						</p>
+						<p>
+							<?= htmlspecialchars($commissionType->getBlurb()) ?>
+						</p>
+					</div>
+				</div>
+			<?php endforeach; ?>
 		</div>
 <?php
 endif;
