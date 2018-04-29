@@ -35,26 +35,15 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		<div class="section">
 			<div class="row">
 				<p class="col s12">You may drag to reorder these.</p>
-				<a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">
-					<div class="commission-type new-commission-type row">
-						<div class="divider col s12 bottom-margin"></div>
-						<div class="col s6 offset-s3 m3 l2 center force-square-contents">
-							<?= Image::getNewItemImage()->getStrictCircleHtml() ?>
-						</div>
-						<div class="col s12 m7 l9 row-inside">
-							<div class="col s12 no-padding">
-								<h3 class="no-top-margin">
-									New
-								</h3>
-							</div>
-							<p>Create a new commission type</p>
-							<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
-						</div>
-						<div class="divider col s12 top-margin"></div>
-					</div>
-				</a>
-				<div class="commission-types commission-types-rearrangeable">
-					<!-- oof -->
+				<div class="col s6 offset-s3 m3 l2 center force-square-contents">
+					<?= Image::getNewItemImage()->getStrictCircleHtml() ?>
+				</div>
+				<div class="col s12 m9 l10">
+					<h3 class="no-top-margin">
+						New
+					</h3>
+					<p>Create a new commission type</p>
+					<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
 				</div>
 				<div id="save-commission-type-order" class="btn col s12 m4 l2">save</div>
 			</div>
