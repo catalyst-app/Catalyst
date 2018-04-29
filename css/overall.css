@@ -73,12 +73,12 @@ a.brand-logo {
 	padding-right: 10px;
 }
 
-a .card-content p, .new-commission-type * {
+a .card-content p {
 	text-decoration: none;
 	font-weight: normal;
 }
 
-a .card-content p, .new-commission-type *:not(a) {
+a .card-content p {
 	color: #000;
 }
 
@@ -146,11 +146,6 @@ div.section > h4:first-child {
 	user-select: none;
 	-webkit-user-select: none;
 }
-
-.commission-type-collapsible-header i {
-	cursor: pointer;
-}
-
 .toggle-btn {
 	margin: 5px;
 	-webkit-user-select: none;
@@ -167,18 +162,6 @@ div.section > h4:first-child {
   z-index: 99999;
 }
 
-.draggable-mirror.commission-type * {
-	visibility: hidden;
-}
-
-.draggable-mirror.commission-type h3 {
-	visibility: visible;
-}
-
-.commission-type-handle {
-	font-weight: bolder;
-}
-
 .modifier-container {
 	min-height: 42px;
 }
@@ -191,10 +174,6 @@ div.section > h4:first-child {
 	margin: 0.25em;
 }
 
-.remove-modifier-container, .remove-payment-type {
-	cursor: pointer;
-}
-
 .clickable {
 	cursor: pointer;
 }
@@ -203,10 +182,6 @@ div.section > h4:first-child {
 	width: 2em;
 	display: inline-block;
 	text-align: center;
-}
-
-#modifier-container-container {
-	margin-bottom: 1em;
 }
 
 .small-margin {
@@ -236,10 +211,6 @@ div.section > h4:first-child {
 
 .draggable-mirror {
 	width: 300px;
-}
-
-.commission-type {
-	margin: 20px 0;
 }
 
 .horizontal-scrollable-container {
@@ -582,12 +553,6 @@ input[type=checkbox] + label + span.invalid-text {
 	.color-swatch {
 		border: 0.7rem solid #fff;
 		min-height: 7rem !important;
-	}
-}
-
-@media only screen and (min-width: 601px) {
-	.commission-type .row-inside {
-		padding-left: 3em;
 	}
 }
 
