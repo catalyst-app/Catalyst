@@ -69,6 +69,14 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 						<p class="col s12">
 							<?= htmlspecialchars($commissionType->getBlurb()) ?>
 						</p>
+						<div class="no-bottom-margin col s12">
+							<span>Quick toggles:</span>
+							<?php foreach (CommissionType::QUICK_TOGGLE_BUTTONS as $button): ?>
+								<div class="btn toggle-btn-set-button toggle-btn commission-type-quick-toggle-button <?= htmlspecialchars(call_user_func([$commissionType, $button[1]]) ? "on" : "off") ?>" data-action="<?= htmlspecialchars($button[0]) ?>">
+									<?= htmlspecialchars($button[0]) ?>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 			<?php endforeach; ?>
