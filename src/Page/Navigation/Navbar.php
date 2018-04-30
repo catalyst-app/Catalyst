@@ -25,8 +25,8 @@ class Navbar {
 
 	// html for the logo in the top left/center
 	public const LOGO_HTML = '
-	<img alt="logo" class="hide-on-small-only" height="60px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
-	<img alt="logo" class="hide-on-med-and-up" height="54px" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
+	<img alt="logo" class="hide-on-small-only" height="60" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
+	<img alt="logo" class="hide-on-med-and-up" height="54" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
 	';
 
 	/**
