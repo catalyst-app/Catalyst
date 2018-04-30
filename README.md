@@ -1,5 +1,7 @@
 # Catalyst - Facilitating Commissions
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/catalyst-app/Catalyst.svg)](https://greenkeeper.io/)
+
 # Table of Contents
 
 - [Introduction](#introduction)
