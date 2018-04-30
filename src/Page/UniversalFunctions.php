@@ -38,10 +38,16 @@ class UniversalFunctions {
 	];
 
 	public static function getRequestUrl() : string {
+		if (php_sapi_name() == "cli") {
+			return '';
+		}
 		return $_SERVER["REQUEST_SCHEME"]."://".((isset($_SERVER["HTTP_X_FORWARDED_HOST"])) ? $_SERVER["HTTP_X_FORWARDED_HOST"] : $_SERVER["SERVER_NAME"].(($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") ? "" : ":".$_SERVER["SERVER_PORT"])).$_SERVER["REQUEST_URI"];
 	}
 
 	public static function getCanonicalRequestUrl() : string {
+		if (php_sapi_name() == "cli") {
+			return '';
+		}
 		// adds trailing slash
 		return self::getRequestUrl().(strpos(strrev(self::getRequestUrl()), "/") !== 0 ? "/" : "");
 	}
