@@ -46,16 +46,24 @@ echo UniversalFunctions::createHeading("About Us");
 					<p class="flow-text">Another defining feature of Catalyst is the lack of most social-media aspects.  While communicating with the artist can be done, it lacks the usual galleries, journal and comment features.  Other sites are made for social media - so let them handle that, and let us focus on what we do best: simplifying commissions.</p>
 					<p class="flow-text">There is a ton of additional, great features, some of them being:</p>
 					<ul class="browser-default">
-						<li class="flow-text">Character storages!</li>
-						<p class="flow-text no-margin">No more re-uploading ref-sheets, or having to send tons of refs!</p>
-						<p class="flow-text no-top-margin">Had something drawn by an artist previously? You can upload it and comment on what might deviate from the official ref, on what you think has turned out great, or things you want other artists to focus on, too!</p>
+						<li class="flow-text">
+							Character storages!
+							<p class="no-margin">No more re-uploading ref-sheets, or having to send tons of refs!</p>
+							<p class="no-top-margin">Had something drawn by an artist previously? You can upload it and comment on what might deviate from the official ref, on what you think has turned out great, or things you want other artists to focus on, too!</p>
+						</li>
 						<li class="flow-text">Commission tracking</li>
-						<li class="flow-text">Wish-Lists!</li>
-						<p class="flow-text no-top-margin">Want to commission someone, but don't have the funds yet? - No worries! Put them on your wish-list so you'll remember later!</p>
-						<li class="flow-text">No Charges, fees or cuts of any kind!</li>
-						<p class="flow-text no-top-margin">Catalyst is entirely free to use by both the artist and customer!</p>
-						<li class="flow-text">User-powered</li>
-						<p class="flow-text no-top-margin">We are powered by our community!  We make it easy for members of the community to share ideas for improvements, new features, etc!  We value your input!</p>
+						<li class="flow-text">
+							Wish-Lists!
+							<p class="no-top-margin">Want to commission someone, but don't have the funds yet? - No worries! Put them on your wish-list so you'll remember later!</p>
+						</li>
+						<li class="flow-text">
+							No Charges, fees or cuts of any kind!
+							<p class="no-top-margin">Catalyst is entirely free to use by both the artist and customer!</p>
+						</li>
+						<li class="flow-text">
+							User-powered
+							<p class="flow-text no-top-margin">We are powered by our community!  We make it easy for members of the community to share ideas for improvements, new features, etc!  We value your input!</p>
+						</li>
 					</ul>
 					<p class="flow-text">We love to hear all your ideas, so please, don't hesitate to share them with us!  You can find us at any of the social media platforms listed below!</p>
 					<p>This text was originally written by Naahva on Telegram - huge thanks to him!</p>
