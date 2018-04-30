@@ -4,6 +4,8 @@ $(document).on("click", ".toggle-btn", function(e) {
 	} else {
 		$(this).removeClass("on").addClass("off");
 	}
+    window.log(<?= json_encode(basename(__FILE__)) ?>, "Toggling button "+($(this).attr("data-key") ? $(this).attr("data-key") : $(this).attr("data-action")));
+	$(this).trigger("toggle", {newValue: $(this).hasClass("on")});
 });
 
 $(document).on("click", ".btn[href^=\"#\"]", function(e) {
@@ -17,11 +19,8 @@ $(document).on("mousedown", ".toggle-btn", function(e) {
 
 $(document).on("click", ".toggle-btn-invert-btn", function(e) {
 	e.preventDefault && e.preventDefault();
+    window.log(<?= json_encode(basename(__FILE__)) ?>, "Inverting button set "+$(this).parent().text());
 	$($(this).parent().next().children()).each(function(i, a) {
-		if ($(a).hasClass("off")) {
-			$(a).addClass("on").removeClass("off");
-		} else {
-			$(a).addClass("off").removeClass("on");
-		}
+		$(a).trigger("click");
 	});
 });
