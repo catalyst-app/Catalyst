@@ -1,5 +1,12 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8");
+
+define("ROOTDIR", "../../");
+define("REAL_ROOTDIR", "../../");
+
+require_once REAL_ROOTDIR."src/initializer.php";
+use \Catalyst\Controller;
+
 ?>
 // this garbage is dedicated to Lazlo (@ElongatedMuskrat)
 window.onerror = function(message, url, lineNumber) {  
@@ -37,9 +44,15 @@ window.onerror = function(message, url, lineNumber) {
 };
 
 window.log = function(category, message, bold=false) {
-	if (bold) {
-		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: 900; font-style: oblique;");
-	} else {
-		console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "");
-	}
+	<?php if (Controller::isDevelMode()): ?>
+		if (bold) {
+			console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: 900; font-style: oblique;");
+		} else {
+			console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "");
+		}
+	<?php else: ?>
+		if (bold) {
+			console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: 900; font-style: oblique;");
+		}
+	<?php endif; ?>
 };
