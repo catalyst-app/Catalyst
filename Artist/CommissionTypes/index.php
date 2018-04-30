@@ -51,7 +51,7 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 				<div id="save-commission-type-order" class="btn col s12 m4 l2">save</div>
 			</div>
 			<?php foreach ($commissionTypes as $commissionType): ?>
-				<div class="row">
+				<div class="row commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
 					<div class="col s6 offset-s3 m3 l2 center force-square-contents">
 						<?= $commissionType->getImage()->getStrictCircleHtml() ?>
 					</div>
