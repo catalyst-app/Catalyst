@@ -121,13 +121,13 @@ var humanFileSize = function(size) {
 				window.log(".on input for .markdown-field", $(this).attr("id")+" - clearing existing render timeout");
 				clearTimeout(window.markdownCurrentlyParsing[$(this).attr("id")]);
 			}
-			window.log(".on input for .markdown-field", $(this).attr("id")+" - setting render timeout for 3000ms");
+			window.log(".on input for .markdown-field", $(this).attr("id")+" - setting render timeout for 1500ms");
 			var field = this; // fucky JS shit
 			window.markdownCurrentlyParsing[$(this).attr("id")] = setTimeout(function() {
 				window.log("Markdown field surrogate", $(field).attr("id")+" - rendering");
 				$(".markdown-target[data-field="+$(field).attr("id")+"]").removeClass("rendered-markdown").addClass("raw-markdown").text($(field).val());
 				renderMarkdownArea($(".markdown-target[data-field="+$(field).attr("id")+"]"));
-			}, 3000);
+			}, 1500);
 		});
 
 		$(document).on("click", ".markdown-rendered-checkbox", function(e) {
