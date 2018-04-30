@@ -89,7 +89,7 @@ class Header {
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
-		[self::PROUCTION, ROOTDIR."css/overall.min.css?{commit}"],
+		[self::PRODUCTION, ROOTDIR."css/overall.min.css?{commit}"],
 		
 		// used for styling, uses rewrite color-######.css to get the approprite styles
 		[self::ALWAYS, ROOTDIR."css/color-".PAGE_COLOR.".css?{commit}"],
