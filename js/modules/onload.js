@@ -137,10 +137,12 @@ var humanFileSize = function(size) {
 		});
 
 		/* EASTER EGGS */
-		cheet('b u l g e', function () {
-			$(".brand-logo").html("OwO what's this?");
-			window.log("Easter egg", "smh my head if you found that you probably are in here already");
-		});
+		<?php if (Controller::isAprilFools()): ?>
+			cheet('b u l g e', function () {
+				$(".brand-logo").html("OwO what's this?");
+				window.log("Easter egg", "smh my head if you found that you probably are in here already");
+			});
+		<?php endif; ?>
 
 		/* FORMS */
 		$(document).on("change", ":checkbox", function(e) {
