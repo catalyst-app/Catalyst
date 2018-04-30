@@ -35,9 +35,12 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 <?php
 $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
 ?>
+		<div class="section no-top-margin">
+			<div id="reorder-commission-types-btn" class="right btn">reorder</div>
+			<br>
+		</div>
 		<div class="section">
 			<div class="row">
-				<p class="col s12">You may drag to reorder these.</p>
 				<div class="col s6 offset-s3 m3 l2 center force-square-contents">
 					<?= Image::getNewItemImage()->getStrictCircleHtml() ?>
 				</div>
@@ -48,7 +51,6 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 					<p>Create a new commission type</p>
 					<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
 				</div>
-				<div id="save-commission-type-order" class="btn col s12 m4 l2">save</div>
 			</div>
 			<?php foreach ($commissionTypes as $commissionType): ?>
 				<div class="row commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
