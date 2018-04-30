@@ -4181,7 +4181,8 @@ function process_inlines(tokens, state) {
         lastChar = text.charCodeAt(t.index - 1);
       } else {
         for (j = i - 1; j >= 0; j--) {
-          if (tokens[j].type !== 'text') { continue; }
+          if (tokens[j].type === 'softbreak' || tokens[j].type === 'hardbreak') break; // lastChar defaults to 0x20
+          if (tokens[j].type !== 'text') continue;
 
           lastChar = tokens[j].content.charCodeAt(tokens[j].content.length - 1);
           break;
@@ -4197,7 +4198,8 @@ function process_inlines(tokens, state) {
         nextChar = text.charCodeAt(pos);
       } else {
         for (j = i + 1; j < tokens.length; j++) {
-          if (tokens[j].type !== 'text') { continue; }
+          if (tokens[j].type === 'softbreak' || tokens[j].type === 'hardbreak') break; // lastChar defaults to 0x20
+          if (tokens[j].type !== 'text') continue;
 
           nextChar = tokens[j].content.charCodeAt(0);
           break;
