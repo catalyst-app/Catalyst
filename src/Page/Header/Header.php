@@ -15,7 +15,7 @@ class Header {
 	/**
 	 * JS libraries n such
 	 */
-	protected const SCRIPTS = [
+	public const SCRIPTS = [
 		// use minified versions in production
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js", 'crossorigin="anonymous"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", 'crossorigin="anonymous"'],
@@ -79,7 +79,7 @@ class Header {
 	/**
 	 * CSS-es
 	 */
-	protected const STYLES = [
+	public const STYLES = [
 		// materialize main
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.css"],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"],
@@ -88,7 +88,8 @@ class Header {
 		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Material+Icons"],
 		
 		// overall styles and such, mostly just small things
-		[self::ALWAYS, ROOTDIR."css/overall.css?{commit}"],
+		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
+		[self::PROUCTION, ROOTDIR."css/overall.min.css?{commit}"],
 		
 		// used for styling, uses rewrite color-######.css to get the approprite styles
 		[self::ALWAYS, ROOTDIR."css/color-".PAGE_COLOR.".css?{commit}"],
