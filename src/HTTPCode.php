@@ -48,6 +48,9 @@ class HTTPCode {
 		if (!array_key_exists($code, self::CODE_MAP)) {
 			throw new \InvalidArgumentException($code." is not a known HTTP status code");
 		}
+		if (php_sapi_name() == "cli") {
+			return;
+		}
 		header($_SERVER["SERVER_PROTOCOL"]." ".$code." ".self::CODE_MAP[$code]);
 	}
 }
