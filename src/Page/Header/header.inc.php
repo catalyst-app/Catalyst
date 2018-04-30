@@ -3,8 +3,10 @@ use \Catalyst\Page\Header\Header;
 use \Catalyst\Page\{UniversalFunctions, Values};
 ?>
 <!DOCTYPE html>
-<html data-rootdir="<?= ROOTDIR ?>">
+<html data-rootdir="<?= ROOTDIR ?>" lang="en">
 	<head>
+		<meta charset="utf-8" /><!-- must be in the first 1024 bytes yada yada -->
+
 		<title>
 			<?= htmlspecialchars(PAGE_TITLE) ?> | <?= Values::ROOT_TITLE ?> 
 		</title>
@@ -17,9 +19,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<link href="<?= $style ?>" rel="stylesheet" />
 <?php endforeach; ?>
 
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport" />
-		<meta charset="utf-8" />
 		<meta name="description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta name="keywords" content="Catalyst"/>
 		<meta name="subject" content="Art, furry, commissions, catalyst"/>
@@ -46,15 +46,14 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
-		<meta http-equiv="Page-Enter" content="RevealTrans(Duration=2.0,Transition=2)"/>
-		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)"/>
+		<meta http-equiv="Page-Enter" content="RevealTrans(Duration=2,Transition=2)"/>
+		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3,Transition=12)"/>
 		<meta name="mssmarttagspreventparsing" content="true"/>
-		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+		<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 		<meta name="msapplication-starturl" content="https://catalystapp.co/"/>
 		<meta name="msapplication-window" content="width=800;height=600"/>
 		<meta name="msapplication-navbutton-color" content="green"/>
 		<meta name="application-name" content="Catalyst"/>
-		<meta http-equiv="cleartype" content="on"/>
 
 		<!-- win 8+ -->
 		<meta name="application-name" content="Catalyst"/>
