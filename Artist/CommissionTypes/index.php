@@ -56,15 +56,15 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 						<?= $commissionType->getImage()->getStrictCircleHtml() ?>
 					</div>
 					<div class="col s12 m9 l10">
-						<h3 class="no-margin">
+						<h3 class="no-margin col s12">
 							<?= htmlspecialchars($commissionType->getName()) ?>
 						</h3>
-						<p class="flow-text no-margin">
+						<p class="flow-text no-margin col s12">
 							<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
 								<?= htmlspecialchars($commissionType->getBaseCost()) ?>
 							</span>
 						</p>
-						<p>
+						<p class="col s12">
 							<?= htmlspecialchars($commissionType->getBlurb()) ?>
 						</p>
 					</div>
