@@ -249,3 +249,10 @@
 - **91542** - An accepting checkbox is invalid
 - **91543** - Visibility checkbox is missing
 - **91544** - Visibility checkbox is invalid
+
+#### Commission type quick actions
+
+- **91601** - You are not an artist 
+- **91602** - Invalid commission type 
+- **91603** - You do not own this commission type 
+- **91604** - Invalid option 
