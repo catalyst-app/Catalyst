@@ -53,11 +53,11 @@ echo UniversalFunctions::createHeading("About Us");
 						</li>
 						<li class="flow-text">Commission tracking</li>
 						<li class="flow-text">
-							Wish-Lists!
+							Wish-lists!
 							<p class="no-top-margin">Want to commission someone, but don't have the funds yet? - No worries! Put them on your wish-list so you'll remember later!</p>
 						</li>
 						<li class="flow-text">
-							No Charges, fees or cuts of any kind!
+							No charges, fees or cuts of any kind!
 							<p class="no-top-margin">Catalyst is entirely free to use by both the artist and customer!</p>
 						</li>
 						<li class="flow-text">
@@ -65,7 +65,7 @@ echo UniversalFunctions::createHeading("About Us");
 							<p class="flow-text no-top-margin">We are powered by our community!  We make it easy for members of the community to share ideas for improvements, new features, etc!  We value your input!</p>
 						</li>
 					</ul>
-					<p class="flow-text">We love to hear all your ideas, so please, don't hesitate to share them with us!  You can find us at any of the social media platforms listed below!</p>
+					<p class="flow-text">There's even more than this in the plan, this is just the start!  Have any feedback or questions?  We'd love to hear all your ideas and answer any questions you may have, so please, don't hesitate to share them with us!  You can find us at any of the social media platforms listed below!</p>
 					<p>This text was originally written by Naahva on Telegram - huge thanks to him!</p>
 				</div>
 				<div class="divider"></div>
