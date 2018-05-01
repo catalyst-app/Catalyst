@@ -130,9 +130,11 @@ class CommissionType {
 	 * Get ID from token, if exists
 	 * 
 	 * @param string $token commission type token
+	 * @param bool $mustBeVisible if the CT must be visible
+	 *   Might be better to impliment in client endpoint
 	 * @return int ID if exists, -1 if not
 	 */
-	public static function getIdFromToken(string $token) : int {
+	public static function getIdFromToken(string $token, bool $mustBeVisible=true) : int {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
@@ -143,8 +145,10 @@ class CommissionType {
 		$whereClause->addToClause([new Column("TOKEN", self::getTable()), '=', $token]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 0]);
+		if ($mustBeVisible) {
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 0]);
+		}
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
