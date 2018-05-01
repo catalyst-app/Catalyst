@@ -252,7 +252,8 @@
 
 #### Commission type quick actions
 
-- **91601** - You are not an artist 
-- **91602** - Invalid commission type 
-- **91603** - You do not own this commission type 
-- **91604** - Invalid option 
+- **91601** - You are not an artist
+- **91602** - Invalid commission type
+- **91603** - You do not own this commission type
+- **91604** - Invalid option
+- **91605** - Invalid value

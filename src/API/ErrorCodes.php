@@ -269,6 +269,7 @@ class ErrorCodes {
 	const ERR_91602 = 'Invalid commission type';
 	const ERR_91603 = 'You do not own this commission type';
 	const ERR_91604 = 'Invalid option';
+	const ERR_91605 = 'Invalid new value';
 
 	/**
 	 * Get an associative array of code => message based on class constants
