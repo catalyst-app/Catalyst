@@ -90,6 +90,7 @@ class Color {
 		"18ffff"=>["cyan", "accent-2"],
 		"00e5ff"=>["cyan", "accent-3"],
 		"00b8d4"=>["cyan", "accent-4"],
+		"40e0d0"=>["cyan", "tree"],
 		"4db6ac"=>["teal", "lighten-2"],
 		"26a69a"=>["teal", "lighten-1"],
 		"009688"=>["teal", ""],
@@ -298,7 +299,8 @@ class Color {
 			'darken-4'=>'006064',
 			'accent-2'=>'18ffff',
 			'accent-3'=>'00e5ff',
-			'accent-4'=>'00b8d4'
+			'accent-4'=>'00b8d4',
+			'tree'=>'40e0d0'
 		],
 		'teal'=>[
 			'lighten-2'=>'4db6ac',
@@ -532,7 +534,8 @@ class Color {
 			'006064',
 			'18ffff',
 			'00e5ff',
-			'00b8d4'
+			'00b8d4',
+			'40e0d0'
 		],
 		'009688' => [
 			'4db6ac',

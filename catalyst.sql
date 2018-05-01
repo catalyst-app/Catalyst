@@ -252,6 +252,7 @@ INSERT INTO `colors` (`HEX`) VALUES(0x3d5afe);
 INSERT INTO `colors` (`HEX`) VALUES(0x3e2723);
 INSERT INTO `colors` (`HEX`) VALUES(0x3f51b5);
 INSERT INTO `colors` (`HEX`) VALUES(0x40c4ff);
+INSERT INTO `colors` (`HEX`) VALUES(0x40e0d0);
 INSERT INTO `colors` (`HEX`) VALUES(0x424242);
 INSERT INTO `colors` (`HEX`) VALUES(0x42a5f5);
 INSERT INTO `colors` (`HEX`) VALUES(0x43a047);
