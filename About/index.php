@@ -4,11 +4,11 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
+use \Catalyst\Controller;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
-
 
 define("PAGE_KEYWORD", Values::ABOUT_US[0]);
 define("PAGE_TITLE", Values::createTitle(Values::ABOUT_US[1], []));
@@ -659,7 +659,7 @@ echo UniversalFunctions::createHeading("About Us");
 	[
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:readrdo@gmail.com",
-		"DISP_NAME" => "@RD#8935",
+		"DISP_NAME" => "readrdo@gmail.com",
 	],
 ])) ?>
 						<li class="yellow-text flow-text no-bottom-margin"><strong><s>Coyote-Lovely</s></strong></li>
