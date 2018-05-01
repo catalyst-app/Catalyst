@@ -13,7 +13,6 @@ artist_images/*
 !artist_images/default.png
 !artist_images/.htaccess
 ssl
-tests/vendor
 
 subl-project.sublime-workspace
 
@@ -26,3 +25,5 @@ scripts/.emaillist
 scripts/.htmlemail
 scripts/.txtemail
 
+js/dist
+css/overall.min.css
