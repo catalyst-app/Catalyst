@@ -5,6 +5,7 @@ $(document).on("toggle", ".commission-type-quick-toggle-button", function(e, eve
 	window.log(<?= json_encode(basename(__FILE__)) ?>, token+" - "+action+" is changed to "+eventData.newValue);
 
 	var data = new FormData();
+	data.append("rootdir", $("html").attr("data-rootdir"));
 	data.append("token", token);
 	data.append("action", action);
 	data.append("value", eventData.newValue);
