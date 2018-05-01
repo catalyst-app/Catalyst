@@ -92,8 +92,8 @@ echo UniversalFunctions::createHeading("FAQ");
 					<ul class="browser-default">
 						<li class="flow-text">Every connection to our site is made with the newest SSL and TLS technology</li>
 						<ul>
-							<li>Our certificates, as of January 16, 2018, are issued by LetsEncrypt.  We score an A+ rating on Qualys SSL Server Test, scoring a 100% in Certificate integrity.</li>
-							<li>Additionally, we use HPKP (HTTP Public Key Pinning) and HSTS (HTTP Strict Transport Security) to ensure that your connection is always secure, and always to us.</li>
+							<li>Our certificates, as of April 30, 2018, are 4096-bit RSA issued by LetsEncrypt.  We score an A+ rating on Qualys SSL Server Test, scoring a 100% in Certificate integrity.</li>
+							<li>Additionally, we use HPKP (HTTP Public Key Pinning), preloaded HSTS (HTTP Strict Transport Security, hardcoded into browsers to force secure connections), and DNS CAA records to ensure that your connection is always secure, and always to us.</li>
 							<li>We also employ Diffie-Hellman (DH) Parameters and SNI in order to keep your connection secure.</li>
 						</ul>
 						<li class="flow-text">User passwords are never stored</li>
