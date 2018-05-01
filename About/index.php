@@ -76,7 +76,7 @@ echo UniversalFunctions::createHeading("About Us");
 						<div class="col s12 m6 hide-on-large-only">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
 								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst@catalystapp.co</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click Here</h5></span>
 							</a>
 							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
@@ -88,7 +88,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>discord.gg/EECUcnT</i></h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>EECUcnT</i></h5></span>
 							</a>
 							<a href="https://furaffinity.net/user/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fa_logo.png" style="width: 6rem;">
@@ -96,11 +96,11 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://catalystapp.deviantart.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp.deviantart.com</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
 							</a>
 							<a href="https://weasyl.com/~catalystapp/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/w_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">weasyl.com/~catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/~catalystapp</h5></span>
 							</a>
 							<a href="https://beta.furrynetwork.com/catalyst/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fn_logo.png" style="width: 6rem;">
@@ -122,19 +122,11 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://ko-fi.com/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/ko-fi_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">ko-fi.com/catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
 							</a>
 							<a href="https://patreon.com/catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">patreon.com/catalyst</h5></span>
-							</a>
-							<a href="https://t.me/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
-							</a>
-							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp_announcements</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst</h5></span>
 							</a>
 							<a href="https://plus.google.com/102762464787584663279" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gp_logo.png" style="width: 6rem;">
@@ -142,7 +134,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://catalystapp-co.tumblr.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co.tumblr.com</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co</h5></span>
 							</a>
 							<a href="https://facebook.com/catalystapp.co" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
@@ -152,11 +144,19 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
 							</a>
+							<a href="https://t.me/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
+							</a>
+							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@..._announcements</h5></span>
+							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
 								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst@catalystapp.co</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click Here</h5></span>
 							</a>
 							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/gh_logo.png" style="width: 6rem;">
@@ -168,15 +168,15 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/discord_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>discord.gg/EECUcnT</i></h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>EECUcnT</i></h5></span>
 							</a>
 							<a href="https://catalystapp.deviantart.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/da_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp.deviantart.com</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
 							</a>
 							<a href="https://weasyl.com/~catalystapp/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/w_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">weasyl.com/~catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/~catalystapp</h5></span>
 							</a>
 							<a href="https://steamcommunity.com/groups/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/sc_logo.png" style="width: 6rem;">
@@ -194,7 +194,7 @@ echo UniversalFunctions::createHeading("About Us");
 							</a>
 							<a href="https://ko-fi.com/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/ko-fi_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">ko-fi.com/catalystapp</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
 							</a>
 							<a href="https://beta.furrynetwork.com/catalyst/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fn_logo.png" style="width: 6rem;">
@@ -212,19 +212,11 @@ echo UniversalFunctions::createHeading("About Us");
 						<div class="col l4 hide-on-med-and-down">
 							<a href="https://patreon.com/catalyst" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/patreon_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">patreon.com/catalyst</h5></span>
-							</a>
-							<a href="https://t.me/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
-							</a>
-							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp_announcements</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst</h5></span>
 							</a>
 							<a href="https://catalystapp-co.tumblr.com/" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/t_logo.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co.tumblr.com</h5></span>
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co</h5></span>
 							</a>
 							<a href="https://facebook.com/catalystapp.co" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/fb_logo.png" style="width: 6rem;">
@@ -233,6 +225,14 @@ echo UniversalFunctions::createHeading("About Us");
 							<a href="https://reddit.com/r/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
+							</a>
+							<a href="https://t.me/catalystapp" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
+							</a>
+							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@..._announcements</h5></span>
 							</a>
 						</div>
 					</div>
