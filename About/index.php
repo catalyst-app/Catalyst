@@ -260,7 +260,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text">Fauxil is the founder of Catalyst!  He has developed most every aspect of the platform.  He oversees all operations and decisions as well.  He is studying Computer Science, and loves to code!  He especially loves backend web-developement or general programming, his primary language being PHP.</p>
 
-								<p class="flow-text">Image by blackmustang13 (<a href="http://www.furaffinity.net/user/blackmustang13/">Fur Affinity</a>)</p>
+								<p class="flow-text">Image by FawnButt (<a href="http://www.furaffinity.net/user/feve/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
@@ -304,7 +304,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -350,7 +350,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/disco.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/disco.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -385,7 +385,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -432,7 +432,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/soul.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/soul.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -483,7 +483,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/jiki.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/jiki.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
