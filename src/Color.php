@@ -90,7 +90,7 @@ class Color {
 		"18ffff"=>["cyan", "accent-2"],
 		"00e5ff"=>["cyan", "accent-3"],
 		"00b8d4"=>["cyan", "accent-4"],
-		"40e0d0"=>["cyan", "tree"],
+		"40e0d0"=>["cyan", "tree"], // he's super cute so he deserves his own color 💙
 		"4db6ac"=>["teal", "lighten-2"],
 		"26a69a"=>["teal", "lighten-1"],
 		"009688"=>["teal", ""],
