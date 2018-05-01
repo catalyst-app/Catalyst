@@ -175,6 +175,9 @@ var humanFileSize = function(size) {
 		/* TOGGLEABLE BUTTONS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'toggle_buttons.js'; ?>
 
+		/* COMMISSION TYPES QUICK ACTIONS */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'commission_types_quick_actions.js'; ?>
+
 		/* ARTIST PAGE LINK PREVIEW */
 		$(document).on("input", "#create-artist-page-form-input-url, #edit-artist-page-form-input-url", function() {
 			$("#artist-page-url-sample").text($("#artist-page-url-sample").attr("data-base")+($(this).val() != "" ? $(this).val()+"/" : ""));
