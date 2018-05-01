@@ -15,12 +15,12 @@ use \InvalidArgumentException;
 class CommissionType {
 	use DatabaseModelTrait, HasImageTrait, HasImageSetTrait;
 
-		["visible", "isVisible"],
-		["quotes", "isAcceptingQuotes"],
-		["requests", "isAcceptingRequests"],
-		["trades", "isAcceptingTrades"],
-		["commissions", "isAcceptingCommissions"],
 	public const QUICK_TOGGLE_BUTTONS = [
+		["visible", "isVisible", "VISIBLE"],
+		["quotes", "isAcceptingQuotes", "ACCEPTING_QUOTES"],
+		["requests", "isAcceptingRequests", "ACCEPTING_REQUESTS"],
+		["trades", "isAcceptingTrades", "ACCEPTING_TRADES"],
+		["commissions", "isAcceptingCommissions", "ACCEPTING_COMMISSIONS"],
 	];
 
 	/**

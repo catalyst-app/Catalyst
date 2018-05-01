@@ -264,6 +264,12 @@ class ErrorCodes {
 	const ERR_91543 = 'An unknown error occured';
 	const ERR_91544 = 'An unknown error occured';
 
+	// commission type quick actions (may be merged with edit later, idk)
+	const ERR_91601 = 'You are not an artist';
+	const ERR_91602 = 'Invalid commission type';
+	const ERR_91603 = 'You do not own this commission type';
+	const ERR_91604 = 'Invalid option';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 
