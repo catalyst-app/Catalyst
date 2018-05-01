@@ -78,6 +78,11 @@ if ($returnCode) {
 
 $minifiedCss = (new Minifier())->run($output);
 
+$minifiedCss = trim(<<<PHP_HEADER_FOR_MINIFIED_CSS
+<?php header("Content-Type: text/css; charset=UTF-8");header("Cache-Control: max-age=86400");__halt_compiler();?>
+PHP_HEADER_FOR_MINIFIED_CSS
+).$minifiedCss;
+
 echo "Minified overall.css (".strlen($output).") -> overall.min.css (".strlen($minifiedCss).")\n";
 
 file_put_contents(REAL_ROOTDIR."css/overall.min.css", $minifiedCss);
