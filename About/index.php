@@ -249,7 +249,7 @@ echo UniversalFunctions::createHeading("About Us");
 					
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/fauxil.png');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/fauxil.jpg?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
