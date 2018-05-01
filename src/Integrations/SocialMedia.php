@@ -103,6 +103,7 @@ class SocialMedia {
 			['/(furaffinity\.net|facdn\.net)$/', 'FURAFFINITY'],
 			['/furrynetwork\.com$/', 'FURRYNETWORK'],
 			['/(googleusercontent\.com|plus\.google\.com)$/', 'GPLUS'],
+			['/github\.(io|com)$/', 'GITHUB'],
 			['/inkbunny\.net$/', 'INKBUNNY'],
 			['/(instagram\.com|cdninstagram\.com)$/', 'INSTAGRAM'],
 			['/ko-fi\.com$/', 'KOFI'],
