@@ -152,6 +152,10 @@ echo UniversalFunctions::createHeading("About Us");
 								<img src="<?= ROOTDIR ?>/img/telegram_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@..._announcements</h5></span>
 							</a>
+							<a href="https://trello.com/b/X37KEv4A/catalyst" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/trello_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click here</h5></span>
+							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
@@ -207,6 +211,10 @@ echo UniversalFunctions::createHeading("About Us");
 							<a href="https://reddit.com/user/catalystapp" class="black-text center col s12">
 								<img src="<?= ROOTDIR ?>/img/reddit_logo.png" style="width: 6rem;">
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/u/catalystapp</h5></span>
+							</a>
+							<a href="https://trello.com/b/X37KEv4A/catalyst" class="black-text center col s12">
+								<img src="<?= ROOTDIR ?>/img/trello_logo.png" style="width: 6rem;">
+								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click here</h5></span>
 							</a>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
