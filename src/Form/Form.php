@@ -622,7 +622,7 @@ class Form {
 			Response::sendErrorResponse(10002, ErrorCodes::ERR_10002);
 		}
 		// https://stackoverflow.com/a/9908619/
-		if ($this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($requestArr) === 0) {
+		if ($checkContentLength && $this->getMethod() == self::POST && intval($_SERVER['CONTENT_LENGTH']) > 0 && count($requestArr) === 0) {
 			foreach ($this->getFields() as $field) {
 				if ($field instanceof ImageField) {
 					$field->throwTooLargeError();
