@@ -36,7 +36,19 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
 ?>
 		<div class="section no-top-margin">
-			<div id="reorder-commission-types-btn" class="right btn">reorder</div>
+			<div id="reorder-commission-types-btn" class="right btn modal-trigger" data-target="commission-type-reorder-modal">reorder</div>
+			<div id="commission-type-reorder-modal" class="modal rearrange-image-modal">
+				<div class="modal-content">
+					<h5>Drag the thumbnails to rearrange them</h5>
+					<div class="commission-type-rearranger row" id="commission-type-rearranger">
+						<?php foreach ($commissionTypes as $commissionType): ?>
+							<div class="center force-square-contents col s4 m2" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+								<?= $commissionType->getImage()->getStrictCircleHtml(["tooltipped"], ["margin" => "1em"], ["data-tooltip" => $commissionType->getName()]) ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
 			<br>
 		</div>
 		<div class="section">
