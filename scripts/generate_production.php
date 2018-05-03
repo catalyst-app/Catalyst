@@ -33,8 +33,8 @@ foreach ($scripts as $script) {
 			$folderEndPos = strpos(($withoutParameters), "js/modules/")+11;
 			$withoutFolder = substr(($withoutParameters), $folderEndPos);
 
-			$output;
-			$returnCode;
+			$output = '';
+			$returnCode = 0;
 
 			echo "Executing ".'cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder."\n";
 
@@ -69,8 +69,8 @@ file_put_contents(REAL_ROOTDIR."js/dist/packed.min.js", $aggregated);
 
 echo "Stored minified JS in js/dist/packed.min.js\n";
 
-$output;
-$returnCode;
+$output = '';
+$returnCode = 0;
 
 exec('cd '.REAL_ROOTDIR.'css/ && php overall.css', $output, $returnCode);
 
