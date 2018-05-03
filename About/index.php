@@ -273,34 +273,99 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
-		"NETWORK" => "SELF",
-		"SERVICE_URL" => ROOTDIR."User/Fauxil",
-		"DISP_NAME" => "Fauxil",
+		'NETWORK' => 'SELF',
+		'SERVICE_URL' => 'https://catalystapp.co/',
+		'DISP_NAME' => 'I built this!',
 	],
 	[
-		"NETWORK" => "TWITTER",
-		"SERVICE_URL" => "https://twitter.com/Fauxil_Fox",
-		"DISP_NAME" => "@Fauxil_Fox",
+		'NETWORK' => 'DOMAIN',
+		'SERVICE_URL' => 'http://xn--fp8h58f.ws',
+		'DISP_NAME' => 'Fauxkai Site!',
 	],
 	[
-		"NETWORK" => "TELEGRAM",
-		"SERVICE_URL" => "https://t.me/Fauxil_Fox",
-		"DISP_NAME" => "@Fauxil_Fox",
+		'NETWORK' => 'EMAIL',
+		'SERVICE_URL' => 'fauxil@catalystapp.co',
+		'DISP_NAME' => '@catalystapp.co',
 	],
 	[
-		"NETWORK" => "DISCORD",
-		"SERVICE_URL" => null,
-		"DISP_NAME" => "@Fauxil_Fox#5881",
+		'NETWORK' => 'DISCORD',
+		'SERVICE_URL' => NULL,
+		'DISP_NAME' => 'Fauxil_Fox#5881',
 	],
 	[
-		"NETWORK" => "FURAFFINITY",
-		"SERVICE_URL" => "http://furaffinity.net/user/fauxilfox/",
-		"DISP_NAME" => "~Fauxil_Fox",
+		'NETWORK' => 'EMAIL',
+		'SERVICE_URL' => 'fauxil_fox@furmail.net',
+		'DISP_NAME' => '@furmail.net',
 	],
 	[
-		"NETWORK" => "EMAIL",
-		"SERVICE_URL" => "mailto:fauxil@catalystapp.co",
-		"DISP_NAME" => "fauxil@catalystapp.co",
+		'NETWORK' => 'EMAIL',
+		'SERVICE_URL' => 'hostmaster@catalystapp.co',
+		'DISP_NAME' => 'hostmaster',
+	],
+	[
+		'NETWORK' => 'EMAIL',
+		'SERVICE_URL' => 'webmaster@catalystapp.co',
+		'DISP_NAME' => 'webmaster',
+	],
+	[
+		'NETWORK' => 'EMAIL',
+		'SERVICE_URL' => 'postmaster@catalystapp.co',
+		'DISP_NAME' => 'postmaster',
+	],
+	[
+		'NETWORK' => 'FURAFFINITY',
+		'SERVICE_URL' => 'https://furaffinity.net/user/fauxilfox',
+		'DISP_NAME' => '~Fauxil_Fox',
+	],
+	[
+		'NETWORK' => 'INSTAGRAM',
+		'SERVICE_URL' => 'https://instagram.com/fauxil_fox',
+		'DISP_NAME' => '@fauxil_fox',
+	],
+	[
+		'NETWORK' => 'INSTAGRAM',
+		'SERVICE_URL' => 'https://instagram.com/furry_irl',
+		'DISP_NAME' => '@furry_irl meme bot',
+	],
+	[
+		'NETWORK' => 'KOFI',
+		'SERVICE_URL' => 'https://ko-fi.com/catalystapp',
+		'DISP_NAME' => 'Ko-Fi',
+	],
+	[
+		'NETWORK' => 'PATREON',
+		'SERVICE_URL' => 'https://patreon.com/catalyst',
+		'DISP_NAME' => 'Patreon',
+	],
+	[
+		'NETWORK' => 'PAYPAL',
+		'SERVICE_URL' => NULL,
+		'DISP_NAME' => 'stglolin5@gmail.com',
+	],
+	[
+		'NETWORK' => 'REDDIT',
+		'SERVICE_URL' => 'https://reddit.com/u/fauxil_fox',
+		'DISP_NAME' => 'Reddit',
+	],
+	[
+		'NETWORK' => 'SOUNDCLOUD',
+		'SERVICE_URL' => 'https://soundcloud.com/fauxil-fox/',
+		'DISP_NAME' => 'sick jamzz',
+	],
+	[
+		'NETWORK' => 'DEVIANTART',
+		'SERVICE_URL' => 'https://fauxil-fox.deviantart.com/',
+		'DISP_NAME' => 'DA',
+	],
+	[
+		'NETWORK' => 'TELEGRAM',
+		'SERVICE_URL' => 'https://telegram.dog/Fauxil_Fox',
+		'DISP_NAME' => '@Fauxil_Fox',
+	],
+	[
+		'NETWORK' => 'TWITTER',
+		'SERVICE_URL' => 'https://twitter.com/fauxilfox',
+		'DISP_NAME' => '@fauxilfox',
 	],
 ])) ?>
 							</div>
