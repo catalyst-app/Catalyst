@@ -64,34 +64,36 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 					<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
 				</div>
 			</div>
-			<?php foreach ($commissionTypes as $commissionType): ?>
-				<div class="row commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
-					<div class="col s6 offset-s3 m3 l2 center force-square-contents">
-						<?= $commissionType->getImage()->getStrictCircleHtml() ?>
-					</div>
-					<div class="col s12 m9 l10">
-						<h3 class="no-margin col s12">
-							<?= htmlspecialchars($commissionType->getName()) ?>
-						</h3>
-						<p class="flow-text no-margin col s12">
-							<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
-								<?= htmlspecialchars($commissionType->getBaseCost()) ?>
-							</span>
-						</p>
-						<p class="col s12">
-							<?= htmlspecialchars($commissionType->getBlurb()) ?>
-						</p>
-						<div class="no-bottom-margin col s12">
-							<span>Quick toggles:</span>
-							<?php foreach (CommissionType::QUICK_TOGGLE_BUTTONS as $button): ?>
-								<div class="btn toggle-btn-set-button toggle-btn commission-type-quick-toggle-button <?= htmlspecialchars(call_user_func([$commissionType, $button[1]]) ? "on" : "off") ?>" data-action="<?= htmlspecialchars($button[0]) ?>">
-									<?= htmlspecialchars($button[0]) ?>
-								</div>
-							<?php endforeach; ?>
+			<div class="user-commission-types">
+				<?php foreach ($commissionTypes as $commissionType): ?>
+					<div class="row commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+						<div class="col s6 offset-s3 m3 l2 center force-square-contents">
+							<?= $commissionType->getImage()->getStrictCircleHtml() ?>
+						</div>
+						<div class="col s12 m9 l10">
+							<h3 class="no-margin col s12">
+								<?= htmlspecialchars($commissionType->getName()) ?>
+							</h3>
+							<p class="flow-text no-margin col s12">
+								<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
+									<?= htmlspecialchars($commissionType->getBaseCost()) ?>
+								</span>
+							</p>
+							<p class="col s12">
+								<?= htmlspecialchars($commissionType->getBlurb()) ?>
+							</p>
+							<div class="no-bottom-margin col s12">
+								<span>Quick toggles:</span>
+								<?php foreach (CommissionType::QUICK_TOGGLE_BUTTONS as $button): ?>
+									<div class="btn toggle-btn-set-button toggle-btn commission-type-quick-toggle-button <?= htmlspecialchars(call_user_func([$commissionType, $button[1]]) ? "on" : "off") ?>" data-action="<?= htmlspecialchars($button[0]) ?>">
+										<?= htmlspecialchars($button[0]) ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
 						</div>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</div>
 		</div>
 <?php
 endif;
