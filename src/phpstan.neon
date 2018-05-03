@@ -2,6 +2,7 @@ parameters:
 	excludes_analyse:
 		- src/vendor
 		- src/phpqrcode.php
+		- scripts/
 	bootstrap: src/phpstan-init.php
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
