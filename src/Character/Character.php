@@ -116,6 +116,8 @@ class Character {
 				return self::getIdFromToken("sq641rb");
 			case 'lykai':
 				return self::getIdFromToken("fwce5ym");
+			case 'toish':
+				return self::getIdFromToken("53h1ggw”);
 		}
 
 		if (!preg_match("/".\Catalyst\Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
