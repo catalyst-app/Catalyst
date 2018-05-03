@@ -24,6 +24,7 @@ error_log
 scripts/.emaillist
 scripts/.htmlemail
 scripts/.txtemail
+scripts/PatronReport*.csv
 
 js/dist
 css/overall.min.css
