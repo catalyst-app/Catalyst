@@ -49,6 +49,10 @@ if (!file_exists(".emaillist")) {
 
 sort($emails);
 
+// lowercase and uniq
+$emails = array_map("strtolower", $emails);
+$emails = array_unique($emails);
+
 foreach ($emails as $email) {
 	if (!preg_match('/^.{1,254}@.{1,254}\..{1,32}$/', $email) || strlen($email) > 255) {
 		throw new InvalidArgumentException($email." is not a valid e-mail address");
