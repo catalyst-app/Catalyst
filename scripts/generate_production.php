@@ -83,7 +83,7 @@ if ($returnCode) {
 $minifiedCss = (new Minifier())->run($output);
 
 $minifiedCss = trim(<<<PHP_HEADER_FOR_MINIFIED_CSS
-<?php header("Content-Type: text/css; charset=UTF-8");header("Cache-Control: max-age=86400");__halt_compiler();?>
+<?php header("Content-Type: text/css; charset=UTF-8");header("Cache-Control: max-age=86400");?>
 PHP_HEADER_FOR_MINIFIED_CSS
 ).$minifiedCss;
 
