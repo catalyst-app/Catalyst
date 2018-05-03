@@ -16,6 +16,9 @@
 - **90002** - Invalid email was passed
 - **90003** - No context was passed
 - **90004** - An invalid context was passed
+- **90005** - Invalid request information checkbox
+- **90006** - No CAPTCHA was sent
+- **90007** - Invalid CAPTCHA
 
 #### Login
 

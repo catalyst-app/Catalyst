@@ -45,6 +45,9 @@ class ErrorCodes {
 	const ERR_90002 = 'Invalid email';
 	const ERR_90003 = 'No context was entered';
 	const ERR_90004 = 'Invalid context';
+	const ERR_90005 = 'Invalid/missing information request checkbox';
+	const ERR_90006 = 'No captcha was sent';
+	const ERR_90007 = 'Invalid captcha';
 
 	// login
 	const ERR_90101 = 'No username was entered';
