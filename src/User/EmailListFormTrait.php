@@ -4,8 +4,9 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\AutoClosingModalCompletionAction;
-use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues,CaptchaField,CheckboxField,EmailField,TextField};
 use \Catalyst\Form\Form;
+use \Catalyst\Secrets;
 
 /**
  * Email list form
@@ -47,12 +48,32 @@ trait EmailListFormTrait {
 		$contextField->setDistinguisher("context");
 		$contextField->setLabel("Name or other information");
 		$contextField->setRequired(true);
-		$contextField->setAutocompleteAttribute(AutocompleteValues::ON);
+		$contextField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
 		$contextField->addError(90003, ErrorCodes::ERR_90003);
 		$contextField->setMissingErrorCode(90003);
 		$contextField->addError(90004, ErrorCodes::ERR_90004);
 		$contextField->setInvalidErrorCode(90004);
 		$form->addField($contextField);
+
+		$informationRequestField = new CheckboxField();
+		$informationRequestField->setDistinguisher("request-info");
+		$informationRequestField->setLabel("I would like a staff member to personally contact me with additional information about our services");
+		$informationRequestField->setRequired(false);
+		$informationRequestField->addError(90005, ErrorCodes::ERR_90005);
+		$informationRequestField->setMissingErrorCode(90005);
+		$informationRequestField->setInvalidErrorCode(90005);
+		$form->addField($informationRequestField);
+
+		$captchaField = new CaptchaField();
+		$captchaField->setDistinguisher("captcha");
+		$captchaField->setRequired(true);
+		$captchaField->setSiteKey("6LdaGlcUAAAAAE0HWwoFT4Y81ifwLV6nCsvQobk4");
+		$captchaField->setSecretKey(Secrets::EMAIL_LIST_CAPTCHA_SECRET);
+		$captchaField->addError(90006, ErrorCodes::ERR_90006);
+		$captchaField->setMissingErrorCode(90006);
+		$captchaField->addError(90007, ErrorCodes::ERR_90007);
+		$captchaField->setInvalidErrorCode(90007);
+		$form->addField($captchaField);
 
 		return $form;
 	}
