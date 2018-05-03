@@ -61,6 +61,10 @@ foreach ($scripts as $script) {
 
 echo "Final JS minified ".$totalUnminified." -> ".strlen($aggregated)." bytes\n";
 
+if (!file_exists(REAL_ROOTDIR."js/dist/")) {
+	mkdir(REAL_ROOTDIR."js/dist/");
+}
+
 file_put_contents(REAL_ROOTDIR."js/dist/packed.min.js", $aggregated);
 
 echo "Stored minified JS in js/dist/packed.min.js\n";
