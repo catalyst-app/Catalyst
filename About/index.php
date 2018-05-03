@@ -345,6 +345,16 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "@Lykai#2495",
 	],
 	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/GoldDingus",
+		"DISP_NAME" => "@GoldDingus",
+	],
+	[
+		"NETWORK" => "SELF",
+		"SERVICE_URL" => "https://beta.catalystapp.co/Character/View/Lykai",
+		"DISP_NAME" => "Reference images",
+	],
+	[
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:lykai@catalystapp.co",
 		"DISP_NAME" => "lykai@catalystapp.co",
