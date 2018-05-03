@@ -50,7 +50,7 @@ if (!file_exists(".emaillist")) {
 sort($emails);
 
 foreach ($emails as $email) {
-	if (!preg_match('/^.{2,254}@.{2,254}\..{2,32}$/', $email) || strlen($email) > 255) {
+	if (!preg_match('/^.{1,254}@.{1,254}\..{1,32}$/', $email) || strlen($email) > 255) {
 		throw new InvalidArgumentException($email." is not a valid e-mail address");
 	}
 }
