@@ -13,7 +13,7 @@ window.encryptString = function(a) {
 	var paddedInput /* owo */ = aesjs.padding.pkcs7.pad(inputAsBytes);
 
 	// thanks to toish for, once again, fixing my shit JS
-	var aesKeyWords = sjcl.random.randomWords(32/4);
+	var aesKeyWords = sjcl.random.randomWords(32/4, 10);
 	var aesKey = [];
 	for (var i = 0; i < aesKeyWords.length; i++) {
 		for (var j = 0; j < 4; j++) {
@@ -23,7 +23,7 @@ window.encryptString = function(a) {
 		}
 	}
 
-	var ivWords = sjcl.random.randomWords(16/4);
+	var ivWords = sjcl.random.randomWords(16/4, 10);
 	var iv = [];
 	for (var i = 0; i < ivWords.length; i++) {
 		for (var j = 0; j < 4; j++) {
