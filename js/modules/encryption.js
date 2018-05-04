@@ -5,10 +5,6 @@ die("TESTING - DO NOT USE OR INCLUDE encryption.js");
 window.encryption = new JSEncrypt();
 window.encryption.setPublicKey(<?= json_encode(Secrets::RSA_PUBLIC) ?>);
 
-window._randomByte = function() {
-	return Math.floor(Math.random()*(0xff+1));
-}
-
 window.dec2hex = function(i) {
 	return (i + 0x100).toString(16).substr(-2).toLowerCase();
 }
@@ -18,14 +14,24 @@ window.encryptString = function(a) {
 	var paddedInput /* owo */ = aesjs.padding.pkcs7.pad(inputAsBytes);
 
 	// thanks to toish for, once again, fixing my shit JS
+	var aesKeyWords = sjcl.random.randomWords(32/4);
 	var aesKey = [];
-	for (var i = 0; i < 32; i++) {
-		aesKey.push(_randomByte());
+	for (var i = 0; i < aesKeyWords.length; i++) {
+		for (var j = 0; j < 4; j++) {
+			var byte = aesKeyWords[i] & 0xff;
+			aesKey.push(byte);
+			aesKeyWords[i] = (aesKeyWords[i] - byte) / 256;
+		}
 	}
 
+	var ivWords = sjcl.random.randomWords(16/4);
 	var iv = [];
-	for (var i = 0; i < 16; i++) {
-		iv.push(_randomByte());
+	for (var i = 0; i < ivWords.length; i++) {
+		for (var j = 0; j < 4; j++) {
+			var byte = ivWords[i] & 0xff;
+			iv.push(byte);
+			ivWords[i] = (ivWords[i] - byte) / 256;
+		}
 	}
 
 	var aesCbc = new aesjs.ModeOfOperation.cbc(aesKey, iv);

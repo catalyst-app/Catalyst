@@ -32,6 +32,9 @@ class Header {
 		// [self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.js", 'crossorigin="anonymous"'],
 		// [self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.min.js", 'crossorigin="anonymous"'],
 
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.min.js", 'crossorigin="anonymous"'],
+
 		// not vital, easter egg
 		[self::DEVEL, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.js", "defer", 'crossorigin="anonymous"'],
 		[self::PRODUCTION, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"'],
