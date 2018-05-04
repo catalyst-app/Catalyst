@@ -16,7 +16,7 @@ use \Catalyst\Tokens;
 
 Endpoint::init(true, 1);
 
-FormRepository::getNewCommissionTypeForm()->checkServerSide($_POST);
+FormRepository::getNewCommissionTypeForm()->checkServerSide();
 
 if (!$_SESSION["user"]->isArtist()) {
 	HTTPCode::set(400);
