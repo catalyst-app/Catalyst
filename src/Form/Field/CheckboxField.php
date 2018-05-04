@@ -102,7 +102,7 @@ class CheckboxField extends AbstractField {
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
-			if ($this->getMethod() == Form::POST) {
+			if ($this->getForm()->getMethod() == Form::POST) {
 				$requestArr = $_POST;
 			} else {
 				$requestArr = $_GET;
