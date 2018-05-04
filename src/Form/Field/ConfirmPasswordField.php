@@ -71,9 +71,9 @@ class ConfirmPasswordField extends PasswordField {
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
 			if ($this->getForm()->getMethod() == Form::POST) {
-				$requestArr = $_POST;
+				$requestArr = &$_POST;
 			} else {
-				$requestArr = $_GET;
+				$requestArr = &$_GET;
 			}
 		}
 		if (is_null($this->getLinkedField())) {

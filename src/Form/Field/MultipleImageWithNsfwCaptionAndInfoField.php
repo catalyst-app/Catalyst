@@ -405,9 +405,9 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
 			if ($this->getForm()->getMethod() == Form::POST) {
-				$requestArr = $_POST;
+				$requestArr = &$_POST;
 			} else {
-				$requestArr = $_GET;
+				$requestArr = &$_GET;
 			}
 		}
 		if ($this->isRequired()) {

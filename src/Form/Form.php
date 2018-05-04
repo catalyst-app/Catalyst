@@ -616,9 +616,9 @@ class Form {
 	public function checkServerSide(?array &$requestArr=null, bool $checkContentLength=true) : void {
 		if (is_null($requestArr)) {
 			if ($this->getMethod() == Form::POST) {
-				$requestArr = $_POST;
+				$requestArr = &$_POST;
 			} else {
-				$requestArr = $_GET;
+				$requestArr = &$_GET;
 			}
 		}
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($this->getMethodString())) {
