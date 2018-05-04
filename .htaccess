@@ -18,10 +18,12 @@
 <IfModule mod_php5.c>
 	php_value upload_max_filesize 10M 
 	php_value post_max_size 10M
+	php_value variables_order ""
 </IfModule>
 <IfModule mod_php7.c>
 	php_value upload_max_filesize 10M 
 	php_value post_max_size 10M
+	php_value variables_order ""
 </IfModule>
 
 Options -Indexes
