@@ -6,7 +6,7 @@ window.encryption.setPublicKey(<?= json_encode(Secrets::RSA_PUBLIC) ?>);
 
 window.dec2hex = function(i) {
 	return (i + 0x100).toString(16).substr(-2).toLowerCase();
-}
+};
 
 window.encryptString = function(a) {
 	var inputAsBytes = aesjs.utils.utf8.toBytes(a);
@@ -62,4 +62,4 @@ window.encryptString = function(a) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "returning "+JSON.stringify(finalResult).length+" byte JSON payload");
 
 	return JSON.stringify(finalResult);
-}
+};
