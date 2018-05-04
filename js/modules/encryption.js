@@ -12,6 +12,8 @@ window.encryptString = function(a) {
 	var inputAsBytes = aesjs.utils.utf8.toBytes(a);
 	var paddedInput /* owo */ = aesjs.padding.pkcs7.pad(inputAsBytes);
 
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "input padded from "+inputAsBytes.length+" bytes to "+paddedInput.length+" bytes");
+
 	// thanks to toish for, once again, fixing my shit JS
 	var aesKeyWords = sjcl.random.randomWords(32/4, 10);
 	var aesKey = [];
@@ -33,6 +35,8 @@ window.encryptString = function(a) {
 		}
 	}
 
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "keys and IV generated");
+
 	var aesCbc = new aesjs.ModeOfOperation.cbc(aesKey, iv);
 
 	var output = aesCbc.encrypt(paddedInput);
@@ -47,12 +51,16 @@ window.encryptString = function(a) {
 		binaryIv += ("" + dec2hex(iv[i]));
 	}
 
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "cipherText produced: "+safeOutput);
+
 	var finalResult = {
 		aesKey: window.encryption.encrypt(binaryKey),
 		aesIv: window.encryption.encrypt(binaryIv),
 		lengthDifference: window.encryption.encrypt((paddedInput.length-inputAsBytes.length).toString()), // encrypt this as someone may use it maliciously 
 		cipherText: safeOutput
 	};
+
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "returning "+JSON.stringify(finalResult).length+" byte JSON payload");
 
 	return JSON.stringify(finalResult);
 }
