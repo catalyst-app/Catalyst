@@ -2,6 +2,7 @@
 
 namespace Catalyst;
 
+// DEPRECATED
 class Response {
 	public static function generateSuccessResponse(int $httpCode, string $message) : string {
 		return json_encode([
