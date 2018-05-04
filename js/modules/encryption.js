@@ -50,10 +50,7 @@ window.encryptString = function(a) {
 	var finalResult = {
 		aesKey: window.encryption.encrypt(binaryKey),
 		aesIv: window.encryption.encrypt(binaryIv),
-		rawKey: binaryKey,
-		rawIv: binaryIv,
-		arrKey: aesKey,
-		arrIv: iv,
+		lengthDifference: window.encryption.encrypt((paddedInput.length-inputAsBytes.length).toString()), // encrypt this as someone may use it maliciously 
 		cipherText: safeOutput
 	};
 
