@@ -1,5 +1,6 @@
 <?php
 use \Catalyst\Secrets;
+die("TESTING - DO NOT USE OR INCLUDE encryption.js");
 ?>
 window.encryption = new JSEncrypt();
 window.encryption.setPublicKey(<?= json_encode(Secrets::RSA_PUBLIC) ?>);

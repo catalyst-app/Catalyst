@@ -220,8 +220,8 @@ var humanFileSize = function(size) {
 			}
 		});
 
-		/* SOCIAL MEDIA */
-		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'encryption.js'; ?>
+		/* ENCRPYTION */
+		<?php /*require_once __DIR__.DIRECTORY_SEPARATOR.'encryption.js';*/ ?>
 	});
 })(jQuery);
 
