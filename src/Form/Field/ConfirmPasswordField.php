@@ -2,6 +2,7 @@
 
 namespace Catalyst\Form\Field;
 
+use \Catalyst\API\TransitEncryption;
 use \Catalyst\Form\Form;
 use \InvalidArgumentException;
 
@@ -82,6 +83,7 @@ class ConfirmPasswordField extends PasswordField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
+		$requestArr[$this->getDistinguisher()] = TransitEncryption::decryptAes($requestArr[$this->getDistinguisher()]);
 		if ($this->isRequired()) {
 			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();

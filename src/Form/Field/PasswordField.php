@@ -3,6 +3,7 @@
 namespace Catalyst\Form\Field;
 
 use \Catalyst\Form\Form;
+use \Catalyst\API\TransitEncryption;
 
 /**
  * Represents a text field
@@ -108,7 +109,7 @@ class PasswordField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', btoa($('.json_encode("#".$this->getId()).').val()));'; // yes, this is half-assing it.  it works, and is better than 99% of sites
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', encryptString(btoa($('.json_encode("#".$this->getId()).').val())));'; // yes, this is half-assing it.  it works, and is better than 99% of sites
 	}
 
 	/**
@@ -127,6 +128,7 @@ class PasswordField extends AbstractField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
+		$requestArr[$this->getDistinguisher()] = TransitEncryption::decryptAes($requestArr[$this->getDistinguisher()]);
 		if ($this->isRequired()) {
 			if (empty($requestArr[$this->getDistinguisher()])) {
 				$this->throwMissingError();
