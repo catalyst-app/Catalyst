@@ -124,7 +124,11 @@ class CaptchaField extends AbstractField {
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
-			$requestArr = &$_REQUEST;
+			if ($this->getMethod() == Form::POST) {
+				$requestArr = $_POST;
+			} else {
+				$requestArr = $_GET;
+			}
 		}
 		if (!$this->isRequired()) {
 			throw new LogicException("CaptchaField must be required");
