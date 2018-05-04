@@ -221,7 +221,7 @@ var humanFileSize = function(size) {
 		});
 
 		/* ENCRPYTION */
-		<?php /*require_once __DIR__.DIRECTORY_SEPARATOR.'encryption.js';*/ ?>
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'encryption.js'; ?>
 	});
 })(jQuery);
 
