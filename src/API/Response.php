@@ -50,7 +50,8 @@ class Response {
 			"data" => $data,
 			"_debug" => Controller::isDevelMode() ? [
 				"_trace" => Controller::getTrace(true),
-				"_request" => (isset($_REQUEST)) ? $_REQUEST : [],
+				"_get" => (isset($_GET)) ? $_GET : [],
+				"_post" => (isset($_POST)) ? $_POST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION
 			] : "Production",
