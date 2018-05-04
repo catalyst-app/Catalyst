@@ -37,7 +37,7 @@ $(document).on("click", <?= json_encode('.'.SubformMultipleEntryFieldWithRows::A
 
 window.log(<?= json_encode(basename(__FILE__)) ?>, "main - registering "+$(".subform-entry-container").length+" subforms with sortable");
 
-function registerSubformContainer(container) {
+window.registerSubformContainer = function(container) {
 	if ($(container).find(".subform-entry-sub-container").length > 0) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "registerSubformContainer - "+$(container).attr("id")+" contains sub-containers.  Treating as such");
 

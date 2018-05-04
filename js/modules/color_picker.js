@@ -1,7 +1,7 @@
 <?php
 use \Catalyst\Color;
 ?>
-function initializeColorPicker() {
+window.initializeColorPicker = function() {
 	var colors = <?= json_encode(Color::COLOR_BY_HEX) ?>;
 
 	$(".color-swatch").hide();

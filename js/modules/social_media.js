@@ -1,4 +1,4 @@
-function addSocialMediaChip(data) {
+window.addSocialMediaChip = function(data) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "addSocialMediaChip - new social media chip recieved from upstream, adding");
 	$(".modal").modal("close");
 	$(".social-chips > div").append($(data.html).html());
