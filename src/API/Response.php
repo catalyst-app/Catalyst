@@ -48,12 +48,12 @@ class Response {
 			"error_code" => $code,
 			"message" => $message,
 			"data" => $data,
-			"_debug" => [
+			"_debug" => Controller::isDevelMode() ? [
 				"_trace" => Controller::getTrace(true),
 				"_request" => (isset($_REQUEST)) ? $_REQUEST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
 				"_session" => $_SESSION
-			]
+			] : "Production",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {
 			trigger_error("API Error RESPONSE given: ".$code." ".$message." ".serialize($data));
