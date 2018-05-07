@@ -55,18 +55,9 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 			<br>
 		</div>
 		<div class="section">
-			<div class="row">
-				<div class="col s6 offset-s3 m3 l2 center force-square-contents">
-					<?= Image::getNewItemImage()->getStrictCircleHtml() ?>
-				</div>
-				<div class="col s12 m9 l10">
-					<h3 class="no-top-margin">
-						New
-					</h3>
-					<p>Create a new commission type</p>
-					<p class="flow-text"><a href="<?= ROOTDIR ?>Artist/CommissionTypes/New/">Go</a></p>
-				</div>
-			</div>
+			<?php if (count($commissionTypes) == 0): ?>
+				<p class="flow-text">You have no commission types!  <a href="<?= ROOTDIR ?>Artist/CommissionTypes/New">Create one</a>?</p>
+			<?php endif; ?>
 			<div class="user-commission-types">
 				<?php foreach ($commissionTypes as $commissionType): ?>
 					<div class="row commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
