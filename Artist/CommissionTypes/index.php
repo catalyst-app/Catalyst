@@ -36,7 +36,10 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
 ?>
 		<div class="section no-top-margin">
-			<div id="reorder-commission-types-btn" class="right btn modal-trigger" data-target="commission-type-reorder-modal">reorder</div>
+			<div class="right-align">
+				<a href="<?= ROOTDIR ?>Artist/CommissionTypes/New" class="btn">new</a>
+				<div id="reorder-commission-types-btn" class="btn modal-trigger" data-target="commission-type-reorder-modal">reorder</div>
+			</div>
 			<div id="commission-type-reorder-modal" class="modal rearrange-image-modal">
 				<div class="modal-content">
 					<h5>Drag the thumbnails to rearrange them</h5>
