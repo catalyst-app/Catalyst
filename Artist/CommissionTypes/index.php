@@ -35,25 +35,27 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 <?php
 $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
 ?>
-		<div class="section no-top-margin">
-			<div class="right-align">
-				<a href="<?= ROOTDIR ?>Artist/CommissionTypes/New" class="btn">new</a>
-				<div id="reorder-commission-types-btn" class="btn modal-trigger" data-target="commission-type-reorder-modal">reorder</div>
-			</div>
-			<div id="commission-type-reorder-modal" class="modal rearrange-image-modal">
-				<div class="modal-content">
-					<h5>Drag the thumbnails to rearrange them</h5>
-					<div class="commission-type-rearranger row" id="commission-type-rearranger">
-						<?php foreach ($commissionTypes as $commissionType): ?>
-							<div class="center force-square-contents col s4 m2" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
-								<?= $commissionType->getImage()->getStrictCircleHtml(["tooltipped"], ["margin" => "1em"], ["data-tooltip" => $commissionType->getName()]) ?>
-							</div>
-						<?php endforeach; ?>
+		<?php if (count($commissionTypes) != 0): ?>
+			<div class="section no-top-margin">
+				<div class="right-align">
+					<a href="<?= ROOTDIR ?>Artist/CommissionTypes/New" class="btn">new</a>
+					<div id="reorder-commission-types-btn" class="btn modal-trigger" data-target="commission-type-reorder-modal">reorder</div>
+				</div>
+				<div id="commission-type-reorder-modal" class="modal rearrange-image-modal">
+					<div class="modal-content">
+						<h5>Drag the thumbnails to rearrange them</h5>
+						<div class="commission-type-rearranger row" id="commission-type-rearranger">
+							<?php foreach ($commissionTypes as $commissionType): ?>
+								<div class="center force-square-contents col s4 m2" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+									<?= $commissionType->getImage()->getStrictCircleHtml(["tooltipped"], ["margin" => "1em"], ["data-tooltip" => $commissionType->getName()]) ?>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
+				<br>
 			</div>
-			<br>
-		</div>
+		<?php endif; ?>
 		<div class="section">
 			<?php if (count($commissionTypes) == 0): ?>
 				<p class="flow-text">You have no commission types!  <a href="<?= ROOTDIR ?>Artist/CommissionTypes/New">Create one</a>?</p>
