@@ -71,14 +71,14 @@ class TOTP {
 	 * @param int $token Token to check
 	 * @param int $fuzz Number of 30s intervals to allow back/forward
 	 */
-	public static function checkToken(string $key, int $token, int $fuzz=4) : bool {
+	public static function checkToken(string $key, string $token, int $fuzz=9) : bool {
 		$currentTime = time()/30;
 
 		for($i=-$fuzz; $i<=$fuzz; $i++) {
 			$checktime = (int)($currentTime+$i);
 			$curKey = self::oathHotp($key, $checktime);
-			
-			if ($token == self::oathTruncate($curKey)) {
+
+			if (((int)ltrim($token, 0)) == self::oathTruncate($curKey)) {
 				return true;
 			}
 			
