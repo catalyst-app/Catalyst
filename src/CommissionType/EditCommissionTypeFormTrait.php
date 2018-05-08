@@ -33,6 +33,10 @@ trait EditCommissionTypeFormTrait {
 		$tokenField = new HiddenInputField();
 		$tokenField->setDistinguisher("token");
 		$tokenField->setSelector("#commission-type-token");
+		$tokenField->addError(91746, ErrorCodes::ERR_91746);
+		$tokenField->setMissingErrorCode(91746);
+		$tokenField->addError(91747, ErrorCodes::ERR_91747);
+		$tokenField->setInvalidErrorCode(91747);
 		$form->addField($tokenField);
 
 		$nameField = new TextField();

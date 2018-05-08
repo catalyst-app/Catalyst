@@ -61,7 +61,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 				<p class="flow-text">You aren't allowed to do that.</p>
 			</div>
 <?php else: ?>
-			<input type="hidden" id="character-token" value="<?= htmlspecialchars($character->getToken()) ?>">
+			<input type="hidden" id="commission-type-token" value="<?= htmlspecialchars($commissionType->getToken()) ?>">
 			<?= FormRepository::getEditCommissionTypeForm($commissionType)->getHtml(); ?>
 <?php
 endif;
