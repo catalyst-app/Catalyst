@@ -10,7 +10,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
 $id = $character = $pendingCharacter = null;
-if (isset($_GET["q"])) {
+if (array_key_exists("q", $_GET)) {
 	$id = Character::getIdFromToken($_GET["q"]);
 	if ($id !== -1) {
 		$pendingCharacter = new Character($id);

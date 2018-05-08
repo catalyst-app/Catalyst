@@ -11,7 +11,7 @@ use \Catalyst\Form\FormHTML;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
-if (!isset($_GET["q"])) {
+if (!array_key_exists("q", $_GET)) {
 	header("Location: ".ROOTDIR."FeatureBoard");
 	die("Redirecting...");
 }
