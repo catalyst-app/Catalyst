@@ -13,5 +13,6 @@ parameters:
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getNewCommissionTypeForm/'
+		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getEditCommissionTypeForm/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
