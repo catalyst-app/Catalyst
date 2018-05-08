@@ -78,6 +78,9 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 							<p class="col s12">
 								<?= htmlspecialchars($commissionType->getBlurb()) ?>
 							</p>
+							<p class="col s12 flow-text no-margin">
+								<a href="<?= ROOTDIR ?>Artist/CommissionTypes/Edit/<?= $commissionType->getToken() ?>">Edit</a>
+							</p>
 							<div class="no-bottom-margin col s12">
 								<span>Quick toggles:</span>
 								<?php foreach (CommissionType::QUICK_TOGGLE_BUTTONS as $button): ?>
