@@ -319,6 +319,9 @@ class ErrorCodes {
 	const ERR_91742 = 'An unknown error occured';
 	const ERR_91743 = 'An unknown error occured';
 	const ERR_91744 = 'An unknown error occured';
+	const ERR_91745 = 'Missing token';
+	const ERR_91746 = 'Invalid token';
+	const ERR_91747 = 'Invalid token';
 
 	/**
 	 * Get an associative array of code => message based on class constants

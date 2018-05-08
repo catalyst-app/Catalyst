@@ -307,3 +307,6 @@
 - **91542** - An accepting checkbox is invalid
 - **91543** - Visibility checkbox is missing
 - **91544** - Visibility checkbox is invalid
+- **91545** - Missing token
+- **91546** - Invalid token
+- **91547** - Bad commission type ownership
