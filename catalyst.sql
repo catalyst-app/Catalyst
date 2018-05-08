@@ -699,6 +699,8 @@ CREATE TABLE `commission_type_modifiers` (
   `NAME` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `PRICE` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `USDEQ` decimal(8,2) UNSIGNED NOT NULL,
+  `GROUP` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `MULTIPLE` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
