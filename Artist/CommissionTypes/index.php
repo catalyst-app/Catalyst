@@ -53,10 +53,9 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 						</div>
 					</div>
 				</div>
-				<br>
 			</div>
 		<?php endif; ?>
-		<div class="section">
+		<div class="section no-top-padding">
 			<?php if (count($commissionTypes) == 0): ?>
 				<p class="flow-text">You have no commission types!  <a href="<?= ROOTDIR ?>Artist/CommissionTypes/New">Create one</a>?</p>
 			<?php endif; ?>

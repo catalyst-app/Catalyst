@@ -535,6 +535,14 @@ input[type=checkbox] + label + span.invalid-text {
 	padding: 0 !important;
 }
 
+.no-bottom-padding {
+	padding-bottom: 0 !important;
+}
+
+.no-top-padding {
+	padding-top: 0 !important;
+}
+
 .color-swatch, .chosen-color {
 	cursor: pointer;
 	transition: color 0.2s ease-out, background-color 0.2s ease-out;
