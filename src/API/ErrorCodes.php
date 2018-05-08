@@ -274,6 +274,52 @@ class ErrorCodes {
 	const ERR_91604 = 'Invalid option';
 	const ERR_91605 = 'Invalid new value';
 
+	// edits commission type
+	const ERR_91701 = 'Missing name';
+	const ERR_91702 = 'Invalid name';
+	const ERR_91703 = 'Missing blurb';
+	const ERR_91704 = 'Invalid blurb';
+	const ERR_91705 = 'Missing description';
+	const ERR_91706 = 'Invalid description';
+	const ERR_91707 = 'Missing base cost';
+	const ERR_91708 = 'Please use less than 64 characters';
+	const ERR_91709 = 'Missing usd cost';
+	const ERR_91710 = 'Invalid usd cost (0-1000000)';
+	const ERR_91711 = 'An unknown error occured';
+	const ERR_91712 = 'An unknown error occured';
+	const ERR_91713 = 'An unknown error occured';
+	const ERR_91714 = 'An unknown error occured';
+	const ERR_91715 = 'An unknown error occured';
+	const ERR_91716 = 'An unknown error occured';
+	const ERR_91717 = 'An unknown error occured';
+	const ERR_91718 = 'An unknown error occured';
+	const ERR_91719 = 'An unknown error occured';
+	const ERR_91720 = 'An unknown error occured';
+	const ERR_91721 = 'An unknown error occured';
+	const ERR_91722 = 'An unknown error occured';
+	const ERR_91723 = 'An unknown error occured';
+	const ERR_91724 = 'File(s) too large';
+	const ERR_91725 = 'Not an image';
+	const ERR_91726 = 'Invald image(s)';
+	const ERR_91727 = 'You are not an artist';
+	const ERR_91728 = 'You must enter a stage to do this';
+	const ERR_91729 = 'Please use between 2 and 255 characters';
+	const ERR_91730 = 'You must enter a payment type';
+	const ERR_91731 = 'Payment types may not be longer than 64 characters';
+	const ERR_91732 = 'You must enter a payment address';
+	const ERR_91733 = 'You must enter payment instructions';
+	const ERR_91734 = 'Please enter a modifier name';
+	const ERR_91735 = 'Please use less than 60 characters';
+	const ERR_91736 = 'Please enter a cost';
+	const ERR_91737 = 'Please use less than 64 characters';
+	const ERR_91738 = 'Please enter a USD cost';
+	const ERR_91739 = 'USD cost is too large';
+	const ERR_91740 = 'You are not an artist';
+	const ERR_91741 = 'An unknown error occured';
+	const ERR_91742 = 'An unknown error occured';
+	const ERR_91743 = 'An unknown error occured';
+	const ERR_91744 = 'An unknown error occured';
+
 	/**
 	 * Get an associative array of code => message based on class constants
 	 * 

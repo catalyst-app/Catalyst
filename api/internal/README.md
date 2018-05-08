@@ -260,3 +260,50 @@
 - **91603** - You do not own this commission type
 - **91604** - Invalid option
 - **91605** - Invalid value
+
+#### New commission type
+
+- **91501** - Missing name
+- **91502** - Invalid name
+- **91503** - Missing blurb
+- **91504** - Invalid blurb
+- **91505** - Missing description
+- **91506** - Invalid description
+- **91507** - Missing base cost
+- **91508** - Invalid base cost
+- **91509** - Missing usd cost
+- **91510** - Invalid usd cost
+- **91511** - Missing attrs
+- **91512** - Invalid attrs
+- **91513** - Invalid physical address checkbox
+- **91514** - Invalid accepting quotes checkbox
+- **91515** - Invalid accepting requests checkbox
+- **91516** - Invalid accepting trades checkbox
+- **91517** - Invalid accepting commissions checkbox
+- **91518** - Missing modifier structure
+- **91519** - Invalid modifier structure
+- **91520** - Missing payment structure
+- **91521** - Invalid payment structure
+- **91522** - Missing stages structure
+- **91523** - Invalid stages structure
+- **91524** - Files too large
+- **91525** - Not an images
+- **91526** - Invald images
+- **91527** - Not an artist
+- **91528** - Stage field empty
+- **91529** - Stage field invalid
+- **91530** - Payemnt type field empty
+- **91531** - Payment type field invalid
+- **91532** - Payment address field empty
+- **91533** - Payment instructions field empty
+- **91534** - No modifier name
+- **91535** - Invalid modifier name
+- **91536** - No base cost
+- **91537** - Invalid base cost
+- **91538** - Missing USD cost
+- **91539** - Invalid USD cost
+- **91540** - User is not an artist
+- **91541** - An accepting checkbox is missing
+- **91542** - An accepting checkbox is invalid
+- **91543** - Visibility checkbox is missing
+- **91544** - Visibility checkbox is invalid
