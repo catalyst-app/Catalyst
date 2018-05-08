@@ -68,7 +68,7 @@ class TOTP {
 	 * Check a TOTP token
 	 * 
 	 * @param string $key TOTP key to check against
-	 * @param int $token Token to check
+	 * @param string $token Token to check (string because of fucky int conversion)
 	 * @param int $fuzz Number of 30s intervals to allow back/forward
 	 */
 	public static function checkToken(string $key, string $token, int $fuzz=9) : bool {
