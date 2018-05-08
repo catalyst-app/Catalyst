@@ -6,6 +6,7 @@ define("REAL_ROOTDIR", "../../../");
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Form\FormRepository;
+use \Catalyst\HTTPCode;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
