@@ -342,6 +342,9 @@ trait EditCommissionTypeFormTrait {
 		$visibleCheckbox->setMissingErrorCode(91743);
 		$visibleCheckbox->addError(91744, ErrorCodes::ERR_91744);
 		$visibleCheckbox->setInvalidErrorCode(91744);
+		if (!is_null($commissionType)) {
+			$visibleCheckbox->setPrefilledValue($commissionType->isVisible());
+		}
 		$form->addField($visibleCheckbox);
 
 		$acceptingHeader = new StaticHTMLField();
@@ -357,6 +360,9 @@ trait EditCommissionTypeFormTrait {
 		foreach (["Quotes", "Requests", "Trades", "Commissions"] as $item) {
 			$acceptingCheckboxGeneric->setLabel($item);
 			$acceptingCheckboxGeneric->setDistinguisher("accepting-".strtolower($item));
+			if (!is_null($commissionType)) {
+				$visibleCheckbox->setPrefilledValue($commissionType->isAccepting{$item}());
+			}
 			$form->addField(clone $acceptingCheckboxGeneric);
 		}
 
