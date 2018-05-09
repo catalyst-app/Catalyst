@@ -107,6 +107,9 @@ trait EditCommissionTypeFormTrait {
 		$baseCostField->setMissingErrorCode(91707);
 		$baseCostField->addError(91708, ErrorCodes::ERR_91708);
 		$baseCostField->setInvalidErrorCode(91708);
+		if (!is_null($commissionType)) {
+			$baseCostField->setPrefilledValue($commissionType->getBaseCost());
+		}
 
 		$baseCostFieldWrapper->setField($baseCostField);
 		$form->addField($baseCostFieldWrapper);
@@ -126,6 +129,9 @@ trait EditCommissionTypeFormTrait {
 		$baseCostUsdField->setMissingErrorCode(91709);
 		$baseCostUsdField->addError(91710, ErrorCodes::ERR_91710);
 		$baseCostUsdField->setInvalidErrorCode(91710);
+		if (!is_null($commissionType)) {
+			$baseCostUsdField->setPrefilledValue($commissionType->getBaseUsdCost());
+		}
 
 		$baseCostUsdFieldWrapper->setField($baseCostUsdField);
 		$form->addField($baseCostUsdFieldWrapper);
