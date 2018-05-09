@@ -70,6 +70,9 @@ trait EditCommissionTypeFormTrait {
 		$blurbField->setMissingErrorCode(91703);
 		$blurbField->addError(91704, ErrorCodes::ERR_91704);
 		$blurbField->setInvalidErrorCode(91704);
+		if (!is_null($commissionType)) {
+			$blurbField->setPrefilledValue($commissionType->getBlurb());
+		}
 		$form->addField($blurbField);
 
 		$descriptionField = new MarkdownField();
