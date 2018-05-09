@@ -329,6 +329,9 @@ trait EditCommissionTypeFormTrait {
 		$imagesField->setInvalidErrorCode(91726);
 		$imagesField->addError(91724, ErrorCodes::ERR_91724);
 		$imagesField->setTooLargeErrorCode(91724);
+		if (!is_null($commissionType)) {
+			$imagesField->setPrefilledValue($commissionType->getImageSet());
+		}
 		$form->addField($imagesField);
 
 		$visibleCheckbox = new CheckboxField();
