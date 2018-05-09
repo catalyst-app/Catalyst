@@ -1,7 +1,6 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.0",
-        "abraham/twitteroauth": "^0.7.4",
         "pguardiario/phpuri": "^1.0"
     },
     "require-dev": {
