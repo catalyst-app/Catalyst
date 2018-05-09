@@ -84,6 +84,9 @@ trait EditCommissionTypeFormTrait {
 		$descriptionField->setMissingErrorCode(91705);
 		$descriptionField->addError(91706, ErrorCodes::ERR_91706);
 		$descriptionField->setInvalidErrorCode(91706);
+		if (!is_null($commissionType)) {
+			$descriptionField->setPrefilledValue($commissionType->getDescription());
+		}
 		$form->addField($descriptionField);
 
 		$costsNote = new StaticHTMLField();
