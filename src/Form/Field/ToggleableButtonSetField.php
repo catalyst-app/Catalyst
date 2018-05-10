@@ -8,7 +8,6 @@ use \Catalyst\Form\Form;
  * Represents a set of sets of buttons field
  */
 class ToggleableButtonSetField extends ToggleableButtonsField {
-	use LabelTrait, SupportsPrefilledValueTrait;
 	/**
 	 * buttons, in form label => [key, title, tooltip]
 	 * 
