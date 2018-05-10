@@ -361,7 +361,7 @@ trait EditCommissionTypeFormTrait {
 			$acceptingCheckboxGeneric->setLabel($item);
 			$acceptingCheckboxGeneric->setDistinguisher("accepting-".strtolower($item));
 			if (!is_null($commissionType)) {
-				$visibleCheckbox->setPrefilledValue($commissionType->isAccepting{$item}());
+				$acceptingCheckboxGeneric->setPrefilledValue(call_user_func([$commissionType, "isAccepting".$item]));
 			}
 			$form->addField(clone $acceptingCheckboxGeneric);
 		}
