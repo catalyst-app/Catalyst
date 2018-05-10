@@ -322,6 +322,7 @@ trait EditCommissionTypeFormTrait {
 		$imagesField->setRequired(false);
 		$imagesField->setMaxHumanSize('10MB');
 		$imagesField->setInfoLabel('Commissioner');
+		$imagesField->setInfoCaptionDelimiter("**Client:**");
 		$imagesField->setAutocompleteAttribute(AutocompleteValues::PHOTO);
 		$imagesField->addError(91725, ErrorCodes::ERR_91725);
 		$imagesField->setMissingErrorCode(91725);
