@@ -144,6 +144,13 @@ trait EditCommissionTypeFormTrait {
 		$attributesGroupField->setMissingErrorCode(91711);
 		$attributesGroupField->addError(91712, ErrorCodes::ERR_91712);
 		$attributesGroupField->setInvalidErrorCode(91712);
+		if (!is_null($commissionType)) {
+			$buttonKeys = [];
+			foreach ($commissionType->getAttributes() as $attribute) {
+				$buttonKeys[] = $attribute->getSetKey();
+			}
+			$attributesGroupField->setPrefilledValue($buttonKeys);
+		}
 		$form->addField($attributesGroupField);
 
 		$stagesField = new SubformMultipleEntryField();
