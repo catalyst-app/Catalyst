@@ -159,6 +159,15 @@ trait EditCommissionTypeFormTrait {
 		$stagesField->setRequired(false);
 		$stagesField->setLabel("Stages (steps of the commission type, can be used to track progress/deadlines)");
 		$stagesField->setDisplayHtml('<p class="'.SubformMultipleEntryField::ENTRY_ITEM.'" data-data="">{stage-psuedo-field}<i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></p>');
+		if (!is_null($commissionType)) {
+			$stages = [];
+			foreach ($commissionType->getStages() as $stage) {
+				$stages[] = [
+					"stage-psuedo-field" => $stage->getStage()
+				];
+			}
+			$stagesField->setPrefilledValue($stages);
+		}
 
 		$stageEntryField = new TextField();
 		$stageEntryField->setDistinguisher("stage-psuedo-field");
