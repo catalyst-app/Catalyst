@@ -458,7 +458,7 @@ class CommissionType {
 		$stages = [];
 
 		foreach ($rawStages as $stage) {
-			$stages[] = new CommissionTypePaymentOption($stage["ID"], $stage["STAGE"]);
+			$stages[] = new CommissionTypeStage($stage["ID"], $stage["STAGE"]);
 		}
 
 		return $this->cache["STAGES"] = $stages;
