@@ -9,7 +9,7 @@ use \Catalyst\Form\Form;
  * Use cases: commission type stages, payemnt options
  */
 class SubformMultipleEntryField extends AbstractField {
-	use LabelTrait;
+	use LabelTrait, SupportsPrefilledValueTrait;
 
 	/**
 	 * Class name given to remove buttons
@@ -123,6 +123,17 @@ class SubformMultipleEntryField extends AbstractField {
 		$str .= ' class="subform-entry-container col s12"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
+
+		if ($this->isFieldPrefilled()) {
+			foreach ($this->getPrefilledValue() as $entry) {
+				$html = $this->getDisplayHtml();
+				$html = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)).'"', $html);
+				foreach ($entry as $key => $value) {
+					$html = str_replace('{'.$key.'}', htmlspecialchars($value), $html);
+				}
+				$str .= $html;
+			}
+		}
 
 		$str .= '</div>';
 
