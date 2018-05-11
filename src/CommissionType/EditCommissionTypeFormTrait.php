@@ -158,7 +158,7 @@ trait EditCommissionTypeFormTrait {
 		$stagesField->setDistinguisher("stages");
 		$stagesField->setRequired(false);
 		$stagesField->setLabel("Stages (steps of the commission type, can be used to track progress/deadlines)");
-		$stagesField->setDisplayHtml('<p class="'.SubformMultipleEntryField::ENTRY_ITEM.'">{stage-psuedo-field}<i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></p>');
+		$stagesField->setDisplayHtml('<p class="'.SubformMultipleEntryField::ENTRY_ITEM.'" data-data="">{stage-psuedo-field}<i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></p>');
 
 		$stageEntryField = new TextField();
 		$stageEntryField->setDistinguisher("stage-psuedo-field");
@@ -186,7 +186,7 @@ trait EditCommissionTypeFormTrait {
 		$paymentsField->setDistinguisher("payments");
 		$paymentsField->setRequired(false);
 		$paymentsField->setLabel("Payment Options");
-		$paymentsField->setDisplayHtml('<div class="'.SubformMultipleEntryField::ENTRY_ITEM.'"><div class="raw-markdown">**{type-psuedo-field}** ({address-psuedo-field})'."\n".'{instructions-psuedo-field}</div><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></div>');
+		$paymentsField->setDisplayHtml('<div class="'.SubformMultipleEntryField::ENTRY_ITEM.'" data-data=""><div class="raw-markdown">**{type-psuedo-field}** ({address-psuedo-field})'."\n".'{instructions-psuedo-field}</div><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></div>');
 
 		$typeEntryWrapper = new WrappedField();
 		$typeEntryWrapper->setWrapperClasses("col s12 m5 l4");
@@ -250,7 +250,7 @@ trait EditCommissionTypeFormTrait {
 		$modifiersField->setDistinguisher("modifiers");
 		$modifiersField->setRequired(false);
 		$modifiersField->setLabel("Modifiers (these can be added to a commission like pizza toppings to a pizza order)");
-		$modifiersField->setDisplayHtml('<a href="#" class="'.SubformMultipleEntryField::ENTRY_ITEM.' btn commission-type-mod"><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i>{modifier-psuedo-field} (+{base-cost-psuedo-field})</div>');
+		$modifiersField->setDisplayHtml('<a href="#" data-data="" class="'.SubformMultipleEntryField::ENTRY_ITEM.' btn commission-type-mod"><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i>{modifier-psuedo-field} (+{base-cost-psuedo-field})</div>');
 		$modifiersField->setRightBarContents('<p class="inline-block no-bottom-margin"><label for="{uniq}"><input type="checkbox" class="filled-in" id="{uniq}"><span>Multiple</span></label></p><i class="material-icons '.SubformMultipleEntryFieldWithRows::REMOVE_CONTAINER_BUTTON_CLASS.'">clear</i>');
 		$modifiersField->setCustomJsAggregator(function(string $dataArrayName, string $entry) : string {
 			return $dataArrayName.'["multiple"] = $('.$entry.').closest(".subform-entry-sub-container").find("input[type=checkbox]").is(":checked");';
