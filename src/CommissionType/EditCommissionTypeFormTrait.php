@@ -280,6 +280,27 @@ trait EditCommissionTypeFormTrait {
 				$this->throwInvalidError();
 			}
 		});
+		if (!is_null($commissionType)) {
+			$modifiers = [];
+			foreach ($commissionType->getModifiers() as $modifierGroup) {
+				$group = [
+					"right" => [],
+					"items" => [],
+				];
+				$group["right"]["default-empty"] = $modifierGroup->isAllowingMultiple() ? ' checked="checked"' : '';
+
+				foreach ($modifierGroup->getModifiers() as $modifier) {
+					$group["items"][] = [
+						"modifier-psuedo-field" => $modifier->getName(),
+						"base-cost-psuedo-field" => $modifier->getPrice(),
+						"base-cost-usd-psuedo-field" => $modifier->getUsdEquivalent(),
+					];
+				}
+
+				$modifiers[] = $group;
+			}
+			$modifiersField->setPrefilledValue($modifiers);
+		}
 
 		$modifierEntryWrapper = new WrappedField();
 		$modifierEntryWrapper->setWrapperClasses("col s12");
