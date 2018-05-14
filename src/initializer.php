@@ -36,6 +36,8 @@ require_once __DIR__."/Database/Connector.inc.php";
 
 require_once __DIR__."/vendor/autoload.php";
 
+Controller::verifySecretsIntegrity();
+
 if (!session_id()) {
 	ini_set("session.name", "catalyst");
 	ini_set("session.gc_maxlifetime", 24*60*60);

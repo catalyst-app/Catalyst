@@ -6,6 +6,7 @@ use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
+use \LogicException;
 use \PDO;
 use \ReflectionClass;
 use \Throwable;
@@ -427,6 +428,63 @@ class Controller {
 			return;
 		}
 		self::handleError(E_ERROR, $e->getMessage(), $e->getFile(), $e->getLine());
+	}
+
+	/**
+	 * Check that Secrets exists and contains what it should
+	 */
+	public static function verifySecretsIntegrity() : void {
+		if (!file_exists(__DIR__."/Secrets.php")) {
+			throw new LogicException("src/Secrets.php does not exist");
+		}
+		if (!class_exists("\\Catalyst\\Secrets")) {
+			throw new LogicException("Secrets class does not exist");
+		}
+		if (!defined("\\Catalyst\\Secrets::DB_PASSWORD")) {
+			throw new LogicException("Secrets::DB_PASSWORD is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::NO_REPLY_PASSWORD")) {
+			throw new LogicException("Secrets::NO_REPLY_PASSWORD is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::ERROR_LOG_PASSWORD")) {
+			throw new LogicException("Secrets::ERROR_LOG_PASSWORD is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::LOGIN_CAPTCHA_SECRET")) {
+			throw new LogicException("Secrets::LOGIN_CAPTCHA_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::REGISTER_CAPTCHA_SECRET")) {
+			throw new LogicException("Secrets::REGISTER_CAPTCHA_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::EMAIL_VERIFICATION_CAPTCHA_SECRET")) {
+			throw new LogicException("Secrets::EMAIL_VERIFICATION_CAPTCHA_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::EMAIL_LIST_CAPTCHA_SECRET")) {
+			throw new LogicException("Secrets::EMAIL_LIST_CAPTCHA_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::DISCORD_BUG_WEBHOOK_TOKEN")) {
+			throw new LogicException("Secrets::DISCORD_BUG_WEBHOOK_TOKEN is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::TELEGRAM_TOKEN")) {
+			throw new LogicException("Secrets::TELEGRAM_TOKEN is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::TELEGRAM_CHAT")) {
+			throw new LogicException("Secrets::TELEGRAM_CHAT is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::TWITTER_CONSUMER_KEY")) {
+			throw new LogicException("Secrets::TWITTER_CONSUMER_KEY is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::TWITTER_CONSUMER_SECRET")) {
+			throw new LogicException("Secrets::TWITTER_CONSUMER_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::TWITTER_CALLBACK")) {
+			throw new LogicException("Secrets::TWITTER_CALLBACK is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::RSA_PRIVATE")) {
+			throw new LogicException("Secrets::RSA_PRIVATE is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::RSA_PUBLIC")) {
+			throw new LogicException("Secrets::RSA_PUBLIC is not defined");
+		}
 	}
 
 	/**
