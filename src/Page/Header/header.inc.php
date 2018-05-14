@@ -92,7 +92,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
 	</head>
 	<body>
-<?php require_once REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
+<?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
 <?php if (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID): ?>
 			<div class="news">
