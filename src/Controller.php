@@ -260,7 +260,14 @@ class Controller {
 			} else {
 				trigger_error("API ENDPOINT HEADERS (SOMEHOW) ALREADY SENT BEFORE ERROR!", E_USER_NOTICE);
 			}
+			if (!defined("PAGE_COLOR")) {
+				define("PAGE_COLOR", Values::DEFAULT_COLOR);
 			}
+			if (!defined("PAGE_TITLE")) {
+				define("PAGE_TITLE", "Error!!1");
+			}
+			if (!defined("PAGE_KEYWORD")) {
+				define("PAGE_KEYWORD", "error");
 			}
 		}
 	}
