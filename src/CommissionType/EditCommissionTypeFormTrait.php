@@ -196,6 +196,17 @@ trait EditCommissionTypeFormTrait {
 		$paymentsField->setRequired(false);
 		$paymentsField->setLabel("Payment Options");
 		$paymentsField->setDisplayHtml('<div class="'.SubformMultipleEntryField::ENTRY_ITEM.'" data-data=""><div class="raw-markdown">**{type-psuedo-field}** ({address-psuedo-field})'."\n".'{instructions-psuedo-field}</div><i class="material-icons right '.SubformMultipleEntryField::REMOVE_BUTTON_CLASS.'">clear</i></div>');
+		if (!is_null($commissionType)) {
+			$paymentOptions = [];
+			foreach ($commissionType->getPaymentOptions() as $paymentOption) {
+				$paymentOptions[] = [
+					"type-psuedo-field" => $paymentOption->getType(),
+					"address-psuedo-field" => $paymentOption->getAddress(),
+					"instructions-psuedo-field" => $paymentOption->getInstructions(),
+				];
+			}
+			$paymentsField->setPrefilledValue($paymentOptions);
+		}
 
 		$typeEntryWrapper = new WrappedField();
 		$typeEntryWrapper->setWrapperClasses("col s12 m5 l4");
