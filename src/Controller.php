@@ -310,7 +310,6 @@ class Controller {
 				break;
 		}
 		self::send500Error($errno, $errstr, $errfile, $errline, $trackingId);
-		die("</div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul></div></p></ul>An unknown error has occured.  This has been reported to the development team and we are working hard to fix it!  Error ID: ".$trackingId);
 		return true;
 	}
 
