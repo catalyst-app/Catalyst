@@ -80,7 +80,7 @@ class User implements Serializable {
 	 * @return bool
 	 */
 	public static function isLoggedIn() : bool {
-		return array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
+		return isset($_SESSION) && array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
 	}
 
 	/**
