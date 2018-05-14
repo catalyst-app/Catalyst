@@ -128,7 +128,7 @@ class Controller {
 				'<p><strong>Beta User:</strong> '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown').'</p>'.
 				'<p><strong>Trace:</strong></p>'.
 				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
-				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,$_SESSION])).'</pre></p>',
+				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null])).'</pre></p>',
 				"Error code: ".$errco." (".$errno.")\r\n\r\n".
 				"Error string: ".$errstr."\r\n\r\n".
 				"Error file: ".$errfile."\r\n\r\n".
@@ -138,7 +138,7 @@ class Controller {
 				'Beta User: '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
-				"Dump: ".serialize([$_SERVER,$_SESSION]),
+				"Dump: ".serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null]),
 				Email::ERROR_LOG_EMAIL,
 				Email::ERROR_LOG_PASSWORD
 			);
