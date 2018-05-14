@@ -327,6 +327,15 @@ class Controller {
 	}
 
 	/**
+	 * Called via register_shutdown_function, should flush OB
+	 */
+	public static function shutdown() : void {
+		if (php_sapi_name() !== 'cli') {
+			ob_end_flush();
+		}
+	}
+
+	/**
 	 * Return if the platform is in development mode
 	 * 
 	 * @return bool If development mode is on

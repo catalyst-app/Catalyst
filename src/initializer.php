@@ -22,6 +22,11 @@ if (Controller::isDevelMode()) {
 	ini_set('scream.enabled', 0);
 }
 
+if (php_sapi_name() !== 'cli') {
+	ob_start();
+}
+
+register_shutdown_function("\\Catalyst\\Controller::shutdown");
 set_error_handler("\\Catalyst\\Controller::handleError", E_ALL);
 set_exception_handler("\\Catalyst\\Controller::handleException");
 
