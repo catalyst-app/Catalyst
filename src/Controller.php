@@ -4,7 +4,9 @@ namespace Catalyst;
 
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
+use \Catalyst\Page\Values;
 use \Exception;
+use \PDO;
 use \ReflectionClass;
 use \Throwable;
 
@@ -279,6 +281,70 @@ class Controller {
 			if (!defined("PAGE_KEYWORD")) {
 				define("PAGE_KEYWORD", "error");
 			}
+
+			if (headers_sent()) { // assume we already sent header, despite our OB attempts
+				echo '</div><div a=""></div></div></div></p></img></div></div><h3>An unexpected error occured.  Tracking ID: '.$trackingId.'</h3></body></html>';
+			} else {
+				if (!defined("REAL_ROOTDIR")) {
+					define("REAL_ROOTDIR", __DIR__.'/../'); // we can do this safely because we're only using stuff from this script, so no fuckery will be included
+				}
+
+				require Values::HEAD_INC;
+				
+				echo '<div class="section center row">';
+				echo '<h3>An unexpected error occured</h3>';
+				echo '<p class="flow-text no-bottom-margin">Tracking ID: <strong>'.$trackingId.'</strong></p>';
+				echo '<p class="flow-text no-top-margin">If you would please e-mail <a href="mailto:bugs@catalystapp.co">bugs@catalystapp.co</a> with the above tracking ID, what you were doing, and any other relevant information.</p>';
+				
+				if (self::isDevelMode()) {
+					echo '<div class="code-block">';
+					echo '<p><strong>Development mode information:</strong></p>';
+					echo '<p></p>';
+					echo '<p>ERRNO: '.htmlspecialchars($errno).'</p>';
+					echo '<p>ERRSTR: '.htmlspecialchars($errstr).'</p>';
+					echo '<p>ERRFILE: '.htmlspecialchars($errfile).'</p>';
+					echo '<p>ERRLINE: '.htmlspecialchars($errline).'</p>';
+					echo '<p>TRACK_ID: '.htmlspecialchars($trackingId).'</p>';
+					echo '<p></p>';
+					echo '<p>Common mistakes (in self-hosting):</p>';
+					echo '<p>SECRETS DEFINED: '.(class_exists("\\Catalyst\\Secrets") ? "YES" : "NO").'</p>';
+					$version = explode(".", phpversion());
+					$vid = ($version[0] * 10000 + $version[1] * 100 + $version[2]);
+					echo '<p>PHP VERSION (>=7.2): '.($vid >= 70200 ? "YES" : "NO").'</p>';
+					echo '<p>PDO exists: '.(class_exists("\\PDO") ? "YES" : "NO").'</p>';
+					echo '<p>MySQL PDO: '.(in_array("mysql", PDO::getAvailableDrivers()) ? "YES" : "NO").'</p>';
+					echo '<p>COMPOSER IS UPDATED: '.(class_exists("\\PHPMailer\\PHPMailer\\PHPMailer") ? "YES (still ensure upgraded)" : "NO").'</p>';
+					echo '</div>';
+
+					echo '<div class="code-block">';
+					echo '<p><strong>Server/host information:</strong></p>';
+					echo '<p></p>';
+					echo '<p>Host: '.htmlspecialchars(array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown").'</p>';
+					echo '<p>Device: '.htmlspecialchars(array_key_exists("HTTP_USER_AGENT", $_SERVER) ? $_SERVER["HTTP_USER_AGENT"] : "unknown").'</p>';
+					echo '<p>Cookies: '.htmlspecialchars(array_key_exists("HTTP_COOKIE", $_SERVER) ? $_SERVER["HTTP_COOKIE"] : "unknown").'</p>';
+					echo '<p>Scheme: '.htmlspecialchars(array_key_exists("REQUEST_SCHEME", $_SERVER) ? $_SERVER["REQUEST_SCHEME"] : "unknown").'</p>';
+					echo '<p>Protocol: '.htmlspecialchars(array_key_exists("SERVER_PROTOCOL", $_SERVER) ? $_SERVER["SERVER_PROTOCOL"] : "unknown").'</p>';
+					echo '<p>Method: '.htmlspecialchars(array_key_exists("REQUEST_METHOD", $_SERVER) ? $_SERVER["REQUEST_METHOD"] : "unknown").'</p>';
+					echo '<p>Requested at: '.htmlspecialchars(array_key_exists("REQUEST_TIME_FLOAT", $_SERVER) ? $_SERVER["REQUEST_TIME_FLOAT"] : "unknown").'</p>';
+					echo '<p>TLS: '.htmlspecialchars(array_key_exists("HTTPS", $_SERVER) && $_SERVER["HTTPS"] == "on" ? "YES" : "NO").'</p>';
+					echo '<p>Referrer: '.htmlspecialchars(array_key_exists("HTTP_REFERER", $_SERVER) ? $_SERVER["HTTP_REFERER"] : "unknown").'</p>';
+					echo '<p>X_Requester: '.htmlspecialchars(array_key_exists("HTTP_X_REQUESTED_WITH", $_SERVER) ? $_SERVER["HTTP_X_REQUESTED_WITH"] : "unknown").'</p>';
+					echo '<p>Remote: '.htmlspecialchars(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown").':'.htmlspecialchars(array_key_exists("REMOTE_PORT", $_SERVER) ? $_SERVER["REMOTE_PORT"] : "unknown").'</p>';
+					echo '<p>argv: '.htmlspecialchars(array_key_exists("ARGV", $_SERVER) ? $_SERVER["ARGV"] : "unknown").'</p>';
+					echo '<p></p>';
+					echo '<p>PHP Version: '.htmlspecialchars(phpversion()).'</p>';
+					echo '<p>Catalyst Version: '.htmlspecialchars(Controller::getVersion()." (".self::getCommit().")").'</p>';
+					echo '</div>';
+				}
+				
+				echo '<img title="Credit: SammyTheTanuki" class="center col s10 offset-s1 m6 offset-m3" src="'.REAL_ROOTDIR.'img/oops.png" />';
+				echo '</div>';
+				
+				require Values::FOOTER_INC;
+			}
+			ob_flush();
+			flush();
+			die();
 		}
 	}
 
