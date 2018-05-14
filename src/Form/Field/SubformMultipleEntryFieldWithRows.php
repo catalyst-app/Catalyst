@@ -111,25 +111,66 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
 
-		$str .= '<div';
-		$str .= ' class="subform-entry-sub-container col s12"';
-		$str .= '>';
+		if ($this->isFieldPrefilled() && count($this->getPrefilledValue())) {
+			foreach ($this->getPrefilledValue() as $row) {
+				$str .= '<div';
+				$str .= ' class="subform-entry-sub-container col s12"';
+				$str .= '>';
 
-		$str .= '<div';
-		$str .= ' class="subform-entry-sub-container-items"';
-		$str .= '>';
+				$str .= '<div';
+				$str .= ' class="subform-entry-sub-container-items"';
+				$str .= '>';
 
-		$str .= '</div>';
+				foreach ($row["items"] as $entry) {
+					$entryHtml = $this->getDisplayHtml();
+					
+					$entryHtml = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)).'"', $entryHtml);
+					$entryHtml = str_replace('{uniq}', htmlspecialchars(bin2hex(random_bytes(6))), $entryHtml);
+					
+					foreach ($entry as $key => $value) {
+						$entryHtml = str_replace('{'.$key.'}', htmlspecialchars($value), $entryHtml);
+					}
 
-		$str .= '<div';
-		$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.' right-align"';
-		$str .= '>';
+					$str .= $entryHtml;
+				}
 
-		$str .= str_replace("{uniq}", microtime(true), $this->getRightBarContents());
+				$str .= '</div>';
 
-		$str .= '</div>';
+				$str .= '<div';
+				$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.' right-align"';
+				$str .= '>';
 
-		$str .= '</div>';
+				$rightBarContents = str_replace("{uniq}", microtime(true), $this->getRightBarContents());
+				foreach ($row["right"] as $key => $value) {
+					$rightBarContents = str_replace('{'.$key.'}', htmlspecialchars($value), $rightBarContents);
+				}
+				$str .= $rightBarContents;
+
+				$str .= '</div>';
+
+				$str .= '</div>';
+			}
+		} else {
+			$str .= '<div';
+			$str .= ' class="subform-entry-sub-container col s12"';
+			$str .= '>';
+
+			$str .= '<div';
+			$str .= ' class="subform-entry-sub-container-items"';
+			$str .= '>';
+
+			$str .= '</div>';
+
+			$str .= '<div';
+			$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.' right-align"';
+			$str .= '>';
+
+			$str .= str_replace("{uniq}", microtime(true), $this->getRightBarContents());
+
+			$str .= '</div>';
+
+			$str .= '</div>';
+		}
 
 		$str .= '</div>';
 
