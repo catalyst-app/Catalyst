@@ -260,6 +260,16 @@ class Controller {
 			} else {
 				trigger_error("API ENDPOINT HEADERS (SOMEHOW) ALREADY SENT BEFORE ERROR!", E_USER_NOTICE);
 			}
+		} else {
+			// we're actually in JS
+			if (array_key_exists("SCRIPT_FILENAME", $_SERVER) && strpos(strrev($_SERVER["SCRIPT_FILENAME"]), strrev(".js")) === 0) {
+				echo ';alert("An unexpected error occured.  Tracking ID: '.$trackingId.'");window.onerror('.json_encode($trackingId).', "???", -1);';
+				ob_flush();
+				flush();
+				die();
+			}
+			
+			// check constants are set
 			if (!defined("PAGE_COLOR")) {
 				define("PAGE_COLOR", Values::DEFAULT_COLOR);
 			}
