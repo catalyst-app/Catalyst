@@ -384,7 +384,7 @@ class CommissionType {
 
 		foreach ($rawModifiers as $modifier) {
 			if (!array_key_exists($modifier["GROUP"], $modifiers)) {
-				$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"]);
+				$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"], $modifier["MULTIPLE"]);
 			}
 
 			$modifierObject = new CommissionTypeModifier($modifier["ID"], $modifier["NAME"], $modifier["PRICE"], (float)$modifier["USDEQ"]);
