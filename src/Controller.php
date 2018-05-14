@@ -241,7 +241,6 @@ class Controller {
 	public static function send500Error(int $errno, string $errstr, string $errfile, int $errline, string $trackingId) : void {
 		if (!headers_sent()) {
 			HTTPCode::set(500);
-			if (Endpoint::isEndpoint()) {
 		}
 		if (php_sapi_name() === 'cli') {
 			echo "An unexpected error occured!  Information:\n".
@@ -253,7 +252,15 @@ class Controller {
 				"  ARGV:   ".$_SERVER["argv"]."\n";
 			flush();
 			exit(1); // non-zero error codes ye
+		}
+		ob_clean(); // clean out output buffer, as we're about to show errors
+		if (Endpoint::isEndpoint()) {
+			if (!headers_sent()) {
 				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, ["tracking_id" => $trackingId]);
+			} else {
+				trigger_error("API ENDPOINT HEADERS (SOMEHOW) ALREADY SENT BEFORE ERROR!", E_USER_NOTICE);
+			}
+			}
 			}
 		}
 	}
