@@ -4,7 +4,7 @@ namespace Catalyst;
 
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Page\Values;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
 use \PDO;
 use \ReflectionClass;
@@ -292,7 +292,7 @@ class Controller {
 				require Values::HEAD_INC;
 				
 				echo '<div class="section center row">';
-				echo '<h3>An unexpected error occured</h3>';
+				echo UniversalFunctions::createHeading('An unexpected error occured</h3>');
 				echo '<p class="flow-text no-bottom-margin">Tracking ID: <strong>'.$trackingId.'</strong></p>';
 				echo '<p class="flow-text no-top-margin">If you would please e-mail <a href="mailto:bugs@catalystapp.co">bugs@catalystapp.co</a> with the above tracking ID, what you were doing, and any other relevant information.</p>';
 				
