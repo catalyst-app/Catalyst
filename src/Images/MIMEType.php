@@ -5,7 +5,7 @@ namespace Catalyst\Images;
 use \InvalidArgumentException;
 
 /**
- * Represents a MIME type
+ * MIME utility class
  */
 class MIMEType {
 	/**
@@ -41,22 +41,6 @@ class MIMEType {
 		"image/x-xbm" => "xbm",
 		"image/x-xbitmap" => "xbm",
 	];
-
-	/**
-	 * MIME type of the instance
-	 * 
-	 * @var string
-	 */
-	protected $mime;
-
-	/**
-	 * Create a new instance of MIMEType
-	 * 
-	 * @param string $mime The instance's mime type
-	 */
-	public function __construct(string $mime) {
-		$this->setMime($mime);
-	}
 
 	/**
 	 * Get all known MIME types
@@ -101,35 +85,5 @@ class MIMEType {
 			throw new InvalidArgumentException($mime." is not a known MIME type");
 		}
 		return self::MIME_TO_EXT[$mime];
-	}
-
-	/**
-	 * Get the mime type
-	 * 
-	 * @return string Current MIME type
-	 */
-	public function getMime() : string {
-		return $this->mime;
-	}
-
-	/**
-	 * Set the internal MIME type
-	 * 
-	 * @param string $mime New MIME
-	 */
-	public function setMime(string $mime) : void {
-		if (!array_key_exists($mime, self::MIME_TO_EXT)) {
-			throw new InvalidArgumentException($mime." is not a known MIME type");
-		}
-		$this->mime = $mime;
-	}
-
-	/**
-	 * Get the mime type
-	 * 
-	 * @return string File's extension
-	 */
-	public function getExtension() : string {
-		return self::getExtensionFromMime($this->getMime());
 	}
 }
