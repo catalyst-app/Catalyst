@@ -3,13 +3,12 @@ parameters:
 		- src/vendor
 		- src/phpqrcode.php
 		- scripts/
+		- src/Form/FormPHP
 	bootstrap: src/phpstan-init.php
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
 		- '/Constant PAGE_IMAGE not found\./'
-		- '/incorrect case: getMIME/'
 		- '/Catalyst\\Database\\CommissionType\\Wishlist/'
-		- '/Call to static method test\(\) on an unknown class Catalyst\\Form\\Captcha\./'
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getNewCommissionTypeForm/'
