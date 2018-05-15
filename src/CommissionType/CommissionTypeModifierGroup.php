@@ -73,6 +73,7 @@ class CommissionTypeModifierGroup implements Iterator {
 	 * @param CommissionTypeModifier $modifier
 	 */
 	public function addModifier(CommissionTypeModifier $modifier) : void {
+		$modifier->setGroup($this);
 		$this->modifiers[] = $modifier;
 	}
 

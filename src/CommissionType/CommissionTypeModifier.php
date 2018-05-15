@@ -24,6 +24,10 @@ class CommissionTypeModifier {
 	 * @var float
 	 */
 	protected $usdEquivalent = 0;
+	/**
+	 * @var CommissionTypeModifierGroup|null
+	 */
+	protected $group = null;
 
 	/**
 	 * Constructor
@@ -32,12 +36,14 @@ class CommissionTypeModifier {
 	 * @param string $name
 	 * @param string $price
 	 * @param float $usdEquivalent
+	 * @param CommissionTypeModifierGroup $group
 	 */
-	public function __construct(int $id, string $name="", string $price="", float $usdEquivalent=0) {
+	public function __construct(int $id, string $name="", string $price="", float $usdEquivalent=0, ?CommissionTypeModifierGroup $group=null) {
 		$this->id = $id;
 		$this->setName($name);
 		$this->setPrice($price);
 		$this->setUsdEquivalent($usdEquivalent);
+		$this->setGroup($group);
 	}
 
 
@@ -88,5 +94,19 @@ class CommissionTypeModifier {
 	 */
 	public function setUsdEquivalent(float $usdEquivalent) : void {
 		$this->usdEquivalent = $usdEquivalent;
+	}
+
+	/**
+	 * @return CommissionTypeModifierGroup|null
+	 */
+	public function getGroup() : ?CommissionTypeModifierGroup {
+		return $this->group;
+	}
+
+	/**
+	 * @param CommissionTypeModifierGroup|null $group
+	 */
+	public function setGroup(?CommissionTypeModifierGroup $group) : void {
+		$this->group = $group;
 	}
 }
