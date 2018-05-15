@@ -3,7 +3,7 @@
 namespace Catalyst\Form\Field;
 
 use \Catalyst\API\Response;
-use \Catalyst\Form\{FileUpload,Form};
+use \Catalyst\Form\Form;
 use \Catalyst\Images\MIMEType;
 use \Catalyst\HTTPCode;
 use \Catalyst\Page\UniversalFunctions;
@@ -122,7 +122,7 @@ class MultipleImageField extends ImageField {
 			if ($_FILES[$this->getDistinguisher()]["error"][$i] === 4) {
 				return;
 			}
-			if (!in_array(FileUpload::getMime($_FILES[$this->getDistinguisher()]["tmp_name"][$i]), MIMEType::getMimeTypes())) {
+			if (!in_array(MIMEType::getFilepathMimeType($_FILES[$this->getDistinguisher()]["tmp_name"][$i]), MIMEType::getMimeTypes())) {
 				$this->throwInvalidError();
 			}
 			if ($_FILES[$this->getDistinguisher()]["size"][$i] > $this->getMaxSize()) {
