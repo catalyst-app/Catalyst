@@ -3,6 +3,8 @@
 namespace Catalyst\API;
 
 use \Catalyst\{Controller, HTTPCode};
+use \Catalyst\Database\Database;
+use \Catalyst\Database\Query\AbstractQuery;
 
 /**
  * Contains various utilities to standardize JSON responses
@@ -24,6 +26,12 @@ class Response {
 			"error_code" => 0,
 			"message" => $message,
 			"data" => $data,
+			"_debug" => Controller::isDevelMode() ? [
+				"_commit" => Controller::getCommit(),
+				"_time" => microtime(true)-EXEC_START_TIME,
+				"_queries" => AbstractQuery::getTotalQueries(),
+				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
 			$_SESSION = [];
@@ -53,8 +61,12 @@ class Response {
 				"_get" => (isset($_GET)) ? $_GET : [],
 				"_post" => (isset($_POST)) ? $_POST : [],
 				"_files" => (isset($_FILES)) ? $_FILES : [],
-				"_session" => $_SESSION
-			] : "Production",
+				"_session" => $_SESSION,
+				"_commit" => Controller::getCommit(),
+				"_time" => microtime(true)-EXEC_START_TIME,
+				"_queries" => AbstractQuery::getTotalQueries(),
+				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {
 			trigger_error("API Error RESPONSE given: ".$code." ".$message." ".serialize($data));
