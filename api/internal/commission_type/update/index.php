@@ -106,13 +106,13 @@ foreach ($existingImages as $image) {
 	$stmt->setTable(Tables::COMMISSION_TYPE_IMAGES);
 
 	$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["caption"]);
-	$stmt->addColumn(new Column("CREDIT", Tables::COMMISSION_TYPE_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["info"]);
+	$stmt->addValue($imageMeta[$image->getPath()]["caption"]);
+	$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
+	$stmt->addValue($imageMeta[$image->getPath()]["info"]);
 	$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["nsfw"] ? 1 : 0);
+	$stmt->addValue($imageMeta[$image->getPath()]["nsfw"] ? 1 : 0);
 	$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["sort"]);
+	$stmt->addValue($imageMeta[$image->getPath()]["sort"]);
 
 	$whereClause = new WhereClause();
 	$whereClause->addToClause([new Column("PATH", Tables::COMMISSION_TYPE_IMAGES), '=', $image->getPath()]);
