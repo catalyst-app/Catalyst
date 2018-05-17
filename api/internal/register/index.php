@@ -38,7 +38,7 @@ if (count($result) != 0) {
 
 // check referrer
 if (!empty($_POST["referrer"])) {
-	if (User::getIdFromUsername($_POST["user"]) == -1) {
+	if (User::getIdFromUsername($_POST["user"], true) == -1) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90326, ErrorCodes::ERR_90326);
 	}
