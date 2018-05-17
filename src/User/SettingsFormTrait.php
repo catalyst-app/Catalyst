@@ -165,7 +165,7 @@ trait SettingsFormTrait {
 		$nsfwProfilePictureField->addError(90519, ErrorCodes::ERR_90519);
 		$nsfwProfilePictureField->setInvalidErrorCode(90519);
 		if (!is_null($user)) {
-			$nsfwProfilePictureField->setPrefilledValue($user->isProfilePictureNsfw());
+			$nsfwProfilePictureField->setPrefilledValue($user->getImage()->isNsfw());
 		}
 		$form->addField($nsfwProfilePictureField);
 
