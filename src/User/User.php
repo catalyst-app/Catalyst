@@ -3,16 +3,17 @@
 namespace Catalyst\User;
 
 use \Catalyst\Artist\Artist;
+use \Catalyst\Character\Character;
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
 use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
-use \Catalyst\Database\Query\SelectQuery;
-use \Catalyst\Email;
+use \Catalyst\Database\Query\{DeleteQuery, InsertQuery, SelectQuery};
+use \Catalyst\{Email, Tokens};
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Page\Navigation\Navbar;
-use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\{UniversalFunctions, Values};
 use \InvalidArgumentException;
 use \LogicException;
 
@@ -635,5 +636,51 @@ class User extends AbstractDatabaseModel {
 		}
 
 		$this->deleteSocialChipsFromDatabase();
+	}
+
+	/**
+	 * Create a user
+	 *
+	 * @param array $values
+	 * @return self
+	 */
+	public static function create(array $values) : User {
+		// per array_merge docs:
+		// If the input arrays have the same string keys, then the latter value
+		//  for that key will overwrite the previous one
+		$values = array_merge([
+			"FILE_TOKEN" => Tokens::generateUserFileToken(),
+			"PASSWORD_RESET_TOKEN" => Tokens::generatePasswordResetToken(),
+			"TOTP_KEY" => null,
+			"TOTP_RESET_TOKEN" => Tokens::generateTotpResetToken(),
+			"EMAIL" => null,
+			"EMAIL_VERIFIED" => 0,
+			"EMAIL_TOKEN" => Tokens::generateEmailVerificationToken(),
+			"ARTIST_PAGE_ID" => null,
+			"PICTURE_LOC" => null,
+			"PICTURE_NSFW" => 0,
+			"NSFW" => 0,
+			"NICK" => $values["USERNAME"],
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"REFERRER" => null,
+		], $values);
+
+		$stmt = new InsertQuery();
+
+		$stmt->setTable(self::getTable());
+
+		foreach (["FILE_TOKEN", "USERNAME", "HASHED_PASSWORD", "PASSWORD_RESET_TOKEN", "EMAIL", "EMAIL_TOKEN", "PICTURE_LOC", "PICTURE_NSFW", "NSFW", "COLOR", "NICK", "REFERRER"] as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+			$stmt->addValue($values[$column]);
+		}
+
+		$stmt->execute();
+
+		$user = new self($stmt->getResult());
+
+		// if the user's email is null, this will silently return
+		$user->sendVerificationEmail();
+
+		return $user;
 	}
 }
