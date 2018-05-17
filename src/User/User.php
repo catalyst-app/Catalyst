@@ -115,10 +115,12 @@ class User extends AbstractDatabaseModel {
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("USERNAME", self::getTable()), "=", $username]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
+		if (!$allowSuspendedAndDeactivated) {
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
+		}
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
