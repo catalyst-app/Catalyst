@@ -38,19 +38,7 @@ if (count($result) != 0) {
 
 // check referrer
 if (!empty($_POST["referrer"])) {
-	$stmt = new SelectQuery();
-	$stmt->setTable(Tables::USERS);
-	$stmt->addColumn(new Column("ID", Tables::USERS));
-
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["referrer"]]);
-	$stmt->addAdditionalCapability($whereClause);
-
-	$stmt->execute();
-
-	$result = $stmt->getResult();
-
-	if (count($result) == 0) {
+	if (User::getIdFromUsername($_POST["user"]) == -1) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90326, ErrorCodes::ERR_90326);
 	}
@@ -81,11 +69,7 @@ if (!empty($_POST["email"])) {
 	}
 }
 
-$stmt = new InsertQuery();
-$stmt->setTable(Tables::USERS);
-
 $fileToken = Tokens::generateUserFileToken();
-$password = password_hash($_POST["password"], PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
 
 $profilePicture = null;
 if (isset($_FILES["profile-picture"])) {
@@ -95,37 +79,18 @@ if (isset($_FILES["profile-picture"])) {
 	}
 }
 
-$stmt->addColumn(new Column("FILE_TOKEN", Tables::USERS));
-$stmt->addValue($fileToken);
-$stmt->addColumn(new Column("USERNAME", Tables::USERS));
-$stmt->addValue($_POST["username"]);
-$stmt->addColumn(new Column("HASHED_PASSWORD", Tables::USERS));
-$stmt->addValue($password);
-$stmt->addColumn(new Column("PASSWORD_RESET_TOKEN", Tables::USERS));
-$stmt->addValue(Tokens::generatePasswordResetToken());
-$stmt->addColumn(new Column("EMAIL", Tables::USERS));
-$stmt->addValue($_POST["email"] ? $_POST["email"] : null); // empty = false = null
-$stmt->addColumn(new Column("EMAIL_TOKEN", Tables::USERS));
-$stmt->addValue(Tokens::generateEmailVerificationToken());
-$stmt->addColumn(new Column("PICTURE_LOC", Tables::USERS));
-$stmt->addValue($profilePicture);
-$stmt->addColumn(new Column("PICTURE_NSFW", Tables::USERS));
-$stmt->addValue($_POST["profile-picture-is-nsfw"] == "true");
-$stmt->addColumn(new Column("NSFW", Tables::USERS));
-$stmt->addValue($_POST["nsfw-access"] == "true");
-$stmt->addColumn(new Column("COLOR", Tables::USERS));
-$stmt->addValue(hex2bin($_POST["color"]));
-$stmt->addColumn(new Column("NICK", Tables::USERS));
-$stmt->addValue($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]); // if none is set set it as the username
-$stmt->addColumn(new Column("REFERRER", Tables::USERS));
-$stmt->addValue($_POST["referrer"] ? $_POST["referrer"] : null); // empty = false = null
-
-$stmt->execute();
-
-$_SESSION["user"] = new User($stmt->getResult());
-
-// if the user's email is null, this will silently return
-$_SESSION["user"]->sendVerificationEmail();
+$_SESSION["user"] = User::create([
+	"FILE_TOKEN" => $fileToken = Tokens::generateUserFileToken(),
+	"USERNAME" => $_POST["username"],
+	"HASHED_PASSWORD" => User::hashPassword($_POST["password"]),
+	"EMAIL" => $_POST["email"] ? $_POST["email"] : null,
+	"PICTURE_LOC" => $profilePicture,
+	"PICTURE_NSFW" => $_POST["profile-picture-is-nsfw"] == "true" && !is_null($profilePicture),
+	"NSFW" => $_POST["nsfw-access"] == "true",
+	"COLOR" => hex2bin($_POST["color"]),
+	"NICK" => $_POST["nickname"] ? $_POST["nickname"] : $_POST["username"],
+	"REFERRER" => $_POST["referrer"] ? $_POST["referrer"] : null,
+]);
 
 HTTPCode::set(201);
 Response::sendSuccessResponse("Success");
