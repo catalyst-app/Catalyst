@@ -18,7 +18,7 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
-if (User::isLoggedIn() && $_SESSION["user"]->emailIsVerified()) {
+if (User::isLoggedIn() && $_SESSION["user"]->isEmailVerified()) {
 	HTTPCode::set(400);
 } else if (!User::isLoggedIn()) {
 	HTTPCode::set(401);
@@ -28,7 +28,7 @@ if (isset($_GET["token"])) {
 	$_SESSION["email_token"] = $_GET["token"];
 }
 
-if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->emailIsVerified()) {
+if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->isEmailVerified()) {
 	$_SESSION["user"]->sendVerificationEmail();
 }
 
@@ -39,7 +39,7 @@ echo UniversalFunctions::createHeading("Email Verification");
 ?>
 <?php if (!User::isLoggedIn()): ?>
 <?= User::getNotLoggedInHtml() ?>
-<?php elseif ($_SESSION["user"]->emailIsVerified()): ?>
+<?php elseif ($_SESSION["user"]->isEmailVerified()): ?>
 			<div class="section">
 				<p class="flow-text">Your email has been verified.  Return <a href="<?=ROOTDIR?>">home</a>?</p>
 			</div>

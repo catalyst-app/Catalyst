@@ -5,12 +5,9 @@ define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, Tables};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
-use \Catalyst\{Email, HTTPCode, Tokens};
+use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Form\FormRepository;
-use \Catalyst\Images\{Folders,Image};
+use \Catalyst\Images\{Folders, Image};
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
@@ -18,20 +15,7 @@ Endpoint::init(true, 2);
 
 FormRepository::getRegisterForm()->checkServerSide();
 
-// check username
-$stmt = new SelectQuery();
-$stmt->setTable(Tables::USERS);
-$stmt->addColumn(new Column("ID", Tables::USERS));
-
-$whereClause = new WhereClause();
-$whereClause->addToClause([new Column("USERNAME", Tables::USERS), "=", $_POST["username"]]);
-$stmt->addAdditionalCapability($whereClause);
-
-$stmt->execute();
-
-$result = $stmt->getResult();
-
-if (count($result) != 0) {
+if (User::getIdFromUsername($_POST["username"], true) == -1) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90303, ErrorCodes::ERR_90303);
 }
@@ -50,20 +34,7 @@ if (!empty($_POST["email"])) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90324, ErrorCodes::ERR_90324);
 	}
-
-	$stmt = new SelectQuery();
-	$stmt->setTable(Tables::USERS);
-	$stmt->addColumn(new Column("ID", Tables::USERS));
-
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("EMAIL", Tables::USERS), "=", $_POST["email"]]);
-	$stmt->addAdditionalCapability($whereClause);
-
-	$stmt->execute();
-
-	$result = $stmt->getResult();
-
-	if (count($result) != 0) {
+	if (User::getIdFromEmail($_POST["email"], true) != -1) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90308, ErrorCodes::ERR_90308);
 	}

@@ -5,9 +5,6 @@ define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, Database, Tables};
-use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
-use \Catalyst\Database\Query\{DeleteQuery, SelectQuery, UpdateQuery};
 use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\User\User;

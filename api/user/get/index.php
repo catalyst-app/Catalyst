@@ -36,7 +36,7 @@ $result = [];
 $result["username"] = $user->getUsername();
 if ($isOwnUser) {
 	$result["email"] = $user->getEmail();
-	$result["email_verified"] = $user->emailIsVerified();
+	$result["email_verified"] = $user->isEmailVerified();
 }
 $result["artist_page_url"] = $user->getArtistPage();
 if (!is_null($result["artist_page_url"])) {
