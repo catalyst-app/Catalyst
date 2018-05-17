@@ -32,7 +32,7 @@ elseif ($_SESSION["user"]->isArtist()): ?>
 		</div>
 <?php elseif ($_SESSION["user"]->wasArtist()): ?>
 		<div class="section">
-			<p class="flow-text">You deleted your artist page.  In order to re-activate it, click below.</p>
+			<p class="flow-text">You deleted your artist page.  In order to re-activate it, click below.  Please note, none of your original information will be present, <strong>except</strong> pre-existing commissions.</p>
 			<?= FormRepository::getUndeleteArtistPageForm()->getHtml(false) ?>
 		</div>
 <?php else: ?>
