@@ -692,7 +692,7 @@ class User extends AbstractDatabaseModel {
 
 		$stmt->execute();
 
-		$user = new self($stmt->getResult());
+		$user = new self($stmt->getResult(), $values);
 
 		// if the user's email is null, this will silently return
 		$user->sendVerificationEmail();
