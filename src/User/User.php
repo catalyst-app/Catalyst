@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\CommissionType;
-use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
+use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
 use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
 use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Email;
@@ -15,64 +15,12 @@ use \Catalyst\Page\Navigation\Navbar;
 use \Catalyst\Page\UniversalFunctions;
 use \InvalidArgumentException;
 use \LogicException;
-use \Serializable;
 
 /**
  * Represents a user
  */
-class User implements Serializable {
-	use DatabaseModelTrait, HasImageTrait, HasSocialChipsTrait, MessagableTrait;
-
-	/**
-	 * The user's ID in the database
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * This is used as not to repeatedly hammer the database
-	 * @var array
-	 */
-	private $cache = [];
-
-	/**
-	 * Create a new User object
-	 * 
-	 * @param int $id The User's ID (will be checked)
-	 * @throws InvalidArgumentException on bad ID
-	 */
-	public function __construct(int $id) {
-		if (!self::idExists($id)) {
-			throw new InvalidArgumentException("User ID ".$id." does not exist in the database.");
-		}
-
-		$this->id = $id;
-	}
-
-	/**
-	 * Check if a given user ID exists in the database
-	 * 
-	 * @param int $id
-	 * @return bool
-	 */
-	public static function idExists(int $id) : bool {
-		$stmt = new SelectQuery();
-		
-		$stmt->setTable(self::getTable());
-		$stmt->addColumn(new Column("ID", self::getTable()));
-
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", self::getTable()), "=", $id]);
-
-		$stmt->addAdditionalCapability($whereClause);
-
-		$stmt->execute();
-
-		if (count($stmt->getResult()) == 0) {
-			return false;
-		}
-		return true;
-	}
+class User extends AbstractDatabaseModel {
+	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
 	/**
 	 * Check if a user is logged in
@@ -93,77 +41,14 @@ class User implements Serializable {
 	}
 
 	/**
-	 * Requirements from Serializable interface, gets a string representation of the User
-	 * 
-	 * Currently, this is the ID.  If this is changed, some form of versioning/verification will be needed
-	 * @return string
+	 * Verifies that the unserialized data is still usable
 	 */
-	public function serialize() : string {
-		return serialize($this->id);
-	}
-
-	/**
-	 * Unserialize the User object, called upon session loading
-	 * 
-	 * @param string $data Serialized data
-	 */
-	public function unserialize($data) : void {
-		$id = unserialize($data);
-
-		if (!is_numeric($id) || (int)$id != $id) {
-			throw new InvalidArgumentException("Invalid serialized data");
-		}
-
-		$id = (int)$id;
-
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(self::getTable());
-		
-		$stmt->addColumn(new Column("FILE_TOKEN", self::getTable()));
-		$stmt->addColumn(new Column("USERNAME", self::getTable()));
-		$stmt->addColumn(new Column("EMAIL", self::getTable()));
-		$stmt->addColumn(new Column("EMAIL_VERIFIED", self::getTable()));
-		$stmt->addColumn(new Column("ARTIST_PAGE_ID", self::getTable()));
-		$stmt->addColumn(new Column("PICTURE_LOC", self::getTable()));
-		$stmt->addColumn(new Column("PICTURE_NSFW", self::getTable()));
-		$stmt->addColumn(new Column("NSFW", self::getTable()));
-		$stmt->addColumn(new Column("COLOR", self::getTable()));
-		$stmt->addColumn(new Column("NICK", self::getTable()));
-
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", self::getTable()), "=", $id]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
-
-		$stmt->addAdditionalCapability($whereClause);
-
-		$stmt->execute();
-
-		if (empty($stmt->getResult())) {
+	protected function unserializeVerification() {
+		if (self::getColumnFromDatabase("DELETED") || self::getColumnFromDatabase("SUSPENDED")) {
 			throw new InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
 		}
-
-		$user = $stmt->getResult()[0];
-
-		// prefill frequently used items
-		$this->cache = [
-			"FILE_TOKEN" => $user["FILE_TOKEN"],
-			"USERNAME" => $user["USERNAME"],
-			"EMAIL" => $user["EMAIL"],
-			"EMAIL_VERIFIED" => ((bool)($user["EMAIL_VERIFIED"]) || is_null($user["EMAIL"])),
-			"ARTIST_PAGE_ID" => $user["ARTIST_PAGE_ID"],
-			"PICTURE_LOC" => ($user["PICTURE_LOC"] ? $user["FILE_TOKEN"].$user["PICTURE_LOC"] : "default.png"),
-			"PICTURE_NSFW" => (bool)($user["PICTURE_NSFW"]),
-			"NSFW" => (bool)($user["NSFW"]),
-			"COLOR" => bin2hex($user["COLOR"]),
-			"NICK" => $user["NICK"]
-		];
-
-		$this->id = $id;
 	}
+
 
 	/**
 	 * Get the user's permission scope
@@ -246,16 +131,7 @@ class User implements Serializable {
 	}
 
 	/**
-	 * Get the User's ID
-	 * 
-	 * @return int
-	 */
-	public function getId() : int {
-		return $this->id;
-	}
-
-	/**
-	 * From DatabaseModelTrait
+	 * From
 	 * 
 	 * @return string
 	 */
@@ -278,24 +154,7 @@ class User implements Serializable {
 	 * @return bool 
 	 */
 	public function isNsfw() : bool {
-		if (array_key_exists("NSFW", $this->cache)) {
-			return $this->cache["NSFW"];
-		}
-		
-		return $this->cache["NSFW"] = (bool)$this->getColumnFromDatabase("NSFW");
-	}
-
-	/**
-	 * If the users profile picture is NSFW
-	 * 
-	 * @return bool
-	 */
-	public function isProfilePictureNsfw() : bool {
-		if (array_key_exists("PICTURE_NSFW", $this->cache)) {
-			return $this->cache["PICTURE_NSFW"];
-		}
-		
-		return $this->cache["PICTURE_NSFW"] = (bool)$this->getColumnFromDatabase("PICTURE_NSFW");
+		return (bool)$this->getColumnFromDatabaseOrCache("NSFW");
 	}
 
 	/**
@@ -313,12 +172,9 @@ class User implements Serializable {
 	 * @return string 6-character hex code
 	 */
 	public function getColor() : string {
-		if (array_key_exists("COLOR", $this->cache)) {
-			return $this->cache["COLOR"];
-		}
+		return bin2hex($this->getColumnFromDatabaseOrCache("NSFW"));
 	}
 
-		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
 	/**
 	 * Verify the user's password
 	 *
@@ -334,11 +190,7 @@ class User implements Serializable {
 	 * @return string|null
 	 */
 	public function getTotpKey() : ?string {
-		if (array_key_exists("TOTP_KEY", $this->cache)) {
-			return $this->cache["TOTP_KEY"];
-		}
-
-		return $this->cache["TOTP_KEY"] = $this->getColumnFromDatabase("TOTP_KEY");
+		return $this->getColumnFromDatabaseOrCache("TOTP_KEY");
 	}
 
 	/**
@@ -349,11 +201,7 @@ class User implements Serializable {
 	 * @return null|string
 	 */
 	public function getTotpResetToken() : ?string {
-		if (array_key_exists("TOTP_RESET_TOKEN", $this->cache)) {
-			return $this->cache["TOTP_RESET_TOKEN"];
-		}
-
-		return $this->cache["TOTP_RESET_TOKEN"] = $this->getColumnFromDatabase("TOTP_RESET_TOKEN");
+		return $this->getColumnFromDatabaseOrCache("TOTP_RESET_TOKEN");
 	}
 
 	/**
@@ -362,11 +210,7 @@ class User implements Serializable {
 	 * @return string|null
 	 */
 	public function getEmail() : ?string {
-		if (array_key_exists("EMAIL", $this->cache)) {
-			return $this->cache["EMAIL"];
-		}
-		
-		return $this->cache["EMAIL"] = $this->getColumnFromDatabase("EMAIL");
+		return $this->getColumnFromDatabaseOrCache("EMAIL");
 	}
 
 	/**
@@ -376,17 +220,7 @@ class User implements Serializable {
 	 * @return bool Whether the User's email address is verified
 	 */
 	public function emailIsVerified() : bool {
-		if (array_key_exists("EMAIL_VERIFIED", $this->cache)) {
-			return $this->cache["EMAIL_VERIFIED"];
-		}
-
-		if (is_null($this->getEmail())) {
-			return $this->cache["EMAIL_VERIFIED"] = true;
-		}
-
-		$result = $this->cache["EMAIL_VERIFIED"] = (bool)($this->getColumnFromDatabase("EMAIL_VERIFIED"));
-
-		return $result;
+		return is_null($this->getEmail()) ? true : $this->getColumnFromDatabaseOrCache("EMAIL_VERIFIED");
 	}
 
 	/**
@@ -396,18 +230,14 @@ class User implements Serializable {
 	 * @return string
 	 */
 	public function getEmailToken() : string {
-		if (array_key_exists("EMAIL_TOKEN", $this->cache)) {
-			return $this->cache["EMAIL_TOKEN"];
-		}
-		
-		return $this->cache["EMAIL_TOKEN"] = $this->getColumnFromDatabase("EMAIL_TOKEN");
+		return $this->getColumnFromDatabaseOrCache("EMAIL_TOKEN");
 	}
 
 	/**
 	 * Send the User a verification e-mail, if their email is not yet verified
 	 */
 	public function sendVerificationEmail() : void {
-		if (is_null($this->getEmail()) || $this->emailIsVerified()) {
+		if ($this->emailIsVerified() || is_null($this->getEmail())) { // is_null is really for phpstan, as emailIsVerified has that within
 			return;
 		}
 
@@ -418,9 +248,6 @@ class User implements Serializable {
 			throw new LogicException("User::sendVerificationEmail called from an unknown page");
 		}
 		$url = $out[1]."EmailVerification/?token=".$this->getEmailToken();
-
-		$recipient = [$this->getEmail(), $this->getNickname()];
-		$recipients = [$recipient];
 
 		$subject = "Catalyst - Email verification";
 
@@ -503,7 +330,7 @@ class User implements Serializable {
 		$textEmail .= "Alternatively, use the token ".$this->getEmailToken().' to verify your email'."\r\n";
 
 		
-		Email::sendEmail($recipients, $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
+		Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
 	}
 
 	/**
@@ -512,11 +339,7 @@ class User implements Serializable {
 	 * @return string
 	 */
 	public function getNickname() : string {
-		if (array_key_exists("NICK", $this->cache)) {
-			return $this->cache["NICK"];
-		}
-		
-		return $this->cache["NICK"] = $this->getColumnFromDatabase("NICK");
+		return $this->getColumnFromDatabaseOrCache("NICK");
 	}
 
 	/**
@@ -525,11 +348,7 @@ class User implements Serializable {
 	 * @return string
 	 */
 	public function getUsername() : string {
-		if (array_key_exists("USERNAME", $this->cache)) {
-			return $this->cache["USERNAME"];
-		}
-
-		return $this->cache["USERNAME"] = $this->getColumnFromDatabase("USERNAME");
+		return $this->getColumnFromDatabaseOrCache("USERNAME");
 	}
 
 	/**
@@ -540,11 +359,7 @@ class User implements Serializable {
 	 * @return string
 	 */
 	public function getFileToken() : string {
-		if (array_key_exists("FILE_TOKEN", $this->cache)) {
-			return $this->cache["FILE_TOKEN"];
-		}
-
-		return $this->cache["FILE_TOKEN"] = $this->getColumnFromDatabase("FILE_TOKEN");
+		return $this->getColumnFromDatabaseOrCache("FILE_TOKEN");
 	}
 
 	/**
@@ -553,11 +368,7 @@ class User implements Serializable {
 	 * @return int|null
 	 */
 	public function getArtistPageId() : ?int {
-		if (array_key_exists("ARTIST_PAGE_ID", $this->cache)) {
-			return $this->cache["ARTIST_PAGE_ID"];
-		}
-		
-		return $this->cache["ARTIST_PAGE_ID"] = $this->getColumnFromDatabase("ARTIST_PAGE_ID");
+		return $this->getColumnFromDatabaseOrCache("ARTIST_PAGE_ID");
 	}
 
 	/**
@@ -566,21 +377,23 @@ class User implements Serializable {
 	 * @return bool
 	 */
 	public function wasArtist() : bool {
-		$stmt = new SelectQuery();
+		return $this->getDataFromCallableOrCache("WAS_ARTIST", function() : bool {
+			$stmt = new SelectQuery();
 
-		$stmt->setTable(Tables::ARTIST_PAGES);
+			$stmt->setTable(Artist::getTable());
 
-		$stmt->addColumn(new Column("ID", Tables::ARTIST_PAGES));
+			$stmt->addColumn(new Column("ID", Artist::getTable()));
 
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("USER_ID", Tables::ARTIST_PAGES), '=', $this->getId()]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DELETED", Tables::ARTIST_PAGES), '=', 1]);
-		$stmt->addAdditionalCapability($whereClause);
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("USER_ID", Artist::getTable()), '=', $this->getId()]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DELETED", Artist::getTable()), '=', 1]);
+			$stmt->addAdditionalCapability($whereClause);
 
-		$stmt->execute();
+			$stmt->execute();
 
-		return count($stmt->getResult()) == 1;
+			return count($stmt->getResult()) == 1;
+		});
 	}
 
 	/**
@@ -589,28 +402,13 @@ class User implements Serializable {
 	 * @return null|Artist
 	 */
 	public function getArtistPage() : ?Artist {
-		if (array_key_exists("ARTIST_PAGE", $this->cache)) {
-			return $this->cache["ARTIST_PAGE"];
-		}
-
-		if (is_null($this->getArtistPageId())) {
-			return null;
-		} else {
-			return $this->cache["ARTIST_PAGE"] = new Artist($this->getArtistPageId());
-		}
-	}
-
-	/**
-	 * Get the User's profile photo
-	 * 
-	 * @return null|string The path, or null if there is none set (should default to default.png, per Images definition)
-	 */
-	public function getProfilePhotoPath() : ?string {
-		if (array_key_exists("PROFILE_PHOTO", $this->cache)) {
-			return $this->cache["PROFILE_PHOTO"];
-		}
-
-		return $this->cache["PROFILE_PHOTO"] = $this->getColumnFromDatabase("PICTURE_LOC");
+		return $this->getDataFromCallableOrCache("ARTIST_PAGE_OBJ", function() : ?Artist {
+			if (is_null($this->getArtistPageId())) {
+				return null;
+			} else {
+				return new Artist($this->getArtistPageId());
+			}
+		});
 	}
 
 	/**
@@ -619,31 +417,30 @@ class User implements Serializable {
 	 * @return int[]
 	 */
 	public function getWishlistIds() : array {
-		if (array_key_exists("WISHLIST_IDS", $this->cache)) {
-			return $this->cache["WISHLIST_IDS"];
-		}
-		
-		$stmt = new SelectQuery();
-		$stmt->setTable(Tables::USER_WISHLISTS);
+		return $this->getDataFromCallableOrCache("WISHLIST_IDS", function() : array {
+			$stmt = new SelectQuery();
 
-		$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
+			$stmt->setTable(Tables::USER_WISHLISTS);
 
-		$joinClause = new JoinClause();
-		$joinClause->setType(JoinClause::INNER);
-		$joinClause->setJoinTable(Tables::COMMISSION_TYPES);
-		$joinClause->setLeftColumn(new Column("ID", Tables::COMMISSION_TYPES));
-		$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
-		$stmt->addAdditionalCapability($joinClause);
+			$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
 
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $this->getId()]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPES), "=", 0]);
-		$stmt->addAdditionalCapability($whereClause);
+			$joinClause = new JoinClause();
+			$joinClause->setType(JoinClause::INNER);
+			$joinClause->setJoinTable(CommissionType::getTable());
+			$joinClause->setLeftColumn(new Column("ID", CommissionType::getTable()));
+			$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
+			$stmt->addAdditionalCapability($joinClause);
 
-		$stmt->execute();
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $this->getId()]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DELETED", CommissionType::getTable()), "=", 0]);
+			$stmt->addAdditionalCapability($whereClause);
 
-		return $this->cache["WISHLIST_IDS"] = array_column($stmt->getResult(), "COMMISSION_TYPE_ID");
+			$stmt->execute();
+
+			return array_column($stmt->getResult(), "COMMISSION_TYPE_ID");
+		});
 	}
 
 	/**
@@ -652,37 +449,11 @@ class User implements Serializable {
 	 * @return CommissionType[]
 	 */
 	public function getWishlistAsObjects() : array {
-		if (array_key_exists("WISHLIST_OBJECTS", $this->cache)) {
-			return $this->cache["WISHLIST_OBJECTS"];
-		}
-
-		$wishlistItems = [];
-
-		foreach ($this->getWishlistIds() as $id) {
-			$wishlistItems[] = new CommissionType($id);
-		}
-
-		return $this->cache["WISHLIST_OBJECTS"] = $wishlistItems;
-	}
-
-	/**
-	 * Determine if a commission type ID is on the User's wishlist
-	 * 
-	 * @param int $id CommissionType ID
-	 * @return bool
-	 */
-	public function idIsOnWishlist(int $id) : bool {
-		return in_array($id, $this->getWishlistIds());
-	}
-
-	/**
-	 * Determine if a CommissionType is on the User's wishlist
-	 * 
-	 * @param CommissionType $type
-	 * @return bool
-	 */
-	public function isOnWishlist(CommissionType $type) : bool {
-		return $this->idIsOnWishlist($type->getId());
+		return $this->getDataFromCallableOrCache("WISHLIST_OBJS", function() : array {
+			return array_map(function(int $id) : CommissionType {
+				return new CommissionType($id);
+			}, $this->getWishlistIds());
+		});
 	}
 
 	/**
@@ -707,7 +478,7 @@ class User implements Serializable {
 	 * Straight out of the HasImageTrait
 	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getProfilePhotoPath(), $this->isProfilePictureNsfw()));
+		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
 	}
 
 	/**
@@ -779,19 +550,6 @@ class User implements Serializable {
 	}
 
 	/**
-	 * Remove a selected item from the internal cache
-	 * 
-	 * @param string|null $toClear the item to remove, or null for all
-	 */
-	public function clearCache(?string $toClear=null) : void {
-		if (is_null($toClear)) {
-			$this->cache = [];
-		} else {
-			unset($this->cache[$toClear]);
-		}
-	}
-
-	/**
 	 * Gets HTML for a message which designates a user-only page
 	 * 
 	 * @return string
@@ -822,5 +580,60 @@ class User implements Serializable {
 		$str .= '</div>';
 
 		return $str;
+	}
+
+	/**
+	 * Get deleted values for when a user is delet
+	 * @return array
+	 */
+	public static function getDeletedValues() : array {
+		return [
+			"FILE_TOKEN" => "aaaaaaaaaa",
+			// "USERNAME" => "" omitted
+			"HASHED_PASSWORD" => "DELETED USER",
+			"PASSWORD_RESET_TOKEN" => Tokens::generatePasswordResetToken(),
+			"TOTP_KEY" => null,
+			"TOTP_RESET_TOKEN" => Tokens::generateTotpResetToken(),
+			"EMAIL_TOKEN" => Tokens::generateEmailVerificationToken(),
+			"ARTIST_PAGE_ID" => null,
+			"PICTURE_LOC" => null,
+			"PICTURE_NSFW" => 0,
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"NICK" => "Deleted user",
+			"DEACTIVATED" => 1,
+		];
+	}
+
+	/**
+	 * Overridden to do additional deletion of subitems
+	 *
+	 * @todo archive commissions
+	 * @todo feature board thingies
+	 * @todo wishlist
+	 */
+	public function additionalDeletion() : void {
+		$removeApiAuthorizationsQuery = new DeleteQuery();
+		$removeApiAuthorizationsQuery->setTable(Tables::API_AUTHORIZATIONS);
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USER_ID", Tables::API_AUTHORIZATIONS), "=", $userId]);
+		$removeApiAuthorizationsQuery->addAdditionalCapability($whereClause);
+		$removeApiAuthorizationsQuery->execute();
+
+		$removeApiKeysQuery = new DeleteQuery();
+		$removeApiKeysQuery->setTable(Tables::API_KEYS);
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USER_ID", Tables::API_KEYS), "=", $userId]);
+		$removeApiKeysQuery->addAdditionalCapability($whereClause);
+		$removeApiKeysQuery->execute();
+
+		if ($this->isArtist()) { // was artist will have already been deleted
+			$this->getArtistPage()->delete();
+		}
+
+		foreach(Character::getCharactersFromUser($this) as $character) {
+			$character->delete();
+		}
+
+		$this->deleteSocialChipsFromDatabase();
 	}
 }
