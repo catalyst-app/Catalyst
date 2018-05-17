@@ -19,6 +19,31 @@ use \LogicException;
 
 /**
  * Represents a user
+ *
+ * @method string getToken()
+ * @method void setToken(string $token)
+ * @method bool isNsfw()
+ * @method void setNsfw(bool $nsfw)
+ * @method string getNickname()
+ * @method void setNickname(string $nickname)
+ * @method string getUsername()
+ * @method void setUsername(string $username)
+ * @method null|int getArtistPageId()
+ * @method void setArtistPageId(null|int $artistPageId)
+ * @method null|string getTotpKey()
+ * @method void setTotpKey(null|string $totpKey)
+ * @method null|string getTotpResetToken()
+ * @method void setTotpResetToken(null|string $totpResetToken)
+ * @method null|string getEmail()
+ * @method void setEmail(null|string $email)
+ * @method bool isEmailVerified()
+ * @method void setEmailVerified(bool $emailVerified)
+ * @method string getColor()
+ * @method void setColor(string $color)
+ * @method bool isSuspended()
+ * @method void setSuspended(bool $suspended)
+ * @method bool isDeactivated()
+ * @method void setDeactivated(bool $deactivated)
  */
 class User extends AbstractDatabaseModel {
 	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
@@ -45,7 +70,7 @@ class User extends AbstractDatabaseModel {
 	 * Verifies that the unserialized data is still usable
 	 */
 	protected function unserializeVerification() {
-		if (self::getColumnFromDatabase("DEACTIVATED") || self::getColumnFromDatabase("SUSPENDED")) {
+		if ($this->isDeactivated() || $this->isSuspended()) {
 			throw new InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
 		}
 	}
@@ -128,8 +153,39 @@ class User extends AbstractDatabaseModel {
 		if (empty($stmt->getResult())) {
 			return -1;
 		} else {
-			$result = $stmt->getResult()[0]["ID"];
-			return $result;
+			return $stmt->getResult()[0]["ID"];
+		}
+	}
+
+	/**
+	 * Get an ID if the username exists, and is unsuspended
+	 * 
+	 * @param string $email
+	 * @return int -1 if not found
+	 */
+	public static function getIdFromEmail(string $email, bool $allowSuspendedAndDeactivated=false) : int {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+		
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("EMAIL", self::getTable()), "=", $email]);
+		if (!$allowSuspendedAndDeactivated) {
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
+		}
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		if (empty($stmt->getResult())) {
+			return -1;
+		} else {
+			return $stmt->getResult()[0]["ID"];
 		}
 	}
 
@@ -143,42 +199,6 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Determine if the user is an artist
-	 * 
-	 * @return bool
-	 */
-	public function isArtist() : bool {
-		return !is_null($this->getArtistPageId());
-	}
-
-	/**
-	 * If the User is NSFW
-	 * 
-	 * @return bool 
-	 */
-	public function isNsfw() : bool {
-		return (bool)$this->getColumnFromDatabaseOrCache("NSFW");
-	}
-
-	/**
-	 * Get whether or not the user has TOTP authentication enables
-	 * 
-	 * @return bool
-	 */
-	public function isTotpEnabled() : bool {
-		return !is_null($this->getTotpKey());
-	}
-
-	/**
-	 * Get the user's color
-	 * 
-	 * @return string 6-character hex code
-	 */
-	public function getColor() : string {
-		return bin2hex($this->getColumnFromDatabaseOrCache("NSFW"));
-	}
-
-	/**
 	 * Verify the user's password
 	 *
 	 * @param string $password to test
@@ -187,7 +207,7 @@ class User extends AbstractDatabaseModel {
 	public function verifyPassword(string $password) : bool {
 		$valid = password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
 		if ($valid && password_needs_rehash($this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"), PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST])) {
-			$this->updateColumnInDatabase("HASHED_PASSWORD", self::hashPassword($password));
+			$this->setPassword($password);
 		}
 		return $valid;
 	}
@@ -203,41 +223,10 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get the user's TOTP key, or null if there is not one
-	 * @return string|null
+	 * @param string $password to set
 	 */
-	public function getTotpKey() : ?string {
-		return $this->getColumnFromDatabaseOrCache("TOTP_KEY");
-	}
-
-	/**
-	 * Get a User's TOTP reset token, or null if none is set
-	 * 
-	 * The token will be null for users who have never had a TOTP token set.
-	 * If they have used a token to reset their account, an admin should reset this
-	 * @return null|string
-	 */
-	public function getTotpResetToken() : ?string {
-		return $this->getColumnFromDatabaseOrCache("TOTP_RESET_TOKEN");
-	}
-
-	/**
-	 * Get the User's email address, or null if none
-	 * 
-	 * @return string|null
-	 */
-	public function getEmail() : ?string {
-		return $this->getColumnFromDatabaseOrCache("EMAIL");
-	}
-
-	/**
-	 * Determine whether or not the User's email is verified
-	 * 
-	 * WILL ALSO return true if the user has no email set
-	 * @return bool Whether the User's email address is verified
-	 */
-	public function emailIsVerified() : bool {
-		return is_null($this->getEmail()) ? true : $this->getColumnFromDatabaseOrCache("EMAIL_VERIFIED");
+	public function setPassword(string $password) : void {
+		$this->updateColumnInDatabase("HASHED_PASSWORD", self::hashPassword($password));
 	}
 
 	/**
@@ -254,7 +243,7 @@ class User extends AbstractDatabaseModel {
 	 * Send the User a verification e-mail, if their email is not yet verified
 	 */
 	public function sendVerificationEmail() : void {
-		if ($this->emailIsVerified() || is_null($this->getEmail())) { // is_null is really for phpstan, as emailIsVerified has that within
+		if ($this->isEmailVerified() || is_null($this->getEmail())) { // is_null is really for phpstan, as isEmailVerified has that within
 			return;
 		}
 
@@ -348,44 +337,6 @@ class User extends AbstractDatabaseModel {
 
 		
 		Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
-	}
-
-	/**
-	 * Get the User's nickname
-	 * 
-	 * @return string
-	 */
-	public function getNickname() : string {
-		return $this->getColumnFromDatabaseOrCache("NICK");
-	}
-
-	/**
-	 * Get the user's username
-	 * 
-	 * @return string
-	 */
-	public function getUsername() : string {
-		return $this->getColumnFromDatabaseOrCache("USERNAME");
-	}
-
-	/**
-	 * Get the file token of the User
-	 * 
-	 * Used for storage of things like profile pictures
-	 * 
-	 * @return string
-	 */
-	public function getToken() : string {
-		return $this->getColumnFromDatabaseOrCache("FILE_TOKEN");
-	}
-
-	/**
-	 * Get the ID of the user's artist page, or null if they do not have one
-	 * 
-	 * @return int|null
-	 */
-	public function getArtistPageId() : ?int {
-		return $this->getColumnFromDatabaseOrCache("ARTIST_PAGE_ID");
 	}
 
 	/**
@@ -698,5 +649,46 @@ class User extends AbstractDatabaseModel {
 		$user->sendVerificationEmail();
 
 		return $user;
+	}
+
+	/**
+	 * Determine if the user is an artist
+	 * 
+	 * @return bool
+	 */
+	public function isArtist() : bool {
+		return !is_null($this->getArtistPageId());
+	}
+
+	/**
+	 * Get whether or not the user has TOTP authentication enables
+	 * 
+	 * @return bool
+	 */
+	public function isTotpEnabled() : bool {
+		return !is_null($this->getTotpKey());
+	}
+
+	/**
+	 * Get modifiable properties for the model
+	 *
+	 * 	"Name" => ["COLUMN_NAME", function($value) {return $out;}, function($newValue) {return $out;}]
+	 * @return array
+	 */
+	public static function getModifiableProperties() : array {
+		return [
+			"Token" => ["FILE_TOKEN", null, null],
+			"Nsfw" => ["NSFW", "boolval", null],
+			"Nickname" => ["NICK", null, null],
+			"Username" => ["USERNAME", null, null],
+			"ArtistPageId" => ["ARTIST_PAGE_ID", null, null],
+			"TotpKey" => ["TOTP_KEY", null, null],
+			"TotpResetToken" => ["TOTP_RESET_TOKEN", null, null],
+			"Email" => ["EMAIL", null, null],
+			"EmailVerified" => ["EMAIL_VERIFIED", function(int $val) : bool { return is_null($this->getEmail()) || $val; }, null],
+			"Color" => ["COLOR", "bin2hex", "hex2bin"],
+			"Suspended" => ["SUSPENDED", "boolval", null],
+			"Deactivated" => ["DEACTIVATED", "boolval", null],
+		];
 	}
 }
