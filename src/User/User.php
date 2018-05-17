@@ -316,8 +316,17 @@ class User implements Serializable {
 		if (array_key_exists("COLOR", $this->cache)) {
 			return $this->cache["COLOR"];
 		}
+	}
 
 		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
+	/**
+	 * Verify the user's password
+	 *
+	 * @param string $password to test
+	 * @return bool valid password
+	 */
+	public function verifyPassword(string $password) : bool {
+		return password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
 	}
 
 	/**

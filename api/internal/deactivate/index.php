@@ -21,7 +21,7 @@ if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername(
 	Response::sendErrorResponse(90602, ErrorCodes::ERR_90602);
 }
 
-if (!password_verify($_POST["password"], $result[0]["HASHED_PASSWORD"])) {
+if (!$_SESSION["user"]->verifyPassword($_POST["password"])) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90604, ErrorCodes::ERR_90604);
 }
