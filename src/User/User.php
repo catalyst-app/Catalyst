@@ -183,7 +183,11 @@ class User extends AbstractDatabaseModel {
 	 * @return bool valid password
 	 */
 	public function verifyPassword(string $password) : bool {
-		return password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
+		$valid = password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
+		if ($valid && password_needs_rehash($this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"), PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST])) {
+			$this->updateColumnInDatabase("HASHED_PASSWORD", self::hashPassword($password));
+		}
+		return $valid;
 	}
 
 	/**
