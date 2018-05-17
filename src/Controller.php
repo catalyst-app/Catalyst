@@ -255,7 +255,7 @@ class Controller {
 				"  ERRFILE:    ".$errfile."\n".
 				"  ERRLINE:    ".$errline."\n".
 				"  TRACK_ID:    ".$trackingId."\n".
-				"  ARGV:   ".$_SERVER["argv"]."\n";
+				"  ARGV:   ".implode(" | ", $_SERVER["argv"])."\n";
 			flush();
 			exit(1); // non-zero error codes ye
 		}
