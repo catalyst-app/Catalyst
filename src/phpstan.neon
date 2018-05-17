@@ -11,8 +11,7 @@ parameters:
 		- '/Catalyst\\Database\\CommissionType\\Wishlist/'
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
-		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getNewCommissionTypeForm/'
-		- '/Using \$this in static method Catalyst\\Form\\FormRepository::getEditCommissionTypeForm/'
+		- '/Using \$this in static method Catalyst\\Form\\FormRepository::get(New|Edit)CommissionTypeForm/'
 		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::getImage(Set|)\(\)/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
