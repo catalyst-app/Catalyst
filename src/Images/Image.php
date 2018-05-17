@@ -91,7 +91,7 @@ class Image {
 	/**
 	 * @return string
 	 */
-	public function getFileToken() : string {
+	public function getToken() : string {
 		return $this->fileToken;
 	}
 
@@ -182,7 +182,7 @@ class Image {
 		if (is_null($this->getPath())) {
 			return ROOTDIR.$this->getFolder()."/"."default.png";
 		} else {
-			return ROOTDIR.$this->getFolder()."/".$this->getFileToken().$this->getPath();
+			return ROOTDIR.$this->getFolder()."/".$this->getToken().$this->getPath();
 		}
 	}
 
@@ -195,7 +195,7 @@ class Image {
 		if (is_null($this->getPath())) {
 			$path = REAL_ROOTDIR.$this->getFolder()."/"."default.png";
 		} else {
-			$path = REAL_ROOTDIR.$this->getFolder()."/".$this->getFileToken().$this->getPath();
+			$path = REAL_ROOTDIR.$this->getFolder()."/".$this->getToken().$this->getPath();
 		}
 		// prevent warnings and shit
 		if (file_exists($path)) {

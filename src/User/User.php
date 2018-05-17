@@ -375,7 +375,7 @@ class User extends AbstractDatabaseModel {
 	 * 
 	 * @return string
 	 */
-	public function getFileToken() : string {
+	public function getToken() : string {
 		return $this->getColumnFromDatabaseOrCache("FILE_TOKEN");
 	}
 
@@ -495,7 +495,7 @@ class User extends AbstractDatabaseModel {
 	 * Straight out of the HasImageTrait
 	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getFileToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
+		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
 	}
 
 	/**

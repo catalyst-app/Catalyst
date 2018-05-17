@@ -201,7 +201,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= 'row ';
 				$str .= htmlspecialchars(self::ROW_CLASS).'"';
 				$str .= ' data-internal-filename="'.htmlspecialchars($image->getPath()).'"';
-				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$str .= ' data-input="'.htmlspecialchars($this->getId()).'"';
 				$str .= '>';
 
@@ -240,13 +240,13 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= '>';
 
 				$str .= '<label';
-				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$str .= '>';
 
 				$str .= '<input';
 				$str .= ' class="filled-in '.htmlspecialchars(self::NSFW_CLASS).'"';
 				$str .= ' type="checkbox"';
-				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::NSFW_CHECKBOX_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				if ($image->isNsfw()) {
 					$str .= ' checked="checked"';
 				}
@@ -266,13 +266,13 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= ' class="'.htmlspecialchars(self::CAPTION_CLASS).'"';
 				$str .= ' type="text"';
 				$str .= ' maxlength="255"';
-				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$captionWithoutInfo = trim(explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption())[0]);
 				$str .= ' value="'.htmlspecialchars($captionWithoutInfo).'"';
 				$str .= '>';
 
 				$str .= '<label';
-				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$str .= $captionWithoutInfo ? ' class="active"' : '';
 				$str .= ' data-error="Caption cannot be longer than 255 characters"';
 				$str .= '>';
@@ -288,7 +288,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= '<input';
 				$str .= ' class="'.htmlspecialchars(self::INFO_CLASS).'"';
 				$str .= ' type="text"';
-				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$exploded = explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption(), 2);
 				if (count($exploded) > 1) {
 					$infoStr = trim($exploded[1]);
@@ -299,7 +299,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= '>';
 
 				$str .= '<label';
-				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()).'"';
+				$str .= ' for="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$str .= $infoStr ? ' class="active"' : '';
 				$str .= '>';
 				$str .= htmlspecialchars($this->getInfoLabel());
@@ -345,7 +345,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 
 				$str .= $image->getStrictCircleHtml([], ["margin" => "1em"], [
 					"data-container" => $this->getId().self::ROW_CONTAINER_ID_SUFFIX,
-					"id" => $this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getFileToken()."-".$image->getPath()."-reorder-img",
+					"id" => $this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getToken()."-".$image->getPath()."-reorder-img",
 				]);
 
 				$str .= '</div>';
