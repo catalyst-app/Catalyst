@@ -2,148 +2,72 @@
 
 namespace Catalyst\Character;
 
-use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
-use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
+use \Catalyst\Database\Query\{InsertQuery, MultiInsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
 use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
+use \Catalyst\Page\Values;
 use \Catalyst\User\User;
+use \Catalyst\Tokens;
 use \InvalidArgumentException;
 
 /**
  * Represents a Character in the database
+ *
+ * @method string getName()
+ * @method void setName(string $name)
+ * @method string getColor()
+ * @method void setColor(string $color)
+ * @method bool isPublic()
+ * @method void setPublic(bool $public)
+ * @method int getOwnerId()
+ * @method void setOwnerId(int $ownerId)
+ * @method string getToken()
+ * @method void setToken(string $token)
+ * @method string getDescription()
+ * @method void setDescription(string $description)
  */
-class Character {
-	use DatabaseModelTrait, HasImageTrait, HasImageSetTrait;
+class Character extends AbstractDatabaseModel {
+	use HasImageTrait, HasImageSetTrait;
+
+	// want your character here?  Submit a PR or donate!
+	const PREDEFINED_CHARACTER_SHORT_URLS = [
+		"fauxil" => "sv2j6qy",
+		"lykai" => "fwce5ym",
+		"toish" => "53h1ggw",
+	];
 
 	/**
-	 * The character's ID
-	 * @var int
+	 * Get a character's ID from their token
 	 */
-	private $id;
+	public static function getIdFromToken(string $token) : int {
+		if (array_key_exists(strtolower($token), self::PREDEFINED_CHARACTER_SHORT_URLS)) {
+			return self::getIdFromToken(self::PREDEFINED_CHARACTER_SHORT_URLS[strtolower($token)]);
+		}
 
-	/**
-	 * This is used as not to repeatedly hammer the database
-	 * @var array
-	 */
-	private $cache = [];
-
-	/**
-	 * Create a new Character object, DELETED or not
-	 * 
-	 * @param int $id
-	 * @throws InvalidArgumentException bad ID passed
-	 */
-	public function __construct(int $id) {
+		if (!preg_match("/".Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
+			return -1;
+		}
+		
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
-
-		$stmt->addColumn(new Column("USER_ID", self::getTable()));
-		$stmt->addColumn(new Column("CHARACTER_TOKEN", self::getTable()));
-		$stmt->addColumn(new Column("NAME", self::getTable()));
-		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
-		$stmt->addColumn(new Column("COLOR", self::getTable()));
-		$stmt->addColumn(new Column("PUBLIC", self::getTable()));
-
-		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-
-		$joinClause = new JoinClause();
-
-		$joinClause->setType(JoinClause::LEFT);
-
-		$joinClause->setJoinTable(Tables::CHARACTER_IMAGES);
-
-		$joinClause->setLeftColumn(new Column("ID", self::getTable()));
-		$joinClause->setRightColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
-
-		$stmt->addAdditionalCapability($joinClause);
+		
+		$stmt->addColumn(new Column("ID", self::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
+		$whereClause->addToClause([new Column("CHARACTER_TOKEN", self::getTable()), "=", $token]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), "=", 0]);
 		$stmt->addAdditionalCapability($whereClause);
 
-		$orderByClause = new OrderByClause();
-		$orderByClause->setColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
-		$orderByClause->setOrder("ASC");
-		$stmt->addAdditionalCapability($orderByClause);
-
 		$stmt->execute();
 
-		$results = $stmt->getResult();
-
-		if (!count($results)) {
-			throw new InvalidArgumentException("Character ID ".$id." does not exist in the database.");
-		}
-
-		$images = [];
-
-		for ($i=0; $i < count($results); $i++) { 
-			if (is_null($results[$i]["PATH"])) {
-				break;
-			}
-			$images[] = new Image(
-				Folders::CHARACTER_IMAGE,
-				$results[$i]["CHARACTER_TOKEN"],
-				$results[$i]["PATH"],
-				(bool)$results[$i]["NSFW"],
-				trim($results[$i]["CAPTION"].($results[$i]["CREDIT"] ? ("\n**Artist:** ".$results[$i]["CREDIT"]) : ''))
-			);
-		}
-
-		$this->cache = [
-			"USER_ID" => $results[0]["USER_ID"],
-			"USER" => new \Catalyst\User\User($results[0]["USER_ID"]),
-			"CHARACTER_TOKEN" => $results[0]["CHARACTER_TOKEN"],
-			"NAME" => $results[0]["NAME"],
-			"DESCRIPTION" => $results[0]["DESCRIPTION"],
-			"COLOR" => bin2hex($results[0]["COLOR"]),
-			"PUBLIC" => (bool)($results[0]["PUBLIC"])
-		];
-
-		$this->setImageSet($images);
-
-		$this->id = $id;
-	}
-
-	public static function getIdFromToken(string $token) : int {
-		switch (strtolower($token)) {
-			case 'fauxil':
-				return self::getIdFromToken("sv2j6qy");
-			case 'wew':
-				return self::getIdFromToken("sq641rb");
-			case 'lykai':
-				return self::getIdFromToken("fwce5ym");
-			case 'toish':
-				return self::getIdFromToken("53h1ggw");
-		}
-
-		if (!preg_match("/".\Catalyst\Tokens::CHARACTER_TOKEN_REGEX."/", $token)) {
-			return -1;
-		}
-		$stmt = $GLOBALS["dbh"]->prepare("SELECT `ID` FROM `".DB_TABLES["characters"]."` WHERE `CHARACTER_TOKEN` = :CHARACTER_TOKEN AND `DELETED` = 0;");
-		$stmt->bindParam(":CHARACTER_TOKEN", $token);
-		$stmt->execute();
-
-		if ($stmt->rowCount() == 0) {
+		if (empty($stmt->getResult())) {
 			return -1;
 		} else {
-			$result = $stmt->fetchAll()[0]["ID"];
-			$stmt->closeCursor();
-			return $result;
+			return $stmt->getResult()[0]["ID"];
 		}
-	}
-
-	/**
-	 * Get the Character's ID
-	 * 
-	 * Specified in DatabaseModelTrait
-	 * @return int
-	 */
-	public function getId() : int {
-		return $this->id;
 	}
 
 	/**
@@ -157,95 +81,14 @@ class Character {
 	}
 
 	/**
-	 * Get the character's name
-	 * 
-	 * @return string
-	 */
-	public function getName() : string {
-		if (array_key_exists("NAME", $this->cache)) {
-			return $this->cache["NAME"];
-		}
-		
-		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
-	}
-
-	/**
-	 * Get the color as a 6-character hex code
-	 * 
-	 * @return string
-	 */
-	public function getColor() : string {
-		if (array_key_exists("COLOR", $this->cache)) {
-			return $this->cache["COLOR"];
-		}
-
-		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
-	}
-
-	/**
-	 * If the character is public
-	 * 
-	 * @return bool
-	 */
-	public function isPublic() : bool {
-		if (array_key_exists("PUBLIC", $this->cache)) {
-			return $this->cache["PUBLIC"];
-		}
-
-		return $this->cache["PUBLIC"] = (bool)($this->getColumnFromDatabase("PUBLIC"));
-	}
-
-	/**
-	 * Get the character's owner's id
-	 * 
-	 * @return int
-	 */
-	public function getOwnerId() : int {
-		if (array_key_exists("USER_ID", $this->cache)) {
-			return $this->cache["USER_ID"];
-		}
-
-		return $this->cache["USER_ID"] = $this->getColumnFromDatabase("USER_ID");
-	}
-
-	/**
 	 * Get the character's owner
 	 * 
 	 * @return User
 	 */
 	public function getOwner() : User {
-		if (array_key_exists("USER", $this->cache)) {
-			return $this->cache["USER"];
-		}
-
-		// cache for db calls
-		return $this->cache["USER"] = new User($this->getOwnerId());
-	}
-
-	/**
-	 * Get the character's unique token
-	 * 
-	 * @return string
-	 */
-	public function getToken() : string {
-		if (array_key_exists("CHARACTER_TOKEN", $this->cache)) {
-			return $this->cache["CHARACTER_TOKEN"];
-		}
-
-		return $this->cache["CHARACTER_TOKEN"] = $this->getColumnFromDatabase("CHARACTER_TOKEN");
-	}
-
-	/**
-	 * Get the character's description, as markdown
-	 * 
-	 * @return string
-	 */
-	public function getDescription() : string {
-		if (array_key_exists("DESCRIPTION", $this->cache)) {
-			return $this->cache["DESCRIPTION"];
-		}
-
-		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
+		return $this->getDataFromCallableOrCache("OWNER_OBJ", function() : int {
+			return $this->getOwnerId();
+		});
 	}
 
 	/**
@@ -257,7 +100,7 @@ class Character {
 		if ($this->isPublic()) {
 			return true;
 		}
-		if (\Catalyst\User\User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
+		if (User::isLoggedIn() && $_SESSION["user"]->getId() == $this->getOwnerId()) {
 			return true;
 		}
 
@@ -410,5 +253,97 @@ class Character {
 		}
 
 		return $characters;
+	}
+
+	/**
+	 * Create a character
+	 *
+	 * @param array $values
+	 * @return self
+	 */
+	public static function create(array $values) : self {
+		// per array_merge docs:
+		// If the input arrays have the same string keys, then the latter value
+		//  for that key will overwrite the previous one
+		$values = array_merge([
+			"CHARACTER_TOKEN" => Tokens::generateCharacterToken(),
+			"NAME" => "",
+			"DESCRIPTION" => "",
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"PUBLIC" => 1,
+			"_images" => [], // preload with an array of Image
+			"_image_meta" => [], // preload with properly formatted array
+		], $values);
+
+		$stmt = new InsertQuery();
+
+		$stmt->setTable(self::getTable());
+
+		foreach (["USER_ID", "CHARACTER_TOKEN", "NAME", "DESCRIPTION", "COLOR", "PUBLIC"] as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+			$stmt->addValue($values[$column]);
+		}
+
+		$stmt->execute();
+
+		$characterId = $stmt->getResult();
+
+		if (!empty($values["_images"])) {
+			$stmt = new MultiInsertQuery();
+
+			$stmt->setTable(Tables::CHARACTER_IMAGES);
+
+			$stmt->addColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
+			$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
+			$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
+			$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
+			$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+			$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
+
+			foreach ($values["_images"] as $image) {
+				$stmt->addValue($characterId);
+				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["caption"]);
+				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["info"]);
+				$stmt->addValue($image->getPath());
+				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["nsfw"] ? 1 : 0);
+				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["sort"]);
+			}
+
+			$stmt->execute();
+		}
+
+		return new self($characterId, $values);
+	}
+
+	/**
+	 * Get deleted values for when a character is delet
+	 * @return array
+	 */
+	public static function getDeletedValues() : array {
+		return [
+			// "CHARACTER_TOKEN" => "", ommitted
+			"NAME" => "Deleted character",
+			"DESCRIPTION" => "Deleted character",
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"PUBLIC" => false,
+			"DELETED" => true,
+		];
+	}
+
+	/**
+	 * Get modifiable properties for the model
+	 *
+	 * 	"Name" => ["COLUMN_NAME", function($value) {return $out;}, function($newValue) {return $out;}]
+	 * @return array
+	 */
+	public static function getModifiableProperties() : array {
+		return [
+			"Name" => ["FILE_TOKEN", null, null],
+			"Color" => ["COLOR", "bin2hex", "hex2bin"],
+			"Public" => ["PUBLIC", "boolval", null],
+			"OwnerId" => ["USER_ID", null, null],
+			"Token" => ["CHARACTER_TOKEN", null, null],
+			"Description" => ["DESCRIPTION", null, null],
+		];
 	}
 }
