@@ -238,3 +238,122 @@ if (count($existingModifiers)) {
 	$stmt->execute();
 }
 
+$existingPaymentTypes = [];
+
+foreach ($commissionType->getPaymentOptions() as $paymentType) {
+	$key = serialize([
+		$paymentType->getType(),
+		$paymentType->getAddress(),
+		$paymentType->getInstructions(),
+	]);
+	$existingPaymentTypes[$key] = $paymentType;
+}
+
+if (array_key_exists("payments", $_POST) && count($_POST["payments"])) {
+	$stmt = new MultiInsertQuery();
+
+	$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
+
+	$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+	$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+	$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+	$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+
+	$anyToAdd = false;
+
+	foreach ($_POST["payments"] as $payment) {
+		$key = serialize([
+			$payment["type-psuedo-field"],
+			$payment["address-psuedo-field"],
+			$payment["instructions-psuedo-field"],
+		]);
+		if (array_key_exists($key, $existingPaymentTypes)) {
+			$existingPaymentTypes[$key] = null;
+			continue;
+		}
+		$anyToAdd = true;
+		$stmt->addValue($commissionTypeId);
+		$stmt->addValue($payment["type-psuedo-field"]);
+		$stmt->addValue($payment["address-psuedo-field"]);
+		$stmt->addValue($payment["instructions-psuedo-field"]);
+	}
+
+	if ($anyToAdd) {
+		$stmt->execute();
+	}
+}
+
+$existingPaymentTypes = array_filter($existingPaymentTypes);
+
+if (count($existingPaymentTypes)) {
+	$toDelete = [];
+
+	foreach ($existingPaymentTypes as $paymentType) {
+		$toDelete[] = $paymentType->getId();
+	}
+
+	$stmt = new DeleteQuery();
+
+	$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
+
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ID", Tables::COMMISSION_TYPE_MODIFIERS), "IN", $toDelete]);
+	$stmt->addAdditionalCapability($whereClause);
+
+	$stmt->execute();
+}
+
+$existingStages = [];
+
+foreach ($commissionType->getStages() as $stage) {
+	$key = serialize($stage->getStage());
+	$existingStages[$key] = $stage;
+}
+
+if (array_key_exists("stages", $_POST) && count($_POST["stages"])) {
+	$stmt = new MultiInsertQuery();
+
+	$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
+
+	$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES));
+	$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
+
+	$anyToAdd = false;
+
+	foreach ($_POST["stages"] as $stage) {
+		$key = serialize($stage["stage-psuedo-field"]);
+		if (array_key_exists($key, $existingStages)) {
+			$existingStages[$key] = null;
+			continue;
+		}
+		$anyToAdd = true;
+		$stmt->addValue($commissionTypeId);
+		$stmt->addValue($stage["stage-psuedo-field"]);
+	}
+
+	if ($anyToAdd) {
+		$stmt->execute();
+	}
+}
+
+$existingStages = array_filter($existingStages);
+
+if (count($existingStages)) {
+	$toDelete = [];
+
+	foreach ($existingStages as $stage) {
+		$toDelete[] = $stage->getId();
+	}
+
+	$stmt = new DeleteQuery();
+
+	$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
+
+	$whereClause = new WhereClause();
+	$whereClause->addToClause([new Column("ID", Tables::COMMISSION_TYPE_STAGES), "IN", $toDelete]);
+	$stmt->addAdditionalCapability($whereClause);
+
+	$stmt->execute();
+}
+
+Response::sendSuccessResponse("Success");
