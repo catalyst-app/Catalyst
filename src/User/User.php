@@ -101,7 +101,7 @@ class User extends AbstractDatabaseModel {
 	 * @param string $username
 	 * @return int -1 if not found
 	 */
-	public static function getIdFromUsername(string $username) : int {
+	public static function getIdFromUsername(string $username, bool $allowSuspendedAndDeactivated=false) : int {
 		// check regex as not to sodomize the database
 		if (!preg_match("/^([A-Za-z0-9._-]){2,64}$/", $username)) {
 			return -1;
