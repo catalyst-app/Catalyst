@@ -414,6 +414,9 @@ class Image {
 		if (!is_null($this->getPath())) {
 			unlink($this->getFilesystemPath());
 		}
+		$this->setPath("deleted_image.png");
+		$this->setNsfw(false);
+		$this->setCaption("Deleted image");
 	}
 
 	/**
