@@ -61,6 +61,23 @@ trait HasSocialChipsTrait {
 	}
 
 	/**
+	 * Delete social chips from the database for the object
+	 * 
+	 * @return array Social chips
+	 */
+	public function deleteSocialChipsFromDatabase() : void {
+		$stmt = new DeleteQuery();
+
+		$stmt->setTable($this->getSocialChipTable());
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column($this->getSocialChipIdColumn(), $this->getSocialChipTable()), "=", $this->getId()]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+	}
+
+	/**
 	 * Get the HTML for the object's social chips
 	 * 
 	 * @param bool $editMode if the chip is in edit mode
