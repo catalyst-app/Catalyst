@@ -6344,7 +6344,7 @@ var _rules = [
   [ 'strikethrough',   __webpack_require__(11).tokenize ],
   [ 'emphasis',        __webpack_require__(12).tokenize ],
   [ 'link',            __webpack_require__(56) ],
-  [ 'image',           __webpack_require__(57) ],
+  // [ 'image',           __webpack_require__(57) ],
   [ 'autolink',        __webpack_require__(58) ],
   [ 'html_inline',     __webpack_require__(59) ],
   [ 'entity',          __webpack_require__(60) ]
