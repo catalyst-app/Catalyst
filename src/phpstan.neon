@@ -12,6 +12,7 @@ parameters:
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::get(New|Edit)CommissionTypeForm/'
+		- '/Using \$this in static method .+::getModifiableProperties/'
 		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::getImage(Set|)\(\)/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
