@@ -588,7 +588,7 @@ class User extends AbstractDatabaseModel {
 	 */
 	public static function getDeletedValues() : array {
 		return [
-			"FILE_TOKEN" => "aaaaaaaaaa",
+			// "FILE_TOKEN" => "", omitted
 			// "USERNAME" => "" omitted
 			"HASHED_PASSWORD" => "DELETED USER",
 			"PASSWORD_RESET_TOKEN" => Tokens::generatePasswordResetToken(),
@@ -615,18 +615,18 @@ class User extends AbstractDatabaseModel {
 		$removeApiAuthorizationsQuery = new DeleteQuery();
 		$removeApiAuthorizationsQuery->setTable(Tables::API_AUTHORIZATIONS);
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("USER_ID", Tables::API_AUTHORIZATIONS), "=", $userId]);
+		$whereClause->addToClause([new Column("USER_ID", Tables::API_AUTHORIZATIONS), "=", $this->getId()]);
 		$removeApiAuthorizationsQuery->addAdditionalCapability($whereClause);
 		$removeApiAuthorizationsQuery->execute();
 
 		$removeApiKeysQuery = new DeleteQuery();
 		$removeApiKeysQuery->setTable(Tables::API_KEYS);
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("USER_ID", Tables::API_KEYS), "=", $userId]);
+		$whereClause->addToClause([new Column("USER_ID", Tables::API_KEYS), "=", $this->getId()]);
 		$removeApiKeysQuery->addAdditionalCapability($whereClause);
 		$removeApiKeysQuery->execute();
 
-		if ($this->isArtist()) { // was artist will have already been deleted
+		if (!is_null($this->getArtistPage())) { // was artist will have already been deleted
 			$this->getArtistPage()->delete();
 		}
 
