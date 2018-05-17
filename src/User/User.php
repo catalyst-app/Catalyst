@@ -187,6 +187,16 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * Verify the user's password
+	 *
+	 * @param string $password to test
+	 * @return bool valid password
+	 */
+	public static function hashPassword(string $password) : bool {
+		return password_hash($password, PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
+	}
+
+	/**
 	 * Get the user's TOTP key, or null if there is not one
 	 * @return string|null
 	 */
