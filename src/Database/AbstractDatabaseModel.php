@@ -5,6 +5,8 @@ namespace Catalyst\Database;
 use \Catalyst\Database\Query\{SelectQuery, UpdateQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Images\{HasImageSetTrait, HasImageTrait};
+use \BadMethodCallException;
+use \Closure;
 use \InvalidArgumentException;
 use \Serializable;
 
@@ -158,7 +160,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		$stmt->execute();
 
-		$this->clearCache($column);
+		$this->cache[$column] = $value;
 	}
 
 	/**
@@ -241,4 +243,82 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * Can be overriden to allow for additional action to occur upon deletion
 	 */
 	protected function additionalDeletion() : void {}
+
+	/**
+	 * Return an array of format
+	 * 	"Name" => ["COLUMN_NAME", function($value) {return $out;}, function($newValue) {return $out;}]
+	 * 	e.g.
+	 * 	"Color" => ["COLOR", "bin2hex", "hex2bin"]
+	 *
+	 * null callable for no function
+	 *
+	 * @return array
+	 */
+	protected abstract static function getModifiableProperties() : array;
+
+	/**
+	 * dynamic getters and setters uwu
+	 */
+	public function __call(string $name, array $arguments) {
+		$type = "";
+		if (strpos($name, "get") === 0) {
+			$type = "get";
+			$name = substr($name, 3);
+			if (count($arguments) !== 0) {
+				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+			}
+		} elseif (strpos($name, "is") === 0) {
+			$type = "is";
+			$name = substr($name, 2);
+			if (count($arguments) !== 0) {
+				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+			}
+		} elseif (strpos($name, "set") === 0) {
+			$type = "set";
+			$name = substr($name, 3);
+			if (count($arguments) !== 1) {
+				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 1.");
+			}
+		} else {
+			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+		}
+
+		if (!array_key_exists($name, static::getModifiableProperties())) {
+			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+		}
+
+		$methodDefinition = static::getModifiableProperties()[$name];
+
+		if ($type == "get" || $type == "is") {
+			if (is_null($methodDefinition[1])) {
+				if ($type == "is") {
+					return (bool)$this->getColumnFromDatabaseOrCache($methodDefinition[0]);
+				}
+				return $this->getColumnFromDatabaseOrCache($methodDefinition[0]);
+			} else {
+				if ($type == "is") {
+					if ($methodDefinition[1] instanceof Closure) {
+						$methodDefinition[1]->bindTo($this, $this);
+					}
+					return (bool)call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
+				}
+				if ($methodDefinition[1] instanceof Closure) {
+					$methodDefinition[1]->bindTo($this, $this);
+				}
+				return call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
+			}
+		} else {
+			if (is_null($methodDefinition[2])) {
+				if ($this->getColumnFromDatabaseOrCache($methodDefinition[0]) == $arguments[0]) {
+					return;
+				}
+				$this->updateColumnInDatabase($methodDefinition[0], $arguments[0]);
+			} else {
+				if ($this->getColumnFromDatabaseOrCache($methodDefinition[0]) == call_user_func($methodDefinition[2], $arguments[0])) {
+					return;
+				}
+				$this->updateColumnInDatabase($methodDefinition[0], call_user_func($methodDefinition[2], $arguments[0]));
+			}
+		}
+	}
 }
