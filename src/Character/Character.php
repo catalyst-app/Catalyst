@@ -277,7 +277,7 @@ class Character {
 			$stmt->addAdditionalCapability($joinClause);
 			
 			$whereClause = new WhereClause();
-			$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::ARTIST_PAGES), '=', $aid]);
+			$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSIONS), '=', $aid]);
 			$whereClause->addToClause(WhereClause::AND);
 			$whereClause->addToClause([new Column("CHARACTER_ID_ARRAY", Tables::COMMISSIONS), 'LIKE', "%\"".$this->getId()."\"%"]);
 			$stmt->addAdditionalCapability($whereClause);
