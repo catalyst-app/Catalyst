@@ -45,7 +45,7 @@ class User extends AbstractDatabaseModel {
 	 * Verifies that the unserialized data is still usable
 	 */
 	protected function unserializeVerification() {
-		if (self::getColumnFromDatabase("DELETED") || self::getColumnFromDatabase("SUSPENDED")) {
+		if (self::getColumnFromDatabase("DEACTIVATED") || self::getColumnFromDatabase("SUSPENDED")) {
 			throw new InvalidArgumentException("The current user was suspended or deactivated.  Please refresh.");
 		}
 	}
