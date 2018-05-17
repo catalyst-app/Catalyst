@@ -13,7 +13,6 @@ use \Catalyst\Images\{Image, Folders};
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\{HTTPCode, Tokens};
-use \LogicException;
 
 Endpoint::init(true, 1);
 
@@ -225,7 +224,7 @@ if (count($existingModifiers)) {
 	$toDelete = [];
 
 	foreach ($existingModifiers as $mod) {
-		$toDelete[] = $mod->getId()
+		$toDelete[] = $mod->getId();
 	}
 
 	$stmt = new DeleteQuery();
