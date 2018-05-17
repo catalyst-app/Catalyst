@@ -227,10 +227,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		$stmt->execute();
 
-		if ($this instanceof HasImageTrait) {
+		if (method_exists($this, "getImage")) {
 			$this->getImage()->delete();
 		}
-		if ($this instanceof HasImageSetTrait) {
+		if (method_exists($this, "getImageSet")) {
 			foreach ($this->getImageSet() as $image) {
 				$image->delete();
 			}
