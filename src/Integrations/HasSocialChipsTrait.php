@@ -4,7 +4,7 @@ namespace Catalyst\Integrations;
 
 use \Catalyst\Database\Column;
 use \Catalyst\Database\QueryAddition\{OrderByClause, WhereClause};
-use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\Query\{DeleteQuery, SelectQuery};
 
 /**
  * Used by classes which have social media chips
