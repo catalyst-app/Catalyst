@@ -15,8 +15,8 @@ Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 FormRepository::getSettingsForm()->checkServerSide();
 
-if ($_POST["username"] == $_SESSION["user"]->getUsername()) {
-	if (User::getIdFromUsername($_POST["username"], true)) {
+if ($_POST["username"] != $_SESSION["user"]->getUsername()) {
+	if (User::getIdFromUsername($_POST["username"], true) !== -1) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
 	}
