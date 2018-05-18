@@ -64,12 +64,14 @@ $resendVerificationEmail = false;
 if (empty($_POST["email"]) && !is_null($_SESSION["user"]->getEmail())) {
 	$_SESSION["user"]->setEmail(null);
 	$_SESSION["user"]->setEmailToken(Tokens::generateEmailVerificationToken());
-	$_SESSION["user"]->setEmailVerified(false);
+	$_SESSION["user"]->setEmailVerified(true);
+	$_SESSION["user"]->setEmailVerificationSendable(false); 
 } else if ($_POST["email"] != $_SESSION["user"]->getEmail()) {
 	$resendVerificationEmail = true;
-	$_SESSION["user"]->setEmail($_SESSION["user"]->getEmail());
+	$_SESSION["user"]->setEmail($_POST["email"]);
 	$_SESSION["user"]->setEmailToken(Tokens::generateEmailVerificationToken());
 	$_SESSION["user"]->setEmailVerified(false);
+	$_SESSION["user"]->setEmailVerificationSendable(false); 
 }
 
 $profilePicture = $_SESSION["user"]->getImage()->getPath();
@@ -81,9 +83,7 @@ if (isset($_FILES["profile-picture"])) {
 	}
 }
 
-if ($_SESSION["user"]->getProfilePicturePath() !== $profilePicture) {
-	$_SESSION["user"]->setProfilePicturePath($profilePicture);
-}
+$_SESSION["user"]->setProfilePicturePath($profilePicture);
 
 if (is_null($profilePicture) && is_null($_SESSION["user"]->getProfilePicturePath())) {
 	$_SESSION["user"]->setProfilePictureNsfw(false);
@@ -93,17 +93,9 @@ if (is_null($profilePicture) && is_null($_SESSION["user"]->getProfilePicturePath
 	$_SESSION["user"]->setProfilePictureNsfw(false);
 }
 
-if (($_POST["nsfw-access"] == "true") != $_SESSION["user"]->isNsfw()) {
-	$_SESSION["user"]->setNsfw($_POST["nsfw-access"] == "true");
-}
-
-if ($_POST["color"] !== $_SESSION["user"]->getColor()) {
-	$_SESSION["user"]->setColor($_POST["color"]);
-}
-
-if ($_POST["nickname"] != $_SESSION["user"]->getNickname()) {
-	$_SESSION["user"]->setNickname($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
-}
+$_SESSION["user"]->setNsfw($_POST["nsfw-access"] == "true");
+$_SESSION["user"]->setColor($_POST["color"]);
+$_SESSION["user"]->setNickname($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
 
 if ($resendVerificationEmail) {
 	$_SESSION["user"]->clearCache();
