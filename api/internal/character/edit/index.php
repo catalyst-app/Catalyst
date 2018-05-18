@@ -6,16 +6,13 @@ define("REAL_ROOTDIR", "../../../../");
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Character\Character;
-use \Catalyst\Database\{Column, RawColumn, Tables};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\Query\{DeleteQuery, InsertQuery, MultiInsertQuery, SelectQuery, UpdateQuery};
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Images\{Folders,Image};
 use \Catalyst\Page\Values;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 FormRepository::getEditCharacterForm()->checkServerSide();
 

@@ -13,7 +13,7 @@ use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_OUT);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_OUT);
 
 FormRepository::getLoginForm()->checkServerSide();
 

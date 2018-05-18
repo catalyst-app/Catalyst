@@ -13,7 +13,7 @@ use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\Values;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 FormRepository::getAddNetworkOtherForm()->checkServerSide();
 

@@ -12,7 +12,7 @@ use \Catalyst\Images\{Image, Folders};
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 FormRepository::getEditArtistPageForm()->checkServerSide();
 

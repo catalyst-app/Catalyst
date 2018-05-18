@@ -11,7 +11,7 @@ use \Catalyst\Database\Query\UpdateQuery;
 use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 if ($_POST["dest"] !== "User" && $_POST["dest"] !== "Artist") {
 	HTTPCode::set(400);

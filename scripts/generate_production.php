@@ -14,7 +14,7 @@ use \Catalyst\Page\Header\Header;
 use \tubalmartin\CssMin\Minifier;
 use \JSMin\JSMin;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_NONE);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
 $scripts = Header::SCRIPTS;
 

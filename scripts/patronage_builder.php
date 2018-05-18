@@ -11,7 +11,7 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Integrations\SocialMedia;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_NONE);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
 define("RANK_ATTRS", [
 	"titanium" => [

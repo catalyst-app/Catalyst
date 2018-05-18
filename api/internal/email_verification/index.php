@@ -8,7 +8,7 @@ use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
 
-Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
+Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
 FormRepository::getEmailVerificationForm()->checkServerSide();
 
