@@ -201,14 +201,14 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * Abstract so specific implementation of unpacking of $params can apply
 	 * @param array $values values to build off of
 	 */
-	public abstract static function create(array $values);
+	abstract public static function create(array $values);
 
 	/**
 	 * Get the values to overwrite deleted items
 	 *
 	 * @return array
 	 */
-	public abstract static function getDeletedValues() : array;
+	abstract public static function getDeletedValues() : array;
 
 	/**
 	 * Deletes the item (deletes images, deletes cache, fills row with deleted values)

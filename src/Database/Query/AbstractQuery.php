@@ -259,7 +259,7 @@ abstract class AbstractQuery {
 	 * 
 	 * @return bool if the query was successful
 	 */
-	public abstract function execute() : bool;
+	abstract public function execute() : bool;
 
 	/**
 	 * Returns the result from ->execute
