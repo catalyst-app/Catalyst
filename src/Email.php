@@ -1565,7 +1565,7 @@ class Email {
 	 * @param string $pass Password for the email
 	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
 	 */
-	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, array $smtp=self::EMAIL_SMTP) : void {
+	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, array $smtp=self::EMAIL_SMTP) : bool {
 		$mail = new PHPMailer(false);
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
@@ -1586,6 +1586,6 @@ class Email {
 		$mail->Body = $message;
 		$mail->AltBody = $textMessage;
 
-		$mail->send();
+		return $mail->send();
 	}
 }
