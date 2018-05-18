@@ -338,7 +338,7 @@ class Character extends AbstractDatabaseModel {
 	 */
 	public static function getModifiableProperties() : array {
 		return [
-			"Name" => ["FILE_TOKEN", null, null],
+			"Name" => ["NAME", null, null],
 			"Color" => ["COLOR", "bin2hex", "hex2bin"],
 			"Public" => ["PUBLIC", "boolval", null],
 			"OwnerId" => ["USER_ID", null, null],
