@@ -78,7 +78,7 @@ var humanFileSize = function(size) {
 			$(".collapsible").collapsible();
 			$(".dropdown-trigger").dropdown();
 			$('.psuedo-required, .psuedo-required input').attr("required", false);
-			$(".raw-markdown").each(function() {renderMarkdownArea(this);});
+			$(".raw-markdown, .raw-inline-markdown").each(function() {renderMarkdownArea(this);});
 			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
 			$(".totp-preview").each(function(a, b) {
 				setInterval(function() {

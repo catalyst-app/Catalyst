@@ -7,9 +7,14 @@ window.markdownCurrentlyParsing = {};
 function renderMarkdownArea(area) {
   var startTime = Date.now();
   window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
-  $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
-  $(area).find('.collapsible').collapsible();
-  window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
+  if ($(area).hasClass("raw-inline-markdown")) {
+    $(area).attr("data-src", $(area).html()).html(md.renderInline($(area).html())).removeClass('raw-inline-markdown').addClass('rendered-markdown');
+    window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered inline block #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
+  } else {
+    $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
+    $(area).find('.collapsible').collapsible();
+    window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered block #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
+  }
 }
 
 // FROM WEBPACK

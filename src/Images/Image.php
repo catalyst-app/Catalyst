@@ -332,7 +332,7 @@ class Image {
 
 		if (!empty($caption)) {
 			$html .= '<p';
-			$html .= ' class="raw-markdown"';
+			$html .= ' class="raw-inline-markdown"';
 			$html .= '>';
 
 			$html .= htmlspecialchars($caption);
