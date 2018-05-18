@@ -575,10 +575,10 @@ class User extends AbstractDatabaseModel {
 			"EMAIL_TOKEN" => Tokens::generateEmailVerificationToken(),
 			"ARTIST_PAGE_ID" => null,
 			"PICTURE_LOC" => null,
-			"PICTURE_NSFW" => 0,
+			"PICTURE_NSFW" => false,
 			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
 			"NICK" => "Deleted user",
-			"DEACTIVATED" => 1,
+			"DEACTIVATED" => true,
 		];
 	}
 
