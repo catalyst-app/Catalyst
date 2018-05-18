@@ -86,8 +86,8 @@ class Character extends AbstractDatabaseModel {
 	 * @return User
 	 */
 	public function getOwner() : User {
-		return $this->getDataFromCallableOrCache("OWNER_OBJ", function() : int {
-			return $this->getOwnerId();
+		return $this->getDataFromCallableOrCache("OWNER_OBJ", function() : User {
+			return new User($this->getOwnerId());
 		});
 	}
 
