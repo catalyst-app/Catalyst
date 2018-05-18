@@ -11,7 +11,7 @@ use \Catalyst\Images\{Image,Folders};
 use \Catalyst\Page\Values;
 use \Catalyst\User\{TOTP,User};
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getSettingsForm()->checkServerSide();
 

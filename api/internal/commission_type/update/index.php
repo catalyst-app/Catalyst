@@ -14,7 +14,7 @@ use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\{HTTPCode, Tokens};
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getEditCommissionTypeForm()->checkServerSide();
 

@@ -11,7 +11,7 @@ use \Catalyst\Database\Query\{SelectQuery, UpdateQuery};
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getUndeleteArtistPageForm()->checkServerSide();
 

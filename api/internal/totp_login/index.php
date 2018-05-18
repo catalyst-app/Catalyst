@@ -9,7 +9,7 @@ use \Catalyst\{Email, HTTPCode};
 use \Catalyst\Form\FormRepository;
 use \Catalyst\User\{TOTP,User};
 
-Endpoint::init(true, 2);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_OUT);
 
 FormRepository::getTotpLoginForm()->checkServerSide();
 

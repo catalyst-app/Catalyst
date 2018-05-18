@@ -35,13 +35,17 @@ class Endpoint {
 	 */
 	static $isInternalEndpoint = false;
 
+	public const AUTH_REQUIRED_NONE = 0;
+	public const AUTH_REQUIRED_LOGGED_IN = 1;
+	public const AUTH_REQUIRED_LOGGED_OUT = 2;
+
 	/**
 	 * Ran for every endpoint
 	 * 
 	 * @param bool $internal Used to denote an internal API endpoint, affects authentication
-	 * @param int $internalAuth Type of authentication to require for an internal endpoint, 1 = logged in, 2 = logged out, 0 = none
+	 * @param int $internalAuth Type of authentication to require for an internal endpoint
 	 */
-	public static function init(bool $internal=false, int $internalAuth=1) : void {
+	public static function init(bool $internal=false, int $internalAuth=self::AUTH_REQUIRED_LOGGED_IN) : void {
 		self::$isEndpoint = true;
 		// ini_set('display_errors', 0); // don't pollute the JSON
 		if (!$internal) {

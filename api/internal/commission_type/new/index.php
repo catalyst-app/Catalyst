@@ -14,7 +14,7 @@ use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
 use \Catalyst\Tokens;
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getNewCommissionTypeForm()->checkServerSide();
 

@@ -10,7 +10,7 @@ use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Database\Query\UpdateQuery;
 use \Catalyst\{HTTPCode, Tokens};
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 if (!$_SESSION["user"]->isArtist()) {
 	HTTPCode::set(400);

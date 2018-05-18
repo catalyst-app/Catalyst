@@ -13,7 +13,7 @@ use \Catalyst\HTTPCode;
 use \Catalyst\Images\{Image, Folders};
 use \Catalyst\Tokens;
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getCreateArtistPageForm()->checkServerSide();
 

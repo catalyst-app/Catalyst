@@ -9,7 +9,7 @@ use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\User\User;
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getDeactivateForm()->checkServerSide();
 

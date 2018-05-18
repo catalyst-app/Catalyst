@@ -27,7 +27,7 @@ use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Email;
 use \Catalyst\Page\{UniversalFunctions, Values};
 
-Endpoint::init(true, 0);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_NONE);
 
 $emails = [];
 

@@ -15,7 +15,7 @@ use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Images\{Folders,Image};
 use \Catalyst\Page\Values;
 
-Endpoint::init(true, 1);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_LOGGED_IN);
 
 FormRepository::getEditCharacterForm()->checkServerSide();
 

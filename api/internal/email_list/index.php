@@ -10,7 +10,7 @@ use \Catalyst\Database\Query\ReplaceQuery;
 use \Catalyst\Email;
 use \Catalyst\Form\FormRepository;
 
-Endpoint::init(true, 0);
+Endpoint::init(true, Endpoint::AUTH_REQUIRED_NONE);
 
 FormRepository::getEmailListAdditionForm()->checkServerSide();
 
