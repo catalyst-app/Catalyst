@@ -38,7 +38,7 @@ require_once __DIR__."/vendor/autoload.php";
 
 Controller::verifySecretsIntegrity();
 
-if (!session_id()) {
+if (!session_id() && !defined("NO_SESSION")) {
 	ini_set("session.name", "catalyst");
 	ini_set("session.gc_maxlifetime", 24*60*60);
 	ini_set("session.cookie_lifetime", 24*60*60);
@@ -56,7 +56,7 @@ if (!session_id()) {
 }
 
 // remove pending_user if not actively logging in
-if (User::isPending2FA()) {
+if (!defined("NO_SESSION") && User::isPending2FA()) {
 	if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/totp_login/") === false && 
 		strpos($_SERVER["SCRIPT_NAME"], "/Login/TOTP/") === false &&
 		strpos($_SERVER["SCRIPT_NAME"], "/css/") === false &&

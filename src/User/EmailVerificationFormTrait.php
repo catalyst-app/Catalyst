@@ -35,8 +35,9 @@ trait EmailVerificationFormTrait {
 		$tokenField->setDistinguisher("token");
 		$tokenField->setLabel("Token");
 		$tokenField->setRequired(true);
-		if (array_key_exists("email_token", $_SESSION) && 
-			preg_match('/'.Tokens::EMAIL_VERIFICATION_TOKEN_REGEX.'/', $_SESSION["email_token"])) {
+		if (!defined("NO_SESSION") && 
+		  array_key_exists("email_token", $_SESSION) && 
+		  preg_match('/'.Tokens::EMAIL_VERIFICATION_TOKEN_REGEX.'/', $_SESSION["email_token"])) {
 			$tokenField->setPrefilledValue($_SESSION["email_token"]);
 			$tokenField->setHelperText("This field was populated with the link from your e-mail!");
 		}

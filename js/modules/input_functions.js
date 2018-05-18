@@ -4,6 +4,8 @@ header("Content-Type: application/javascript; charset=UTF-8");
 define("ROOTDIR", "../../");
 define("REAL_ROOTDIR", "../../");
 
+define("NO_SESSION", true);
+
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\ErrorCodes;
 
