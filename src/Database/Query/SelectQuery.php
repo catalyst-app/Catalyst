@@ -3,6 +3,7 @@
 namespace Catalyst\Database\Query;
 
 use \Catalyst\Database\Database;
+use \PDO;
 
 /**
  * Represents a MySQL SELECT query
@@ -39,7 +40,7 @@ class SelectQuery extends AbstractQuery {
 
 		$stmt->execute($this->getParamtersToBind());
 
-		$this->result = $stmt->fetchAll();
+		$this->result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		self::$totalQueries++;
 
