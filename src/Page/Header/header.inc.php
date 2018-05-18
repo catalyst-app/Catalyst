@@ -107,7 +107,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 				</p>
 			</div>
 <?php endif; ?>
-<?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->isEmailVerified()): ?>
+<?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->isEmailVerified() && !is_null($_SESSION["user"]->getEmail())): ?>
 			<div class="warning">
 				<p class="no-margin flow-text">
 					Please verify your email <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.

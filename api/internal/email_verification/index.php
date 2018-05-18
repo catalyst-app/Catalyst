@@ -12,7 +12,7 @@ Endpoint::init(true, 1);
 
 FormRepository::getEmailVerificationForm()->checkServerSide();
 
-if ($_SESSION["user"]->isEmailVerified()) {
+if ($_SESSION["user"]->isEmailVerified() || is_null($_SESSION["user"]->getEmail())) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90405, ErrorCodes::ERR_90405);
 }
