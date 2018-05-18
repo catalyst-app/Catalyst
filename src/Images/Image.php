@@ -411,7 +411,7 @@ class Image {
 	 * Delete the image from disk (won't work for default)
 	 */
 	public function delete() : void {
-		if (!is_null($this->getPath())) {
+		if (!is_null($this->getPath()) && file_exists($this->getFilesystemPath())) {
 			unlink($this->getFilesystemPath());
 		}
 		$this->setPath("deleted_image.png");

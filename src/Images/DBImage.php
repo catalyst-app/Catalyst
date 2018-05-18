@@ -72,12 +72,11 @@ class DBImage extends Image {
 	 * Delete the image from disk (won't work for default)
 	 */
 	public function delete() : void {
-		if (!is_null($this->getPath())) {
-			unlink($this->getFilesystemPath());
+		parent::delete();
+
+		if (empty($this->getTable()) || $this->getId() == 0) {
+			return;
 		}
-		$this->setPath("deleted_image.png");
-		$this->setNsfw(false);
-		$this->setCaption("Deleted image");
 
 		$stmt = new DeleteQuery();
 
