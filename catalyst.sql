@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2018 at 02:05 AM
+-- Generation Time: May 18, 2018 at 12:05 AM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -1030,6 +1030,7 @@ CREATE TABLE `users` (
   `TOTP_RESET_TOKEN` char(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `EMAIL` varchar(254) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `EMAIL_VERIFIED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `EMAIL_VERIFICATION_SENDABLE` tinyint(1) NOT NULL DEFAULT '0',
   `EMAIL_TOKEN` varchar(12) CHARACTER SET ascii NOT NULL,
   `ARTIST_PAGE_ID` int(11) UNSIGNED DEFAULT NULL,
   `PICTURE_LOC` varchar(15) CHARACTER SET ascii DEFAULT NULL,
@@ -1326,8 +1327,8 @@ ALTER TABLE `social_media_meta`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `USERNAME` (`USERNAME`),
   ADD UNIQUE KEY `FILE_TOKEN` (`FILE_TOKEN`),
+  ADD UNIQUE KEY `USERNAME` (`USERNAME`),
   ADD UNIQUE KEY `EMAIL` (`EMAIL`),
   ADD UNIQUE KEY `CREATOR_PAGE_ID` (`ARTIST_PAGE_ID`) USING BTREE,
   ADD KEY `COLOR` (`COLOR`),
