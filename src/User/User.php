@@ -224,9 +224,9 @@ class User extends AbstractDatabaseModel {
 	 * Verify the user's password
 	 *
 	 * @param string $password to test
-	 * @return bool valid password
+	 * @return string new password
 	 */
-	public static function hashPassword(string $password) : bool {
+	public static function hashPassword(string $password) : string {
 		return password_hash($password, PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
 	}
 
