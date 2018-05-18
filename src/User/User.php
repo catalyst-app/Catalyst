@@ -38,12 +38,20 @@ use \LogicException;
  * @method void setEmail(null|string $email)
  * @method bool isEmailVerified()
  * @method void setEmailVerified(bool $emailVerified)
+ * @method bool isEmailVerificationSendable()
+ * @method void setEmailVerificationSendable(bool $sendable)
  * @method string getColor()
  * @method void setColor(string $color)
  * @method bool isSuspended()
  * @method void setSuspended(bool $suspended)
  * @method bool isDeactivated()
  * @method void setDeactivated(bool $deactivated)
+ * @method string getProfilePicturePath
+ * @method void setProfilePicturePath(string $path)
+ * @method bool isProfilePictureNsfw
+ * @method void setProfilePictureNsfw(bool $nsfw)
+ * @method string getPasswordResetToken
+ * @method void setPasswordResetToken(string $token)
  */
 class User extends AbstractDatabaseModel {
 	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
@@ -687,9 +695,13 @@ class User extends AbstractDatabaseModel {
 			"Email" => ["EMAIL", null, null],
 			"EmailToken" => ["EMAIL_TOKEN", null, null],
 			"EmailVerified" => ["EMAIL_VERIFIED", "boolval", null],
+			"EmailVerificationSendable" => ["EMAIL_VERIFICATION_SENDABLE", "boolval", null],
 			"Color" => ["COLOR", "bin2hex", "hex2bin"],
 			"Suspended" => ["SUSPENDED", "boolval", null],
 			"Deactivated" => ["DEACTIVATED", "boolval", null],
+			"ProfilePicturePath" => ["PICTURE_LOC", null, null],
+			"ProfilePictureNsfw" => ["PICTURE_NSFW", "boolval", null],
+			"PasswordResetToken" => ["PASSWORD_RESET_TOKEN", null, null],
 		];
 	}
 }
