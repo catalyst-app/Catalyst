@@ -4,6 +4,7 @@ namespace Catalyst;
 
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
+use \Catalyst\Database\AbstractDatabaseModel;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
 use \LogicException;
@@ -491,6 +492,7 @@ class Controller {
 	 * Called via register_shutdown_function, should flush OB
 	 */
 	public static function shutdown() : void {
+		AbstractDatabaseModel::writeAllUpdates();
 		if (php_sapi_name() !== 'cli') {
 			ob_end_flush();
 		}
