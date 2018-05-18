@@ -5,7 +5,7 @@ namespace Catalyst\Form;
 use \Catalyst\API\{ErrorCodes, Response};
 use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
 use \Catalyst\Form\Field\{AbstractField,ImageField};
-use \Catalyst\HTTPCode;
+use \Catalyst\{Controller, HTTPCode};
 use \Exception;
 use \InvalidArgumentException;
 
@@ -534,6 +534,9 @@ class Form {
 		$str .= '$('.json_encode('#'.$this->getId()).'+" input[type=text], textarea").removeClass("active").blur();';
 		if (!is_null($this->getCompletionAction())) {
 			$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - invoking completion action ".get_class($this->getCompletionAction())).');';
+			if (Controller::isDevelMode()) {
+				$str .= 'debugger;';
+			}
 			$str .= $this->getCompletionAction()->getJs();
 		}
 		$str .= '} catch (e) {';
