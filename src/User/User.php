@@ -583,6 +583,31 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * @return array
+	 */
+	public static function getPrefetchColumns() : array {
+		return [
+			"FILE_TOKEN",
+			"USERNAME",
+			"HASHED_PASSWORD",
+			"PASSWORD_RESET_TOKEN",
+			"TOTP_KEY",
+			"TOTP_RESET_TOKEN",
+			"EMAIL",
+			"EMAIL_VERIFIED",
+			"EMAIL_TOKEN",
+			"ARTIST_PAGE_ID",
+			"PICTURE_LOC",
+			"PICTURE_NSFW",
+			"NSFW",
+			"COLOR",
+			"NICK",
+			"SUSPENDED",
+			"DEACTIVATED",
+		];
+	}
+
+	/**
 	 * Overridden to do additional deletion of subitems
 	 *
 	 * @todo archive commissions

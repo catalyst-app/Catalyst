@@ -331,6 +331,21 @@ class Character extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * @return array
+	 */
+	public static function getPrefetchColumns() : array {
+		return [
+			"USER_ID",
+			"CHARACTER_TOKEN",
+			"NAME",
+			"DESCRIPTION",
+			"COLOR",
+			"PUBLIC",
+			"DELETED",
+		];
+	}
+
+	/**
 	 * Get modifiable properties for the model
 	 *
 	 * 	"Name" => ["COLUMN_NAME", function($value) {return $out;}, function($newValue) {return $out;}]
