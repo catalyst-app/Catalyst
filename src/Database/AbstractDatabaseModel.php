@@ -24,7 +24,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * This is used as not to repeatedly hammer the database
 	 * @var array
 	 */
-	protected $cache = [];
+	protected static $cache = [];
 
 	/**
 	 * Creates a new object
@@ -37,7 +37,13 @@ abstract class AbstractDatabaseModel implements Serializable {
 			throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
 		}
 		$this->id = $id;
-		$this->cache = $cache;
+		if (!array_key_exists(static::class, self::$cache)) {
+			self::$cache[static::class] = [];
+		}
+		if (!array_key_exists($this->id, self::$cache[static::class])) {
+			self::$cache[static::class][$this->id] = $row;
+		}
+		self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $row, $cache); // latter overwrites previous
 	}
 
 	/**
@@ -110,10 +116,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * @return mixed
 	 */
 	protected function getColumnFromDatabaseOrCache(string $column) {
-		if (array_key_exists($column, $this->cache)) {
-			return $this->cache[$column];
+		if (array_key_exists($column, self::$cache[static::class][$this->id])) {
+			return self::$cache[static::class][$this->id][$column];
+		return self::$cache[static::class][$this->id][$column] = $this->getColumnFromDatabase($column);
 		}
-		return $this->cache[$column] = $this->getColumnFromDatabase($column);
 	}
 
 	/**
@@ -124,10 +130,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * @return mixed
 	 */
 	protected function getDataFromCallableOrCache(string $key, callable $callable) {
-		if (array_key_exists($key, $this->cache)) {
-			return $this->cache[$key];
+		if (array_key_exists($key, self::$cache[static::class][$this->id])) {
+			return self::$cache[static::class][$this->id][$key];
 		}
-		return $this->cache[$key] = $callable();
+		return self::$cache[static::class][$this->id][$key] = $callable();
 	}
 
 	/**
@@ -136,10 +142,11 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * @param string|null $toClear the item to remove, or null for all
 	 */
 	public function clearCache(?string $toClear=null) : void {
+		$this->writeUpdates();
 		if (is_null($toClear)) {
-			$this->cache = [];
+			self::$cache[static::class][$this->id] = [];
 		} else {
-			unset($this->cache[$toClear]);
+			unset(self::$cache[static::class][$this->id][$toClear]);
 		}
 	}
 
@@ -185,7 +192,21 @@ abstract class AbstractDatabaseModel implements Serializable {
 			throw new InvalidArgumentException("Invalid serialized data");
 		}
 
-		$this->id = (int)$id;
+		$row = self::getInitialData($id);
+		if ($row === false) {
+			throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
+		}
+
+		$this->id = $id;
+		
+		if (!array_key_exists(static::class, self::$cache)) {
+			self::$cache[static::class] = [];
+		}
+		if (!array_key_exists($this->id, self::$cache[static::class])) {
+			self::$cache[static::class][$this->id] = $row;
+		}
+		
+		self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $row); // latter overwrites previous
 
 		$this->unserializeVerification();
 	}
