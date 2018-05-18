@@ -46,11 +46,11 @@ use \LogicException;
  * @method void setSuspended(bool $suspended)
  * @method bool isDeactivated()
  * @method void setDeactivated(bool $deactivated)
- * @method string getProfilePicturePath
+ * @method string getProfilePicturePath()
  * @method void setProfilePicturePath(string $path)
- * @method bool isProfilePictureNsfw
+ * @method bool isProfilePictureNsfw()
  * @method void setProfilePictureNsfw(bool $nsfw)
- * @method string getPasswordResetToken
+ * @method string getPasswordResetToken()
  * @method void setPasswordResetToken(string $token)
  */
 class User extends AbstractDatabaseModel {
