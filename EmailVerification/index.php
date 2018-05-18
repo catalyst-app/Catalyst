@@ -18,7 +18,7 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
-if (User::isLoggedIn() && $_SESSION["user"]->isEmailVerified()) {
+if (User::isLoggedIn() && ($_SESSION["user"]->isEmailVerified() || is_null($_SESSION["user"]->getEmail()))) {
 	HTTPCode::set(400);
 } else if (!User::isLoggedIn()) {
 	HTTPCode::set(401);
@@ -28,7 +28,7 @@ if (isset($_GET["token"])) {
 	$_SESSION["email_token"] = $_GET["token"];
 }
 
-if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->isEmailVerified()) {
+if (isset($_GET["resend"]) && $_GET["resend"] && User::isLoggedIn() && !$_SESSION["user"]->isEmailVerified() && !is_null($_SESSION["user"]->getEmail())) {
 	$_SESSION["user"]->sendVerificationEmail();
 }
 
@@ -39,13 +39,17 @@ echo UniversalFunctions::createHeading("Email Verification");
 ?>
 <?php if (!User::isLoggedIn()): ?>
 <?= User::getNotLoggedInHtml() ?>
-<?php elseif ($_SESSION["user"]->isEmailVerified()): ?>
+<?php elseif ($_SESSION["user"]->isEmailVerified() || is_null($_SESSION["user"]->getEmail())): ?>
 			<div class="section">
 				<p class="flow-text">Your email has been verified.  Return <a href="<?=ROOTDIR?>">home</a>?</p>
 			</div>
 <?php else: ?>
 			<div class="section">
-				<p class="flow-text">An email has been sent to <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.</p>
+				<?php if ($_SESSION["user"]->isEmailVerificationSendable()): ?>
+					<p class="flow-text">An email has been sent to <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.</p>
+				<?php else: ?>
+					<p class="flow-text">An error occured in sending an email to <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.  Confirm that this email is correct.  If this issue persists, contact support.</p>
+				<?php endif; ?>
 				<p class="flow-text">Please follow the link inside or enter the token in the box below to validate your account.</p>
 <?= FormRepository::getEmailVerificationForm()->getHtml(); ?>
 				<p class="flow-text">Didn't recieve an email?</p>
