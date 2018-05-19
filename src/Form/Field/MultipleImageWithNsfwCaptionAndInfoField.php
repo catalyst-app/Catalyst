@@ -99,7 +99,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 			$result[$request[$key."-keys"][$i]] = [
 				"nsfw" => $request[$key.self::NSFW_CHECKBOX_ID_SUFFIX][$i] == 'true',
 				"caption" => ltrim($request[$key.self::CAPTION_ID_SUFFIX][$i]),
-				"sort" => $request[$key."-sort"][$i],
+				"sort" => (int)$request[$key."-sort"][$i],
 				"info" => $request[$key.self::INFO_ID_SUFFIX][$i]
 			];
 		}
