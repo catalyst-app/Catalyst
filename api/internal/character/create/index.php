@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, Response};
-use \Character\Character;
+use \Catalyst\Character\Character;
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Tokens;
@@ -21,7 +21,7 @@ $values["USER_ID"] = $_SESSION["user"]->getId();
 $values["CHARACTER_TOKEN"] = Tokens::generateCharacterToken();
 $values["NAME"] = $_POST["name"];
 $values["DESCRIPTION"] = $_POST["description"];
-$values["COLOR"] = $_POST["color"];
+$values["COLOR"] = hex2bin($_POST["color"]);
 $values["PUBLIC"] = $_POST["public"] == "true";
 
 if (isset($_FILES["images"])) {
