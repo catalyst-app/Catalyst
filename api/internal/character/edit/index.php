@@ -23,136 +23,44 @@ if ($id == -1) {
 	Response::sendErrorResponse(91012, ErrorCodes::ERR_91012);
 }
 
-$stmt = new SelectQuery();
+$character = new Character($id);
 
-$stmt->setTable(Tables::CHARACTERS);
-
-$stmt->addColumn(new Column("USER_ID", Tables::CHARACTERS));
-$stmt->addColumn(new Column("NAME", Tables::CHARACTERS));
-$stmt->addColumn(new Column("DESCRIPTION", Tables::CHARACTERS));
-$stmt->addColumn(new Column("COLOR", Tables::CHARACTERS));
-$stmt->addColumn(new Column("PUBLIC", Tables::CHARACTERS));
-
-$whereClause = new WhereClause();
-$whereClause->addToClause([new Column("ID", Tables::CHARACTERS), '=', $id]);
-$stmt->addAdditionalCapability($whereClause);
-
-$stmt->execute();
-
-$character = $stmt->getResult()[0];
-
-if ($character["USER_ID"] != $_SESSION["user"]->getId()) {
+if ($character->getOwnerId() != $_SESSION["user"]->getId()) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(91012, ErrorCodes::ERR_91012);
 }
 
-$stmt = new UpdateQuery();
-
-$stmt->setTable(Tables::CHARACTERS);
-
-if ($character["NAME"] != $_POST["name"]) {
-	$stmt->addColumn(new Column("NAME", Tables::CHARACTERS));
-	$stmt->addValue($_POST["name"]);
-}
-if ($character["DESCRIPTION"] != $_POST["description"]) {
-	$stmt->addColumn(new Column("DESCRIPTION", Tables::CHARACTERS));
-	$stmt->addValue($_POST["description"]);
-}
-if (bin2hex($character["COLOR"]) != $_POST["color"]) {
-	$stmt->addColumn(new Column("COLOR", Tables::CHARACTERS));
-	$stmt->addValue(hex2bin($_POST["color"]));
-}
-// must have at least one column, so lets do a simple bool
-$stmt->addColumn(new Column("PUBLIC", Tables::CHARACTERS));
-$stmt->addValue($_POST["public"] == "true");
-
-$whereClause = new WhereClause();
-$whereClause->addToClause([new Column("ID", Tables::CHARACTERS), '=', $id]);
-$stmt->addAdditionalCapability($whereClause);
-
-$stmt->execute();
+$character->setName($_POST["name"]);
+$character->setDescription($_POST["description"]);
+$character->setColor($_POST["color"]);
+$character->setPublic($_POST["public"] == "true");
 
 $imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", $_POST);
 
-$stmt = new SelectQuery();
-
-$stmt->setTable(Tables::CHARACTER_IMAGES);
-
-$stmt->addColumn(new Column("ID", Tables::CHARACTER_IMAGES));
-$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
-
-$whereClause = new WhereClause();
-$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $id]);
-$stmt->addAdditionalCapability($whereClause);
-
-$stmt->execute();
-
-$existingImages = $stmt->getResult();
-
-$toDelete = [];
+$existingImages = $character->getImageSet();
 
 foreach ($existingImages as $image) {
-	if (!array_key_exists($image["PATH"], $imageMeta)) {
-		$toDelete[] = $image["ID"];
+	if (!array_key_exists($image->getPath(), $imageMeta)) {
+		$image->delete();
 		continue;
 	}
-	$stmt = new UpdateQuery();
-
-	$stmt->setTable(Tables::CHARACTER_IMAGES);
-
-	$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["caption"]);
-	$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["info"]);
-	$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["nsfw"] ? 1 : 0);
-	$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
-	$stmt->addValue($imageMeta[$image["PATH"]]["sort"]);
-
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("ID", Tables::CHARACTER_IMAGES), '=', $image["ID"]]);
-	$stmt->addAdditionalCapability($whereClause);
-
-	$stmt->execute();
-}
-
-if (count($toDelete)) {
-	$stmt = new DeleteQuery();
-
-	$stmt->setTable(Tables::CHARACTER_IMAGES);
-
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("ID", Tables::CHARACTER_IMAGES), "IN", $toDelete]);
-	$stmt->addAdditionalCapability($whereClause);
-
-	$stmt->execute();
+	$image->setNsfw(!!$imageMeta[$image->getPath()]["nsfw"]);
+	$image->setCaption($imageMeta[$image->getPath()]["caption"]);
+	$image->setInfo($imageMeta[$image->getPath()]["info"]);
+	$image->setSort($imageMeta[$image->getPath()]["sort"]);
 }
 
 if (isset($_FILES["images"])) {
 	$images = Image::uploadMultiple($_FILES["images"], Folders::CHARACTER_IMAGE, $_POST["token"]);
 
-	if (count($images)) {
-		$stmt = new MultiInsertQuery();
-
-		$stmt->setTable(Tables::CHARACTER_IMAGES);
-
-		$stmt->addColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
-
-		foreach ($images as $image) {
-			$stmt->addValue($id);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["caption"]);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
-			$stmt->addValue($image->getPath());
-			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
-		}
-
-		$stmt->execute();
+	foreach ($images as $image) {
+		$character->addImage(
+			$image->getPath(),
+			!!$imageMeta[$image->getUploadName()]["nsfw"],
+			$imageMeta[$image->getUploadName()]["caption"],
+			$imageMeta[$image->getUploadName()]["info"],
+			$imageMeta[$image->getUploadName()]["sort"]
+		);
 	}
 }
 
