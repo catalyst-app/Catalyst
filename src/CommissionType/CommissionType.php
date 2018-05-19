@@ -504,7 +504,7 @@ class CommissionType {
 	 */
 	public function initializeImage() : void {
 		if (count($this->getImageSet()) == 0) {
-			$this->setImage(new Image(Folders::COMMISSION_TYPE_IMAGE, $this->getToken(), null, false));
+			$this->setImage(new Image(self::getImageFolder(), $this->getToken(), null, false));
 		} else {
 			$this->setImage($this->getImageSet()[0]);
 		}
@@ -543,7 +543,7 @@ class CommissionType {
 				break;
 			}
 			$images[] = new Image(
-				Folders::COMMISSION_TYPE_IMAGE,
+				self::getImageFolder(),
 				$results[$i]["TOKEN"],
 				$results[$i]["PATH"],
 				(bool)$results[$i]["NSFW"],
