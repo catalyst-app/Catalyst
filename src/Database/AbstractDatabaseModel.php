@@ -121,11 +121,11 @@ abstract class AbstractDatabaseModel implements Serializable {
 	protected function getColumnFromDatabase(string $column) {
 		$stmt = new SelectQuery();
 
-		$stmt->setTable($this->getTable());
-		$stmt->addColumn(new Column($column, $this->getTable()));
+		$stmt->setTable(static::getTable());
+		$stmt->addColumn(new Column($column, static::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", $this->getTable()), "=", $this->getId()]);
+		$whereClause->addToClause([new Column("ID", static::getTable()), "=", $this->getId()]);
 
 		$stmt->addAdditionalCapability($whereClause);
 
@@ -155,14 +155,14 @@ abstract class AbstractDatabaseModel implements Serializable {
 	protected function prefetchColumns(array $columns) : void {
 		$stmt = new SelectQuery();
 
-		$stmt->setTable($this->getTable());
+		$stmt->setTable(static::getTable());
 
 		foreach ($columns as $column) {
-			$stmt->addColumn(new Column($column, $this->getTable()));
+			$stmt->addColumn(new Column($column, static::getTable()));
 		}
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", $this->getTable()), "=", $this->getId()]);
+		$whereClause->addToClause([new Column("ID", static::getTable()), "=", $this->getId()]);
 
 		$stmt->addAdditionalCapability($whereClause);
 
@@ -208,13 +208,13 @@ abstract class AbstractDatabaseModel implements Serializable {
 		if ($writeImmediately) {
 			$stmt = new UpdateQuery();
 
-			$stmt->setTable($this->getTable());
+			$stmt->setTable(static::getTable());
 
-			$stmt->addColumn(new Column($column, $this->getTable()));
+			$stmt->addColumn(new Column($column, static::getTable()));
 			$stmt->addValue($value);
 
 			$whereClause = new WhereClause();
-			$whereClause->addToClause([new Column("ID", $this->getTable()), "=", $this->getId()]);
+			$whereClause->addToClause([new Column("ID", static::getTable()), "=", $this->getId()]);
 			$stmt->addAdditionalCapability($whereClause);
 
 			$stmt->execute();
@@ -236,17 +236,18 @@ abstract class AbstractDatabaseModel implements Serializable {
 		if (empty($this->pendingUpdates)) {
 			return;
 		}
+
 		$stmt = new UpdateQuery();
 
-		$stmt->setTable($this->getTable());
+		$stmt->setTable(static::getTable());
 
 		foreach ($this->pendingUpdates as $key => $value) {
-			$stmt->addColumn(new Column($key, $this->getTable()));
+			$stmt->addColumn(new Column($key, static::getTable()));
 			$stmt->addValue($value);
 		}
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", $this->getTable()), "=", $this->getId()]);
+		$whereClause->addToClause([new Column("ID", static::getTable()), "=", $this->getId()]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
@@ -287,7 +288,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		$row = self::getInitialData($id);
 		if ($row === false) {
-			throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
+			throw new InvalidArgumentException("ID ".$this->id." does not exist in table ".static::getTable().".");
 		}
 
 		$this->id = $id;
