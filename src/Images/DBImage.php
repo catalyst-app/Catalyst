@@ -40,6 +40,28 @@ class DBImage extends Image {
 	protected $columns=[];
 
 	/**
+	 * Used to cache pending updates so we can update multiple columns at once
+	 * @var array
+	 */
+	protected $pendingUpdates = [];
+	/**
+	 * Used to cache pending updates so we can update multiple columns at once
+	 * @var self[]
+	 */
+	protected static $objectsPendingUpdates = [];
+	/**
+	 * Used to cache pending insertions for multiple insertions
+	 * @var self[]
+	 */
+	protected static $pendingInsertions = [];
+
+	/**
+	 * IDs to delete
+	 * @var int[][]
+	 */
+	static $toDelete = [];
+
+	/**
 	 * Create a new object to represent an image
 	 * 
 	 * @param int $id
@@ -84,6 +106,9 @@ class DBImage extends Image {
 			],
 		]);
 		parent::__construct($folder, $fileToken, $path, $nsfw, trim($caption.($captionInfo ? ("\n".$dbInfo["captionDelimiter"].$captionInfo) : '')));
+		if ($pendingInsertion) {
+			self::$pendingInsertions[] = $this;
+		}
 	}
 
 	/**
@@ -198,13 +223,122 @@ class DBImage extends Image {
 		self::$toDelete[$this->getTable()][] = $this->getId();
 	}
 
+	/**
+	 * Used by shutdown function to save to database
+	 */
+	public static function writeAllChanges() : void {
+		self::writeAllInsertions();
+		self::writeAllUpdates();
+		self::writeAllDeletions();
+	}
+
+	/**
+	 * Writes all database updates
+	 */
+	public static function writeAllInsertions() : void {
+		if (empty(self::$pendingInsertions)) {
+			return;
+		}
+
+		$queries = [];
+
+		foreach (self::$pendingInsertions as $pendingInsertion) {
+			if (in_array($pendingInsertion->getTable(), self::$toDelete) && in_array($pendingInsertion, self::$toDelete[$pendingInsertion->getTable()])) {
+				continue; // we've been marked for deletion, let's not insert
+			}
+
+			// create query if needed
+			if (!array_key_exists($pendingInsertion->getTable(), $queries)) {
+				$queries[$pendingInsertion->getTable()] = new MultiInsertQuery();
+
+				$queries[$pendingInsertion->getTable()]->setTable($pendingInsertion->getTable());
+
+				foreach ($pendingInsertion->getColumns() as $column) {
+					$queries[$pendingInsertion->getTable()]->addColumn(new Column($column["column"], $pendingInsertion->getTable()));
+				}
+			}
+
+			// add columns
+			foreach ($pendingInsertion->getColumns() as $column) {
+				$queries[$pendingInsertion->getTable()]->addValue($column["value"]);
+			}
+
+			$pendingInsertion->pendingUpdates = [];
+		}
+
+		foreach ($queries as $query) {
+			$query->execute();
+		}
+	}
+
+	/**
+	 * Writes all database updates
+	 */
+	public static function writeAllUpdates() : void {
+		if (empty(self::$objectsPendingUpdates)) {
+			return;
+		}
+
+		foreach (self::$objectsPendingUpdates as $object) {
+			$object->writeUpdates();
+		}
+	}
+
+	/**
+	 * Write the database updates for this class
+	 */
+	public function writeUpdates() : void {
+		if (empty($this->pendingUpdates)) {
+			return;
+		}
+
+		// don't update if we're deleting, that's redundant!
+		if (array_key_exists($this->getTable(), self::$toDelete) && in_array($this->getId(), self::$toDelete[$this->getTable()])) {
+			return;
+		}
+
+		$stmt = new UpdateQuery();
 
 		$stmt->setTable($this->getTable());
 
+		foreach ($this->pendingUpdates as $key => $value) {
+			$stmt->addColumn(new Column($key, $this->getTable()));
+			$stmt->addValue($value);
+		}
+
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", $this->getTable()), '=', $this->getId()]);
+		$whereClause->addToClause([new Column("ID", $this->getTable()), "=", $this->getId()]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
+
+		$this->pendingUpdates = [];
+	}
+
+	/**
+	 * Write the queued deletions to DB
+	 */
+	public static function writeAllDeletions() : void {
+		if (empty(self::$toDelete)) {
+			return;
+		}
+
+		foreach (self::$toDelete as $table => $ids) {
+			if (empty($ids)) {
+				continue;
+			}
+
+			$stmt = new DeleteQuery();
+
+			$stmt->setTable($table);
+
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("ID", $table), 'IN', $ids]);
+			$stmt->addAdditionalCapability($whereClause);
+
+			$stmt->execute();
+		}
+
+		self::$toDelete = [];
 	}
 }
