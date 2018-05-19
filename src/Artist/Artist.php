@@ -91,10 +91,18 @@ class Artist {
 	}
 
 	/**
+	 * The folder containing the image
+	 * @return string
+	 */
+	public static function getImageFolder() : string {
+		return Folders::ARTIST_IMAGE;
+	}
+
+	/**
 	 * Initialize the image for the artist
 	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::ARTIST_IMAGE, $this->getToken(), $this->getImagePath()));
+		$this->setImage(new Image(self::getImageFolder(), $this->getToken(), $this->getImagePath()));
 	}
 
 	/**

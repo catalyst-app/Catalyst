@@ -81,6 +81,14 @@ class Character extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * The folder containing the image
+	 * @return string
+	 */
+	public static function getImageFolder() : string {
+		return Folders::CHARACTER_IMAGE;
+	}
+
+	/**
 	 * Get the character's owner
 	 * 
 	 * @return User
@@ -141,7 +149,7 @@ class Character extends AbstractDatabaseModel {
 	public function initializeImage() : void {
 		if (count($this->getImageSet()) === 0) {
 			$this->setImage(new Image(
-				Folders::CHARACTER_IMAGE,
+				self::getImageFolder(),
 				$this->getToken(),
 				null
 			));

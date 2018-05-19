@@ -96,7 +96,7 @@ class CommissionType {
 				break;
 			}
 			$images[] = new Image(
-				Folders::COMMISSION_TYPE_IMAGE,
+				self::getImageFolder(),
 				$results[$i]["TOKEN"],
 				$results[$i]["PATH"],
 				(bool)$results[$i]["NSFW"],
@@ -178,6 +178,14 @@ class CommissionType {
 	 */
 	public static function getTable() : string {
 		return Tables::COMMISSION_TYPES;
+	}
+
+	/**
+	 * The folder containing the image
+	 * @return string
+	 */
+	public static function getImageFolder() : string {
+		return Folders::COMMISSION_TYPE_IMAGE;
 	}
 
 	/**

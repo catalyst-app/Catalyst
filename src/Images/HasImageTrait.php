@@ -12,6 +12,14 @@ trait HasImageTrait {
 	 */
 	protected $image=null;
 
+	/**
+	 * Get the image's folder
+	 */
+	abstract public function getImageFolder() : string;
+
+	/**
+	 * Initialize the image
+	 */
 	abstract public function initializeImage() : void;
 
 	/**

@@ -12,6 +12,9 @@ trait HasImageSetTrait {
 	 */
 	protected $images=null;
 
+	/**
+	 * Used to prefill image set from DB or similar
+	 */
 	abstract public function initializeImageSet() : void;
 
 	/**

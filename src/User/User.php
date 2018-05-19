@@ -207,6 +207,14 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * The folder containing the image
+	 * @return string
+	 */
+	public static function getImageFolder() : string {
+		return Folders::PROFILE_PHOTO;
+	}
+
+	/**
 	 * Verify the user's password
 	 *
 	 * @param string $password to test
@@ -456,7 +464,7 @@ class User extends AbstractDatabaseModel {
 	 * Straight out of the HasImageTrait
 	 */
 	public function initializeImage() : void {
-		$this->setImage(new Image(Folders::PROFILE_PHOTO, $this->getToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
+		$this->setImage(new Image(self::getImageFolder(), $this->getToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
 	}
 
 	/**
