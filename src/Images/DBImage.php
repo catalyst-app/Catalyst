@@ -185,21 +185,21 @@ class DBImage extends Image {
 			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
 		}
 
-		$methodDefinition = $this->getColumns()[$name];
+		$prop = $this->getColumns()[$name];
 
 		if ($type == "get" || $type == "is") {
 			if ($type == "is") {
-				return (bool)$this->getColumns()[$methodDefinition[0]]["value"];
+				return (bool)$prop["value"];
 			}
-			return $this->getColumns()[$methodDefinition[0]]["value"];
+			return $prop["value"];
 		} else {
-			if ($this->getColumns()[$methodDefinition[0]]["value"] == $arguments[0]) {
+			if ($prop["value"] == $arguments[0]) {
 				return;
 			}
-			$this->getColumns()[$methodDefinition[0]]["value"] = $arguments[0];
+			$prop["value"] = $arguments[0];
 
 			// using key => value allows easy and painless overwriting if the same value is changed twice
-			$this->pendingUpdates[$this->getColumns()[$methodDefinition[0]]["column"]] = $arguments[0];
+			$this->pendingUpdates[$prop["column"]] = $arguments[0];
 
 			// for shutdown
 			self::$objectsPendingUpdates[] = $this;
