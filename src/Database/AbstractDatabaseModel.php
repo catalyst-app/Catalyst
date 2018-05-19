@@ -285,13 +285,14 @@ abstract class AbstractDatabaseModel implements Serializable {
 		if (!is_numeric($id) || (int)$id != $id) {
 			throw new InvalidArgumentException("Invalid serialized data");
 		}
+		
+		$this->id = (int)$id;
 
-		$row = self::getInitialData($id);
+		$row = self::getInitialData($this->id);
+
 		if ($row === false) {
 			throw new InvalidArgumentException("ID ".$this->id." does not exist in table ".static::getTable().".");
 		}
-
-		$this->id = $id;
 		
 		if (!array_key_exists(static::class, self::$cache)) {
 			self::$cache[static::class] = [];
