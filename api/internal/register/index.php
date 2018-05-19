@@ -15,7 +15,8 @@ Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_OUT);
 
 FormRepository::getRegisterForm()->checkServerSide();
 
-if (User::getIdFromUsername($_POST["username"], true) == -1) {
+// username in use
+if (User::getIdFromUsername($_POST["username"], true) != -1) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90303, ErrorCodes::ERR_90303);
 }
