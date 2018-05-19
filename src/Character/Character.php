@@ -5,7 +5,7 @@ namespace Catalyst\Character;
 use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
 use \Catalyst\Database\Query\{InsertQuery, MultiInsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
-use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
+use \Catalyst\Images\{DBImage, Folders, HasDBImageSetTrait, HasImageTrait, Image};
 use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 use \Catalyst\Tokens;
@@ -28,7 +28,7 @@ use \InvalidArgumentException;
  * @method void setDescription(string $description)
  */
 class Character extends AbstractDatabaseModel {
-	use HasImageTrait, HasImageSetTrait;
+	use HasImageTrait, HasDBImageSetTrait;
 
 	// want your character here?  Submit a PR or donate!
 	const PREDEFINED_CHARACTER_SHORT_URLS = [
@@ -86,6 +86,25 @@ class Character extends AbstractDatabaseModel {
 	 */
 	public static function getImageFolder() : string {
 		return Folders::CHARACTER_IMAGE;
+	}
+
+	/**
+	 * Returns info about the character_images table
+	 * @return array
+	 */
+	public static function getImageDbInfo() : array {
+		return [
+			"table" => Tables::CHARACTER_IMAGES,
+			"column" => [
+				"parentId" => "CHARACTER_ID",
+				"path" => "PATH",
+				"nsfw" => "NSFW",
+				"caption" => "CAPTION",
+				"info" => "CREDIT",
+				"sort" => "SORT",
+			],
+			"captionDelimiter" => "**Artist:** ",
+		];
 	}
 
 	/**
@@ -168,10 +187,12 @@ class Character extends AbstractDatabaseModel {
 
 		$stmt->setTable(Tables::CHARACTER_IMAGES);
 
+		$stmt->addColumn(new Column("ID", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
+		$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES), '=', $this->id]);
@@ -185,12 +206,17 @@ class Character extends AbstractDatabaseModel {
 		$stmt->execute();
 
 		foreach ($stmt->getResult() as $row) {
-			$images[] = new Image(
-				Folders::CHARACTER_IMAGE, 
-				$this->getToken(), 
-				$row["PATH"], 
-				$row["NSFW"], 
-				trim($row["CAPTION"].($row["CREDIT"] ? ("\n**Artist:** ".$row["CREDIT"]) : ''))
+			$images[] = new DBImage(
+				$row["ID"],
+				$this->getId(),
+				self::getImageDbInfo(),
+				self::getImageFolder(),
+				$this->getToken(),
+				$row["PATH"],
+				$row["NSFW"],
+				$row["CAPTION"],
+				$row["CREDIT"],
+				$row["SORT"]
 			);
 		}
 
