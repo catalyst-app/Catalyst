@@ -412,7 +412,9 @@ class Image {
 	 */
 	public function delete() : void {
 		if (!is_null($this->getPath()) && file_exists($this->getFilesystemPath())) {
-			unlink($this->getFilesystemPath());
+			if (!in_array($this->getFolder(), Folders::PROTECTED_FOLDERS)) {
+				unlink($this->getFilesystemPath());
+			}
 		}
 		$this->setPath("deleted_image.png");
 		$this->setNsfw(false);

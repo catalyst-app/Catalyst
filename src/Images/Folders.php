@@ -12,4 +12,9 @@ class Folders {
 	public const COMMISSION_TYPE_IMAGE = "commission_type_images";
 	public const INTEGRATION_ICONS = "integration_icons";
 	public const GLOBAL_IMG = "img";
+
+	public const PROTECTED_FOLDERS = [
+		self::INTEGRATION_ICONS,
+		self::GLOBAL_IMG,
+	];
 }
