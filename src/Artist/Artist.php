@@ -2,9 +2,9 @@
 
 namespace Catalyst\Artist;
 
-use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
-use \Catalyst\Database\Query\{SelectQuery};
-use \Catalyst\Database\QueryAddition\{WhereClause};
+use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
+use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
@@ -14,8 +14,8 @@ use \InvalidArgumentException;
 /**
  * Represents an artist in the database
  */
-class Artist {
-	use DatabaseModelTrait, HasImageTrait, HasSocialChipsTrait, MessagableTrait;
+class Artist extends AbstractDatabaseModel {
+	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
 	/**
 	 * Unique ID for the artist
