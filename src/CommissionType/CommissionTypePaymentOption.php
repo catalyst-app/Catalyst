@@ -2,91 +2,96 @@
 
 namespace Catalyst\CommissionType;
 
+use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
+use \Catalyst\Database\Query\InsertQuery;
+
 /**
  * Represents a commission type payment option
  *
  * Basic model class, nothing fancy
+ * @method int getCommissionTypeId()
+ * @method void setCommissionTypeId(int $commissionTypeId)
+ * @method string getType()
+ * @method void setType(string $type)
+ * @method string getAddress()
+ * @method void setAddress(string $address)
+ * @method string getInstructions()
+ * @method void setInstructions(string $instructions)
+ * @method bool getDeleted()
+ * @method void setDeleted(bool $deleted)
  */
-class CommissionTypePaymentOption {
+class CommissionTypePaymentOption extends AbstractDatabaseModel {
 	/**
-	 * @var int
-	 */
-	protected $id = 0;
-	/**
-	 * @var string
-	 */
-	protected $type = "";
-	/**
-	 * @var string
-	 */
-	protected $address = "";
-	/**
-	 * @var string
-	 */
-	protected $instructions = "";
-
-	/**
-	 * Constructor
+	 * Columns to prefetch from constructor
 	 *
-	 * @param int $id
-	 * @param string $type
-	 * @param string $address
-	 * @param string $instructions
+	 * @return string[]
 	 */
-	public function __construct(int $id, string $type="", string $address="", string $instructions="") {
-		$this->id = $id;
-		$this->setType($type);
-		$this->setAddress($address);
-		$this->setInstructions($instructions);
-	}
-
-
-	/**
-	 * @return int
-	 */
-	public function getId() : int {
-		return $this->id;
+	public static function getPrefetchColumns() : array {
+		return [
+			"COMMISSION_TYPE_ID",
+			"TYPE",
+			"ADDRESS",
+			"INSTRUCTIONS",
+			"DELETED",
+		];
 	}
 
 	/**
+	 * Table in which data resides in
+	 *
 	 * @return string
 	 */
-	public function getType() : string {
-		return $this->type;
+	public static function getTable() : string {
+		return Tables::COMMISSION_TYPE_PAYMENT_OPTIONS;
 	}
 
 	/**
-	 * @param string $type
+	 * Get values to set upon deletion
+	 *
+	 * We don't delete any information such as name/etc because artist's will need this information in the future for previous commissions
+	 * @return array
 	 */
-	public function setType(string $type) : void {
-		$this->type = $type;
+	public function getDeletedValues() : array {
+		return [
+			"TYPE" => "[Deleted] ".substr($this->getType(), 0, 54),
+			"DELETED" => true,
+		];
 	}
 
 	/**
-	 * @return string
+	 * Create a new CommissionTypePaymentOption from the given info
+	 *
+	 * @param array $values
+	 * @return self
 	 */
-	public function getAddress() : string {
-		return $this->address;
+	public static function create(array $values) : self {
+		// no prefilling is available as this is such a low-level component
+		$stmt = new InsertQuery();
+
+		$stmt->setTable(self::getTable());
+
+		foreach (["COMMISSION_TYPE_ID", "TYPE", "ADDRESS", "INSTRUCTIONS"] as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+			$stmt->addValue($values[$column]);
+		}
+
+		$stmt->execute();
+
+		return new self($stmt->getResult(), $values, false);
 	}
 
 	/**
-	 * @param string $address
+	 * Easily modifiable properties of the object
+	 *
+	 * @return array
 	 */
-	public function setAddress(string $address) : void {
-		$this->address = $address;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getInstructions() : string {
-		return $this->instructions;
-	}
-
-	/**
-	 * @param string $instructions
-	 */
-	public function setInstructions(string $instructions) : void {
-		$this->instructions = $instructions;
+	public static function getModifiableProperties() : array {
+		return [
+			"CommissionTypeId" => ["COMMISSION_TYPE_ID", null, null],
+			"Type" => ["TYPE", null, null],
+			"Address" => ["ADDRESS", null, null],
+			"Instructions" => ["INSTRUCTIONS", null, null],
+			"Deleted" => ["DELETED", "boolval", null],
+		];
 	}
 }
