@@ -8,10 +8,10 @@ parameters:
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
 		- '/Constant PAGE_IMAGE not found\./'
-		- '/Catalyst\\Database\\CommissionType\\Wishlist/'
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::get(New|Edit)CommissionTypeForm/'
+		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::deleteSocialChipsFromDatabase\(\)/'
 		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::getImage(Set|)\(\)/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
