@@ -200,4 +200,16 @@ class CommissionTypeAttribute {
 			return new self($key);
 		}, array_filter(explode(" ", $in)));
 	}
+
+	/**
+	 * Get the space-delimited string from a series of attributes
+	 *
+	 * @param self[] $in
+	 * @return string
+	 */
+	public static function getStringFromObjects(array $in) : array {
+		return implode(" ", array_map(function(self $key) {
+			return $key->getSetKey();
+		}, $in));
+	}
 }
