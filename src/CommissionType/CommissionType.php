@@ -3,127 +3,125 @@
 namespace Catalyst\CommissionType;
 
 use \Catalyst\Artist\Artist;
-use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
-use \Catalyst\Database\Query\{SelectQuery};
+use \Catalyst\Database\{AbstractDatabaseModel, Column, DatabaseModelTrait, Tables};
+use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
-use \Catalyst\Images\{Folders, HasDBImageSetTrait, HasImageTrait, Image};
+use \Catalyst\Images\{DBImage, Folders, HasDBImageSetTrait, HasImageTrait, Image};
+use \Catalyst\Tokens;
 use \InvalidArgumentException;
 
 /**
  * Represents a commision type
+ * @method int getArtistPageId()
+ * @method void setArtistPageId(int $artistPageId)
+ * @method string getToken()
+ * @method void setToken(string $token)
+ * @method string getName()
+ * @method void setName(string $name)
+ * @method string getBlurb()
+ * @method void setBlurb(string $blurb)
+ * @method string getDescription()
+ * @method void setDescription(string $description)
+ * @method int getSort()
+ * @method void setSort(int $sort)
+ * @method string getBaseCost()
+ * @method void setBaseCost(string $baseCost)
+ * @method float getBaseUsdCost()
+ * @method void setBaseUsdCost(float $baseUsdCost)
+ * @method CommissionTypeAttribute[] getAttributes()
+ * @method void setAttributes(CommissionTypeAttribute[] $attrs)
+ * @method bool isAcceptingQuotes()
+ * @method void setAcceptingQuotes(bool $acceptingQuotes)
+ * @method bool isAcceptingRequests()
+ * @method void setAcceptingRequests(bool $acceptingRequests)
+ * @method bool isAcceptingTrades()
+ * @method void setAcceptingTrades(bool $acceptingTrades)
+ * @method bool isAcceptingCommissions()
+ * @method void setAcceptingCommissions(bool $acceptingCommissions)
+ * @method bool isVisible()
+ * @method void setVisible(bool $visible)
  */
-class CommissionType {
-	use /*DatabaseModelTrait,*/ HasImageTrait, HasDBImageSetTrait;
+class CommissionType extends AbstractDatabaseModel {
+	use HasImageTrait, HasDBImageSetTrait;
 
+	/**
+	 * Used for quick toggle buttons, defines HTML ID, getter, and setter
+	 */
 	public const QUICK_TOGGLE_BUTTONS = [
-		["visible", "isVisible", "VISIBLE"],
-		["quotes", "isAcceptingQuotes", "ACCEPTING_QUOTES"],
-		["requests", "isAcceptingRequests", "ACCEPTING_REQUESTS"],
-		["trades", "isAcceptingTrades", "ACCEPTING_TRADES"],
-		["commissions", "isAcceptingCommissions", "ACCEPTING_COMMISSIONS"],
+		["visible", "isVisible", "setVisible"],
+		["quotes", "isAcceptingQuotes", "setAcceptingQuotes"],
+		["requests", "isAcceptingRequests", "setAcceptingRequests"],
+		["trades", "isAcceptingTrades", "setAcceptingTrades"],
+		["commissions", "isAcceptingCommissions", "setAcceptingCommissions"],
 	];
 
 	/**
-	 * The user's ID in the database
-	 * @var int
+	 * Get columns to prefetch
+	 *
+	 * @return array
 	 */
-	private $id;
-
-	/**
-	 * This is used as not to repeatedly hammer the database
-	 * @var array
-	 */
-	private $cache = [];
-
-	/**
-	 * Create a new commission type object
-	 * 
-	 * @param int $id
-	 */
-	public function __construct(int $id) {
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(self::getTable());
-
-		$stmt->addColumn(new Column("ARTIST_PAGE_ID", self::getTable()));
-		$stmt->addColumn(new Column("TOKEN", self::getTable()));
-		$stmt->addColumn(new Column("NAME", self::getTable()));
-		$stmt->addColumn(new Column("BLURB", self::getTable()));
-		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
-		$stmt->addColumn(new Column("SORT", self::getTable()));
-		$stmt->addColumn(new Column("BASE_COST", self::getTable()));
-		$stmt->addColumn(new Column("BASE_USD_COST", self::getTable()));
-		$stmt->addColumn(new Column("ATTRS", self::getTable()));
-		$stmt->addColumn(new Column("ACCEPTING_QUOTES", self::getTable()));
-		$stmt->addColumn(new Column("ACCEPTING_REQUESTS", self::getTable()));
-		$stmt->addColumn(new Column("ACCEPTING_TRADES", self::getTable()));
-		$stmt->addColumn(new Column("ACCEPTING_COMMISSIONS", self::getTable()));
-		$stmt->addColumn(new Column("VISIBLE", self::getTable()));
-
-		$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("PATH", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
-
-		$joinClause = new JoinClause();
-		$joinClause->setType(JoinClause::LEFT);
-		$joinClause->setJoinTable(Tables::COMMISSION_TYPE_IMAGES);
-		$joinClause->setLeftColumn(new Column("ID", self::getTable()));
-		$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addAdditionalCapability($joinClause);
-
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
-		$stmt->addAdditionalCapability($whereClause);
-
-		$orderByClause = new OrderByClause();
-		$orderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
-		$orderByClause->setOrder("ASC");
-		$stmt->addAdditionalCapability($orderByClause);
-
-		$stmt->execute();
-
-		$results = $stmt->getResult();
-
-		if (count($results) == 0) {
-			throw new InvalidArgumentException("Commission type ID ".$id." does not exist in the database.");
-		}
-
-		$images = [];
-
-		for ($i=0; $i < count($results); $i++) { 
-			if (is_null($results[$i]["PATH"])) {
-				break;
-			}
-			$images[] = new Image(
-				self::getImageFolder(),
-				$results[$i]["TOKEN"],
-				$results[$i]["PATH"],
-				(bool)$results[$i]["NSFW"],
-				trim($results[$i]["CAPTION"].($results[$i]["COMMISSIONER"] ? ("\n**Client:** ".$results[$i]["COMMISSIONER"]) : ''))
-			);
-		}
-
-		$this->cache = [
-			"ARTIST_PAGE_ID" => $results[0]["ARTIST_PAGE_ID"],
-			"TOKEN" => $results[0]["TOKEN"],
-			"NAME" => $results[0]["NAME"],
-			"BLURB" => $results[0]["BLURB"],
-			"DESCRIPTION" => $results[0]["DESCRIPTION"],
-			"SORT" => (int)$results[0]["SORT"],
-			"BASE_COST" => $results[0]["BASE_COST"],
-			"BASE_USD_COST" => (float)$results[0]["BASE_USD_COST"],
-			"ATTRS" => CommissionTypeAttribute::getObjectsFromString($results[0]["ATTRS"]),
-			"ACCEPTING_QUOTES" => (bool)$results[0]["ACCEPTING_QUOTES"],
-			"ACCEPTING_REQUESTS" => (bool)$results[0]["ACCEPTING_REQUESTS"],
-			"ACCEPTING_TRADES" => (bool)$results[0]["ACCEPTING_TRADES"],
-			"ACCEPTING_COMMISSIONS" => (bool)$results[0]["ACCEPTING_COMMISSIONS"],
-			"VISIBLE" => (bool)$results[0]["VISIBLE"],
+	public static function getPrefetchColumns() : array {
+		return [
+			"ARTIST_PAGE_ID",
+			"TOKEN",
+			"NAME",
+			"BLURB",
+			"DESCRIPTION",
+			"SORT",
+			"BASE_COST",
+			"BASE_USD_COST",
+			"ATTRS",
+			"ACCEPTING_QUOTES",
+			"ACCEPTING_REQUESTS",
+			"ACCEPTING_TRADES",
+			"ACCEPTING_COMMISSIONS",
+			"VISIBLE",
 		];
+	}
 
-		$this->setImageSet($images);
+	/**
+	 * Get columns to prefetch
+	 *
+	 * @return array
+	 */
+	public static function getDeletedColumns() : array {
+		return [
+			"ARTIST_PAGE_ID",
+			"TOKEN",
+			"NAME",
+			"BLURB",
+			"DESCRIPTION",
+			"SORT",
+			"BASE_COST",
+			"BASE_USD_COST",
+			"ATTRS",
+			"ACCEPTING_QUOTES",
+			"ACCEPTING_REQUESTS",
+			"ACCEPTING_TRADES",
+			"ACCEPTING_COMMISSIONS",
+			"VISIBLE",
+		];
+	}
 
-		$this->id = $id;
+	/**
+	 * Values to insert upon CT deletion
+	 *
+	 * We don't delete any information such as name/etc because artist's will need this information in the future for previous commissions
+	 */
+	public function getDeletedValues() : array {
+		return [
+			"NAME" => "[Deleted] ".substr($this->getName(), 0, 245),
+			"BLURB" => "Deleted commission type",
+			"DESCRIPTION" => "Deleted commission type",
+			"SORT" => 0,
+			"ATTRS" => "",
+			"ACCEPTING_QUOTES" => false,
+			"ACCEPTING_REQUESTS" => false,
+			"ACCEPTING_TRADES" => false,
+			"ACCEPTING_COMMISSIONS" => false,
+			"VISIBLE" => false,
+			"DELETED" => true,
+		];
 	}
 
 	/**
@@ -163,15 +161,6 @@ class CommissionType {
 	}
 
 	/**
-	 * Get the commission type's ID
-	 * 
-	 * @return int
-	 */
-	public function getId() : int {
-		return $this->id;
-	}
-
-	/**
 	 * Get the table for the object, as specified in DatabaseModelTrait
 	 *
 	 * @return string
@@ -208,172 +197,14 @@ class CommissionType {
 	}
 
 	/**
-	 * Get the artist page's ID
-	 *
-	 * @return int
-	 */
-	public function getArtistPageId() : int {
-		if (array_key_exists("ARTIST_PAGE_ID", $this->cache)) {
-			return $this->cache["ARTIST_PAGE_ID"];
-		}
-		
-		return $this->cache["ARTIST_PAGE_ID"] = $this->getColumnFromDatabase("ARTIST_PAGE_ID");
-	}
-
-	/**
 	 * Get the artist's page as an object
 	 *
 	 * @return Artist
 	 */
 	public function getArtistPage() : Artist {
-		if (array_key_exists("ARTIST_PAGE", $this->cache)) {
-			return $this->cache["ARTIST_PAGE"];
-		}
-		
-		return $this->cache["ARTIST_PAGE"] = new Artist($this->getArtistPageId());
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getToken() : string {
-		if (array_key_exists("TOKEN", $this->cache)) {
-			return $this->cache["TOKEN"];
-		}
-
-		return $this->cache["TOKEN"] = $this->getColumnFromDatabase("TOKEN");
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName() : string {
-		if (array_key_exists("NAME", $this->cache)) {
-			return $this->cache["NAME"];
-		}
-
-		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getBlurb() : string {
-		if (array_key_exists("BLURB", $this->cache)) {
-			return $this->cache["BLURB"];
-		}
-
-		return $this->cache["BLURB"] = $this->getColumnFromDatabase("BLURB");
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDescription() : string {
-		if (array_key_exists("DESCRIPTION", $this->cache)) {
-			return $this->cache["DESCRIPTION"];
-		}
-
-		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getSort() : int {
-		if (array_key_exists("SORT", $this->cache)) {
-			return $this->cache["SORT"];
-		}
-
-		return $this->cache["SORT"] = (int)$this->getColumnFromDatabase("SORT");
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getBaseCost() : string {
-		if (array_key_exists("BASE_COST", $this->cache)) {
-			return $this->cache["BASE_COST"];
-		}
-
-		return $this->cache["BASE_COST"] = $this->getColumnFromDatabase("BASE_COST");
-	}
-
-	/**
-	 * @return float
-	 */
-	public function getBaseUsdCost() : float {
-		if (array_key_exists("BASE_USD_COST", $this->cache)) {
-			return $this->cache["BASE_USD_COST"];
-		}
-
-		return $this->cache["BASE_USD_COST"] = (float)$this->getColumnFromDatabase("BASE_USD_COST");
-	}
-
-	/**
-	 * @return CommissionTypeAttribute[]
-	 */
-	public function getAttributes() : array {
-		if (array_key_exists("ATTRS", $this->cache)) {
-			return $this->cache["ATTRS"];
-		}
-
-		return $this->cache["ATTRS"] = CommissionTypeAttribute::getObjectsFromString($this->getColumnFromDatabase("ATTRS"));
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isAcceptingQuotes() : bool {
-		if (array_key_exists("ACCEPTING_QUOTES", $this->cache)) {
-			return $this->cache["ACCEPTING_QUOTES"];
-		}
-
-		return $this->cache["ACCEPTING_QUOTES"] = (bool)$this->getColumnFromDatabase("ACCEPTING_QUOTES");
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isAcceptingRequests() : bool {
-		if (array_key_exists("ACCEPTING_REQUESTS", $this->cache)) {
-			return $this->cache["ACCEPTING_REQUESTS"];
-		}
-
-		return $this->cache["ACCEPTING_REQUESTS"] = (bool)$this->getColumnFromDatabase("ACCEPTING_REQUESTS");
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isAcceptingTrades() : bool {
-		if (array_key_exists("ACCEPTING_TRADES", $this->cache)) {
-			return $this->cache["ACCEPTING_TRADES"];
-		}
-
-		return $this->cache["ACCEPTING_TRADES"] = (bool)$this->getColumnFromDatabase("ACCEPTING_TRADES");
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isAcceptingCommissions() : bool {
-		if (array_key_exists("ACCEPTING_COMMISSIONS", $this->cache)) {
-			return $this->cache["ACCEPTING_COMMISSIONS"];
-		}
-
-		return $this->cache["ACCEPTING_COMMISSIONS"] = (bool)$this->getColumnFromDatabase("ACCEPTING_COMMISSIONS");
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isVisible() : bool {
-		if (array_key_exists("VISIBLE", $this->cache)) {
-			return $this->cache["VISIBLE"];
-		}
-
-		return $this->cache["VISIBLE"] = (bool)$this->getColumnFromDatabase("VISIBLE");
+		return $this->getDataFromCallableOrCache("ARTIST_PAGE_OBJ", function() : Artist {
+			return new Artist($this->getArtistPageId());
+		});
 	}
 
 	/**
@@ -382,113 +213,118 @@ class CommissionType {
 	 * @return CommissionTypeModifierGroup[]
 	 */
 	public function getModifiers() : array {
-		if (array_key_exists("MODIFIERS", $this->cache)) {
-			return $this->cache["MODIFIERS"];
-		}
+		return $this->getDataFromCallableOrCache("MODIFIER_OBJS", function() : array {
+			$stmt = new SelectQuery();
 
-		$stmt = new SelectQuery();
+			$stmt->setTable(Tables::COMMISSION_TYPE_MODIFIERS);
 
-		$stmt->setTable(Tables::COMMISSION_TYPE_MODIFIERS);
+			$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("PRICE", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("USDEQ", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("MULTIPLE", Tables::COMMISSION_TYPE_MODIFIERS));
 
-		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_MODIFIERS));
-		$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPE_MODIFIERS));
-		$stmt->addColumn(new Column("PRICE", Tables::COMMISSION_TYPE_MODIFIERS));
-		$stmt->addColumn(new Column("USDEQ", Tables::COMMISSION_TYPE_MODIFIERS));
-		$stmt->addColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
-		$stmt->addColumn(new Column("MULTIPLE", Tables::COMMISSION_TYPE_MODIFIERS));
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS), '=', $this->getId()]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_MODIFIERS), '=', 0]);
+			$stmt->addAdditionalCapability($whereClause);
 
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS), '=', $this->getId()]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_MODIFIERS), '=', 0]);
-		$stmt->addAdditionalCapability($whereClause);
+			$stmt->execute();
 
-		$stmt->execute();
+			// will be keyed by groups
+			$modifiers = [];
 
-		$rawModifiers = $stmt->getResult();
-		// will be keyed by GROUP
-		$modifiers = [];
+			foreach ($stmt->getResult() as $modifier) {
+				if (!array_key_exists($modifier["GROUP"], $modifiers)) {
+					$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"], $modifier["MULTIPLE"]);
+				}
 
-		foreach ($rawModifiers as $modifier) {
-			if (!array_key_exists($modifier["GROUP"], $modifiers)) {
-				$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"], $modifier["MULTIPLE"]);
+				$modifierObject = new CommissionTypeModifier($modifier["ID"], [
+					"NAME" => $modifier["NAME"],
+					"PRICE" => $modifier["PRICE"],
+					"USDEQ" => (float)$modifier["USDEQ"],
+					"GROUP" => $modifier["GROUP"],
+					"DELETED" => 0,
+				], false); // do not prefetch as we know it all already and to reduce load
+				$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
 			}
 
-			$modifierObject = new CommissionTypeModifier($modifier["ID"], $modifier["NAME"], $modifier["PRICE"], (float)$modifier["USDEQ"]);
-			$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
-		}
-
-		return $this->cache["MODIFIERS"] = array_values($modifiers);
+			return array_values($modifiers);
+		});
 	}
 
 	/**
 	 * @return CommissionTypePaymentOption[]
 	 */
 	public function getPaymentOptions() : array {
-		if (array_key_exists("PAYMENT_OPTIONS", $this->cache)) {
-			return $this->cache["PAYMENT_OPTIONS"];
-		}
+		return $this->getDataFromCallableOrCache("PAYMENT_OBJS", function() : array {
+			$stmt = new SelectQuery();
 
-		$stmt = new SelectQuery();
+			$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
 
-		$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
+			$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
 
-		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-		$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-		$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-		$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', $this->getId()]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', 0]);
+			$stmt->addAdditionalCapability($whereClause);
 
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', $this->getId()]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', 0]);
-		$stmt->addAdditionalCapability($whereClause);
+			$stmt->execute();
 
-		$stmt->execute();
+			$options = [];
 
-		$rawOptions = $stmt->getResult();
+			foreach ($stmt->getResult() as $option) {
+				$options[] = new CommissionTypePaymentOption($option["ID"], [
+					"COMMISSION_TYPE_ID" => $this->getId(),
+					"TYPE" => $option["TYPE"], 
+					"ADDRESS" => $option["ADDRESS"], 
+					"INSTRUCTIONS" => $option["INSTRUCTIONS"],
+					"DELETED" => 0,
+				], false);
+			}
 
-		$options = [];
-
-		foreach ($rawOptions as $option) {
-			$options[] = new CommissionTypePaymentOption($option["ID"], $option["TYPE"], $option["ADDRESS"], $option["INSTRUCTIONS"]);
-		}
-
-		return $this->cache["PAYMENT_OPTIONS"] = $options;
+			return $options;
+		});
 	}
 
 	/**
 	 * @return CommissionTypeStage[]
 	 */
 	public function getStages() : array {
-		if (array_key_exists("STAGES", $this->cache)) {
-			return $this->cache["STAGES"];
-		}
+		return $this->getDataFromCallableOrCache("STAGE_OBJS", function() : array {
+			$stmt = new SelectQuery();
 
-		$stmt = new SelectQuery();
+			$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
 
-		$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
+			$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_STAGES));
+			$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
 
-		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_STAGES));
-		$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
+			$whereClause = new WhereClause();
+			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES), '=', $this->getId()]);
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_STAGES), '=', 0]);
+			$stmt->addAdditionalCapability($whereClause);
 
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES), '=', $this->getId()]);
-		$whereClause->addToClause(WhereClause::AND);
-		$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_STAGES), '=', 0]);
-		$stmt->addAdditionalCapability($whereClause);
+			$stmt->execute();
 
-		$stmt->execute();
+			$stages = [];
 
-		$rawStages = $stmt->getResult();
+			foreach ($stmt->getResult() as $stage) {
+				$stages[] = new CommissionTypeStage($stage["ID"], [
+					"COMMISSION_TYPE_ID" => $this->getId(),
+					"STAGE" => $stage["STAGE"],
+					"DELETED" => 0,
+				], false);
+			}
 
-		$stages = [];
-
-		foreach ($rawStages as $stage) {
-			$stages[] = new CommissionTypeStage($stage["ID"], $stage["STAGE"]);
-		}
-
-		return $this->cache["STAGES"] = $stages;
+			return $stages;
+		});
 	}
 
 	/**
@@ -537,10 +373,12 @@ class CommissionType {
 
 		$stmt->setTable(Tables::COMMISSION_TYPE_IMAGES);
 
+		$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_IMAGES));
 		$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
 		$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
 		$stmt->addColumn(new Column("PATH", Tables::COMMISSION_TYPE_IMAGES));
 		$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
+		$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES), '=', $this->id]);
@@ -561,15 +399,108 @@ class CommissionType {
 			if (is_null($results[$i]["PATH"])) {
 				break;
 			}
-			$images[] = new Image(
+			$images[] = new DBImage(
+				$results[$i]["ID"],
+				$this->getId(),
+				self::getImageDbInfo(),
 				self::getImageFolder(),
-				$results[$i]["TOKEN"],
+				$this->getToken(),
 				$results[$i]["PATH"],
-				(bool)$results[$i]["NSFW"],
-				trim($results[$i]["CAPTION"].($results[$i]["COMMISSIONER"] ? ("\n**Client:** ".$results[$i]["COMMISSIONER"]) : ''))
+				$results[$i]["NSFW"],
+				$results[$i]["CAPTION"],
+				$results[$i]["COMMISSIONER"],
+				$results[$i]["SORT"]
 			);
 		}
 
 		$this->setImageSet($images);
+	}
+
+	/**
+	 * See AbstractDatabaseModel for spec
+	 *
+	 * @return array
+	 */
+	public static function getModifiableProperties() : array {
+		return [
+			"ArtistPageId" => ["ARTIST_PAGE_ID", null, null],
+			"Token" => ["TOKEN", null, null],
+			"Name" => ["NAME", null, null],
+			"Blurb" => ["BLURB", null, null],
+			"Description" => ["DESCRIPTION", null, null],
+			"Sort" => ["SORT", null, null],
+			"BaseCost" => ["BASE_COST", null, null],
+			"BaseUsdCost" => ["BASE_USD_COST", null, null],
+			"Attributes" => ["ATTRS", [CommissionTypeAttribute::class, "getObjectsFromString"], [CommissionTypeAttribute::class, "getStringFromObjects"]],
+			"AcceptingQuotes" => ["ACCEPTING_QUOTES", "boolval", null],
+			"AcceptingRequests" => ["ACCEPTING_REQUESTS", "boolval", null],
+			"AcceptingTrades" => ["ACCEPTING_TRADES", "boolval", null],
+			"AcceptingCommissions" => ["ACCEPTING_COMMISSIONS", "boolval", null],
+			"Visible" => ["VISIBLE", "boolval", null],
+		];
+	}
+
+	/**
+	 * Create a commission type
+	 *
+	 * @param array $values
+	 * @return self
+	 */
+	public static function create(array $values) : self {
+		// per array_merge docs:
+		// If the input arrays have the same string keys, then the latter value
+		//  for that key will overwrite the previous one
+		$values = array_merge([
+			"TOKEN" => Tokens::generateCommissionTypeToken(),
+			"SORT" => 0,
+			"ATTRS" => "",
+			"ACCEPTING_QUOTES" => false,
+			"ACCEPTING_REQUESTS" => false,
+			"ACCEPTING_TRADES" => false,
+			"ACCEPTING_COMMISSIONS" => false,
+			"VISIBLE" => false,
+			"_modifiers" => [],
+			"_payment_options" => [],
+			"_stages" => [],
+			"_images" => [], // preload with an array of Image
+			"_image_meta" => [], // preload with properly formatted array
+		], $values);
+
+		$stmt = new InsertQuery();
+
+		$stmt->setTable(self::getTable());
+
+		foreach (["ARTIST_PAGE_ID", "TOKEN", "NAME", "BLURB", "DESCRIPTION", "SORT", "BASE_COST", "BASE_USD_COST", "ATTRS", "ACCEPTING_QUOTES", "ACCEPTING_REQUESTS", "ACCEPTING_TRADES", "ACCEPTING_COMMISSIONS", "VISIBLE"] as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+			$stmt->addValue($values[$column]);
+		}
+
+		$stmt->execute();
+
+		$commissionType = new self($stmt->getResult(), $values);
+
+		foreach ($values["_images"] as $image) {
+			$commissionType->addImage(
+				$image->getPath(),
+				!!$values["_image_meta"][$image->getUploadName()]["nsfw"],
+				$values["_image_meta"][$image->getUploadName()]["caption"],
+				$values["_image_meta"][$image->getUploadName()]["info"],
+				$values["_image_meta"][$image->getUploadName()]["sort"]
+			);
+		}
+
+		foreach ($values["_modifiers"] as $modifier) {
+			CommissionTypeModifier::create(array_merge(["COMMISSION_TYPE_ID" => $commissionType->getId()], $modifier));
+		}
+
+		foreach ($values["_payment_options"] as $modifier) {
+			CommissionTypePaymentOption::create(array_merge(["COMMISSION_TYPE_ID" => $commissionType->getId()], $modifier));
+		}
+
+		foreach ($values["_stages"] as $modifier) {
+			CommissionTypeStage::create(array_merge(["COMMISSION_TYPE_ID" => $commissionType->getId()], $modifier));
+		}
+
+		return $commissionType;
 	}
 }
