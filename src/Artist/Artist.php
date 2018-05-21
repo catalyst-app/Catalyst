@@ -222,14 +222,13 @@ class Artist extends AbstractDatabaseModel {
 			"TOKEN" => Tokens::generateArtistToken(),
 			"IMG" => null,
 			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
-			"DELETED" => false,
 		], $values);
 
 		$stmt = new InsertQuery();
 
 		$stmt->setTable(self::getTable());
 
-		foreach (["USER_ID", "TOKEN", "NAME", "URL", "DESCRIPTION", "TOS", "IMG", "COLOR", "DELETED"] as $column) {
+		foreach (["USER_ID", "TOKEN", "NAME", "URL", "DESCRIPTION", "TOS", "IMG", "COLOR"] as $column) {
 			$stmt->addColumn(new Column($column, self::getTable()));
 			$stmt->addValue($values[$column]);
 		}
