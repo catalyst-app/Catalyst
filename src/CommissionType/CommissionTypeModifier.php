@@ -19,6 +19,8 @@ use \Catalyst\Database\Query\InsertQuery;
  * @method void setBaseUsdCost(float $baseUsdCost)
  * @method string getBaseCost()
  * @method void setBaseCost(string $baseCost)
+ * @method int getSort()
+ * @method void setSort(int $sort)
  * @method int getGroupId()
  * @method void setGroupId(int $groupId)
  */
@@ -36,6 +38,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"USDEQ",
 			"GROUP",
 			"MULTIPLE",
+			"SORT",
 			"DELETED",
 		];
 	}
@@ -74,7 +77,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 
 		$stmt->setTable(self::getTable());
 
-		foreach (["COMMISSION_TYPE_ID", "NAME", "PRICE", "USDEQ", "GROUP", "MULTIPLE"] as $column) {
+		foreach (["COMMISSION_TYPE_ID", "NAME", "PRICE", "USDEQ", "GROUP", "MULTIPLE", "SORT"] as $column) {
 			$stmt->addColumn(new Column($column, self::getTable()));
 			$stmt->addValue($values[$column]);
 		}
@@ -97,6 +100,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"BaseUsdCost" => ["USDEQ", null, null],
 			"GroupId" => ["GROUP", null, null],
 			"Multiple" => ["MULPILE", "boolval", null],
+			"Sort" => ["SORT", null, null],
 			"Deleted" => ["DELETED", "boolval", null],
 		];
 	}

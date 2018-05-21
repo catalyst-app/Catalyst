@@ -224,6 +224,7 @@ class CommissionType extends AbstractDatabaseModel {
 			$stmt->addColumn(new Column("USDEQ", Tables::COMMISSION_TYPE_MODIFIERS));
 			$stmt->addColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
 			$stmt->addColumn(new Column("MULTIPLE", Tables::COMMISSION_TYPE_MODIFIERS));
+			$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_MODIFIERS));
 
 			$whereClause = new WhereClause();
 			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS), '=', $this->getId()]);
