@@ -5,12 +5,10 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\Query\{InsertQuery, SelectQuery, UpdateQuery};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Artist\Artist;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
-use \Catalyst\Images\{Image, Folders};
+use \Catalyst\Images\Image;
 use \Catalyst\Tokens;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
@@ -26,7 +24,7 @@ $token = Tokens::generateArtistToken();
 
 $image = null;
 if (isset($_FILES["image"])) {
-	$image = Image::upload($_FILES["image"], Folders::ARTIST_IMAGE, $token);
+	$image = Image::upload($_FILES["image"], Artist::getImageFolder(), $token);
 }
 
 Artist::create([
