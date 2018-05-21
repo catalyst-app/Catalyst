@@ -6,14 +6,14 @@ use \Catalyst\Artist\Artist;
 use \Catalyst\Database\{Column, DatabaseModelTrait, Tables};
 use \Catalyst\Database\Query\{SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
-use \Catalyst\Images\{Folders, HasImageSetTrait, HasImageTrait, Image};
+use \Catalyst\Images\{Folders, HasDBImageSetTrait, HasImageTrait, Image};
 use \InvalidArgumentException;
 
 /**
  * Represents a commision type
  */
 class CommissionType {
-	use DatabaseModelTrait, HasImageTrait, HasImageSetTrait;
+	use /*DatabaseModelTrait,*/ HasImageTrait, HasDBImageSetTrait;
 
 	public const QUICK_TOGGLE_BUTTONS = [
 		["visible", "isVisible", "VISIBLE"],
@@ -186,6 +186,25 @@ class CommissionType {
 	 */
 	public static function getImageFolder() : string {
 		return Folders::COMMISSION_TYPE_IMAGE;
+	}
+
+	/**
+	 * Returns info about the commission_type_images table
+	 *
+	 * @return array
+	 */
+	public static function getImageDbInfo() : array {
+		return [
+			"table" => Tables::COMMISSION_TYPE_IMAGES,
+			"column" => [
+				"parentId" => "COMMISSION_TYPE_ID",
+				"path" => "PATH",
+				"nsfw" => "NSFW",
+				"caption" => "CAPTION",
+				"info" => "COMMISSIONER",
+				"sort" => "SORT",
+			],
+		];
 	}
 
 	/**
