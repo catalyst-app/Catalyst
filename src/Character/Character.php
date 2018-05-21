@@ -320,33 +320,19 @@ class Character extends AbstractDatabaseModel {
 
 		$stmt->execute();
 
-		$characterId = $stmt->getResult();
+		$character = new self($stmt->getResult(), $values);
 
-		if (!empty($values["_images"])) {
-			$stmt = new MultiInsertQuery();
-
-			$stmt->setTable(Tables::CHARACTER_IMAGES);
-
-			$stmt->addColumn(new Column("CHARACTER_ID", Tables::CHARACTER_IMAGES));
-			$stmt->addColumn(new Column("CAPTION", Tables::CHARACTER_IMAGES));
-			$stmt->addColumn(new Column("CREDIT", Tables::CHARACTER_IMAGES));
-			$stmt->addColumn(new Column("PATH", Tables::CHARACTER_IMAGES));
-			$stmt->addColumn(new Column("NSFW", Tables::CHARACTER_IMAGES));
-			$stmt->addColumn(new Column("SORT", Tables::CHARACTER_IMAGES));
-
-			foreach ($values["_images"] as $image) {
-				$stmt->addValue($characterId);
-				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["caption"]);
-				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["info"]);
-				$stmt->addValue($image->getPath());
-				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["nsfw"] ? 1 : 0);
-				$stmt->addValue($values["_image_meta"][$image->getUploadName()]["sort"]);
-			}
-
-			$stmt->execute();
+		foreach ($values["_images"] as $image) {
+			$character->addImage(
+				$image->getPath(),
+				!!$values["_image_meta"][$image->getUploadName()]["nsfw"],
+				$values["_image_meta"][$image->getUploadName()]["caption"],
+				$values["_image_meta"][$image->getUploadName()]["info"],
+				$values["_image_meta"][$image->getUploadName()]["sort"]
+			);
 		}
 
-		return new self($characterId, $values);
+		return $character;
 	}
 
 	/**
