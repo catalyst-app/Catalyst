@@ -55,13 +55,13 @@ class Navbar {
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"not_artist" => [
-				["Artist", self::NAME, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["Artist", self::NAME, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
 					["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"artist" => [
-				[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
-				["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getURL() : "") : null), self::DROPDOWN_CHILD],
+				[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+				["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_CHILD],
 				["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
 				["Commission Types", self::NAME, null, ROOTDIR."Artist/CommissionTypes", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
