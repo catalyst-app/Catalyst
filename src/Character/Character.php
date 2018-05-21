@@ -353,7 +353,7 @@ class Character extends AbstractDatabaseModel {
 	 * Get deleted values for when a character is delet
 	 * @return array
 	 */
-	public static function getDeletedValues() : array {
+	public function getDeletedValues() : array {
 		return [
 			// "CHARACTER_TOKEN" => "", ommitted
 			"NAME" => "Deleted character",

@@ -572,7 +572,7 @@ class User extends AbstractDatabaseModel {
 	 * Get deleted values for when a user is delet
 	 * @return array
 	 */
-	public static function getDeletedValues() : array {
+	public function getDeletedValues() : array {
 		return [
 			// "FILE_TOKEN" => "", omitted
 			// "USERNAME" => "" omitted

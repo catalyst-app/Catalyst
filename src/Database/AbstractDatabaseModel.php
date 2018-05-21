@@ -324,7 +324,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * @return array
 	 */
-	abstract public static function getDeletedValues() : array;
+	abstract public function getDeletedValues() : array;
 
 	/**
 	 * Deletes the item (deletes images, deletes cache, fills row with deleted values)
@@ -338,7 +338,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		$stmt->setTable(static::getTable());
 
-		foreach (static::getDeletedValues() as $key => $value) {
+		foreach ($this->getDeletedValues() as $key => $value) {
 			$stmt->addColumn(new Column($key, static::getTable()));
 			$stmt->addValue($value);
 		}

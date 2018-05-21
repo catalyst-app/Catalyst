@@ -234,7 +234,7 @@ class Artist extends AbstractDatabaseModel {
 	/**
 	 * @return array values to fill upon deletion
 	 */
-	public static function getDeletedValues() : array {
+	public function getDeletedValues() : array {
 		return [
 			"NAME" => "Deleted artist page",
 			"URL" => Tokens::generateDeletedArtistUrl(),
