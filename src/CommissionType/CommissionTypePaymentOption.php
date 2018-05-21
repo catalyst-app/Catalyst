@@ -17,6 +17,8 @@ use \Catalyst\Database\Query\InsertQuery;
  * @method void setAddress(string $address)
  * @method string getInstructions()
  * @method void setInstructions(string $instructions)
+ * @method int getSort()
+ * @method void setSort(int $sort)
  * @method bool getDeleted()
  * @method void setDeleted(bool $deleted)
  */
@@ -32,6 +34,7 @@ class CommissionTypePaymentOption extends AbstractDatabaseModel {
 			"TYPE",
 			"ADDRESS",
 			"INSTRUCTIONS",
+			"SORT",
 			"DELETED",
 		];
 	}
@@ -70,7 +73,7 @@ class CommissionTypePaymentOption extends AbstractDatabaseModel {
 
 		$stmt->setTable(self::getTable());
 
-		foreach (["COMMISSION_TYPE_ID", "TYPE", "ADDRESS", "INSTRUCTIONS"] as $column) {
+		foreach (["COMMISSION_TYPE_ID", "TYPE", "ADDRESS", "INSTRUCTIONS", "SORT"] as $column) {
 			$stmt->addColumn(new Column($column, self::getTable()));
 			$stmt->addValue($values[$column]);
 		}
@@ -91,6 +94,7 @@ class CommissionTypePaymentOption extends AbstractDatabaseModel {
 			"Type" => ["TYPE", null, null],
 			"Address" => ["ADDRESS", null, null],
 			"Instructions" => ["INSTRUCTIONS", null, null],
+			"Sort" => ["SORT", null, null],
 			"Deleted" => ["DELETED", "boolval", null],
 		];
 	}

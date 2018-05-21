@@ -13,6 +13,8 @@ use \Catalyst\Database\Query\InsertQuery;
  * @method void setCommissionTypeId(int $commissionTypeId)
  * @method string getStage()
  * @method void setStage(string $stage)
+ * @method int getSort()
+ * @method void setSort(int $sort)
  * @method bool getDeleted()
  * @method void setDeleted(bool $deleted)
  */
@@ -26,6 +28,7 @@ class CommissionTypeStage extends AbstractDatabaseModel {
 		return [
 			"COMMISSION_TYPE_ID",
 			"STAGE",
+			"SORT",
 			"DELETED",
 		];
 	}
@@ -64,7 +67,7 @@ class CommissionTypeStage extends AbstractDatabaseModel {
 
 		$stmt->setTable(self::getTable());
 
-		foreach (["COMMISSION_TYPE_ID", "STAGE"] as $column) {
+		foreach (["COMMISSION_TYPE_ID", "STAGE", "SORT"] as $column) {
 			$stmt->addColumn(new Column($column, self::getTable()));
 			$stmt->addValue($values[$column]);
 		}
@@ -83,6 +86,7 @@ class CommissionTypeStage extends AbstractDatabaseModel {
 		return [
 			"CommissionTypeId" => ["COMMISSION_TYPE_ID", null, null],
 			"Stage" => ["STAGE", null, null],
+			"Sort" => ["SORT", null, null],
 			"Deleted" => ["DELETED", "boolval", null],
 		];
 	}

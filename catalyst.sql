@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 21, 2018 at 06:29 PM
+-- Generation Time: May 21, 2018 at 07:09 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -723,6 +723,7 @@ CREATE TABLE `commission_type_payment_options` (
   `TYPE` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ADDRESS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `INSTRUCTIONS` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SORT` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -742,6 +743,7 @@ CREATE TABLE `commission_type_stages` (
   `ID` int(11) UNSIGNED NOT NULL,
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL,
   `STAGE` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SORT` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1102,7 +1104,8 @@ ALTER TABLE `commission_type_payment_options`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `TYPE` (`TYPE`),
   ADD KEY `DELETED` (`DELETED`),
-  ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`);
+  ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`),
+  ADD KEY `SORT` (`SORT`);
 
 --
 -- Indexes for table `commission_type_stages`
@@ -1110,7 +1113,8 @@ ALTER TABLE `commission_type_payment_options`
 ALTER TABLE `commission_type_stages`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`),
-  ADD KEY `DELETED` (`DELETED`);
+  ADD KEY `DELETED` (`DELETED`),
+  ADD KEY `SORT` (`SORT`);
 
 --
 -- Indexes for table `commission_wips`

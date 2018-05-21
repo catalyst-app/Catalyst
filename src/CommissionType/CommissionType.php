@@ -266,6 +266,7 @@ class CommissionType extends AbstractDatabaseModel {
 			$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
 			$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
 			$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
 
 			$whereClause = new WhereClause();
 			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', $this->getId()]);
@@ -283,6 +284,7 @@ class CommissionType extends AbstractDatabaseModel {
 					"TYPE" => $option["TYPE"], 
 					"ADDRESS" => $option["ADDRESS"], 
 					"INSTRUCTIONS" => $option["INSTRUCTIONS"],
+					"SORT" => $option["SORT"],
 					"DELETED" => 0,
 				], false);
 			}
@@ -302,6 +304,7 @@ class CommissionType extends AbstractDatabaseModel {
 
 			$stmt->addColumn(new Column("ID", Tables::COMMISSION_TYPE_STAGES));
 			$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
+			$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_STAGES));
 
 			$whereClause = new WhereClause();
 			$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES), '=', $this->getId()]);
@@ -317,6 +320,7 @@ class CommissionType extends AbstractDatabaseModel {
 				$stages[] = new CommissionTypeStage($stage["ID"], [
 					"COMMISSION_TYPE_ID" => $this->getId(),
 					"STAGE" => $stage["STAGE"],
+					"SORT" => $stage["SORT"],
 					"DELETED" => 0,
 				], false);
 			}
