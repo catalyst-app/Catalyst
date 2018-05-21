@@ -207,7 +207,7 @@ class CommissionTypeAttribute {
 	 * @param self[] $in
 	 * @return string
 	 */
-	public static function getStringFromObjects(array $in) : array {
+	public static function getStringFromObjects(array $in) : string {
 		return implode(" ", array_map(function(self $key) {
 			return $key->getSetKey();
 		}, $in));
