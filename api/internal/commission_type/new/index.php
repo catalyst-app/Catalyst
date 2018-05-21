@@ -5,9 +5,10 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
+use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Database\{Column, RawColumn, Tables};
-use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
-use \Catalyst\Database\Query\{InsertQuery, MultiInsertQuery, SelectQuery};
+use \Catalyst\Database\QueryAddition\WhereClause;
+use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Images\{Image, Folders};
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
@@ -23,25 +24,6 @@ if (!$_SESSION["user"]->isArtist()) {
 	Response::sendErrorResponse(91540, ErrorCodes::ERR_91540);
 }
 
-$stmt = new InsertQuery();
-
-$stmt->setTable(Tables::COMMISSION_TYPES);
-
-$stmt->addColumn(new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES));
-$stmt->addValue($_SESSION["user"]->getArtistPageId());
-
-$stmt->addColumn(new Column("TOKEN", Tables::COMMISSION_TYPES));
-$stmt->addValue($token = Tokens::generateCommissionTypeToken());
-
-$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["name"]);
-
-$stmt->addColumn(new Column("BLURB", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["blurb"]);
-
-$stmt->addColumn(new Column("DESCRIPTION", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["description"]);
-
 $nextSortStmt = new SelectQuery();
 
 $nextSortStmt->setTable(Tables::COMMISSION_TYPES);
@@ -54,132 +36,75 @@ $nextSortStmt->addAdditionalCapability($nextSortWhereClause);
 
 $nextSortStmt->execute();
 
-$nextSort = $nextSortStmt->getResult()[0]["NEXT_SORT"];
-
-if (is_null($nextSort)) {
+if (is_null($nextSortStmt->getResult()[0]["NEXT_SORT"])) {
 	$nextSort = 0;
 } else {
-	$nextSort++;
+	$nextSort = $nextSortStmt->getResult()[0]["NEXT_SORT"]+1;
 }
 
-$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPES));
-$stmt->addValue($nextSort);
+$token = Tokens::generateCommissionTypeToken();
 
-$stmt->addColumn(new Column("BASE_COST", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["base-cost"]);
-
-$stmt->addColumn(new Column("BASE_USD_COST", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["base-cost-usd"]);
-
-$stmt->addColumn(new Column("ATTRS", Tables::COMMISSION_TYPES));
-$stmt->addValue(implode(" ", $_POST["attributes"]));
-
-$stmt->addColumn(new Column("ACCEPTING_QUOTES", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["accepting-quotes"] == "true");
-
-$stmt->addColumn(new Column("ACCEPTING_REQUESTS", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["accepting-requests"] == "true");
-
-$stmt->addColumn(new Column("ACCEPTING_TRADES", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["accepting-trades"] == "true");
-
-$stmt->addColumn(new Column("ACCEPTING_COMMISSIONS", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["accepting-commissions"] == "true");
-
-$stmt->addColumn(new Column("VISIBLE", Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["visible"] == "true");
-
-$stmt->execute();
-
-$commissionTypeId = $stmt->getResult();
-
+$images = $imageMeta = [];
 if (isset($_FILES["images"])) {
 	$images = Image::uploadMultiple($_FILES["images"], Folders::COMMISSION_TYPE_IMAGE, $token);
 	$imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", $_POST);
-
-	if (count($images)) {
-		$stmt = new MultiInsertQuery();
-
-		$stmt->setTable(Tables::COMMISSION_TYPE_IMAGES);
-
-		$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("CAPTION", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("COMMISSIONER", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("PATH", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("NSFW", Tables::COMMISSION_TYPE_IMAGES));
-		$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPE_IMAGES));
-
-		foreach ($images as $image) {
-			$stmt->addValue($commissionTypeId);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["caption"]);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["info"]);
-			$stmt->addValue($image->getPath());
-			$stmt->addValue($imageMeta[$image->getUploadName()]["nsfw"] ? 1 : 0);
-			$stmt->addValue($imageMeta[$image->getUploadName()]["sort"]);
-		}
-
-		$stmt->execute();
-	}
 }
 
+$modifiers = [];
 if (array_key_exists("modifiers", $_POST) && count($_POST["modifiers"])) {
-	$stmt = new MultiInsertQuery();
-
-	$stmt->setTable(Tables::COMMISSION_TYPE_MODIFIERS);
-
-	$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_MODIFIERS));
-	$stmt->addColumn(new Column("NAME", Tables::COMMISSION_TYPE_MODIFIERS));
-	$stmt->addColumn(new Column("PRICE", Tables::COMMISSION_TYPE_MODIFIERS));
-	$stmt->addColumn(new Column("USDEQ", Tables::COMMISSION_TYPE_MODIFIERS));
-	$stmt->addColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
-	$stmt->addColumn(new Column("MULTIPLE", Tables::COMMISSION_TYPE_MODIFIERS));
-
+	$i=0;
 	foreach ($_POST["modifiers"] as $modifier) {
-		$stmt->addValue($commissionTypeId);
-		$stmt->addValue($modifier["modifier-psuedo-field"]);
-		$stmt->addValue($modifier["base-cost-psuedo-field"]);
-		$stmt->addValue($modifier["base-cost-usd-psuedo-field"]);
-		$stmt->addValue($modifier["row"]);
-		$stmt->addValue($modifier["multiple"] ? 1 : 0);
+		$modifiers[] = [
+			"NAME" => $modifier["modifier-psuedo-field"],
+			"PRICE" => $modifier["base-cost-psuedo-field"],
+			"USDEQ" => $modifier["base-cost-usd-psuedo-field"],
+			"GROUP" => $modifier["row"],
+			"MULTIPLE" => $modifier["multiple"] ? 1 : 0,
+			"SORT" => $i++,
+		];
 	}
-
-	$stmt->execute();
 }
 
+$paymentOptions = [];
 if (array_key_exists("payments", $_POST) && count($_POST["payments"])) {
-	$stmt = new MultiInsertQuery();
-
-	$stmt->setTable(Tables::COMMISSION_TYPE_PAYMENT_OPTIONS);
-
-	$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-	$stmt->addColumn(new Column("TYPE", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-	$stmt->addColumn(new Column("ADDRESS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-	$stmt->addColumn(new Column("INSTRUCTIONS", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
-
-	foreach ($_POST["payments"] as $payment) {
-		$stmt->addValue($commissionTypeId);
-		$stmt->addValue($payment["type-psuedo-field"]);
-		$stmt->addValue($payment["address-psuedo-field"]);
-		$stmt->addValue($payment["instructions-psuedo-field"]);
+	foreach ($_POST["payments"] as $paymentOption) {
+		$paymentOptions[] = [
+			"TYPE" => $paymentOption["type-psuedo-field"],
+			"ADDRESS" => $paymentOption["address-psuedo-field"],
+			"INSTRUCTIONS" => $paymentOption["instructions-psuedo-field"],
+		];
 	}
-
-	$stmt->execute();
 }
 
+$stages = [];
 if (array_key_exists("stages", $_POST) && count($_POST["stages"])) {
-	$stmt = new MultiInsertQuery();
-
-	$stmt->setTable(Tables::COMMISSION_TYPE_STAGES);
-
-	$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::COMMISSION_TYPE_STAGES));
-	$stmt->addColumn(new Column("STAGE", Tables::COMMISSION_TYPE_STAGES));
-
 	foreach ($_POST["stages"] as $stage) {
-		$stmt->addValue($commissionTypeId);
-		$stmt->addValue($stage["stage-psuedo-field"]);
+		$stages[] = [
+			"STAGE" => $stage["stage-psuedo-field"],
+		];
 	}
-
-	$stmt->execute();
 }
+
+CommissionType::create([
+	"ARTIST_PAGE_ID" => $_SESSION["user"]->getArtistPageId(),
+	"TOKEN" => $token,
+	"NAME" => $_POST["name"],
+	"BLURB" => $_POST["blurb"],
+	"DESCRIPTION" => $_POST["description"],
+	"SORT" => $nextSort,
+	"BASE_COST" => $_POST["base-cost"],
+	"BASE_USD_COST" => $_POST["base-cost-usd"],
+	"ATTRS" => implode(" ", $_POST["attributes"]),
+	"ACCEPTING_QUOTES" => $_POST["accepting-quotes"] == "true",
+	"ACCEPTING_REQUESTS" => $_POST["accepting-requests"] == "true",
+	"ACCEPTING_TRADES" => $_POST["accepting-trades"] == "true",
+	"ACCEPTING_COMMISSIONS" => $_POST["accepting-commissions"] == "true",
+	"VISIBLE" => $_POST["visible"] == "true",
+	"_images" => $images,
+	"_image_meta" => $imageMeta,
+	"_modifiers" => $modifiers,
+	"_payment_options" => $paymentOptions,
+	"_stages" => $stages,
+]);
 
 Response::sendSuccessResponse("Success");
