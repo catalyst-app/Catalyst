@@ -9,13 +9,18 @@ use \Catalyst\Database\Query\InsertQuery;
  * Represents a commission type modifier
  *
  * Basic model class, nothing fancy
- *
+ * @method int getCommissionTypeId()
+ * @method void setCommissionTypeId(int $commissionTypeId)
  * @method string getName()
  * @method void setName(string $name)
  * @method string getBaseCost()
  * @method void setBaseCost(string $baseCost)
  * @method float getBaseUsdCost()
  * @method void setBaseUsdCost(float $baseUsdCost)
+ * @method string getBaseCost()
+ * @method void setBaseCost(string $baseCost)
+ * @method int getGroupId()
+ * @method void setGroupId(int $groupId)
  */
 class CommissionTypeModifier extends AbstractDatabaseModel {
 	/**
@@ -30,6 +35,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"PRICE",
 			"USDEQ",
 			"GROUP",
+			"DELETED",
 		];
 	}
 
@@ -48,8 +54,9 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 	 * We don't delete any information such as name/etc because artist's will need this information in the future for previous commissions
 	 * @return array
 	 */
-	public static function getDeletedValues() : array {
+	public function getDeletedValues() : array {
 		return [
+			"NAME" => "[Deleted] ".substr($this->getName(), 0, 54),
 			"DELETED" => true,
 		];
 	}
@@ -99,9 +106,12 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 	 */
 	public static function getModifiableProperties() : array {
 		return [
+			"CommissionTypeId" => ["COMMISSION_TYPE_ID", null, null],
 			"Name" => ["NAME", null, null],
 			"BaseCost" => ["PRICE", null, null],
 			"BaseUsdCost" => ["USDEQ", null, null],
+			"GroupId" => ["GROUP", null, null],
+			"Deleted" => ["DELETED", "boolval", null],
 		];
 	}
 }
