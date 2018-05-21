@@ -31,7 +31,7 @@ trait DeleteArtistPageFormTrait {
 		$confirmField = new JSConfirmField();
 		$confirmField->setDistinguisher("confirm");
 		$confirmField->setRequired(true);
-		$confirmField->setPrompt("Are you sure you want to delete your page?  This will PERMANENTLY delete all commission types and other information.");
+		$confirmField->setPrompt("Are you sure you want to delete your page?  This will PERMANENTLY delete all commission types and other information as well as remove your claim for the URL.");
 		$form->addField($confirmField);
 
 		return $form;

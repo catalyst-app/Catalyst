@@ -97,13 +97,12 @@ class Tokens {
 	}
 
 	/**
-	 * Generate a 64-character URL to use for deleted artist pages, starting with "TMP_"
+	 * Generate a 64-character URL to use for deleted artist pages, starting with "DEL_"
 	 *
-	 * @param string $token Artist's token
 	 * @return string URL
 	 */
-	public static function generateDeletedArtistUrl(string $token) : string {
-		return "TMP_".$token."_".self::generateToken(50);
+	public static function generateDeletedArtistUrl() : string {
+		return "DEL_".self::generateToken(60);
 	}
 
 	/**
