@@ -54,6 +54,9 @@ if (isset($_FILES["images"])) {
 	$images = Image::uploadMultiple($_FILES["images"], Folders::CHARACTER_IMAGE, $_POST["token"]);
 
 	foreach ($images as $image) {
+		if (is_null($image->getPath())) {
+			continue;
+		}
 		$character->addImage(
 			$image->getPath(),
 			!!$imageMeta[$image->getUploadName()]["nsfw"],
