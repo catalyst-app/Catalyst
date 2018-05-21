@@ -3,82 +3,56 @@
 namespace Catalyst\Artist;
 
 use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
-use \Catalyst\Database\Query\SelectQuery;
+use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
 use \Catalyst\Page\Navigation\Navbar;
+use \Catalyst\Page\Values;
+use \Catalyst\Tokens;
+use \Catalyst\User\User;
 use \InvalidArgumentException;
 
 /**
  * Represents an artist in the database
+ *
+ * @method int getUserId()
+ * @method void setUserId(int $userId)
+ * @method string getToken()
+ * @method void setToken(string $token)
+ * @method string getName()
+ * @method void setName(string $name)
+ * @method null|string getUrl()
+ * @method void setUrl(null|string $url)
+ * @method string getDescription()
+ * @method void setDescription(string $description)
+ * @method string[][] getAllTos()
+ * @method void setAllTos(string[][] $tos)
+ * @method null|string getImagePath()
+ * @method void setImagePath(null|string $imagePath)
+ * @method string getColor()
+ * @method void setColor(string $color)
+ * @method bool getDeleted()
+ * @method void setDeleted(bool $deleted)
  */
 class Artist extends AbstractDatabaseModel {
 	use HasImageTrait, HasSocialChipsTrait, MessagableTrait;
 
 	/**
-	 * Unique ID for the artist
+	 * @return array
 	 */
-	private $id;
-
-	/**
-	 * Used as not to hammer the database
-	 */
-	private $cache = [];
-
-	/**
-	 * Create a new artist object
-	 * 
-	 * @param int $id
-	 */
-	public function __construct(int $id) {
-		$stmt = new SelectQuery();
-
-		$stmt->setTable(self::getTable());
-
-		$stmt->addColumn(new Column("USER_ID", self::getTable()));
-		$stmt->addColumn(new Column("TOKEN", self::getTable()));
-		$stmt->addColumn(new Column("NAME", self::getTable()));
-		$stmt->addColumn(new Column("URL", self::getTable()));
-		$stmt->addColumn(new Column("DESCRIPTION", self::getTable()));
-		$stmt->addColumn(new Column("TOS", self::getTable()));
-		$stmt->addColumn(new Column("IMG", self::getTable()));
-		$stmt->addColumn(new Column("COLOR", self::getTable()));
-
-		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ID", self::getTable()), '=', $id]);
-		$stmt->addAdditionalCapability($whereClause);
-
-		$stmt->execute();
-
-		$results = $stmt->getResult();
-
-		if (!count($results)) {
-			throw new InvalidArgumentException("Artist ID ".$id." does not exist in the database.");
-		}
-
-		$this->cache = [
-			"USER_ID" => $results[0]["USER_ID"],
-			"TOKEN" => $results[0]["TOKEN"],
-			"NAME" => $results[0]["NAME"],
-			"URL" => $results[0]["URL"],
-			"DESCRIPTION" => $results[0]["DESCRIPTION"],
-			"TOS" => json_decode($results[0]["TOS"]),
-			"IMG" => $results[0]["IMG"],
-			"COLOR" => bin2hex($results[0]["COLOR"])
+	public static function getPrefetchColumns() : array {
+		return [
+			"USER_ID",
+			"TOKEN",
+			"NAME",
+			"URL",
+			"DESCRIPTION",
+			"TOS",
+			"IMG",
+			"COLOR",
 		];
-
-		$this->id = $id;
-	}
-
-	/**
-	 * Get the object's unique ID
-	 * 
-	 * @return int
-	 */
-	public function getId() : int {
-		return $this->id;
 	}
 
 	/**
@@ -106,80 +80,16 @@ class Artist extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get the page's user id
-	 * 
-	 * @return int
-	 */
-	public function getUserId() : int {
-		if (array_key_exists("USER_ID", $this->cache)) {
-			return $this->cache["USER_ID"];
-		}
-		
-		return $this->cache["USER_ID"] = $this->getColumnFromDatabase("USER_ID");
-	}
-
-	/**
-	 * Get the artist's token
-	 * 
-	 * @return string
-	 */
-	public function getToken() : string {
-		if (array_key_exists("TOKEN", $this->cache)) {
-			return $this->cache["TOKEN"];
-		}
-		
-		return $this->cache["TOKEN"] = $this->getColumnFromDatabase("TOKEN");
-	}
-
-	/**
-	 * Get the artist's name
-	 * 
-	 * @return string
-	 */
-	public function getName() : string {
-		if (array_key_exists("NAME", $this->cache)) {
-			return $this->cache["NAME"];
-		}
-
-		return $this->cache["NAME"] = $this->getColumnFromDatabase("NAME");
-	}
-
-	/**
-	 * Get the artist's description
-	 * 
-	 * @return string
-	 */
-	public function getDescription() : string {
-		if (array_key_exists("DESCRIPTION", $this->cache)) {
-			return $this->cache["DESCRIPTION"];
-		}
-
-		return $this->cache["DESCRIPTION"] = $this->getColumnFromDatabase("DESCRIPTION");
-	}
-
-	/**
 	 * Get the artist's current Terms of Service
 	 * 
 	 * @return string
 	 */
 	public function getCurrentTos() : string {
-		if (array_key_exists("TOS", $this->cache)) {
-			$str = '';
-
-			$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
-			$str .= "\n";
-			$str .= $this->cache["TOS"][0][1];
-
-			return $str;
-		}
-
-		$this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
-
 		$str = '';
 		
-		$str .= "*Effective as of ".$this->cache["TOS"][0][0]."*";
+		$str .= "*Effective as of ".$this->getAllTos()[0][0]."*";
 		$str .= "\n";
-		$str .= $this->cache["TOS"][0][1];
+		$str .= $this->getAllTos()[0][1];
 
 		return $str;
 	}
@@ -190,65 +100,7 @@ class Artist extends AbstractDatabaseModel {
 	 * @return string
 	 */
 	public function getCurrentTosWithoutDate() : string {
-		if (array_key_exists("TOS", $this->cache)) {
-			return $this->cache["TOS"][0][1];
-		}
-
-		$this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
-
-		return $this->cache["TOS"][0][1];
-	}
-
-	/**
-	 * Get the artist's Terms of ServiceS
-	 * 
-	 * @return string[][]
-	 */
-	public function getAllTos() : array {
-		if (array_key_exists("TOS", $this->cache)) {
-			return $this->cache["TOS"];
-		}
-
-		return $this->cache["TOS"] = json_decode($this->getColumnFromDatabase("TOS"));
-	}
-
-	/**
-	 * Get the page's URL
-	 * 
-	 * @return string
-	 */
-	public function getUrl() : string {
-		if (array_key_exists("URL", $this->cache)) {
-			return $this->cache["URL"];
-		}
-
-		return $this->cache["URL"] = $this->getColumnFromDatabase("URL");
-	}
-
-	/**
-	 * Get the path to the artist's image, WITHOUT token
-	 * 
-	 * @return null|string
-	 */
-	public function getImagePath() : ?string {
-		if (array_key_exists("IMG", $this->cache)) {
-			return $this->cache["IMG"];
-		}
-
-		return $this->cache["IMG"] = $this->getColumnFromDatabase("IMG");
-	}
-
-	/**
-	 * Color of the artist page
-	 * 
-	 * @return string
-	 */
-	public function getColor() : string {
-		if (array_key_exists("COLOR", $this->cache)) {
-			return $this->cache["COLOR"];
-		}
-
-		return $this->cache["COLOR"] = bin2hex($this->getColumnFromDatabase("COLOR"));
+		return $this->getAllTos()[0][1];
 	}
 
 	/**
@@ -331,5 +183,76 @@ class Artist extends AbstractDatabaseModel {
 	 */
 	public function getFriendlyName() : string {
 		return $this->getName();
+	}
+
+	/**
+	 * @return array values to fill upon deletion
+	 */
+	public static function getDeletedValues() : array {
+		return [
+			"NAME" => "Deleted artist page",
+			"URL" => Tokens::generateDeletedArtistUrl(),
+			"DESCRIPTION" => "Deleted artist page",
+			"TOS" => json_encode([date("l, F jS, Y"), "Page deleted."]),
+			"IMG" => null,
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"DELETED" => true,
+		];
+	}
+
+	/**
+	 * Also sets ARTIST_PAGE_ID on User = null
+	 */
+	public function additionalDeletion() : void {
+		$user = new User($this->getUserId());
+		$user->setArtistPageId(null);
+	}
+
+	/**
+	 * Create an artist page
+	 *
+	 * @param array $values
+	 * @return self
+	 */
+	public static function create(array $values) : self {
+		// per array_merge docs:
+		// If the input arrays have the same string keys, then the latter value
+		//  for that key will overwrite the previous one
+		$values = array_merge([
+			"TOKEN" => Tokens::generateArtistToken(),
+			"IMG" => null,
+			"COLOR" => hex2bin(Values::DEFAULT_COLOR),
+			"DELETED" => false,
+		], $values);
+
+		$stmt = new InsertQuery();
+
+		$stmt->setTable(self::getTable());
+
+		foreach (["USER_ID", "TOKEN", "NAME", "URL", "DESCRIPTION", "TOS", "IMG", "COLOR", "DELETED"] as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+			$stmt->addValue($values[$column]);
+		}
+
+		$stmt->execute();
+
+		return new self($stmt->getResult(), $values);;
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getModifiableProperties() : array {
+		return [
+			"UserId" => ["USER_ID", null, null],
+			"Token" => ["TOKEN", null, null],
+			"Name" => ["NAME", null, null],
+			"Url" => ["URL", null, null],
+			"Description" => ["DESCRIPTION", null, null],
+			"AllTos" => ["TOS", "json_decode", "json_encode"],
+			"ImagePath" => ["IMG", null, null],
+			"Color" => ["COLOR", "bin2hex", "hex2bin"],
+			"Deleted" => ["DELETED", "boolval", null],
+		];
 	}
 }
