@@ -292,8 +292,8 @@ trait EditCommissionTypeFormTrait {
 				foreach ($modifierGroup->getModifiers() as $modifier) {
 					$group["items"][] = [
 						"modifier-psuedo-field" => $modifier->getName(),
-						"base-cost-psuedo-field" => $modifier->getPrice(),
-						"base-cost-usd-psuedo-field" => $modifier->getUsdEquivalent(),
+						"base-cost-psuedo-field" => $modifier->getBaseCost(),
+						"base-cost-usd-psuedo-field" => $modifier->getBaseUsdCost(),
 					];
 				}
 

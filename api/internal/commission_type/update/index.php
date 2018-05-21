@@ -169,8 +169,8 @@ foreach ($commissionType->getModifiers() as $group) {
 		}
 		$key = serialize([
 			$mod->getName(),
-			$mod->getPrice(),
-			$mod->getUsdEquivalent(),
+			$mod->getBaseCost(),
+			$mod->getUsdBaseCost(),
 			$mod->getGroup()->getId(),
 			$mod->getGroup()->isAllowingMultiple(),
 		]);
