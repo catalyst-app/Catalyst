@@ -121,8 +121,36 @@ class Artist extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * Get an ID from a User ID, -1 if none
+	 *
+	 * Used for undeletion
+	 * @param int $userId
+	 * @return int
+	 */
+	public static function getIdFromUserId(int $userId) : int {
+		$stmt = new SelectQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$stmt->addColumn(new Column("ID", self::getTable()));
+
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("USER_ID", self::getTable()), '=', $userId]);
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
+
+		if (count($stmt->getResult()) == 0) {
+			return -1;
+		}
+
+		return $stmt->getResult()[0]["ID"];
+	}
+
+	/**
 	 * Get an ID from the URL, -1 if none
-	 * 
+	 *
+	 * @param string $url
 	 * @return int
 	 */
 	public static function getIdFromUrl(string $url) : int {
@@ -206,6 +234,10 @@ class Artist extends AbstractDatabaseModel {
 	public function additionalDeletion() : void {
 		$user = new User($this->getUserId());
 		$user->setArtistPageId(null);
+
+		foreach (CommissionType::getForArtist($this) as $commissionType) {
+			$commissionType->delete();
+		}
 	}
 
 	/**
