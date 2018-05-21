@@ -2,6 +2,7 @@
 
 namespace Catalyst\Artist;
 
+use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
 use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
@@ -77,6 +78,23 @@ class Artist extends AbstractDatabaseModel {
 	 */
 	public function initializeImage() : void {
 		$this->setImage(new Image(self::getImageFolder(), $this->getToken(), $this->getImagePath()));
+	}
+
+	/**
+	 * Update the Artist's Terms of Service to a new one
+	 * 
+	 * @param string $newTos
+	 */
+	public function addTos(string $newTos) : void {
+		if ($newTos == $this->getCurrentTosWithoutDate()) {
+			return;
+		}
+
+		$tos = $this->getAllTos();
+
+		array_unshift($tos, [date("l, F jS, Y"), $newTos]);
+
+		$this->setAllTos(array_values($tos));
 	}
 
 	/**
