@@ -445,4 +445,19 @@ abstract class AbstractDatabaseModel implements Serializable {
 			}
 		}
 	}
+
+	/**
+	 * Gets a serialized string from an array of modifiable properties
+	 *
+	 * Intended to be used in order to compare
+	 */
+	public function getSerializedStringFromModifiableProperties(array $properties) : string {
+		$values = [];
+
+		foreach ($properties as $property) {
+			$values[$property] = call_user_func([$this, "get".$property]);
+		}
+
+		return serialize($values);
+	}
 }
