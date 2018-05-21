@@ -43,11 +43,15 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * @param int $id
 	 * @param array $cache Prefilled cache
+	 * @param bool $prefetch If to prefetch data from DB
 	 */
-	public function __construct(int $id, array $cache=[]) {
-		$row = self::getInitialData($id);
-		if ($row === false) {
-			throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
+	public function __construct(int $id, array $cache=[], bool $prefetch=true) {
+		$row = [];
+		if ($prefetch) {
+			$row = self::getInitialData($id);
+			if ($row === false) {
+				throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
+			}
 		}
 		$this->id = $id;
 		if (!array_key_exists(static::class, self::$cache)) {
@@ -56,7 +60,11 @@ abstract class AbstractDatabaseModel implements Serializable {
 		if (!array_key_exists($this->id, self::$cache[static::class])) {
 			self::$cache[static::class][$this->id] = $row;
 		}
-		self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $row, $cache); // latter overwrites previous
+		if ($prefetch) {
+			self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $row, $cache); // latter overwrites previous
+		} else {
+			self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $cache);
+		}
 	}
 
 	/**
