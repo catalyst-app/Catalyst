@@ -235,7 +235,12 @@ class Artist extends AbstractDatabaseModel {
 
 		$stmt->execute();
 
-		return new self($stmt->getResult(), $values);;
+		$artist = new self($stmt->getResult(), $values);
+
+		$user = new User($artist->getUserId());
+		$user->setArtistPageId($artist->getId());
+
+		return $artist;
 	}
 
 	/**
