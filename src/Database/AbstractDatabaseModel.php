@@ -416,16 +416,12 @@ abstract class AbstractDatabaseModel implements Serializable {
 				}
 				return $this->getColumnFromDatabaseOrCache($methodDefinition[0]);
 			} else {
-				if ($type == "is") {
-					if ($methodDefinition[1] instanceof Closure) {
-						$methodDefinition[1]->bindTo($this, $this);
+				return $this->getDataFromCallableOrCache("_custom_hander_".$methodDefinition[0], function() use ($type, $methodDefinition) {
+					if ($type == "is") {
+						return (bool)call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
 					}
-					return (bool)call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
-				}
-				if ($methodDefinition[1] instanceof Closure) {
-					$methodDefinition[1]->bindTo($this, $this);
-				}
-				return call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
+					return call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
+				});
 			}
 		} else {
 			if (is_null($methodDefinition[2])) {
