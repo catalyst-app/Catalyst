@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 18, 2018 at 12:05 AM
+-- Generation Time: May 21, 2018 at 06:29 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -701,6 +701,7 @@ CREATE TABLE `commission_type_modifiers` (
   `USDEQ` decimal(8,2) UNSIGNED NOT NULL,
   `GROUP` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `MULTIPLE` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `SORT` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1091,7 +1092,8 @@ ALTER TABLE `commission_type_modifiers`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `COMMISSION_TYPE_ID` (`COMMISSION_TYPE_ID`),
   ADD KEY `USDEQ` (`USDEQ`),
-  ADD KEY `DELETED` (`DELETED`);
+  ADD KEY `DELETED` (`DELETED`),
+  ADD KEY `SORT` (`SORT`);
 
 --
 -- Indexes for table `commission_type_payment_options`
