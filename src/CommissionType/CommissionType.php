@@ -208,9 +208,9 @@ class CommissionType extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Returns an array of CommissionTypeModifierGroup
+	 * Returns an array of CommissionTypeModifier
 	 * 
-	 * @return CommissionTypeModifierGroup[]
+	 * @return CommissionTypeModifier[]
 	 */
 	public function getModifiers() : array {
 		return $this->getDataFromCallableOrCache("MODIFIER_OBJS", function() : array {
@@ -233,22 +233,19 @@ class CommissionType extends AbstractDatabaseModel {
 
 			$stmt->execute();
 
-			// will be keyed by groups
 			$modifiers = [];
 
 			foreach ($stmt->getResult() as $modifier) {
-				if (!array_key_exists($modifier["GROUP"], $modifiers)) {
-					$modifiers[$modifier["GROUP"]] = new CommissionTypeModifierGroup($modifier["GROUP"], $modifier["MULTIPLE"]);
-				}
-
 				$modifierObject = new CommissionTypeModifier($modifier["ID"], [
 					"NAME" => $modifier["NAME"],
 					"PRICE" => $modifier["PRICE"],
 					"USDEQ" => (float)$modifier["USDEQ"],
 					"GROUP" => $modifier["GROUP"],
+					"MULTIPLE" => $modifier["MULTIPLE"],
+					"SORT" => $modifier["SORT"],
 					"DELETED" => 0,
 				], false); // do not prefetch as we know it all already and to reduce load
-				$modifiers[$modifier["GROUP"]]->addModifier($modifierObject);
+				$modifiers[]->addModifier($modifierObject);
 			}
 
 			return array_values($modifiers);

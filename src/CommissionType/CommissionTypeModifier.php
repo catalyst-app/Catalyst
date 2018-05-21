@@ -35,6 +35,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"PRICE",
 			"USDEQ",
 			"GROUP",
+			"MULTIPLE",
 			"DELETED",
 		];
 	}
@@ -59,22 +60,6 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"NAME" => "[Deleted] ".substr($this->getName(), 0, 54),
 			"DELETED" => true,
 		];
-	}
-
-	/**
-	 * @return CommissionTypeModifierGroup
-	 */
-	public function getGroup() : CommissionTypeModifierGroup {
-		return $this->getDataFromCallableOrCache("GROUP_OBJ", function() : CommissionTypeModifierGroup {
-			return new CommissionTypeModifierGroup($this->getColumnFromDatabaseOrCache("GROUP"));
-		});
-	}
-
-	/**
-	 * @param CommissionTypeModifierGroup $group
-	 */
-	public function setGroup(CommissionTypeModifierGroup $group) : void {
-		$this->updateColumnInDatabase("GROUP", $group->getId());
 	}
 
 	/**
@@ -111,6 +96,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"BaseCost" => ["PRICE", null, null],
 			"BaseUsdCost" => ["USDEQ", null, null],
 			"GroupId" => ["GROUP", null, null],
+			"Multiple" => ["MULPILE", "boolval", null],
 			"Deleted" => ["DELETED", "boolval", null],
 		];
 	}
