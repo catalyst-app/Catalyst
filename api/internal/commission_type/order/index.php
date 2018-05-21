@@ -36,27 +36,18 @@ foreach ($order as $item) {
 	}
 }
 
-Database::getDbh()->beginTransaction();
-
 $i = 0;
 foreach ($order as $token) {
-	$stmt = new UpdateQuery();
-	$stmt->setTable(Tables::COMMISSION_TYPES);
+	$commissionTypeId = CommissionType::getIdFromToken($token);
 
-	$stmt->addColumn(new Column("SORT", Tables::COMMISSION_TYPES));
-	$stmt->addValue($i);
+	// token doesn't exist
+	if ($commissionTypeId == -1) {
+		HTTPCode::set(400);
+		Response::sendErrorResponse(99999, ErrorCodes::ERR_99999);
+	}
 
-	$whereClause = new WhereClause();
-	$whereClause->addToClause([new Column("TOKEN", Tables::COMMISSION_TYPES), "=", $token]);
-	$whereClause->addToClause(WhereClause::AND);
-	$whereClause->addToClause([new Column("ARTIST_PAGE_ID", Tables::COMMISSION_TYPES), "=", $_SESSION["user"]->getArtistPageId()]);
-	$stmt->addAdditionalCapability($whereClause);
-
-	$stmt->execute();
-
-	$i++;
+	$commissionType = new CommissionType($commissionTypeId);
+	$commissionType->setSort($i++);
 }
-
-Database::getDbh()->commit();
 
 Response::sendSuccessResponse("Success");

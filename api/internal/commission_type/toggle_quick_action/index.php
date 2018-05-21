@@ -56,17 +56,6 @@ if (!array_key_exists("value", $_POST)) {
 	Response::sendErrorResponse(91605, ErrorCodes::ERR_91605);
 }
 
-$stmt = new UpdateQuery();
-
-$stmt->setTable(Tables::COMMISSION_TYPES);
-
-$stmt->addColumn(new Column(CommissionType::QUICK_TOGGLE_BUTTONS[$i][2], Tables::COMMISSION_TYPES));
-$stmt->addValue($_POST["value"] == "true");
-
-$whereClause = new WhereClause();
-
-$whereClause->addToClause([new Column("ID", Tables::COMMISSION_TYPES), '=', $commissionTypeId]);
-
-$stmt->execute();
+call_user_func([$commissionType, CommissionType::QUICK_TOGGLE_BUTTONS[$actionIndex][2]], $_POST["value"] == true);
 
 Response::sendSuccessResponse("Success");
