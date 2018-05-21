@@ -644,8 +644,6 @@ class User extends AbstractDatabaseModel {
 		foreach(Character::getCharactersFromUser($this) as $character) {
 			$character->delete();
 		}
-
-		$this->deleteSocialChipsFromDatabase();
 	}
 
 	/**
