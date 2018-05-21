@@ -345,6 +345,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		$stmt->execute();
 
+		if (method_exists($this, "deleteSocialChipsFromDatabase")) {
+			$this->deleteSocialChipsFromDatabase();
+		}
+
 		if (method_exists($this, "getImage")) {
 			$this->getImage()->delete();
 		}
