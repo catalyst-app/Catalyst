@@ -282,24 +282,33 @@ trait EditCommissionTypeFormTrait {
 		});
 		if (!is_null($commissionType)) {
 			$modifiers = [];
-			foreach ($commissionType->getModifiers() as $modifierGroup) {
-				$group = [
-					"right" => [],
-					"items" => [],
-				];
-				$group["right"]["default-empty"] = $modifierGroup->isAllowingMultiple() ? ' checked="checked"' : '';
-
-				foreach ($modifierGroup->getModifiers() as $modifier) {
-					$group["items"][] = [
-						"modifier-psuedo-field" => $modifier->getName(),
-						"base-cost-psuedo-field" => $modifier->getBaseCost(),
-						"base-cost-usd-psuedo-field" => $modifier->getBaseUsdCost(),
+			foreach ($commissionType->getModifiers() as $modifier) {
+				if (!array_key_exists($modifier->getGroupId(), $modifiers)) {
+					$modifiers[$modifier->getGroupId()] = [
+						"right" => [
+							"default-empty" => $modifier->isAllowingMultiple() ? ' checked="checked"' : '',
+						],
+						"items" => [],
 					];
 				}
-
-				$modifiers[] = $group;
+				$modifiers[$modifier->getGroupId()]["items"][] = [
+					"modifier-psuedo-field" => $modifier->getName(),
+					"base-cost-psuedo-field" => $modifier->getBaseCost(),
+					"base-cost-usd-psuedo-field" => $modifier->getBaseUsdCost(),
+					"sort" => $modifier->getSort(),
+				];
 			}
-			$modifiersField->setPrefilledValue($modifiers);
+
+			foreach ($modifiers as &$group) {
+				uksort($group["items"], function($a, $b) : int {
+					return $a["sort"] <=> $b["sort"];
+				});
+				$group["items"] = array_values($group["items"]);
+			}
+			unset($group);
+			// put groups in order
+			ksort($modifiers);
+			$modifiersField->setPrefilledValue(array_values($modifiers));
 		}
 
 		$modifierEntryWrapper = new WrappedField();
