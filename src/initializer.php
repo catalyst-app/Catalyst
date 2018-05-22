@@ -32,7 +32,6 @@ set_exception_handler("\\Catalyst\\Controller::handleException");
 
 // LEGACY
 require_once __DIR__."/Secrets.php";
-require_once __DIR__."/Database/Connector.inc.php";
 
 require_once __DIR__."/vendor/autoload.php";
 
