@@ -5,6 +5,7 @@ namespace Catalyst\API;
 use \Catalyst\{Controller, HTTPCode};
 use \Catalyst\Database\Database;
 use \Catalyst\Database\Query\AbstractQuery;
+use \Catalyst\Page\UniversalFunctions;
 
 /**
  * Contains various utilities to standardize JSON responses
@@ -31,6 +32,7 @@ class Response {
 				"_time" => microtime(true)-EXEC_START_TIME,
 				"_queries" => AbstractQuery::getTotalQueries(),
 				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+				"_memory" => UniversalFunctions::humanize(memory_get_peak_usage()),
 			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (Endpoint::isEndpoint() && !Endpoint::isInternalEndpoint()) {
@@ -66,6 +68,7 @@ class Response {
 				"_time" => microtime(true)-EXEC_START_TIME,
 				"_queries" => AbstractQuery::getTotalQueries(),
 				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+				"_memory" => UniversalFunctions::humanize(memory_get_peak_usage()),
 			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
 		if (strpos($_SERVER["SCRIPT_NAME"], "/api/internal/") === false) {

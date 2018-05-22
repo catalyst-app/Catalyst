@@ -12,6 +12,7 @@ use \Catalyst\{Controller, Secrets};
 use \Catalyst\Database\Database;
 use \Catalyst\Database\Query\AbstractQuery;
 use \Catalyst\Form\FormRepository;
+use \Catalyst\Page\UniversalFunctions;
 
 $forms = FormRepository::getAllForms();
 
@@ -239,5 +240,6 @@ console.log("''Main JS generation debug: '''''''''''''''''''''''''''''''''''''''
 console.log("''''''Overall: <?= $overallTime ?>s <?= str_repeat("'", 83-strlen($overallTime)) ?>");
 console.log("''''''Database queries: <?= AbstractQuery::getTotalQueries() ?> <?= str_repeat("'", 75-strlen(AbstractQuery::getTotalQueries())) ?>");
 console.log("''''''Database queries time usage: <?= $dbDuration ?>s <?= str_repeat("'", 63-strlen($dbDuration)) ?>");
+console.log("''''''Memory: <?= UniversalFunctions::humanize(memory_get_peak_usage()) ?>s <?= str_repeat("'", 84-strlen(UniversalFunctions::humanize(memory_get_peak_usage()))) ?>");
 console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 <?php endif; ?>

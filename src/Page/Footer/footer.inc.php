@@ -23,7 +23,7 @@ $stmt = Database::getDbh()->query("show profiles");
 $rows = $stmt->fetchAll();
 ?>
 					<p>
-						<strong>Debug information:</strong> Page generated in <?= microtime(true)-EXEC_START_TIME ?>s, requiring <?= AbstractQuery::getTotalQueries() ?> database queries (which took <?= array_sum(array_column($rows, "Duration")) ?>s).
+						<strong>Debug information:</strong> Page generated in <?= microtime(true)-EXEC_START_TIME ?>s, requiring <?= AbstractQuery::getTotalQueries() ?> database queries (which took <?= array_sum(array_column($rows, "Duration")) ?>s) and <?= UniversalFunctions::humanize(memory_get_peak_usage()) ?> of memory.
 					</p>
 				<?php endif; ?>
 				<p>
