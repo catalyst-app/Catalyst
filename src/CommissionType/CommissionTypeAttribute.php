@@ -212,4 +212,13 @@ class CommissionTypeAttribute {
 			return $key->getSetKey();
 		}, $in));
 	}
+
+	/**
+	 * Get a string representation of the object (just the set key)
+	 *
+	 * @return string
+	 */
+	public function __toString() : string {
+		return $this->getSetKey();
+	}
 }
