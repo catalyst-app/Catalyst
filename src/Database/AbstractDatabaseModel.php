@@ -351,6 +351,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 			$stmt->addValue($value);
 		}
 
+		$whereClause = new WhereClause();
+		$whereClause->addToClause([new Column("ID", static::getTable()), '=', $this->getId()]);
+		$stmt->addAdditionalCapability($whereClause);
+
 		$stmt->execute();
 
 		if (method_exists($this, "deleteSocialChipsFromDatabase")) {
