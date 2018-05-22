@@ -67,20 +67,24 @@ if (array_key_exists("modifiers", $_POST) && count($_POST["modifiers"])) {
 
 $paymentOptions = [];
 if (array_key_exists("payments", $_POST) && count($_POST["payments"])) {
+	$i=0;
 	foreach ($_POST["payments"] as $paymentOption) {
 		$paymentOptions[] = [
 			"TYPE" => $paymentOption["type-psuedo-field"],
 			"ADDRESS" => $paymentOption["address-psuedo-field"],
 			"INSTRUCTIONS" => $paymentOption["instructions-psuedo-field"],
+			"SORT" => $i++,
 		];
 	}
 }
 
 $stages = [];
 if (array_key_exists("stages", $_POST) && count($_POST["stages"])) {
+	$i=0;
 	foreach ($_POST["stages"] as $stage) {
 		$stages[] = [
 			"STAGE" => $stage["stage-psuedo-field"],
+			"SORT" => $i++,
 		];
 	}
 }
