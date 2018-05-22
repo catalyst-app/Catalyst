@@ -14,6 +14,7 @@ use \Catalyst\Character\{
 	EditCharacterFormTrait,
 	NewCharacterFormTrait};
 use \Catalyst\CommissionType\{
+	DeleteCommissionTypeFormTrait,
 	EditCommissionTypeFormTrait,
 	NewCommissionTypeFormTrait};
 use \Catalyst\Form\Form;
@@ -76,6 +77,7 @@ class FormRepository {
 
 	use NewCommissionTypeFormTrait;
 	use EditCommissionTypeFormTrait;
+	use DeleteCommissionTypeFormTrait;
 
 	/**
 	 * Get all Forms functions defined in the repository
