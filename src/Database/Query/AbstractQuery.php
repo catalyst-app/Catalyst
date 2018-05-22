@@ -212,17 +212,12 @@ abstract class AbstractQuery {
 	 * @return bool If it was valid
 	 * @throws InvalidArgumentException on error
 	 */
-	public function verifyIntegrity() : bool {
+	protected function verifyIntegrity() : bool {
 		if (empty($this->table) || !is_string($this->table)) {
 			throw new InvalidArgumentException("Invalid table for Query");
 		}
 		if (!is_array($this->columns)) {
 			throw new InvalidArgumentException("Query columns is not an array");
-		}
-		foreach ($this->columns as $column) {
-			if (!$column instanceof Column) {
-				throw new InvalidArgumentException("Column is not a valid [table,column] array");
-			}
 		}
 		if (!is_array($this->additionalCapabilities)) {
 			throw new InvalidArgumentException("Additional capabilities is not a valid type");
