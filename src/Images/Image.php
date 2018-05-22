@@ -412,7 +412,8 @@ class Image {
 	 */
 	public function delete() : void {
 		if (!is_null($this->getPath()) && file_exists($this->getFilesystemPath())) {
-			if (!in_array($this->getFolder(), Folders::PROTECTED_FOLDERS)) {
+			if ($this->getFilesystemPath() != REAL_ROOTDIR.$this->getFolder()."/"."default.png" && // no image
+				$this->getFilesystemPath() != $this->getNotFoundFilesystemPath()) { // image not found
 				unlink($this->getFilesystemPath());
 			}
 		}
