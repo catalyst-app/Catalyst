@@ -30,6 +30,8 @@ use \InvalidArgumentException;
  * @method void setBaseUsdCost(float $baseUsdCost)
  * @method CommissionTypeAttribute[] getAttributes()
  * @method void setAttributes(CommissionTypeAttribute[] $attrs)
+ * @method string getAttributeString()
+ * @method void setAttributeString(string $attrs)
  * @method bool isAcceptingQuotes()
  * @method void setAcceptingQuotes(bool $acceptingQuotes)
  * @method bool isAcceptingRequests()
@@ -460,6 +462,7 @@ class CommissionType extends AbstractDatabaseModel {
 			"BaseCost" => ["BASE_COST", null, null],
 			"BaseUsdCost" => ["BASE_USD_COST", null, null],
 			"Attributes" => ["ATTRS", [CommissionTypeAttribute::class, "getObjectsFromString"], [CommissionTypeAttribute::class, "getStringFromObjects"]],
+			"AttributeString" => ["ATTRS", null, null],
 			"AcceptingQuotes" => ["ACCEPTING_QUOTES", "boolval", null],
 			"AcceptingRequests" => ["ACCEPTING_REQUESTS", "boolval", null],
 			"AcceptingTrades" => ["ACCEPTING_TRADES", "boolval", null],
