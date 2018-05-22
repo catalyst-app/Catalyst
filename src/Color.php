@@ -300,7 +300,7 @@ class Color {
 			'accent-2'=>'18ffff',
 			'accent-3'=>'00e5ff',
 			'accent-4'=>'00b8d4',
-			'tree'=>'40e0d0'
+			'tree'=>'40e0d0' // see above
 		],
 		'teal'=>[
 			'lighten-2'=>'4db6ac',
@@ -535,7 +535,7 @@ class Color {
 			'18ffff',
 			'00e5ff',
 			'00b8d4',
-			'40e0d0'
+			'40e0d0' // see above
 		],
 		'009688' => [
 			'4db6ac',
