@@ -19,6 +19,8 @@ use \Catalyst\Database\Query\InsertQuery;
  * @method void setBaseUsdCost(float $baseUsdCost)
  * @method string getBaseCost()
  * @method void setBaseCost(string $baseCost)
+ * @method bool isAllowingMultiple()
+ * @method void setAllowingMultiple(bool $allowingMultiple)
  * @method int getSort()
  * @method void setSort(int $sort)
  * @method int getGroupId()
@@ -99,7 +101,7 @@ class CommissionTypeModifier extends AbstractDatabaseModel {
 			"BaseCost" => ["PRICE", null, null],
 			"BaseUsdCost" => ["USDEQ", null, null],
 			"GroupId" => ["GROUP", null, null],
-			"Multiple" => ["MULPILE", "boolval", null],
+			"AllowingMultiple" => ["MULTIPLE", "boolval", null],
 			"Sort" => ["SORT", null, null],
 			"Deleted" => ["DELETED", "boolval", null],
 		];
