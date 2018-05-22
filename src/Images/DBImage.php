@@ -333,7 +333,7 @@ class DBImage extends Image {
 			$stmt->setTable($table);
 
 			$whereClause = new WhereClause();
-			$whereClause->addToClause([new Column("ID", $table), 'IN', $ids]);
+			$whereClause->addToClause([new Column("ID", $table), 'IN', array_unique($ids)]);
 			$stmt->addAdditionalCapability($whereClause);
 
 			$stmt->execute();
