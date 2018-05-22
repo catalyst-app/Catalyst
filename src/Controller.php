@@ -112,7 +112,7 @@ class Controller {
 		ob_start();
 		$destinations = [];
 		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
-			$destinations = ["discord","email","telegram"];
+			$destinations = ["email","telegram"];
 		} else {
 			$destinations = ["discord","email","telegram"];
 		}
@@ -471,15 +471,6 @@ class Controller {
 		}
 		if (!defined("\\Catalyst\\Secrets::TELEGRAM_CHAT")) {
 			throw new LogicException("Secrets::TELEGRAM_CHAT is not defined");
-		}
-		if (!defined("\\Catalyst\\Secrets::TWITTER_CONSUMER_KEY")) {
-			throw new LogicException("Secrets::TWITTER_CONSUMER_KEY is not defined");
-		}
-		if (!defined("\\Catalyst\\Secrets::TWITTER_CONSUMER_SECRET")) {
-			throw new LogicException("Secrets::TWITTER_CONSUMER_SECRET is not defined");
-		}
-		if (!defined("\\Catalyst\\Secrets::TWITTER_CALLBACK")) {
-			throw new LogicException("Secrets::TWITTER_CALLBACK is not defined");
 		}
 		if (!defined("\\Catalyst\\Secrets::RSA_PRIVATE")) {
 			throw new LogicException("Secrets::RSA_PRIVATE is not defined");
