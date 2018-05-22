@@ -11,7 +11,7 @@
 	"build_systems": [
 		{
 			"name": "Catalyst",
-			"shell_cmd": "echo 'No selected command'",
+			"shell_cmd": "echo No selected command",
 			"working_dir": "$folder",
 			"variants": [
 				{
