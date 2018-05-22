@@ -5,7 +5,7 @@ namespace Catalyst\CommissionType;
 use \Catalyst\Artist\Artist;
 use \Catalyst\Database\{AbstractDatabaseModel, Column, DatabaseModelTrait, Tables};
 use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
-use \Catalyst\Database\QueryAddition\{JoinClause, OrderByClause, WhereClause};
+use \Catalyst\Database\QueryAddition\{JoinClause, MultipleOrderByClause, OrderByClause, WhereClause};
 use \Catalyst\Images\{DBImage, Folders, HasDBImageSetTrait, HasImageTrait, Image};
 use \Catalyst\Tokens;
 use \InvalidArgumentException;
@@ -232,12 +232,26 @@ class CommissionType extends AbstractDatabaseModel {
 			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_MODIFIERS), '=', 0]);
 			$stmt->addAdditionalCapability($whereClause);
 
+			$orderByClause = new MultipleOrderByClause();
+
+			$groupOrderByClause = new OrderByClause();
+			$groupOrderByClause->setColumn(new Column("GROUP", Tables::COMMISSION_TYPE_MODIFIERS));
+			$groupOrderByClause->setOrder("ASC");
+			$orderByClause->addClause($groupOrderByClause);
+
+			$sortOrderByClause = new OrderByClause();
+			$sortOrderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_MODIFIERS));
+			$sortOrderByClause->setOrder("ASC");
+			$orderByClause->addClause($sortOrderByClause);
+
+			$stmt->addAdditionalCapability($orderByClause);
+
 			$stmt->execute();
 
 			$modifiers = [];
 
 			foreach ($stmt->getResult() as $modifier) {
-				$modifierObject = new CommissionTypeModifier($modifier["ID"], [
+				$modifier = new CommissionTypeModifier($modifier["ID"], [
 					"NAME" => $modifier["NAME"],
 					"PRICE" => $modifier["PRICE"],
 					"USDEQ" => (float)$modifier["USDEQ"],
@@ -246,7 +260,7 @@ class CommissionType extends AbstractDatabaseModel {
 					"SORT" => $modifier["SORT"],
 					"DELETED" => 0,
 				], false); // do not prefetch as we know it all already and to reduce load
-				$modifiers[]->addModifier($modifierObject);
+				$modifiers[] = $modifier;
 			}
 
 			return array_values($modifiers);
@@ -273,6 +287,11 @@ class CommissionType extends AbstractDatabaseModel {
 			$whereClause->addToClause(WhereClause::AND);
 			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS), '=', 0]);
 			$stmt->addAdditionalCapability($whereClause);
+
+			$orderByClause = new OrderByClause();
+			$orderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_PAYMENT_OPTIONS));
+			$orderByClause->setOrder("ASC");
+			$stmt->addAdditionalCapability($orderByClause);
 
 			$stmt->execute();
 
@@ -312,6 +331,11 @@ class CommissionType extends AbstractDatabaseModel {
 			$whereClause->addToClause([new Column("DELETED", Tables::COMMISSION_TYPE_STAGES), '=', 0]);
 			$stmt->addAdditionalCapability($whereClause);
 
+			$orderByClause = new OrderByClause();
+			$orderByClause->setColumn(new Column("SORT", Tables::COMMISSION_TYPE_STAGES));
+			$orderByClause->setOrder("ASC");
+			$stmt->addAdditionalCapability($orderByClause);
+
 			$stmt->execute();
 
 			$stages = [];
@@ -342,6 +366,8 @@ class CommissionType extends AbstractDatabaseModel {
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("ARTIST_PAGE_ID", self::getTable()), '=', $artist->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$orderByClause = new OrderByClause();
