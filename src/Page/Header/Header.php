@@ -20,8 +20,8 @@ class Header {
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js", 'crossorigin="anonymous"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", 'crossorigin="anonymous"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", 'crossorigin="anonymous"'],
 		
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", 'crossorigin="anonymous"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", 'crossorigin="anonymous"'],
