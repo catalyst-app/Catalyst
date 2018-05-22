@@ -4,13 +4,30 @@ namespace Catalyst\Database\Query;
 
 use \Catalyst\API\{Endpoint, Response};
 use \Catalyst\Database\Database;
-use \Catalyst\Database\QueryAddition\JoinClause;
+use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
 use \Catalyst\HTTPCode;
+use \InvalidArgumentException;
 
 /**
  * Represents a MySQL UPDATE query
  */
 class UpdateQuery extends AbstractQuery {
+	/**
+	 * Adds additional check for a WHERE clause as this is a destructive query
+	 * (And i've made this mistake one too many times ffs)
+	 */
+	protected function verifyIntegrity() : bool {
+		parent::verifyIntegrity();
+
+		foreach ($this->additionalCapabilities as $additionalCapability) {
+			if ($additionalCapability instanceof WhereClause) {
+				return true;
+			}
+		}
+
+		throw new InvalidArgumentException("No WhereClause given to limit UpdateQuery, which could be potentially disastrous.  Refusing to permit query execution.");
+	}
+
 	/**
 	 * Executes the query
 	 * 
