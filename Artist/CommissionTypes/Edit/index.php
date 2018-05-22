@@ -64,6 +64,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 <?php else: ?>
 			<input type="hidden" id="commission-type-token" value="<?= htmlspecialchars($commissionType->getToken()) ?>">
 			<?= FormRepository::getEditCommissionTypeForm($commissionType)->getHtml(); ?>
+			<?= FormRepository::getDeleteCommissionTypeForm()->getHtml(); ?>
 <?php
 endif;
 
