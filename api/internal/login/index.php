@@ -26,19 +26,21 @@ if ($id == -1) {
 
 $user = new User($id);
 
+// deactivation nukes password
+if ($user->isDeactivated()) {
+	HTTPCode::set(400);
+	Response::sendErrorResponse(90109, ErrorCodes::ERR_90109);
+}
+
 if (!$user->verifyPassword($_POST["password"])) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90105, ErrorCodes::ERR_90105);
 }
 
-// suspension/deactivation is serious, and should be displayed only when password is correct
+// suspension is serious, and should be displayed only when password is correct
 if ($user->isSuspended()) {
 	HTTPCode::set(400);
 	Response::sendErrorResponse(90108, ErrorCodes::ERR_90108);
-}
-if ($user->isSuspended()) {
-	HTTPCode::set(400);
-	Response::sendErrorResponse(90109, ErrorCodes::ERR_90109);
 }
 
 if ($user->isTotpEnabled()) {
