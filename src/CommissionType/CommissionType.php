@@ -534,4 +534,19 @@ class CommissionType extends AbstractDatabaseModel {
 
 		return $commissionType;
 	}
+
+	/**
+	 * Responsible for cleaning up all the inner stuff (modifiers, stages, payment options)
+	 */
+	public function additionalDeletion() : void {
+		foreach ($this->getModifiers() as $modifier) {
+			$modifier->delete();
+		}
+		foreach ($this->getPaymentOptions() as $paymentOption) {
+			$paymentOption->delete();
+		}
+		foreach ($this->getStages() as $stage) {
+			$stage->delete();
+		}
+	}
 }
