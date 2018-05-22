@@ -12,7 +12,6 @@ character_images/*
 artist_images/*
 !artist_images/default.png
 !artist_images/.htaccess
-ssl
 
 subl-project.sublime-workspace
 
