@@ -34,7 +34,6 @@ echo UniversalFunctions::createHeading("Markdown");
 	["superscripts", "Superscripts"],
 	["dividers", "Dividers"],
 	["links", "Links"],
-	["images", "Images"],
 	["lists", "Lists"],
 	["checklists", "Checklists"],
 	["tables", "Tables"],
@@ -266,28 +265,6 @@ https://catalystapp.co
 [The Best Site!](https://catalystapp.co/)
 
 *For more information, check out the [About](https://catalystapp.co) page.*
-MD
-) ?> 
-</div>
-				</div>
-			</div>
-			<div class="divider"></div>
-			<div class="section" id="images">
-				<h4>Images</h4>
-				<p class="flow-text">You may use images in a similar manner to links, prepending it with an exclamation point.  However, images are special: they do not need a title.</p>
-				<p class="flow-text">If you add images, please ensure they are scaled to a decent size, or they may look bad/break your page on mobile browsers.</p>
-				<div class="row">
-					<div class="col s12 m6"><div class="code-block"><p>
-<?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
-Below is a sample image:
-![](https://via.placeholder.com/200x150)
-MD
-))) ?> 
-</p></div></div>
-				<div class="raw-markdown markdown-preview col s12 m6">
-<?= htmlspecialchars(<<<MD
-Below is a sample image:
-![](https://via.placeholder.com/200x150)
 MD
 ) ?> 
 </div>
@@ -549,7 +526,6 @@ MD
 	["superscripts", "Superscripts"],
 	["dividers", "Dividers"],
 	["links", "Links"],
-	["images", "Images"],
 	["lists", "Lists"],
 	["checklists", "Checklists"],
 	["tables", "Tables"],
