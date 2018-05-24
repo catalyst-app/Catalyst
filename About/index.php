@@ -257,7 +257,7 @@ echo UniversalFunctions::createHeading("About Us");
 					
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/fauxil.jpg?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/fauxil.jpg?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -377,7 +377,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/lykai.png?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/lykai.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -433,7 +433,7 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/disco.png?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/disco.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -468,7 +468,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/foxxo.png?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/foxxo.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -515,7 +515,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/soul.png?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/soul.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -566,7 +566,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<div class="row">
 						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff/jiki.png?<?= Controller::getCommit(); ?>');"></div>
+							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/jiki.png?<?= Controller::getCommit(); ?>');"></div>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
