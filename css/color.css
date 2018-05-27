@@ -68,7 +68,7 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
 .img-strict-circle[style*='/default.png");'], .img-strict-circle[style*="/default.png');"], img[src$="/default.png"],
 [type="checkbox"].filled-in:checked + label:after,
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
-.progress .indeterminate, .progress .determinate, btn-floating, button:focus, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
+.progress .indeterminate, .progress .determinate, .btn-floating, button:focus, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
 	background-color: #<?= $_GET["hex"] ?>;
 }
 
@@ -131,7 +131,7 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 	background-color: #<?= Color::lightenHex($_GET["hex"], 2) ?>;
 }
 
-.btn:hover, .btn:focus, btn-floating:hover, .btn-large:hover, .btn-large:focus {
+.btn:hover, .btn:focus, .btn-floating:hover, .btn-large:hover, .btn-large:focus {
 	background-color: #<?= Color::lightenHexByPercent($_GET["hex"], 5) ?>;
 }
 
