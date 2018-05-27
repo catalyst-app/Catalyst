@@ -1,13 +1,13 @@
 <?php
 
-namespace Catalyst\Page\Header;
+namespace Catalyst\Page;
 
 use Catalyst\Controller;
 
 /**
- * Used to hold data about what scripts and other resources should belong in the <head> element
+ * Used to hold data about what scripts and other resources are used
  */
-class Header {
+class Resources {
 	const PRODUCTION = 0;
 	const DEVEL = 1;
 	const ALWAYS = 2;
@@ -20,20 +20,20 @@ class Header {
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js", 'crossorigin="anonymous"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", 'crossorigin="anonymous"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", "defer", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", "defer", 'crossorigin="anonymous"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", "defer", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", "defer", 'crossorigin="anonymous"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js", "defer", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js", "defer", 'crossorigin="anonymous"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.js", "defer", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.min.js", "defer", 'crossorigin="anonymous"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js", "defer", 'crossorigin="anonymous"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.min.js", "defer", 'crossorigin="anonymous"'],
 
 		// not vital, easter egg
 		[self::DEVEL, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.js", "defer", 'crossorigin="anonymous"'],

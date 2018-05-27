@@ -1,5 +1,5 @@
 <?php
-use \Catalyst\Page\Header\Header;
+use \Catalyst\Page\Resources;
 use \Catalyst\Page\{UniversalFunctions, Values};
 ?>
 <!DOCTYPE html>
@@ -11,11 +11,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 			<?= htmlspecialchars(PAGE_TITLE) ?> | <?= Values::ROOT_TITLE ?> 
 		</title>
 
-<?php foreach (Header::getScripts() as $script): ?>
-		<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
-<?php endforeach; ?>
-
-<?php foreach (Header::getStyles() as $style): ?>
+<?php foreach (Resources::getStyles() as $style): ?>
 		<link href="<?= $style ?>" rel="stylesheet" />
 <?php endforeach; ?>
 

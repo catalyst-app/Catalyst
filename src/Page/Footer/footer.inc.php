@@ -2,7 +2,7 @@
 use \Catalyst\Controller;
 use \Catalyst\Database\Database;
 use \Catalyst\Database\Query\AbstractQuery;
-use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\{Resources, UniversalFunctions};
 ?>
 		</div>
 		<footer class="page-footer">
@@ -33,6 +33,10 @@ $rows = $stmt->fetchAll();
 			</div>
 		</footer>
 	</body>
+	<?php foreach (Resources::getScripts() as $script): ?>
+		<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
+	<?php endforeach; ?>
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script src="https://googletagmanager.com/gtag/js?id=UA-112460506-1" async defer></script>
 	<script>
