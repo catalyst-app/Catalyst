@@ -359,7 +359,7 @@ class CommissionType extends AbstractDatabaseModel {
 	 * @param Artist $artist
 	 * @return self[]
 	 */
-	public static function getForArtist(Artist $artist) : array {
+	public static function getForArtist(Artist $artist, bool $onlyPublic=false) : array {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
@@ -370,6 +370,10 @@ class CommissionType extends AbstractDatabaseModel {
 		$whereClause->addToClause([new Column("ARTIST_PAGE_ID", self::getTable()), '=', $artist->getId()]);
 		$whereClause->addToClause(WhereClause::AND);
 		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
+		if ($onlyPublic) {
+			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 1]);
+		}
 		$stmt->addAdditionalCapability($whereClause);
 
 		$orderByClause = new OrderByClause();
