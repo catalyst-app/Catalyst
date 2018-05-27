@@ -211,7 +211,7 @@ class Image {
 	 * @return string
 	 */
 	public static function getNsfwImagePath() : string {
-		return ROOTDIR.'img/nsfw.png';
+		return ROOTDIR.Folders::GLOBAL_IMG.'nsfw.png';
 	}
 
 	/**
@@ -220,7 +220,7 @@ class Image {
 	 * @return string
 	 */
 	public static function getNotFoundPath() : string {
-		return ROOTDIR.'img/not_found.png';
+		return ROOTDIR.Folders::GLOBAL_IMG.'not_found.png';
 	}
 
 	/**
@@ -229,7 +229,7 @@ class Image {
 	 * @return string
 	 */
 	public static function getNotFoundFilesystemPath() : string {
-		return REAL_ROOTDIR.'img/not_found.png';
+		return REAL_ROOTDIR.Folders::GLOBAL_IMG.'not_found.png';
 	}
 
 	/**
