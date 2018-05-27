@@ -30,9 +30,6 @@ register_shutdown_function("\\Catalyst\\Controller::shutdown");
 set_error_handler("\\Catalyst\\Controller::handleError", E_ALL);
 set_exception_handler("\\Catalyst\\Controller::handleException");
 
-// LEGACY
-require_once __DIR__."/Secrets.php";
-
 require_once __DIR__."/vendor/autoload.php";
 
 Controller::verifySecretsIntegrity();
