@@ -5,5 +5,4 @@
 ./src/Color.php
 ./src/CommissionType/CommissionType.php
 ./src/Message/Message.php
-./src/Page/UniversalFunctions.php
 ./src/Page/Values.php
