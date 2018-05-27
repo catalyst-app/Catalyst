@@ -11,7 +11,7 @@ parameters:
 		- '/Call to an undefined method callable::bindTo\(\)/'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::get(New|Edit)CommissionTypeForm/'
-		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::deleteSocialChipsFromDatabase\(\)/'
-		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabaseModel::getImage(Set|)\(\)/'
+		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabase(Row|)Model::deleteSocialChipsFromDatabase\(\)/'
+		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabase(Row|)Model::getImage(Set|)\(\)/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
