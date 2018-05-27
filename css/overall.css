@@ -6,6 +6,25 @@ html, html {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
+.commission-type-row {
+	min-height: 64px;
+}
+
+.btn-floating {
+	transition: background-color 0.5s ease;
+}
+
+button:focus {
+	color: white;
+}
+
+.inline-fab {
+	float: right;
+	position: relative;
+	left: 0px;
+	bottom: 0px;
+}
+
 .flow-text {
 	font-weight: 300;
 }

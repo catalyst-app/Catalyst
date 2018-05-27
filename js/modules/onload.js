@@ -83,6 +83,10 @@ var humanFileSize = function(size) {
 			$('.psuedo-required, .psuedo-required input').attr("required", false);
 			$(".raw-markdown, .raw-inline-markdown").each(function() {renderMarkdownArea(this);});
 			$(".raw-emoji").each(function() {$(this).html(twemoji.parse($(this).html())).removeClass("raw-emoji");});
+			$('.fixed-action-btn:not(.horizontal)').floatingActionButton();
+			$('.fixed-action-btn.horizontal').floatingActionButton({
+				direction: 'left'
+			});
 			$(".totp-preview").each(function(a, b) {
 				setInterval(function() {
 					$(b).text(
