@@ -398,47 +398,13 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get the IDs of each item on the User's wishlist
-	 * 
-	 * @return int[]
-	 */
-	public function getWishlistIds() : array {
-		return $this->getDataFromCallableOrCache("WISHLIST_IDS", function() : array {
-			$stmt = new SelectQuery();
-
-			$stmt->setTable(Tables::USER_WISHLISTS);
-
-			$stmt->addColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
-
-			$joinClause = new JoinClause();
-			$joinClause->setType(JoinClause::INNER);
-			$joinClause->setJoinTable(CommissionType::getTable());
-			$joinClause->setLeftColumn(new Column("ID", CommissionType::getTable()));
-			$joinClause->setRightColumn(new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS));
-			$stmt->addAdditionalCapability($joinClause);
-
-			$whereClause = new WhereClause();
-			$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $this->getId()]);
-			$whereClause->addToClause(WhereClause::AND);
-			$whereClause->addToClause([new Column("DELETED", CommissionType::getTable()), "=", 0]);
-			$stmt->addAdditionalCapability($whereClause);
-
-			$stmt->execute();
-
-			return array_column($stmt->getResult(), "COMMISSION_TYPE_ID");
-		});
-	}
-
-	/**
 	 * Get all wishlist items as an array of CommissionType's
 	 * 
-	 * @return CommissionType[]
+	 * @return WishlistItem[]
 	 */
-	public function getWishlistAsObjects() : array {
+	public function getWishlist() : array {
 		return $this->getDataFromCallableOrCache("WISHLIST_OBJS", function() : array {
-			return array_map(function(int $id) : CommissionType {
-				return new CommissionType($id);
-			}, $this->getWishlistIds());
+			WishlistItem::getUserWishlist($this);
 		});
 	}
 
