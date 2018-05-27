@@ -79,7 +79,7 @@ class Header {
 				case self::ALWAYS:
 				break;
 			}
-			$script[self::DEVEL] = str_replace("{commit}", Controller::getCommit(), $script[self::DEVEL]);
+			$script[1] = str_replace("{commit}", Controller::getCommit(), $script[1]);
 			$scripts[] = array_slice($script, 1);
 		}
 		return $scripts;
@@ -90,11 +90,12 @@ class Header {
 	 */
 	public const STYLES = [
 		// materialize main
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.css"],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.css"],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css"],
 
 		// icon set + robotos
-		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Material+Icons"],
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Material+Icons"],
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i"],
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
@@ -125,7 +126,7 @@ class Header {
 				case self::ALWAYS:
 				break;
 			}
-			$styles[] = str_replace("{commit}", Controller::getCommit(), $style[self::DEVEL]);
+			$styles[] = str_replace("{commit}", Controller::getCommit(), $style[1]);
 		}
 		return $styles;
 	}
