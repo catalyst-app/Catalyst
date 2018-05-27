@@ -81,31 +81,31 @@ foreach ($characters as $character) {
 			<div class="section">
 				<h4>Wishlist</h4>
 <?php
-$types = $_SESSION["user"]->getWishlistAsObjects();
-$types = array_filter($types, function($type) {
-	if (User::isLoggedIn() && $_SESSION["user"]->isNsfw()) {
-		return true;
-	}
-	if (!in_array("MATURE", $type->getAttrs()) && !in_array("EXPLICIT", $type->getAttrs())) {
-		return true;
-	}
-	return in_array("SAFE", $type->getAttrs());
-});
+// $types = $_SESSION["user"]->getWishlistAsObjects();
+// $types = array_filter($types, function($type) {
+// 	if (User::isLoggedIn() && $_SESSION["user"]->isNsfw()) {
+// 		return true;
+// 	}
+// 	if (!in_array("MATURE", $type->getAttrs()) && !in_array("EXPLICIT", $type->getAttrs())) {
+// 		return true;
+// 	}
+// 	return in_array("SAFE", $type->getAttrs());
+// });
 $cards = [];
-foreach ($types as $type) {
-	$img = $type->getPrimaryImage();
-	$artist = $type->getArtistPage();
-	$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
-		$type->getName(), 
-		$artist->getName()."\n".$type->getBlurb(), 
-		true, 
-		ROOTDIR."Artist/".$artist->getUrl()."/", 
-		[
-			$artist->getColor(),
-			$type->isOpen() ? $type->getBaseCost() : "CLOSED"
-		]
-	).'</div>';
-}
+// foreach ($types as $type) {
+// 	$img = $type->getPrimaryImage();
+// 	$artist = $type->getArtistPage();
+// 	$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
+// 		$type->getName(), 
+// 		$artist->getName()."\n".$type->getBlurb(), 
+// 		true, 
+// 		ROOTDIR."Artist/".$artist->getUrl()."/", 
+// 		[
+// 			$artist->getColor(),
+// 			$type->isOpen() ? $type->getBaseCost() : "CLOSED"
+// 		]
+// 	).'</div>';
+// }
 ?>
 	<?php if (count($cards) === 0): ?>
 					<p class="flow-text">Your wishlist is empty!</p>
