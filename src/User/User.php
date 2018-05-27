@@ -586,7 +586,6 @@ class User extends AbstractDatabaseModel {
 	 *
 	 * @todo archive commissions
 	 * @todo feature board thingies
-	 * @todo wishlist
 	 */
 	public function additionalDeletion() : void {
 		$removeApiAuthorizationsQuery = new DeleteQuery();
@@ -609,6 +608,10 @@ class User extends AbstractDatabaseModel {
 
 		foreach(Character::getCharactersFromUser($this) as $character) {
 			$character->delete();
+		}
+
+		foreach(WishlistItem::getUserWishlist($this) as $wishlistItem) {
+			$wishlistItem->delete();
 		}
 	}
 

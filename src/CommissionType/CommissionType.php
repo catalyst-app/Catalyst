@@ -8,6 +8,7 @@ use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\{JoinClause, MultipleOrderByClause, OrderByClause, WhereClause};
 use \Catalyst\Images\{DBImage, Folders, HasDBImageSetTrait, HasImageTrait, Image};
 use \Catalyst\Tokens;
+use \Catalyst\User\WishlistItem;
 use \InvalidArgumentException;
 
 /**
@@ -551,6 +552,9 @@ class CommissionType extends AbstractDatabaseModel {
 		}
 		foreach ($this->getStages() as $stage) {
 			$stage->delete();
+		}
+		foreach (WishlistItem::getForCommissionType($this) as $wishlistItem) {
+			$wishlistItem->delete();
 		}
 	}
 }
