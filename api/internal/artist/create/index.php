@@ -39,7 +39,7 @@ Artist::create([
 			$_POST["tos"]
 		],
 	]),
-	"IMG" => !is_null($image) ? $image : null,
+	"IMG" => !is_null($image) ? $image->getPath() : null,
 	"COLOR" => hex2bin($_POST["color"]),
 ]);
 
