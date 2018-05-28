@@ -14,6 +14,16 @@ html, html {
 	transition: background-color 0.5s ease;
 }
 
+.about-page-social-icon-wrapper {
+	height: 10em;
+}
+
+.about-page-social-icon {
+	width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 button:focus {
 	color: white;
 }
@@ -268,7 +278,7 @@ label[data-error], label[data-success] {
 	width: 100%;
 }
 
-.card-image img {
+.card-image img, .card-image picture {
 	margin: 0.75em 0;
 }
 
