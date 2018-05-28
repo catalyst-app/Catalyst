@@ -251,47 +251,8 @@ echo UniversalFunctions::createHeading("About Us");
 					}
 					?>
 					<div class="row">
-						<div class="col s12 m6 hide-on-large-only">
-							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
-								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click Here</h5></span>
-							</a>
-							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/github.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst-app/Catalyst</h5></span>
-							</a>
-							<a href="https://twitter.com/catalystapp_co" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/twitter.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp_co</h5></span>
-							</a>
-							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/discord.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>EECUcnT</i></h5></span>
-							</a>
-							<a href="https://furaffinity.net/user/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/furaffinity.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">~Catalystapp</h5></span>
-							</a>
-							<a href="https://catalystapp.deviantart.com/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/deviantart.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
-							</a>
-							<a href="https://weasyl.com/~catalystapp/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/weasyl.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/~catalystapp</h5></span>
-							</a>
-							<a href="https://beta.furrynetwork.com/catalyst/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/furrynetwork.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalyst</h5></span>
-							</a>
-							<a href="https://reddit.com/user/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/reddit.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/u/catalystapp</h5></span>
-							</a>
-							<a href="https://steamcommunity.com/groups/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/steam.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Catalystapp</h5></span>
-							</a>
+						<div class="col s12 hide-on-med-and-up">
+							<?= implode("", $items) ?>
 						</div>
 						<div class="col s12 m6 hide-on-large-only hide-on-small-only">
 							<?= implode("", $bisected[0]) ?>
@@ -321,8 +282,11 @@ echo UniversalFunctions::createHeading("About Us");
 					<h4>Our Staff</h4>
 					
 					<div class="row">
-						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/fauxil.jpg?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "fauxil.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -441,8 +405,11 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/lykai.png?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col push-m8 s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "lykai.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -497,8 +464,11 @@ echo UniversalFunctions::createHeading("About Us");
 
 					<br>
 					<div class="row">
-						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/disco.png?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "disco.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -532,8 +502,11 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/foxxo.png?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col push-m8 s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "foxxo.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
@@ -579,8 +552,11 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/soul.png?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "soul.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
@@ -630,8 +606,11 @@ echo UniversalFunctions::createHeading("About Us");
 					<br>
 
 					<div class="row">
-						<div class="col push-m8 s6 offset-s3 m4 center force-square-contents">
-							<div class="img-strict-circle" style="background-image: url('<?= ROOTDIR ?>img/staff_icons/jiki.png?<?= Controller::getCommit(); ?>');"></div>
+						<div class="force-square-contents col push-m8 s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "jiki.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
 						</div>
 						<div class="col s12 m7 pull-m4">
 							<div class="col s12 right-align">
