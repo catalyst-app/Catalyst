@@ -10,19 +10,19 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\Endpoint;
-use \Catalyst\Page\Header\Header;
+use \Catalyst\Page\Resources;
 use \tubalmartin\CssMin\Minifier;
 use \JSMin\JSMin;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
-$scripts = Header::SCRIPTS;
+$scripts = Resources::SCRIPTS;
 
 $aggregated = '';
 $totalUnminified = 0;
 
 foreach ($scripts as $script) {
-	if ($script[0] === Header::DEVEL) {
+	if ($script[0] === Resources::DEVEL) {
 		if (strpos($script[1], "js/modules/")) {
 			$parameterPosition = strpos($script[1], "?");
 			$withoutParameters = substr($script[1], 0, $parameterPosition);
