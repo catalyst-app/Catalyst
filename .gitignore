@@ -2,15 +2,19 @@ src/vendor
 src/Secrets.php
 profile_pictures/*
 !profile_pictures/default.png
+!profile_pictures/default.webp
 !profile_pictures/.htaccess
 commission_type_images/*
 !commission_type_images/default.png
+!commission_type_images/default.webp
 !commission_type_images/.htaccess
 character_images/*
 !character_images/default.png
+!character_images/default.webp
 !character_images/.htaccess
 artist_images/*
 !artist_images/default.png
+!artist_images/default.webp
 !artist_images/.htaccess
 
 subl-project.sublime-workspace
