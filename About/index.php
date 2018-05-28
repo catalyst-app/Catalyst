@@ -6,6 +6,7 @@ define("REAL_ROOTDIR", "../");
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Controller;
 use \Catalyst\Form\FormRepository;
+use \Catalyst\Images\{Folders, Image};
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
@@ -72,6 +73,183 @@ echo UniversalFunctions::createHeading("About Us");
 				<div class="section" id="social-media">
 					<h4>Social Media</h4>
 					<p class="flow-text">Italic networks are social groups which are used for direct user interaction and are preferred.</p>
+					<?php
+					$networks = [
+						[
+							"href" => "mailto:catalyst@catalystapp.co",
+							"primary" => false,
+							"img" => "mail",
+							"label" => "Click Here",
+						],
+						[
+							"href" => "https://github.com/catalyst-app/Catalyst",
+							"primary" => false,
+							"img" => "github",
+							"label" => "catalyst-app/Catalyst",
+						],
+						[
+							"href" => "https://twitter.com/catalystapp_co",
+							"primary" => false,
+							"img" => "twitter",
+							"label" => "@catalystapp_co",
+						],
+						[
+							"href" => "https://discord.gg/EECUcnT",
+							"primary" => true,
+							"img" => "discord",
+							"label" => "EECUcnT",
+						],
+						[
+							"href" => "https://furaffinity.net/user/catalystapp",
+							"primary" => false,
+							"img" => "furaffinity",
+							"label" => "~Catalystapp",
+						],
+						[
+							"href" => "https://catalystapp.deviantart.com/",
+							"primary" => false,
+							"img" => "deviantart",
+							"label" => "catalystapp",
+						],
+						[
+							"href" => "https://weasyl.com/~catalystapp/",
+							"primary" => false,
+							"img" => "weasyl",
+							"label" => "~catalystapp",
+						],
+						[
+							"href" => "https://beta.furrynetwork.com/catalyst/",
+							"primary" => false,
+							"img" => "furrynetwork",
+							"label" => "@catalyst",
+						],
+						[
+							"href" => "https://reddit.com/user/catalystapp",
+							"primary" => false,
+							"img" => "reddit",
+							"label" => "u/catalystapp",
+						],
+						[
+							"href" => "https://steamcommunity.com/groups/catalystapp",
+							"primary" => false,
+							"img" => "steam",
+							"label" => "Catalystapp",
+						],
+						[
+							"href" => "https://instagram.com/catalyst.app",
+							"primary" => false,
+							"img" => "instagram",
+							"label" => "@catalyst.app",
+						],
+						[
+							"href" => "https://ko-fi.com/catalystapp",
+							"primary" => false,
+							"img" => "kofi",
+							"label" => "catalystapp",
+						],
+						[
+							"href" => "https://patreon.com/catalyst",
+							"primary" => false,
+							"img" => "patreon",
+							"label" => "catalyst",
+						],
+						[
+							"href" => "https://plus.google.com/102762464787584663279",
+							"primary" => false,
+							"img" => "googleplus",
+							"label" => "+Catalyst",
+						],
+						[
+							"href" => "https://catalystapp-co.tumblr.com/",
+							"primary" => false,
+							"img" => "tumblr",
+							"label" => "catalystapp-co",
+						],
+						[
+							"href" => "https://facebook.com/catalystapp.co",
+							"primary" => false,
+							"img" => "facebook",
+							"label" => "/catalystapp.co",
+						],
+						[
+							"href" => "https://reddit.com/r/catalystapp",
+							"primary" => false,
+							"img" => "reddit",
+							"label" => "/r/CatalystApp",
+						],
+						[
+							"href" => "https://t.me/catalystapp",
+							"primary" => true,
+							"img" => "telegram",
+							"label" => "@catalystapp",
+						],
+						[
+							"href" => "https://t.me/catalystapp_announcements",
+							"primary" => false,
+							"img" => "telegram",
+							"label" => "@..._announcements",
+						],
+						[
+							"href" => "https://trello.com/b/X37KEv4A/catalyst",
+							"primary" => false,
+							"img" => "trello",
+							"label" => "Click here",
+						],
+					];
+
+					$items = [];
+
+					foreach ($networks as $network) {
+						$str = '';
+
+						$str .= '<a';
+						$str .= ' href="'.htmlspecialchars($network["href"]).'"';
+						$str .= ' class="black-text center col s12"';
+						$str .= ' rel="noopener"';
+						$str .= '>';
+
+						$image = new Image(Folders::ABOUT_ICONS, "", $network["img"].'.png');
+
+						$str .= '<div';
+						$str .= ' class="about-page-social-icon-wrapper valign-wrapper"';
+						$str .= '>';
+
+						$str .= $image->getImgElementHtml(["about-page-social-icon"]);
+
+						$str .= '</div>';
+
+						$str .= '<span';
+						$str .= ' style="overflow-x: auto;white-space: nowrap;"';
+						$str .= ' class="col s12"';
+						$str .= '>';
+
+						$str .= '<h5>';
+
+						if ($network["primary"]) {
+							$str .= '<i>';
+						}
+
+						$str .= htmlspecialchars($network["label"]);
+
+						if ($network["primary"]) {
+							$str .= '</i>';
+						}
+
+						$str .= '</h5>';
+
+						$str .= '</a>';
+
+						$items[] = $str;
+					}
+
+					$bisected = [[],[]];
+					$trisected = [[],[],[]];
+
+					for ($i=0; $i < count($items); $i++) { 
+						$bisected[$i%2][] = $items[$i];
+						$trisected[$i%3][] = $items[$i];
+					}
+					?>
 					<div class="row">
 						<div class="col s12 m6 hide-on-large-only">
 							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
@@ -115,133 +293,20 @@ echo UniversalFunctions::createHeading("About Us");
 								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Catalystapp</h5></span>
 							</a>
 						</div>
-						<div class="col s12 m6 hide-on-large-only">
-							<a href="https://instagram.com/catalyst.app" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/instagram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalyst.app</h5></span>
-							</a>
-							<a href="https://ko-fi.com/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/ko-fi.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
-							</a>
-							<a href="https://patreon.com/catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/patreon.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst</h5></span>
-							</a>
-							<a href="https://plus.google.com/102762464787584663279" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/googleplus.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">+Catalyst</h5></span>
-							</a>
-							<a href="https://catalystapp-co.tumblr.com/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/tumblr.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co</h5></span>
-							</a>
-							<a href="https://facebook.com/catalystapp.co" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/facebook.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/catalystapp.co</h5></span>
-							</a>
-							<a href="https://reddit.com/r/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/reddit.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
-							</a>
-							<a href="https://t.me/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/telegram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
-							</a>
-							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/telegram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@..._announcements</h5></span>
-							</a>
-							<a href="https://trello.com/b/X37KEv4A/catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/trello.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click here</h5></span>
-							</a>
+						<div class="col s12 m6 hide-on-large-only hide-on-small-only">
+							<?= implode("", $bisected[0]) ?>
+						</div>
+						<div class="col s12 m6 hide-on-large-only hide-on-small-only">
+							<?= implode("", $bisected[1]) ?>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="mailto:catalyst@catalystapp.co" class="black-text center col s12">
-								<i class="large material-icons">mail</i>
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click Here</h5></span>
-							</a>
-							<a href="https://github.com/catalyst-app/Catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/github.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst-app/Catalyst</h5></span>
-							</a>
-							<a href="https://twitter.com/catalystapp_co" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/twitter.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalystapp_co</h5></span>
-							</a>
-							<a href="https://discord.gg/EECUcnT" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/discord.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>EECUcnT</i></h5></span>
-							</a>
-							<a href="https://catalystapp.deviantart.com/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/deviantart.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
-							</a>
-							<a href="https://weasyl.com/~catalystapp/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/weasyl.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/~catalystapp</h5></span>
-							</a>
-							<a href="https://steamcommunity.com/groups/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/steam.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Catalystapp</h5></span>
-							</a>
+							<?= implode("", $trisected[0]) ?>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="http://furaffinity.net/user/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/furaffinity.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">~Catalystapp</h5></span>
-							</a>
-							<a href="https://instagram.com/catalyst.app" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/instagram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalyst.app</h5></span>
-							</a>
-							<a href="https://ko-fi.com/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/ko-fi.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp</h5></span>
-							</a>
-							<a href="https://beta.furrynetwork.com/catalyst/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/furrynetwork.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@catalyst</h5></span>
-							</a>
-							<a href="https://plus.google.com/102762464787584663279" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/googleplus.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">+Catalyst</h5></span>
-							</a>
-							<a href="https://reddit.com/user/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/reddit.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/u/catalystapp</h5></span>
-							</a>
-							<a href="https://trello.com/b/X37KEv4A/catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/trello.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">Click here</h5></span>
-							</a>
+							<?= implode("", $trisected[1]) ?>
 						</div>
 						<div class="col l4 hide-on-med-and-down">
-							<a href="https://patreon.com/catalyst" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/patreon.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalyst</h5></span>
-							</a>
-							<a href="https://catalystapp-co.tumblr.com/" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/tumblr.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">catalystapp-co</h5></span>
-							</a>
-							<a href="https://facebook.com/catalystapp.co" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/facebook.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/catalystapp.co</h5></span>
-							</a>
-							<a href="https://reddit.com/r/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/reddit.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">/r/CatalystApp</h5></span>
-							</a>
-							<a href="https://t.me/catalystapp" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/telegram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin"><i>@catalystapp</i></h5></span>
-							</a>
-							<a href="https://t.me/catalystapp_announcements" class="black-text center col s12">
-								<img src="<?= ROOTDIR ?>/img/about_social_icons/telegram.png" style="width: 6rem;">
-								<span style="overflow-x: auto;white-space: nowrap;" class="col s12"><h5 class="no-top-margin">@..._announcements</h5></span>
-							</a>
+							<?= implode("", $trisected[2]) ?>
 						</div>
 					</div>
 					
