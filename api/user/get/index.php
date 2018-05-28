@@ -4,50 +4,12 @@ define("ROOTDIR", "");
 define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
-use \Catalyst\API\{Endpoint, ErrorCodes, Response};
+use \Catalyst\API\{Endpoint, Response};
 use \Catalyst\HTTPCode;
-use \Catalyst\User\User;
 
 Endpoint::init();
 
-if (isset($_GET["name"])) {
-	if (!preg_match('/^([A-Za-z0-9._-]){2,64}$/', $_GET["name"])) {
-		HTTPCode::set(404);
-		Response::sendErrorResponse(20001, ErrorCodes::ERR_20001);
-	}
-	$id = User::getIdFromUsername($_GET["name"]);
-	if ($id == -1) {
-		HTTPCode::set(404);
-		Response::sendErrorResponse(20001, ErrorCodes::ERR_20001);
-	}
-	if ($id == $_SESSION["user"]->getId()) {
-		$user = $_SESSION["user"];
-		$isOwnUser = true;
-	} else {
-		$user = new User($id);
-		$isOwnUser = false;
-	}
-} else {
-	$user = $_SESSION["user"];
-	$isOwnUser = true;
-}
+// i'll come back to you i promise
+HTTPCode::set(501);
 
-$result = [];
-$result["username"] = $user->getUsername();
-if ($isOwnUser) {
-	$result["email"] = $user->getEmail();
-	$result["email_verified"] = $user->isEmailVerified();
-}
-$result["artist_page_url"] = $user->getArtistPage();
-if (!is_null($result["artist_page_url"])) {
-	$result["artist_page_url"] = $result["artist_page_url"]->getUrl();
-}
-$result["picture_loc"] = $user->getImage()->getFullPath();
-$result["picture_nsfw"] = $user->isProfilePictureNsfw();
-if ($isOwnUser) {
-	$result["nsfw"] = $user->isNsfw();
-}
-$result["color"] = $user->getColor();
-
-
-Response::sendSuccessResponse("Success", $result);
+Response::sendErrorResponse(99999, "Unimplemented");
