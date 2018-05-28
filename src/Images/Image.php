@@ -170,7 +170,7 @@ class Image {
 	/**
 	 * Get the path to the image.  Uses ROOTDIR, not REAL_ROOTDIR
 	 * 
-	 * @return string[] Path to the image, as type=>path, last type most legacy
+	 * @return string[][] Path to the image, as [type,path], last type most legacy
 	 */
 	public function getFullPaths() : array {
 		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
@@ -181,14 +181,14 @@ class Image {
 		}
 		if (is_null($this->getPath())) {
 			return [
-				"image/svg+xml" => ROOTDIR.$this->getFolder()."/"."default.svg",
-				"image/webp" => ROOTDIR.$this->getFolder()."/"."default.webp",
-				"image/png" => ROOTDIR.$this->getFolder()."/"."default.png",
+				["image/svg+xml", ROOTDIR.$this->getFolder()."/"."default.svg"],
+				["image/webp", ROOTDIR.$this->getFolder()."/"."default.webp"],
+				["image/png", ROOTDIR.$this->getFolder()."/"."default.png"],
 			];
 		} else {
 			$result = [];
-			foreach ($this->getFilesystemPaths() as $mime => $path) {
-				$result[$mime] = preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path, 1);
+			foreach ($this->getFilesystemPaths() as $path) {
+				$result[] = [$path[0], preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path[1], 1)];
 			}
 			return $result;
 		}
@@ -201,13 +201,13 @@ class Image {
 	 */
 	public function getFullPath() : string {
 		$paths = array_values($this->getFullPaths());
-		return $paths[count($paths)-1];
+		return $paths[count($paths)-1][1];
 	}
 
 	/**
 	 * Get the filesystem's path to the image (REAL_ROOTDIR, not ROOTDIR)
 	 * 
-	 * @return string[] FS paths to the image, as type=>path, last type most legacy
+	 * @return string[][] FS paths to the image, as [type,path], last type most legacy
 	 */
 	public function getFilesystemPaths() : array {
 		if (is_null($this->getPath())) {
@@ -220,30 +220,35 @@ class Image {
 			$mime = getimagesize($path)["mime"];
 			if ($mime == "image/webp") {
 				return [
-					"image/webp" => $path
+					["image/webp", $path],
 				];
 			} else {
 				$pathrev = strrev($path);
-				$webpPathRev = "pbew.".substr($pathrev, strpos($pathrev, ".")+1);
+				$pathbase = substr($pathrev, strpos($pathrev, ".")+1);
 
 				if ($this->getFolder() == Folders::GLOBAL_IMG ||
 						$this->getFolder() == Folders::ABOUT_ICONS) { // we're an SVG!
-					$svgPathRev = "gvs.".substr($pathrev, strpos($pathrev, ".")+1);
 					return [
-						"image/svg+xml" => strrev($svgPathRev),
-						"image/webp" => strrev($webpPathRev),
-						$mime => $path,
+						["image/svg+xml", strrev("gvs.".$pathbase)],
+						["image/webp", strrev("pbew.".$pathbase)],
+						[$mime, $path],
 					];
 				} else {
 					$result = [
-						"image/webp" => strrev($webpPathRev),
-						$mime => $path,
+						["image/webp", strrev("pbew.bmuht_".$pathbase)],
+						["image/jpeg", strrev("gepj.bmuht_".$pathbase)],
+						[$mime, $path],
 					];
-					if (!file_exists($result["image/webp"])) { // BC with exidting images
-						unset($result["image/webp"]);
+					// webp thumb
+					if (!file_exists($result[0][1])) { // BC with exidting images
+						unset($result[0]);
+					}
+					// jpeg thumb
+					if (!file_exists($result[1][1])) {
+						unset($result[1]);
 					}
 					uasort($result, function($a, $b) : int {
-						return filesize($a) <=> filesize($b);
+						return filesize($a[1]) <=> filesize($b[1]);
 					});
 					return $result;
 				}
@@ -256,39 +261,39 @@ class Image {
 	/**
 	 * Get the path to the [NSFW] notice
 	 * 
-	 * @return string[]
+	 * @return string[][]
 	 */
 	public static function getNsfwImagePaths() : array {
 		return [
-			"image/svg+xml" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.svg',
-			"image/webp" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.webp',
-			"image/png" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.png',
+			["image/svg+xml", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.svg'],
+			["image/webp", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.webp'],
+			["image/png", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.png'],
 		];
 	}
 
 	/**
 	 * Get the path to the image not found notice
 	 * 
-	 * @return string[]
+	 * @return string[][]
 	 */
 	public static function getNotFoundPaths() : array {
 		return [
-			"image/svg+xml" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg',
-			"image/webp" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp',
-			"image/png" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png',
+			["image/svg+xml", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg'],
+			["image/webp", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp'],
+			["image/png", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png'],
 		];
 	}
 
 	/**
 	 * Get the FS path to the image not found notice
 	 * 
-	 * @return string[]
+	 * @return string[][]
 	 */
 	public static function getNotFoundFilesystemPaths() : array {
 		return [
-			"image/svg+xml" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg',
-			"image/webp" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp',
-			"image/png" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png',
+			["image/svg+xml", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg'],
+			["image/webp", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp'],
+			["image/png", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png'],
 		];
 	}
 
@@ -298,8 +303,8 @@ class Image {
 	 * @return bool If the image is pixel art
 	 */
 	public function isPixelArt() : bool {
-		$imageDimensions = getimagesize(array_values($this->getFilesystemPaths())[0]);
-		if ($imageDimensions === false) {
+		$imageDimensions = getimagesize($this->getFullPath());
+		if ($imageDimensions === false) { // doesn't exist ?
 			return false;
 		}
 		if (min($imageDimensions[0], $imageDimensions[1]) <= self::PIXEL_ART_MAX_SIZE) {
@@ -319,7 +324,7 @@ class Image {
 	public function getStrictCircleHtml(array $additionalClasses=[], array $additionalStyles=[], array $additionalAttributes=[]) : string {
 		$str = '';
 
-		$paths = array_values($this->getFullPaths());
+		$paths = $this->getFullPaths();
 
 		$preferredPath = $paths[0];
 		$fallbackPath = $paths[count($paths)-1];
@@ -356,10 +361,10 @@ class Image {
 	}
 
 	/**
-	 * Get the image as a <img> element
+	 * Get the image as a <picture> element
 	 * 
 	 * @param string[] $additionalClasses Classes to add to the tag
-	 * @return string HTML img representing the image
+	 * @return string HTML picture representing the image
 	 */
 	public function getImgElementHtml(array $additionalClasses=[]) : string {
 		if ($this->isPixelArt()) {
@@ -378,10 +383,10 @@ class Image {
 
 		$paths = $this->getFullPaths();
 
-		foreach ($paths as $mime => $path) {
+		foreach ($paths as $path) {
 			$str .= '<source';
-			$str .= ' srcset="'.htmlspecialchars($path).'"';
-			$str .= ' type="'.htmlspecialchars($mime).'"';
+			$str .= ' srcset="'.htmlspecialchars($path[1]).'"';
+			$str .= ' type="'.htmlspecialchars($path[0]).'"';
 			$str .= '>';
 		}
 
@@ -389,7 +394,7 @@ class Image {
 		$fallbackPath = $paths[count($paths)-1];
 		
 		$str .= '<img'; // fallback for shit browsers >:/
-		$str .= ' src="'.htmlspecialchars($fallbackPath).'"';
+		$str .= ' src="'.htmlspecialchars($fallbackPath[1]).'"';
 		$str .= ' alt="'.htmlspecialchars($this->getFolder()).' path"';
 		if (count($additionalClasses)) {
 		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
@@ -473,8 +478,7 @@ class Image {
 			$str .= '<a';
 			if (is_null($linkPath)) {
 				$str .= ' target="_blank"';
-				$paths = array_values($this->getFullPaths());
-				$str .= ' href="'.htmlspecialchars($paths[count($paths)-1]).'"';
+				$str .= ' href="'.htmlspecialchars($this->getFullPath()).'"';
 			} else {
 				$str .= ' href="'.htmlspecialchars($linkPath).'"';
 			}
