@@ -1,0 +1,59 @@
+echo --------------------------------------------------------------------
+# convert to MAX 512px in either dimension
+echo --Thumbnailifying $1 with basename ${1%.*}
+
+echo --------------------------------------------------------------------
+
+echo --Creating JPEG
+if [ ${1: -4} == ".gif" ]; then
+	echo --Input is a GIF\; extracting first frame only
+
+	echo ----convert "$1[0]" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	convert "$1[0]" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+
+	echo --Creating temporary holder for losslessly compressed output file as _tmp.gif
+
+	echo ----convert "$1" -quality 100 -resize 512x512\> "${1%.*}_tmp.gif"
+	convert "$1" -quality 100 -resize 512x512\> "${1%.*}_tmp.gif"
+else
+	echo --Input is NOT a GIF\; JPEG-ifying the entire file
+
+	echo ----convert "$1" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	convert "$1" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+
+	echo --Creating temporary holder for losslessly compressed output file as _tmp.png
+
+	# PNG is lossless by default
+	echo ----convert "$1" -resize 512x512\> "${1%.*}_tmp.png"
+	convert "$1" -resize 512x512\> "${1%.*}_tmp.png"
+fi
+
+echo --Creating lossy and lossless WebP
+if [ ${1: -4} == ".gif" ]; then
+	echo --Input is a GIF\; invoking gif2webp
+
+	echo ----Creating lossy animated WebP
+	echo --gif2webp -mixed -min_size -metadata none -m 6 -mt "${1%.*}_tmp.gif" -o "${1%.*}_thumb_lossy.webp"
+	gif2webp -mixed -min_size -metadata none -m 6 -mt "${1%.*}_tmp.gif" -o "${1%.*}_thumb_lossy.webp"
+
+	echo ----Creating lossless animated WebP
+	echo --gif2webp -lossless -mixed -min_size -metadata none -m 6 -mt "${1%.*}_tmp.gif" -o "${1%.*}_thumb_lossless.webp"
+	gif2webp -lossless -mixed -min_size -metadata none -m 6 -mt "${1%.*}_tmp.gif" -o "${1%.*}_thumb_lossless.webp"
+else
+	echo --Input is NOT a GIF\; invoking cwebp
+
+	echo ----Creating lossy static WebP
+	echo ------cwebp -mt -m 6 -pass 10 -quiet -metadata none "${1%.*}_tmp.png" -o "${1%.*}_thumb_lossy.webp"
+	cwebp -mt -m 6 -pass 10 -quiet -metadata none "${1%.*}_tmp.png" -o "${1%.*}_thumb_lossy.webp"
+
+	echo ----Creating lossless static WebP
+	echo ------cwebp -lossless -mt -m 6 -q 100 -pass 10 -quiet -metadata none "${1%.*}_tmp.png" -o "${1%.*}_thumb_lossless.webp"
+	cwebp -lossless -mt -m 6 -q 100 -pass 10 -quiet -metadata none "${1%.*}_tmp.png" -o "${1%.*}_thumb_lossless.webp"
+fi
+
+echo --Removing temporary lossless image
+echo ----rm "${1%.*}_tmp.png" "${1%.*}_tmp.gif"
+rm "${1%.*}_tmp.png" "${1%.*}_tmp.gif"
+
+echo Done with $1!
+echo --------------------------------------------------------------------
