@@ -5,6 +5,13 @@ echo --Thumbnailifying $1 with basename ${1%.*}
 
 echo --------------------------------------------------------------------
 
+echo --Image size is $(php -r "\$size=getimagesize(\$argv[1]);echo max(\$size[0], \$size[1]);" $1)
+
+if [ $(php -r "\$size=getimagesize(\$argv[1]);echo max(\$size[0], \$size[1]);" $1) -lt 150 ]; then
+	echo ----Image too small to thumbnail \(pixel art\).  Exiting.
+	exit
+fi
+
 echo --Creating JPEG
 if [ ${1: -4} == ".gif" ]; then
 	echo --Input is a GIF, we can\'t do shit
