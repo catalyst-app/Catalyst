@@ -23,6 +23,8 @@ if (Controller::isDevelMode()) {
 }
 
 if (php_sapi_name() !== 'cli') {
+	ini_set('zlib.output_compression', 1);
+
 	ob_start();
 }
 
