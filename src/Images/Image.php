@@ -170,28 +170,46 @@ class Image {
 	/**
 	 * Get the path to the image.  Uses ROOTDIR, not REAL_ROOTDIR
 	 * 
-	 * @return string Path to the image
+	 * @return string[] Path to the image, as type=>path, last type most legacy
 	 */
-	public function getFullPath() : string {
+	public function getFullPaths() : array {
 		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
-			return $this->getNsfwImagePath();
+			return $this->getNsfwImagePaths();
 		}
-		if ($this->getFilesystemPath() == $this->getNotFoundFilesystemPath()) {
-			return $this->getNotFoundPath(); // NF note
+		if ($this->getFilesystemPaths() == $this->getNotFoundFilesystemPaths()) {
+			return $this->getNotFoundPaths(); // NF note
 		}
 		if (is_null($this->getPath())) {
-			return ROOTDIR.$this->getFolder()."/"."default.png";
+			return [
+				"image/svg+xml" => ROOTDIR.$this->getFolder()."/"."default.svg",
+				"image/webp" => ROOTDIR.$this->getFolder()."/"."default.webp",
+				"image/png" => ROOTDIR.$this->getFolder()."/"."default.png",
+			];
 		} else {
-			return ROOTDIR.$this->getFolder()."/".$this->getToken().$this->getPath();
+			$result = [];
+			foreach ($this->getFilesystemPaths() as $mime => $path) {
+				$result[$mime] = preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path, 1);
+			}
+			return $result;
 		}
+	}
+
+	/**
+	 * Get the path to the fallback image.
+	 * 
+	 * @return string Path to the fallback image
+	 */
+	public function getFullPath() : string {
+		$paths = array_values($this->getFullPaths());
+		return $paths[count($paths)-1];
 	}
 
 	/**
 	 * Get the filesystem's path to the image (REAL_ROOTDIR, not ROOTDIR)
 	 * 
-	 * @return string FS path to the image
+	 * @return string[] FS paths to the image, as type=>path, last type most legacy
 	 */
-	public function getFilesystemPath() : string {
+	public function getFilesystemPaths() : array {
 		if (is_null($this->getPath())) {
 			$path = REAL_ROOTDIR.$this->getFolder()."/"."default.png";
 		} else {
@@ -199,37 +217,76 @@ class Image {
 		}
 		// prevent warnings and shit
 		if (file_exists($path)) {
-			return $path;
+			$mime = getimagesize($path)["mime"];
+			if ($mime == "image/webp") {
+				return [
+					"image/webp" => $path
+				];
+			} else {
+				$pathrev = strrev($path);
+				$webpPathRev = "pbew.".substr($pathrev, strpos($pathrev, ".")+1);
+
+				if ($this->getFolder() == Folders::GLOBAL_IMG ||
+						$this->getFolder() == Folders::ABOUT_ICONS) { // we're an SVG!
+					$svgPathRev = "gvs.".substr($pathrev, strpos($pathrev, ".")+1);
+					return [
+						"image/svg+xml" => strrev($svgPathRev),
+						"image/webp" => strrev($webpPathRev),
+						$mime => $path,
+					];
+				} else {
+					$result = [
+						"image/webp" => strrev($webpPathRev),
+						$mime => $path,
+					];
+					uasort($result, function($a, $b) : int {
+						return filesize($a) <=> filesize($b);
+					});
+					return $result;
+				}
+			}
 		} else {
-			return $this->getNotFoundFilesystemPath();
+			return $this->getNotFoundFilesystemPaths();
 		}
 	}
 
 	/**
 	 * Get the path to the [NSFW] notice
 	 * 
-	 * @return string
+	 * @return string[]
 	 */
-	public static function getNsfwImagePath() : string {
-		return ROOTDIR.Folders::GLOBAL_IMG.'nsfw.png';
+	public static function getNsfwImagePaths() : array {
+		return [
+			"image/svg+xml" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.svg',
+			"image/webp" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.webp',
+			"image/png" => ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.png',
+		];
 	}
 
 	/**
 	 * Get the path to the image not found notice
 	 * 
-	 * @return string
+	 * @return string[]
 	 */
-	public static function getNotFoundPath() : string {
-		return ROOTDIR.Folders::GLOBAL_IMG.'not_found.png';
+	public static function getNotFoundPaths() : array {
+		return [
+			"image/svg+xml" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg',
+			"image/webp" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp',
+			"image/png" => ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png',
+		];
 	}
 
 	/**
 	 * Get the FS path to the image not found notice
 	 * 
-	 * @return string
+	 * @return string[]
 	 */
-	public static function getNotFoundFilesystemPath() : string {
-		return REAL_ROOTDIR.Folders::GLOBAL_IMG.'not_found.png';
+	public static function getNotFoundFilesystemPaths() : array {
+		return [
+			"image/svg+xml" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg',
+			"image/webp" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp',
+			"image/png" => REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png',
+		];
 	}
 
 	/**
@@ -238,7 +295,7 @@ class Image {
 	 * @return bool If the image is pixel art
 	 */
 	public function isPixelArt() : bool {
-		$imageDimensions = getimagesize($this->getFilesystemPath());
+		$imageDimensions = getimagesize(array_values($this->getFilesystemPaths())[0]);
 		if ($imageDimensions === false) {
 			return false;
 		}
@@ -258,6 +315,12 @@ class Image {
 	 */
 	public function getStrictCircleHtml(array $additionalClasses=[], array $additionalStyles=[], array $additionalAttributes=[]) : string {
 		$str = '';
+
+		$paths = array_values($this->getFullPaths());
+
+		$preferredPath = $paths[0];
+		$fallbackPath = $paths[count($paths)-1];
+
 		$str .= '<div';
 		$str .= ' class="img-strict-circle';
 		if ($this->isPixelArt()) {
@@ -271,8 +334,17 @@ class Image {
 		foreach ($additionalStyles as $key => $value) {
 			$str .= htmlspecialchars($key).":".htmlspecialchars($value).";";
 		}
-		$str .= 'background-image: url('.htmlspecialchars(json_encode($this->getFullPath())).');';
+
+		$str .= 'background-image: url('.htmlspecialchars('"'.$preferredPath.'"').');';
+		
 		$str .= '"';
+
+		$str .= ' onerror="';
+		$str .= 'this.onerror=null;';
+		$str .= 'this.src='.htmlspecialchars(json_encode($fallbackPath)).';';
+		$str .= 'return false;';
+		$str .= '"';
+
 		foreach ($additionalAttributes as $key => $value) {
 			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
 		}
@@ -288,15 +360,41 @@ class Image {
 	 */
 	public function getImgElementHtml(array $additionalClasses=[]) : string {
 		if ($this->isPixelArt()) {
-			$additionalClasses[] = " render-pixelated";
+			$additionalClasses[] = "render-pixelated";
+		}
+		if (is_null($this->getPath())) {
+			$additionalClasses[] = "default-img";
 		}
 		$str = '';
-		$str .= '<img';
+
+		$str .= '<picture';
 		if (count($additionalClasses)) {
 		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
 		}
-		$str .= ' src="'.htmlspecialchars($this->getFullPath()).'"';
+		$str .= '>';
+
+		$paths = $this->getFullPaths();
+
+		foreach ($paths as $mime => $path) {
+			$str .= '<source';
+			$str .= ' srcset="'.htmlspecialchars($path).'"';
+			$str .= ' type="'.htmlspecialchars($mime).'"';
+			$str .= '>';
+		}
+
+		$paths = array_values($paths);
+		$fallbackPath = $paths[count($paths)-1];
+		
+		$str .= '<img'; // fallback for shit browsers >:/
+		$str .= ' src="'.htmlspecialchars($fallbackPath).'"';
+		$str .= ' alt="'.htmlspecialchars($this->getFolder()).' path"';
+		if (count($additionalClasses)) {
+		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
+		}
 		$str .= ' />';
+
+		$str .= '</picture>';
+		
 		return $str;
 	}
 
@@ -372,7 +470,8 @@ class Image {
 			$str .= '<a';
 			if (is_null($linkPath)) {
 				$str .= ' target="_blank"';
-				$str .= ' href="'.htmlspecialchars($this->getFullPath()).'"';
+				$paths = array_values($this->getFullPaths());
+				$str .= ' href="'.htmlspecialchars($paths[count($paths)-1]).'"';
 			} else {
 				$str .= ' href="'.htmlspecialchars($linkPath).'"';
 			}
@@ -411,10 +510,10 @@ class Image {
 	 * Delete the image from disk (won't work for default)
 	 */
 	public function delete() : void {
-		if (!is_null($this->getPath()) && file_exists($this->getFilesystemPath())) {
-			if ($this->getFilesystemPath() != REAL_ROOTDIR.$this->getFolder()."/"."default.png" && // no image
-				$this->getFilesystemPath() != $this->getNotFoundFilesystemPath()) { // image not found
-				unlink($this->getFilesystemPath());
+		if (!is_null($this->getPath()) && file_exists(array_values($this->getFilesystemPaths())[0])) {
+			if (array_values($this->getFilesystemPaths())[0] != REAL_ROOTDIR.$this->getFolder()."/"."default.png" && // no image
+				$this->getFilesystemPaths() != $this->getNotFoundFilesystemPaths()) { // image not found
+				array_map("unlink", $this->getFilesystemPaths());
 			}
 		}
 		$this->setPath("deleted_image.png");
