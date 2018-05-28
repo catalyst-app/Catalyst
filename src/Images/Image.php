@@ -349,15 +349,17 @@ class Image {
 			$str .= htmlspecialchars($key).":".htmlspecialchars($value).";";
 		}
 
-		$str .= 'background-image: url('.htmlspecialchars('"'.$preferredPath.'"').');';
+		$str .= 'background-image: url('.htmlspecialchars('"'.$preferredPath[1].'"').');';
 		
 		$str .= '"';
 
-		$str .= ' onerror="';
-		$str .= 'this.onerror=null;';
-		$str .= 'this.src='.htmlspecialchars(json_encode($fallbackPath)).';';
-		$str .= 'return false;';
-		$str .= '"';
+		if ($preferredPath != $fallbackPath) {
+			$str .= ' onerror="';
+			$str .= 'this.onerror=null;';
+			$str .= 'this.src='.htmlspecialchars(json_encode($fallbackPath[1])).';';
+			$str .= 'return false;';
+			$str .= '"';
+		}
 
 		foreach ($additionalAttributes as $key => $value) {
 			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
