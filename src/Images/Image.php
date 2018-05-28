@@ -249,7 +249,7 @@ class Image {
 					if (!file_exists($result[1][1])) {
 						unset($result[1]);
 					}
-					uasort($result, function($a, $b) : int {
+					usort($result, function($a, $b) : int {
 						return filesize($a[1]) <=> filesize($b[1]);
 					});
 					return $result;
