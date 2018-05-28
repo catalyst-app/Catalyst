@@ -235,23 +235,17 @@ class Image {
 					];
 				} else {
 					$result = [
-						["image/webp", strrev("pbew.sselssol_bmuht_".$pathbase)],
-						["image/webp", strrev("pbew.yssol_bmuht_".$pathbase)],
+						["image/webp", strrev("pbew.bmuht_".$pathbase)],
 						["image/jpeg", strrev("gepj.bmuht_".$pathbase)],
 						[$mime, $path],
 					];
-					// BC with existing images
-					// lossless webp thumb
-					if (!file_exists($result[0][1])) { 
+					// webp thumb
+					if (!file_exists($result[0][1])) { // BC with exidting images
 						unset($result[0]);
 					}
-					// lossy webp thumb
+					// jpeg thumb
 					if (!file_exists($result[1][1])) {
 						unset($result[1]);
-					}
-					// jpeg thumb
-					if (!file_exists($result[2][1])) {
-						unset($result[2]);
 					}
 					uasort($result, function($a, $b) : int {
 						return filesize($a[1]) <=> filesize($b[1]);
