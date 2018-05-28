@@ -2,6 +2,7 @@
 
 namespace Catalyst\Images;
 
+use \Catalyst\Controller;
 use \Catalyst\Tokens;
 use \Catalyst\User\User;
 
@@ -236,11 +237,12 @@ class Image {
 				} else {
 					$result = [
 						["image/webp", strrev("pbew.bmuht_".$pathbase)],
-						["image/jpeg", strrev("gepj.bmuht_".$pathbase)],
+						["image/jpeg", strrev("gpj.bmuht_".$pathbase)],
 						[$mime, $path],
 					];
+
 					// webp thumb
-					if (!file_exists($result[0][1])) { // BC with exidting images
+					if (!file_exists($result[0][1])) {
 						unset($result[0]);
 					}
 					// jpeg thumb
