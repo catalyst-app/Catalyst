@@ -193,6 +193,7 @@ class SocialMedia {
 				$str .= '<a';
 				$str .= ' target="_blank"';
 				$str .= ' href="'.htmlspecialchars($chip["href"]).'"';
+				$str .= ' rel="noopener"';
 				$str .= '>';
 			}
 
