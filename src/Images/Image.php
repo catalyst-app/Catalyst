@@ -239,6 +239,9 @@ class Image {
 						"image/webp" => strrev($webpPathRev),
 						$mime => $path,
 					];
+					if (!file_exists($result["image/webp"])) { // BC with exidting images
+						unset($result["image/webp"];
+					}
 					uasort($result, function($a, $b) : int {
 						return filesize($a) <=> filesize($b);
 					});
