@@ -51,10 +51,13 @@ for ($i=0; $i < count($cards); $i++) {
 }
 
 ?>
-					<div class="col s12 m6 hide-on-large-only">
+					<div class="col s12 hide-on-med-and-up">
+						<?= implode("", $cards) ?>
+					</div>
+					<div class="col s12 m6 hide-on-large-only hide-on-small-only">
 						<?= implode("", $bisected[0]) ?>
 					</div>
-					<div class="col s12 m6 hide-on-large-only">
+					<div class="col s12 m6 hide-on-large-only hide-on-small-only">
 						<?= implode("", $bisected[1]) ?>
 					</div>
 					<div class="col l4 hide-on-med-and-down">
