@@ -395,6 +395,9 @@ class Image {
 			$str .= '<source';
 			$str .= ' srcset="'.htmlspecialchars($path[1]).'"';
 			$str .= ' type="'.htmlspecialchars($path[0]).'"';
+			if (Controller::isDevelMode()) {
+				$str .= ' data-size="'.htmlspecialchars(filesize($path[1])).'"';
+			}
 			$str .= '>';
 		}
 
