@@ -3975,7 +3975,8 @@ module.exports = function linkify(state) {
           var internal = (fullUrl.startsWith("http://catalystapp.co") ||
             fullUrl.startsWith("https://catalystapp.co") ||
             fullUrl.startsWith("http://beta.catalystapp.co") ||
-            fullUrl.startsWith("https://beta.catalystapp.co"));
+            fullUrl.startsWith("https://beta.catalystapp.co") ||
+            fullUrl.startsWith("#"));
           token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
           token.level   = level++;
           token.markup  = 'linkify';
@@ -6910,7 +6911,8 @@ module.exports = function link(state, silent) {
     var internal = (href.startsWith("http://catalystapp.co") ||
       href.startsWith("https://catalystapp.co") ||
       href.startsWith("http://beta.catalystapp.co") ||
-      href.startsWith("https://beta.catalystapp.co"));
+      href.startsWith("https://beta.catalystapp.co") ||
+      href.startsWith("#"));
     token.attrs  = attrs = [ [ 'href', href ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
     if (title) {
       attrs.push([ 'title', title ]);
@@ -7123,7 +7125,8 @@ module.exports = function autolink(state, silent) {
       var internal = (fullUrl.startsWith("http://catalystapp.co") ||
         fullUrl.startsWith("https://catalystapp.co") ||
         fullUrl.startsWith("http://beta.catalystapp.co") ||
-        fullUrl.startsWith("https://beta.catalystapp.co"));
+        fullUrl.startsWith("https://beta.catalystapp.co") ||
+        fullUrl.startsWith("#"));
       token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
       token.markup  = 'autolink';
       token.info    = 'auto';
@@ -7152,7 +7155,8 @@ module.exports = function autolink(state, silent) {
       var internal = (fullUrl.startsWith("http://catalystapp.co") ||
         fullUrl.startsWith("https://catalystapp.co") ||
         fullUrl.startsWith("http://beta.catalystapp.co") ||
-        fullUrl.startsWith("https://beta.catalystapp.co"));
+        fullUrl.startsWith("https://beta.catalystapp.co") ||
+        fullUrl.startsWith("#"));
       token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
       token.attrs   = [ [ 'href', fullUrl ] ];
       token.markup  = 'autolink';
