@@ -228,7 +228,9 @@ class SocialMedia {
 
 			$str .= '</div>';
 
+			$str .= '<span>';
 			$str .= htmlspecialchars($chip["label"]);
+			$str .= '</span>';
 
 			if ($editMode) {
 				$str .= '<i';
