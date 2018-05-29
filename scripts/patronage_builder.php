@@ -650,7 +650,10 @@ foreach ($aliveDead as $key => $value) {
 		$patreonHtml .= '</p>';
 
 		if ($patron->goodStanding) {
+			$patreonHtml .= '<div';
+			$patreonHtml .= ' class="social-chips">';
 			$patreonHtml .= SocialMedia::getChipHtml(SocialMedia::getChipArray($patron->social));
+			$patreonHtml .= '</div>';
 		}
 
 		$patreonHtml .= '</li>';
