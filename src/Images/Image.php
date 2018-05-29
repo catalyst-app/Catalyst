@@ -230,11 +230,15 @@ class Image {
 				if ($this->getFolder() == Folders::GLOBAL_IMG ||
 						$this->getFolder() == Folders::ABOUT_ICONS ||
 						$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
-					return [
+					$result = [
 						["image/svg+xml", strrev("gvs.".$pathbase)],
 						["image/webp", strrev("pbew.".$pathbase)],
 						[$mime, $path],
 					];
+					usort($result, function($a, $b) : int {
+						return filesize($a[1]) <=> filesize($b[1]);
+					});
+					return $result;
 				} else {
 					$result = [
 						["image/webp", strrev("pbew.bmuht_".$pathbase)],
