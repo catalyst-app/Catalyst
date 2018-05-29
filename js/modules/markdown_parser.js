@@ -5766,6 +5766,7 @@ module.exports = function heading(state, startLine, endLine, silent) {
   state.line = startLine + 1;
 
   token        = state.push('heading_open', 'h' + String(level), 1);
+  token.attrs  = [ [ "id", "md-header-"+state.src.slice(pos, max).trim().replace(/\W+/g, '-').toLowerCase() ] ];
   token.markup = '########'.slice(0, level);
   token.map    = [ startLine, state.line ];
 
@@ -5855,6 +5856,7 @@ module.exports = function lheading(state, startLine, endLine/*, silent*/) {
 
   token          = state.push('heading_open', 'h' + String(level), 1);
   token.markup   = String.fromCharCode(marker);
+  token.attrs  = [ [ "id", "md-header-"+content.trim().replace(/\W+/g, '-').toLowerCase() ] ];
   token.map      = [ startLine, state.line ];
 
   token          = state.push('inline', '', 0);
