@@ -59,7 +59,7 @@ class SocialMedia {
 	protected static function processMetaRow(array $row) : array {
 		return [
 			$row["INTEGRATION_NAME"] => [
-				"path" => ROOTDIR.Folders::INTEGRATION_ICONS."/".$row["IMAGE_PATH"],
+				"path" => $row["IMAGE_PATH"],
 				"name" => $row["DEFAULT_HUMAN_NAME"],
 				"classes" => $row["CHIP_CLASSES"],
 				"visible" => $row["VISIBLE"]
