@@ -68,6 +68,8 @@
 - **90324** - @catalystapp.co emails are not allowed
 - **90325** - Invalid referrer
 - **90326** - Unknown referrer
+- **90327** - Invalid age gt 13/16 checkbox
+- **90328** - Did not check age gt 13/16
 
 #### Email Verification
 

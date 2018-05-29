@@ -226,6 +226,32 @@ define("PATRON_ATTRS", [
 			],
 		],
 	],
+	"46d46ce6e94f807bc535faf153fa7f96edf563d93718bed42858bdeb95ea43fe" => [
+		"color" => "db395b",
+		"name" => "Keeri",
+		"social" => [
+			[
+				"NETWORK" => "FURAFFINITY",
+				"SERVICE_URL" => "https://www.furaffinity.net/user/keeri/",
+				"DISP_NAME" => "~keeri",
+			],
+			[
+				"NETWORK" => "TUMBLR",
+				"SERVICE_URL" => "https://keerifox.tumblr.com/",
+				"DISP_NAME" => "keerifox",
+			],
+			[
+				"NETWORK" => "STEAM",
+				"SERVICE_URL" => "https://steamcommunity.com/id/keeri",
+				"DISP_NAME" => "keeri",
+			],
+			[
+				"NETWORK" => "DISCORD",
+				"SERVICE_URL" => null,
+				"DISP_NAME" => "@keeri#4538",
+			],
+		],
+	],
 ]);
 
 function logStr(string $section, string $message) : void {
