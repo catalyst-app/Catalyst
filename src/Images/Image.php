@@ -524,10 +524,13 @@ class Image {
 	 * Delete the image from disk (won't work for default)
 	 */
 	public function delete() : void {
-		if (!is_null($this->getPath()) && file_exists(array_values($this->getFilesystemPaths())[0])) {
-			if (array_values($this->getFilesystemPaths())[0] != REAL_ROOTDIR.$this->getFolder()."/"."default.png" && // no image
-				$this->getFilesystemPaths() != $this->getNotFoundFilesystemPaths()) { // image not found
-				array_map("unlink", $this->getFilesystemPaths());
+		if (!is_null($this->getPath())) {
+			if ($this->getFilesystemPaths() != $this->getNotFoundFilesystemPaths()) { // image not found
+				foreach ($this->getFilesystemPaths() as $fsPath) {
+					if (file_exists($fsPath)) {
+						unlink($fsPath[1]);
+					}
+				}
 			}
 		}
 		$this->setPath("deleted_image.png");
