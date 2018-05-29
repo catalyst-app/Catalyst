@@ -6,7 +6,7 @@ use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\QueryAddition\OrderByClause;
 use \Catalyst\Database\Query\SelectQuery;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\Images\Folders;
+use \Catalyst\Images\{Folders, Image};
 
 /**
  * Represents social-media related things
@@ -219,9 +219,14 @@ class SocialMedia {
 			
 			$str .= '>';
 
-			$str .= '<img';
-			$str .= ' src="'.htmlspecialchars($chip["src"]).'"';
-			$str .= ' />';
+			$str .= '<div';
+			$str .= ' class="social-chip-img-wrapper"';
+			$str .= '>';
+
+			$image = new Image(Folders::INTEGRATION_ICONS, "", $chip["src"]);
+			$str .= $image->getImgElementHtml();
+
+			$str .= '</div>';
 
 			$str .= htmlspecialchars($chip["label"]);
 
