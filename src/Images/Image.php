@@ -528,7 +528,7 @@ class Image {
 		if (!is_null($this->getPath())) {
 			if ($this->getFilesystemPaths() != $this->getNotFoundFilesystemPaths()) { // image not found
 				foreach ($this->getFilesystemPaths() as $fsPath) {
-					if (file_exists($fsPath)) {
+					if (file_exists($fsPath[1])) {
 						unlink($fsPath[1]);
 					}
 				}
