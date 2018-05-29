@@ -237,7 +237,6 @@ class Artist extends AbstractDatabaseModel {
 	public function getDeletedValues() : array {
 		return [
 			"NAME" => "Deleted artist page",
-			"URL" => Tokens::generateDeletedArtistUrl(),
 			"DESCRIPTION" => "Deleted artist page",
 			"TOS" => json_encode([date("l, F jS, Y"), "Page deleted."]),
 			"IMG" => null,
