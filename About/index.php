@@ -300,6 +300,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by FawnButt (<a href="http://www.furaffinity.net/user/feve/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		'NETWORK' => 'SELF',
@@ -397,6 +398,7 @@ echo UniversalFunctions::createHeading("About Us");
 		'DISP_NAME' => '@fauxilfox',
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -425,6 +427,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 									<p class="flow-text"><strong>Roles: </strong> Assistant, General Helper</p>
 								</div>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "FURAFFINITY",
@@ -457,6 +460,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "lykai@catalystapp.co",
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -482,6 +486,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by Orlando Fox (<a href="https://twitter.com/Orlando_Fox/">Twitter</a>, <a href="http://afoxdraws.com/index.html">Website</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Patreon, Tumblr)</p>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
@@ -494,6 +499,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "blackoak@catalystapp.co",
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -522,6 +528,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Twitter)</p>
 								</div>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TWITTER",
@@ -544,6 +551,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "foxxo@catalystapp.co",
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -570,6 +578,7 @@ echo UniversalFunctions::createHeading("About Us");
 								<p class="flow-text">Image by Jasmae (<a href="https://www.furaffinity.net/view/22443950/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> PR manager</p>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
@@ -597,6 +606,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "soul.wesson@catalystapp.co",
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -626,6 +636,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 									<p class="flow-text"><strong>Roles: </strong> Social Media Manager (Fur Affinity, Facebook)</p>
 								</div>
+								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "TELEGRAM",
@@ -643,6 +654,7 @@ echo UniversalFunctions::createHeading("About Us");
 		"DISP_NAME" => "jiki@catalystapp.co",
 	],
 ])) ?>
+								</div>
 							</div>
 						</div>
 					</div>
