@@ -18,8 +18,8 @@ if [ ${1: -4} == ".gif" ]; then
 else
 	echo --Input is NOT a GIF\; JPEG-ifying the entire file
 
-	echo ----convert -verbose "$1" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
-	convert -verbose "$1" -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	echo ----convert -verbose "$1" -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	convert -verbose "$1" -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
 
 	echo --Creating temporary holder for losslessly compressed output file as _tmp.png
 
