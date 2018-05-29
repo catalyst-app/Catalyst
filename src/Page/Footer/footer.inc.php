@@ -11,6 +11,9 @@ use \Catalyst\Page\{Resources, UniversalFunctions};
 					Website &copy;2017-<?php echo date("Y"); ?> Catalyst, All rights reserved.
 				</p>
 				<p>
+					View our <a href="<?= ROOTDIR ?>Help/ToS">Terms of Service</a> or <a href="<?= ROOTDIR ?>Help/Privacy">Privacy Policy</a>
+				</p>
+				<p>
 					Version: <?= Controller::getVersion() ?> (<?= Controller::getCommit() ?>)
 					<?php if (Controller::isDevelMode()): ?>
 						<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
