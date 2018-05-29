@@ -391,7 +391,7 @@ class Image {
 			$str .= '<source';
 			$str .= ' srcset="'.htmlspecialchars($path[1]).'"';
 			$str .= ' type="'.htmlspecialchars($path[0]).'"';
-			if (Controller::isDevelMode()) {
+			if (Controller::isDevelMode() && file_exists($path[1])) { // file_exists because rel paths
 				$str .= ' data-size="'.htmlspecialchars(filesize($path[1])).'"';
 			}
 			$str .= '>';
