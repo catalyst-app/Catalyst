@@ -49,6 +49,8 @@ class Values {
 	const BLOG = ["about", "Blog"];
 	
 	const TOS_GUIDE = ["about", "Terms of Service Guide"];
+	
+	const PRIVACY_POLICY = ["about", "Privacy Policy"];
 
 
 
@@ -78,10 +80,10 @@ class Values {
 
 
 
-	const NEWEST_NEWS_ID = 0;
-	const NEWEST_NEWS_LABEL = 'Character page re-design';
-	const NEWEST_NEWS_DATE = 'Feb 26';
-	const NEWEST_NEWS_DESC = ' The new, super-awesome character pages have been pushed to the beta!  This includes a ton of things you\'ll notice throughout the site, including...';
+	const NEWEST_NEWS_ID = 1;
+	const NEWEST_NEWS_LABEL = 'New privacy policy';
+	const NEWEST_NEWS_DATE = 'May 28';
+	const NEWEST_NEWS_DESC = 'As part of the GDPR, we\'ve created a formal privacy policy!  Please go take a look at it <a href="https://beta.catalystapp.co/Help/Privacy">here</a>!';
 
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {
