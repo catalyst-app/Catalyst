@@ -299,9 +299,10 @@ label[data-error], label[data-success] {
 	height: 24px;
 }
 
-.chip picture * {
+.chip picture img {
 	margin-top: 4px;
-	margin-left: 2px;
+	margin-left: 4px;
+	margin-right: 4px;
 }
 
 .modal.modal-fixed-footer .modal-content {
