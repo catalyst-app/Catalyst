@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 21, 2018 at 07:09 PM
+-- Generation Time: May 29, 2018 at 02:02 AM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -827,9 +827,9 @@ CREATE TABLE `social_media_meta` (
   `SORT_ORDER` int(2) UNSIGNED NOT NULL DEFAULT '0',
   `VISIBLE` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `INTEGRATION_NAME` varchar(12) NOT NULL,
-  `IMAGE_PATH` varchar(16) NOT NULL,
+  `IMAGE_PATH` varchar(19) NOT NULL,
   `DEFAULT_HUMAN_NAME` varchar(18) NOT NULL,
-  `CHIP_CLASSES` varchar(31) NOT NULL
+  `CHIP_CLASSES` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 --
@@ -842,7 +842,7 @@ CREATE TABLE `social_media_meta` (
 
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(10, 1, '500PX', '500px.png', '500px', 'black white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(130, 1, 'AMINO', 'amino.png', 'Furry Amino', 'cyan white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(20, 1, 'AO3', 'ao3.png', 'Archive of Our Own', 'red darken-4 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(20, 1, 'AO3', 'archiveofourown.png', 'Archive of Our Own', 'red darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(30, 1, 'BANDCAMP', 'bandcamp.png', 'Bandcamp', 'teal lighten-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(40, 0, 'CUSTOM', 'custom.png', 'Custom Link', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(50, 1, 'DEVIANTART', 'deviantart.png', 'DeviantArt', 'green white-text');
@@ -850,24 +850,23 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(70, 0, 'DOMAIN', 'domain.png', 'Custom Website', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(80, 1, 'EMAIL', 'email.png', 'Email', 'user-color white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(90, 1, 'ETSY', 'etsy.png', 'Etsy', 'orange darken-3 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(100, 1, 'FACEBOOK', 'fb.png', 'Facebook', 'blue darken-4 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(110, 1, 'FANFICTION', 'ff.png', 'FanFiction', 'indigo darken-3 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(120, 1, 'FURAFFINITY', 'fa.png', 'Fur Affinity', 'orange white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(100, 1, 'FACEBOOK', 'facebook.png', 'Facebook', 'blue darken-4 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(110, 1, 'FANFICTION', 'fanfiction.png', 'FanFiction', 'indigo darken-3 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(120, 1, 'FURAFFINITY', 'furaffinity.png', 'Fur Affinity', 'orange white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(140, 1, 'FURRYNETWORK', 'furrynetwork.png', 'Furry Network', 'blue darken-2 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(150, 1, 'GITHUB', 'github.png', 'GitHub', 'black white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(160, 1, 'GPLUS', 'gplus.png', 'Google+', 'red darken-1 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(160, 1, 'GPLUS', 'googleplus.png', 'Google+', 'red darken-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(170, 1, 'INKBUNNY', 'inkbunny.png', 'Inkbunny', 'light-green darken-1 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(180, 1, 'INSTAGRAM', 'ig.png', 'Instagram', 'pink accent-3 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(190, 1, 'KOFI', 'ko-fi.png', 'Ko-fi', 'cyan darken-3 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(200, 0, 'ONEDRIVE', 'onedrive.png', 'OneDrive', 'blue darken-4 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(180, 1, 'INSTAGRAM', 'instagram.png', 'Instagram', 'pink accent-3 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(190, 1, 'KOFI', 'kofi.png', 'Ko-fi', 'cyan darken-3 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(210, 1, 'PATREON', 'patreon.png', 'Patreon', 'deep-orange accent-2 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(220, 1, 'PAYPAL', 'paypal.png', 'PayPal', 'blue darken-2 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(230, 1, 'PERISCOPE', 'periscope.png', 'Periscope', 'cyan darken-1 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(240, 1, 'PICARTO', 'picarto.png', 'Picarto.TV', 'blue-grey darken-2 white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(250, 1, 'PINTEREST', 'pintrest.png', 'Pinterest', 'red darken-4 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(240, 1, 'PICARTO', 'picartotv.png', 'Picarto.TV', 'blue-grey darken-2 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(250, 1, 'PINTEREST', 'pinterest.png', 'Pinterest', 'red darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(260, 1, 'REDDIT', 'reddit.png', 'Reddit', 'reddit-orangered white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(0, 1, 'SELF', 'self.png', 'Catalyst', 'user-color white-text');
-INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(270, 1, 'SNAPCHAT', 'snap.png', 'Snapchat', 'yellow darken-1 white-text');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(0, 1, 'SELF', 'self.png', 'Catalyst', 'user-color white-text no-img-margin');
+INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(270, 1, 'SNAPCHAT', 'snapchat.png', 'Snapchat', 'yellow darken-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(280, 1, 'SOFURRY', 'sofurry.png', 'SoFurry', 'brown darken-4 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(290, 1, 'SOUNDCLOUD', 'soundcloud.png', 'SoundCloud', 'deep-orange darken-1 white-text');
 INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `IMAGE_PATH`, `DEFAULT_HUMAN_NAME`, `CHIP_CLASSES`) VALUES(300, 1, 'SPOTIFY', 'spotify.png', 'Spotify', 'green accent-4 white-text');
