@@ -282,6 +282,28 @@ label[data-error], label[data-success] {
 	margin: 0.75em 0;
 }
 
+.social-chips .chip {
+	padding-left: 0;
+}
+
+.social-chips .chip::before {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.chip picture, .chip picture * {
+	/* size of chip */
+	width: 24px;
+	height: 24px;
+}
+
+.chip picture * {
+	margin-top: 4px;
+	margin-left: 2px;
+}
+
 .modal.modal-fixed-footer .modal-content {
 	height: 100%;
 }
@@ -347,6 +369,15 @@ footer a {
 
 .social-chips .chip.has-icon {
 	padding-right: 0;
+}
+
+.chip span {
+	margin-top: -6px;
+}
+
+.social-chip-img-wrapper, .chip span {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .social-chips a {
