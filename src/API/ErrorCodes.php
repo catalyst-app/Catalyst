@@ -94,6 +94,8 @@ class ErrorCodes {
 	const ERR_90324 = '@catalystapp.co emails are not allowed';
 	const ERR_90325 = 'Referrer is invalid';
 	const ERR_90326 = 'Unknown referrer';
+	const ERR_90327 = 'Internal error';
+	const ERR_90328 = 'You may not use our service if you are below this age.';
 
 	// email verification
 	const ERR_90401 = 'Token was not entered';

@@ -151,6 +151,16 @@ trait RegisterFormTrait {
 		$nsfwAccessField->setInvalidErrorCode(90319);
 		$form->addField($nsfwAccessField);
 
+		$minimumAgeField = new CheckboxField();
+		$minimumAgeField->setDistinguisher("age");
+		$minimumAgeField->setLabel("I am above 13 years old, or 16 if I am in the EU");
+		$minimumAgeField->setRequired(true);
+		$minimumAgeField->addError(90327, ErrorCodes::ERR_90327);
+		$minimumAgeField->setMissingErrorCode(90327);
+		$minimumAgeField->addError(90328, ErrorCodes::ERR_90328);
+		$minimumAgeField->setInvalidErrorCode(90328);
+		$form->addField($minimumAgeField);
+
 		$tosAcceptanceField = new RawLabelCheckboxField();
 		$tosAcceptanceField->setDistinguisher("tos-acceptance");
 		$tosAcceptanceField->setLabel('I accept the <a target="_blank" href="'.ROOTDIR.'TOS">terms of service</a>');
