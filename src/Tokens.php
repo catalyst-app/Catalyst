@@ -97,15 +97,6 @@ class Tokens {
 	}
 
 	/**
-	 * Generate a 64-character URL to use for deleted artist pages, starting with "DEL_"
-	 *
-	 * @return string URL
-	 */
-	public static function generateDeletedArtistUrl() : string {
-		return "DEL_".self::generateToken(60);
-	}
-
-	/**
 	 * Generate a psuedorandom token
 	 * 
 	 * This uses the Mersenne Twister algorithm (underlying for array_rand), which is secure enough
