@@ -286,6 +286,10 @@ label[data-error], label[data-success] {
 	height: 100%;
 }
 
+footer a {
+	color: #fff !important;
+}
+
 .card-content {
 	padding: 0.75em !important;
 	margin-bottom: 0.5em;
