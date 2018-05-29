@@ -177,8 +177,8 @@ class Image {
 		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
 			return $this->getNsfwImagePaths();
 		}
-		if ($this->getFilesystemPaths() == $this->getNotFoundFilesystemPaths()) {
-			return $this->getNotFoundPaths(); // NF note
+		if ($this->getFilesystemPaths() == self::getNotFoundFilesystemPaths()) {
+			return self::getNotFoundPaths(); // NF note
 		}
 		if (is_null($this->getPath())) {
 			return [
@@ -261,7 +261,7 @@ class Image {
 				}
 			}
 		} else {
-			return $this->getNotFoundFilesystemPaths();
+			return self::getNotFoundFilesystemPaths();
 		}
 	}
 
@@ -517,7 +517,7 @@ class Image {
 	 */
 	public function delete() : void {
 		if (!is_null($this->getPath())) {
-			if ($this->getFilesystemPaths() != $this->getNotFoundFilesystemPaths()) { // image not found
+			if ($this->getFilesystemPaths() != self::getNotFoundFilesystemPaths()) { // image not found
 				foreach ($this->getFilesystemPaths() as $fsPath) {
 					if (file_exists($fsPath[1])) {
 						unlink($fsPath[1]);
