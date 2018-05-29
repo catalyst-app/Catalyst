@@ -228,7 +228,8 @@ class Image {
 				$pathbase = substr($pathrev, strpos($pathrev, ".")+1);
 
 				if ($this->getFolder() == Folders::GLOBAL_IMG ||
-						$this->getFolder() == Folders::ABOUT_ICONS) { // we're an SVG!
+						$this->getFolder() == Folders::ABOUT_ICONS ||
+						$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
 					return [
 						["image/svg+xml", strrev("gvs.".$pathbase)],
 						["image/webp", strrev("pbew.".$pathbase)],
