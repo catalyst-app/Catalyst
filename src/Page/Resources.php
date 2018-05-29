@@ -56,6 +56,8 @@ class Resources {
 		[self::DEVEL, ROOTDIR."js/modules/onload.js?{commit}"],
 
 		[self::PRODUCTION, ROOTDIR."js/dist/packed.min.js?{commit}"],
+
+		[self::ALWAYS, "https://googletagmanager.com/gtag/js?id=UA-112460506-1", "defer"],
 	];
 
 	/**

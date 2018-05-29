@@ -38,7 +38,6 @@ $rows = $stmt->fetchAll();
 	<?php endforeach; ?>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script src="https://googletagmanager.com/gtag/js?id=UA-112460506-1" async defer></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
