@@ -454,7 +454,7 @@ class User extends AbstractDatabaseModel {
 	 * @return string URL, relative to ROOTDIR/Message/New/, that can be used for messaging
 	 */
 	public function getMessageUrlPath() : string {
-		return 'User/'.$this->getUsername();
+		return 'User/'.$this->getUsername().'/';
 	}
 
 	/**
