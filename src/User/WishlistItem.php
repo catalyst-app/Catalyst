@@ -13,8 +13,8 @@ use \Catalyst\Database\QueryAddition\WhereClause;
  * Basic model class, nothing fancy
  * @method int getCommissionTypeId()
  * @method void setCommissionTypeId(int $commissionTypeId)
- * @method int getCommissionTypeId()
- * @method void setCommissionTypeId(int $commissionTypeId)
+ * @method int getUserId()
+ * @method void setUserId(int $userId)
  */
 class WishlistItem extends AbstractDatabaseRowModel {
 	/**
@@ -49,7 +49,7 @@ class WishlistItem extends AbstractDatabaseRowModel {
 		$stmt->setTable(self::getTable());
 
 		$stmt->addColumn(new Column("ID", self::getTable()));
-		$stmt->addColumn(new Column("COMISSION_TYPE_ID", self::getTable()));
+		$stmt->addColumn(new Column("COMMISSION_TYPE_ID", self::getTable()));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("USER_ID", Tables::USER_WISHLISTS), "=", $user->getId()]);
@@ -79,7 +79,7 @@ class WishlistItem extends AbstractDatabaseRowModel {
 		$stmt->addColumn(new Column("USER_ID", self::getTable()));
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("COMISSION_TYPE_ID", Tables::USER_WISHLISTS), "=", $commissionType->getId()]);
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", Tables::USER_WISHLISTS), "=", $commissionType->getId()]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
