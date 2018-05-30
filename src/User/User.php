@@ -409,6 +409,21 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
+	 * Get all wishlist items as an array of CT IDSs
+	 * 
+	 * @return int[]
+	 */
+	public function getWishlistCommissionTypeIds() : array {
+		return $this->getDataFromCallableOrCache("WISHLIST_CT_IDS", function() : array {
+			$result = [];
+			foreach ($this->getWishlist() as $wishtlistItem) {
+				$result[] = $wishtlistItem->getCommissionTypeId();
+			}
+			return $result;
+		});
+	}
+
+	/**
 	 * Get the table used to store a User's social media items
 	 * 
 	 * @return string
