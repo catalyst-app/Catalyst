@@ -119,7 +119,8 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 						<?php if (!$firstCommissionType): ?>
 							<div class="divider small-bottom-margin"></div>
 						<?php endif; ?>
-							<div class="commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+							<div class="commission-type-row" id="ct-<?= htmlspecialchars($commissionType->getToken()) ?>" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+								<h5><?= htmlspecialchars($commissionType->getName()) ?></h5>
 								<?php if (User::isLoggedIn()): ?>
 									<div class="fixed-action-btn click-to-toggle horizontal inline-fab commission-type-client-actions right">
 										<a class="btn-floating btn-large">
@@ -140,7 +141,7 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 												</li>
 											<?php endif; ?>
 											<li class="tooltipped" data-tooltip="Ask a Question">
-												<a href="<?= ROOTDIR ?>Message/New/<?= $commissionType->getArtistPage()->getPrecomposedMessageUrl("Commission Inquiry", 'Questions regarding "'.$commissionType->getName()."\"\n\n---\n\n") ?>" class="btn-floating">
+												<a href="<?= ROOTDIR ?>Message/New/<?= htmlspecialchars($commissionType->getArtistPage()->getPrecomposedMessageUrl("Commission Inquiry", 'Questions regarding "'.$commissionType->getName()."\"\n\n---\n\n")) ?>" class="btn-floating">
 													<i class="material-icons">contact_support</i>
 												</a>
 											</li>
