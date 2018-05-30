@@ -110,6 +110,73 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 	// not explicitly marked any way
 	return true;
 });
+?>
+				<?php if (empty($commissionTypes)): ?> 
+					<p class="flow-text">This artist has no commission types listed!</p>
+				<?php else: ?> 
+					<?php $firstCommissionType = true; ?>
+					<?php foreach ($commissionTypes as $commissionType): ?>
+						<?php if (!$firstCommissionType): ?>
+							<div class="divider small-bottom-margin"></div>
+						<?php endif; ?>
+							<div class="commission-type-row" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
+								<?php if (User::isLoggedIn()): ?>
+									<div class="fixed-action-btn click-to-toggle horizontal inline-fab commission-type-client-actions right">
+										<a class="btn-floating btn-large">
+											<i class="large material-icons">more_horiz</i>
+										</a>
+										<ul>
+											<?php if (in_array($commissionType->getId(), $_SESSION["user"]->getWishlistCommissionTypeIds())): ?>
+												<li class="tooltipped" data-tooltip="Remove from wishlist">
+													<a data-action="wishlist" data-state="on" class="btn-floating">
+														<i class="material-icons">star</i>
+													</a>
+												</li>
+											<?php else: ?>
+												<li class="tooltipped" data-tooltip="Add to wishlist">
+													<a data-action="wishlist" data-state="off" class="btn-floating">
+														<i class="material-icons">star_outline</i>
+													</a>
+												</li>
+											<?php endif; ?>
+											<li class="tooltipped" data-tooltip="Ask a Question">
+												<a href="<?= ROOTDIR ?>Message/New/<?= $commissionType->getArtistPage()->getPrecomposedMessageUrl("Commission Inquiry", 'Questions regarding "'.$commissionType->getName()."\"\n\n---\n\n") ?>" class="btn-floating">
+													<i class="material-icons">contact_support</i>
+												</a>
+											</li>
+											<li class="tooltipped" data-tooltip="Request a Quote">
+												<a class="btn-floating">
+													<i class="material-icons">attach_money</i>
+												</a>
+											</li>
+											<li class="tooltipped" data-tooltip="Make a Request">
+												<a class="btn-floating">
+													<i class="material-icons">how_to_vote</i>
+												</a>
+											</li>
+											<li class="tooltipped" data-tooltip="Request a Trade">
+												<a class="btn-floating">
+													<i class="material-icons">swap_horiz</i>
+												</a>
+											</li>
+											<li class="tooltipped" data-tooltip="Commission">
+												<a class="btn-floating">
+													<i class="material-icons">add_shopping_cart</i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								<?php else: ?>
+									<div class="fixed-action-btn horizontal inline-fab commission-type-client-actions right tooltipped" data-position="left" data-tooltip="Please login">
+										<a class="btn-floating btn-large grey">
+											<i class="large material-icons">more_horiz</i>
+										</a>
+									</div>
+								<?php endif; ?>
+							</div>
+						<?php $firstCommissionType = false; ?>
+					<?php endforeach; ?> 
+				<?php endif; ?>
 			</div>
 <?php elseif (User::isLoggedIn() && !array_key_exists("q", $_GET)): ?>
 			<div class="section">
