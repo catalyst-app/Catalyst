@@ -15,6 +15,18 @@ trait MessagableTrait {
 	abstract public function getMessageUrlPath() : string;
 
 	/**
+	 * @return string Message URL path with precomposed data
+	 */
+	public function getPrecomposedMessageUrl(string $subject="", string $message="") : string {
+		if (empty($subject) && empty($message)) {
+			return $this->getMessageUrlPath();
+		} elseif (empty($message)) {
+			return $this->getMessageUrlPath().urlencode($subject)."/";
+		}
+		return $this->getMessageUrlPath().urlencode($subject)."/".urlencode($message)."/";
+	}
+
+	/**
 	 * Get the friendly name to use for the user
 	 * 
 	 * Nickname/name as compared to username
