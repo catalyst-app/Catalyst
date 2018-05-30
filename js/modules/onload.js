@@ -235,6 +235,9 @@ var humanFileSize = function(size) {
 
 		/* ENCRPYTION */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'encryption.js'; ?>
+
+		/* COMMISSION TYPE ACTIONS */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'commission_type_client_actions.js'; ?>
 	});
 })(jQuery);
 
