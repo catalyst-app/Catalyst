@@ -94,10 +94,6 @@ class Resources {
 		// materialize main
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.css"],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css"],
-
-		// icon set + robotos
-		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Material+Icons"],
-		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i"],
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
@@ -114,6 +110,41 @@ class Resources {
 	public static function getStyles() : array {
 		$styles = [];
 		foreach (self::STYLES as $style) {
+			switch ($style[self::PRODUCTION]) {
+				case self::PRODUCTION: // production only
+					if (Controller::isDevelMode()) {
+						continue 2;
+					}
+					break;
+				case self::DEVEL: // devel only
+					if (!Controller::isDevelMode()) {
+						continue 2;
+					}
+					break;
+				case self::ALWAYS:
+				break;
+			}
+			$styles[] = str_replace("{commit}", Controller::getCommit(), $style[1]);
+		}
+		return $styles;
+	}
+
+	/**
+	 * Deferred CSS
+	 */
+	public const DEFERRED_CSS = [
+		// icon set + robotos
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Material+Icons"],
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i"],
+	];
+
+	/**
+	 * Get the deferred styles
+	 * @return string[]
+	 */
+	public static function getDeferredStyles() : array {
+		$styles = [];
+		foreach (self::DEFERRED_CSS as $style) {
 			switch ($style[self::PRODUCTION]) {
 				case self::PRODUCTION: // production only
 					if (Controller::isDevelMode()) {
