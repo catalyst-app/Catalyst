@@ -12,7 +12,7 @@ use \Catalyst\{Controller, Secrets};
 use \Catalyst\Database\Database;
 use \Catalyst\Database\Query\AbstractQuery;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\Page\UniversalFunctions;
+use \Catalyst\Page\{Resources, UniversalFunctions};
 
 $forms = FormRepository::getAllForms();
 
@@ -102,6 +102,12 @@ var humanFileSize = function(size) {
 		}
 
 		materializeOnload();
+
+		/* LOAD DEFERRED STYLES */
+		<?php foreach (Resources::getDeferredStyles() as $style): ?>
+			$("head").append($("<link>").attr("href", <?= json_encode($style) ?>).attr("rel", "stylesheet"));
+			window.log("onload.js", "Loading style "+<?= json_encode($style) ?>);
+		<?php endforeach; ?>
 		
 		/* GENERIC FUNCTIONS */
 		jQuery.fn.swapWith = function(to) {
