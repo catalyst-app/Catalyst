@@ -219,7 +219,7 @@ class Artist extends AbstractDatabaseModel {
 	 * @return string URL, relative to ROOTDIR/Message/New/, that can be used for messaging
 	 */
 	public function getMessageUrlPath() : string {
-		return 'Artist/'.$this->getUrl();
+		return 'Artist/'.$this->getUrl().'/';
 	}
 
 	/**
