@@ -404,7 +404,7 @@ class User extends AbstractDatabaseModel {
 	 */
 	public function getWishlist() : array {
 		return $this->getDataFromCallableOrCache("WISHLIST_OBJS", function() : array {
-			WishlistItem::getUserWishlist($this);
+			return WishlistItem::getUserWishlist($this);
 		});
 	}
 
