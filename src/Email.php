@@ -1576,6 +1576,11 @@ class Email {
 		$mail->SMTPSecure = $smtp[2];
 		$mail->Port = $smtp[1];
 
+		$mail->CharSet = 'utf-8';
+
+		// we ARE a mailing list!
+		$mail->addCustomHeader("List-Unsubscribe",'<mailto:catalyst@catalystapp.co?subject=Unsubscribe>');
+
 		$mail->setFrom(...$email);
 		foreach ($recipients as $to) {
 			$mail->addAddress(...$to);
