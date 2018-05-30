@@ -462,4 +462,13 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 		return serialize($values);
 	}
+
+	/**
+	 * Basic string version for easy in_array usage
+	 *
+	 * @return string
+	 */
+	public function __toString() : string {
+		return get_class($this)."|".$this->getId();
+	}
 }
