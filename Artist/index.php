@@ -90,18 +90,26 @@ echo UniversalFunctions::createHeading("Artist");
 			</div>
 			<div class="divider"></div>
 			<div class="section">
+				<h4>Commission Types</h4>
 <?php
-// $types = CommissionType::getForArtist($artist);
-/* $types = array_filter($types, function($type) {
+$commissionTypes = CommissionType::getForArtist($artist);
+$commissionTypes = array_filter($commissionTypes, function($type) {
 	if (User::isLoggedIn() && $_SESSION["user"]->isNsfw()) {
 		return true;
 	}
-	if (!in_array("MATURE", $type->getAttrs()) && !in_array("EXPLICIT", $type->getAttrs())) {
+
+	// if known SAFE then leave in
+	if (in_array("SAFE", $type->getAttributes())) {
 		return true;
 	}
-	return in_array("SFW", $type->getAttrs());
-}); */ ?>
-				<p class="flow-text">Commission types are :b:roke right now, sorry!</p>
+	// if NOT SFW and mature or explicit, say no
+	if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
+		return false;
+	}
+
+	// not explicitly marked any way
+	return true;
+});
 			</div>
 <?php elseif (User::isLoggedIn() && !array_key_exists("q", $_GET)): ?>
 			<div class="section">
