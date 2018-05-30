@@ -398,7 +398,7 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get all wishlist items as an array of CommissionType's
+	 * Get all wishlist items as an array of WishlistItem's
 	 * 
 	 * @return WishlistItem[]
 	 */
