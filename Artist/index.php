@@ -145,22 +145,22 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 												</a>
 											</li>
 											<li class="tooltipped" data-tooltip="Request a Quote">
-												<a class="btn-floating">
+												<a class="btn-floating" href="<?= ROOTDIR ?>Quote/<?= $commissionType->getToken() ?>/">
 													<i class="material-icons">attach_money</i>
 												</a>
 											</li>
 											<li class="tooltipped" data-tooltip="Make a Request">
-												<a class="btn-floating">
+												<a class="btn-floating" href="<?= ROOTDIR ?>Request/<?= $commissionType->getToken() ?>/">
 													<i class="material-icons">how_to_vote</i>
 												</a>
 											</li>
 											<li class="tooltipped" data-tooltip="Request a Trade">
-												<a class="btn-floating">
+												<a class="btn-floating" href="<?= ROOTDIR ?>Trade/<?= $commissionType->getToken() ?>/">
 													<i class="material-icons">swap_horiz</i>
 												</a>
 											</li>
 											<li class="tooltipped" data-tooltip="Commission">
-												<a class="btn-floating">
+												<a class="btn-floating" href="<?= ROOTDIR ?>Commission/<?= $commissionType->getToken() ?>/">
 													<i class="material-icons">add_shopping_cart</i>
 												</a>
 											</li>
