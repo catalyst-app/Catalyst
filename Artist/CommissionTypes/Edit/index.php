@@ -44,7 +44,7 @@ if (User::isLoggedIn() && $_SESSION["user"]->isArtist()) {
 
 require_once Values::HEAD_INC;
 
-echo UniversalFunctions::createHeading("New Commission Type");
+echo UniversalFunctions::createHeading("Edit Commission Type");
 
 if (!User::isLoggedIn()):
 	echo User::getNotLoggedInHtml();
