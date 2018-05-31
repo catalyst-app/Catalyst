@@ -194,6 +194,22 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 							<p class="col s12">
 								<?= htmlspecialchars($commissionType->getBlurb()) ?>
 							</p>
+							<div class="commission-type-image-examples row">
+								<?php $i = 0; ?>
+								<?php foreach ($commissionType->getImageSet() as $image): ?>
+									<?php $i++; ?>
+									<?php if ($i == 3): ?>
+										<div class="col s6 l4 hide-on-med-and-down">
+											<?= $image->getCard() ?>
+										</div>
+										<?php break; ?>
+									<?php else: ?>
+										<div class="col s6 l4">
+											<?= $image->getCard() ?>
+										</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
 					<?php endforeach; ?> 
