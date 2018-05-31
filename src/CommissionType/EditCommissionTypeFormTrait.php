@@ -90,7 +90,7 @@ trait EditCommissionTypeFormTrait {
 		$form->addField($descriptionField);
 
 		$costsNote = new StaticHTMLField();
-		$costsNote->setHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging.  The base cost in USD is not shown to users, but is used for searching and analytics.</p>');
+		$costsNote->setHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging. </p>');
 		$form->addField($costsNote);
 
 		$baseCostFieldWrapper = new WrappedField();
