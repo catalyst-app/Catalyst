@@ -92,9 +92,9 @@ echo UniversalFunctions::createHeading("Artist");
 			<div class="section">
 				<h4>Commission Types</h4>
 <?php
-$commissionTypes = CommissionType::getForArtist($artist);
+$commissionTypes = CommissionType::getForArtist($artist, true);
 $commissionTypes = array_filter($commissionTypes, function($type) {
-	if (User::isLoggedIn() && $_SESSION["user"]->isNsfw()) {
+	if (User::isCurrentUserNsfw()) {
 		return true;
 	}
 
