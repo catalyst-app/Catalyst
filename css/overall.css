@@ -302,7 +302,7 @@ label[data-error], label[data-success] {
 .chip picture img {
 	margin-top: 4px;
 	margin-left: 4px;
-	margin-right: 4px;
+	margin-right: 6px;
 }
 
 .modal.modal-fixed-footer .modal-content {
