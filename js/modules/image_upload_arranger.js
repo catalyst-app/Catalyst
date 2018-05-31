@@ -229,5 +229,6 @@ new Draggable.Sortable(document.querySelectorAll(".image-rearranger"), {
 $(document).on("click", ".image-row-remove-icon", function(e) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, ".on click for .image-row-remove-icon - removing an image row");
 
+	$("[data-path=\""+$(this).parent().parent().parent().attr("data-internal-filename")+"\"]").parent().remove();
 	$(this).parent().parent().parent().remove();
 });
