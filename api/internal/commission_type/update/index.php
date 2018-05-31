@@ -71,7 +71,7 @@ foreach ($existingImages as $image) {
 }
 
 if (isset($_FILES["images"])) {
-	$images = Image::uploadMultiple($_FILES["images"], Folders::CHARACTER_IMAGE, $_POST["token"]);
+	$images = Image::uploadMultiple($_FILES["images"], Folders::COMMISSION_TYPE_IMAGE, $_POST["token"]);
 
 	foreach ($images as $image) {
 		if (is_null($image->getPath())) {
