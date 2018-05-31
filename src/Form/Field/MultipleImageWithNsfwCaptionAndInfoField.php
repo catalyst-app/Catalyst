@@ -346,6 +346,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= $image->getStrictCircleHtml([], ["margin" => "1em"], [
 					"data-container" => $this->getId().self::ROW_CONTAINER_ID_SUFFIX,
 					"id" => $this->getId()."-pre-existing-".self::ROW_ID_SUFFIX.$image->getToken()."-".$image->getPath()."-reorder-img",
+					"data-path" => $image->getPath(),
 				]);
 
 				$str .= '</div>';
