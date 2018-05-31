@@ -117,7 +117,7 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 					<?php $firstCommissionType = true; ?>
 					<?php foreach ($commissionTypes as $commissionType): ?>
 						<?php if (!$firstCommissionType): ?>
-							<div class="divider small-bottom-margin"></div>
+						<div class="divider small-bottom-margin"></div>
 						<?php endif; ?>
 							<div class="commission-type-row" id="ct-<?= htmlspecialchars($commissionType->getToken()) ?>" data-token="<?= htmlspecialchars($commissionType->getToken()) ?>">
 								<div class="commission-type-row-header">
