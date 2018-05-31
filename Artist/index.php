@@ -199,6 +199,7 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 								<?php foreach ($commissionType->getImageSet() as $image): ?>
 									<?php $i++; ?>
 									<?php if ($i == 3): ?>
+										<!-- hide 3rd card on smaller screens -->
 										<div class="col s6 l4 hide-on-med-and-down">
 											<?= $image->getCard() ?>
 										</div>
