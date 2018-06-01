@@ -15,4 +15,5 @@ class Folders {
 	public const ABOUT_ICONS = "img/about_social_icons";
 	public const STAFF_ICONS = "img/staff_icons";
 	public const INTEGRATION_ICONS = "img/integration_icons";
+	public const LOGO_WHITE = "img/logo/white";
 }
