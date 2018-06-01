@@ -204,7 +204,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 						$str .= '<a';
 						$str .= ' href="'.htmlspecialchars($network["href"]).'"';
-						$str .= ' class="black-text center col s12"';
+						$str .= ' class="black-text about-page-social-icon-block center col s12"';
 						$str .= ' rel="noopener"';
 						$str .= '>';
 
@@ -219,7 +219,6 @@ echo UniversalFunctions::createHeading("About Us");
 						$str .= '</div>';
 
 						$str .= '<span';
-						$str .= ' style="overflow-x: auto;white-space: nowrap;"';
 						$str .= ' class="col s12"';
 						$str .= '>';
 
