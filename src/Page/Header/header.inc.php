@@ -51,7 +51,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<!-- win 8+ -->
 		<meta name="application-name" content="Catalyst"/>
 		<meta name="msapplication-TileColor" content="#<?= PAGE_COLOR ?>"/>
-		<meta name="msapplication-square70x70logo" content="<?= ROOTDIR ?>img/logo/white/logo.png"/>
+		<meta name="msapplication-square70x70logo" content="<?= ROOTDIR ?>img/logo/solid/logo.png"/>
 
 		<!-- opengraph -->
 		<meta property="og:title" content="<?= htmlspecialchars(PAGE_TITLE) ?>"/>
@@ -78,8 +78,8 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<?php endif; ?>
 
 		<!-- link tags -->
-		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo/white/logo.png'/>
-		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo/white/logo.png'/>
+		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo/icon/logo.png'/>
+		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo/icon/logo.png'/>
 		<link rel="canonical" href="<?= htmlspecialchars(UniversalFunctions::getCanonicalRequestUrl()) ?>"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
 		<link rel="image_src" href="https://catalystapp.co/img/logo/white/logo.png" type="image/png"/>
