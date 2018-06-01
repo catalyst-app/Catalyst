@@ -79,7 +79,7 @@ echo UniversalFunctions::createHeading("About Us");
 							"href" => "mailto:catalyst@catalystapp.co",
 							"primary" => false,
 							"img" => "mail",
-							"label" => "Click Here",
+							"label" => "Email Us",
 						],
 						[
 							"href" => "https://github.com/catalyst-app/Catalyst",
@@ -193,7 +193,7 @@ echo UniversalFunctions::createHeading("About Us");
 							"href" => "https://trello.com/b/X37KEv4A/catalyst",
 							"primary" => false,
 							"img" => "trello",
-							"label" => "Click here",
+							"label" => "Trello",
 						],
 					];
 
