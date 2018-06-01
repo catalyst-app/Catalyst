@@ -11,7 +11,7 @@ class Folders {
 	public const ARTIST_IMAGE = "artist_images";
 	public const COMMISSION_TYPE_IMAGE = "commission_type_images";
 
-	public const GLOBAL_IMG = "img/placeholders";
+	public const PLACEHOLDERS = "img/placeholders";
 	public const ABOUT_ICONS = "img/about_social_icons";
 	public const STAFF_ICONS = "img/staff_icons";
 	public const INTEGRATION_ICONS = "img/integration_icons";
