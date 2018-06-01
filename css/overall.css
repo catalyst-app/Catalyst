@@ -571,6 +571,11 @@ input[type=checkbox] + label + span.invalid-text {
 	line-height: 4rem;
 }
 
+.about-page-social-icon-block span {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
 .file-input-field .btn input::-webkit-file-upload-button {
 	display: none;
 }
