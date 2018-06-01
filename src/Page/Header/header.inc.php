@@ -12,7 +12,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		</title>
 
 <?php foreach (Resources::getStyles() as $style): ?>
-		<link href="<?= $style ?>" rel="stylesheet" />
+		<link href="<?= $style[0] ?>" <?= trim(" ".implode(" ", array_slice($style, 1))) ?> rel="stylesheet" />
 <?php endforeach; ?>
 
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport" />
