@@ -92,8 +92,8 @@ class Resources {
 	 */
 	public const STYLES = [
 		// materialize main
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.css"],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css"],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.css", 'crossorigin="anonymous"', 'integrity="sha384-GQmJ12uuazjwFD/WEjv2hI/wYT/3JCEaf15p/XyqQl0mfow5PqI/APimyGQXEDHK"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css", 'crossorigin="anonymous"', 'integrity="sha384-AGqYo0VYxBkWUfLYJujCtaohTG6DnXxnWgLZ2cROBb2Lpl/2ew9aA79ke3PWsZ+B"'],
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
@@ -101,6 +101,10 @@ class Resources {
 		
 		// used for styling, uses rewrite color-######.css to get the approprite styles
 		[self::ALWAYS, ROOTDIR."css/color-".PAGE_COLOR.".css?{commit}"],
+
+		// icon set + robotos
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Material+Icons", 'crossorigin="anonymous"'],
+		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i", 'crossorigin="anonymous"'],
 	];
 
 	/**
