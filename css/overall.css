@@ -137,7 +137,6 @@ div.section > h4:first-child {
 .ribbon {
 	text-align: center;
 	margin: 0;
-	padding: 0;
 	color:white;
 	padding:0.5em 0;
 	position: absolute;
@@ -619,6 +618,11 @@ input[type=checkbox] + label + span.invalid-text {
 }
 
 @media only screen and (max-width: 600px) {
+	a.brand-logo img {
+		padding-top: 2px;
+		height: 54px;
+	}
+
 	.color-swatch {
 		border: 0.3rem solid #fff;
 		min-height: 3rem !important;
@@ -626,6 +630,11 @@ input[type=checkbox] + label + span.invalid-text {
 }
 
 @media only screen and (min-width: 601px) and (max-width: 992px) {
+	a.brand-logo img {
+		padding-top: 4px;
+		height: 60px;
+	}
+
 	.color-swatch {
 		border: 0.5rem solid #fff;
 		min-height: 5rem !important;
@@ -633,6 +642,11 @@ input[type=checkbox] + label + span.invalid-text {
 }
 
 @media only screen and (min-width: 993px) {
+	a.brand-logo img {
+		padding-top: 4px;
+		height: 60px;
+	}
+
 	.color-swatch {
 		border: 0.7rem solid #fff;
 		min-height: 7rem !important;
