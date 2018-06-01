@@ -57,7 +57,7 @@ class Resources {
 
 		[self::PRODUCTION, ROOTDIR."js/dist/packed.min.js?{commit}"],
 
-		[self::ALWAYS, "https://googletagmanager.com/gtag/js?id=UA-112460506-1", "defer", 'integrity="sha384-ukcotZRZbHh9DYtemmVlDLFWWqdSIB9bKl9hdrQlg3pLjlatp0xSO3ZQUQ73/dpo"'],
+		[self::ALWAYS, "https://googletagmanager.com/gtag/js?id=UA-112460506-1", "defer"],
 	];
 
 	/**
