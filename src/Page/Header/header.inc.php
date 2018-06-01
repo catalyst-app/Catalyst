@@ -34,11 +34,11 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<meta name="apple-touch-fullscreen" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 		<meta name="format-detection" content="telephone=no"/>
-		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon" type="image/png"/>
-		<link href="https://catalystapp.co/img/logo_square.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link rel="mask-icon" href="https://catalystapp.co/img/logo_square.png" color="green"/>
+		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon" type="image/png"/>
+		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+		<link rel="mask-icon" href="https://catalystapp.co/img/logo/mask.svg" color="#1b5e20"/>
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
@@ -51,7 +51,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<!-- win 8+ -->
 		<meta name="application-name" content="Catalyst"/>
 		<meta name="msapplication-TileColor" content="#<?= PAGE_COLOR ?>"/>
-		<meta name="msapplication-square70x70logo" content="img/logo_square.png"/>
+		<meta name="msapplication-square70x70logo" content="<?= ROOTDIR ?>img/logo/white/logo.png"/>
 
 		<!-- opengraph -->
 		<meta property="og:title" content="<?= htmlspecialchars(PAGE_TITLE) ?>"/>
@@ -60,7 +60,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<?php if (defined("PAGE_IMAGE")): ?>
 			<meta property="og:image" content="<?= phpUri::parse(UniversalFunctions::getRequestUrl())->join(PAGE_IMAGE) ?>"/>
 		<?php else: ?>
-			<meta property="og:image" content="https://catalystapp.co/img/logo_big_white.png"/>
+			<meta property="og:image" content="https://catalystapp.co/img/banner/sammy/usage/main.png"/>
 		<?php endif; ?>
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
@@ -74,15 +74,15 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<?php if (defined("PAGE_IMAGE")): ?>
 			<meta property="twitter:image" content="<?= phpUri::parse(UniversalFunctions::getRequestUrl())->join(PAGE_IMAGE) ?>"/>
 		<?php else: ?>
-			<meta property="twitter:image" content="https://catalystapp.co/img/logo_big_white.png"/>
+			<meta property="twitter:image" content="https://catalystapp.co/img/banner/sammy/usage/main.png"/>
 		<?php endif; ?>
 
 		<!-- link tags -->
-		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
-		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo_square.png'/>
+		<link rel='shortcut icon' type='image/png' href='https://catalystapp.co/img/logo/white/logo.png'/>
+		<link rel='fluid-icon' type='image/png' href='https://catalystapp.co/img/logo/white/logo.png'/>
 		<link rel="canonical" href="<?= htmlspecialchars(UniversalFunctions::getCanonicalRequestUrl()) ?>"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
-		<link rel="image_src" href="https://catalystapp.co/img/logo_square.png" type="image/png"/>
+		<link rel="image_src" href="https://catalystapp.co/img/logo/white/logo.png" type="image/png"/>
 	</head>
 	<body>
 <?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
