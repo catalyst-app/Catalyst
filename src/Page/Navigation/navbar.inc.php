@@ -34,7 +34,7 @@ $navbarItems = Navbar::getNavbarItems(User::getPermissionScope());
 					</i>
 				</a>
 				<a class="brand-logo" href="<?= ROOTDIR ?>">
-					<?= Navbar::LOGO_HTML ?>
+					<?= Navbar::getLogoHtml() ?>
 				</a>
 				<ul class="right hide-on-med-and-down">
 					<?php foreach ($navbarItems as $navbarItem): ?>

@@ -2,6 +2,7 @@
 
 namespace Catalyst\Page\Navigation;
 
+use \Catalyst\Images\Image;
 use \Catalyst\User\User;
 
 /**
@@ -22,12 +23,6 @@ class Navbar {
 	// if the bar this item is a part of is sidebar or navbar, used for callable
 	public const NAVBAR = 0;
 	public const SIDENAV = 1;
-
-	// html for the logo in the top left/center
-	public const LOGO_HTML = '
-	<img alt="logo" class="hide-on-small-only" height="60" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 2px;"/>
-	<img alt="logo" class="hide-on-med-and-up" height="54" src="'.ROOTDIR.'img/logo_square_white.png" style="margin-top: 1px;"/>
-	';
 
 	/**
 	 * Get all possible navbar items
@@ -110,5 +105,14 @@ class Navbar {
 	 */
 	public static function getNavbarItemLabel(int $bar, array $navbarItem) : string {
 		return $navbarItem[1] == self::CALLABLE ? call_user_func($navbarItem[0], $bar) : htmlspecialchars($navbarItem[0]);
+	}
+
+	/**
+	 * Get the HTML to display thie logo HTML, in white
+	 *
+	 * @return string HTML to display logo in white
+	 */
+	public static function getLogoHtml() : string {
+		return Image::getLogoImage()->getImgElementHtml();
 	}
 }
