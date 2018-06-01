@@ -17,27 +17,27 @@ class Resources {
 	 */
 	public const SCRIPTS = [
 		// use minified versions in production
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js", 'crossorigin="anonymous"', 'integrity="sha384-fJU6sGmyn07b+uD1nMk7/iSb4yvaowcueiQhfVgQuD98rfva8mcr1eSvjchfpMrH"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", 'crossorigin="anonymous"', 'integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-VG5Q68Gg4u6g3utXGn2oq5XFI7UcM1XFkHF/oHazvrzpn0rTIo49NuN8Z1CUN4dY"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-xkq5MpE6OTpCEKiI52Kl3j3oMebQHg4W08aWkvIoKktH8yYFrJu7HzAU+DqDcYf4"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-HdCLGHAIqh0N569EeI8o4Etw1Z9Xgpzxzv8lDwoiXZAH5Og8ifGCKhUCJ6jC0p2l"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-toD9dRpVHuKuQBoFBpltRQqyY/sx4ic2N0SKCQ8lJmY4CF5W5Bls3MKJ2uhJfB3S"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-4YOEy5TUNJLUt9LDoiwW93OD+NCDFwWPOgnE5i2SqPJdsSZqvbbJlrOv8J+yvYCI"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-uYiTH2ePRlFXtnfS6psKczK3AlqsDO3dpEHqz/GRNrGQi9QdEh8aFAZob9pSyce4"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-gHK0hFb5OqUx3ZtJAk/ikyeR4ywEFNcJlrv0mtgA+qb43Dd6D7Fp2OugVsz4pB9z"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.1/index.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-mePQ3qRBaScPjQsgsr06R9L2u8SUZJW2vdociBqfFfK/uHIsZeeRz+J61enIS16G"'],
 
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-zJXJqc5ftX51ojskUi8aWFg0yrz9P61p6Wyg8n0cyFYsgWiAYtxnVWzh8d8BLcw0"'],
+		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-X0mQP9Ee57CRKxDlf/55LrrCIwWvXucDZvxkZ/rO5WF2By9Lwva4rEFd2LZLogOs"'],
 
 		// not vital, easter egg
-		[self::DEVEL, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.js", "defer", 'crossorigin="anonymous"'],
-		[self::PRODUCTION, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"'],
+		[self::DEVEL, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-hsul02hGCXZOC202Z9Grc2qcn5Et4FLWdJgXYBtTNG3Ux1YPr85TQY1G2/I0YQrd"'],
+		[self::PRODUCTION, "https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-8sTXxKn53rkirkXu5gKBBpFxoK/zmAefVSPu6IvC29DIKRkU94ep9TNs6tgyxde4"'],
 		
 		// crossorigin doesn't like to behave here
 		// already comes minified
