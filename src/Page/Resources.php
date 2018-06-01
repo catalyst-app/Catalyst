@@ -124,42 +124,8 @@ class Resources {
 				case self::ALWAYS:
 				break;
 			}
-			$styles[] = str_replace("{commit}", Controller::getCommit(), $style[1]);
-		}
-		return $styles;
-	}
-
-	/**
-	 * Deferred CSS
-	 */
-	public const DEFERRED_CSS = [
-		// icon set + robotos
-		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Material+Icons"],
-		[self::ALWAYS, "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i"],
-	];
-
-	/**
-	 * Get the deferred styles
-	 * @return string[]
-	 */
-	public static function getDeferredStyles() : array {
-		$styles = [];
-		foreach (self::DEFERRED_CSS as $style) {
-			switch ($style[self::PRODUCTION]) {
-				case self::PRODUCTION: // production only
-					if (Controller::isDevelMode()) {
-						continue 2;
-					}
-					break;
-				case self::DEVEL: // devel only
-					if (!Controller::isDevelMode()) {
-						continue 2;
-					}
-					break;
-				case self::ALWAYS:
-				break;
-			}
-			$styles[] = str_replace("{commit}", Controller::getCommit(), $style[1]);
+			$style[1] = str_replace("{commit}", Controller::getCommit(), $style[1]);
+			$styles[] = array_slice($style, 1);
 		}
 		return $styles;
 	}
