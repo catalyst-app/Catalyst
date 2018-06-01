@@ -229,6 +229,7 @@ class Image {
 
 				if ($this->getFolder() == Folders::PLACEHOLDERS ||
 						$this->getFolder() == Folders::ABOUT_ICONS ||
+						$this->getFolder() == Folders::LOGO_WHITE ||
 						$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
 					$result = [
 						["image/svg+xml", strrev("gvs.".$pathbase)],
@@ -611,6 +612,6 @@ class Image {
 	 * @return self
 	 */
 	public static function getLogoImage() : self {
-		return new self(Folders::PLACEHOLDERS, "", "new.png", false);
+		return new self(Folders::LOGO_WHITE, "", "logo.png", false);
 	}
 }
