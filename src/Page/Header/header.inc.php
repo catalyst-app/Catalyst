@@ -60,7 +60,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<?php if (defined("PAGE_IMAGE")): ?>
 			<meta property="og:image" content="<?= phpUri::parse(UniversalFunctions::getRequestUrl())->join(PAGE_IMAGE) ?>"/>
 		<?php else: ?>
-			<meta property="og:image" content="https://catalystapp.co/img/banner/sammy/usage/main.png"/>
+			<meta property="og:image" content="https://catalystapp.co/img/banners/sammy/usage/main.png"/>
 		<?php endif; ?>
 		<meta property="og:description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
 		<meta property="og:site_name" content="Catalyst"/>
@@ -74,7 +74,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 		<?php if (defined("PAGE_IMAGE")): ?>
 			<meta property="twitter:image" content="<?= phpUri::parse(UniversalFunctions::getRequestUrl())->join(PAGE_IMAGE) ?>"/>
 		<?php else: ?>
-			<meta property="twitter:image" content="https://catalystapp.co/img/banner/sammy/usage/main.png"/>
+			<meta property="twitter:image" content="https://catalystapp.co/img/banners/sammy/usage/main.png"/>
 		<?php endif; ?>
 
 		<!-- link tags -->
