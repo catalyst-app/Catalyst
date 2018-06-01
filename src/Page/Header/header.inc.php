@@ -42,10 +42,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
-		<meta http-equiv="Page-Enter" content="RevealTrans(Duration=2,Transition=2)"/>
-		<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3,Transition=12)"/>
 		<meta name="mssmarttagspreventparsing" content="true"/>
-		<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 		<meta name="msapplication-starturl" content="https://catalystapp.co/"/>
 		<meta name="msapplication-window" content="width=800;height=600"/>
 		<meta name="msapplication-navbutton-color" content="green"/>
