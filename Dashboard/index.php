@@ -65,7 +65,7 @@ else: ?>
 <?php
 $characters = Character::getCharactersFromUser($_SESSION["user"]);
 
-$newCharacterImage = new Image(Folders::GLOBAL_IMG, "", "new.png", false);
+$newCharacterImage = Image::getNewItemImage();
 
 $cards = [
 	'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", [], false).'</div>'

@@ -227,7 +227,7 @@ class Image {
 				$pathrev = strrev($path);
 				$pathbase = substr($pathrev, strpos($pathrev, ".")+1);
 
-				if ($this->getFolder() == Folders::GLOBAL_IMG ||
+				if ($this->getFolder() == Folders::PLACEHOLDERS ||
 						$this->getFolder() == Folders::ABOUT_ICONS ||
 						$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
 					$result = [
@@ -272,9 +272,9 @@ class Image {
 	 */
 	public static function getNsfwImagePaths() : array {
 		return [
-			["image/svg+xml", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.svg'],
-			["image/webp", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.webp'],
-			["image/png", ROOTDIR.Folders::GLOBAL_IMG.'/nsfw.png'],
+			["image/svg+xml", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.svg'],
+			["image/webp", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.webp'],
+			["image/png", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.png'],
 		];
 	}
 
@@ -285,9 +285,9 @@ class Image {
 	 */
 	public static function getNotFoundPaths() : array {
 		return [
-			["image/svg+xml", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg'],
-			["image/webp", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp'],
-			["image/png", ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png'],
+			["image/svg+xml", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.svg'],
+			["image/webp", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.webp'],
+			["image/png", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.png'],
 		];
 	}
 
@@ -298,9 +298,9 @@ class Image {
 	 */
 	public static function getNotFoundFilesystemPaths() : array {
 		return [
-			["image/svg+xml", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.svg'],
-			["image/webp", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.webp'],
-			["image/png", REAL_ROOTDIR.Folders::GLOBAL_IMG.'/not_found.png'],
+			["image/svg+xml", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.svg'],
+			["image/webp", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.webp'],
+			["image/png", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.png'],
 		];
 	}
 
@@ -602,6 +602,15 @@ class Image {
 	 * @return self
 	 */
 	public static function getNewItemImage() : self {
-		return new self(Folders::GLOBAL_IMG, "", "new.png", false);
+		return new self(Folders::PLACEHOLDERS, "", "new.png", false);
+	}
+
+	/**
+	 * Get the image for a new {item}
+	 * 
+	 * @return self
+	 */
+	public static function getLogoImage() : self {
+		return new self(Folders::PLACEHOLDERS, "", "new.png", false);
 	}
 }
