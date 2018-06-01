@@ -14,6 +14,10 @@ html, html {
 	transition: background-color 0.3s ease;
 }
 
+.fixed-action-btn {
+	z-index: initial;
+}
+
 .about-page-social-icon-wrapper {
 	height: 10em;
 }
