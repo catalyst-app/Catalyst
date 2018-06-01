@@ -45,7 +45,7 @@ window.onerror = function(message, url, lineNumber) {
 	return false;
 };
 
-window.log = function(category, message, bold=false) {
+window.log = function(category, message, bold) {
 	<?php if (Controller::isDevelMode()): ?>
 		if (bold) {
 			console.log("%c"+(new Date().toLocaleString())+" ["+category+"] "+message, "font-weight: 900; font-style: oblique;");
