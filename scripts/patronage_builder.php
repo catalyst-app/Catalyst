@@ -226,7 +226,7 @@ define("PATRON_ATTRS", [
 			],
 		],
 	],
-	"46d46ce6e94f807bc535faf153fa7f96edf563d93718bed42858bdeb95ea43fe" => [
+	"919235a035e65476f64db8dd2a8a024fb92c6d32c11400be32118ad28bf01ec6" => [
 		"color" => "db395b",
 		"name" => "Keeri",
 		"social" => [
