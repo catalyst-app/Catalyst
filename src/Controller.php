@@ -109,6 +109,9 @@ class Controller {
 		if (!class_exists("\\Catalyst\\Secrets") || !class_exists("\\PHPMailer\\PHPMailer\\PHPMailer")) {
 			return;
 		}
+		if ($errstr == "Simulated error page") {
+			return;
+		}
 		ob_start();
 		$destinations = [];
 		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
