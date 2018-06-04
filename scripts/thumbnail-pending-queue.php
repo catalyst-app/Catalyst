@@ -70,7 +70,7 @@ while (true) {
 
 			logLine("Thumbnailifying ".$image." (".$folder.DIRECTORY_SEPARATOR.$image.")");
 
-			$command = "./catalyst-thumbnail-generator ".escapeshellarg(REAL_ROOTDIR.$folder."/".$image);
+			$command = "/usr/bin/bash catalyst-thumbnail-generator ".escapeshellarg(REAL_ROOTDIR.$folder."/".$image);
 
 			logLine("exec: ".$command);
 			
