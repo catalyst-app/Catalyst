@@ -5,6 +5,10 @@ parameters:
 		- scripts/
 		- src/Form/FormPHP
 	bootstrap: src/phpstan-init.php
+	fileExtensions:
+		- php
+		- css
+		- js
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
 		- '/Constant PAGE_IMAGE not found\./'
