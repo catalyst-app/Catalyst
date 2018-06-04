@@ -3,6 +3,8 @@
 namespace Catalyst\Images;
 
 use \Catalyst\Controller;
+use \Catalyst\Database\{Column, Tables};
+use \Catalyst\Database\Query\MultiInsertQuery;
 use \Catalyst\Tokens;
 use \Catalyst\User\User;
 
@@ -40,6 +42,12 @@ class Image {
 	 * @var string
 	 */
 	protected $uploadName='';
+
+	/**
+	 * Stores list of images to add to the thumbnailing queue on shutdown
+	 * @var self[]
+	 */
+	protected static $pendingThumbnailQueue = [];
 
 	/**
 	 * Maximum size an image can be if it is pixel art
@@ -532,6 +540,53 @@ class Image {
 	}
 
 	/**
+	 * Write the pending operation queues (currently only thumbnailing)
+	 */
+	public static function writePendingOperationQueues() : void {
+		self::writeThumbnailQueue();
+	}
+
+	/**
+	 * Write the thumbnail queue to database to be processed later by a job
+	 */
+	public static function writeThumbnailQueue() : void {
+		self::$pendingThumbnailQueue = array_filter(self::$pendingThumbnailQueue, function(self $in) : bool {
+			return !is_null($in->getPath());
+		});
+
+		if (empty(self::$pendingThumbnailQueue)) {
+			return;
+		}
+
+		$stmt = new MultiInsertQuery();
+
+		$stmt->setTable(Tables::PENDING_THUMBNAIL_QUEUE);
+
+		$stmt->addColumn(new Column("FOLDER", Tables::PENDING_THUMBNAIL_QUEUE));
+		$stmt->addColumn(new Column("TOKEN", Tables::PENDING_THUMBNAIL_QUEUE));
+		$stmt->addColumn(new Column("PATH", Tables::PENDING_THUMBNAIL_QUEUE));
+
+		foreach (array_unique(self::$pendingThumbnailQueue, SORT_REGULAR) as $image) {
+			$stmt->addValue($image->getFolder());
+			$stmt->addValue($image->getToken());
+			$stmt->addValue($image->getPath());
+		}
+
+		$stmt->execute();
+	}
+
+	/**
+	 * Inserts the image into the queue to be thumbnailed
+	 */
+	protected function queueForThumbnailing() : void {
+		if ($this->getFilesystemPaths() == $this->getNotFoundFilesystemPaths() || is_null($this->getPath())) {
+			return;
+		}
+
+		self::$pendingThumbnailQueue[] = $this;
+	}
+
+	/**
 	 * Upload an image to the server with the given parameters
 	 * 
 	 * @param null|array $image An uploaded image object, from the $_FILES array
@@ -562,6 +617,8 @@ class Image {
 
 		$obj = new self($folder, $fileToken, $middle.$suffix);
 		$obj->setUploadName($image["name"]);
+
+		$obj->queueForThumbnailing();
 
 		return $obj;
 	}
