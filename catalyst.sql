@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 29, 2018 at 02:02 AM
+-- Generation Time: Jun 04, 2018 at 02:41 AM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -820,6 +820,23 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pending_thumbnail_queue`
+--
+
+CREATE TABLE `pending_thumbnail_queue` (
+  `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique DB Identifier of the row',
+  `FOLDER` varchar(22) NOT NULL COMMENT 'Folder the image resides in',
+  `TOKEN` varchar(12) NOT NULL COMMENT 'Token for the image',
+  `PATH` varchar(15) NOT NULL COMMENT 'Image path'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `pending_thumbnail_queue`:
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `social_media_meta`
 --
 
@@ -1143,6 +1160,12 @@ ALTER TABLE `messages`
   ADD KEY `READ` (`READ`);
 
 --
+-- Indexes for table `pending_thumbnail_queue`
+--
+ALTER TABLE `pending_thumbnail_queue`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `social_media_meta`
 --
 ALTER TABLE `social_media_meta`
@@ -1279,6 +1302,12 @@ ALTER TABLE `commission_wips`
 --
 ALTER TABLE `messages`
   MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pending_thumbnail_queue`
+--
+ALTER TABLE `pending_thumbnail_queue`
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique DB Identifier of the row';
 
 --
 -- AUTO_INCREMENT for table `users`
