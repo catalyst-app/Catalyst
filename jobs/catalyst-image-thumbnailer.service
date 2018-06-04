@@ -1,5 +1,12 @@
 [Unit]
-Description=Catalyst image thumbnailer
+Description=Thumbnail images every 15 minutes from pending queue
+After=network.target
 
 [Service]
-ExecStart=/usr/bin/php /home/catalyst/beta/scripts/thumbnail-pending-queue.php
+Type=simple
+WorkingDirectory=/home/catalyst/beta/scripts
+ExecStart=/usr/bin/php thumbnail-pending-queue.php
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
