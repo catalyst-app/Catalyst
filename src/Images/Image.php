@@ -353,7 +353,7 @@ class Image {
 		if ($this->isPixelArt()) {
 			$str .= " render-pixelated";
 		}
-		foreach ($additionalClasses as $class) {
+		foreach (array_unique($additionalClasses) as $class) {
 			$str .= " ".htmlspecialchars($class);
 		}
 		$str .= '"';
@@ -362,7 +362,7 @@ class Image {
 			$str .= htmlspecialchars($key).":".htmlspecialchars($value).";";
 		}
 
-		$str .= 'background-image: url('.htmlspecialchars('"'.$this->getFullPath().'"').');';
+		$str .= 'background-image: url('.htmlspecialchars('"'.$paths[0][1].'"').');';
 		
 		$str .= '"';
 
