@@ -232,6 +232,9 @@ var humanFileSize = function(size) {
 
 		/* COMMISSION TYPE ACTIONS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'commission_type_client_actions.js'; ?>
+
+		/* IMAGE COMPRESSION FALLBACKS */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'webp_background_image_fallback.js'; ?>
 	});
 })(jQuery);
 
