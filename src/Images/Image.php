@@ -366,7 +366,7 @@ class Image {
 		
 		$str .= '"';
 
-		$str .= ' data-fallback-src="'.htmlspecialchars($paths[1][1]).'"'
+		$str .= ' data-fallback-src="'.htmlspecialchars($paths[min(count($paths)-1, 1)][1]).'"';
 
 		foreach ($additionalAttributes as $key => $value) {
 			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
