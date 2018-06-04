@@ -5,7 +5,7 @@ namespace Catalyst;
 use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{AbstractDatabaseModel, AbstractDatabaseRowModel};
-use \Catalyst\Images\DBImage;
+use \Catalyst\Images\{DBImage, Image};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
 use \LogicException;
@@ -490,6 +490,7 @@ class Controller {
 		AbstractDatabaseModel::writeAllUpdates();
 		AbstractDatabaseRowModel::writeAllDeletions();
 		DBImage::writeAllChanges();
+		Image::writePendingOperationQueues();
 		if (php_sapi_name() !== 'cli') {
 			ob_end_flush();
 		}
