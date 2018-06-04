@@ -1,0 +1,9 @@
+[Unit]
+Description=Thumbnail images every 15 minutes from pending queue
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+
+[Install]
+WantedBy=timers.target

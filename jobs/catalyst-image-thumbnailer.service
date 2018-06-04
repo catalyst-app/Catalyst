@@ -1,0 +1,5 @@
+[Unit]
+Description=Catalyst image thumbnailer
+
+[Service]
+ExecStart=/usr/bin/php /home/catalyst/beta/scripts/thumbnail-pending-queue.php
