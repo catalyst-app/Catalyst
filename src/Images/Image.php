@@ -340,6 +340,14 @@ class Image {
 	public function getStrictCircleHtml(array $additionalClasses=[], array $additionalStyles=[], array $additionalAttributes=[]) : string {
 		$str = '';
 
+		$paths = $this->getFullPaths();
+
+		$realPaths = array_column($paths, 1);
+
+		if (strpos($realPaths[0][1], "_thumb.webp")) {
+			$additionalClasses[] = "primary-webp-thumb";
+		}
+
 		$str .= '<div';
 		$str .= ' class="img-strict-circle';
 		if ($this->isPixelArt()) {
@@ -357,6 +365,8 @@ class Image {
 		$str .= 'background-image: url('.htmlspecialchars('"'.$this->getFullPath().'"').');';
 		
 		$str .= '"';
+
+		$str .= ' data-fallback-src="'.htmlspecialchars($paths[1][1]).'"'
 
 		foreach ($additionalAttributes as $key => $value) {
 			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
