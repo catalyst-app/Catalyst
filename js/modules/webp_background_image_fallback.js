@@ -2,8 +2,8 @@ var img = new Image();
 img.onerror = function() {
 	window.log("webp", "webp support is not present", true);
 	$(".primary-webp-thumb").each(function(a,b) {
-		window.log("webp", "Reverting "+$(b).attr("src")+" to fallback "+$(b).attr("data-fallback-src"), true);
-		$(b).attr("src", $(b).attr("data-fallback-src"));
+		window.log("webp", "Reverting "+$(b).css("background-image")+" to fallback "+$(b).attr("data-fallback-src"), true);
+		$(b).css("background-image", $(b).attr("data-fallback-src"));
 	});
 };
 img.onload = function() {
