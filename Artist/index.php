@@ -217,6 +217,8 @@ echo UniversalFunctions::createHeading("Artist");
 						<div class="modal modal-fixed-footer" id="commission-type-info-modal-<?= htmlspecialchars($commissionType->getToken()) ?>">
 							<div class="modal-content">
 								<h4><?= htmlspecialchars($commissionType->getName()) ?></h4>
+								<div class="divider"></div>
+								<div class="raw-markdown"><?= htmlspecialchars($commissionType->getDescription()) ?></div>
 						</div>
 						<?php $firstCommissionType = false; ?>
 					<?php endforeach; ?> 
