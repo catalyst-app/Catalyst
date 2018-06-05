@@ -75,11 +75,6 @@ class Values {
 
 
 
-	const DEBUG_CAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-	const DEBUG_CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
-
-
-
 	const NEWEST_NEWS_ID = 1;
 	const NEWEST_NEWS_LABEL = 'New privacy policy';
 	const NEWEST_NEWS_DATE = 'May 28';
