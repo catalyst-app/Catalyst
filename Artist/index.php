@@ -55,7 +55,7 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("Artist");
 ?>
 
-<?php if (!is_null($artist)): ?>
+		<?php if (!is_null($artist)): ?>
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
@@ -91,26 +91,26 @@ echo UniversalFunctions::createHeading("Artist");
 			<div class="divider"></div>
 			<div class="section">
 				<h4>Commission Types</h4>
-<?php
-$commissionTypes = CommissionType::getForArtist($artist, true);
-$commissionTypes = array_filter($commissionTypes, function($type) {
-	if (User::isCurrentUserNsfw()) {
-		return true;
-	}
+				<?php
+				$commissionTypes = CommissionType::getForArtist($artist, true);
+				$commissionTypes = array_filter($commissionTypes, function($type) {
+					if (User::isCurrentUserNsfw()) {
+						return true;
+					}
 
-	// if known SAFE then leave in
-	if (in_array("SAFE", $type->getAttributes())) {
-		return true;
-	}
-	// if NOT SFW and mature or explicit, say no
-	if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
-		return false;
-	}
+					// if known SAFE then leave in
+					if (in_array("SAFE", $type->getAttributes())) {
+						return true;
+					}
+					// if NOT SFW and mature or explicit, say no
+					if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
+						return false;
+					}
 
-	// not explicitly marked any way
-	return true;
-});
-?>
+					// not explicitly marked any way
+					return true;
+				});
+				?>
 				<?php if (empty($commissionTypes)): ?> 
 					<p class="flow-text">This artist has no commission types listed!</p>
 				<?php else: ?> 
@@ -216,15 +216,15 @@ $commissionTypes = array_filter($commissionTypes, function($type) {
 					<?php endforeach; ?> 
 				<?php endif; ?>
 			</div>
-<?php elseif (User::isLoggedIn() && !array_key_exists("q", $_GET)): ?>
+		<?php elseif (User::isLoggedIn() && !array_key_exists("q", $_GET)): ?>
 			<div class="section">
 				<p class="flow-text">You are not an artist.  <a href="<?= ROOTDIR ?>Artist/New">Become one</a>?</p>
 			</div>
-<?php else: ?>
+		<?php else: ?>
 			<div class="section">
 				<p class="flow-text">This artist does not exist!</p>
 			</div>
-<?php endif; ?>
+		<?php endif; ?>
 
 <?php
 require_once Values::FOOTER_INC;
