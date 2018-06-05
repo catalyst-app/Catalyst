@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Artist\Artist;
-use \Catalyst\CommissionType\CommissionType;
+use \Catalyst\CommissionType\{CommissionType, CommissionTypeAttribute};
 use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
@@ -219,6 +219,41 @@ echo UniversalFunctions::createHeading("Artist");
 								<h4><?= htmlspecialchars($commissionType->getName()) ?></h4>
 								<div class="divider"></div>
 								<div class="raw-markdown"><?= htmlspecialchars($commissionType->getDescription()) ?></div>
+								<div class="divider"></div>
+								<h5>Attributes:</h5>
+								<?php
+								$attributes = $commissionType->getAttributes();
+								$keyedGroups = [];
+								foreach ($attributes as $attribute) {
+									if (!array_key_exists($attribute->getGroupId(), $keyedGroups)) {
+										$keyedGroups[$attribute->getGroupId()] = [];
+									}
+									$keyedGroups[$attribute->getGroupId()][] = $attribute;
+								}
+								?>
+								<?php foreach ($keyedGroups as $groupId => $attributes): ?>
+									<p class="no-margin">
+										<strong><?= htmlspecialchars(CommissionTypeAttribute::getGroupLabelFromId($groupId)) ?>:</strong>
+
+										<?php for ($i=0; $i<count($attributes); $i++): ?>
+											<?php
+											if ($i < count($attributes)-2 && count($attributes) >= 3) {
+												$suffix = ", ";
+											} elseif (count($attributes) < 3 && $i == 0) {
+												$suffix = " and ";
+											} elseif ($i == count($attributes)-2 && count($attributes) >= 3) {
+												$suffix = ", and ";
+											} else {
+												$suffix = "";
+											}
+											?>
+											<span class="tooltipped" data-tooltip="<?= htmlspecialchars($attributes[$i]->getDescription()) ?>">
+												<?= htmlspecialchars($attributes[$i]->getName()).$suffix ?>
+											</span>
+										<?php endfor; ?>
+									</p>
+								<?php endforeach; ?>
+							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
 					<?php endforeach; ?> 
