@@ -4,7 +4,6 @@ namespace Catalyst\Form\Field;
 
 use \Catalyst\Controller;
 use \Catalyst\Form\Form;
-use \Catalyst\Page\Values;
 use \InvalidArgumentException;
 use \LogicException;
 
@@ -23,6 +22,9 @@ class CaptchaField extends AbstractField {
 	 */
 	protected $secretKey = "";
 
+	const DEBUG_CAPTCHA_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+	const DEBUG_CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
 	/**
 	 * Get the current site key, or debug/testing one if the site is in development mode
 	 * 
@@ -30,7 +32,7 @@ class CaptchaField extends AbstractField {
 	 */
 	public function getSiteKey() : string {
 		if (Controller::isDevelMode()) {
-			return Values::DEBUG_CAPTCHA_KEY;
+			return self::DEBUG_CAPTCHA_KEY;
 		}
 		return $this->siteKey;
 	}
@@ -51,7 +53,7 @@ class CaptchaField extends AbstractField {
 	 */
 	protected function getSecretKey() : string {
 		if (Controller::isDevelMode()) {
-			return Values::DEBUG_CAPTCHA_SECRET;
+			return self::DEBUG_CAPTCHA_SECRET;
 		}
 		return $this->secretKey;
 	}
