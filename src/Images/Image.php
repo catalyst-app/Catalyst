@@ -342,9 +342,7 @@ class Image {
 
 		$paths = $this->getFullPaths();
 
-		$realPaths = array_column($paths, 1);
-
-		if (strpos($realPaths[0][1], "_thumb.webp")) {
+		if (strpos($paths[0][1], "_thumb.webp") !== 0) {
 			$additionalClasses[] = "primary-webp-thumb";
 		}
 
