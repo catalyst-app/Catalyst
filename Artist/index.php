@@ -193,6 +193,7 @@ echo UniversalFunctions::createHeading("Artist");
 							</p>
 							<p class="col s12">
 								<?= htmlspecialchars($commissionType->getBlurb()) ?>
+								(<a class="modal-trigger" href="#commission-type-info-modal-<?= htmlspecialchars($commissionType->getToken()) ?>">More information</a>)
 							</p>
 							<div class="commission-type-image-examples row">
 								<?php $i = 0; ?>
@@ -211,6 +212,11 @@ echo UniversalFunctions::createHeading("Artist");
 									<?php endif; ?>
 								<?php endforeach; ?>
 							</div>
+						</div>
+
+						<div class="modal modal-fixed-footer" id="commission-type-info-modal-<?= htmlspecialchars($commissionType->getToken()) ?>">
+							<div class="modal-content">
+								<h4><?= htmlspecialchars($commissionType->getName()) ?></h4>
 						</div>
 						<?php $firstCommissionType = false; ?>
 					<?php endforeach; ?> 
