@@ -236,20 +236,24 @@ echo UniversalFunctions::createHeading("Artist");
 									$keyedGroups[$attribute->getGroupId()][] = $attribute;
 								}
 								?>
-								<?php foreach ($keyedGroups as $groupId => $attributes): ?>
-									<p class="no-margin">
-										<strong><?= htmlspecialchars(CommissionTypeAttribute::getGroupLabelFromId($groupId)) ?>:</strong>
+								<?php if (empty($keyedGroups)): ?>
+									<p>None listed</p>
+								<?php else: ?>
+									<?php foreach ($keyedGroups as $groupId => $attributes): ?>
+										<p class="no-margin">
+											<strong><?= htmlspecialchars(CommissionTypeAttribute::getGroupLabelFromId($groupId)) ?>:</strong>
 
-										<?php
-										$suffixes = UniversalFunctions::getListPunctuationArray(count($attributes));
-										?>
-										<?php for ($i=0; $i<count($attributes); $i++): ?>
-											<span class="tooltipped" data-tooltip="<?= htmlspecialchars($attributes[$i]->getDescription()) ?>">
-												<?= htmlspecialchars($attributes[$i]->getName()).$suffixes[$i] ?>
-											</span>
-										<?php endfor; ?>
-									</p>
-								<?php endforeach; ?>
+											<?php
+											$suffixes = UniversalFunctions::getListPunctuationArray(count($attributes));
+											?>
+											<?php for ($i=0; $i<count($attributes); $i++): ?>
+												<span class="tooltipped" data-tooltip="<?= htmlspecialchars($attributes[$i]->getDescription()) ?>">
+													<?= htmlspecialchars($attributes[$i]->getName()).$suffixes[$i] ?>
+												</span>
+											<?php endfor; ?>
+										</p>
+									<?php endforeach; ?>
+								<?php endif; ?>
 
 								<div class="divider"></div>
 
