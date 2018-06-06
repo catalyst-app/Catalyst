@@ -5,7 +5,7 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Artist\Artist;
-use \Catalyst\CommissionType\{CommissionType, CommissionTypeAttribute};
+use \Catalyst\CommissionType\{CommissionType, CommissionTypeAttribute, CommissionTypeModifier};
 use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
@@ -293,6 +293,54 @@ echo UniversalFunctions::createHeading("Artist");
 											<li><?= htmlspecialchars($stage->getStage()) ?></li>
 										<?php endforeach; ?>
 									</ol>
+								<?php endif; ?>
+
+								<div class="divider"></div>
+
+								<h5>Modifiers:</h5>
+
+								<?php if (empty($commissionType->getModifiers())): ?>
+									<p>None listed</p>
+								<?php else: ?>
+									<?php
+									$modifiers = [];
+									foreach ($commissionType->getModifiers() as $modifier) {
+										if (!array_key_exists($modifier->getGroupId(), $modifiers)) {
+											$modifiers[$modifier->getGroupId()] = [];
+										}
+										$modifiers[$modifier->getGroupId()][] = $modifier;
+									}
+									ksort($modifiers);
+									foreach ($modifiers as &$arr) {
+										usort($arr, function(CommissionTypeModifier $a, CommissionTypeModifier $b) : int {
+											return $a->getSort() <=> $b->getSort();
+										});
+									}
+									if (isset($arr)) {
+										$lastKey = $arr[0]->getGroupId();
+										unset($arr);
+									}
+									?>
+									<?php foreach ($modifiers as $groupId => $group): ?>
+										<p class="<?= $groupId == $lastKey ? "no-top-margin" : "no-margin" ?>">
+											<strong>
+												<?php if ($group[0]->isAllowingMultiple()): ?>
+													Pick any number of:
+												<?php else: ?>
+													Pick at most one of:
+												<?php endif; ?>
+											</strong>
+											<?php
+											$suffixes = UniversalFunctions::getListPunctuationArray(count($group));
+											?>
+											<?php for ($i=0; $i<count($group); $i++): ?>
+												<span class="tooltipped" data-tooltip="<?= htmlspecialchars($group[$i]->getBaseUsdCost()) ?> USD">
+													<?= htmlspecialchars($group[$i]->getName()) ?> (+<?= htmlspecialchars($group[$i]->getBaseCost()) ?>)<!--
+												--></span><?= $suffixes[$i] ?>
+												<!-- this weird-ass html shit so there's no whitespace smh my head -->
+											<?php endfor; ?>
+										</p>
+									<?php endforeach; ?>
 								<?php endif; ?>
 							</div>
 						</div>
