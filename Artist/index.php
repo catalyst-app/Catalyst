@@ -220,6 +220,39 @@ echo UniversalFunctions::createHeading("Artist");
 
 								<div class="divider"></div>
 
+								<div class="center row no-margin align-center">
+									<div class="col s12 m6 l3">
+										<p>
+											Accepting Quotes
+											<br>
+											<strong><?= $commissionType->isAcceptingQuotes() ? "Yes" : "No" ?></strong>
+										</p>
+									</div>
+									<div class="col s12 m6 l3">
+										<p>
+											Accepting Requests
+											<br>
+											<strong><?= $commissionType->isAcceptingRequests() ? "Yes" : "No" ?></strong>
+										</p>
+									</div>
+									<div class="col s12 m6 l3">
+										<p>
+											Accepting Trades
+											<br>
+											<strong><?= $commissionType->isAcceptingTrades() ? "Yes" : "No" ?></strong>
+										</p>
+									</div>
+									<div class="col s12 m6 l3">
+										<p>
+											Accepting Commissions
+											<br>
+											<strong><?= $commissionType->isAcceptingCommissions() ? "Yes" : "No" ?></strong>
+										</p>
+									</div>
+								</div>
+
+								<div class="divider"></div>
+
 								<div class="raw-markdown"><?= htmlspecialchars($commissionType->getDescription()) ?></div>
 
 								<div class="divider"></div>
