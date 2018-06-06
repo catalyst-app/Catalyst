@@ -274,6 +274,22 @@ echo UniversalFunctions::createHeading("Artist");
 								<?php else: ?>
 									<p>This artist accepts: <?= implode("", $optionStrings) ?></p>
 								<?php endif; ?>
+
+								<div class="divider"></div>
+
+								<h5>Stages:</h5>
+
+								<p>Not all stages may apply to each commission.</p>
+
+								<?php if (empty($commissionType->getStages())): ?>
+									<p>None listed</p>
+								<?php else: ?>
+									<ol class="browser-default">
+										<?php foreach ($commissionType->getStages() as $stage): ?>
+											<li><?= htmlspecialchars($stage->getStage()) ?></li>
+										<?php endforeach; ?>
+									</ol>
+								<?php endif; ?>
 							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
