@@ -139,10 +139,10 @@ class UniversalFunctions {
 	/**
 	 * Get an array of punctuation for a list of $count items
 	 *
-	 * @param string $count
+	 * @param int $count
 	 * @return string[]
 	 */
-	public static function getListPunctuationArray(string $count) : array {
+	public static function getListPunctuationArray(int $count) : array {
 		$result = [];
 		for ($i=0; $i < $count; $i++) { 
 			if ($i < $count-2 && $count >= 3) {
