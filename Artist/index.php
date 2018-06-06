@@ -334,10 +334,7 @@ echo UniversalFunctions::createHeading("Artist");
 											$suffixes = UniversalFunctions::getListPunctuationArray(count($group));
 											?>
 											<?php for ($i=0; $i<count($group); $i++): ?>
-												<span class="tooltipped" data-tooltip="<?= htmlspecialchars($group[$i]->getBaseUsdCost()) ?> USD">
-													<?= htmlspecialchars($group[$i]->getName()) ?> (+<?= htmlspecialchars($group[$i]->getBaseCost()) ?>)<!--
-												--></span><?= $suffixes[$i] ?>
-												<!-- this weird-ass html shit so there's no whitespace smh my head -->
+												<span class="tooltipped" data-tooltip="<?= htmlspecialchars($group[$i]->getBaseUsdCost()) ?> USD"><?= htmlspecialchars($group[$i]->getName()) ?> (+<?= htmlspecialchars($group[$i]->getBaseCost()) ?>)</span><?= $suffixes[$i] ?>
 											<?php endfor; ?>
 										</p>
 									<?php endforeach; ?>
