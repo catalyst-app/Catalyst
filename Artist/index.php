@@ -339,6 +339,53 @@ echo UniversalFunctions::createHeading("Artist");
 										</p>
 									<?php endforeach; ?>
 								<?php endif; ?>
+
+								<div class="divider"></div>
+
+								<h5>Examples:</h5>
+
+								<?php if (empty($commissionType->getImageSet())): ?>
+									<p>None listed</p>
+								<?php else: ?>
+									<?php
+									$cards = [];
+
+									foreach ($commissionType->getImageSet() as $image) {
+										$cardContents = $image->getCard("", null, true, null, [], false);
+										if (!empty($cardContents)) {
+											$cards[] = $cardContents;
+										}
+									}
+
+									$bisected = [[],[]];
+									$trisected = [[],[],[]];
+
+									for ($i=0; $i < count($cards); $i++) { 
+										$bisected[$i%2][] = $cards[$i];
+										$trisected[$i%3][] = $cards[$i];
+									}
+									?>
+									<div class="images row">
+										<div class="col s12 hide-on-med-and-up">
+											<?= implode("", $cards) ?>
+										</div>
+										<div class="col s12 m6 hide-on-large-only hide-on-small-only">
+											<?= implode("", $bisected[0]) ?>
+										</div>
+										<div class="col s12 m6 hide-on-large-only hide-on-small-only">
+											<?= implode("", $bisected[1]) ?>
+										</div>
+										<div class="col l4 hide-on-med-and-down">
+											<?= implode("", $trisected[0]) ?>
+										</div>
+										<div class="col l4 hide-on-med-and-down">
+											<?= implode("", $trisected[1]) ?>
+										</div>
+										<div class="col l4 hide-on-med-and-down">
+											<?= implode("", $trisected[2]) ?>
+										</div>
+									</div>
+								<?php endif; ?>
 							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
