@@ -240,20 +240,12 @@ echo UniversalFunctions::createHeading("Artist");
 									<p class="no-margin">
 										<strong><?= htmlspecialchars(CommissionTypeAttribute::getGroupLabelFromId($groupId)) ?>:</strong>
 
+										<?php
+										$suffixes = UniversalFunctions::getListPunctuationArray(count($attributes));
+										?>
 										<?php for ($i=0; $i<count($attributes); $i++): ?>
-											<?php
-											if ($i < count($attributes)-2 && count($attributes) >= 3) {
-												$suffix = ", ";
-											} elseif (count($attributes) < 3 && $i == 0) {
-												$suffix = " and ";
-											} elseif ($i == count($attributes)-2 && count($attributes) >= 3) {
-												$suffix = ", and ";
-											} else {
-												$suffix = "";
-											}
-											?>
 											<span class="tooltipped" data-tooltip="<?= htmlspecialchars($attributes[$i]->getDescription()) ?>">
-												<?= htmlspecialchars($attributes[$i]->getName()).$suffix ?>
+												<?= htmlspecialchars($attributes[$i]->getName()).$suffixes[$i] ?>
 											</span>
 										<?php endfor; ?>
 									</p>
