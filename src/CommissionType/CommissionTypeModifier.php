@@ -17,8 +17,6 @@ use \Catalyst\Database\Query\InsertQuery;
  * @method void setBaseCost(string $baseCost)
  * @method float getBaseUsdCost()
  * @method void setBaseUsdCost(float $baseUsdCost)
- * @method string getBaseCost()
- * @method void setBaseCost(string $baseCost)
  * @method bool isAllowingMultiple()
  * @method void setAllowingMultiple(bool $allowingMultiple)
  * @method int getSort()
