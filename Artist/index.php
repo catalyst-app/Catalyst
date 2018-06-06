@@ -235,12 +235,16 @@ echo UniversalFunctions::createHeading("Artist");
 									}
 									$keyedGroups[$attribute->getGroupId()][] = $attribute;
 								}
+								$lastKey = 0;
+								if (!empty($keyedGroups)) {
+									$lastKey = array_keys($keyedGroups)[count($keyedGroups)-1];
+								}
 								?>
 								<?php if (empty($keyedGroups)): ?>
 									<p>None listed</p>
 								<?php else: ?>
 									<?php foreach ($keyedGroups as $groupId => $attributes): ?>
-										<p class="no-margin">
+										<p class="<?= $groupId == $lastKey ? "no-top-margin" : "no-margin" ?>">
 											<strong><?= htmlspecialchars(CommissionTypeAttribute::getGroupLabelFromId($groupId)) ?>:</strong>
 
 											<?php
