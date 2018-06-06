@@ -250,6 +250,22 @@ echo UniversalFunctions::createHeading("Artist");
 										<?php endfor; ?>
 									</p>
 								<?php endforeach; ?>
+
+								<div class="divider"></div>
+
+								<h5>Payment Options:</h5>
+
+								<p>For information regarding payment plans, refund policies, etc., please refer to the artist's <a href="<?= ROOTDIR ?>Artist/ToS/<?= $artist->getUrl() ?>">terms of service</a>.</p>
+
+								<?php
+								$paymentOptions = $commissionType->getPaymentOptions();
+								$optionStrings = [];
+								$suffixes = UniversalFunctions::getListPunctuationArray(count($paymentOptions));
+								for ($i=0; $i < count($paymentOptions); $i++) { 
+									$optionStrings[] = $paymentOptions[$i]->getType().$suffixes[$i];
+								}
+								?>
+								<p>This artist accepts: <?= implode("", $optionStrings) ?></p>
 							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
