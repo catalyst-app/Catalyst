@@ -416,8 +416,8 @@ class User extends AbstractDatabaseModel {
 	public function getWishlistCommissionTypeIds() : array {
 		return $this->getDataFromCallableOrCache("WISHLIST_CT_IDS", function() : array {
 			$result = [];
-			foreach ($this->getWishlist() as $wishtlistItem) {
-				$result[] = $wishtlistItem->getCommissionTypeId();
+			foreach ($this->getWishlist() as $wishlistItem) {
+				$result[] = $wishlistItem->getCommissionTypeId();
 			}
 			return $result;
 		});

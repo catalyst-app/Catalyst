@@ -115,7 +115,7 @@ class Controller {
 		ob_start();
 		$destinations = [];
 		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
-			$destinations = ["discord","email","telegram"];
+			$destinations = [];
 		} else {
 			$destinations = ["discord","email","telegram"];
 		}

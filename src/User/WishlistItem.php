@@ -57,12 +57,16 @@ class WishlistItem extends AbstractDatabaseRowModel {
 
 		$stmt->execute();
 
-		return array_map(function($row) use ($user) {
-			new self($row["ID"], [
+		$items = [];
+
+		foreach ($stmt->getResult() as $row) {
+			$items[] = (new self($row["ID"], [
 				"USER_ID" => $user->getId(),
 				"COMMISSION_TYPE_ID" => $row["COMMISSION_TYPE_ID"],
-			], false);
-		}, $stmt->getResult());
+			], false));
+		}
+
+		return $items;
 	}
 
 	/**
