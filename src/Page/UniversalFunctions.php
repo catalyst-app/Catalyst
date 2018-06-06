@@ -135,4 +135,26 @@ class UniversalFunctions {
 	public static function zeropad($in, int $limit) : string {
 		return (strlen($in) >= $limit) ? $in : self::zeropad("0".$in, $limit);
 	}
+
+	/**
+	 * Get an array of punctuation for a list of $count items
+	 *
+	 * @param string $count
+	 * @return string[]
+	 */
+	public static function getListPunctuationArray(string $count) : array {
+		$result = [];
+		for ($i=0; $i < $count; $i++) { 
+			if ($i < $count-2 && $count >= 3) {
+				$result[] = ", ";
+			} elseif ($count < 3 && $i == 0) {
+				$result[] = " and ";
+			} elseif ($i == $count-2 && $count >= 3) {
+				$result[] = ", and ";
+			} else {
+				$result[] = "";
+			}
+		}
+		return $result;
+	}
 }
