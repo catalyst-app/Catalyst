@@ -269,7 +269,11 @@ echo UniversalFunctions::createHeading("Artist");
 									$optionStrings[] = $paymentOptions[$i]->getType().$suffixes[$i];
 								}
 								?>
-								<p>This artist accepts: <?= implode("", $optionStrings) ?></p>
+								<?php if (empty($optionStrings)): ?>
+									<p>None listed</p>
+								<?php else: ?>
+									<p>This artist accepts: <?= implode("", $optionStrings) ?></p>
+								<?php endif; ?>
 							</div>
 						</div>
 						<?php $firstCommissionType = false; ?>
