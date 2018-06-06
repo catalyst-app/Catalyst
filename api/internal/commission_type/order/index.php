@@ -6,9 +6,6 @@ define("REAL_ROOTDIR", "../../../../");
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\CommissionType\CommissionType;
-use \Catalyst\Database\{Column, Database, Tables};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\Query\UpdateQuery;
 use \Catalyst\{HTTPCode, Tokens};
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
