@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Database\{AbstractDatabaseRowModel, Column, Tables};
-use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
+use \Catalyst\Database\Query\{DeleteQuery, InsertQuery, SelectQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
 
 /**
@@ -94,6 +94,28 @@ class WishlistItem extends AbstractDatabaseRowModel {
 				"COMMISSION_TYPE_ID" => $commissionType->getId(),
 			], false);
 		}, $stmt->getResult());
+	}
+
+	/**
+	 * Remove the wishlist item, if one exists, for the given user and commission type
+	 *
+	 * @param User $user
+	 * @param CommissionType $commissionType
+	 */
+	public static function remove(User $user, CommissionType $commissionType) : void {
+		$stmt = new DeleteQuery();
+
+		$stmt->setTable(self::getTable());
+
+		$whereClause = new WhereClause();
+		
+		$whereClause->addToClause([new Column("USER_ID", self::getTable()), '=', $user->getId()]);
+		$whereClause->addToClause(WhereClause::AND);
+		$whereClause->addToClause([new Column("COMMISSION_TYPE_ID", self::getTable()), '=', $commissionType->getId()]);
+
+		$stmt->addAdditionalCapability($whereClause);
+
+		$stmt->execute();
 	}
 
 	/**
