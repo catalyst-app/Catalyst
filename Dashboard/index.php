@@ -5,8 +5,9 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Character\Character;
+use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\Integrations\SocialMedia;
-use \Catalyst\Images\{Folders,Image};
+use \Catalyst\Images\Image;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\HTTPCode;
 use \Catalyst\User\User;
@@ -81,40 +82,60 @@ else: ?>
 			<div class="divider"></div>
 			<div class="section">
 				<h4>Wishlist</h4>
-<?php
-// $types = $_SESSION["user"]->getWishlistAsObjects();
-// $types = array_filter($types, function($type) {
-// 	if (User::isLoggedIn() && $_SESSION["user"]->isNsfw()) {
-// 		return true;
-// 	}
-// 	if (!in_array("MATURE", $type->getAttrs()) && !in_array("EXPLICIT", $type->getAttrs())) {
-// 		return true;
-// 	}
-// 	return in_array("SAFE", $type->getAttrs());
-// });
-$cards = [];
-// foreach ($types as $type) {
-// 	$img = $type->getPrimaryImage();
-// 	$artist = $type->getArtistPage();
-// 	$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
-// 		$type->getName(), 
-// 		$artist->getName()."\n".$type->getBlurb(), 
-// 		true, 
-// 		ROOTDIR."Artist/".$artist->getUrl()."/", 
-// 		[
-// 			$artist->getColor(),
-// 			$type->isOpen() ? $type->getBaseCost() : "CLOSED"
-// 		]
-// 	).'</div>';
-// }
-?>
-	<?php if (count($cards) === 0): ?>
+				<?php
+				$ids = $_SESSION["user"]->getWishlistCommissionTypeIds();
+				$commissionTypes = [];
+				foreach ($ids as $id) {
+					$commissionTypes[] = new CommissionType($id);
+				}
+				$commissionTypes = array_filter($commissionTypes, function(CommissionType $type) : bool {
+					// if it shouldn't be visible, don't show it (wishlist can contain these)
+					if (!$type->isVisible()) {
+						return false;
+					}
+
+					if (User::isCurrentUserNsfw()) {
+						return true;
+					}
+
+					// if known SAFE then leave in
+					if (in_array("SAFE", $type->getAttributes())) {
+						return true;
+					}
+					// if NOT SFW and mature or explicit, say no
+					if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
+						return false;
+					}
+
+					// not explicitly marked any way
+					return true;
+				});
+				$commissionTypes = array_unique($commissionTypes);
+				$cards = [];
+				foreach ($commissionTypes as $type) {
+					$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
+						$type->getName()." by ".$type->getArtistPage()->getName(), 
+						$type->getBlurb(), 
+						true, 
+						ROOTDIR."Artist/".$type->getArtistPage()->getUrl()."/#ct-".$type->getToken(), 
+						[
+							$type->getArtistPage()->getColor(),
+							(
+								$type->isAcceptingCommissions() ||
+								$type->isAcceptingTrades() || 
+								$type->isAcceptingRequests() 
+							) ? $type->getBaseCost() : "CLOSED",
+						]
+					).'</div>';
+				}
+				?>
+				<?php if (count($cards) === 0): ?>
 					<p class="flow-text">Your wishlist is empty!</p>
-	<?php else: ?>
+				<?php else: ?>
 					<div class="horizontal-scrollable-container row">
-	<?= implode("", $cards) ?>
+						<?= implode("", $cards) ?>
 					</div>
-	<?php endif; ?>
+				<?php endif; ?>
 			</div>
 <?php endif; ?>
 <?php
