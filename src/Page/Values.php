@@ -75,10 +75,10 @@ class Values {
 
 
 
-	const NEWEST_NEWS_ID = 1;
-	const NEWEST_NEWS_LABEL = 'New privacy policy';
-	const NEWEST_NEWS_DATE = 'May 28';
-	const NEWEST_NEWS_DESC = 'As part of the GDPR, we\'ve created a formal privacy policy!  Please go take a look at it <a href="https://beta.catalystapp.co/Help/Privacy">here</a>!';
+	const NEWEST_NEWS_ID = 2;
+	const NEWEST_NEWS_LABEL = 'Commission Types Finished!';
+	const NEWEST_NEWS_DATE = 'Jun 6';
+	const NEWEST_NEWS_DESC = 'We have finished development of commission types!  Please give it a spin and try creating one today!  Note that actions do not yet work (with the exception of wishlisting), however, they can be fully shared!';
 
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {
