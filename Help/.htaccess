@@ -1,3 +1,8 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* ../Unimplemented [QSA,R=302,L]
+
 Satisfy Any
 Require all granted
 Allow from all
