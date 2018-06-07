@@ -1,6 +1,7 @@
 <?php
 
 namespace Catalyst;
+use \InvalidArgumentException;
 
 /**
  * Class to set HTTP code header and other similar utilities
@@ -46,7 +47,7 @@ class HTTPCode {
 	 */
 	public static function set(int $code) : void {
 		if (!array_key_exists($code, self::CODE_MAP)) {
-			throw new \InvalidArgumentException($code." is not a known HTTP status code");
+			throw new InvalidArgumentException($code." is not a known HTTP status code");
 		}
 		if (php_sapi_name() == "cli") {
 			return;
