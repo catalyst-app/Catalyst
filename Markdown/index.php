@@ -125,7 +125,7 @@ MD
 				<div class="row">
 					<div class="col s12 m6"><div class="code-block"><p>
 <?= implode("&nbsp;</p><p>", explode("\n",htmlspecialchars(<<<MD
-Please make all payments **within ~~three days~~ one week** of commissioning.  If they aren't recieved, your commision *will* be __canceled__.
+Please make all payments **within ~~three days~~ one week** of commissioning.  If they aren't recieved, your commission *will* be __canceled__.
 
 ~~_*__And, why not, let's try them all at once!__*_~~
 MD
@@ -133,7 +133,7 @@ MD
 </p></div></div>
 					<div class="raw-markdown markdown-preview col s12 m6">
 <?= htmlspecialchars(<<<MD
-Please make all payments **within ~~three days~~ one week** of commissioning.  If they aren't recieved, your commision *will* be __canceled__.
+Please make all payments **within ~~three days~~ one week** of commissioning.  If they aren't recieved, your commission *will* be __canceled__.
 
 ~~_*__And, why not, let's try them all at once!__*_~~
 MD
