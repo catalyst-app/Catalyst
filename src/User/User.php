@@ -229,7 +229,7 @@ class User extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Verify the user's password
+	 * Create a password hash
 	 *
 	 * @param string $password to test
 	 * @return string new password
