@@ -672,7 +672,7 @@ class Image {
 	}
 
 	/**
-	 * Get the image for a new {item}
+	 * Get the main logo
 	 * 
 	 * @return self
 	 */
