@@ -12,7 +12,7 @@ use \Catalyst\User\WishlistItem;
 use \InvalidArgumentException;
 
 /**
- * Represents a commision type
+ * Represents a commission type
  * @method int getArtistPageId()
  * @method void setArtistPageId(int $artistPageId)
  * @method string getToken()
