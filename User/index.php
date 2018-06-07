@@ -5,6 +5,7 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Character\Character;
+use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Message\Message;
@@ -84,27 +85,83 @@ echo UniversalFunctions::createHeading("User Profile");
 			<div class="divider"></div>
 			<div class="section">
 				<h4>Characters</h4>
-<?php
-$characters = Character::getPublicCharactersFromUser($user);
-$cards = [];
-foreach ($characters as $character) {
-	$cardContents = $character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], false);
-	if (!empty($cardContents)) {
-		$cards[] = '<div class="col s8 m4 l3">'.$cardContents.'</div>';
-	}
-}
-?>
-<?php if (count($cards) === 0): ?>
-				<p class="flow-text">This user has no public characters</p>
-<?php else: ?>
-				<div class="horizontal-scrollable-container row">
-<?= implode("", $cards) ?>
-				</div>
-<?php endif; ?>
+				<?php
+				$characters = Character::getPublicCharactersFromUser($user);
+				$cards = [];
+				foreach ($characters as $character) {
+					$cardContents = $character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], false);
+					if (!empty($cardContents)) {
+						$cards[] = '<div class="col s8 m4 l3">'.$cardContents.'</div>';
+					}
+				}
+				?>
+				<?php if (count($cards) === 0): ?>
+					<p class="flow-text">This user has no public characters</p>
+				<?php else: ?>
+					<div class="horizontal-scrollable-container row">
+				<?= implode("", $cards) ?>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="divider"></div>
-			<!-- <div class="section"> -->
-				<!-- <h4>Wishlist</h4> -->
+			<div class="divider"></div>
+			<div class="section">
+				<h4>Wishlist</h4>
+				<?php
+				$ids = $user->getWishlistCommissionTypeIds();
+				$commissionTypes = [];
+				foreach ($ids as $id) {
+					$commissionTypes[] = new CommissionType($id);
+				}
+				$commissionTypes = array_filter($commissionTypes, function(CommissionType $type) : bool {
+					// if it shouldn't be visible, don't show it (wishlist can contain these)
+					if (!$type->isVisible()) {
+						return false;
+					}
+
+					if (User::isCurrentUserNsfw()) {
+						return true;
+					}
+
+					// if known SAFE then leave in
+					if (in_array("SAFE", $type->getAttributes())) {
+						return true;
+					}
+					// if NOT SFW and mature or explicit, say no
+					if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
+						return false;
+					}
+
+					// not explicitly marked any way
+					return true;
+				});
+				$commissionTypes = array_unique($commissionTypes);
+				$cards = [];
+				foreach ($commissionTypes as $type) {
+					$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
+						$type->getName()." by ".$type->getArtistPage()->getName(), 
+						$type->getBlurb(), 
+						true, 
+						ROOTDIR."Artist/".$type->getArtistPage()->getUrl()."/#ct-".$type->getToken(), 
+						[
+							$type->getArtistPage()->getColor(),
+							(
+								$type->isAcceptingCommissions() ||
+								$type->isAcceptingTrades() || 
+								$type->isAcceptingRequests() 
+							) ? $type->getBaseCost() : "CLOSED",
+						]
+					).'</div>';
+				}
+				?>
+				<?php if (count($cards) === 0): ?>
+					<p class="flow-text">This user has not added anything to their wishlist!</p>
+				<?php else: ?>
+					<div class="horizontal-scrollable-container row">
+						<?= implode("", $cards) ?>
+					</div>
+				<?php endif; ?>
+			</div>
 <?php
 endif;
 require_once Values::FOOTER_INC;
