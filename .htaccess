@@ -34,6 +34,15 @@
 	php_value max_file_uploads 1000000
 </IfModule>
 
+# Redirect not yet done things
+RewriteEngine On
+RewriteRule ^Message Unimplemented [QSA,R=302,L]
+RewriteRule ^Quote Unimplemented [QSA,R=302,L]
+RewriteRule ^Request Unimplemented [QSA,R=302,L]
+RewriteRule ^Trade Unimplemented [QSA,R=302,L]
+RewriteRule ^Commission Unimplemented [QSA,R=302,L]
+RewriteRule ^Login/ForgotPassword Unimplemented [QSA,R=302,L]
+
 Options -Indexes
 
 # These are merely for reference, and should be in an applicable virtual host
