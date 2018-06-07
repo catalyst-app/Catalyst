@@ -40,11 +40,11 @@ require_once Values::HEAD_INC;
 echo UniversalFunctions::createHeading("User Profile");
 
 ?>
-<?php if (is_null($user)): ?>
+		<?php if (is_null($user)): ?>
 			<div class="section">
 				<p class="flow-text">This account does not exist or has been deleted.</p>
 			</div>
-<?php else: ?>
+		<?php else: ?>
 			<div class="section">
 				<div class="row">
 					<div class="col s6 offset-s3 m4 center force-square-contents">
@@ -59,14 +59,14 @@ echo UniversalFunctions::createHeading("User Profile");
 
 							<p class="flow-text no-margin"><?= $user->getUsername() ?></p>
 
-<?php if (User::isLoggedIn() && $_SESSION["user"]->getId() == $id): ?>
-							<p class="flow-text no-margin"><a href="<?=ROOTDIR?>Dashboard">View Dashboard</a></p>
-<?php else: ?>
-							<br>
-<?php endif; ?>
-<?php if (!is_null($user->getArtistPage())): ?>
-							<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= $user->getArtistPage()->getName() ?></a></p>
-<?php endif; ?>
+							<?php if (User::isLoggedIn() && $_SESSION["user"]->getId() == $id): ?>
+								<p class="flow-text no-margin"><a href="<?=ROOTDIR?>Dashboard">View Dashboard</a></p>
+							<?php else: ?>
+								<br>
+							<?php endif; ?>
+							<?php if (!is_null($user->getArtistPage())): ?>
+								<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= $user->getArtistPage()->getName() ?></a></p>
+							<?php endif; ?>
 
 							<br>
 

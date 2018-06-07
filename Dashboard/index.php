@@ -62,19 +62,20 @@ else: ?>
 			<div class="section">
 				<h4>Characters</h4>
 				<div class="horizontal-scrollable-container row">
-<?php
-$characters = Character::getCharactersFromUser($_SESSION["user"]);
+					<?php
+					$characters = Character::getCharactersFromUser($_SESSION["user"]);
 
-$newCharacterImage = Image::getNewItemImage();
+					$newCharacterImage = Image::getNewItemImage();
 
-$cards = [
-	'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", [], false).'</div>'
-];
-foreach ($characters as $character) {
-	$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], true).'</div>';
-}
-?>
-<?= implode("", $cards) ?>
+					$cards = [
+						'<div class="col s8 m4 l3">'.$newCharacterImage->getCard("New Character", "", true, ROOTDIR."Character/New", [], false).'</div>'
+					];
+					foreach ($characters as $character) {
+						$cards[] = '<div class="col s8 m4 l3">'.$character->getImage()->getCard($character->getName(), "", true, ROOTDIR."Character/View/".$character->getToken()."/", [], true).'</div>';
+					}
+					// there is always at least one because of the add
+					?>
+					<?= implode("", $cards) ?>
 				</div>
 			</div>
 			<div class="divider"></div>
