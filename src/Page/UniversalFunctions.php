@@ -143,6 +143,9 @@ class UniversalFunctions {
 	 * @return string[]
 	 */
 	public static function getListPunctuationArray(int $count) : array {
+		if ($count <= 1) {
+			return [""];
+		}
 		$result = [];
 		for ($i=0; $i < $count; $i++) { 
 			if ($i < $count-2 && $count >= 3) {
