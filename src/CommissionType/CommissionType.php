@@ -196,6 +196,7 @@ class CommissionType extends AbstractDatabaseModel {
 				"info" => "COMMISSIONER",
 				"sort" => "SORT",
 			],
+			"captionDelimiter" => "**Client:** ",
 		];
 	}
 
