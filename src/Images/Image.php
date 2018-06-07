@@ -679,4 +679,39 @@ class Image {
 	public static function getLogoImage() : self {
 		return new self(Folders::LOGO_WHITE, "", "logo.png", false);
 	}
+
+	/**
+	 * Get the images of fauxil and lykai for the unimplemented page
+	 * 
+	 * @return self[]
+	 */
+	public static function getUnimplementedImages() : array {
+		$images = [
+			"computer",
+			"e621",
+			"game",
+			"ok",
+			"original",
+			"other",
+			"so",
+		];
+		$fauxImage = $images[array_rand($images)];
+		if ($fauxImage == "e621") {
+			$fauxImage .= "_".random_int(1, 3);
+		}
+		if ($fauxImage == "other") {
+			$lykaiImage = "other";
+		} else {
+			do {
+				$lykaiImage = $images[array_rand($images)];
+			} while ($lykaiImage == "other"); // only show other if both are other
+			if ($lykaiImage == "e621") {
+				$lykaiImage .= "_".random_int(1, 3);
+			}
+		}
+		return [
+			new self(Folders::UNIMPLEMENTED_MEMES_FAUXIL, $fauxImage, ".png", false),
+			new self(Folders::UNIMPLEMENTED_MEMES_LYKAI, $lykaiImage, ".png", false),
+		];
+	}
 }
