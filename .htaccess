@@ -36,12 +36,14 @@
 
 # Redirect not yet done things
 RewriteEngine On
-RewriteRule ^Message Unimplemented [QSA,R=302,L]
-RewriteRule ^Quote Unimplemented [QSA,R=302,L]
-RewriteRule ^Request Unimplemented [QSA,R=302,L]
-RewriteRule ^Trade Unimplemented [QSA,R=302,L]
-RewriteRule ^Commission Unimplemented [QSA,R=302,L]
-RewriteRule ^Login/ForgotPassword Unimplemented [QSA,R=302,L]
+RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+RewriteRule ^(.*)$ - [E=BASE:%1]
+RewriteRule ^Message %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Quote %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Request %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Trade %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Commission %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Login/ForgotPassword %{ENV:BASE}Unimplemented [QSA,R=302,L]
 
 Options -Indexes
 
