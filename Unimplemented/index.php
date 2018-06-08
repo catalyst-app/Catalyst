@@ -18,8 +18,6 @@ if (User::isLoggedIn()) {
 	define("PAGE_COLOR", Values::DEFAULT_COLOR);
 }
 
-HTTPCode::set(501);
-
 require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Unimplemented");
