@@ -1,7 +1,12 @@
 RewriteEngine on
+
+RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+RewriteRule ^(.*)$ - [E=BASE:%1]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule .* ../Unimplemented [QSA,R=302,L]
+
+RewriteRule .* %{ENV:BASE}../Unimplemented [QSA,R=302,L]
 
 Satisfy Any
 Require all granted
