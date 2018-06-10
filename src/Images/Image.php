@@ -78,9 +78,9 @@ class Image {
 		}
 		$this->setFolder($folder);
 		$this->setFileToken($fileToken);
-		$this->setPath($path);
-		$this->setNsfw($nsfw);
-		$this->setCaption($caption);
+		$this->path = $path;
+		$this->nsfw = $nsfw;
+		$this->caption = $caption;
 	}
 
 	/**
@@ -119,13 +119,6 @@ class Image {
 	}
 
 	/**
-	 * @param string|null $path
-	 */
-	public function setPath(?string $path) : void {
-		$this->path = $path;
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function isNsfw() : bool {
@@ -133,24 +126,10 @@ class Image {
 	}
 
 	/**
-	 * @param bool $nsfw
-	 */
-	public function setNsfw(bool $nsfw) : void {
-		$this->nsfw = $nsfw;
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getCaption() : string {
 		return $this->caption;
-	}
-
-	/**
-	 * @param string $caption
-	 */
-	public function setCaption(string $caption) : void {
-		$this->caption = $caption;
 	}
 
 	/**
@@ -542,9 +521,9 @@ class Image {
 				}
 			}
 		}
-		$this->setPath("deleted_image.png");
-		$this->setNsfw(false);
-		$this->setCaption("Deleted image");
+		$this->path = "deleted_image.png";
+		$this->nsfw = false;
+		$this->caption = "Deleted image";
 	}
 
 	/**
