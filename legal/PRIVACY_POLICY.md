@@ -14,19 +14,19 @@ If you wish to withdraw consent towards this policy or any future version, you m
 
 #### Data Collection and Usage
 
-In order to use our platform and services therein we require personal information such as username, email address, and password.  In addition to this required information, certain services require further information, such as social media profiles, nicknames, profile images, etc.
+In order to use our platform and services offered therein, we require personal information such as username, email address, and password.  In addition to this required information, certain services require further information, such as social media profiles, nicknames, profile images, etc.
 
-When requests are made to our platform, data such as page visited, time of the request, IP address, and browser may be logged temporarily.  Doing so allows us to troubleshoot errors and streamline user experiences.  These logs will only be accessible by Catalyst staff.
+When requests are made to our platform, data such as page visited, time of the request, IP address, and your browser may be logged temporarily.  Doing so allows us to troubleshoot errors and streamline user experiences.  These logs will only be accessible by Catalyst staff.
 
 In the event of an internal error or bug, we may log information about the request, including, but not limited to, IP address, time of the request, current and previous pages, error information, request information (including anonymized form data), and the logged in user (in order to request additional information for troubleshooting).  This information is frequently purged and only accessible to Catalyst developers.
 
-By browsing our site, unless a "do not track" header is sent, you consent to allowing Google to collect anonymized information including approximate location, device and browser, route (the path a user takes through the platform), and other similar information.  We may analyze this data for aggregate trends and statistics, allowing us to gather important demographic information and to improve the user experience of the platform.
+By browsing our site, unless a "do not track" header is sent, you consent to allow Google to collect anonymized information including approximate location, device, and your browser, route (the path a user takes through the platform), and other similar information.  We may analyze this data for aggregate trends and statistics, allowing us to gather important demographic information and to improve the user experience of the platform.
 
 All information transmitted to our service is encrypted using above-industry standard encryption, with additional care given to sensitive information such as passwords.
 
 #### Cookies and Tracking Information
 
-When you access our platform, small data files, called "cookies", may be stored on your computer.  These cookies allow us to provide core functionalities of our service.  You are permitted to disable these cookies, however, your ability to our platform may be severely impared by this.
+When you access our platform, small data files, called "cookies", may be stored on your computer.  These cookies allow us to provide core functionalities of our service.  You are permitted to disable these cookies, however, your ability to our platform may be severely impaired by this.
 
 We use Google Analytics to collect aggregated tracking information.  If you elect to send a "do not track" header, as described in our [Data Collection and Usage](#md-header-data-collection-and-usage) policy, Google Analytics tracking will be disabled for your session.
 
@@ -42,17 +42,17 @@ We will share your personal data if required by law, regulations, subpoenas, cou
 
 ##### Preventive Measures
 
-We may share your personal data, including IP address, email address, and other identifying informaiton when we believe it is necessary in order to prevent financial loss to a third party, physical harm, illegal activity, or if required in order to investigate suspected violations of our Terms of Service.
+We may share your personal data, including IP address, email address, and other identifying information when we believe it is necessary in order to prevent financial loss to a third party, physical harm, illegal activity, or if required in order to investigate suspected violations of our Terms of Service.
 
 ##### User Initiated
 
 If you desire, we may share your personal data with a third party if explicitly requested.  See the Contact section for information regarding who to contact and what proofs of ownership may be required.
 
-Additionally, we will share your personal data to anyone who you give access to through our platform.  This can be in the form of private URLs, commission information, messages, etc.  By giving access we will not be liable for any damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result, even if we have been advised of the possibility of such damages.
+Additionally, we will share your personal data with anyone who you give access to through our platform.  This can be in the form of private URLs, commission information, messages, etc.  By giving access we will not be liable for any damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result, even if we have been advised of the possibility of such damages.
 
 ##### Administrative Reorganization
 
-We may transfer personal information to a successor entity in the event of a merger, acquisition, or other similar event.  If this occurs, users will be duly notified and provided with options regarding account deletion.
+We may transfer personal information to a successor entity in the event of a merger, acquisition, or other similar events.  If this occurs, users will be duly notified and provided with options regarding account deletion.
 
 #### Privacy of Children's Data
 
@@ -90,7 +90,7 @@ We automatically create daily backups of all information within the site.  These
 
 If you notify us of your account deletion and your account seems to be in good standing, we will take actions to remove it from our backups in a timely manner.
 
-If your account is deemed to not be in good standing, or has demonstrated suspicious activity, we reserve the right to retain this information, as defined under the [Right to Erasure](#md-header-right-to-erasure)
+If your account is deemed to not be in good standing or has demonstrated suspicious activity, we reserve the right to retain this information, as defined under the [Right to Erasure](#md-header-right-to-erasure)
 
 #### Third Party Links
 
@@ -108,7 +108,7 @@ We do not mess around when it comes to security, using well-above industry pract
 
 Our systems are currently based in France, with certain aspects in the United States and Canada.  As such, your personal data may be processed in the United States, Canada, or France, where data protection and privacy regulations may not offer the same level of protection as in other parts of the world.  By using our platform you agree to this Privacy Policy and consent to the transfer of any information to the United States, Canada, and/or France, which may not offer an equivalent level of protection to that of your home country.
 
-You may withdraw this consent at any time.  Upon such withdraw we will immediately cease any further transfer of your data.  Moreover, regardless of your home country, you may use the rights provided by the General Data Protection Regulation, as outlined in the [Rights to Your Information](#md-header-rights-to-your-information) section.
+You may withdraw this consent at any time.  Upon such withdrawal, we will immediately cease any further transfer of your data.  Moreover, regardless of your home country, you may use the rights provided by the General Data Protection Regulation, as outlined in the [Rights to Your Information](#md-header-rights-to-your-information) section.
 
 #### Rights to Your Information
 
@@ -126,7 +126,7 @@ The first ten requests within a calendar month will be completed within 30 days 
 
 ##### Right to Data Portability
 
-Under certain circumstances you can request that we migrate your data to another service provider. This is not an automatic right due to the unique nature of our services and relational data, however, we can attempt to work with other service providers in the even of such a request.
+Under certain circumstances, you can request that we migrate your data to another service provider. This is not an automatic right due to the unique nature of our services and relational data, however, we can attempt to work with other service providers in the event of such a request.
 
 ##### Right to Restrict Processing or Objection
 
