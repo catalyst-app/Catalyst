@@ -130,7 +130,6 @@ class Controller {
 				'<p><strong>Error line:</strong> '.$errline.'</p>'.
 				'<p><strong>Tracking ID:</strong> '.$trackingId.'</p>'.
 				'<p><strong>Site User:</strong> '.((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in').'</p>'.
-				'<p><strong>Beta User:</strong> '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown').'</p>'.
 				'<p><strong>Trace:</strong></p>'.
 				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
 				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null])).'</pre></p>',
@@ -140,7 +139,6 @@ class Controller {
 				"Error line: ".$errline."\r\n\r\n".
 				"Tracking ID: ".$trackingId."\r\n\r\n".
 				'Site User: '.((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')."\r\n\r\n".
-				'Beta User: '.(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null]),
@@ -202,10 +200,6 @@ class Controller {
 											"name" => 'Site User',
 											"value" => ((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')
 										],
-										[
-											"name" => 'Beta User',
-											"value" => (array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')
-										],
 									], $traceEmbeds),
 									"description" => "Please see the embed fields"
 								]
@@ -225,7 +219,6 @@ class Controller {
 				$telegramStr .= "<b>Line:</b> ".$errline."\n";
 				$telegramStr .= "<b>Tracking ID:</b> ".$trackingId."\n";
 				$telegramStr .= "<b>Site User:</b> ".((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')."\n";
-				$telegramStr .= "<b>Beta User:</b> ".(array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : 'unknown')."\n";
 				$telegramStr .= "<b>Trace:</b>\n";
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
