@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2018 at 02:41 AM
+-- Generation Time: Jun 11, 2018 at 04:01 AM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.5
 
@@ -906,6 +906,7 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 CREATE TABLE `users` (
   `ID` int(11) UNSIGNED NOT NULL,
   `FILE_TOKEN` char(10) CHARACTER SET ascii NOT NULL,
+  `APPROVED_BETA_USER` tinyint(1) NOT NULL DEFAULT '0',
   `USERNAME` varchar(64) CHARACTER SET ascii NOT NULL,
   `HASHED_PASSWORD` varchar(60) CHARACTER SET ascii NOT NULL,
   `PASSWORD_RESET_TOKEN` varchar(16) CHARACTER SET ascii NOT NULL,

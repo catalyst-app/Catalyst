@@ -20,6 +20,8 @@ use \LogicException;
 /**
  * Represents a user
  *
+ * @method bool isApprovedBetaTester()
+ * @method void setApprovedBetaTester(bool $approvedBetaTester)
  * @method string getToken()
  * @method void setToken(string $token)
  * @method bool isNsfw()
@@ -578,6 +580,7 @@ class User extends AbstractDatabaseModel {
 		return [
 			"FILE_TOKEN",
 			"USERNAME",
+			"APPROVED_BETA_TESTER",
 			"HASHED_PASSWORD",
 			"PASSWORD_RESET_TOKEN",
 			"TOTP_KEY",
@@ -702,6 +705,7 @@ class User extends AbstractDatabaseModel {
 	 */
 	public static function getModifiableProperties() : array {
 		return [
+			"ApprovedBetaTester" => ["APPROVED_BETA_TESTER", "boolval", null],
 			"Token" => ["FILE_TOKEN", null, null],
 			"Nsfw" => ["NSFW", "boolval", null],
 			"Nickname" => ["NICK", null, null],
