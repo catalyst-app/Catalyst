@@ -1,6 +1,6 @@
 <?php
-use \Catalyst\Page\Resources;
-use \Catalyst\Page\{UniversalFunctions, Values};
+use \Catalyst\Controller;
+use \Catalyst\Page\{Resources, UniversalFunctions, Values};
 ?>
 <!DOCTYPE html>
 <html data-rootdir="<?= ROOTDIR ?>" lang="en">
@@ -89,7 +89,7 @@ use \Catalyst\Page\{UniversalFunctions, Values};
 	<body>
 		<?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
-			<?php if (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID): ?>
+			<?php if (Controller::isDevelMode() && !array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID): ?>
 				<div class="news">
 					<p class="no-margin">
 						<span class="flow-text">
