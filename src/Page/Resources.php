@@ -175,19 +175,19 @@ class Resources {
 
 
 			foreach ($preconnects as $domain) {
-				header("Link: <".$domain.">;rel=preconnect", false);
+				header("Link: <".$domain.">; rel=preconnect", false);
 			}
 
 			foreach ($styles as $style) {
-				header("Link: <".$style.">;rel=prefetch;as=style", false);
+				header("Link: <".$style.">; rel=prefetch; as=style", false);
 			}
 
 			foreach ($scripts as $script) {
-				header("Link: <".$script.">;rel=prefetch;as=script", false);
+				header("Link: <".$script.">; rel=prefetch; as=script", false);
 			}
 
 			foreach ($deferredScripts as $script) {
-				header("Link: <".$script.">;rel=prefetch;as=script", false);
+				header("Link: <".$script.">; rel=prefetch; as=script", false);
 			}
 		}
 	}
