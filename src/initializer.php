@@ -64,6 +64,6 @@ if (!defined("NO_SESSION") && User::isPending2FA()) {
 }
 
 if (User::isLoggedIn() && !$_SESSION["user"]->isApprovedBetaTester()) {
-	trigger_error("Your account, ".$_SESSION["user"]->getNickname().", has not been activated.  The administrators have been notified and will do this as soon as possible.", E_USER_ERROR)
+	trigger_error("Your account, ".$_SESSION["user"]->getNickname().", has not been activated.  The administrators have been notified and will do this as soon as possible.", E_USER_ERROR);
 	unset($_SESSION["user"]);
 }
