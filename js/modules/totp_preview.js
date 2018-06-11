@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/javascript; charset=UTF-8");
+header("Content-Type: application/javascript; charset=UTF-8", true);
 ?>
 function totp(K,t) {
     function sha1(C){

@@ -1,6 +1,6 @@
 <?php
-header("Content-Type: text/css; charset=UTF-8");
-header("Cache-Control: max-age=86400");
+header("Content-Type: text/css; charset=UTF-8", true);
+header("Cache-Control: max-age=86400", true);
 ?>
 html, html {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
