@@ -160,17 +160,21 @@ class Resources {
 			$deferredScripts = [];
 
 			foreach (self::getScripts() as $script) {
+				$preload = strpos($script[0], "http") !== 0;
+
 				if (in_array("defer", $script)) {
-					$deferredScripts[] = $script[0];
+					$deferredScripts[] = [$script[0], $preload ? "preload" : "prefetch"];
 				} else {
-					$scripts[] = $script[0];
+					$scripts[] = [$script[0], $preload ? "preload" : "prefetch"];
 				}
 			}
 
 			$styles = [];
 
 			foreach (self::getStyles() as $style) {
-				$styles[] = $style[0];
+				$preload = strpos($style[0], "http") !== 0;
+
+				$styles[] = [$style[0], $preload ? "preload" : "prefetch"];
 			}
 
 
@@ -179,15 +183,15 @@ class Resources {
 			}
 
 			foreach ($styles as $style) {
-				header("Link: <".$style.">; rel=prefetch; as=style", false);
+				header("Link: <".$style[0].">; rel=".$style[1]."; as=style", false);
 			}
 
 			foreach ($scripts as $script) {
-				header("Link: <".$script.">; rel=prefetch; as=script", false);
+				header("Link: <".$script[0].">; rel=".$script[1]."; as=script", false);
 			}
 
 			foreach ($deferredScripts as $script) {
-				header("Link: <".$script.">; rel=prefetch; as=script", false);
+				header("Link: <".$script[0].">; rel=".$script[1]."; as=script", false);
 			}
 		}
 	}
