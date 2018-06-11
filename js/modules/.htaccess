@@ -1,5 +1,3 @@
-AddHandler application/x-httpd-php .js
-
 Satisfy Any
 Require all granted
 Allow from all

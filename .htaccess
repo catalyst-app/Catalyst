@@ -5,11 +5,11 @@
 	Require valid-user
 </If>
 
-<ifModule mod_deflate.c>
+<IfModule mod_deflate.c>
 	<FilesMatch "\.(html?|txt|css|js|php|pl)$">
 		SetOutputFilter DEFLATE
 	</FilesMatch>
-</ifModule>
+</IfModule>
 
 <IfModule mod_speling.c>
 	CheckSpelling on
@@ -21,17 +21,18 @@
 	Options -MultiViews
 </IfModule>
 
-<IfModule mod_php5.c>
-	php_value upload_max_filesize 10M 
-	php_value post_max_size 10M
-	php_value max_input_vars 1000000
-	php_value max_file_uploads 1000000
+<IfModule mod_proxy_fcgi.c>
+        <FilesMatch ".+\.(cs|j)s$">
+                SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
+        </FilesMatch>
 </IfModule>
 <IfModule mod_php7.c>
-	php_value upload_max_filesize 10M 
-	php_value post_max_size 10M
-	php_value max_input_vars 1000000
-	php_value max_file_uploads 1000000
+	AddHandler application/x-httpd-php .css
+	AddHandler application/x-httpd-php .js
+</IfModule>
+<IfModule mod_php7.c>
+	AddHandler application/x-httpd-php .css
+	AddHandler application/x-httpd-php .js
 </IfModule>
 
 # Redirect not yet done things

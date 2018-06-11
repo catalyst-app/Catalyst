@@ -24,6 +24,8 @@ if (Controller::isDevelMode()) {
 
 if (php_sapi_name() !== 'cli') {
 	ob_start();
+
+	header("X-Catalyst-Version: ".Controller::getVersion()." (".Controller::getCommit().")", true);
 }
 
 register_shutdown_function("\\Catalyst\\Controller::shutdown");

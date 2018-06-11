@@ -318,7 +318,7 @@ class Controller {
 					echo '<p>Common mistakes (in self-hosting):</p>';
 					echo '<p>SECRETS DEFINED: '.(class_exists("\\Catalyst\\Secrets") ? "YES" : "NO").'</p>';
 					$version = explode(".", phpversion());
-					$vid = ($version[0] * 10000 + $version[1] * 100 + $version[2]);
+					$vid = ($version[0] * 10000 + $version[1] * 100);
 					echo '<p>PHP VERSION (>=7.2): '.($vid >= 70200 ? "YES" : "NO").'</p>';
 					echo '<p>PDO exists: '.(class_exists("\\PDO") ? "YES" : "NO").'</p>';
 					echo '<p>MySQL PDO: '.(in_array("mysql", PDO::getAvailableDrivers()) ? "YES" : "NO").'</p>';
@@ -367,7 +367,7 @@ class Controller {
 	 * @return bool Whether or not the handler worked
 	 */
 	public static function handleError(int $errno, string $errstr, string $errfile, int $errline) : bool {
-		file_put_contents(REAL_ROOTDIR."error_log", json_encode(func_get_args(), JSON_PRETTY_PRINT)."\0\x\07\n", FILE_APPEND);
+		error_log(json_encode(func_get_args(), JSON_PRETTY_PRINT)."\0\x\07\n");
 		$trackingId = ((string)time())."-".$errno."-".md5($errstr.$errfile.$errline)."-".uniqid();
 		switch ($errno) {
 			case E_ERROR:
