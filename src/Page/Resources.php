@@ -173,25 +173,22 @@ class Resources {
 				$styles[] = $style[0];
 			}
 
-			$items = [];
 
 			foreach ($preconnects as $domain) {
-				$items[] = "<".$domain.">;rel=preconnect";
+				header("Link: <".$domain.">;rel=preconnect", false);
 			}
 
 			foreach ($styles as $style) {
-				$items[] = "<".$style.">;rel=prefetch;as=style";
+				header("Link: <".$style.">;rel=prefetch;as=style", false);
 			}
 
 			foreach ($scripts as $script) {
-				$items[] = "<".$script.">;rel=prefetch;as=script";
+				header("Link: <".$script.">;rel=prefetch;as=script", false);
 			}
 
 			foreach ($deferredScripts as $script) {
-				$items[] = "<".$script.">;rel=prefetch;as=script";
+				header("Link: <".$script.">;rel=prefetch;as=script", false);
 			}
-
-			header("Link: ".implode(",", $items), false);
 		}
 	}
 }
