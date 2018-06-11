@@ -52,6 +52,6 @@ class HTTPCode {
 		if (php_sapi_name() == "cli") {
 			return;
 		}
-		header($_SERVER["SERVER_PROTOCOL"]." ".$code." ".self::CODE_MAP[$code]);
+		header($_SERVER["SERVER_PROTOCOL"]." ".$code." ".self::CODE_MAP[$code], true, $code);
 	}
 }

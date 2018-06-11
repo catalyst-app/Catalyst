@@ -1,6 +1,6 @@
 <?php
-header("Content-Type: application/javascript; charset=UTF-8");
-header("Cache-Control: max-age=86400");
+header("Content-Type: application/javascript; charset=UTF-8", true);
+header("Cache-Control: max-age=86400", true);
 ?>
 window.markdownCurrentlyParsing = {};
 

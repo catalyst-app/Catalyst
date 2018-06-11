@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/javascript; charset=UTF-8");
+header("Content-Type: application/javascript; charset=UTF-8", true);
 ?>
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 Object.defineProperty(Array.prototype, 'includes', {
