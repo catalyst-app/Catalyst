@@ -191,7 +191,7 @@ class Resources {
 				$items[] = "<".$script.">;rel=prefetch;as=script";
 			}
 
-			header("Link: ".implode(",", $items));
+			header("Link: ".implode(",", $items), false);
 		}
 	}
 }
