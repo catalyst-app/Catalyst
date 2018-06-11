@@ -296,7 +296,7 @@ echo UniversalFunctions::createHeading("About Us");
 
 								<p class="flow-text">Fauxil is the founder of Catalyst!  He has developed most every aspect of the platform.  He oversees all operations and decisions as well.  He is studying Computer Science, and loves to code!  He especially loves backend web-developement or general programming, his primary language being PHP.</p>
 
-								<p class="flow-text">Image by FawnButt (<a href="http://www.furaffinity.net/user/feve/">Fur Affinity</a>)</p>
+								<p class="flow-text">Image by aspenshadow (<a href="https://www.furaffinity.net/view/27621841/">Fur Affinity</a>)</p>
 
 								<p class="flow-text"><strong>Roles: </strong> Owner, Lead Developer</p>
 								<div class="social-chips">
