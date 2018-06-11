@@ -180,7 +180,7 @@ class NumberField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', Math.round(parseFloat($('.json_encode("#".$this->getId()).').val()) * (10 ** '.$this->getPrecision().')) / (10 ** '.$this->getPrecision().'));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', Math.round(parseFloat($('.json_encode("#".$this->getId()).').val()) * Math.pow(10, '.$this->getPrecision().')) / Math.pow(10, '.$this->getPrecision().'));';
 	}
 
 	/**
