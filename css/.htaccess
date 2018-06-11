@@ -2,7 +2,3 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^color-([a-z0-9]{6}).css$ color.css?hex=$1 [NC,L]
-
-Satisfy Any
-Require all granted
-Allow from all
