@@ -1,6 +1,8 @@
 <?php
 use \Catalyst\Controller;
 use \Catalyst\Page\{Resources, UniversalFunctions, Values};
+
+Resources::pushPageResources();
 ?>
 <!DOCTYPE html>
 <html data-rootdir="<?= ROOTDIR ?>" lang="en">
