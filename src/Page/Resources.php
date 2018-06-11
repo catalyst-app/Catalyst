@@ -23,8 +23,8 @@ class Resources {
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-VG5Q68Gg4u6g3utXGn2oq5XFI7UcM1XFkHF/oHazvrzpn0rTIo49NuN8Z1CUN4dY"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-xkq5MpE6OTpCEKiI52Kl3j3oMebQHg4W08aWkvIoKktH8yYFrJu7HzAU+DqDcYf4"'],
 		
-		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-HdCLGHAIqh0N569EeI8o4Etw1Z9Xgpzxzv8lDwoiXZAH5Og8ifGCKhUCJ6jC0p2l"'],
-		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.7/draggable.bundle.legacy.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-toD9dRpVHuKuQBoFBpltRQqyY/sx4ic2N0SKCQ8lJmY4CF5W5Bls3MKJ2uhJfB3S"'],
+		[self::DEVEL, "https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/es5/draggable.bundle.legacy.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-ErJoNjNx+pdPxftdDZBVwZrZVswpDAdg6/qxkH8WOLIiwknpLC1eDFlT+c2EW/RS"'],
+		[self::PRODUCTION, "https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/es5/draggable.bundle.legacy.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-25is1maAa19fCBpiYi0r7GXEMigaUCj0Ba+CdwgaJORgbA5nOpiWNul6vbZwubws"'],
 
 		[self::DEVEL, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-4YOEy5TUNJLUt9LDoiwW93OD+NCDFwWPOgnE5i2SqPJdsSZqvbbJlrOv8J+yvYCI"'],
 		[self::PRODUCTION, "https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js", "defer", 'crossorigin="anonymous"', 'integrity="sha384-uYiTH2ePRlFXtnfS6psKczK3AlqsDO3dpEHqz/GRNrGQi9QdEh8aFAZob9pSyce4"'],
@@ -144,12 +144,13 @@ class Resources {
 			$preconnects = []; // domains to preconnect to
 			$prefetchs = []; // URLs to prefetch
 
-			$preconnects[] = "https://cdn.rawgit.com";
 			$preconnects[] = "https://cdnjs.cloudflare.com";
 			$preconnects[] = "https://fonts.googleapis.com";
 			$preconnects[] = "https://fonts.gstatic.com";
-			$preconnects[] = "https://google.com";
+			$preconnects[] = "https://cdn.jsdelivr.net";
 			$preconnects[] = "https://www.gstatic.com";
+			$preconnects[] = "https://google.com";
+			$preconnects[] = "https://cdn.rawgit.com";
 
 			if (!isset($_SERVER['HTTP_DNT']) || $_SERVER['HTTP_DNT'] != 1) {
 				$preconnects[] = "https://googletagmanager.com";
