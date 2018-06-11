@@ -24,7 +24,7 @@
 	AddHandler application/x-httpd-php .js
 </IfModule>
 
-<FilesMatch ".+(profile_pictures|character_images|artist_images|commission_type_images|img)\.*$">
+<FilesMatch ".+\.(jpe?(g|2|x|m)|mj2|jxr|webp|gif|a?png|bmp|ico|xbm|svg)$">
 	Header set Cache-Control "max-age=31536000, public"
 </FilesMatch>
 
