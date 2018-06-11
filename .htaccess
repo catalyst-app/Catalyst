@@ -15,13 +15,9 @@
 </IfModule>
 
 <IfModule mod_proxy_fcgi.c>
-        <FilesMatch ".+\.(cs|j)s$">
-                SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
-        </FilesMatch>
-</IfModule>
-<IfModule mod_php7.c>
-	AddHandler application/x-httpd-php .css
-	AddHandler application/x-httpd-php .js
+	<FilesMatch ".+\.(cs|j)s$">
+		SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
+	</FilesMatch>
 </IfModule>
 <IfModule mod_php7.c>
 	AddHandler application/x-httpd-php .css
