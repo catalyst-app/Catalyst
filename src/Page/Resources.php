@@ -133,4 +133,65 @@ class Resources {
 		}
 		return $styles;
 	}
+
+	/**
+	 * Send Link headers with page resources that may be helpful, especially for HTTP/2
+	 */
+	public static function pushPageResources() : void {
+		if (!headers_sent() &&
+			!(array_key_exists("SCRIPT_FILENAME", $_SERVER) && strpos(strrev($_SERVER["SCRIPT_FILENAME"]), strrev(".js")) === 0) &&
+			!(array_key_exists("SCRIPT_FILENAME", $_SERVER) && strpos(strrev($_SERVER["SCRIPT_FILENAME"]), strrev(".css")) === 0)) {
+			$preconnects = []; // domains to preconnect to
+			$prefetchs = []; // URLs to prefetch
+
+			$preconnects[] = "https://cdn.rawgit.com";
+			$preconnects[] = "https://cdnjs.cloudflare.com";
+			$preconnects[] = "https://fonts.googleapis.com";
+			$preconnects[] = "https://fonts.gstatic.com";
+			$preconnects[] = "https://google.com";
+			$preconnects[] = "https://www.gstatic.com";
+
+			if (!isset($_SERVER['HTTP_DNT']) || $_SERVER['HTTP_DNT'] != 1) {
+				$preconnects[] = "https://googletagmanager.com";
+				$preconnects[] = "https://www.google-analytics.com";
+			}
+
+			$scripts = [];
+			$deferredScripts = [];
+
+			foreach (self::getScripts() as $script) {
+				if (in_array("defer", $script)) {
+					$deferredScripts[] = $script[0];
+				} else {
+					$scripts[] = $script[0];
+				}
+			}
+
+			$styles = [];
+
+			foreach (self::getStyles() as $style) {
+				$styles[] = $style[0];
+			}
+
+			$items = [];
+
+			foreach ($preconnects as $domain) {
+				$items[] = "<".$domain.">;rel=preconnect";
+			}
+
+			foreach ($styles as $style) {
+				$items[] = "<".$style.">;rel=prefetch;as=style";
+			}
+
+			foreach ($scripts as $script) {
+				$items[] = "<".$script.">;rel=prefetch;as=script";
+			}
+
+			foreach ($deferredScripts as $script) {
+				$items[] = "<".$script.">;rel=prefetch;as=script";
+			}
+
+			header("Link: ".implode(",", $items));
+		}
+	}
 }
