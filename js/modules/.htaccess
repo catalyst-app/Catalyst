@@ -1,4 +1,10 @@
-AddHandler application/x-httpd-php .js
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} \.js
+
+RewriteRule ^(.*)$ $1.php
 
 Satisfy Any
 Require all granted
