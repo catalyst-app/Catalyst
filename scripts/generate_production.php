@@ -59,6 +59,11 @@ foreach ($scripts as $script) {
 	}
 }
 
+$aggregated = trim(<<<PHP_HEADER_FOR_MINIFIED_JS
+<?php header("Content-Type: application/javascript; charset=UTF-8", true);header("Cache-Control: max-age=86400", true);?>
+PHP_HEADER_FOR_MINIFIED_JS
+).$aggregated;
+
 echo "Final JS minified ".$totalUnminified." -> ".strlen($aggregated)." bytes\n";
 
 if (!file_exists(REAL_ROOTDIR."js/dist/")) {
