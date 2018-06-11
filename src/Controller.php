@@ -318,7 +318,7 @@ class Controller {
 					echo '<p>Common mistakes (in self-hosting):</p>';
 					echo '<p>SECRETS DEFINED: '.(class_exists("\\Catalyst\\Secrets") ? "YES" : "NO").'</p>';
 					$version = explode(".", phpversion());
-					$vid = ($version[0] * 10000 + $version[1] * 100 + $version[2]);
+					$vid = ($version[0] * 10000 + $version[1] * 100);
 					echo '<p>PHP VERSION (>=7.2): '.($vid >= 70200 ? "YES" : "NO").'</p>';
 					echo '<p>PDO exists: '.(class_exists("\\PDO") ? "YES" : "NO").'</p>';
 					echo '<p>MySQL PDO: '.(in_array("mysql", PDO::getAvailableDrivers()) ? "YES" : "NO").'</p>';
