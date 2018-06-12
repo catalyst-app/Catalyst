@@ -23,8 +23,8 @@ class Resources {
 		[self::DEVEL, ROOTDIR."js/external/materialize.js", "defer", 'integrity="sha384-VG5Q68Gg4u6g3utXGn2oq5XFI7UcM1XFkHF/oHazvrzpn0rTIo49NuN8Z1CUN4dY"'],
 		[self::PRODUCTION, ROOTDIR."js/external/materialize.min.js", "defer", 'integrity="sha384-xkq5MpE6OTpCEKiI52Kl3j3oMebQHg4W08aWkvIoKktH8yYFrJu7HzAU+DqDcYf4"'],
 		
-		[self::DEVEL, ROOTDIR."js/external/lib/es5/draggable.bundle.legacy.js", "defer", 'integrity="sha384-ErJoNjNx+pdPxftdDZBVwZrZVswpDAdg6/qxkH8WOLIiwknpLC1eDFlT+c2EW/RS"'],
-		[self::PRODUCTION, ROOTDIR."js/external/lib/es5/draggable.bundle.legacy.min.js", "defer", 'integrity="sha384-25is1maAa19fCBpiYi0r7GXEMigaUCj0Ba+CdwgaJORgbA5nOpiWNul6vbZwubws"'],
+		[self::DEVEL, ROOTDIR."js/external/draggable.bundle.legacy.js", "defer", 'integrity="sha384-ErJoNjNx+pdPxftdDZBVwZrZVswpDAdg6/qxkH8WOLIiwknpLC1eDFlT+c2EW/RS"'],
+		[self::PRODUCTION, ROOTDIR."js/external/draggable.bundle.legacy.min.js", "defer", 'integrity="sha384-25is1maAa19fCBpiYi0r7GXEMigaUCj0Ba+CdwgaJORgbA5nOpiWNul6vbZwubws"'],
 
 		[self::DEVEL, ROOTDIR."js/external/jsencrypt.js", "defer", 'integrity="sha384-4YOEy5TUNJLUt9LDoiwW93OD+NCDFwWPOgnE5i2SqPJdsSZqvbbJlrOv8J+yvYCI"'],
 		[self::PRODUCTION, ROOTDIR."js/external/jsencrypt.min.js", "defer", 'integrity="sha384-uYiTH2ePRlFXtnfS6psKczK3AlqsDO3dpEHqz/GRNrGQi9QdEh8aFAZob9pSyce4"'],
