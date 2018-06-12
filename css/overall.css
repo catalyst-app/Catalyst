@@ -2,7 +2,8 @@
 header("Content-Type: text/css; charset=UTF-8", true);
 header("Cache-Control: max-age=86400", true);
 ?>
-html, html {
+html, body {
+	font-display: swap;
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
