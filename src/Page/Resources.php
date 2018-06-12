@@ -93,7 +93,7 @@ class Resources {
 	public const STYLES = [
 		// materialize main
 		[self::DEVEL, ROOTDIR."css/external/materialize.css", 'integrity="sha384-GQmJ12uuazjwFD/WEjv2hI/wYT/3JCEaf15p/XyqQl0mfow5PqI/APimyGQXEDHK"'],
-		[self::PRODUCTION, ROOTDIR."css/external/materialize.min.css", 'integrity="sha384-AGqYo0VYxBkWUfLYJujCtaohTG6DnXxnWgLZ2cROBb2Lpl/2ew9aA79ke3PWsZ+B"'],
+		[self::PRODUCTION, ROOTDIR."css/external/materialize.min.css", 'integrity="sha384-3rkQ4BmYtCRaaZ87FvrusoClA6BcjM3PXF+Fk7NJMisMw8+w+EnTR7e/1xSJY4dC"'],
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
