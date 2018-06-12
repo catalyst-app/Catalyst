@@ -1,4 +1,4 @@
-/*!
+<?php header("Content-Type: application/javascript; charset=UTF-8", true);header("Cache-Control: max-age=86400", true);?>/*!
  * Materialize v1.0.0-rc.1 (http://materializecss.com)
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)

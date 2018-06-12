@@ -1,4 +1,4 @@
-/*
+<?php header("Content-Type: application/javascript; charset=UTF-8", true);header("Cache-Control: max-age=86400", true);?>/*
 The MIT License (MIT)
 
 Copyright (c) 2013 Louis Acresti
