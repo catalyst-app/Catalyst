@@ -36,6 +36,7 @@ RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
 RewriteRule ^(.*)$ - [E=BASE:%1]
 
 RewriteRule ^Message %{ENV:BASE}Unimplemented [QSA,R=302,L]
+RewriteRule ^Browse %{ENV:BASE}Unimplemented [QSA,R=302,L]
 RewriteRule ^Quote %{ENV:BASE}Unimplemented [QSA,R=302,L]
 RewriteRule ^Request %{ENV:BASE}Unimplemented [QSA,R=302,L]
 RewriteRule ^Trade %{ENV:BASE}Unimplemented [QSA,R=302,L]
