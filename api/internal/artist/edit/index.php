@@ -25,6 +25,7 @@ $artist->setName($_POST["name"]);
 $artist->setUrl($_POST["url"]);
 $artist->setDescription($_POST["description"]);
 $artist->setColor($_POST["color"]);
+$artist->addTos($_POST["tos"]);
 
 if (isset($_FILES["image"])) {
 	$image = Image::upload($_FILES["image"], Artist::getImageFolder(), $artist->getToken());
