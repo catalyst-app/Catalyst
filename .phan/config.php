@@ -13,9 +13,6 @@ return [
     "exclude_analysis_directory_list" => [
         'src/vendor/'
     ],
-    "exclude_file_list" => [
-        "src/phpqrcode.php"
-    ],
     "suppress_issue_types" => [
         "PhanUnreferencedPublicClassConstant",
         "PhanUnreferencedPublicMethod",
