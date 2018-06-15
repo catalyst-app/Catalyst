@@ -4,7 +4,6 @@ define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
-use \Catalyst\Controller;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Images\{Folders, Image};
 use \Catalyst\Integrations\SocialMedia;

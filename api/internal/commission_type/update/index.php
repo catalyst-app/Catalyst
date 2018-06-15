@@ -9,7 +9,7 @@ use \Catalyst\CommissionType\{CommissionType, CommissionTypeModifier, Commission
 use \Catalyst\Images\{Image, Folders};
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\{HTTPCode, Tokens};
+use \Catalyst\HTTPCode;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
