@@ -780,7 +780,7 @@ CREATE TABLE `commission_wips` (
 --
 
 CREATE TABLE `email_list` (
-  `EMAIL` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `EMAIL` varchar(254) CHARACTER SET ascii NOT NULL,
   `CONTEXT` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -912,7 +912,7 @@ CREATE TABLE `users` (
   `PASSWORD_RESET_TOKEN` varchar(16) CHARACTER SET ascii NOT NULL,
   `TOTP_KEY` binary(10) DEFAULT NULL,
   `TOTP_RESET_TOKEN` char(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `EMAIL` varchar(254) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `EMAIL` varchar(254) CHARACTER SET ascii DEFAULT NULL,
   `EMAIL_VERIFIED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `EMAIL_VERIFICATION_SENDABLE` tinyint(1) NOT NULL DEFAULT '0',
   `EMAIL_TOKEN` varchar(12) CHARACTER SET ascii NOT NULL,
