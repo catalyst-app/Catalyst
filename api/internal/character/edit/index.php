@@ -8,9 +8,8 @@ use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Character\Character;
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\{HTTPCode, Tokens};
+use \Catalyst\HTTPCode;
 use \Catalyst\Images\{Folders,Image};
-use \Catalyst\Page\Values;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
