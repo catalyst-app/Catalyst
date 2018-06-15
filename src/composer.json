@@ -6,6 +6,7 @@
     "require-dev": {
         "phpstan/phpstan": "^0.9.2",
         "slam/phpstan-extensions": "^1.2",
-        "mrclay/minify": "^3.0"
+        "mrclay/minify": "^3.0",
+        "phan/phan": "^0.12.12"
     }
 }
