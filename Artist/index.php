@@ -7,7 +7,6 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Artist\Artist;
 use \Catalyst\CommissionType\{CommissionType, CommissionTypeAttribute, CommissionTypeModifier};
 use \Catalyst\HTTPCode;
-use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 

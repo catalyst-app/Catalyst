@@ -7,8 +7,6 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Character\Character;
 use \Catalyst\CommissionType\CommissionType;
 use \Catalyst\HTTPCode;
-use \Catalyst\Integrations\SocialMedia;
-use \Catalyst\Message\Message;
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Catalyst\User\User;
 
