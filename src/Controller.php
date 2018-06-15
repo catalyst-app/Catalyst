@@ -40,7 +40,7 @@ class Controller {
 				require_once __DIR__.DIRECTORY_SEPARATOR.$toPath;
 			}
 		} elseif ($name === 'QRcode') {
-			require_once __DIR__.DIRECTORY_SEPARATOR."phpqrcode.php";
+			require_once __DIR__.DIRECTORY_SEPARATOR."vendor_qr".DIRECTORY_SEPARATOR."phpqrcode.php";
 		}
 	}
 
