@@ -11,13 +11,16 @@ return [
         "css",
     ],
     "exclude_analysis_directory_list" => [
-        'src/vendor/'
+        'src/vendor/',
     ],
     "suppress_issue_types" => [
         "PhanUnreferencedPublicClassConstant",
         "PhanUnreferencedPublicMethod",
+        "PhanTypeMismatchDimFetch",
+        "PhanTypeArraySuspiciousNullable",
     ],
     "dead_code_detection" => true,
     "progress_bar" => true,
     "print_memory_usage_summary" => true,
+    "scalar_implicit_cast" => true,
 ];
