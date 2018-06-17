@@ -5,12 +5,8 @@ define("REAL_ROOTDIR", "../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, Tables};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\Query\{SelectQuery, UpdateQuery};
-use \Catalyst\{Email, HTTPCode};
+use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_OUT);

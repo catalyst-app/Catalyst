@@ -9,7 +9,7 @@ use \Catalyst\Database\{Column, RawColumn, Tables};
 use \Catalyst\Database\QueryAddition\WhereClause;
 use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
 use \Catalyst\Form\FormRepository;
-use \Catalyst\{HTTPCode, Tokens};
+use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\Values;
 
