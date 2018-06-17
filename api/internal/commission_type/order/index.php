@@ -36,7 +36,7 @@ foreach ($order as $item) {
 
 $i = 0;
 foreach ($order as $token) {
-	$commissionTypeId = CommissionType::getIdFromToken($token);
+	$commissionTypeId = CommissionType::getIdFromToken($token, false);
 
 	// token doesn't exist
 	if ($commissionTypeId == -1) {
