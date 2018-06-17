@@ -7,7 +7,6 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\HTTPCode;
 use \Catalyst\Form\FormRepository;
-use \Catalyst\User\User;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 

@@ -8,7 +8,6 @@ use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\{HTTPCode, Tokens};
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Images\{Folders, Image};
-use \Catalyst\Page\Values;
 use \Catalyst\User\User;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_OUT);
