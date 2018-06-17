@@ -43,6 +43,9 @@ foreach ($existingImages as $image) {
 		$image->delete();
 		continue;
 	}
+	if ($image instanceof Image) {
+		continue;
+	}
 	$image->setNsfw(!!$imageMeta[$image->getPath()]["nsfw"]);
 	$image->setCaption($imageMeta[$image->getPath()]["caption"]);
 	$image->setInfo($imageMeta[$image->getPath()]["info"]);
