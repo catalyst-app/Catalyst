@@ -28,6 +28,7 @@
 	Header set Cache-Control "max-age=31536000, public"
 </FilesMatch>
 
+AddType image/webp .webp
 
 # Redirect not yet done things
 RewriteEngine On
