@@ -65,12 +65,14 @@ if (empty($_POST["email"]) && !is_null($_SESSION["user"]->getEmail())) {
 	$_SESSION["user"]->setEmailToken(Tokens::generateEmailVerificationToken());
 	$_SESSION["user"]->setEmailVerified(true);
 	$_SESSION["user"]->setEmailVerificationSendable(false); 
+	$_SESSION["user"]->setPasswordResetToken(Tokens::generatePasswordResetToken());
 } else if ($_POST["email"] != $_SESSION["user"]->getEmail()) {
 	$resendVerificationEmail = true;
 	$_SESSION["user"]->setEmail($_POST["email"]);
 	$_SESSION["user"]->setEmailToken(Tokens::generateEmailVerificationToken());
 	$_SESSION["user"]->setEmailVerified(false);
 	$_SESSION["user"]->setEmailVerificationSendable(false); 
+	$_SESSION["user"]->setPasswordResetToken(Tokens::generatePasswordResetToken());
 }
 
 $profilePicture = $_SESSION["user"]->getImage()->getPath();
