@@ -148,7 +148,7 @@ class CommissionType extends AbstractDatabaseModel {
 		$whereClause->addToClause([new Column("DELETED", self::getTable()), '=', 0]);
 		if ($mustBeVisible) {
 			$whereClause->addToClause(WhereClause::AND);
-			$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 0]);
+			$whereClause->addToClause([new Column("VISIBLE", self::getTable()), '=', 1]);
 		}
 		$stmt->addAdditionalCapability($whereClause);
 
