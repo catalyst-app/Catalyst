@@ -142,7 +142,6 @@ class Resources {
 			!(array_key_exists("SCRIPT_FILENAME", $_SERVER) && strpos(strrev($_SERVER["SCRIPT_FILENAME"]), strrev(".js")) === 0) &&
 			!(array_key_exists("SCRIPT_FILENAME", $_SERVER) && strpos(strrev($_SERVER["SCRIPT_FILENAME"]), strrev(".css")) === 0)) {
 			$preconnects = []; // domains to preconnect to
-			$prefetchs = []; // URLs to prefetch
 
 			$preconnects[] = "https://cdnjs.cloudflare.com";
 			$preconnects[] = "https://fonts.googleapis.com";
