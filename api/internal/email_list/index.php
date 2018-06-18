@@ -37,7 +37,9 @@ Email::sendEmail(
 		"If you did not sign up for this list, please contact abuse@catalystapp.co."
 	]),
 	Email::NO_REPLY_EMAIL,
-	Email::NO_REPLY_PASSWORD
+	Email::NO_REPLY_PASSWORD,
+	Email::NO_REPLY_SMIME_PATH,
+	Email::NO_REPLY_SMIME_PASSWORD
 );
 
 if ($_POST["request-info"] == "true") {
@@ -53,7 +55,9 @@ if ($_POST["request-info"] == "true") {
 			$_POST["context"],
 		]),
 		Email::NO_REPLY_EMAIL,
-		Email::NO_REPLY_PASSWORD
+		Email::NO_REPLY_PASSWORD,
+		Email::NO_REPLY_SMIME_PATH,
+		Email::NO_REPLY_SMIME_PASSWORD
 	);
 }
 

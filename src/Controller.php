@@ -144,7 +144,9 @@ class Controller {
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null]),
 				Email::ERROR_LOG_EMAIL,
-				Email::ERROR_LOG_PASSWORD
+				Email::ERROR_LOG_PASSWORD,
+				Email::ERROR_LOG_SMIME_PATH,
+				Email::ERROR_LOG_SMIME_PASSWORD
 			);
 		}
 
