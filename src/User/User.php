@@ -355,7 +355,7 @@ class User extends AbstractDatabaseModel {
 		$textEmail .= "Alternatively, use the token ".$this->getEmailToken().' to verify your email'."\r\n";
 
 		
-		$success = Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD);
+		$success = Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD, Email::NO_REPLY_SMIME_PATH, Email::NO_REPLY_SMIME_PASSWORD);
 
 		$this->setEmailVerificationSendable($success);
 	}
