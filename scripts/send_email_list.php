@@ -24,7 +24,7 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\Query\SelectQuery;
-use \Catalyst\Email;
+use \Catalyst\Email\Email;
 use \Catalyst\Page\{UniversalFunctions, Values};
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);

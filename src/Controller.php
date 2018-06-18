@@ -2,9 +2,10 @@
 
 namespace Catalyst;
 
-use \Catalyst\{Email, HTTPCode};
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\Database\{AbstractDatabaseModel, AbstractDatabaseRowModel};
+use \Catalyst\Email\Email;
+use \Catalyst\HTTPCode;
 use \Catalyst\Images\{DBImage, Image};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
