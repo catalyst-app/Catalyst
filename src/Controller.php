@@ -475,6 +475,12 @@ class Controller {
 		if (!defined("\\Catalyst\\Secrets::RSA_PUBLIC")) {
 			throw new LogicException("Secrets::RSA_PUBLIC is not defined");
 		}
+		if (!defined("\\Catalyst\\Secrets::ERROR_LOG_SMIME_PASSWORD")) {
+			throw new LogicException("Secrets::ERROR_LOG_SMIME_PASSWORD is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::NO_REPLY_SMIME_PASSWORD")) {
+			throw new LogicException("Secrets::NO_REPLY_SMIME_PASSWORD is not defined");
+		}
 	}
 
 	/**
