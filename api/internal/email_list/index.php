@@ -7,7 +7,7 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, Response};
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\Query\ReplaceQuery;
-use \Catalyst\Email;
+use \Catalyst\Email\Email;
 use \Catalyst\Form\FormRepository;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
