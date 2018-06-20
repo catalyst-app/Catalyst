@@ -1570,8 +1570,9 @@ class Email {
 	 * @param string $smimePath PEM path to the certificate to be used to sign this email
 	 * @param string $smimePassword Password for the PEM certificate
 	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
+	 * @param bool $copyToSent Copy to SENT folder or not
 	 */
-	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, string $smimePath, string $smimePassword, array $smtp=self::EMAIL_SMTP) : bool {
+	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, string $smimePath, string $smimePassword, array $smtp=self::EMAIL_SMTP, bool $copyToSent=true) : bool {
 		$mail = new Mailer(false);
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
@@ -1599,6 +1600,13 @@ class Email {
 
 		$mail->sign($smimePath, $smimePath, $smimePassword);
 
-		return $mail->send();
+		if ($mail->send()) {
+			if ($copyToSent) {
+				$mail->copyToFolder("Sent");
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
