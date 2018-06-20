@@ -33,13 +33,13 @@ function logLine(string $in, bool $forceSend=false) : void {
 	if ($forceSend || count($fullLog) > 1000) {
 		Email::sendEmail(
 			[["error_logs@catalystapp.co","Error Log"]],
-			"Thumbnailer log",
+			"Thumbnailer log from ".$logStart." to ".date("r"),
 			'<pre>'.htmlspecialchars(implode("\n", $fullLog)).'</pre>',
 			implode("\n", $fullLog),
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD,
 			Email::ERROR_LOG_SMIME_PATH,
-			Email::ERROR_LOG_SMIME_PASSWORD,
+			Email::ERROR_LOG_SMIME_PASSWORD
 		);
 
 		$fullLog = [];
