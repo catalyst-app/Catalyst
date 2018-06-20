@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53f4b231088e78018474bf8155a6be41",
+    "content-hash": "fb2775bb09a5a1655bce6127b3f2ec81",
     "packages": [
+        {
+            "name": "ddeboer/imap",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ddeboer/imap.git",
+                "reference": "7e3a31dfd92f0dfd24af03dff63b25eba2d1a805"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ddeboer/imap/zipball/7e3a31dfd92f0dfd24af03dff63b25eba2d1a805",
+                "reference": "7e3a31dfd92f0dfd24af03dff63b25eba2d1a805",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-imap": "*",
+                "ext-mbstring": "*",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "phpstan/phpstan": "^0.9.1",
+                "phpstan/phpstan-phpunit": "^0.9.3",
+                "phpunit/phpunit": "^6.5 || ^7.0",
+                "zendframework/zend-mail": "^2.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ddeboer\\Imap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/ddeboer/imap/graphs/contributors"
+                },
+                {
+                    "name": "Filippo Tessarotto",
+                    "email": "zoeslam@gmail.com"
+                }
+            ],
+            "description": "Object-oriented IMAP for PHP",
+            "keywords": [
+                "email",
+                "imap",
+                "mail"
+            ],
+            "time": "2018-05-04T09:59:33+00:00"
+        },
         {
             "name": "pguardiario/phpuri",
             "version": "1.0",
