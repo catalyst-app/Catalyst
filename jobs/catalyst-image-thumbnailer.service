@@ -4,6 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
+User=www-data
+Group=www-data
 WorkingDirectory=/var/www/beta.catalystapp.co/scripts
 ExecStart=/usr/bin/php thumbnail-pending-queue.php
 Restart=always
