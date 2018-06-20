@@ -1,7 +1,8 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.0",
-        "pguardiario/phpuri": "^1.0"
+        "pguardiario/phpuri": "^1.0",
+        "ddeboer/imap": "^1.5"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.9.2",
