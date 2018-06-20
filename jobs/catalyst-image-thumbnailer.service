@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/catalyst/beta/scripts
+WorkingDirectory=/var/www/beta.catalystapp.co/scripts
 ExecStart=/usr/bin/php thumbnail-pending-queue.php
 Restart=always
 
