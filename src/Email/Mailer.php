@@ -2,6 +2,7 @@
 
 namespace Catalyst\Email;
 
+use \Ddeboer\Imap\Server;
 use \Exception;
 use \PHPMailer\PHPMailer\PHPMailer;
 
@@ -230,4 +231,18 @@ class Mailer extends PHPMailer {
 
 		return $body;
 	}
+
+	/**
+	 * Save email to a folder
+	 */
+    public function copyToFolder(string $folderPath="Sent", bool $markAsRead=true) : void {
+        $message = $this->MIMEHeader.$this->MIMEBody;
+
+        $server = new Server($this->Host);
+        $connection = $server->authenticate($this->Username, $this->Password);
+
+        $mailbox = $connection->getMailbox($folderPath);
+        
+        $mailbox->addMessage($message, $markAsRead ? '\\Seen' : null);
+    }
 }
