@@ -5,8 +5,8 @@ if (php_sapi_name() !== 'cli') {
 }
 
 // register with the internal api
-define("ROOTDIR", "../");
-define("REAL_ROOTDIR", "../");
+define("ROOTDIR", "/var/www/beta.catalystapp.co/");
+define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Database\{Column, Tables};
