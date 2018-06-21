@@ -54,9 +54,12 @@ $reminderMaster = [
 		],
 		"foxxo" => [
 			"Update the twitter",
-			"Post to the Fur Affinity page if possible, or at least be somewhat active on it",
+			"Post to the Fur Affinity page if possible (and Jiki hasn't done it), or at least be somewhat active on it",
 		],
-		"jiki" => [],
+		"jiki" => [
+			"Post to the Fur Affinity page if possible, or at least be somewhat active on it",
+			"Do something with the Facebook page",
+		],
 		"lykai" => [
 			"Do the weasyl thing",
 			"Do the furry network thing",
