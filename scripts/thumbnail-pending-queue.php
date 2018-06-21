@@ -126,7 +126,7 @@ while (true) {
 
 	$cyclesInLog++;
 
-	if ($cyclesInLog >= (3600/SLEEP_TIME)) {
+	if ($cyclesInLog >= ((3600*6)/SLEEP_TIME)) { // 6 hours
 		$cyclesInLog = 0;
 		logLine("Flushing log...", true);
 	}
