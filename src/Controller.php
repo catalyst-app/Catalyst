@@ -13,6 +13,7 @@ use \LogicException;
 use \PDO;
 use \ReflectionClass;
 use \Throwable;
+use \WhichBrowser\Parser;
 
 /**
  * Generic controller which handles things like error logging, autoloading, etc.
@@ -120,17 +121,35 @@ class Controller {
 		} else {
 			$destinations = ["discord","email","telegram"];
 		}
+		
+		$ua = "unknown";
+		if (php_sapi_name() == "cli") {
+			$ua = "CLI";
+		} else {
+			$ua = [new Parser(getallheaders()), new Parser(getallheaders(), ['detectBots' => false])];
+			if ($ua[0]->toString() == $ua[1]->toString()) {
+				$ua = $ua[0]->toString();
+			} else {
+				$ua = $ua[0]->toString()." (pretending to be ".$ua[1]->toString().")";
+			}
+		}
+
 		if (in_array("email", $destinations)) {
 			$trace = self::getTrace();
 			Email::sendEmail(
 				[["error_logs@catalystapp.co","Error Log"]],
-				$subj." occured in ".$errfile." at ".$errline.": ".$errstr,
+				$subj." on ".(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown"))." occured in ".$errfile." at ".$errline.": ".$errstr,
 				'<p><strong>Error code:</strong> '.$errco.' ('.$errno.')</p>'.
 				'<p><strong>Error string:</strong> '.htmlspecialchars($errstr).'</p>'.
 				'<p><strong>Error file:</strong> '.htmlspecialchars($errfile).'</p>'.
 				'<p><strong>Error line:</strong> '.$errline.'</p>'.
 				'<p><strong>Tracking ID:</strong> '.$trackingId.'</p>'.
+				'<p><strong>Destination Script:</strong> '.(array_key_exists("PHP_SELF", $_SERVER) ? $_SERVER["PHP_SELF"] : "unknown").'</p>'.
 				'<p><strong>Site User:</strong> '.((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in').'</p>'.
+				'<p><strong>Referrer:</strong> '.htmlspecialchars(array_key_exists("HTTP_REFERER", $_SERVER) ? $_SERVER["HTTP_REFERER"] : "unknown").'</p>'.
+				"<p><strong>IP Address:</strong> ".htmlspecialchars(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown")."</p>".
+				'<p><strong>User agent:</strong> '.htmlspecialchars($ua)."</p>".
+				'<p><strong>Host:</strong> '.htmlspecialchars(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown")).'</p>'.
 				'<p><strong>Trace:</strong></p>'.
 				'<p>'.implode('</p><p>',array_map("htmlspecialchars",$trace)).'</p>'.
 				'<p><strong>Dump:</strong> <pre>'.htmlspecialchars(serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null])).'</pre></p>',
@@ -139,7 +158,13 @@ class Controller {
 				"Error file: ".$errfile."\r\n\r\n".
 				"Error line: ".$errline."\r\n\r\n".
 				"Tracking ID: ".$trackingId."\r\n\r\n".
+				'Destination Script: '.(array_key_exists("PHP_SELF", $_SERVER) ? $_SERVER["PHP_SELF"] : "unknown")."\r\n\r\n".
+				'Referrer: '.(array_key_exists("HTTP_REFERER", $_SERVER) ? $_SERVER["HTTP_REFERER"] : "unknown")."\r\n\r\n".
 				'Site User: '.((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')."\r\n\r\n".
+				"IP Address: ".(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown")."\r\n\r\n".
+				'User agent: '.($ua)."\r\n\r\n".
+				'Host: '.(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown"))."\r\n\r\n".
+				"Script: ".(array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown")."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null]),
@@ -203,6 +228,30 @@ class Controller {
 											"name" => 'Site User',
 											"value" => ((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')
 										],
+										[
+											"name" => 'Destination Script',
+											"value" => (array_key_exists("PHP_SELF", $_SERVER) ? $_SERVER["PHP_SELF"] : "unknown"),
+										],
+										[
+											"name" => 'Referrer',
+											"value" => (array_key_exists("HTTP_REFERER", $_SERVER) ? $_SERVER["HTTP_REFERER"] : "unknown"),
+										],
+										[
+											"name" => "IP Address",
+											"value" => substr(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown", 0, -4)."XXXX",
+										],
+										[
+											"name" => 'User agent',
+											"value" => ($ua),
+										],
+										[
+											"name" => 'Host',
+											"value" => (php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown")),
+										],
+										[
+											"name" => "Script",
+											"value" => (array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown"),
+										],
 									], $traceEmbeds),
 									"description" => "Please see the embed fields"
 								]
@@ -217,11 +266,17 @@ class Controller {
 				$trace = self::getTrace(false);
 				$telegramStr = $subj." occured\n\n";
 				$telegramStr .= "<b>Code:</b> ".$errco." (".$errno.")\n";
-				$telegramStr .= "<b>Error:</b> ".str_replace("<br>", "\r\n", $errstr)."\n";
+				$telegramStr .= "<b>Error:</b> ".htmlspecialchars(str_replace("<br>", "\r\n", $errstr))."\n";
 				$telegramStr .= "<b>File:</b> ".basename($errfile)."\n";
 				$telegramStr .= "<b>Line:</b> ".$errline."\n";
 				$telegramStr .= "<b>Tracking ID:</b> ".$trackingId."\n";
-				$telegramStr .= "<b>Site User:</b> ".((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')."\n";
+				$telegramStr .= '<b>Destination Script:</b> '.htmlspecialchars(array_key_exists("PHP_SELF", $_SERVER) ? $_SERVER["PHP_SELF"] : "unknown")."\n";
+				$telegramStr .= '<b>Referrer:</b> '.htmlspecialchars(array_key_exists("HTTP_REFERER", $_SERVER) ? $_SERVER["HTTP_REFERER"] : "unknown")."\n";
+				$telegramStr .= "<b>Site User:</b> ".htmlspecialchars((isset($_SESSION) && array_key_exists("user", $_SESSION)) ? $_SESSION['user']->getUsername() : 'not logged in')."\n";
+				$telegramStr .= "<b>IP Address:</b> ".substr(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown", 0, -4)."XXXX"."\n";
+				$telegramStr .= '<b>User agent:</b> '.htmlspecialchars($ua)."\n";
+				$telegramStr .= '<b>Host:</b> '.htmlspecialchars(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown"))."\n";
+				$telegramStr .= "<b>Script:</b> ".htmlspecialchars(array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown")."\n";
 				$telegramStr .= "<b>Trace:</b>\n";
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
