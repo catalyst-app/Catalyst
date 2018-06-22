@@ -51,7 +51,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<ul class="browser-default">
 					<li class="flow-text"><strong>10001</strong>: Endpoint not found</li>
 					<li class="flow-text"><strong>10002</strong>: Invalid method ("GET", "POST", etc)</li>
-					<p>We have many internal error codes which may mean different things, however 999999 is likely the only one you will see.</p>
+					<p>We have many internal error codes which may mean different things, however 99999 is likely the only one you will see.</p>
 					<li class="flow-text"><strong>99990</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
 					<li class="flow-text"><strong>99991</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
 					<li class="flow-text"><strong>99992</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
