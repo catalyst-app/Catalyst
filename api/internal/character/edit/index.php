@@ -9,7 +9,7 @@ use \Catalyst\Character\Character;
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
-use \Catalyst\Images\{Folders,Image};
+use \Catalyst\Images\{DBImage,Folders,Image};
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
@@ -43,7 +43,7 @@ foreach ($existingImages as $image) {
 		$image->delete();
 		continue;
 	}
-	if ($image instanceof Image) {
+	if (!$image instanceof DBImage) {
 		continue;
 	}
 	$image->setNsfw(!!$imageMeta[$image->getPath()]["nsfw"]);
