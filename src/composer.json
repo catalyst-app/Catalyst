@@ -3,7 +3,8 @@
         "phpmailer/phpmailer": "*",
         "pguardiario/phpuri": "*",
         "ddeboer/imap": "*",
-        "whichbrowser/parser": "*"
+        "whichbrowser/parser": "*",
+        "ralouphie/getallheaders": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
