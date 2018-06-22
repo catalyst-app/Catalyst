@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02bbd39dc5464e2457500df7de540d1b",
+    "content-hash": "cf23bf677510e99f8d818e5c208ec158",
     "packages": [
         {
             "name": "ddeboer/imap",
