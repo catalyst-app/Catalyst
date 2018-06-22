@@ -6,7 +6,7 @@ define("REAL_ROOTDIR", "../../../../");
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
 use \Catalyst\CommissionType\{CommissionType, CommissionTypeModifier, CommissionTypePaymentOption, CommissionTypeStage};
-use \Catalyst\Images\{Image, Folders};
+use \Catalyst\Images\{DBImage, Folders, Image};
 use \Catalyst\Form\Field\MultipleImageWithNsfwCaptionAndInfoField;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
@@ -64,7 +64,7 @@ foreach ($existingImages as $image) {
 		$image->delete();
 		continue;
 	}
-	if ($image instanceof Image) {
+	if (!$image instanceof DBImage) {
 		continue;
 	}
 	$image->setNsfw(!!$imageMeta[$image->getPath()]["nsfw"]);
