@@ -161,7 +161,6 @@ class Controller {
 				"IP Address: ".(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown")."\r\n\r\n".
 				'User agent: '.($ua)."\r\n\r\n".
 				'Host: '.(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown"))."\r\n\r\n".
-				"Script: ".(array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown")."\r\n\r\n".
 				"Trace: \r\n\r\n".
 				implode("\r\n\r\n",$trace)."\r\n\r\n".
 				"Dump: ".serialize([$_SERVER,isset($_SESSION) ? $_SESSION : null]),
@@ -245,10 +244,6 @@ class Controller {
 											"name" => 'Host',
 											"value" => (php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown")),
 										],
-										[
-											"name" => "Script",
-											"value" => (array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown"),
-										],
 									], $traceEmbeds),
 									"description" => "Please see the embed fields"
 								]
@@ -273,7 +268,6 @@ class Controller {
 				$telegramStr .= "<b>IP Address:</b> ".substr(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown", 0, -4)."XXXX"."\n";
 				$telegramStr .= '<b>User agent:</b> '.htmlspecialchars($ua)."\n";
 				$telegramStr .= '<b>Host:</b> '.htmlspecialchars(php_sapi_name() == "cli" ? "cli" : (array_key_exists("HTTP_HOST", $_SERVER) ? $_SERVER["HTTP_HOST"] : "unknown"))."\n";
-				$telegramStr .= "<b>Script:</b> ".htmlspecialchars(array_key_exists("SCRIPT_NAME", $_SERVER) ? $_SERVER["SCRIPT_NAME"] : "unknown")."\n";
 				$telegramStr .= "<b>Trace:</b>\n";
 				foreach ($trace as $row) {
 					$telegramStr .= $row .= "\n";
