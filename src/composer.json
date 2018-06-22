@@ -1,13 +1,14 @@
 {
     "require": {
-        "phpmailer/phpmailer": "^6.0",
-        "pguardiario/phpuri": "^1.0",
-        "ddeboer/imap": "^1.5"
+        "phpmailer/phpmailer": "*",
+        "pguardiario/phpuri": "*",
+        "ddeboer/imap": "*",
+        "whichbrowser/parser": "*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.9.2",
-        "slam/phpstan-extensions": "^1.2",
-        "mrclay/minify": "^3.0",
-        "phan/phan": "^0.12.12"
+        "phpstan/phpstan": "*",
+        "slam/phpstan-extensions": "*",
+        "mrclay/minify": "*",
+        "phan/phan": "*"
     }
 }
