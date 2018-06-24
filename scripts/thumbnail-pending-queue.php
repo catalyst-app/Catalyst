@@ -31,6 +31,8 @@ function logLine(string $in, bool $forceSend=false) : void {
 
 	$fullLog[] = $in;
 	if ($forceSend || count($fullLog) > 1000) {
+		$fullLog[] = "Maximum memory usage: ".memory_get_usage();
+
 		Email::sendEmail(
 			[["error_logs@catalystapp.co","Error Log"]],
 			"Thumbnailer log from ".$logStart." to ".date("r"),
