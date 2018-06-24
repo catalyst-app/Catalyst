@@ -234,6 +234,9 @@ class Mailer extends PHPMailer {
 
 	/**
 	 * Save email to a folder
+	 *
+	 * @param string $folderPath Where to save the mail
+	 * @param bool $markAsRead Whether or not to mark the mail as read
 	 */
     public function copyToFolder(string $folderPath="Sent", bool $markAsRead=true) : void {
         $message = $this->MIMEHeader.$this->MIMEBody;
