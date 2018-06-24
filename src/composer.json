@@ -4,7 +4,8 @@
         "pguardiario/phpuri": "*",
         "ddeboer/imap": "*",
         "whichbrowser/parser": "*",
-        "ralouphie/getallheaders": "*"
+        "ralouphie/getallheaders": "*",
+        "ifsnop/mysqldump-php": "^2.4"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
