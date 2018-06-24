@@ -60,7 +60,7 @@ We recognize the privacy interests of children and take steps to ensure these in
 
 For users under the age of eighteen, we recommend that parents and guardians actively monitor and take a part in their children's online activities.
 
-Our site is not directed or targeted towards children under the age of thirteen, or sixteen in the EU, nor do we knowingly collect data from children under this age.
+Our site is not directed or targeted towards children under the age of thirteen, or sixteen in the European Union, nor do we knowingly collect data from children under this age.
 
 If we find a child under this age has provided us with personal information we will delete that information, as outlined in our [Deletion Standards and Data Retention](#md-header-deletion-standards-and-data-retention) policy.  If your child is under this age and has provided us such information, please contact us as outlined in the [Contact](#md-header-contact) policy.
 
