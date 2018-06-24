@@ -508,6 +508,9 @@ class Controller {
 		if (!defined("\\Catalyst\\Secrets::EMAIL_LIST_CAPTCHA_SECRET")) {
 			throw new LogicException("Secrets::EMAIL_LIST_CAPTCHA_SECRET is not defined");
 		}
+		if (!defined("\\Catalyst\\Secrets::DISCORD_BACKUP_WEBHOOK_TOKEN")) {
+			throw new LogicException("Secrets::DISCORD_BACKUP_WEBHOOK_TOKEN is not defined");
+		}
 		if (!defined("\\Catalyst\\Secrets::DISCORD_BUG_WEBHOOK_TOKEN")) {
 			throw new LogicException("Secrets::DISCORD_BUG_WEBHOOK_TOKEN is not defined");
 		}
