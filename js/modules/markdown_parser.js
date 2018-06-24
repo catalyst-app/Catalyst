@@ -1339,7 +1339,7 @@ md.use(__webpack_require__(79), "backcolor", {
         if (tokens[idx].nesting === 1) {
             // opening tag
             if (m && m.length > 1) {
-              return '<div style="color: #'+m[1]+'">';
+              return '<div style="background-color: #'+m[1]+'">';
             } else {
               return '<div>';
             }
