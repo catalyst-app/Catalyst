@@ -35,7 +35,7 @@ class Database {
 		if (self::$dbh instanceof PDO) {
 			return;
 		}
-		self::$dbh = new PDO(self::getDataSourceName(), self::DB_USER, self::DB_PASSWORD, "utf8mb4");
+		self::$dbh = new PDO(self::getDataSourceName(), self::DB_USER, self::DB_PASSWORD);
 
 		foreach (self::getPdoAttributes() as $attr => $value) {
 			self::$dbh->setAttribute($attr, $value);
