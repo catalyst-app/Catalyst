@@ -53,7 +53,7 @@ function logLine(string $in, bool $forceSend=false) : void {
 
 register_shutdown_function(function() : void {
 	logLine("Shutting down...", true);
-})
+});
 
 logLine("Starting background thumbnailer process");
 
