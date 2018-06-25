@@ -5,7 +5,8 @@
         "ddeboer/imap": "*",
         "whichbrowser/parser": "*",
         "ralouphie/getallheaders": "*",
-        "ifsnop/mysqldump-php": "^2.4"
+        "ifsnop/mysqldump-php": "*",
+        "phpseclib/phpseclib": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
