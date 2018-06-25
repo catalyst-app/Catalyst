@@ -90,7 +90,7 @@ We automatically create daily backups of all information within the site.  These
 
 If you notify us of your account deletion and your account seems to be in good standing, we will take actions to remove it from our backups in a timely manner.
 
-If your account is deemed to not be in good standing or has demonstrated suspicious activity, we reserve the right to retain this information, as defined under the [Right to Erasure](#md-header-right-to-erasure)
+If your account is deemed to not be in good standing or has demonstrated suspicious activity, we reserve the right to retain this information, as defined under the section regarding [Right to Erasure Including Retention and Disposal](#md-header-md-header-right-to-erasure-including-retention-and-disposal)
 
 #### Third Party Links
 
