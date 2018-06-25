@@ -11,13 +11,13 @@ use \PDO;
  * Is only used for that, nothing else.  Constants are for connection info, public because may be used elsewhere
  */
 class Database {
-	protected const DB_DRIVER = "mysql";
-	protected const DB_SERVER = "localhost";
-	protected const DB_PORT = 3306;
-	protected const DB_NAME = "catalyst";
-	protected const DB_USER = "catalyst";
+	public const DB_DRIVER = "mysql";
+	public const DB_SERVER = "localhost";
+	public const DB_PORT = 3306;
+	public const DB_NAME = "catalyst";
+	public const DB_USER = "catalyst";
 	// this is already public in Secrets so
-	protected const DB_PASSWORD = Secrets::DB_PASSWORD;
+	public const DB_PASSWORD = Secrets::DB_PASSWORD;
 
 	/**
 	 * Contains the PDO instance for our database
