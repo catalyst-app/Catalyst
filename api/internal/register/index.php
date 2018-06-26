@@ -51,7 +51,7 @@ if (isset($_FILES["profile-picture"])) {
 }
 
 $_SESSION["user"] = User::create([
-	"FILE_TOKEN" => $fileToken = Tokens::generateUserFileToken(),
+	"FILE_TOKEN" => $fileToken,
 	"USERNAME" => $_POST["username"],
 	"HASHED_PASSWORD" => User::hashPassword($_POST["password"]),
 	"EMAIL" => $_POST["email"] ? $_POST["email"] : null,
