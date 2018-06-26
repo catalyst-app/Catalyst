@@ -99,6 +99,9 @@ var humanFileSize = function(size) {
 				}, 1000);
 			});
 			$('textarea').trigger('autoresize');
+			M.Timepicker.init(document.querySelectorAll('.timepicker'), {
+				showClearBtn: true
+			});
 		}
 
 		materializeOnload();
