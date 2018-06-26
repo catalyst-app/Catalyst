@@ -88,6 +88,7 @@ trait SettingsFormTrait {
 		$newPasswordField = new PasswordField();
 		$newPasswordField->setDistinguisher("new-password");
 		$newPasswordField->setLabel("New Password");
+		$newPasswordField->setHelperText('Only use this field if you wish to change your password.');
 		$newPasswordField->setRequired(false);
 		$newPasswordField->setMinLength(8);
 		$newPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
@@ -96,10 +97,6 @@ trait SettingsFormTrait {
 		$newPasswordField->addError(90510, ErrorCodes::ERR_90510);
 		$newPasswordField->setInvalidErrorCode(90510);
 		$form->addField($newPasswordField);
-
-		$passwordMinimumMessage = new StaticHTMLField();
-		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Only use this field if you wish to change your password.</p>');
-		$form->addField($passwordMinimumMessage);
 
 		$confirmNewPasswordField = new ConfirmPasswordField();
 		$confirmNewPasswordField->setDistinguisher("confirm-new-password");
