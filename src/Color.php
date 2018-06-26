@@ -696,7 +696,7 @@ class Color {
 		foreach ($exploded as &$byte) {
 			$val = hexdec($byte);
 			$val = ($val + (255*$steps))/(1+$steps);
-			$byte = dechex($val);
+			$byte = dechex((int)$val);
 		}
 
 		return implode("", $exploded);
