@@ -153,7 +153,7 @@ class Tokens {
 		$token = self::generateToken($length);
 
 		while (in_array($token, $existingTokens)) {
-			$token = self::generateArtistToken();
+			$token = self::generateToken($length);
 		}
 
 		return $token;
