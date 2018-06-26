@@ -140,3 +140,21 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 blockquote {
 	border-left: 5px solid #<?= $_GET["hex"] ?>;
 }
+
+.timepicker-digital-display {
+  background-color: #<?= $_GET["hex"] ?>;
+}
+
+.timepicker-hours .timepicker-tick.active,
+.timepicker-hours .timepicker-tick:hover {
+  background-color: #<?= $_GET["hex"] ?>44;
+}
+.timepicker-canvas line {
+  stroke: #<?= $_GET["hex"] ?>;
+}
+.timepicker-canvas-bearing, .timepicker-canvas-bg {
+  fill: #<?= $_GET["hex"] ?>;
+}
+.timepicker-close {
+  color: #<?= $_GET["hex"] ?>;
+}
