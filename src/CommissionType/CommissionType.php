@@ -83,30 +83,6 @@ class CommissionType extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get columns to prefetch
-	 *
-	 * @return array
-	 */
-	public static function getDeletedColumns() : array {
-		return [
-			"ARTIST_PAGE_ID",
-			"TOKEN",
-			"NAME",
-			"BLURB",
-			"DESCRIPTION",
-			"SORT",
-			"BASE_COST",
-			"BASE_USD_COST",
-			"ATTRS",
-			"ACCEPTING_QUOTES",
-			"ACCEPTING_REQUESTS",
-			"ACCEPTING_TRADES",
-			"ACCEPTING_COMMISSIONS",
-			"VISIBLE",
-		];
-	}
-
-	/**
 	 * Values to insert upon CT deletion
 	 *
 	 * We don't delete any information such as name/etc because artist's will need this information in the future for previous commissions
