@@ -158,3 +158,25 @@ blockquote {
 .timepicker-close {
   color: #<?= $_GET["hex"] ?>;
 }
+
+.datepicker-date-display {
+  background-color: #<?= $_GET["hex"] ?>;
+}
+
+.datepicker-table td.is-today {
+  color: #<?= $_GET["hex"] ?>;
+}
+
+.datepicker-table td.is-selected {
+  background-color: #<?= $_GET["hex"] ?>;
+}
+
+.datepicker-day-button:focus {
+  background-color: #<?= $_GET["hex"] ?>44;
+}
+
+.datepicker-cancel,
+.datepicker-today,
+.datepicker-done {
+  color: #<?= $_GET["hex"] ?>;
+}
