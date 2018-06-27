@@ -99,6 +99,9 @@ var humanFileSize = function(size) {
 				}, 1000);
 			});
 			$('textarea').trigger('autoresize');
+			M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+				showClearBtn: true
+			});
 			M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 				showClearBtn: true
 			});
