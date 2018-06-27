@@ -18,6 +18,14 @@ class WhereClause implements QueryAdditionInterface {
 	 * Represents a boolean OR operation
 	 */
 	public const OR = 1;
+	/**
+	 * Represents a (
+	 */
+	public const LEFT_PARENTHESIS = 2;
+	/**
+	 * Represents a )
+	 */
+	public const RIGHT_PARENTHESIS = 3;
 
 	/**
 	 * Array which contains AND/OR operands delimiting [column, equality, value]
@@ -80,6 +88,12 @@ class WhereClause implements QueryAdditionInterface {
 						break;
 					case self::OR:
 						$str .= ' OR ';
+						break;
+					case self::LEFT_PARENTHESIS:
+						$str .= ' ( ';
+						break;
+					case self::RIGHT_PARENTHESIS:
+						$str .= ' ) ';
 						break;
 					default:
 						throw new LogicException("Where clause item has no associated column and is not equal to WhereClause::AND or WhereClause::OR");
