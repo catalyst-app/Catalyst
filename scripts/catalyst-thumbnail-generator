@@ -18,14 +18,14 @@ if [ ${1: -4} == ".gif" ]; then
 else
 	echo --Input is NOT a GIF\; JPEG-ifying the entire file
 
-	echo ----convert -verbose "$1" -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
-	convert -verbose "$1" -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	echo ----convert -verbose "$1" -auto-orient -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
+	convert -verbose "$1" -auto-orient -background white -alpha remove -quality 75 -resize 512x512\> "${1%.*}_thumb.jpg"
 
 	echo --Creating temporary holder for losslessly compressed output file as _tmp.png
 
 	# PNG is lossless by default
-	echo ----convert -verbose "$1" -resize 512x512\> "${1%.*}_tmp.png"
-	convert -verbose "$1" -resize 512x512\> "${1%.*}_tmp.png"
+	echo ----convert -verbose "$1" -auto-orient -resize 512x512\> "${1%.*}_tmp.png"
+	convert -verbose "$1" -auto-orient -resize 512x512\> "${1%.*}_tmp.png"
 fi
 
 echo --Creating lossy and lossless WebP
