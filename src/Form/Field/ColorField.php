@@ -160,7 +160,7 @@ class ColorField extends AbstractField {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!in_array($_POST[$this->getDistinguisher()], array_keys(Color::HEX_MAP))) {
+		if (!in_array($requestArr[$this->getDistinguisher()], array_keys(Color::HEX_MAP))) {
 			$this->throwInvalidError();
 		}
 	}

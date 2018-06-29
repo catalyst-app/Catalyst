@@ -130,7 +130,7 @@ class DateField extends AbstractField {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
+		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 	}
@@ -276,7 +276,7 @@ class DateField extends AbstractField {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
+		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 	}

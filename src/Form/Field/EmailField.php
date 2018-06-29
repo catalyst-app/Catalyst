@@ -170,7 +170,7 @@ class EmailField extends AbstractField {
 				$this->throwInvalidError();
 			}
 		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $_POST[$this->getDistinguisher()])) {
+		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 	}
