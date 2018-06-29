@@ -58,7 +58,7 @@ class EmailField extends AbstractField {
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isFieldPrefilled()) {
-			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || strlen($this->getPrefilledValue()) > $this->getMaxLength()) {
+			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || ($this->getMaxLength() && strlen($this->getPrefilledValue()) > $this->getMaxLength())) {
 				$this->throwInvalidPrefilledValueError();
 			}
 			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
