@@ -17,6 +17,8 @@ use \Ifsnop\Mysqldump\Mysqldump;
 use \phpseclib\Crypt\RSA;
 use \phpseclib\Net\{SCP,SSH2};
 
+define('NET_SSH2_LOGGING', SSH2::LOG_COMPLEX);
+
 $fullLog = [];
 $logStart = date("r");
 $logStartMs = microtime(true);
