@@ -6,7 +6,7 @@
         "whichbrowser/parser": "*",
         "ralouphie/getallheaders": "*",
         "ifsnop/mysqldump-php": "*",
-        "phpseclib/phpseclib": "*"
+        "phpseclib/phpseclib": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
