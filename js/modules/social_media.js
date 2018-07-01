@@ -87,3 +87,13 @@ if ($('.social-chips-editable.social-chips > div').length) {
 		});
 	});
 }
+
+$(document).on("click", ".copy-on-click", function(e) {
+	var temp = $("<input>");
+	$("body").append(temp);
+	temp.val($(this).text()).select();
+	document.execCommand("copy");
+	temp.remove();
+
+	M.escapeToast("Copied", 4000);
+});
