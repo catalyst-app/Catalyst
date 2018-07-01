@@ -45,7 +45,7 @@ class Navbar {
 					["Help Center", self::NAME, null, ROOTDIR."Help", self::DROPDOWN_CHILD],
 					["Feature Board", self::NAME, null, ROOTDIR."FeatureBoard", self::DROPDOWN_CHILD],
 					["Developer Docs", self::NAME, null, ROOTDIR."Help/API", self::DROPDOWN_CHILD],
-					["Terms of Service", self::NAME, null, ROOTDIR."TOS", self::DROPDOWN_CHILD],
+					["Terms of Service", self::NAME, null, ROOTDIR."Help/ToS", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
 			"not_artist" => [
