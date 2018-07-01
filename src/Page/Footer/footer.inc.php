@@ -35,16 +35,16 @@ $rows = $stmt->fetchAll();
 				<br>
 			</div>
 		</footer>
-	</body>
-	<?php foreach (Resources::getScripts() as $script): ?>
-		<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
-	<?php endforeach; ?>
+		<?php foreach (Resources::getScripts() as $script): ?>
+			<script src="<?= $script[0] ?>" <?= trim(" ".implode(" ", array_slice($script, 1))) ?>></script>
+		<?php endforeach; ?>
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-112460506-1');
-	</script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-112460506-1');
+		</script>
+	</body>
 </html>
