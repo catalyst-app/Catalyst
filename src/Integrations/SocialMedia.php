@@ -200,6 +200,9 @@ class SocialMedia {
 			$str .= '<div';
 			$str .= ' class="';
 			$str .= 'chip';
+			if (!$editMode && (!isset($chip["href"]) || is_null($chip["href"]))) {
+				$str .= ' copy-on-click';
+			}
 			$str .= ' hoverable';
 			$str .= ' '.$chip["classes"];
 			if ($editMode) {
