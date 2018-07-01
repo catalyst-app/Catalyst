@@ -218,7 +218,10 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 
 		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating ").'+$('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).').length+'.json_encode(" entries of data").');';
 
-		$str .= 'for (var entry of $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).')) {';
+		$str .= 'var entries = $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).');';
+		$str .= 'var entry = 0;';
+		$str .= 'for (var i=0; i<entries.length; i++) {';
+		$str .= "entry = entries[i];";
 
 		$str .= 'var itemData = JSON.parse($(entry).attr("data-data"));';
 
@@ -271,9 +274,14 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 		
 		$str .= 'var serializedData = {};';
 
-		$str .= 'for (var pair of psuedoAggregator.entries()) {';
+		$str .= 'var pairs = psuedoAggregator.entries();';
+		$str .= 'var pair = 0;';
+		$str .= 'for (var i=0; i<pairs.length; i++) {';
+		$str .= "pair = pairs[i];";
+
 		$str .= 'serializedData[pair[0]] = pair[1];';
 		$str .= 'htmlToAdd = htmlToAdd.replace("{"+pair[0]+"}", $("<div></div>").text(pair[1]).html());';
+		
 		$str .= '}';
 
 		$str .= 'htmlToAdd = $(htmlToAdd);';
