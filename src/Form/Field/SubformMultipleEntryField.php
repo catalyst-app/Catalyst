@@ -233,14 +233,15 @@ class SubformMultipleEntryField extends AbstractField {
 		
 		$str .= 'var serializedData = {};';
 
-		$str .= 'var pairs = psuedoAggregator.entries();';
-		$str .= 'var pair = 0;';
-		$str .= 'for (var i=0; i<pairs.length; i++) {';
-		$str .= "pair = pairs[i];";
+		$str .= 'var iterator = psuedoAggregator.entries();';
+		$str .= 'var item = iterator.next();';
 
-		$str .= 'serializedData[pair[0]] = pair[1];';
-		$str .= 'htmlToAdd = htmlToAdd.replace("{"+pair[0]+"}", $("<div></div>").text(pair[1]).html());';
+		$str .= 'while (!item.done) {';
+
+		$str .= 'serializedData[item.value[0]] = item.value[1];';
+		$str .= 'htmlToAdd = htmlToAdd.replace("{"+item.value[0]+"}", $("<div></div>").text(item.value[1]).html());';
 		
+		$str .= 'item = iterator.next();';
 		$str .= '}';
 
 		$str .= 'htmlToAdd = $(htmlToAdd);';
