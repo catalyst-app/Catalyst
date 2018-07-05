@@ -1,4 +1,4 @@
 User-Agent: *
-Disallow: 
+Disallow: /api
 
 Sitemap: https://catalystapp.co/sitemap.xml
