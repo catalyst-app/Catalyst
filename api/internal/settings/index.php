@@ -60,7 +60,7 @@ if (is_null($_SESSION["user"]->getTotpResetToken())) {
 }
 
 $resendVerificationEmail = false;
-if (empty($_POST["email"]) && !is_null($_SESSION["user"]->getEmail())) {
+if (empty($_POST["email"]) && !empty($_SESSION["user"]->getEmail())) {
 	$_SESSION["user"]->setEmail(null);
 	$_SESSION["user"]->setEmailToken(Tokens::generateEmailVerificationToken());
 	$_SESSION["user"]->setEmailVerified(true);
