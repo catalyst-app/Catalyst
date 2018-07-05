@@ -23,14 +23,6 @@ html, body {
 	height: 10em;
 }
 
-.btn {
-    height: auto !important;
-    min-height: 20px !important;
-    line-height: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
 .about-page-social-icon {
 	width: 55%;
     margin-left: auto;
