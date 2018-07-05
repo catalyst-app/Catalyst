@@ -200,11 +200,11 @@ class NumberField extends AbstractField {
 			$this->throwMissingError();
 		}
 		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+			if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+			if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
 				return; // not required and empty, don't do further checks
 			}
 		}
