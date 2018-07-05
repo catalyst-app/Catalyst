@@ -129,13 +129,13 @@ echo UniversalFunctions::createHeading("Artist");
 											</a>
 											<ul>
 												<?php if (in_array($commissionType->getId(), $_SESSION["user"]->getWishlistCommissionTypeIds())): ?>
-													<li class="tooltipped" data-tooltip="Remove from wishlist">
+													<li class="tooltipped" data-tooltip="Remove from Wishlist">
 														<a data-action="wishlist" data-state="on" class="btn-floating">
 															<i class="material-icons">star</i>
 														</a>
 													</li>
 												<?php else: ?>
-													<li class="tooltipped" data-tooltip="Add to wishlist">
+													<li class="tooltipped" data-tooltip="Add to Wishlist">
 														<a data-action="wishlist" data-state="off" class="btn-floating">
 															<i class="material-icons">star_outline</i>
 														</a>
