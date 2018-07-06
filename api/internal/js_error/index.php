@@ -8,6 +8,6 @@ use \Catalyst\API\{Endpoint, Response};
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
-trigger_error("JavaScript error has occured."."\r\n<br>\r\n".$_POST["message"]."\r\n<br>\r\n".$_POST["url"]."\r\n<br>\r\n".$_POST["lineNumber"], E_USER_WARNING);
+trigger_error("JavaScript error has occured."."\r\n<br>\r\n".(array_key_exists("message", $_POST) ? $_POST["message"] : "????")."\r\n<br>\r\n".(array_key_exists("url", $_POST) ? $_POST["url"] : "????")."\r\n<br>\r\n".(array_key_exists("lineNumber", $_POST) ? $_POST["lineNumber"] : "????"), E_USER_WARNING);
 
 Response::sendSuccessResponse("Reported");
