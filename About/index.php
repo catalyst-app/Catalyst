@@ -560,48 +560,43 @@ echo UniversalFunctions::createHeading("About Us");
 					<div class="row">
 						<div class="force-square-contents col s6 offset-s3 m4 center">
 							<?php
-							$image = new Image(Folders::STAFF_ICONS, "", "soul.jpg");
+							$image = new Image(Folders::STAFF_ICONS, "", "acey.png");
 							echo $image->getStrictCircleHtml();
 							?>
 						</div>
 						<div class="col s12 m7 offset-m1">
 							<div class="col s12 center-on-small-only">
-								<h3 class="header hide-on-small-only no-margin">Soul Wesson</h3>
+								<h3 class="header hide-on-small-only no-margin">Acey</h3>
 								
 								<br class="hide-on-med-and-up">
-								<h4 class="header hide-on-med-and-up no-margin">Soul Wesson</h4>
+								<h4 class="header hide-on-med-and-up no-margin">Acey</h4>
 
-								<p class="flow-text">Soul has been an artist for almost a decade now, and loves growing her style with the help of the community. Always one to help others, she loves taking the time to help others via Twitter, Twitch, and several other communities and art sites. Great at diffusing tense situations, and always ready to lend a hand, Soul often offers her friendship first, and her services second. Her messages are always open for anyone who needs advice, or just someone to talk to.</p>
+								<p class="flow-text">Acey is an artist who is looking to become a professional illustrator in the future!</p>
 
-								<p class="flow-text">Image by Jasmae (<a href="https://www.furaffinity.net/view/22443950/">Fur Affinity</a>)</p>
+								<p class="flow-text">Image by quietwheezing on Amino</p>
 
-								<p class="flow-text"><strong>Roles: </strong> PR manager</p>
+								<p class="flow-text"><strong>Roles: </strong> Artist, Instagram, and DeviantArt</p>
 								<div class="social-chips">
 <?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
 	[
 		"NETWORK" => "DISCORD",
 		"SERVICE_URL" => null,
-		"DISP_NAME" => "@Soul Wesson#7693",
+		"DISP_NAME" => "@oneggiri#4094",
 	],
 	[
-		"NETWORK" => "TWITTER",
-		"SERVICE_URL" => "https://twitter.com/SoulWesson/",
-		"DISP_NAME" => "@SoulWesson",
+		"NETWORK" => "INSTAGRAM",
+		"SERVICE_URL" => "https://instagram.com/acemoonkid/",
+		"DISP_NAME" => "@acemoonkid",
 	],
 	[
-		"NETWORK" => "FURAFFINITY",
-		"SERVICE_URL" => "http://www.furaffinity.net/user/soulcommissions/",
-		"DISP_NAME" => "~SoulCommissions",
-	],
-	[
-		"NETWORK" => "TWITCH",
-		"SERVICE_URL" => "https://twitch.tv/soulwesson/",
-		"DISP_NAME" => "SoulWesson",
+		"NETWORK" => "DEVIANTART",
+		"SERVICE_URL" => "https://oneggiri.deviantart.com/",
+		"DISP_NAME" => "oneggiri",
 	],
 	[
 		"NETWORK" => "EMAIL",
-		"SERVICE_URL" => "mailto:soul.wesson@catalystapp.co",
-		"DISP_NAME" => "soul.wesson@catalystapp.co",
+		"SERVICE_URL" => "mailto:acey@catalystapp.co",
+		"DISP_NAME" => "acey@catalystapp.co",
 	],
 ])) ?>
 								</div>
@@ -650,6 +645,61 @@ echo UniversalFunctions::createHeading("About Us");
 		"NETWORK" => "EMAIL",
 		"SERVICE_URL" => "mailto:jiki@catalystapp.co",
 		"DISP_NAME" => "jiki@catalystapp.co",
+	],
+])) ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+
+					<br>
+
+					<div class="row">
+						<div class="force-square-contents col s6 offset-s3 m4 center">
+							<?php
+							$image = new Image(Folders::STAFF_ICONS, "", "soul.jpg");
+							echo $image->getStrictCircleHtml();
+							?>
+						</div>
+						<div class="col s12 m7 offset-m1">
+							<div class="col s12 center-on-small-only">
+								<h3 class="header hide-on-small-only no-margin">Soul Wesson</h3>
+								
+								<br class="hide-on-med-and-up">
+								<h4 class="header hide-on-med-and-up no-margin">Soul Wesson</h4>
+
+								<p class="flow-text">Soul has been an artist for almost a decade now, and loves growing her style with the help of the community. Always one to help others, she loves taking the time to help others via Twitter, Twitch, and several other communities and art sites. Great at diffusing tense situations, and always ready to lend a hand, Soul often offers her friendship first, and her services second. Her messages are always open for anyone who needs advice, or just someone to talk to.</p>
+
+								<p class="flow-text">Image by Jasmae (<a href="https://www.furaffinity.net/view/22443950/">Fur Affinity</a>)</p>
+
+								<p class="flow-text"><strong>Roles: </strong> PR manager</p>
+								<div class="social-chips">
+<?= SocialMedia::getChipHtml(SocialMedia::getChipArray([
+	[
+		"NETWORK" => "DISCORD",
+		"SERVICE_URL" => null,
+		"DISP_NAME" => "@Soul Wesson#7693",
+	],
+	[
+		"NETWORK" => "TWITTER",
+		"SERVICE_URL" => "https://twitter.com/SoulWesson/",
+		"DISP_NAME" => "@SoulWesson",
+	],
+	[
+		"NETWORK" => "FURAFFINITY",
+		"SERVICE_URL" => "http://www.furaffinity.net/user/soulcommissions/",
+		"DISP_NAME" => "~SoulCommissions",
+	],
+	[
+		"NETWORK" => "TWITCH",
+		"SERVICE_URL" => "https://twitch.tv/soulwesson/",
+		"DISP_NAME" => "SoulWesson",
+	],
+	[
+		"NETWORK" => "EMAIL",
+		"SERVICE_URL" => "mailto:soul.wesson@catalystapp.co",
+		"DISP_NAME" => "soul.wesson@catalystapp.co",
 	],
 ])) ?>
 								</div>
