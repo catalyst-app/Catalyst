@@ -50,7 +50,7 @@ $reminderMaster = [
 			"Update/interact with the Tumblr",
 		],
 		"fauxil" => [
-			"Update the Instagram with at least a story",
+			"Update the Instagram with at least a story or something if ace hasn't done it",
 		],
 		"foxxo" => [
 			"Update the twitter",
@@ -64,8 +64,12 @@ $reminderMaster = [
 			"Do the weasyl thing",
 			"Do the furry network thing",
 		],
+		"acey" => [
+			"Update the Instagram with at least a story or something",
+			"Post/update/interact/idk with the Deviant Art page",
+		],
 		"soul.wesson" => [
-			"Post/update/interact with the Deviant Art page",
+			"Post/update/interact with the Deviant Art page if ace hasn't",
 			"Update/interact with the twitter (if Foxxo hasn't already)",
 		],
 	],
