@@ -34,7 +34,8 @@ class Character extends AbstractDatabaseModel {
 	const PREDEFINED_CHARACTER_SHORT_URLS = [
 		"fauxil" => "sv2j6qy",
 		"lykai" => "fwce5ym",
-		"toish" => "53h1ggw",
+		"foxxo" => "ljtk76i",
+		"keeri" => "w5nms1u",
 	];
 
 	/**
