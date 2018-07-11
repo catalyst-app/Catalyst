@@ -32,7 +32,7 @@ if (!empty($_POST["email"]) && $_POST["email"] != $_SESSION["user"]->getEmail())
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90508, ErrorCodes::ERR_90508);
 	}
-	if (strpos($_POST["email"], "@catalystapp.co") !== false) {
+	if (strpos($_POST["email"], "@catalystapp.co") !== false || strpos($_POST["email"], "@catl.st") !== false) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90523, ErrorCodes::ERR_90523);
 	}
