@@ -100,7 +100,7 @@ class SocialMedia {
 			['/etsy\.com$/', 'ETSY'],
 			['/(facebook\.com|akamaihd\.net|fbcdn\.net|fb\.me|fbsbx\.com)$/', 'FACEBOOK'],
 			['/fanfiction\.net$/', 'FANFICTION'],
-			['/(furaffinity\.net|facdn\.net)$/', 'FURAFFINITY'],
+			['/(furaffinity\.net|(.\.|)facdn\.net)$/', 'FURAFFINITY'],
 			['/furrynetwork\.com$/', 'FURRYNETWORK'],
 			['/(googleusercontent\.com|plus\.google\.com)$/', 'GPLUS'],
 			['/github\.(io|com)$/', 'GITHUB'],
