@@ -113,7 +113,7 @@ class SocialMedia {
 			['/picarto\.tv$/', 'PICARTO'],
 			['/pinterest\.com$/', 'PINTEREST'],
 			['/(redd\.it|reddit.com|reddit(static|media)\.com)$/', 'REDDIT'],
-			['/catalystapp\.co$/', 'SELF'],
+			['/(catalystapp\.co|(.*\.|)catl\.st)$/', 'SELF'],
 			['/snapchat\.com$/', 'SNAPCHAT'],
 			['/(sofurry\.com|is(feathery|fluffy|furry|rubbery|scaly|winged)\.com)$/', 'SOFURRY'],
 			['/(snd\.sc|soundcloud\.com)$/', 'SOUNDCLOUD'],
