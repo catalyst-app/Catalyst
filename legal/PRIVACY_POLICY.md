@@ -106,7 +106,7 @@ We do not mess around when it comes to security, using well-above industry pract
 
 #### Transfer of Data
 
-Our systems are currently based in France, with certain aspects in the United States and Canada.  As such, your personal data may be processed in the United States, Canada, or France, where data protection and privacy regulations may not offer the same level of protection as in other parts of the world.  By using our platform you agree to this Privacy Policy and consent to the transfer of any information to the United States, Canada, and/or France, which may not offer an equivalent level of protection to that of your home country.
+Our systems are currently based in the EU, with certain aspects in the United States and Canada.  As such, your personal data may be processed in the United States, Canada, or France, where data protection and privacy regulations may not offer the same level of protection as in other parts of the world.  By using our platform you agree to this Privacy Policy and consent to the transfer of any information to the United States, Canada, and/or France, which may not offer an equivalent level of protection to that of your home country.
 
 You may withdraw this consent at any time.  Upon such withdrawal, we will immediately cease any further transfer of your data.  Moreover, regardless of your home country, you may use the rights provided by the General Data Protection Regulation, as outlined in the [Rights to Your Information](#md-header-rights-to-your-information) section.
 
