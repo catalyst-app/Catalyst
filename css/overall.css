@@ -1,10 +1,35 @@
 <?php
 header("Content-Type: text/css; charset=UTF-8", true);
-header("Cache-Control: max-age=86400", true);
+header("Cache-Control: max-age=259200", true); // 3 days
 ?>
 html, body {
 	font-display: swap;
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.diagonal-header {
+	position: relative;
+	overflow: hidden;
+}
+.diagonal-header-inner {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: skewY(-6deg);
+	transform-origin: top left;
+}
+.diagonal-header-inner.diagonal-header-inner-alt {
+	transform-origin: top right;
+	transform: skewY(6deg);
+}
+
+.diagonal-header .header {
+	position: relative;
+	color: white;
 }
 
 .commission-type-row {
@@ -632,6 +657,14 @@ input[type=checkbox] + label + span.invalid-text {
 		border: 0.3rem solid #fff;
 		min-height: 3rem !important;
 	}
+
+	.diagonal-header .header {
+		margin-top: 0.1em;
+	}
+
+	.diagonal-header {
+		height: 9em;
+	}
 }
 
 @media only screen and (min-width: 601px) and (max-width: 992px) {
@@ -644,6 +677,10 @@ input[type=checkbox] + label + span.invalid-text {
 		border: 0.5rem solid #fff;
 		min-height: 5rem !important;
 	}
+
+	.diagonal-header {
+		height: 15em;
+	}
 }
 
 @media only screen and (min-width: 993px) {
@@ -655,6 +692,10 @@ input[type=checkbox] + label + span.invalid-text {
 	.color-swatch {
 		border: 0.7rem solid #fff;
 		min-height: 7rem !important;
+	}
+
+	.diagonal-header {
+		height: 17em;
 	}
 }
 
