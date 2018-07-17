@@ -183,15 +183,15 @@ class Resources {
 			}
 
 			foreach ($styles as $style) {
-				header("Link: <".$style[0].">; rel=".$style[1]."; as=style", false);
+				header("Link: <".$style[0].">; rel=".$style[1]."; as=style; type=text/css", false);
 			}
 
 			foreach ($scripts as $script) {
-				header("Link: <".$script[0].">; rel=".$script[1]."; as=script", false);
+				header("Link: <".$script[0].">; rel=".$script[1]."; as=script; type=application/javascript", false);
 			}
 
 			foreach ($deferredScripts as $script) {
-				header("Link: <".$script[0].">; rel=".$script[1]."; as=script", false);
+				header("Link: <".$script[0].">; rel=".$script[1]."; as=script; type=application/javascript", false);
 			}
 		}
 	}
