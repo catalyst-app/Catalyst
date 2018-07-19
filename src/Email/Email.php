@@ -2,7 +2,7 @@
 
 namespace Catalyst\Email;
 
-use \Catalyst\Color;
+use \Catalyst\{Color,Controller};
 use \Catalyst\Page\Values;
 use \Catalyst\Secrets;
 
@@ -1592,6 +1592,16 @@ class Email {
 		foreach ($recipients as $to) {
 			$mail->addAddress(...$to);
 		}
+
+		$message .= "<p>&copy;2017-".date("Y")." Catalyst, All rights reserved.  Version: ".Controller::getVersion()." (".Controller::getCommit().").</p>";
+		$message .= "<p>If this e-mail does not contain a valid S/MIME signature, matching SPF record, or valid DKIM signature, please report it to <a href=\"mailto:abuse@catalystapp.co\">abuse@catalystapp.co</a> immediately.</p>";
+		$message .= "<p>Additionally, if you see a &quot;smime.p7s&quot; attached to this e-mail, do not be alarmed.  It is a cryptographic signature which your e-mail client does not support.</p>";
+
+		$textMessage .= "\r\n";
+		$textMessage .= "--\r\n";
+		$textMessage .= "(C) 2017-".date("Y")." Catalyst, All rights reserved.  Version: ".Controller::getVersion()." (".Controller::getCommit().").\r\n";
+		$textMessage .= "If this e-mail does not contain a valid S/MIME signature, matching SPF record, or valid DKIM signature, please report it to abuse@catalystapp.co immediately.\r\n";
+		$textMessage .= "Additionally, if you see a \"smime.p7s\" attached to this e-mail, do not be alarmed.  It is a cryptographic signature which your e-mail client does not support.\r\n";
 
 		$mail->isHTML(true);
 		$mail->Subject = $subject;
