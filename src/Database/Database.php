@@ -12,7 +12,7 @@ use \PDO;
  */
 class Database {
 	public const DB_DRIVER = "mysql";
-	public const DB_SERVER = "localhost";
+	public const DB_SERVER = "127.0.0.1";
 	public const DB_PORT = 3306;
 	public const DB_NAME = "catalyst";
 	public const DB_USER = "catalyst";
