@@ -91,26 +91,28 @@ Resources::pushPageResources();
 	<body>
 		<?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
-			<?php if (Controller::isDevelMode() && (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID)): ?>
-				<div class="news">
-					<p class="no-margin">
-						<span class="flow-text">
-							<strong><?= htmlspecialchars(Values::NEWEST_NEWS_DATE) ?> News: <?= htmlspecialchars(Values::NEWEST_NEWS_LABEL) ?></strong>
-						</span>
-						<a href="#" class="right green-text text-darken-4" data-cookie-val="<?= Values::NEWEST_NEWS_ID ?>" id="hide-news-button">hide</a>
-					</p>
-					<p class="no-margin">
-						<?= Values::NEWEST_NEWS_DESC ?> (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>).
-					</p>
-				</div>
-			<?php endif; ?>
-			<?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->isEmailVerified() && !is_null($_SESSION["user"]->getEmail())): ?>
-				<div class="warning">
-					<p class="no-margin flow-text">
-						Please verify your email <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.
-					</p>
-					<p class="no-margin">
-						Click the link in your verification email.  If you have not received the email or the email is incorrect, please go <a href="<?=ROOTDIR?>EmailVerification" class="yellow-text text-darken-4">here</a>.
-					</p>
-				</div>
+			<?php if (!defined("NO_HEADER") || !NO_HEADER): ?>
+				<?php if (Controller::isDevelMode() && (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID)): ?>
+					<div class="news">
+						<p class="no-margin">
+							<span class="flow-text">
+								<strong><?= htmlspecialchars(Values::NEWEST_NEWS_DATE) ?> News: <?= htmlspecialchars(Values::NEWEST_NEWS_LABEL) ?></strong>
+							</span>
+							<a href="#" class="right green-text text-darken-4" data-cookie-val="<?= Values::NEWEST_NEWS_ID ?>" id="hide-news-button">hide</a>
+						</p>
+						<p class="no-margin">
+							<?= Values::NEWEST_NEWS_DESC ?> (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>).
+						</p>
+					</div>
+				<?php endif; ?>
+				<?php if (PAGE_TITLE != Values::EMAIL_VERIFICATION[1] && isset($_SESSION["user"]) && !$_SESSION["user"]->isEmailVerified() && !is_null($_SESSION["user"]->getEmail())): ?>
+					<div class="warning">
+						<p class="no-margin flow-text">
+							Please verify your email <strong><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></strong>.
+						</p>
+						<p class="no-margin">
+							Click the link in your verification email.  If you have not received the email or the email is incorrect, please go <a href="<?=ROOTDIR?>EmailVerification" class="yellow-text text-darken-4">here</a>.
+						</p>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
