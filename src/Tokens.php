@@ -19,7 +19,7 @@ class Tokens {
 	public const COMMISSION_TOKEN_LENGTH = 12;
 	public const COMMISSION_TYPE_TOKEN_LENGTH = 8;
 	public const EMAIL_VERIFICATION_TOKEN_LENGTH = 12;
-	public const PASSWORD_RESET_TOKEN_LENGTH = 16;
+	public const PASSWORD_RESET_TOKEN_LENGTH = 32;
 	public const TOTP_RESET_TOKEN_LENGTH = 20;
 	public const USER_FILE_TOKEN_LENGTH = 10;
 
