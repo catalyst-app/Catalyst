@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ddeboer/imap",
-            "version": "1.5.1",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ddeboer/imap.git",
-                "reference": "7e3a31dfd92f0dfd24af03dff63b25eba2d1a805"
+                "reference": "3956be40cfb038a7cfffaae0958035093ee1ff75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ddeboer/imap/zipball/7e3a31dfd92f0dfd24af03dff63b25eba2d1a805",
-                "reference": "7e3a31dfd92f0dfd24af03dff63b25eba2d1a805",
+                "url": "https://api.github.com/repos/ddeboer/imap/zipball/3956be40cfb038a7cfffaae0958035093ee1ff75",
+                "reference": "3956be40cfb038a7cfffaae0958035093ee1ff75",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "imap",
                 "mail"
             ],
-            "time": "2018-05-04T09:59:33+00:00"
+            "time": "2018-07-20T06:46:21+00:00"
         },
         {
             "name": "ifsnop/mysqldump-php",
@@ -325,12 +325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "383e4e73a7f402daf8389f045cb54eaa99e21d55"
+                "reference": "790b9cb22c30ac3dcec0677ba2495e592788965b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/383e4e73a7f402daf8389f045cb54eaa99e21d55",
-                "reference": "383e4e73a7f402daf8389f045cb54eaa99e21d55",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/790b9cb22c30ac3dcec0677ba2495e592788965b",
+                "reference": "790b9cb22c30ac3dcec0677ba2495e592788965b",
                 "shasum": ""
             },
             "require": {
@@ -411,7 +411,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2018-05-27T16:34:32+00:00"
+            "time": "2018-07-16T05:57:08+00:00"
         },
         {
             "name": "psr/cache",
@@ -501,16 +501,16 @@
         },
         {
             "name": "whichbrowser/parser",
-            "version": "v2.0.32",
+            "version": "v2.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WhichBrowser/Parser-PHP.git",
-                "reference": "933a695fe0b3d6cf3e957af9b73dd14ade6ed354"
+                "reference": "5f64e55347d5c0f4287d4fddeaf4a5cd909d8498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WhichBrowser/Parser-PHP/zipball/933a695fe0b3d6cf3e957af9b73dd14ade6ed354",
-                "reference": "933a695fe0b3d6cf3e957af9b73dd14ade6ed354",
+                "url": "https://api.github.com/repos/WhichBrowser/Parser-PHP/zipball/5f64e55347d5c0f4287d4fddeaf4a5cd909d8498",
+                "reference": "5f64e55347d5c0f4287d4fddeaf4a5cd909d8498",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +556,7 @@
                 "ua",
                 "useragent"
             ],
-            "time": "2018-01-24T20:27:42+00:00"
+            "time": "2018-07-13T10:20:16+00:00"
         }
     ],
     "packages-dev": [
@@ -1648,16 +1648,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "35b8caf75e791ba1b2d24fec1552168d72692b12"
+                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/35b8caf75e791ba1b2d24fec1552168d72692b12",
-                "reference": "35b8caf75e791ba1b2d24fec1552168d72692b12",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
                 "shasum": ""
             },
             "require": {
@@ -1695,7 +1695,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-06-03T11:33:10+00:00"
+            "time": "2018-07-15T17:25:16+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -1748,16 +1748,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "0.12.13",
+            "version": "0.12.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "2271dfffa67141e5af9b951fb3cff906856a8224"
+                "reference": "59f3788233d8a89b440f1e82d9b1378afaf8471b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/2271dfffa67141e5af9b951fb3cff906856a8224",
-                "reference": "2271dfffa67141e5af9b951fb3cff906856a8224",
+                "url": "https://api.github.com/repos/phan/phan/zipball/59f3788233d8a89b440f1e82d9b1378afaf8471b",
+                "reference": "59f3788233d8a89b440f1e82d9b1378afaf8471b",
                 "shasum": ""
             },
             "require": {
@@ -1808,7 +1808,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-06-16T22:53:03+00:00"
+            "time": "2018-07-22T04:47:35+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2010,16 +2010,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3179cf27542e9e47acb548150e7ca21ca5ab92d6"
+                "reference": "d69658794514e57ad9f247e623513397038f362f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3179cf27542e9e47acb548150e7ca21ca5ab92d6",
-                "reference": "3179cf27542e9e47acb548150e7ca21ca5ab92d6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d69658794514e57ad9f247e623513397038f362f",
+                "reference": "d69658794514e57ad9f247e623513397038f362f",
                 "shasum": ""
             },
             "require": {
@@ -2044,6 +2044,7 @@
                 "ext-mysqli": "*",
                 "ext-zip": "*",
                 "jakub-onderka/php-parallel-lint": "^1.0",
+                "localheinz/composer-normalize": "~0.8.0",
                 "phing/phing": "^2.16.0",
                 "phpstan/phpstan-deprecation-rules": "^0.10.2",
                 "phpstan/phpstan-php-parser": "^0.10",
@@ -2074,7 +2075,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2018-07-01T18:22:12+00:00"
+            "time": "2018-07-22T17:55:11+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2284,16 +2285,16 @@
         },
         {
             "name": "slam/phpstan-extensions",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Slamdunk/phpstan-extensions.git",
-                "reference": "7f566708643a1aa83e48c6987779672202f92af8"
+                "reference": "5bd0258c7a652a882691b9b41f4e0f5d5e34264b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/7f566708643a1aa83e48c6987779672202f92af8",
-                "reference": "7f566708643a1aa83e48c6987779672202f92af8",
+                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/5bd0258c7a652a882691b9b41f4e0f5d5e34264b",
+                "reference": "5bd0258c7a652a882691b9b41f4e0f5d5e34264b",
                 "shasum": ""
             },
             "require": {
@@ -2327,20 +2328,20 @@
                 }
             ],
             "description": "Slam extension of phpstan",
-            "time": "2018-06-26T06:55:48+00:00"
+            "time": "2018-07-23T08:55:21+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.1.1",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f"
+                "reference": "5c31f6a97c1c240707f6d786e7e59bfacdbc0219"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/70591cda56b4b47c55776ac78e157c4bb6c8b43f",
-                "reference": "70591cda56b4b47c55776ac78e157c4bb6c8b43f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5c31f6a97c1c240707f6d786e7e59bfacdbc0219",
+                "reference": "5c31f6a97c1c240707f6d786e7e59bfacdbc0219",
                 "shasum": ""
             },
             "require": {
@@ -2395,11 +2396,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-31T10:17:53+00:00"
+            "time": "2018-07-16T14:05:40+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.1.1",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
