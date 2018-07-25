@@ -40,7 +40,7 @@ Resources::pushPageResources();
 		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon-precomposed" type="image/png"/>
 		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon" type="image/png"/>
 		<link href="https://catalystapp.co/img/logo/solid/logo.png" rel="apple-touch-icon-precomposed" type="image/png"/>
-		<link rel="mask-icon" href="https://catalystapp.co/img/logo/mask.svg" color="#1b5e20"/>
+		<link rel="mask-icon" href="https://catalystapp.co/img/logo/mask.svg" color="#<?= PAGE_COLOR ?>"/>
 
 		<!-- IE -->
 		<meta name="msapplication-tooltip" content="Catalyst - Facilitating Commissions"/>
