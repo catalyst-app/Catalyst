@@ -272,14 +272,14 @@ $data = [];
 foreach ($reports as $report) {
 	logStr($report, "Parsing...");
 
-	$csv = array_map('str_getcsv', file($report));
+	$csv = array_values(array_map('str_getcsv', file($report)));
 
 	for ($i=0; $i<count($csv); $i++) {
-		if (in_array(strtoupper($csv[$i][5]), ["PENDING", "OK", "PROCESSED", "DECLINED"])) {
+		if (in_array(strtoupper(array_key_exists(5, $csv[$i]) ? $csv[$i][5] : "uh"), ["PENDING", "OK", "PROCESSED", "DECLINED"])) {
 			logStr($report, "Allowing [".$i."] (".$csv[$i][0].") - Status is ".json_encode($csv[$i][5]));
 			$data[] = array_merge($csv[$i], [$report]);
 		} else {
-			logStr($report, "Filtering [".$i."] (".$csv[$i][0].") - Status is ".json_encode($csv[$i][5]));
+			logStr($report, "Filtering [".$i."] (".$csv[$i][0].") - Status is ".json_encode(array_key_exists(5, $csv[$i]) ? $csv[$i][5] : "uh"));
 		}
 	}
 }
