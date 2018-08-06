@@ -159,7 +159,7 @@ define("PATRON_ATTRS", [
 			[
 				"NETWORK" => "DISCORD",
 				"SERVICE_URL" => null,
-				"DISP_NAME" => "@nyawenyye#8583",
+				"DISP_NAME" => "@nyawenyye 💙#9869",
 			],
 		],
 	],
