@@ -227,7 +227,7 @@ var humanFileSize = function(size) {
 			}
 		});
 		$(document).on("keydown", "textarea", function(e) {
-			if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+			if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.metaKey)) {
 				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown in textarea - ctrl+enter recieved, attempting form submission");
 				$(document.activeElement.form).submit();
 			}
