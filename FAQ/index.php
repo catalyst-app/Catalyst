@@ -92,7 +92,7 @@ echo UniversalFunctions::createHeading("FAQ");
 					<ul class="browser-default">
 						<li class="flow-text">Every connection to our site is made with the newest SSL and TLS technology</li>
 						<ul>
-							<li>Our certificates, as of April 30, 2018, are 4096-bit RSA issued by LetsEncrypt.  We score an A+ rating on Qualys SSL Server Test, scoring a 100% in Certificate integrity.</li>
+							<li>Our certificates, as of August 28, 2018, are 4096-bit RSA issued by LetsEncrypt.  We score an A+ rating on Qualys SSL Server Test, scoring a 100% in Certificate integrity.</li>
 							<li>Additionally, we use HPKP (HTTP Public Key Pinning), preloaded HSTS (HTTP Strict Transport Security, hardcoded into browsers to force secure connections), and DNS CAA records to ensure that your connection is always secure, and always to us.</li>
 							<li>We also employ Diffie-Hellman (DH) Parameters and SNI in order to keep your connection secure.</li>
 						</ul>
@@ -100,7 +100,7 @@ echo UniversalFunctions::createHeading("FAQ");
 						<ul>
 							<li>We use per-user salts - if two users have the same password, the hashes are different</li>
 							<li>Additionally, we require all passwords be 8 characters long, and that they have no maximum length.  This encourages the use of ridiculously long random passwords.</li>
-							<li>We store passwords after they are hashed with the bcrypt algorithm and a high work factor (currently 12).  If the user is to use a password of only 8 characters, the password would take (by current estimates) millions of years to crack and billions of dollars.</li>
+							<li>We store passwords after they are hashed with the argon2i algorithm and a high iteration factor (sometimes called time cost, which is currently 5), a high memory usage (32 MB), and multiple cores.  If the user is to use a password of only 8 characters, the password would take (by current estimates) millions of years to crack and billions of dollars.</li>
 						</ul>
 						<li class="flow-text">Two Factor Authentication</li>
 						<ul>
