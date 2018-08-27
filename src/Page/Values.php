@@ -58,8 +58,14 @@ class Values {
 
 
 
-	const BCRYPT_COST = 12;
+	const PASSWORD_HASH = PASSWORD_ARGON2I;
 
+	// gets around 100-150ms on my machines
+	const PASSWORD_OPTIONS = [
+		"memory_cost" => 1 << 15, // 32 MB,
+		"time_cost" => 5,
+		"threads" => 4,
+	];
 
 
 	const ROOT_TITLE = "Catalyst";

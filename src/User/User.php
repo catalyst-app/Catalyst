@@ -225,7 +225,7 @@ class User extends AbstractDatabaseModel {
 	 */
 	public function verifyPassword(string $password) : bool {
 		$valid = password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
-		if ($valid && password_needs_rehash($this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"), PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST])) {
+		if ($valid && password_needs_rehash($this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"), Values::PASSWORD_HASH, Values::PASSWORD_OPTIONS)) {
 			$this->setPassword($password);
 		}
 		return $valid;
@@ -238,7 +238,7 @@ class User extends AbstractDatabaseModel {
 	 * @return string new password
 	 */
 	public static function hashPassword(string $password) : string {
-		return password_hash($password, PASSWORD_BCRYPT, ["cost" => Values::BCRYPT_COST]);
+		return password_hash($password, Values::PASSWORD_HASH, Values::PASSWORD_OPTIONS) ?: "COULD NOT HASH PASSWORD";
 	}
 
 	/**
