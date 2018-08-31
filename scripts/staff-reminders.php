@@ -81,6 +81,7 @@ $reminderMaster = [
 		],
 		"jiki" => [],
 		"lykai" => [],
+		"acey" => [],
 		"soul.wesson" => [],
 	],
 	"triweekly" => [
@@ -93,6 +94,7 @@ $reminderMaster = [
 		"foxxo" => [],
 		"jiki" => [],
 		"lykai" => [],
+		"acey" => [],
 		"soul.wesson" => [],
 	],
 ];
@@ -103,6 +105,7 @@ $reminders = [
 	"foxxo" => [],
 	"jiki" => [],
 	"lykai" => [],
+	"acey" => [],
 	"soul.wesson" => [],
 ];
 
