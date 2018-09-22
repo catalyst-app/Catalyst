@@ -47,7 +47,7 @@ class CheckboxField extends AbstractField {
 		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= '>';
 
-		$str .= htmlspecialchars($this->getLabel());
+		$str .= ($this->getLabel());
 		
 		if ($this->isRequired()) {
 			$str .= '<span class="red-text">';
