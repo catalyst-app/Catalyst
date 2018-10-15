@@ -10,8 +10,6 @@ use \PHPMailer\PHPMailer\PHPMailer;
  * Wrapper for PHPMailer which provides S/MIME support
  */
 class Mailer extends PHPMailer {
-
-
 	/**
 	 * Assemble the message body.
 	 * Returns an empty string on failure.
