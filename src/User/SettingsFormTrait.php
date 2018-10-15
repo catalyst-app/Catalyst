@@ -167,7 +167,7 @@ trait SettingsFormTrait {
 		$form->addField($nsfwProfilePictureField);
 
 		$explicitDefinitionMessage = new StaticHTMLField();
-		$explicitDefinitionMessage->setHtml('<p class="no-top-margin col s12">Go <a href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
+		$explicitDefinitionMessage->setHtml('<p class="no-top-margin col s12">Go <a target="_blank" href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
 		$form->addField($explicitDefinitionMessage);
 
 		$nsfwAccessField = new CheckboxField();
