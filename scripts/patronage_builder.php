@@ -252,6 +252,32 @@ define("PATRON_ATTRS", [
 			],
 		],
 	],
+	"9b19858f5c6d512a173686e6df9cb2fd8abe401be882bb35fe09a4b4ce75372f" => [
+		"color" => "ffd54f",
+		"name" => "Mango",
+		"social" => [
+			[
+				"NETWORK" => "INSTAGRAM",
+				"SERVICE_URL" => "https://instagram.com/water.paws",
+				"DISP_NAME" => "water.paws",
+			],
+			[
+				"NETWORK" => "TWITTER",
+				"SERVICE_URL" => "https://twitter.com/mangopaw",
+				"DISP_NAME" => "mangopaw",
+			],
+			[
+				"NETWORK" => "DISCORD",
+				"SERVICE_URL" => null,
+				"DISP_NAME" => "@Manghoul#6321",
+			],
+			[
+				"NETWORK" => "SELF",
+				"SERVICE_URL" => "https://manguwu.patreon.catl.st/",
+				"DISP_NAME" => "Commission Info",
+			],
+		],
+	],
 ]);
 
 function logStr(string $section, string $message) : void {
