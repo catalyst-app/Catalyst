@@ -236,14 +236,16 @@ class Mailer extends PHPMailer {
 	 * @param string $folderPath Where to save the mail
 	 * @param bool $markAsRead Whether or not to mark the mail as read
 	 */
-    public function copyToFolder(string $folderPath="Sent", bool $markAsRead=true) : void {
-        $message = $this->MIMEHeader.$this->MIMEBody;
+	public function copyToFolder(string $folderPath="Sent", bool $markAsRead=true) : void {
+		$message = $this->MIMEHeader.$this->MIMEBody;
 
-        $server = new Server($this->Host);
-        $connection = $server->authenticate($this->Username, $this->Password);
+		if (extension_loaded("imap")) {
+			$server = new Server($this->Host);
+			$connection = $server->authenticate($this->Username, $this->Password);
 
-        $mailbox = $connection->getMailbox($folderPath);
-        
-        $mailbox->addMessage($message, $markAsRead ? '\\Seen' : null);
-    }
+			$mailbox = $connection->getMailbox($folderPath);
+			
+			$mailbox->addMessage($message, $markAsRead ? '\\Seen' : null);
+		}
+	}
 }
