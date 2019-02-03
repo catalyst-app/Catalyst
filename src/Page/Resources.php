@@ -81,7 +81,11 @@ class Resources {
 				case self::ALWAYS:
 				break;
 			}
-			$script[1] = str_replace("{commit}", Controller::getCommit(), $script[1]);
+			if (Controller::isDevelMode()) {
+				$script[1] = str_replace("{commit}", Controller::getCommit().microtime(true), $script[1]);
+			} else {
+				$script[1] = str_replace("{commit}", Controller::getCommit(), $script[1]);
+			}
 			$scripts[] = array_slice($script, 1);
 		}
 		return $scripts;
@@ -128,7 +132,11 @@ class Resources {
 				case self::ALWAYS:
 				break;
 			}
-			$style[1] = str_replace("{commit}", Controller::getCommit(), $style[1]);
+			if (Controller::isDevelMode()) {
+				$style[1] = str_replace("{commit}", Controller::getCommit().microtime(true), $style[1]);
+			} else {
+				$style[1] = str_replace("{commit}", Controller::getCommit(), $style[1]);
+			}
 			$styles[] = array_slice($style, 1);
 		}
 		return $styles;
