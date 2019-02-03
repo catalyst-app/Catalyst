@@ -241,6 +241,16 @@ var humanFileSize = function(size) {
 
 		/* IMAGE COMPRESSION FALLBACKS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'webp_background_image_fallback.js'; ?>
+
+		<?php if (Controller::isDevelMode()): ?>
+			$(document).on("click", ".brand-logo", function(e) {
+				e.preventDefault();
+
+				$("head").append($("<link></link>").attr("rel", "stylesheet").attr("href", $("html").attr("data-rootdir")+"css/color-"+prompt("Input color: ")+".css"));
+
+				return false;
+			});
+		<?php endif; ?>
 	});
 })(jQuery);
 
