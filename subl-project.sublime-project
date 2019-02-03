@@ -1,25 +1,11 @@
 {
-	"folders": [
-		{
-			"path": ".",
-			"name": "Catalyst",
-			"folder_exclude_patterns": [
-				"src/vendor",
-				"artist_images",
-				"character_images",
-				"commission_type_images",
-				"profile_pictures"
-			]
-		},
-	],
-	"settings": {
-	},
-	"build_systems": [
+	"build_systems":
+	[
 		{
 			"name": "Catalyst",
 			"shell_cmd": "echo No selected command",
-			"working_dir": "$folder",
-			"variants": [
+			"variants":
+			[
 				{
 					"name": "Get uncommited work",
 					"shell_cmd": "git diff"
@@ -33,6 +19,26 @@
 					"shell_cmd": "bash -c './test'"
 				}
 			],
+			"working_dir": "$folder"
 		}
-	]
+	],
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"src/vendor",
+				"artist_images",
+				"character_images",
+				"commission_type_images",
+				"integration_icons",
+				"profile_pictures"
+			],
+			"name": "Catalyst",
+			"path": "."
+		}
+	],
+	"settings":
+	{
+	}
 }
