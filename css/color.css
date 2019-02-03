@@ -11,6 +11,10 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Color;
 ?>
 
+.tinted-white-text {
+  color: #<?= Color::lightenHex($_GET["hex"], 5) ?>;
+}
+
 .lighten-quarter {
   background-color: #<?= Color::lightenHex($_GET["hex"], 0.25) ?>;
 }
