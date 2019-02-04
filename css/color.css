@@ -15,6 +15,10 @@ use \Catalyst\Color;
   color: #<?= Color::lightenHex($_GET["hex"], 5) ?>;
 }
 
+.dark-tinted-white-text {
+  color: #<?= Color::lightenHex($_GET["hex"], 2) ?>;
+}
+
 .lighten-quarter {
   background-color: #<?= Color::lightenHex($_GET["hex"], 0.25) ?>;
 }
