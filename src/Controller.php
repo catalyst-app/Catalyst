@@ -351,10 +351,10 @@ class Controller {
 					echo '<div class="code-block">';
 					echo '<p><strong>Development mode information:</strong></p>';
 					echo '<p></p>';
-					echo '<p>ERRNO: '.htmlspecialchars($errno).'</p>';
+					echo '<p>ERRNO: '.$errno.'</p>';
 					echo '<p>ERRSTR: '.htmlspecialchars($errstr).'</p>';
 					echo '<p>ERRFILE: '.htmlspecialchars($errfile).'</p>';
-					echo '<p>ERRLINE: '.htmlspecialchars($errline).'</p>';
+					echo '<p>ERRLINE: '.$errline.'</p>';
 					echo '<p>TRACK_ID: '.htmlspecialchars($trackingId).'</p>';
 					echo '<p></p>';
 					echo '<p>Common mistakes (in self-hosting):</p>';

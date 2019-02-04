@@ -186,7 +186,7 @@ echo UniversalFunctions::createHeading("Artist");
 								<?php endif; ?>
 							</div>
 							<p class="flow-text no-margin col s12">
-								<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
+								<span class="tooltipped" data-tooltip="<?= number_format($commissionType->getBaseUsdCost(), 2) ?> USD">
 									<?= htmlspecialchars($commissionType->getBaseCost()) ?>
 								</span>
 							</p>
@@ -366,7 +366,7 @@ echo UniversalFunctions::createHeading("Artist");
 											$suffixes = UniversalFunctions::getListPunctuationArray(count($group));
 											?>
 											<?php for ($i=0; $i<count($group); $i++): ?>
-												<span class="tooltipped" data-tooltip="<?= htmlspecialchars($group[$i]->getBaseUsdCost()) ?> USD"><?= htmlspecialchars($group[$i]->getName()) ?> (+<?= htmlspecialchars($group[$i]->getBaseCost()) ?>)</span><?= $suffixes[$i] ?>
+												<span class="tooltipped" data-tooltip="<?= number_format($group[$i]->getBaseUsdCost(), 2) ?> USD"><?= htmlspecialchars($group[$i]->getName()) ?> (+<?= htmlspecialchars($group[$i]->getBaseCost()) ?>)</span><?= $suffixes[$i] ?>
 											<?php endfor; ?>
 										</p>
 									<?php endforeach; ?>

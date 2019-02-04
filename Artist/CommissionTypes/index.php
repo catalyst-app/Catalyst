@@ -70,7 +70,7 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 								<?= htmlspecialchars($commissionType->getName()) ?>
 							</h3>
 							<p class="flow-text no-margin col s12">
-								<span class="tooltipped" data-tooltip="<?= htmlspecialchars($commissionType->getBaseUsdCost()) ?> USD">
+								<span class="tooltipped" data-tooltip="<?= number_format($commissionType->getBaseUsdCost(), 2) ?> USD">
 									<?= htmlspecialchars($commissionType->getBaseCost()) ?>
 								</span>
 							</p>
