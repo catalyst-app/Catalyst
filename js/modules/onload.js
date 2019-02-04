@@ -246,7 +246,7 @@ var humanFileSize = function(size) {
 			$(document).on("click", ".brand-logo", function(e) {
 				e.preventDefault();
 
-				$("head").append($("<link></link>").attr("rel", "stylesheet").attr("href", $("html").attr("data-rootdir")+"css/color-"+prompt("Input color: ")+".css"));
+				$("head").append($("<link></link>").attr("rel", "stylesheet").attr("href", $("html").attr("data-rootdir")+"css/color-"+prompt("Input color: ")+".css?"+Date.now()));
 
 				return false;
 			});
