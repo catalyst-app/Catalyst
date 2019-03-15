@@ -13,14 +13,17 @@ use \Catalyst\Color;
 :root {
 	--main-color: #<?= $_GET["hex"] ?>;
 	--main-color-quarter-alpha: #<?= $_GET["hex"] ?>44;
+
+	--main-color-light-tinted:  #<?= Color::lightenHex($_GET["hex"], 5) ?>;
+	--main-color-dark-tinted:  #<?= Color::lightenHex($_GET["hex"], 2) ?>;
 }
 
 .tinted-white-text {
-	color: #<?= Color::lightenHex($_GET["hex"], 5) ?>;
+	color: var(--main-color-light-tinted);
 }
 
 .dark-tinted-white-text {
-	color: #<?= Color::lightenHex($_GET["hex"], 2) ?>;
+	color: var(--main-color-dark-tinted);
 }
 
 .lighten-tenth {
