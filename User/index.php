@@ -97,7 +97,7 @@ echo UniversalFunctions::createHeading("User Profile");
 					<p class="flow-text">This user has no public characters</p>
 				<?php else: ?>
 					<div class="horizontal-scrollable-container row">
-				<?= implode("", $cards) ?>
+						<?= implode("", $cards) ?>
 					</div>
 				<?php endif; ?>
 			</div>
