@@ -719,3 +719,149 @@ input[type=checkbox] + label + span.invalid-text {
 .timepicker-minutes .timepicker-tick:hover {
   background-color: #00000000;
 }
+
+
+
+.social-chips .chip:focus {
+	background-color: var(--main-color);
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+	border-right: 2px solid var(--main-color);
+	border-bottom: 2px solid var(--main-color);
+}
+
+/* Indeterminate checkbox */
+[type="checkbox"]:indeterminate + span:not(.lever):before {
+	border-right: 2px solid var(--main-color);
+}
+
+[type="checkbox"].filled-in:checked + span:not(.lever):after {
+	border: 2px solid var(--main-color);
+	background-color: var(--main-color);
+}
+
+[type="checkbox"].filled-in.tabbed:checked:focus + span:not(.lever):after {
+	background-color: var(--main-color);
+	border-color: var(--main-color);
+}
+
+
+
+
+.switch label input[type=checkbox]:checked + .lever:after {
+	background-color: var(--main-color);
+}
+
+.switch label input[type=checkbox]:checked + .lever::after, .user-color, nav, footer.page-footer,
+.img-strict-circle[style*='/default.png");'], .img-strict-circle[style*="/default.png');"],
+.img-strict-circle[style*='/default.svg");'], .img-strict-circle[style*="/default.svg');"],
+.img-strict-circle[style*='/default.webp");'], .img-strict-circle[style*="/default.webp');"], picture.default-img, picture.default-img *,
+[type="checkbox"].filled-in:checked + label:after,
+[type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
+.progress .indeterminate, .progress .determinate, .btn-floating, button:focus, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
+	background-color: var(--main-color);
+}
+
+.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span {
+	color: var(--main-color) !important;
+}
+
+[type="checkbox"]:checked + label:before {
+	border-right: 2px solid var(--main-color);
+	border-bottom: 2px solid var(--main-color);
+}
+
+[type="checkbox"]:indeterminate + label:before {
+	border-right: 2px solid var(--main-color);
+}
+
+[type="checkbox"].filled-in:checked + label:after {
+	border: 2px solid var(--main-color);
+}
+
+[type="checkbox"].filled-in.tabbed:checked:focus + label:after {
+	border-color: var(--main-color);
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid var(--main-color);
+	-webkit-box-shadow: 0 1px 0 0 var(--main-color);
+	box-shadow: 0 1px 0 0 var(--main-color);
+}
+
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=url]:not(.browser-default):focus:not([readonly]) + label,
+input[type=time]:not(.browser-default):focus:not([readonly]) + label,
+input[type=date]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
+input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+input[type=search]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+	color: var(--main-color);
+}
+
+blockquote {
+	border-left: 5px solid var(--main-color);
+}
+
+.timepicker-digital-display {
+	background-color: var(--main-color);
+}
+
+.timepicker-hours .timepicker-tick.active,
+.timepicker-hours .timepicker-tick:hover {
+	background-color: var(--main-color-quarter-alpha);
+}
+.timepicker-canvas line {
+	stroke: var(--main-color);
+}
+.timepicker-canvas-bearing, .timepicker-canvas-bg {
+	fill: var(--main-color);
+}
+.timepicker-close {
+	color: var(--main-color);
+}
+
+.datepicker-date-display {
+	background-color: var(--main-color);
+}
+
+.datepicker-table td.is-today {
+	color: var(--main-color);
+}
+
+.datepicker-table td.is-selected {
+	background-color: var(--main-color);
+}
+
+.datepicker-cancel,
+.datepicker-today,
+.datepicker-done {
+	color: var(--main-color);
+}
+
+a {
+	color: var(--main-color);
+}
+
+.datepicker-day-button:focus {
+	background-color: var(--main-color-quarter-alpha);
+}
