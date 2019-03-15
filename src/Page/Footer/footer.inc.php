@@ -17,7 +17,7 @@ use \Catalyst\Page\{Resources, UniversalFunctions};
 					Version: <?= Controller::getVersion() ?> (<?= Controller::getCommit() ?>)
 					<?php if (Controller::isDevelMode()): ?>
 						<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
-						<?= `git log -1 --pretty="%B by %cN %cr"` ?>
+						<?= htmlspecialchars(`git log -1 --pretty="%B by %cN %cr"`) ?>
 					<?php endif; ?>
 				</p>
 				<?php if (Controller::isDevelMode()): ?>
