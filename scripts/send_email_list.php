@@ -107,7 +107,7 @@ echo date("c")." - Ready!\n";
 
 foreach ($emails as $email) {
 	echo date("c")." - Sending to ".$email."...\n";
-	Email::sendEmail([[$email]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD, Email::NO_REPLY_SMIME_PATH, Email::NO_REPLY_SMIME_PASSWORD);
+	Email::sendEmail([[$email]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD, Email::NO_REPLY_SMIME_PATH, Email::NO_REPLY_SMIME_PASSWORD, Email::EMAIL_SMTP, false);
 }
 
 echo date("c")." - Done!\n";
