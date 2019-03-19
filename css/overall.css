@@ -7,6 +7,33 @@ html, body {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
+#about-definition {
+	padding: 8vh 5% 7vh 5%;
+}
+
+.about-page-inline-block {
+	padding: 0.5rem 0.8rem;
+	color: var(--main-color-light-tinted);
+	border: 0.2rem solid var(--main-color-dark-tinted);
+	border-radius: 5rem;
+	margin: 0.6rem 0.8rem;
+	display: inline-block;
+	cursor: pointer;
+	transition: border 0.1s ease;
+}
+
+.about-page-inline-block-selected {
+	border: 0.2rem solid #fff !important;
+}
+
+.about-page-inline-block:hover {
+	border: 0.2rem solid var(--main-color-light-tinted);
+}
+
+.about-page-inline-block-no-border {
+	border: none !important;
+}
+
 .diagonal-header {
 	position: relative;
 	overflow: hidden;
