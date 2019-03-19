@@ -44,16 +44,6 @@ html, body {
 	z-index: initial;
 }
 
-.about-page-social-icon-wrapper {
-	height: 10em;
-}
-
-.about-page-social-icon {
-	width: 55%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 button:focus {
 	color: white;
 }
@@ -662,8 +652,8 @@ input[type=checkbox] + label + span.invalid-text {
 		margin-top: 0.1em;
 	}
 
-	.diagonal-header {
-		height: 9em;
+	.about-page-social-icon {
+		width: 4em;
 	}
 }
 
@@ -678,8 +668,8 @@ input[type=checkbox] + label + span.invalid-text {
 		min-height: 5rem !important;
 	}
 
-	.diagonal-header {
-		height: 15em;
+	.about-page-social-icon {
+		width: 5rem;
 	}
 }
 
@@ -694,8 +684,8 @@ input[type=checkbox] + label + span.invalid-text {
 		min-height: 7rem !important;
 	}
 
-	.diagonal-header {
-		height: 17em;
+	.about-page-social-icon {
+		width: 6rem;
 	}
 }
 
