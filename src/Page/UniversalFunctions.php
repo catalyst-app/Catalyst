@@ -43,6 +43,26 @@ class UniversalFunctions {
 		return $str;
 	}
 
+	/**
+	 * to camel case to toCamelcase
+	 *
+	 * @param string $in
+	 * @return string
+	 */
+	public static function toCamelCase(string $in) : string {
+		return preg_replace("/[^a-zA-Z0-9]/", "", preg_replace_callback("/[^a-zA-Z0-9]([a-zA-Z])/i", function ($m) {return strtoupper($m[1]);}, strtolower($in)));
+	}
+
+	/**
+	 * toDashCase to to-dash-case
+	 *
+	 * @param string $in
+	 * @return string
+	 */
+	public static function toDashCase(string $in) : string {
+		return preg_replace("/[^a-zA-Z0-9]/", "-", strtolower($in));
+	}
+
 	// https://github.com/mingalevme/utils/blob/master/src/Filesize.php
 	const UNIT_PREFIXES_POWERS = [
 		'B' => 0,
