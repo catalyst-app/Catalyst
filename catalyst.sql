@@ -880,6 +880,27 @@ INSERT INTO `social_media_meta` (`SORT_ORDER`, `VISIBLE`, `INTEGRATION_NAME`, `I
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `DESCRIPTION` mediumtext NOT NULL,
+  `SOCIAL_MEDIA_CHIPS` mediumtext NOT NULL,
+  `IMAGE_PATH` varchar(15) NOT NULL,
+  `SORT` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(1, 'Fauxil Fox', 'Fauxil is the founder of Catalyst! He has developed most every aspect of the platform. He oversees all operations and decisions as well. He is studying Computer Science, and loves to code! He especially loves backend web-developement or general programming, his primary language being PHP.\r\n\r\nProfile Picture by aspenshadow ([FurAffinity](https://www.furaffinity.net/view/27621841/))', '[{\"NETWORK\":\"SELF\",\"SERVICE_URL\":\"https:\\/\\/c.catl.st\\/fauxil\",\"DISP_NAME\":\"Character Reference\"},{\"NETWORK\":\"DOMAIN\",\"SERVICE_URL\":\"http:\\/\\/xn--fp8h58f.ws\",\"DISP_NAME\":\"Fauxkai Site!\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil@catalystapp.co\",\"DISP_NAME\":\"@catalystapp.co\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"Fauxil_Fox#5881\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil_fox@furmail.net\",\"DISP_NAME\":\"@furmail.net\"},{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"https:\\/\\/furaffinity.net\\/user\\/fauxilfox\",\"DISP_NAME\":\"~Fauxil_Fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/fauxil_fox\",\"DISP_NAME\":\"@fauxil_fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/furry_irl_v2\",\"DISP_NAME\":\"@furry_irl_v2\"},{\"NETWORK\":\"REDDIT\",\"SERVICE_URL\":\"https:\\/\\/reddit.com\\/u\\/fauxil_fox\",\"DISP_NAME\":\"Reddit\"},{\"NETWORK\":\"TELEGRAM\",\"SERVICE_URL\":\"https:\\/\\/telegram.dog\\/Fauxil_Fox\",\"DISP_NAME\":\"@Fauxil_Fox\"},{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/fauxilfox\",\"DISP_NAME\":\"@fauxilfox\"}]', 'fauxil', 10);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -1156,6 +1177,13 @@ ALTER TABLE `social_media_meta`
   ADD KEY `SORT_ORDER` (`SORT_ORDER`);
 
 --
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SORT` (`SORT`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1289,6 +1317,12 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `pending_thumbnail_queue`
   MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique DB Identifier of the row';
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
