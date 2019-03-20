@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0-rc1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2018 at 04:01 AM
--- Server version: 5.7.21-log
--- PHP Version: 7.2.5
+-- Generation Time: Mar 20, 2019 at 02:05 PM
+-- Server version: 10.3.13-MariaDB-log
+-- PHP Version: 7.3.1
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -225,7 +225,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0x039be5);
 INSERT INTO `colors` (`HEX`) VALUES(0x03a9f4);
 INSERT INTO `colors` (`HEX`) VALUES(0x0d47a1);
 INSERT INTO `colors` (`HEX`) VALUES(0x1565c0);
-INSERT INTO `colors` (`HEX`) VALUES(0x18ffff);
 INSERT INTO `colors` (`HEX`) VALUES(0x1976d2);
 INSERT INTO `colors` (`HEX`) VALUES(0x1a237e);
 INSERT INTO `colors` (`HEX`) VALUES(0x1b5e20);
@@ -251,12 +250,10 @@ INSERT INTO `colors` (`HEX`) VALUES(0x3949ab);
 INSERT INTO `colors` (`HEX`) VALUES(0x3d5afe);
 INSERT INTO `colors` (`HEX`) VALUES(0x3e2723);
 INSERT INTO `colors` (`HEX`) VALUES(0x3f51b5);
-INSERT INTO `colors` (`HEX`) VALUES(0x40c4ff);
 INSERT INTO `colors` (`HEX`) VALUES(0x40e0d0);
 INSERT INTO `colors` (`HEX`) VALUES(0x424242);
 INSERT INTO `colors` (`HEX`) VALUES(0x42a5f5);
 INSERT INTO `colors` (`HEX`) VALUES(0x43a047);
-INSERT INTO `colors` (`HEX`) VALUES(0x448aff);
 INSERT INTO `colors` (`HEX`) VALUES(0x4527a0);
 INSERT INTO `colors` (`HEX`) VALUES(0x455a64);
 INSERT INTO `colors` (`HEX`) VALUES(0x4a148c);
@@ -266,7 +263,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0x4dd0e1);
 INSERT INTO `colors` (`HEX`) VALUES(0x4e342e);
 INSERT INTO `colors` (`HEX`) VALUES(0x4fc3f7);
 INSERT INTO `colors` (`HEX`) VALUES(0x512da8);
-INSERT INTO `colors` (`HEX`) VALUES(0x536dfe);
 INSERT INTO `colors` (`HEX`) VALUES(0x546e7a);
 INSERT INTO `colors` (`HEX`) VALUES(0x558b2f);
 INSERT INTO `colors` (`HEX`) VALUES(0x5c6bc0);
@@ -277,12 +273,10 @@ INSERT INTO `colors` (`HEX`) VALUES(0x616161);
 INSERT INTO `colors` (`HEX`) VALUES(0x6200ea);
 INSERT INTO `colors` (`HEX`) VALUES(0x64b5f6);
 INSERT INTO `colors` (`HEX`) VALUES(0x64dd17);
-INSERT INTO `colors` (`HEX`) VALUES(0x64ffda);
 INSERT INTO `colors` (`HEX`) VALUES(0x651fff);
 INSERT INTO `colors` (`HEX`) VALUES(0x66bb6a);
 INSERT INTO `colors` (`HEX`) VALUES(0x673ab7);
 INSERT INTO `colors` (`HEX`) VALUES(0x689f38);
-INSERT INTO `colors` (`HEX`) VALUES(0x69f0ae);
 INSERT INTO `colors` (`HEX`) VALUES(0x6a1b9a);
 INSERT INTO `colors` (`HEX`) VALUES(0x6d4c41);
 INSERT INTO `colors` (`HEX`) VALUES(0x757575);
@@ -291,7 +285,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0x78909c);
 INSERT INTO `colors` (`HEX`) VALUES(0x795548);
 INSERT INTO `colors` (`HEX`) VALUES(0x7986cb);
 INSERT INTO `colors` (`HEX`) VALUES(0x7b1fa2);
-INSERT INTO `colors` (`HEX`) VALUES(0x7c4dff);
 INSERT INTO `colors` (`HEX`) VALUES(0x7cb342);
 INSERT INTO `colors` (`HEX`) VALUES(0x7e57c2);
 INSERT INTO `colors` (`HEX`) VALUES(0x81c784);
@@ -315,7 +308,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0xad1457);
 INSERT INTO `colors` (`HEX`) VALUES(0xaed581);
 INSERT INTO `colors` (`HEX`) VALUES(0xaeea00);
 INSERT INTO `colors` (`HEX`) VALUES(0xafb42b);
-INSERT INTO `colors` (`HEX`) VALUES(0xb2ff59);
 INSERT INTO `colors` (`HEX`) VALUES(0xb388ff);
 INSERT INTO `colors` (`HEX`) VALUES(0xb71c1c);
 INSERT INTO `colors` (`HEX`) VALUES(0xba68c8);
@@ -335,7 +327,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0xd81b60);
 INSERT INTO `colors` (`HEX`) VALUES(0xd84315);
 INSERT INTO `colors` (`HEX`) VALUES(0xdce775);
 INSERT INTO `colors` (`HEX`) VALUES(0xdd2c00);
-INSERT INTO `colors` (`HEX`) VALUES(0xe040fb);
 INSERT INTO `colors` (`HEX`) VALUES(0xe53935);
 INSERT INTO `colors` (`HEX`) VALUES(0xe57373);
 INSERT INTO `colors` (`HEX`) VALUES(0xe64a19);
@@ -343,7 +334,6 @@ INSERT INTO `colors` (`HEX`) VALUES(0xe65100);
 INSERT INTO `colors` (`HEX`) VALUES(0xe91e63);
 INSERT INTO `colors` (`HEX`) VALUES(0xea80fc);
 INSERT INTO `colors` (`HEX`) VALUES(0xec407a);
-INSERT INTO `colors` (`HEX`) VALUES(0xeeff41);
 INSERT INTO `colors` (`HEX`) VALUES(0xef5350);
 INSERT INTO `colors` (`HEX`) VALUES(0xef6c00);
 INSERT INTO `colors` (`HEX`) VALUES(0xf06292);
@@ -358,11 +348,8 @@ INSERT INTO `colors` (`HEX`) VALUES(0xfbc02d);
 INSERT INTO `colors` (`HEX`) VALUES(0xfdd835);
 INSERT INTO `colors` (`HEX`) VALUES(0xff1744);
 INSERT INTO `colors` (`HEX`) VALUES(0xff3d00);
-INSERT INTO `colors` (`HEX`) VALUES(0xff4081);
-INSERT INTO `colors` (`HEX`) VALUES(0xff5252);
 INSERT INTO `colors` (`HEX`) VALUES(0xff5722);
 INSERT INTO `colors` (`HEX`) VALUES(0xff6d00);
-INSERT INTO `colors` (`HEX`) VALUES(0xff6e40);
 INSERT INTO `colors` (`HEX`) VALUES(0xff6f00);
 INSERT INTO `colors` (`HEX`) VALUES(0xff7043);
 INSERT INTO `colors` (`HEX`) VALUES(0xff80ab);
@@ -375,22 +362,15 @@ INSERT INTO `colors` (`HEX`) VALUES(0xff9e80);
 INSERT INTO `colors` (`HEX`) VALUES(0xffa000);
 INSERT INTO `colors` (`HEX`) VALUES(0xffa726);
 INSERT INTO `colors` (`HEX`) VALUES(0xffab00);
-INSERT INTO `colors` (`HEX`) VALUES(0xffab40);
 INSERT INTO `colors` (`HEX`) VALUES(0xffb300);
 INSERT INTO `colors` (`HEX`) VALUES(0xffb74d);
 INSERT INTO `colors` (`HEX`) VALUES(0xffc107);
 INSERT INTO `colors` (`HEX`) VALUES(0xffc400);
 INSERT INTO `colors` (`HEX`) VALUES(0xffca28);
 INSERT INTO `colors` (`HEX`) VALUES(0xffd180);
-INSERT INTO `colors` (`HEX`) VALUES(0xffd54f);
 INSERT INTO `colors` (`HEX`) VALUES(0xffd600);
-INSERT INTO `colors` (`HEX`) VALUES(0xffd740);
 INSERT INTO `colors` (`HEX`) VALUES(0xffe57f);
 INSERT INTO `colors` (`HEX`) VALUES(0xffea00);
-INSERT INTO `colors` (`HEX`) VALUES(0xffeb3b);
-INSERT INTO `colors` (`HEX`) VALUES(0xffee58);
-INSERT INTO `colors` (`HEX`) VALUES(0xfff176);
-INSERT INTO `colors` (`HEX`) VALUES(0xffff00);
 INSERT INTO `colors` (`HEX`) VALUES(0xffff8d);
 
 -- --------------------------------------------------------
