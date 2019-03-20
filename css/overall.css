@@ -22,6 +22,11 @@ html, body {
 	transition: border 0.1s ease;
 }
 
+.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
+	width: 10em;
+	height: 10em;
+}
+
 .about-page-inline-block-selected {
 	border: 0.2rem solid #fff !important;
 }
@@ -680,7 +685,12 @@ input[type=checkbox] + label + span.invalid-text {
 	}
 
 	.about-page-social-icon {
-		width: 4em;
+		width: 4rem;
+	}
+
+	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
+		width: 6rem;
+		height: 6rem;
 	}
 }
 
@@ -698,6 +708,11 @@ input[type=checkbox] + label + span.invalid-text {
 	.about-page-social-icon {
 		width: 5rem;
 	}
+
+	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
+		width: 7rem;
+		height: 7rem;
+	}
 }
 
 @media only screen and (min-width: 993px) {
@@ -713,6 +728,11 @@ input[type=checkbox] + label + span.invalid-text {
 
 	.about-page-social-icon {
 		width: 6rem;
+	}
+
+	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
+		width: 8rem;
+		height: 8rem;
 	}
 }
 
