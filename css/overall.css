@@ -22,6 +22,11 @@ html, body {
 	transition: border 0.1s ease;
 }
 
+.about-page-inline-block .img-strict-circle {
+	opacity: 0.65;
+	transition: opacity 0.1s ease;
+}
+
 .about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
 	width: 10em;
 	height: 10em;
@@ -31,8 +36,16 @@ html, body {
 	border: 0.2rem solid #fff !important;
 }
 
+.about-page-inline-block-selected .img-strict-circle {
+	opacity: 1 !important;
+}
+
 .about-page-inline-block:hover {
 	border: 0.2rem solid var(--main-color-light-tinted);
+}
+
+.about-page-inline-block:hover .img-strict-circle {
+	opacity: 0.8;
 }
 
 .about-page-inline-block-no-border {
