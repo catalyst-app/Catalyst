@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2019 at 02:05 PM
+-- Generation Time: Mar 26, 2019 at 02:01 AM
 -- Server version: 10.3.13-MariaDB-log
 -- PHP Version: 7.3.1
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -33,14 +32,6 @@ CREATE TABLE `api_authorizations` (
   `ACCESS_SECRET` varchar(60) CHARACTER SET ascii NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- RELATIONSHIPS FOR TABLE `api_authorizations`:
---   `USER_ID`
---       `users` -> `ID`
---   `API_ID`
---       `api_keys` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -55,12 +46,6 @@ CREATE TABLE `api_keys` (
   `CLIENT_ID` varchar(16) CHARACTER SET ascii NOT NULL,
   `CLIENT_SECRET` varchar(60) CHARACTER SET ascii NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `api_keys`:
---   `USER_ID`
---       `users` -> `ID`
---
 
 -- --------------------------------------------------------
 
@@ -78,16 +63,8 @@ CREATE TABLE `artist_pages` (
   `TOS` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Artist''s TOS - shown only when you go to commission',
   `IMG` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Artist''s profile picture, null if default, file path (suffixed after token)',
   `COLOR` binary(3) NOT NULL COMMENT 'Artist''s color hex',
-  `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the artist is deleted.  Artist''s have a special ability to "undelete" their pages - rather than forcing them to contact us to create another one if they take it down, this is easier.  When they delete it, all their commission types and all are also marked deleted.'
+  `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'If the artist is deleted.  Artist''s have a special ability to "undelete" their pages - rather than forcing them to contact us to create another one if they take it down, this is easier.  When they delete it, all their commission types and all are also marked deleted.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains the information which pertains to an artist page datatype.\nThis is an "addition" to a user account - each artist is a user (USER_ID)';
-
---
--- RELATIONSHIPS FOR TABLE `artist_pages`:
---   `USER_ID`
---       `users` -> `ID`
---   `COLOR`
---       `colors` -> `HEX`
---
 
 -- --------------------------------------------------------
 
@@ -97,20 +74,12 @@ CREATE TABLE `artist_pages` (
 
 CREATE TABLE `artist_social_media` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique identifier for each entry',
-  `SORT` int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Sort order for the row, used to allow the artist to customize the ordering (as not to remove all and reinsert)',
+  `SORT` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Sort order for the row, used to allow the artist to customize the ordering (as not to remove all and reinsert)',
   `ARTIST_ID` int(11) UNSIGNED DEFAULT NULL COMMENT 'ID of the artist the row is for',
   `NETWORK` varchar(12) CHARACTER SET ascii NOT NULL COMMENT 'The network which the artist is making an entry for.  Relates to `social_media_meta`.`INTEGRAION_NAME`',
-  `SERVICE_URL` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'URL of the service.  MEDIUMTEXT as it could be longer than 255 characters (some places _really_ need to get their crap together)',
+  `SERVICE_URL` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'URL of the service.  MEDIUMTEXT as it could be longer than 255 characters (some places _really_ need to get their crap together)',
   `DISP_NAME` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'User-customizable label for the chip'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Social media entries for artists.  Displayed as chips on their profile.';
-
---
--- RELATIONSHIPS FOR TABLE `artist_social_media`:
---   `NETWORK`
---       `social_media_meta` -> `INTEGRATION_NAME`
---   `ARTIST_ID`
---       `artist_pages` -> `ID`
---
 
 -- --------------------------------------------------------
 
@@ -124,16 +93,10 @@ CREATE TABLE `artist_streaming_integrations` (
   `SERVICE` varchar(12) CHARACTER SET ascii NOT NULL COMMENT 'Service name, must be in `social_media_meta`.`INTEGRATION_NAME`',
   `SERVICE_ID` varchar(255) CHARACTER SET ascii DEFAULT NULL COMMENT 'Not yet used, may eventually refer to a user ID or similar, potentially can be combined with `SERVICE_UNAME`',
   `SERVICE_UNAME` varchar(255) CHARACTER SET ascii DEFAULT NULL COMMENT 'Username to the artist''s profile/account on the service',
-  `URL` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'URL to access the stream',
-  `IS_STREAMING` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Whether the artist is currently streaming',
-  `CACHE_TS` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Last time we checked if the artist was streaming'
+  `URL` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'URL to access the stream',
+  `IS_STREAMING` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Whether the artist is currently streaming',
+  `CACHE_TS` datetime DEFAULT current_timestamp() COMMENT 'Last time we checked if the artist was streaming'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Special streaming services for artist''s profiles.';
-
---
--- RELATIONSHIPS FOR TABLE `artist_streaming_integrations`:
---   `SERVICE`
---       `social_media_meta` -> `INTEGRATION_NAME`
---
 
 -- --------------------------------------------------------
 
@@ -148,17 +111,9 @@ CREATE TABLE `characters` (
   `NAME` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Character''s name',
   `DESCRIPTION` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Markdown description of character',
   `COLOR` binary(3) NOT NULL COMMENT 'Color of character',
-  `PUBLIC` tinyint(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'Whether the character is publicly accessible',
-  `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the character is deleted'
+  `PUBLIC` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Whether the character is publicly accessible',
+  `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'If the character is deleted'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Table which contains all of a user''s characters';
-
---
--- RELATIONSHIPS FOR TABLE `characters`:
---   `USER_ID`
---       `users` -> `ID`
---   `COLOR`
---       `colors` -> `HEX`
---
 
 -- --------------------------------------------------------
 
@@ -172,15 +127,9 @@ CREATE TABLE `character_images` (
   `CAPTION` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Image caption',
   `CREDIT` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `PATH` varchar(15) CHARACTER SET ascii NOT NULL COMMENT 'Image path (appended to character token)',
-  `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'If the image is nsfw',
-  `SORT` int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Image sort'
+  `NSFW` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'If the image is nsfw',
+  `SORT` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Image sort'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Images of a character';
-
---
--- RELATIONSHIPS FOR TABLE `character_images`:
---   `CHARACTER_ID`
---       `characters` -> `ID`
---
 
 -- --------------------------------------------------------
 
@@ -191,10 +140,6 @@ CREATE TABLE `character_images` (
 CREATE TABLE `colors` (
   `HEX` binary(3) NOT NULL COMMENT '6 character hex'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores all valid colors (needed for FKs)';
-
---
--- RELATIONSHIPS FOR TABLE `colors`:
---
 
 --
 -- Dumping data for table `colors`
@@ -398,14 +343,6 @@ CREATE TABLE `commissions` (
   `ARCHIVED_BUYER` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commissions`:
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---   `USER_ID`
---       `users` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -422,14 +359,6 @@ CREATE TABLE `commission_payments` (
   `MADE_AT` datetime NOT NULL COMMENT 'When the payment was made (customizable by the commissioner)',
   `ARTIST_VERDICT` enum('DENIED','CONFIRMED') CHARACTER SET ascii DEFAULT NULL COMMENT 'Whether the artist has confirmed receipt or denied that it came'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Payments for commissions';
-
---
--- RELATIONSHIPS FOR TABLE `commission_payments`:
---   `COMMISSION_ID`
---       `commissions` -> `ID`
---   `COMMISSION_TYPE_PAYMENT_ID`
---       `commission_type_payment_options` -> `ID`
---
 
 -- --------------------------------------------------------
 
@@ -456,12 +385,6 @@ CREATE TABLE `commission_types` (
   `DELETED` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commission_types`:
---   `ARTIST_PAGE_ID`
---       `artist_pages` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -475,12 +398,6 @@ CREATE TABLE `commission_type_attributes` (
   `GROUP_ID` int(2) UNSIGNED NOT NULL,
   `SORT` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
-
---
--- RELATIONSHIPS FOR TABLE `commission_type_attributes`:
---   `GROUP_ID`
---       `commission_type_attribute_groups` -> `ID`
---
 
 --
 -- Dumping data for table `commission_type_attributes`
@@ -626,10 +543,6 @@ CREATE TABLE `commission_type_attribute_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 --
--- RELATIONSHIPS FOR TABLE `commission_type_attribute_groups`:
---
-
---
 -- Dumping data for table `commission_type_attribute_groups`
 --
 
@@ -661,12 +574,6 @@ CREATE TABLE `commission_type_images` (
   `SORT` int(11) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commission_type_images`:
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -685,12 +592,6 @@ CREATE TABLE `commission_type_modifiers` (
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commission_type_modifiers`:
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -707,12 +608,6 @@ CREATE TABLE `commission_type_payment_options` (
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commission_type_payment_options`:
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -726,12 +621,6 @@ CREATE TABLE `commission_type_stages` (
   `SORT` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `DELETED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `commission_type_stages`:
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---
 
 -- --------------------------------------------------------
 
@@ -747,12 +636,6 @@ CREATE TABLE `commission_wips` (
   `PATH` varchar(15) CHARACTER SET ascii DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `commission_wips`:
---   `COMMISSION_ID`
---       `commissions` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -763,10 +646,6 @@ CREATE TABLE `email_list` (
   `EMAIL` varchar(254) CHARACTER SET ascii NOT NULL,
   `CONTEXT` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `email_list`:
---
 
 -- --------------------------------------------------------
 
@@ -787,15 +666,39 @@ CREATE TABLE `messages` (
   `BODY` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- RELATIONSHIPS FOR TABLE `messages`:
---   `FROM_ID`
---       `users` -> `ID`
---   `TO_ID`
---       `users` -> `ID`
---   `CONCERNING_COMMISSION`
---       `commissions` -> `ID`
+-- Table structure for table `patrons`
 --
+
+CREATE TABLE `patrons` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `PATREON_ID` varchar(36) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `CURRENT` tinyint(1) NOT NULL DEFAULT 1,
+  `PLEDGED_CENTS` int(10) UNSIGNED NOT NULL,
+  `TOTAL_CENTS` int(10) UNSIGNED NOT NULL,
+  `SINCE` date NOT NULL,
+  `DESCRIPTION` mediumtext NOT NULL,
+  `SOCIAL_CHIPS` mediumtext NOT NULL,
+  `IMAGE_LOC` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `patrons`
+--
+
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(1, '1d942069-5805-4e1a-9566-5ee336416756', 'RD', 0, 0, 300, '2018-04-09', '_Pending description from patron_', '[]', '1d942069-5805-4e1a-9566-5ee336416756-gray.png');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(2, '2b8c637c-133b-4b9c-b7fd-6da0173fbf65', 'AnalogHorse', 0, 0, 3000, '2018-04-01', '_Pending description from patron_', '[]', '2b8c637c-133b-4b9c-b7fd-6da0173fbf65-gray.png');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(3, '45d2a7ab-1c70-4a78-8e76-f83aaed3c2f0', 'King Amdusias', 1, 100, 1300, '2018-02-27', '_Pending description from patron_', '[]', '45d2a7ab-1c70-4a78-8e76-f83aaed3c2f0.png');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(4, '678b1129-b08a-4abc-8a60-c0f9ba492d52', 'Coyote-Lovely', 0, 0, 0, '2018-02-18', '_Pending description from patron_', '[]', '678b1129-b08a-4abc-8a60-c0f9ba492d52-gray.jpg');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(5, '84062a06-180a-4d33-a157-48d9ecbc9aa8', 'Styx Renegade', 1, 100, 4000, '2018-03-06', '_Pending description from patron_', '[]', '84062a06-180a-4d33-a157-48d9ecbc9aa8.gif');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(6, '8c187db3-ca83-4d44-b4d3-a4d586853617', 'SINNERSCOUT', 0, 0, 2100, '2018-07-11', '_Pending description from patron_', '[]', '8c187db3-ca83-4d44-b4d3-a4d586853617-gray.jpg');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(7, 'e1f671dc-9ac5-457b-8977-783fa2ca7681', 'keeri', 1, 100, 1000, '2018-05-28', '_Pending description from patron_', '[]', 'e1f671dc-9ac5-457b-8977-783fa2ca7681.gif');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(8, 'e876a5a5-ee10-4181-831c-36a31e5a7bd6', 'Mango', 1, 100, 700, '2018-09-16', '_Pending description from patron_', '[]', 'e876a5a5-ee10-4181-831c-36a31e5a7bd6.png');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(9, 'ee82df59-a2f4-4091-8f41-037903b8c911', 'nyawenyye', 1, 200, 2300, '2018-03-31', '_Pending description from patron_', '[]', 'ee82df59-a2f4-4091-8f41-037903b8c911.png');
+INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `TOTAL_CENTS`, `SINCE`, `DESCRIPTION`, `SOCIAL_CHIPS`, `IMAGE_LOC`) VALUES(10, 'f8b3f6ea-ab8c-4ecd-b8fd-9ff15aaceb06', 'Lykai', 0, 0, 200, '2018-03-02', '_Pending description from patron_', '[]', 'f8b3f6ea-ab8c-4ecd-b8fd-9ff15aaceb06-gray.png');
 
 -- --------------------------------------------------------
 
@@ -807,12 +710,8 @@ CREATE TABLE `pending_thumbnail_queue` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique DB Identifier of the row',
   `FOLDER` varchar(22) NOT NULL COMMENT 'Folder the image resides in',
   `TOKEN` varchar(12) NOT NULL COMMENT 'Token for the image',
-  `PATH` varchar(15) NOT NULL COMMENT 'Image path'
+  `PATH` varchar(64) NOT NULL COMMENT 'Image path'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `pending_thumbnail_queue`:
---
 
 -- --------------------------------------------------------
 
@@ -828,10 +727,6 @@ CREATE TABLE `social_media_meta` (
   `DEFAULT_HUMAN_NAME` varchar(18) NOT NULL,
   `CHIP_CLASSES` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
-
---
--- RELATIONSHIPS FOR TABLE `social_media_meta`:
---
 
 --
 -- Dumping data for table `social_media_meta`
@@ -896,7 +791,13 @@ CREATE TABLE `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(1, 'Fauxil Fox', 'Fauxil is the founder of Catalyst! He has developed most every aspect of the platform. He oversees all operations and decisions as well. He is studying Computer Science, and loves to code! He especially loves backend web-developement or general programming, his primary language being PHP.\r\n\r\nProfile Picture by aspenshadow ([FurAffinity](https://www.furaffinity.net/view/27621841/))', '[{\"NETWORK\":\"SELF\",\"SERVICE_URL\":\"https:\\/\\/c.catl.st\\/fauxil\",\"DISP_NAME\":\"Character Reference\"},{\"NETWORK\":\"DOMAIN\",\"SERVICE_URL\":\"http:\\/\\/xn--fp8h58f.ws\",\"DISP_NAME\":\"Fauxkai Site!\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil@catalystapp.co\",\"DISP_NAME\":\"@catalystapp.co\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"Fauxil_Fox#5881\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil_fox@furmail.net\",\"DISP_NAME\":\"@furmail.net\"},{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"https:\\/\\/furaffinity.net\\/user\\/fauxilfox\",\"DISP_NAME\":\"~Fauxil_Fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/fauxil_fox\",\"DISP_NAME\":\"@fauxil_fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/furry_irl_v2\",\"DISP_NAME\":\"@furry_irl_v2\"},{\"NETWORK\":\"REDDIT\",\"SERVICE_URL\":\"https:\\/\\/reddit.com\\/u\\/fauxil_fox\",\"DISP_NAME\":\"Reddit\"},{\"NETWORK\":\"TELEGRAM\",\"SERVICE_URL\":\"https:\\/\\/telegram.dog\\/Fauxil_Fox\",\"DISP_NAME\":\"@Fauxil_Fox\"},{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/fauxilfox\",\"DISP_NAME\":\"@fauxilfox\"}]', 'fauxil', 10);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(1, 'Fauxil Fox', 'Fauxil is the founder of Catalyst! He has developed most every aspect of the platform. He oversees all operations and decisions as well. He is studying Computer Science, and loves to code! He especially loves backend web-developement or general programming, his primary language being PHP.\r\n\r\nProfile Picture by aspenshadow ([FurAffinity](https://www.furaffinity.net/view/27621841/))', '[{\"NETWORK\":\"SELF\",\"SERVICE_URL\":\"https:\\/\\/c.catl.st\\/fauxil\",\"DISP_NAME\":\"Character Reference\"},{\"NETWORK\":\"DOMAIN\",\"SERVICE_URL\":\"http:\\/\\/xn--fp8h58f.ws\",\"DISP_NAME\":\"Fauxkai Site!\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil@catalystapp.co\",\"DISP_NAME\":\"@catalystapp.co\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"Fauxil_Fox#5881\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"fauxil_fox@furmail.net\",\"DISP_NAME\":\"@furmail.net\"},{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"https:\\/\\/furaffinity.net\\/user\\/fauxilfox\",\"DISP_NAME\":\"~Fauxil_Fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/fauxil_fox\",\"DISP_NAME\":\"@fauxil_fox\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/furry_irl_v2\",\"DISP_NAME\":\"@furry_irl_v2\"},{\"NETWORK\":\"REDDIT\",\"SERVICE_URL\":\"https:\\/\\/reddit.com\\/u\\/fauxil_fox\",\"DISP_NAME\":\"/u/Fauxil_Fox\"},{\"NETWORK\":\"TELEGRAM\",\"SERVICE_URL\":\"https:\\/\\/telegram.dog\\/Fauxil_Fox\",\"DISP_NAME\":\"@Fauxil_Fox\"},{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/fauxilfox\",\"DISP_NAME\":\"@fauxilfox\"}]', 'fauxil.jpg', 10);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(2, 'Lykai', 'A wonderful and sweet wolf that keeps everything and everyone going.  Studying computer science and machine learning!\r\n\r\nProfile Picture by blackmustang13 ([FurAffinity](https://www.furaffinity.net/view/25588593/))\r\n', '[{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"http:\\/\\/www.furaffinity.net\\/user\\/lykai\\/\",\"DISP_NAME\":\"~Lykai\"},{\"NETWORK\":\"TELEGRAM\",\"SERVICE_URL\":\"https:\\/\\/t.me\\/Lykai\",\"DISP_NAME\":\"@Lykai\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"@Lykai#2495\"},{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/GoldDingus\",\"DISP_NAME\":\"@GoldDingus\"},{\"NETWORK\":\"SELF\",\"SERVICE_URL\":\"https:\\/\\/beta.catalystapp.co\\/Character\\/View\\/Lykai\",\"DISP_NAME\":\"Reference images\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:lykai@catalystapp.co\",\"DISP_NAME\":\"lykai@catalystapp.co\"}]', 'lykai.png', 20);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(3, 'Disco Bob', 'Disco Bob (Discombobulation) loves to help out others with whatever problems they encounter. He studies Chemistry and English and loves all sorts of animals (primarily his dogs). Disco Bob is always happy to get a message from someone who needs help or simply wants to talk.\r\n\r\nProfile Picture by Orlando Fox ([Twitter](https://twitter.com/Orlando_Fox/), [Website](http://afoxdraws.com/index.html))', '[{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"@Discombobulation#5558\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:blackoak@catalystapp.co\",\"DISP_NAME\":\"blackoak@catalystapp.co\"}]', 'disco.jpg', 30);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(4, 'Foxxo', 'From the land of maple syrup, moose, and beavers.  AKA Canada.  Also is a blue fox thing.  Speaking of blue things, Cherry MX Blue™ key switches are great. ^(We^ ^are^ ^not^ ^endorsed^ ^nor^ ^paid^ ^by^ ^Cherry)^\r\n\r\n\r\nProfile Picture by wo7f ([FurAffinity](https://www.furaffinity.net/view/24726073/))', '[{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/fluffracing\",\"DISP_NAME\":\"@fluffracing\"},{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"http:\\/\\/furaffinity.net\\/user\\/foxxoracing\",\"DISP_NAME\":\"~foxxoracing\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"@Foxxo#7183\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:foxxo@catalystapp.co\",\"DISP_NAME\":\"foxxo@catalystapp.co\"}]', 'foxxo.jpg', 40);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(5, 'Acey', 'Acey is an artist who is looking to become a professional illustrator in the future!\r\n\r\nProfile Picture by quietwheezing on Amino', '[{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"@oneggiri#4094\"},{\"NETWORK\":\"INSTAGRAM\",\"SERVICE_URL\":\"https:\\/\\/instagram.com\\/acemoonkid\\/\",\"DISP_NAME\":\"@acemoonkid\"},{\"NETWORK\":\"DEVIANTART\",\"SERVICE_URL\":\"https:\\/\\/oneggiri.deviantart.com\\/\",\"DISP_NAME\":\"oneggiri\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:acey@catalystapp.co\",\"DISP_NAME\":\"acey@catalystapp.co\"}]\r\n', 'acey.png', 50);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(6, 'Jiki Scott', 'Jiki is a social media tycoonist who\'s studying marketing and the principles needed to make social platforms.\r\n\r\nImage by ShadowNinja976 ([FurAffinity](https://www.furaffinity.net/view/19702583/))', '[{\"NETWORK\":\"TELEGRAM\",\"SERVICE_URL\":\"https:\\/\\/t.me\\/JikiScott\",\"DISP_NAME\":\"@JikiScott\"},{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"Jiki Scott#7840\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:jiki@catalystapp.co\",\"DISP_NAME\":\"jiki@catalystapp.co\"}]\r\n', 'jiki.jpg', 60);
+INSERT INTO `staff` (`ID`, `NAME`, `DESCRIPTION`, `SOCIAL_MEDIA_CHIPS`, `IMAGE_PATH`, `SORT`) VALUES(7, 'Soul Wesson', 'Soul has been an artist for almost a decade now, and loves growing her style with the help of the community. Always one to help others, she loves taking the time to help others via Twitter, Twitch, and several other communities and art sites. Great at diffusing tense situations, and always ready to lend a hand, Soul often offers her friendship first, and her services second. Her messages are always open for anyone who needs advice, or just someone to talk to.\r\n\r\nImage by Jasmae ([FurAffinity](https://www.furaffinity.net/view/22443950/))', '[{\"NETWORK\":\"DISCORD\",\"SERVICE_URL\":null,\"DISP_NAME\":\"@Soul Wesson#7693\"},{\"NETWORK\":\"TWITTER\",\"SERVICE_URL\":\"https:\\/\\/twitter.com\\/SoulWesson\\/\",\"DISP_NAME\":\"@SoulWesson\"},{\"NETWORK\":\"FURAFFINITY\",\"SERVICE_URL\":\"http:\\/\\/www.furaffinity.net\\/user\\/soulcommissions\\/\",\"DISP_NAME\":\"~SoulCommissions\"},{\"NETWORK\":\"TWITCH\",\"SERVICE_URL\":\"https:\\/\\/twitch.tv\\/soulwesson\\/\",\"DISP_NAME\":\"SoulWesson\"},{\"NETWORK\":\"EMAIL\",\"SERVICE_URL\":\"mailto:soul.wesson@catalystapp.co\",\"DISP_NAME\":\"soul.wesson@catalystapp.co\"}]\r\n', 'soul.jpg', 70);
 
 -- --------------------------------------------------------
 
@@ -928,14 +829,6 @@ CREATE TABLE `users` (
   `DEACTIVATED` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `users`:
---   `COLOR`
---       `colors` -> `HEX`
---   `ARTIST_PAGE_ID`
---       `artist_pages` -> `ID`
---
-
 -- --------------------------------------------------------
 
 --
@@ -951,14 +844,6 @@ CREATE TABLE `user_social_media` (
   `DISP_NAME` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- RELATIONSHIPS FOR TABLE `user_social_media`:
---   `USER_ID`
---       `users` -> `ID`
---   `NETWORK`
---       `social_media_meta` -> `INTEGRATION_NAME`
---
-
 -- --------------------------------------------------------
 
 --
@@ -970,14 +855,6 @@ CREATE TABLE `user_wishlists` (
   `USER_ID` int(11) UNSIGNED NOT NULL,
   `COMMISSION_TYPE_ID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `user_wishlists`:
---   `USER_ID`
---       `users` -> `ID`
---   `COMMISSION_TYPE_ID`
---       `commission_types` -> `ID`
---
 
 --
 -- Indexes for dumped tables
@@ -1162,6 +1039,16 @@ ALTER TABLE `messages`
   ADD KEY `READ` (`READ`);
 
 --
+-- Indexes for table `patrons`
+--
+ALTER TABLE `patrons`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `PATREON_ID` (`PATREON_ID`),
+  ADD KEY `CURRENT` (`CURRENT`),
+  ADD KEY `PLEDGED_CENTS` (`PLEDGED_CENTS`),
+  ADD KEY `TOTAL_CENTS` (`TOTAL_CENTS`);
+
+--
 -- Indexes for table `pending_thumbnail_queue`
 --
 ALTER TABLE `pending_thumbnail_queue`
@@ -1313,6 +1200,12 @@ ALTER TABLE `messages`
   MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `patrons`
+--
+ALTER TABLE `patrons`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `pending_thumbnail_queue`
 --
 ALTER TABLE `pending_thumbnail_queue`
@@ -1322,7 +1215,7 @@ ALTER TABLE `pending_thumbnail_queue`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1476,5 +1369,4 @@ ALTER TABLE `user_social_media`
 ALTER TABLE `user_wishlists`
   ADD CONSTRAINT `user_wishlists_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `user_wishlists_ibfk_2` FOREIGN KEY (`COMMISSION_TYPE_ID`) REFERENCES `commission_types` (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
