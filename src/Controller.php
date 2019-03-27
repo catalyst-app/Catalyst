@@ -532,6 +532,12 @@ class Controller {
 		if (!defined("\\Catalyst\\Secrets::NO_REPLY_SMIME_PASSWORD")) {
 			throw new LogicException("Secrets::NO_REPLY_SMIME_PASSWORD is not defined");
 		}
+		if (!defined("\\Catalyst\\Secrets::PATREON_CLIENT_SECRET")) {
+			throw new LogicException("Secrets::PATREON_CLIENT_SECRET is not defined");
+		}
+		if (!defined("\\Catalyst\\Secrets::PATREON_ACCESS_TOKEN")) {
+			throw new LogicException("Secrets::PATREON_ACCESS_TOKEN is not defined");
+		}
 	}
 
 	/**
