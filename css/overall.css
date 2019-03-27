@@ -27,11 +27,6 @@ html, body {
 	transition: opacity 0.1s ease;
 }
 
-.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
-	width: 10em;
-	height: 10em;
-}
-
 .about-page-inline-block-selected {
 	border: 0.2rem solid #fff !important;
 }
