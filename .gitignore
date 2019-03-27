@@ -28,6 +28,7 @@ artist_images/*
 !artist_images/.htaccess
 
 img/patron_icons/*
+!img/patron_icons/.empty
 
 subl-project.sublime-workspace
 
