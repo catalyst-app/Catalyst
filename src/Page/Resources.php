@@ -17,27 +17,27 @@ class Resources {
 	 */
 	public const SCRIPTS = [
 		// use minified versions in production
-		[self::DEVEL, ROOTDIR."js/external/jquery.js", 'integrity="sha384-fJU6sGmyn07b+uD1nMk7/iSb4yvaowcueiQhfVgQuD98rfva8mcr1eSvjchfpMrH"'],
-		[self::PRODUCTION, ROOTDIR."js/external/jquery.min.js", 'integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"'],
+		[self::DEVEL, ROOTDIR."js/external/jquery.js"],
+		[self::PRODUCTION, ROOTDIR."js/external/jquery.min.js"],
 		
-		[self::DEVEL, ROOTDIR."js/external/materialize.js", "defer", 'integrity="sha384-VG5Q68Gg4u6g3utXGn2oq5XFI7UcM1XFkHF/oHazvrzpn0rTIo49NuN8Z1CUN4dY"'],
-		[self::PRODUCTION, ROOTDIR."js/external/materialize.min.js", "defer", 'integrity="sha384-xkq5MpE6OTpCEKiI52Kl3j3oMebQHg4W08aWkvIoKktH8yYFrJu7HzAU+DqDcYf4"'],
+		[self::DEVEL, ROOTDIR."js/external/materialize.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/materialize.min.js", "defer"],
 		
-		[self::DEVEL, ROOTDIR."js/external/draggable.bundle.legacy.js", "defer", 'integrity="sha384-ErJoNjNx+pdPxftdDZBVwZrZVswpDAdg6/qxkH8WOLIiwknpLC1eDFlT+c2EW/RS"'],
-		[self::PRODUCTION, ROOTDIR."js/external/draggable.bundle.legacy.min.js", "defer", 'integrity="sha384-25is1maAa19fCBpiYi0r7GXEMigaUCj0Ba+CdwgaJORgbA5nOpiWNul6vbZwubws"'],
+		[self::DEVEL, ROOTDIR."js/external/draggable.bundle.legacy.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/draggable.bundle.legacy.min.js", "defer"],
 
-		[self::DEVEL, ROOTDIR."js/external/jsencrypt.js", "defer", 'integrity="sha384-4YOEy5TUNJLUt9LDoiwW93OD+NCDFwWPOgnE5i2SqPJdsSZqvbbJlrOv8J+yvYCI"'],
-		[self::PRODUCTION, ROOTDIR."js/external/jsencrypt.min.js", "defer", 'integrity="sha384-uYiTH2ePRlFXtnfS6psKczK3AlqsDO3dpEHqz/GRNrGQi9QdEh8aFAZob9pSyce4"'],
+		[self::DEVEL, ROOTDIR."js/external/jsencrypt.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/jsencrypt.min.js", "defer"],
 
-		[self::DEVEL, ROOTDIR."js/external/index.js", "defer", 'integrity="sha384-gHK0hFb5OqUx3ZtJAk/ikyeR4ywEFNcJlrv0mtgA+qb43Dd6D7Fp2OugVsz4pB9z"'],
-		[self::PRODUCTION, ROOTDIR."js/external/index.min.js", "defer", 'integrity="sha384-mePQ3qRBaScPjQsgsr06R9L2u8SUZJW2vdociBqfFfK/uHIsZeeRz+J61enIS16G"'],
+		[self::DEVEL, ROOTDIR."js/external/index.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/index.min.js", "defer"],
 
-		[self::DEVEL, ROOTDIR."js/external/sjcl.js", "defer", 'integrity="sha384-zJXJqc5ftX51ojskUi8aWFg0yrz9P61p6Wyg8n0cyFYsgWiAYtxnVWzh8d8BLcw0"'],
-		[self::PRODUCTION, ROOTDIR."js/external/sjcl.min.js", "defer", 'integrity="sha384-X0mQP9Ee57CRKxDlf/55LrrCIwWvXucDZvxkZ/rO5WF2By9Lwva4rEFd2LZLogOs"'],
+		[self::DEVEL, ROOTDIR."js/external/sjcl.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/sjcl.min.js", "defer"],
 
 		// not vital, easter egg
-		[self::DEVEL, ROOTDIR."js/external/cheet.js", "defer", 'integrity="sha384-hsul02hGCXZOC202Z9Grc2qcn5Et4FLWdJgXYBtTNG3Ux1YPr85TQY1G2/I0YQrd"'],
-		[self::PRODUCTION, ROOTDIR."js/external/cheet.min.js", "defer", 'integrity="sha384-8sTXxKn53rkirkXu5gKBBpFxoK/zmAefVSPu6IvC29DIKRkU94ep9TNs6tgyxde4"'],
+		[self::DEVEL, ROOTDIR."js/external/cheet.js", "defer"],
+		[self::PRODUCTION, ROOTDIR."js/external/cheet.min.js", "defer"],
 		
 		// crossorigin doesn't like to behave here
 		// already comes minified
@@ -96,8 +96,8 @@ class Resources {
 	 */
 	public const STYLES = [
 		// materialize main
-		[self::DEVEL, ROOTDIR."css/external/materialize.css", 'integrity="sha384-CsHVDMfHOe63t98dIA4pZzTHRqWzuod8uWMGv24HKx71CwknxEicG5oB1sxO1XWs"'],
-		[self::PRODUCTION, ROOTDIR."css/external/materialize.min.css", 'integrity="sha384-3rkQ4BmYtCRaaZ87FvrusoClA6BcjM3PXF+Fk7NJMisMw8+w+EnTR7e/1xSJY4dC"'],
+		[self::DEVEL, ROOTDIR."css/external/materialize.css"],
+		[self::PRODUCTION, ROOTDIR."css/external/materialize.min.css"],
 		
 		// overall styles and such, mostly just small things
 		[self::DEVEL, ROOTDIR."css/overall.css?{commit}"],
