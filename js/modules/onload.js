@@ -242,6 +242,9 @@ var humanFileSize = function(size) {
 		/* IMAGE COMPRESSION FALLBACKS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'webp_background_image_fallback.js'; ?>
 
+		/* ABOUT PAGE INTERACTIVE TERMS */
+		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'about_page_interactive_terms.js'; ?>
+
 		<?php if (Controller::isDevelMode()): ?>
 			$(document).on("click", ".brand-logo", function(e) {
 				e.preventDefault();
