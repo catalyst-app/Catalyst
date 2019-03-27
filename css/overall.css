@@ -18,6 +18,7 @@ html, body {
 	border-radius: 5rem;
 	margin: 0.6rem 0.8rem;
 	display: inline-block;
+	word-break: break-all;
 	cursor: pointer;
 	transition: border 0.1s ease;
 }
@@ -700,6 +701,31 @@ input[type=checkbox] + label + span.invalid-text {
 		width: 6rem;
 		height: 6rem;
 	}
+
+	.about-page-inline-block[data-reveal-clump=titanium-patron] {
+		flex: 1 1 80%;
+		max-width: 80%;
+	}
+	.about-page-inline-block[data-reveal-clump=gold-patron] {
+		flex: 1 1 62%;
+		max-width: 62%;
+	}
+	.about-page-inline-block[data-reveal-clump=silver-patron] {
+		flex: 1 1 46%;
+		max-width: 46%;
+	}
+	.about-page-inline-block[data-reveal-clump=bronze-patron] {
+		flex: 1 1 36%;
+		max-width: 36%;
+	}
+	.about-page-inline-block[data-reveal-clump=base-patron] {
+		flex: 1 1 32%;
+		max-width: 32%;
+	}
+	.about-page-inline-block[data-reveal-clump=dead-patron] {
+		flex: 1 1 32%;
+		max-width: 32%;
+	}
 }
 
 @media only screen and (min-width: 601px) and (max-width: 992px) {
@@ -721,6 +747,31 @@ input[type=checkbox] + label + span.invalid-text {
 		width: 7rem;
 		height: 7rem;
 	}
+
+	.about-page-inline-block[data-reveal-clump=titanium-patron] {
+		flex: 1 1 48%;
+		max-width: 48%;
+	}
+	.about-page-inline-block[data-reveal-clump=gold-patron] {
+		flex: 1 1 40%;
+		max-width: 40%;
+	}
+	.about-page-inline-block[data-reveal-clump=silver-patron] {
+		flex: 1 1 33%;
+		max-width: 33%;
+	}
+	.about-page-inline-block[data-reveal-clump=bronze-patron] {
+		flex: 1 1 30%;
+		max-width: 30%;
+	}
+	.about-page-inline-block[data-reveal-clump=base-patron] {
+		flex: 1 1 25%;
+		max-width: 25%;
+	}
+	.about-page-inline-block[data-reveal-clump=dead-patron] {
+		flex: 1 1 25%;
+		max-width: 25%;
+	}
 }
 
 @media only screen and (min-width: 993px) {
@@ -741,6 +792,31 @@ input[type=checkbox] + label + span.invalid-text {
 	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
 		width: 8rem;
 		height: 8rem;
+	}
+
+	.about-page-inline-block[data-reveal-clump=titanium-patron] {
+		flex: 1 1 40%;
+		max-width: 40%;
+	}
+	.about-page-inline-block[data-reveal-clump=gold-patron] {
+		flex: 1 1 31%;
+		max-width: 31%;
+	}
+	.about-page-inline-block[data-reveal-clump=silver-patron] {
+		flex: 1 1 23%;
+		max-width: 23%;
+	}
+	.about-page-inline-block[data-reveal-clump=bronze-patron] {
+		flex: 1 1 18%;
+		max-width: 18%;
+	}
+	.about-page-inline-block[data-reveal-clump=base-patron] {
+		flex: 1 1 16%;
+		max-width: 16%;
+	}
+	.about-page-inline-block[data-reveal-clump=dead-patron] {
+		flex: 1 1 16%;
+		max-width: 16%;
 	}
 }
 

@@ -180,7 +180,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Titanium Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_PLATINUM] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 40%; max-width: 40%;" data-reveal-clump="titanium-patron" data-reveal="titanium-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="titanium-patron" data-reveal="titanium-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
@@ -213,7 +213,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Gold Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_GOLD] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 31%; max-width: 31%;" data-reveal-clump="gold-patron" data-reveal="gold-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="gold-patron" data-reveal="gold-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
@@ -246,7 +246,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Silver Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_SILVER] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 23%; max-width: 23%;" data-reveal-clump="silver-patron" data-reveal="silver-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="silver-patron" data-reveal="silver-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
@@ -279,7 +279,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Bronze Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_BRONZE] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 18%; max-width: 18%;" data-reveal-clump="bronze-patron" data-reveal="bronze-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="bronze-patron" data-reveal="bronze-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
@@ -317,7 +317,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Base Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_BASE] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 16%; max-width: 16%;" data-reveal-clump="base-patron" data-reveal="base-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="base-patron" data-reveal="base-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
@@ -350,7 +350,7 @@ require_once Values::HEAD_INC;
 				<h5 class="tinted-white-text"><strong>Former Patrons</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_DEAD] as $patron): ?>
-						<div class="about-page-inline-block about-page-inline-block-no-border" style="flex: 1 1 16%; max-width: 16%;" data-reveal-clump="dead-patron" data-reveal="dead-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
+						<div class="about-page-inline-block about-page-inline-block-no-border" data-reveal-clump="dead-patron" data-reveal="dead-patron-<?= UniversalFunctions::toDashCase($patron->getName()) ?>">
 							<div class="force-square-contents" style="width: 100%;">
 								<?= $patron->getImage()->getStrictCircleHtml() ?>
 							</div>
