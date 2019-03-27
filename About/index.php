@@ -177,6 +177,11 @@ require_once Values::HEAD_INC;
 			}
 			?>
 			<?php if (count($rankedPatrons[Patron::TIER_PLATINUM])): ?>
+				<?php
+				usort($rankedPatrons[Patron::TIER_PLATINUM], function(Patron $a, Patron $b) : int {
+					return $a->getSince() <=> $b->getSince();
+				});
+				?>
 				<h5 class="tinted-white-text"><strong>Titanium Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_PLATINUM] as $patron): ?>
@@ -210,6 +215,11 @@ require_once Values::HEAD_INC;
 
 			
 			<?php if (count($rankedPatrons[Patron::TIER_GOLD])): ?>
+				<?php
+				usort($rankedPatrons[Patron::TIER_GOLD], function(Patron $a, Patron $b) : int {
+					return $a->getSince() <=> $b->getSince();
+				});
+				?>
 				<h5 class="tinted-white-text"><strong>Gold Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_GOLD] as $patron): ?>
@@ -243,6 +253,11 @@ require_once Values::HEAD_INC;
 
 			
 			<?php if (count($rankedPatrons[Patron::TIER_SILVER])): ?>
+				<?php
+				usort($rankedPatrons[Patron::TIER_SILVER], function(Patron $a, Patron $b) : int {
+					return $a->getSince() <=> $b->getSince();
+				});
+				?>
 				<h5 class="tinted-white-text"><strong>Silver Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_SILVER] as $patron): ?>
@@ -276,6 +291,11 @@ require_once Values::HEAD_INC;
 
 			
 			<?php if (count($rankedPatrons[Patron::TIER_BRONZE])): ?>
+				<?php
+				usort($rankedPatrons[Patron::TIER_BRONZE], function(Patron $a, Patron $b) : int {
+					return $a->getSince() <=> $b->getSince();
+				});
+				?>
 				<h5 class="tinted-white-text"><strong>Bronze Level</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_BRONZE] as $patron): ?>
@@ -311,7 +331,7 @@ require_once Values::HEAD_INC;
 			<?php if (count($rankedPatrons[Patron::TIER_BASE])): ?>
 				<?php
 				usort($rankedPatrons[Patron::TIER_BASE], function(Patron $a, Patron $b) : int {
-					return $a->getTotalCents() <=> $b->getTotalCents();
+					return $a->getSince() <=> $b->getSince();
 				});
 				?>
 				<h5 class="tinted-white-text"><strong>Base Level</strong></h5>
@@ -347,6 +367,11 @@ require_once Values::HEAD_INC;
 
 			
 			<?php if (count($rankedPatrons[Patron::TIER_DEAD])): ?>
+				<?php
+				usort($rankedPatrons[Patron::TIER_DEAD], function(Patron $a, Patron $b) : int {
+					return $b->getTotalCents() <=> $a->getTotalCents();
+				});
+				?>
 				<h5 class="tinted-white-text"><strong>Former Patrons</strong></h5>
 				<div class="container" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
 					<?php foreach ($rankedPatrons[Patron::TIER_DEAD] as $patron): ?>
