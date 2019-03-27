@@ -565,7 +565,7 @@ class Image {
 	/**
 	 * Inserts the image into the queue to be thumbnailed
 	 */
-	protected function queueForThumbnailing() : void {
+	public function queueForThumbnailing() : void {
 		if ($this->getFilesystemPaths() == $this->getNotFoundFilesystemPaths() || is_null($this->getPath())) {
 			return;
 		}

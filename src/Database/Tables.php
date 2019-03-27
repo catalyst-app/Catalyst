@@ -30,6 +30,7 @@ class Tables {
 	public const FEATURE_BOARD_STATUSES = "feature_board_statuses";
 	public const FEATURE_BOARD_VOTES = "feature_board_votes";
 	public const INTEGRATIONS_META = "social_media_meta";
+	public const PATRONS = "patrons";
 	public const PENDING_THUMBNAIL_QUEUE = "pending_thumbnail_queue";
 	public const STAFF = "staff";
 	public const USER_SOCIAL_MEDIA = "user_social_media";

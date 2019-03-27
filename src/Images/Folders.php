@@ -17,6 +17,8 @@ class Folders {
 	public const INTEGRATION_ICONS = "img/integration_icons";
 	public const LOGO_WHITE = "img/logo/white";
 
+	public const PATRON_ICONS = "img/patron_icons";
+
 	public const UNIMPLEMENTED_MEMES_FAUXIL = "img/unimplemented_memes/faux";
 	public const UNIMPLEMENTED_MEMES_LYKAI = "img/unimplemented_memes/lykai";
 }
