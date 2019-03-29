@@ -75,7 +75,13 @@ require_once Values::HEAD_INC;
 						<p class="tinted-white-text flow-text">Please explore these wonderful examples from our community of beta testers: <a href="https://c.catl.st/keeri/" class="white-text">Keeri</a>, <a href="https://c.catl.st/vmy3ad3/" class="white-text">Hidoni</a>, <a href="https://c.catl.st/aolwglb/" class="white-text">Sauksauk</a>.</p>
 					</div>
 					<div id="feature-connected-profiles" data-clump="feature" class="hide">
-						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
+						<p class="tinted-white-text flow-text">With Catalyst, we believe that every site is good at something and that we should not try to become something we are not.  We understand the implications of <a href="https://en.wikipedia.org/wiki/Jamie_Zawinski#Principles" class="white-text">Zawinski's Law of Software Envelopment</a> and wish to instead focus on what Catalyst is great at – commissions.  We are not a social media site, nor do we want to be – we only want to serve one purpose and do it as well as we can.</p>
+
+						<p class="tinted-white-text flow-text">As such, we want to make it easy for existing services to integrate and be found on Catalyst.  Any user can add a colorful and intuitive array of social networks to their profile, allowing people to quickly contact Catalyst users on Twitter, e-mail, or anywhere else!</p>
+
+						<p class="tinted-white-text flow-text">Additionally, we have created a URL shortening service to make it easy to access and share profiles.  A user's profile can be as simple as <a href="https://u.catl.st/fauxil" class="white-text">https://u.catl.st/fauxil</a>!  Although it is still a work in progress, we plan to expand this system into all areas of the site, allowing users to easily link character profiles, artist information, and much more.</p>
+
+						<p class="tinted-white-text flow-text">Please explore these wonderful examples from our community of beta testers: <a href="https://u.catl.st/sammythetanuki/" class="white-text">SammyTheTanuki</a>, <a href="https://u.catl.st/naahva/" class="white-text">Naahva</a>, <a href="https://u.catl.st/meeturself/" class="white-text">meeturself</a>.</p>
 					</div>
 					<div id="feature-flexible-commission-types" data-clump="feature" class="hide">
 						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
