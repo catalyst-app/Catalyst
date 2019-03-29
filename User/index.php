@@ -64,7 +64,7 @@ echo UniversalFunctions::createHeading("User Profile");
 								<br>
 							<?php endif; ?>
 							<?php if (!is_null($user->getArtistPage())): ?>
-								<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= $user->getArtistPage()->getName() ?></a></p>
+								<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= htmlspecialchars($user->getArtistPage()->getName()) ?></a></p>
 							<?php endif; ?>
 
 							<br>
