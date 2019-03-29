@@ -26,13 +26,14 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Register");
 
-if (User::isLoggedIn()) {
+if (User::isLoggedIn()):
 ?>
-			<p class="flow-text">You are already logged in.</p>
-			<p class="flow-text">Go to your <a href="<?= ROOTDIR ?>Dashboard">dashboard</a>?</p>
+	<p class="flow-text">You are already logged in.</p>
+	<p class="flow-text">Go to your <a href="<?= ROOTDIR ?>Dashboard">dashboard</a>?</p>
+<?php else: ?>
+	<h5>This page is for beta testers only.  If you have not completed and been approved then this application will not work.</h5>
+	<?= FormRepository::getRegisterForm()->getHtml(); ?>
 <?php
-} else {
-	echo FormRepository::getRegisterForm()->getHtml();
-}
+endif;
 
 require_once Values::FOOTER_INC;
