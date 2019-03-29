@@ -13,6 +13,7 @@ use \Catalyst\Database\Database;
 use \Catalyst\Database\Query\AbstractQuery;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\Page\{Resources, UniversalFunctions};
+use \Catalyst\Tokens;
 
 $forms = FormRepository::getAllForms();
 
@@ -105,6 +106,11 @@ var humanFileSize = function(size) {
 			M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 				showClearBtn: true
 			});
+			if (/<?= Tokens::COMMISSION_TYPE_TOKEN_REGEX ?>/.test(window.location.hash.substr(1))) {
+				if ($("#commission-type-info-modal-"+window.location.hash.substr(1)).length) {
+					M.Modal.getInstance($("#commission-type-info-modal-"+window.location.hash.substr(1))[0]).open();
+				}
+			}
 		}
 
 		materializeOnload();
