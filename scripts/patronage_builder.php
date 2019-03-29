@@ -55,11 +55,6 @@ $data = json_decode(file_get_contents(
 	])
 ));
 
-foreach (glob(REAL_ROOTDIR.Folders::PATRON_ICONS."/*") as $file) {
-	logStr("Deleting ".$file);
-	unlink($file);
-}
-
 $patrons = Patron::getAll();
 
 foreach ($data->data as $member) {
@@ -109,42 +104,50 @@ foreach ($data->data as $member) {
 		]);
 	}
 
-	$image = $user->included[0]->attributes->image_url;
+	if (!$patronObj->isCustomImage()) {
+		foreach (glob(REAL_ROOTDIR.Folders::PATRON_ICONS."/".$member->id."*") as $file) {
+			logStr("Deleting ".$file);
+			unlink($file);
+		}
 
-	logStr("Downloading image ".$user->included[0]->attributes->image_url);
+		$image = $user->included[0]->attributes->image_url;
 
-	$out = REAL_ROOTDIR.Folders::PATRON_ICONS."/".$member->id;
-	copy($user->included[0]->attributes->image_url, $out);
+		logStr("Downloading image ".$user->included[0]->attributes->image_url);
 
-	$ext = MIMEType::getExtensionFromMime(MIMEType::getFilepathMimeType($out));
+		$out = REAL_ROOTDIR.Folders::PATRON_ICONS."/".$member->id;
+		copy($user->included[0]->attributes->image_url, $out);
 
-	rename($out, $out.".".$ext);
+		$ext = MIMEType::getExtensionFromMime(MIMEType::getFilepathMimeType($out));
 
-	logStr("Saved to ".$out.".".$ext);
+		rename($out, $out.".".$ext);
 
-	logStr("Executing "."convert ".escapeshellarg($out.".".$ext)." -verbose -coalesce -fx intensity +repage ".escapeshellarg($out."-gray.".$ext));
-	
-	$output = [];
-	$return = 0;
-	exec("convert ".escapeshellarg($out.".".$ext)." -verbose -coalesce -fx intensity +repage ".escapeshellarg($out."-gray.".$ext), $output, $return);
+		logStr("Saved to ".$out.".".$ext);
 
-	logStr("Returned ".$return);
-	foreach ($output as $l) {
-		logStr("Output: ".$l);
+		logStr("Executing "."convert ".escapeshellarg($out.".".$ext)." -verbose -coalesce -fx intensity +repage ".escapeshellarg($out."-gray.".$ext));
+		
+		$output = [];
+		$return = 0;
+		exec("convert ".escapeshellarg($out.".".$ext)." -verbose -coalesce -fx intensity +repage ".escapeshellarg($out."-gray.".$ext), $output, $return);
+
+		logStr("Returned ".$return);
+		foreach ($output as $l) {
+			logStr("Output: ".$l);
+		}
+
+		logStr("Made ".$out."-gray.".$ext);
+
+		(new Image(Folders::PATRON_ICONS,"",substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/")).".".$ext))->queueForThumbnailing();
+		(new Image(Folders::PATRON_ICONS,"",substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/"))."-gray.".$ext))->queueForThumbnailing();
+
+		logStr("Queued for thumbnailing.");
+
+		$patronObj->setImageLoc(substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/")).($patronObj->isCurrent() ? "" : "-gray").".".$ext);
 	}
-
-	logStr("Made ".$out."-gray.".$ext);
-
-	(new Image(Folders::PATRON_ICONS,"",substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/")).".".$ext))->queueForThumbnailing();
-	(new Image(Folders::PATRON_ICONS,"",substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/"))."-gray.".$ext))->queueForThumbnailing();
-
-	logStr("Queued for thumbnailing.");
 
 	$patronObj->setCurrent($user->data->attributes->patron_status == "active_patron");
 	$patronObj->setPledgedCents($user->data->attributes->will_pay_amount_cents);
 	$patronObj->setTotalCents($user->data->attributes->lifetime_support_cents);
 	$patronObj->setSince((is_null($user->data->attributes->pledge_relationship_start) || $user->data->attributes->patron_status != "active_patron") ? null : date_create($user->data->attributes->pledge_relationship_start));
-	$patronObj->setImageLoc(substr($out, strlen(REAL_ROOTDIR.Folders::PATRON_ICONS."/")).($patronObj->isCurrent() ? "" : "-gray").".".$ext);
 }
 
 logStr("All done!", true);

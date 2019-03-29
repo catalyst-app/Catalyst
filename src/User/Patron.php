@@ -32,6 +32,8 @@ use \InvalidArgumentException;
  * @method void setSocialChips(string $socialChips)
  * @method string getImageLoc()
  * @method void setImageLoc(string $imageLoc)
+ * @method boolean isCustomImage()
+ * @method void setCustomImage(boolean $customImage)
  */
 class Patron extends AbstractDatabaseModel {
 	use HasImageTrait;
@@ -168,6 +170,7 @@ class Patron extends AbstractDatabaseModel {
 			"DESCRIPTION",
 			"SOCIAL_CHIPS",
 			"IMAGE_LOC",
+			"CUSTOM_IMAGE",
 		];
 	}
 
@@ -188,6 +191,7 @@ class Patron extends AbstractDatabaseModel {
 			"Description" => ["DESCRIPTION", null, null],
 			"SocialChips" => ["SOCIAL_CHIPS", null, null],
 			"ImageLoc" => ["IMAGE_LOC", null, null],
+			"CustomImage" => ["CUSTOM_IMAGE", null, null],
 		];
 	}
 }
