@@ -36,6 +36,7 @@ class Character extends AbstractDatabaseModel {
 		"lykai" => "fwce5ym",
 		"foxxo" => "ljtk76i",
 		"keeri" => "w5nms1u",
+		"toish" => "53h1ggw",
 	];
 
 	/**
