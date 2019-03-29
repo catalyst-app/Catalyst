@@ -50,6 +50,9 @@ require_once Values::HEAD_INC;
 				<span class="flow-text white-text about-page-inline-block" data-reveal-clump="feature" data-reveal="feature-connected-profiles">
 					<strong>Connected Profiles</strong>
 				</span>
+				<span class="flow-text white-text about-page-inline-block" data-reveal-clump="feature" data-reveal="feature-flexible-commission-types">
+					<strong>Flexible Commission Types</strong>
+				</span>
 				<span class="flow-text white-text about-page-inline-block" data-reveal-clump="feature" data-reveal="feature-smart-commission-management">
 					<strong>Smart Commission Management</strong>
 				</span>
@@ -69,6 +72,9 @@ require_once Values::HEAD_INC;
 						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
 					</div>
 					<div id="feature-connected-profiles" data-clump="feature" class="hide">
+						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
+					</div>
+					<div id="feature-flexible-commission-types" data-clump="feature" class="hide">
 						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
 					</div>
 					<div id="feature-smart-commission-management" data-clump="feature" class="hide">
