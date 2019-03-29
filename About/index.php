@@ -69,7 +69,10 @@ require_once Values::HEAD_INC;
 			<div class="container">
 				<div>
 					<div id="feature-character-storage" data-clump="feature">
-						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
+						<p class="tinted-white-text small-margin flow-text">Gone are the days of re-uploading reference sheets, digging through your computer for examples, or forgetting some critical information that your character needs.  Gone are the days of artists not having enough to go on or missing details.</p>
+						<p class="tinted-white-text small-margin flow-text">With Catalyst, users can create as many character profiles as they would like and easily sharing them using custom links.  These profiles are entirely customizable to suit the needs of any character: users can upload and caption as many images as they would like, add full markdown descriptions, change the page colors, and so much more.</p>
+
+						<p class="tinted-white-text flow-text">Please explore these wonderful examples from our community of beta testers: <a href="https://c.catl.st/keeri/" class="white-text">Keeri</a>, <a href="https://c.catl.st/vmy3ad3/" class="white-text">Hidoni</a>, <a href="https://c.catl.st/aolwglb/" class="white-text">Sauksauk</a>.</p>
 					</div>
 					<div id="feature-connected-profiles" data-clump="feature" class="hide">
 						<p class="tinted-white-text flow-text">This description is still being written - please check back later!</p>
