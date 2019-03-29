@@ -698,8 +698,8 @@ input[type=checkbox] + label + span.invalid-text {
 	}
 
 	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
-		width: 6rem;
-		height: 6rem;
+		width: 9rem;
+		height: 9rem;
 	}
 
 	.about-page-inline-block[data-reveal-clump=titanium-patron] {
@@ -744,8 +744,8 @@ input[type=checkbox] + label + span.invalid-text {
 	}
 
 	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
-		width: 7rem;
-		height: 7rem;
+		width: 10rem;
+		height: 10rem;
 	}
 
 	.about-page-inline-block[data-reveal-clump=titanium-patron] {
@@ -790,8 +790,8 @@ input[type=checkbox] + label + span.invalid-text {
 	}
 
 	.about-page-inline-block[data-reveal-clump=staff] .img-strict-circle {
-		width: 8rem;
-		height: 8rem;
+		width: 11rem;
+		height: 11rem;
 	}
 
 	.about-page-inline-block[data-reveal-clump=titanium-patron] {
