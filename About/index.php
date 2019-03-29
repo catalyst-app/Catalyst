@@ -167,7 +167,8 @@ require_once Values::HEAD_INC;
 		
 		<div class="row center align-center lighten-quarter" style="padding: 1rem 0 2rem 0;">
 			<h4 class="tinted-white-text">Thanks to our wonderful patrons!</h4>
-			<p class="tinted-white-text"><i>You could get your name here for as low as $1 a month!  Find out how <a href="https://p.catl.st/" target="_blank" class="white-text" rel="noopener">here</a>.</i></p>
+			<p class="tinted-white-text no-bottom-margin"><i>You could get your name here for as low as $1 a month!  Find out how <a href="https://p.catl.st/" target="_blank" class="white-text" rel="noopener">here</a>.</i></p>
+			<p class="tinted-white-text no-top-margin"><i>Please note that Catalyst does not endorse/support any of the below people and the patrons listed below do not officially represent Catalyst.</i></p>
 			<?php
 			$patrons = Patron::getAll();
 
