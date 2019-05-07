@@ -24,7 +24,7 @@ use \InvalidArgumentException;
  * @method void setPledgedCents(int $pledgedCents)
  * @method int getTotalCents()
  * @method void setTotalCents(int $totalCents)
- * @method null|DateTime getSince()
+ * @method DateTime getSince()
  * @method void setSince(null|DateTime $since)
  * @method string getDescription()
  * @method void setDescription(string $description)
