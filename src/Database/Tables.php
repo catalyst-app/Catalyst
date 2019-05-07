@@ -32,6 +32,7 @@ class Tables {
 	public const INTEGRATIONS_META = "social_media_meta";
 	public const PATRONS = "patrons";
 	public const PENDING_THUMBNAIL_QUEUE = "pending_thumbnail_queue";
+	public const RESOURCES = "resources";
 	public const STAFF = "staff";
 	public const USER_SOCIAL_MEDIA = "user_social_media";
 	public const USER_WISHLISTS = "user_wishlists";

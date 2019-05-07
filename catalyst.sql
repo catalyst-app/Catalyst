@@ -719,6 +719,60 @@ CREATE TABLE `pending_thumbnail_queue` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resources`
+--
+
+CREATE TABLE `resources` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `ENVIRONMENT` enum('ALWAYS','DEVEL','PRODUCTION') NOT NULL,
+  `TYPE` enum('SCRIPT','STYLE') NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `LOCAL` tinyint(1) NOT NULL DEFAULT 1,
+  `NAME` varchar(255) NOT NULL,
+  `MINIFIED_NAME` varchar(255) NOT NULL,
+  `STAGED_NAME` varchar(255) NOT NULL,
+  `STAGED_MINIFIED_NAME` varchar(255) NOT NULL,
+  `VERSIONED` tinyint(1) NOT NULL DEFAULT 0,
+  `DATE_LATEST_RELEASED` date DEFAULT NULL,
+  `GITHUB_REPO_NAME` varchar(128) DEFAULT NULL,
+  `CHANGELOG_URL` mediumtext NOT NULL,
+  `CURRENT_VERSION` varchar(16) DEFAULT NULL,
+  `LATEST_VERSION` varchar(16) DEFAULT NULL,
+  `ATTRIBUTES` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resources`
+--
+
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(1, 'ALWAYS', 'SCRIPT', 100, 0, 'jquery.js', 'jquery.min.js', 'jquery.latest.js', 'jquery.latest.min.js', 1, '2019-05-01', 'jquery/jquery', 'https://blog.jquery.com/category/jquery/', '3.3.1', '3.4.1', '[]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(2, 'ALWAYS', 'SCRIPT', 1000, 0, 'materialize.js', 'materialize.min.js', 'materialize.latest.js', 'materialize.latest.min.js', 1, '2018-09-09', 'Dogfalo/materialize', 'https://github.com/Dogfalo/materialize/blob/v1-dev/CHANGELOG.md', '1.0.0', '1.0.0', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(3, 'ALWAYS', 'SCRIPT', 1500, 0, 'draggable.bundle.legacy.js', 'draggable.bundle.legacy.min.js', 'draggable.bundle.legacy.staged.js', 'draggable.bundle.legacy.staged.min.js', 1, '2018-09-07', 'Shopify/draggable', 'https://github.com/Shopify/draggable/blob/master/CHANGELOG.md', '1.0.0.8', '1.0.0.8', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(4, 'ALWAYS', 'SCRIPT', 5000, 0, 'jsencrypt.js', 'jsencrypt.min.js', 'jsencrypt.staged.js', 'jsencrypt.staged.min.js', 1, '2018-06-25', 'travist/jsencrypt', 'http://travistidwell.com/jsencrypt', '2.3.0', '3.0.0.1', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(5, 'ALWAYS', 'SCRIPT', 5000, 0, 'aesjs.js', 'aesjs.min.js', 'aesjs.staged.js', 'aesjs.staged.min.js', 1, '2018-11-09', 'ricmoo/aes-js', 'https://github.com/ricmoo/aes-js/releases', '3.1.0', '3.1.2', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(6, 'ALWAYS', 'SCRIPT', 5000, 0, 'sjcl.js', 'sjcl.min.js', 'sjcl.staged.js', 'sjcl.staged.min.js', 1, '2019-11-10', 'bitwiseshiftleft/sjcl', 'https://github.com/bitwiseshiftleft/sjcl/releases', '1.0.7', '1.0.8', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(7, 'ALWAYS', 'SCRIPT', 100000, 0, 'cheet.js', 'cheet.min.js', 'cheet.staged.js', 'cheet.min.staged.js', 1, '2014-11-10', 'namuol/cheet.js', 'https://github.com/namuol/cheet.js/commits/master', '0.3.3', '0.3.3', '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(8, 'ALWAYS', 'SCRIPT', 2000, 0, 'https://google.com/recaptcha/api.js', 'https://google.com/recaptcha/api.js', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(9, 'DEVEL', 'SCRIPT', 0, 1, 'modules/error_handler.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(10, 'DEVEL', 'SCRIPT', 5, 1, 'modules/polyfills.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(11, 'DEVEL', 'SCRIPT', 10, 1, 'modules/onload.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(12, 'DEVEL', 'SCRIPT', 15, 1, 'modules/input_functions.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(13, 'DEVEL', 'SCRIPT', 20, 1, 'modules/color_functions.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(14, 'DEVEL', 'SCRIPT', 25, 1, 'modules/totp_preview.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(15, 'DEVEL', 'SCRIPT', 30, 1, 'modules/ajax_progress.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(16, 'DEVEL', 'SCRIPT', 35, 1, 'modules/console_message.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(17, 'DEVEL', 'SCRIPT', 40, 1, 'modules/markdown_parser.js', 'N/A', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(18, 'PRODUCTION', 'SCRIPT', 0, 1, 'N/A', 'dist/packed.min.js', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(19, 'ALWAYS', 'SCRIPT', 10000, 0, 'https://googletagmanager.com/gtag/js?id=UA-112460506-1', 'https://googletagmanager.com/gtag/js?id=UA-112460506-1', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(20, 'ALWAYS', 'STYLE', 100, 0, 'materialize.css', 'materialize.min.css', 'materialize.staged.css', 'materialize.min.staged.css', 1, '2018-09-09', 'Dogfalo/materialize', 'https://github.com/Dogfalo/materialize/blob/v1-dev/CHANGELOG.md', '1.0.0', '1.0.0', '');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(21, 'ALWAYS', 'STYLE', 200, 1, 'color-{color}.css', 'color-{color}.css', 'N/A', 'N/A', 0, NULL, NULL, 'M/A', NULL, NULL, '[]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(25, 'ALWAYS', 'STYLE', 300, 1, 'overall.css', 'overall.min.css', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(26, 'ALWAYS', 'STYLE', 1000, 0, 'https://fonts.googleapis.com/css?family=Material+Icons&', 'https://fonts.googleapis.com/css?family=Material+Icons&', 'N/A', 'N/A', 0, NULL, NULL, 'N/A', NULL, NULL, '[\"crossorigin=\\\"anonymous\\\"\"]');
+INSERT INTO `resources` (`ID`, `ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `STAGED_NAME`, `STAGED_MINIFIED_NAME`, `VERSIONED`, `DATE_LATEST_RELEASED`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES(27, 'ALWAYS', 'STYLE', 1100, 1, 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&', 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&', 'N/A', 'N/A', 0, NULL, NULL, 'M/A', NULL, NULL, '[\"crossorigin=\\\"anonymous\\\"\"]');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `social_media_meta`
 --
 
