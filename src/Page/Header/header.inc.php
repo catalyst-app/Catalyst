@@ -1,8 +1,8 @@
 <?php
 use \Catalyst\Controller;
-use \Catalyst\Page\{Resources, UniversalFunctions, Values};
+use \Catalyst\Page\{Resource, UniversalFunctions, Values};
 
-Resources::pushPageResources();
+Resource::pushPageResources();
 ?>
 <!DOCTYPE html>
 <html data-rootdir="<?= ROOTDIR ?>" lang="en">
@@ -13,9 +13,9 @@ Resources::pushPageResources();
 			<?= htmlspecialchars(PAGE_TITLE) ?> | <?= Values::ROOT_TITLE ?> 
 		</title>
 
-<?php foreach (Resources::getStyles() as $style): ?>
-		<link href="<?= $style[0] ?>" <?= trim(" ".implode(" ", array_slice($style, 1))) ?> rel="stylesheet" />
-<?php endforeach; ?>
+		<?php foreach (Resource::getStyles() as $style): ?>
+			<?= $style->getTag() ?>
+		<?php endforeach; ?>
 
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport" />
 		<meta name="description" content="Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more."/>
