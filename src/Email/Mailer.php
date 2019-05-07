@@ -240,8 +240,8 @@ class Mailer extends PHPMailer {
 		$message = $this->MIMEHeader.$this->MIMEBody;
 
 		if (extension_loaded("imap")) {
-			$server = new Server($this->Host, "993", "/imap/ssl/validate-cert"); // i know this is bad but its the best I can do until php_imap supports SANs.
-			                                                                     // this may be fixed upon the next SSL renew when I put catalystapp.co first, not sure (5/7/19)
+			$server = new Server($this->Host, "993", "/imap/ssl/novalidate-cert"); // i know this is bad but its the best I can do until php_imap supports SANs.
+			                                                                       // this may be fixed upon the next SSL renew when I put catalystapp.co first, not sure (5/7/19)
 			$connection = $server->authenticate($this->Username, $this->Password);
 
 			$mailbox = $connection->getMailbox($folderPath);
