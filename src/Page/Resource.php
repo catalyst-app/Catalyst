@@ -143,9 +143,10 @@ class Resource extends AbstractDatabaseModel {
 	/**
 	 * Get an array of all resources for the current environment
 	 * 
+	 * @param bool $forceDevel to force devel
 	 * @return self[]
 	 */
-	public static function getAllForEnvironment() : array {
+	public static function getAllForEnvironment(bool $forceDevel=false) : array {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
@@ -157,7 +158,7 @@ class Resource extends AbstractDatabaseModel {
 		}
 
 		$whereClause = new WhereClause();
-		$whereClause->addToClause([new Column("ENVIRONMENT", self::getTable()), "!=", Controller::isDevelMode() ? "PRODUCTION" : "DEVEL"]);
+		$whereClause->addToClause([new Column("ENVIRONMENT", self::getTable()), "!=", (Controller::isDevelMode() | $forceDevel) ? "PRODUCTION" : "DEVEL"]);
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->addAdditionalCapability(new OrderByClause(new Column("PRIORITY", self::getTable()), "ASC"));

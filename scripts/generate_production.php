@@ -10,59 +10,56 @@ define("REAL_ROOTDIR", "../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\Endpoint;
-use \Catalyst\Page\Resources;
+use \Catalyst\Page\Resource;
 use \tubalmartin\CssMin\Minifier;
 use \JSMin\JSMin;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
-$scripts = Resources::SCRIPTS;
-
 $aggregated = '';
 $totalUnminified = 0;
 
-foreach ($scripts as $script) {
-	if ($script[0] === Resources::DEVEL) {
-		if (strpos($script[1], "js/modules/")) {
-			$parameterPosition = strpos($script[1], "?");
-			$withoutParameters = substr($script[1], 0, $parameterPosition);
-			if (empty($withoutParameters)) {
-				$withoutParameters = $script[1];
-			}
+$resources = Resource::getAllForEnvironment(true);
 
-			$folderEndPos = strpos(($withoutParameters), "js/modules/")+11;
-			$withoutFolder = substr(($withoutParameters), $folderEndPos);
-
-			$output = '';
-			$returnCode = 0;
-
-			echo "Executing ".'cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder."\n";
-
-			exec('cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder, $output, $returnCode);
-
-			if ($returnCode) {
-				throw new LogicException($withoutFolder." failed with exit code ".$returnCode);
-			}
-
-			$output = implode("\n", $output);
-
-			$totalUnminified += strlen($output);
-
-			echo "Got ".strlen($output)." bytes of JS\n";
-
-			$minified = JSMin::minify($output.";");
-
-			echo "Minified into ".strlen($minified)." bytes\n";
-
-			$aggregated .= $minified.";";
-		}
+foreach ($resources as $resource) {
+	if (!$resource->isScript()) {
+		continue;
 	}
-}
+	if (!$resource->isLocal()) {
+		continue;
+	}
+	$parameterPosition = strpos($resource->getName(), "?");
+	$withoutParameters = substr($resource->getName(), 0, $parameterPosition);
+	if (empty($withoutParameters)) {
+		$withoutParameters = $resource->getName();
+	}
 
-$aggregated = trim(<<<PHP_HEADER_FOR_MINIFIED_JS
-<?php header("Content-Type: application/javascript; charset=UTF-8", true);header("Cache-Control: max-age=86400", true);?>
-PHP_HEADER_FOR_MINIFIED_JS
-).$aggregated;
+	$folderEndPos = strpos(($withoutParameters), "modules/")+8;
+	$withoutFolder = substr(($withoutParameters), $folderEndPos);
+
+	$output = '';
+	$returnCode = 0;
+
+	echo "Executing ".'cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder."\n";
+
+	exec('cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder, $output, $returnCode);
+
+	if ($returnCode) {
+		throw new LogicException($withoutFolder." failed with exit code ".$returnCode);
+	}
+
+	$output = implode("\n", $output);
+
+	$totalUnminified += strlen($output);
+
+	echo "Got ".strlen($output)." bytes of JS\n";
+
+	$minified = JSMin::minify($output.";");
+
+	echo "Minified into ".strlen($minified)." bytes\n";
+
+	$aggregated .= $minified.";";
+}
 
 echo "Final JS minified ".$totalUnminified." -> ".strlen($aggregated)." bytes\n";
 
