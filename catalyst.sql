@@ -1426,4 +1426,5 @@ ALTER TABLE `user_social_media`
 ALTER TABLE `user_wishlists`
   ADD CONSTRAINT `user_wishlists_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `user_wishlists_ibfk_2` FOREIGN KEY (`COMMISSION_TYPE_ID`) REFERENCES `commission_types` (`ID`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
