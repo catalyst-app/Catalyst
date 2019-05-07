@@ -78,6 +78,10 @@ class Staff extends AbstractDatabaseModel {
 
 		$stmt->addColumn(new Column("ID", self::getTable()));
 
+		foreach (self::getPrefetchColumns() as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+		}
+
 		$orderClause = new OrderByClause();
 
 		$orderClause->setColumn(new Column("SORT", self::getTable()));
@@ -89,14 +93,14 @@ class Staff extends AbstractDatabaseModel {
 
 		$staff = [];
 
-		foreach ($stmt->getResult() as $character) {
-			$staff[] = new self($character["ID"]);
+		foreach ($stmt->getResult() as $item) {
+			$staff[] = new self($item["ID"], $item, false);
 		}
 
 		return self::$all = $staff;
 	}
 	/**
-	 * Create a character
+	 * Create a staff member
 	 *
 	 * @param array $values
 	 * @return self
@@ -106,7 +110,7 @@ class Staff extends AbstractDatabaseModel {
 	}
 
 	/**
-	 * Get deleted values for when a character is delet
+	 * Get deleted values for when a staff is delet, inapplicable
 	 * @return array
 	 */
 	public function getDeletedValues() : array {

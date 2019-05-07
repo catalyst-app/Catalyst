@@ -48,7 +48,6 @@ class Patron extends AbstractDatabaseModel {
 	/**
 	 * Get the table the object's data is stored in
 	 * 
-	 * Specified in DatabaseModelTrait
 	 * @return string
 	 */
 	public static function getTable() : string {
@@ -106,6 +105,10 @@ class Patron extends AbstractDatabaseModel {
 
 		$stmt->addColumn(new Column("ID", self::getTable()));
 
+		foreach (self::getPrefetchColumns() as $column) {
+			$stmt->addColumn(new Column($column, self::getTable()));
+		}
+
 		$orderClause = new MultipleOrderByClause();
 
 		$orderClause->addClause(new OrderByClause(new Column("CURRENT", self::getTable()), "DESC"));
@@ -119,8 +122,8 @@ class Patron extends AbstractDatabaseModel {
 
 		$patrons = [];
 
-		foreach ($stmt->getResult() as $character) {
-			$patrons[] = new self($character["ID"]);
+		foreach ($stmt->getResult() as $patron) {
+			$patrons[] = new self($patron["ID"], $patron, false);
 		}
 
 		return $patrons;
