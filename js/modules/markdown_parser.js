@@ -6908,11 +6908,11 @@ module.exports = function link(state, silent) {
     state.posMax = labelEnd;
 
     token        = state.push('link_open', 'a', 1);
-    var internal = (href.startsWith("http://catalystapp.co") ||
+    var internal = (href !== undefined) && ((href.startsWith("http://catalystapp.co") ||
       href.startsWith("https://catalystapp.co") ||
       href.startsWith("http://beta.catalystapp.co") ||
       href.startsWith("https://beta.catalystapp.co") ||
-      href.startsWith("#"));
+      href.startsWith("#")));
     token.attrs  = attrs = [ [ 'href', href ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
     if (title) {
       attrs.push([ 'title', title ]);
