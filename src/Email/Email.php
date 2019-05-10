@@ -1567,12 +1567,12 @@ class Email {
 	 * @param string $textMessage Message in text format for older clients/viewers
 	 * @param array $email E-mail to send from, [username, name]
 	 * @param string $pass Password for the email
-	 * @param string $smimePath PEM path to the certificate to be used to sign this email
-	 * @param string $smimePassword Password for the PEM certificate
+	 * @param string|null $smimePath PEM path to the certificate to be used to sign this email, null for no signature
+	 * @param string|null $smimePassword Password for the PEM certificate, null for no signature
 	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
 	 * @param bool $copyToSent Copy to SENT folder or not
 	 */
-	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, string $smimePath, string $smimePassword, array $smtp=self::EMAIL_SMTP, bool $copyToSent=true) : bool {
+	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, ?string $smimePath=null, ?string $smimePassword=null, array $smtp=self::EMAIL_SMTP, bool $copyToSent=true) : bool {
 		$mail = new Mailer(false);
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
@@ -1594,21 +1594,23 @@ class Email {
 		}
 
 		$message .= "<p>&copy;2017-".date("Y")." Catalyst, All rights reserved.  Version: ".Controller::getVersion()." (".Controller::getCommit().").</p>";
-		$message .= "<p>If this e-mail does not contain a valid S/MIME signature, matching SPF record, or valid DKIM signature, please report it to <a href=\"mailto:abuse@catalystapp.co\">abuse@catalystapp.co</a> immediately.</p>";
-		$message .= "<p>Additionally, if you see a &quot;smime.p7s&quot; attached to this e-mail, do not be alarmed.  It is a cryptographic signature which your e-mail client does not support.</p>";
+		$message .= "<p>If this e-mail does not contain a matching SPF record and a valid DKIM signature, please report it to <a href=\"mailto:abuse@catalystapp.co\">abuse@catalystapp.co</a> immediately.</p>";
 
 		$textMessage .= "\r\n";
 		$textMessage .= "--\r\n";
 		$textMessage .= "(C) 2017-".date("Y")." Catalyst, All rights reserved.  Version: ".Controller::getVersion()." (".Controller::getCommit().").\r\n";
-		$textMessage .= "If this e-mail does not contain a valid S/MIME signature, matching SPF record, or valid DKIM signature, please report it to abuse@catalystapp.co immediately.\r\n";
-		$textMessage .= "Additionally, if you see a \"smime.p7s\" attached to this e-mail, do not be alarmed.  It is a cryptographic signature which your e-mail client does not support.\r\n";
+		$textMessage .= "If this e-mail does not contain a matching SPF record and a valid DKIM signature, please report it to abuse@catalystapp.co immediately.\r\n";
 
 		$mail->isHTML(true);
 		$mail->Subject = $subject;
 		$mail->Body = $message;
 		$mail->AltBody = $textMessage;
 
-		$mail->sign($smimePath, $smimePath, $smimePassword);
+		if (!is_null($smimePath) && file_exists($smimePath)) {
+			$mail->sign($smimePath, $smimePath, $smimePassword);
+		} elseif (!file_exists($smimePath)) {
+			trigger_error("SMIME key ".$smimePath." was passed to Email::sendEmail but does not actually exist", E_USER_NOTICE);
+		}
 
 		if ($mail->send()) {
 			if ($copyToSent) {
