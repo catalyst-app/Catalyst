@@ -2349,16 +2349,16 @@
         },
         {
             "name": "slam/phpstan-extensions",
-            "version": "v3.0.0",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Slamdunk/phpstan-extensions.git",
-                "reference": "276033968405c1b0546e1b630707d0d98a83e296"
+                "reference": "6fc7cb96a1b40d17dd2521d8ea594b231d63ba85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/276033968405c1b0546e1b630707d0d98a83e296",
-                "reference": "276033968405c1b0546e1b630707d0d98a83e296",
+                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/6fc7cb96a1b40d17dd2521d8ea594b231d63ba85",
+                "reference": "6fc7cb96a1b40d17dd2521d8ea594b231d63ba85",
                 "shasum": ""
             },
             "require": {
@@ -2392,7 +2392,7 @@
                 }
             ],
             "description": "Slam extension of phpstan",
-            "time": "2019-01-24T07:14:25+00:00"
+            "time": "2019-05-10T07:45:19+00:00"
         },
         {
             "name": "symfony/console",
