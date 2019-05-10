@@ -42,6 +42,8 @@ scripts/.htmlemail
 scripts/.txtemail
 scripts/PatronReport*.csv
 
+scripts/tmp
+
 js/dist
 css/overall.min.css
 .DS_Store
