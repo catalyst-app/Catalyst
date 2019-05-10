@@ -28,7 +28,7 @@ else
 	convert -verbose "$1" -auto-orient -resize 512x512\> "${1%.*}_tmp.png"
 fi
 
-echo --Creating lossy and lossless WebP
+echo --Creating lossy WebP
 if [ ${1: -4} == ".gif" ]; then
 	echo --Input is a GIF\; WebP for gifs is...poor.  Not creating a WebP
 else
