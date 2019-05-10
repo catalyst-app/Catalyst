@@ -23,14 +23,12 @@ use \LogicException;
  * @method void setName(string $name)
  * @method string getMinifiedName()
  * @method void setMinifiedName(string $minifiedName)
- * @method string getStagedName()
- * @method void setStagedName(string $stagedName)
- * @method string getStagedMinifiedName()
- * @method void setStagedMinifiedName(string $stagedMinifiedName)
  * @method bool isVersioned()
  * @method void setVersioned(bool $versioned)
- * @method DateTime getDateOfLastRelease()
- * @method void setDateOfLastRelease(DateTime $dateOfLastRelease)
+ * @method string getLatestSource()
+ * @method void setLatestSource(string $latestSource)
+ * @method DateTime getDateOfLatestUpgrade()
+ * @method void setDateOfLatestUpgrade(DateTime $dateOfLatestUpgrade)
  * @method string getGithubRepoName()
  * @method void setGithubRepoName(string $githubRepoName)
  * @method string getChangelogUrl()
@@ -99,10 +97,9 @@ class Resource extends AbstractDatabaseModel {
 			"Local" => ["LOCAL", null, null],
 			"Name" => ["NAME", null, null],
 			"MinifiedName" => ["MINIFIED_NAME", null, null],
-			"StagedName" => ["STAGED_NAME", null, null],
-			"StagedMinifiedName" => ["STAGED_MINIFIED_NAME", null, null],
 			"Versioned" => ["VERSIONED", null, null],
-			"DateOfLastRelease" => ["DATE_OF_LATEST_RELEASE", "date_create", function(DateTime $in) : string { return $in->format("Y-m-d"); }],
+			"LatestSource" => ["LATEST_SOURCE", null, null],
+			"DateOfLatestUpgrade" => ["DATE_OF_LATEST_UPGRADE", "date_create", function(DateTime $in) : string { return $in->format("Y-m-d"); }],
 			"GithubRepoName" => ["GITHUB_REPO_NAME", null, null],
 			"ChangelogUrl" => ["CHANGELOG_URL", null, null],
 			"CurrentVersion" => ["CURRENT_VERSION", null, null],
