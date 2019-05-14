@@ -30,6 +30,7 @@ use \Catalyst\User\{
 	SettingsFormTrait,
 	TOTPLoginFormTrait,
 	User};
+use \Exception;
 use \ReflectionClass;
 
 /**
@@ -94,8 +95,14 @@ class FormRepository {
 
 		$forms = [];
 		foreach ($classMethods as $method) {
-			if ($method->getReturnType()->getName() == Form::class) {
-				$forms[] = call_user_func([__CLASS__, $method->getName()]);
+			$returnType = $method->getReturnType();
+			if (is_null($returnType)) {
+				throw new Exception("Unable to aggregate ".$method." in FormRepository");
+			}
+			if ($returnType->getName() == Form::class) {
+				/** @var callable */
+				$func = [__CLASS__, $method->getName()];
+				$forms[] = call_user_func($func);
 			}
 		}
 
