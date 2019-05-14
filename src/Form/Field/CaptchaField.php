@@ -4,6 +4,7 @@ namespace Catalyst\Form\Field;
 
 use \Catalyst\Controller;
 use \Catalyst\Form\Form;
+use \Exception;
 use \InvalidArgumentException;
 use \LogicException;
 
@@ -153,6 +154,9 @@ class CaptchaField extends AbstractField {
 			]
 		];
 		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify", false, stream_context_create($opts));
+		if ($response === false) {
+			throw new Exception("Unable to query reCAPTCHA.");
+		}
 		if (!json_decode($response)->success) {
 			$this->throwInvalidError();
 		}
