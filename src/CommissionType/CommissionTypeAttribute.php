@@ -42,9 +42,11 @@ class CommissionTypeAttribute {
 	 *
 	 * @param string $setKey the ID/key of the attribute
 	 */
-	public function __construct(string $setKey = '') {
-		if (!array_key_exists($setKey, self::getAttributeMetadataCache())) {
-			throw new InvalidArgumentException($setKey." is not a known key");
+	public function __construct(string $setKey = '', bool $bypassSanityCheck=false) {
+		if (!$bypassSanityCheck) {
+			if (!array_key_exists($setKey, self::getAttributeMetadataCache())) {
+				throw new InvalidArgumentException($setKey." is not a known key");
+			}
 		}
 
 		$this->setKey = $setKey;
@@ -193,7 +195,7 @@ class CommissionTypeAttribute {
 				"GROUP_ID" => $row["GROUP_ID"],
 				"SORT" => $row["SORT"],
 			];
-			self::$allAttributes[] = new self($row["SET_KEY"]);
+			self::$allAttributes[] = new self($row["SET_KEY"], true);
 		}
 
 		return self::$allAttributes;
