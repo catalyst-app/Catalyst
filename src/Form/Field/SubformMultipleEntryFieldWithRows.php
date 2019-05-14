@@ -124,7 +124,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 				foreach ($row["items"] as $entry) {
 					$entryHtml = $this->getDisplayHtml();
 					
-					$entryHtml = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)).'"', $entryHtml);
+					$entryHtml = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)."").'"', $entryHtml);
 					$entryHtml = str_replace('{uniq}', htmlspecialchars(bin2hex(random_bytes(6))), $entryHtml);
 					
 					foreach ($entry as $key => $value) {
@@ -140,7 +140,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 				$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.' right-align"';
 				$str .= '>';
 
-				$rightBarContents = str_replace("{uniq}", microtime(true), $this->getRightBarContents());
+				$rightBarContents = str_replace("{uniq}", (string)microtime(true), $this->getRightBarContents());
 				foreach ($row["right"] as $key => $value) {
 					$rightBarContents = str_replace('{'.$key.'}', htmlspecialchars($value), $rightBarContents);
 				}
@@ -165,7 +165,7 @@ class SubformMultipleEntryFieldWithRows extends SubformMultipleEntryField {
 			$str .= ' class="'.self::PROTECTED_RIGHT_CONTAINER_CLASS.' right-align"';
 			$str .= '>';
 
-			$str .= str_replace("{uniq}", microtime(true), $this->getRightBarContents());
+			$str .= str_replace("{uniq}", (string)microtime(true), $this->getRightBarContents());
 
 			$str .= '</div>';
 
