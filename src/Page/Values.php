@@ -51,6 +51,7 @@ class Values {
 	const TOS_GUIDE = ["about", "Terms of Service Guide"];
 	
 	const PRIVACY_POLICY = ["about", "Privacy Policy"];
+	const TERMS_OF_SERVICE = ["about", "Terms of Service"];
 
 
 
