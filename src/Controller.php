@@ -108,7 +108,7 @@ class Controller {
 	 * @param string $trackingId Unique ID for the error
 	 */
 	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline, string $trackingId) : void {
-		if (!class_exists("\\Catalyst\\Secrets") || !class_exists("\\PHPMailer\\PHPMailer\\PHPMailer")) {
+		if (!class_exists(Secrets::class) || !class_exists(\PHPMailer\PHPMailer\PHPMailer::class)) {
 			return;
 		}
 		ob_start();
@@ -358,13 +358,13 @@ class Controller {
 					echo '<p>TRACK_ID: '.htmlspecialchars($trackingId).'</p>';
 					echo '<p></p>';
 					echo '<p>Common mistakes (in self-hosting):</p>';
-					echo '<p>SECRETS DEFINED: '.(class_exists("\\Catalyst\\Secrets") ? "YES" : "NO").'</p>';
-					$version = explode(".", phpversion());
-					$vid = ($version[0] * 10000 + $version[1] * 100);
+					echo '<p>SECRETS DEFINED: '.(class_exists(Secrets::class) ? "YES" : "NO").'</p>';
+					$version = explode(".", phpversion() ?: "1.1.1");
+					$vid = (((int)$version[0]) * 10000 + ((int)$version[1]) * 100);
 					echo '<p>PHP VERSION (>=7.2): '.($vid >= 70200 ? "YES" : "NO").'</p>';
-					echo '<p>PDO exists: '.(class_exists("\\PDO") ? "YES" : "NO").'</p>';
+					echo '<p>PDO exists: '.(class_exists(PDO::class) ? "YES" : "NO").'</p>';
 					echo '<p>MySQL PDO: '.(in_array("mysql", PDO::getAvailableDrivers()) ? "YES" : "NO").'</p>';
-					echo '<p>COMPOSER IS UPDATED: '.(class_exists("\\PHPMailer\\PHPMailer\\PHPMailer") ? "YES (still ensure upgraded)" : "NO").'</p>';
+					echo '<p>COMPOSER IS UPDATED: '.(class_exists(\PHPMailer\PHPMailer\PHPMailer::class) ? "YES (still ensure upgraded)" : "NO").'</p>';
 					echo '</div>';
 
 					echo '<div class="code-block">';
@@ -383,7 +383,7 @@ class Controller {
 					echo '<p>Remote: '.htmlspecialchars(array_key_exists("REMOTE_ADDR", $_SERVER) ? $_SERVER["REMOTE_ADDR"] : "unknown").':'.htmlspecialchars(array_key_exists("REMOTE_PORT", $_SERVER) ? $_SERVER["REMOTE_PORT"] : "unknown").'</p>';
 					echo '<p>argv: '.htmlspecialchars(array_key_exists("ARGV", $_SERVER) ? $_SERVER["ARGV"] : "unknown").'</p>';
 					echo '<p></p>';
-					echo '<p>PHP Version: '.htmlspecialchars(phpversion()).'</p>';
+					echo '<p>PHP Version: '.htmlspecialchars(phpversion() ?: "unknown").'</p>';
 					echo '<p>Catalyst Version: '.htmlspecialchars(Controller::getVersion()." (".self::getCommit().")").'</p>';
 					echo '</div>';
 				}
@@ -484,7 +484,7 @@ class Controller {
 		if (!file_exists(__DIR__."/Secrets.php")) {
 			throw new LogicException("src/Secrets.php does not exist");
 		}
-		if (!class_exists("\\Catalyst\\Secrets")) {
+		if (!class_exists(Secrets::class)) {
 			throw new LogicException("Secrets class does not exist");
 		}
 		if (!defined("\\Catalyst\\Secrets::DB_PASSWORD")) {
