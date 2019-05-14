@@ -1606,9 +1606,9 @@ class Email {
 		$mail->Body = $message;
 		$mail->AltBody = $textMessage;
 
-		if (!is_null($smimePath) && file_exists($smimePath)) {
+		if (!is_null($smimePath) && !is_null($smimePassword) && file_exists($smimePath)) {
 			$mail->sign($smimePath, $smimePath, $smimePassword);
-		} elseif (!file_exists($smimePath)) {
+		} elseif (!is_null($smimePath)) {
 			trigger_error("SMIME key ".$smimePath." was passed to Email::sendEmail but does not actually exist", E_USER_NOTICE);
 		}
 
