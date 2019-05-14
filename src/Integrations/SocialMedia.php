@@ -130,7 +130,7 @@ class SocialMedia {
 		];
 		$host = parse_url($url, PHP_URL_HOST);
 		foreach ($typeRegexDefs as list($regex, $type)) {
-			if (preg_match($regex, strtolower($host))) {
+			if (preg_match($regex, strtolower($host.""))) {
 				return $type;
 			}
 		}
