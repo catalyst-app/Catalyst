@@ -43,8 +43,7 @@ class CommissionTypeAttribute {
 	 * @param string $setKey the ID/key of the attribute
 	 */
 	public function __construct(string $setKey = '') {
-		// note that the getAllAttributes() call here fills the cache
-		if (!array_key_exists($setKey, self::getAllAttributes())) {
+		if (!array_key_exists($setKey, self::getAttributeMetadataCache())) {
 			throw new InvalidArgumentException($setKey." is not a known key");
 		}
 
@@ -62,28 +61,28 @@ class CommissionTypeAttribute {
 	 * @return string
 	 */
 	public function getName() : string {
-		return self::$attributeMetadataCache[$this->getSetKey()]["NAME"];
+		return self::getAttributeMetadataCache()[$this->getSetKey()]["NAME"];
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getDescription() : string {
-		return self::$attributeMetadataCache[$this->getSetKey()]["DESCRIPTION"];
+		return self::getAttributeMetadataCache()[$this->getSetKey()]["DESCRIPTION"];
 	}
 
 	/**
 	 * @return int
 	 */
 	public function getGroupId() : int {
-		return self::$attributeMetadataCache[$this->getSetKey()]["GROUP_ID"];
+		return self::getAttributeMetadataCache()[$this->getSetKey()]["GROUP_ID"];
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getGroupLabel() : string {
-		return self::getGroupLabelFromId(self::$attributeMetadataCache[$this->getSetKey()]["GROUP_ID"]);
+		return self::getGroupLabelFromId(self::getAttributeMetadataCache()[$this->getSetKey()]["GROUP_ID"]);
 	}
 
 	/**
@@ -101,7 +100,7 @@ class CommissionTypeAttribute {
 	 * @return int
 	 */
 	public function getSort() : int {
-		return self::$attributeMetadataCache[$this->getSetKey()]["SORT"];
+		return self::getAttributeMetadataCache()[$this->getSetKey()]["SORT"];
 	}
 
 	/**
@@ -115,6 +114,19 @@ class CommissionTypeAttribute {
 			}
 		}
 		return self::$groups;
+	}
+
+	/**
+	 * Get all attribute metadata info, pulling from DB if needed
+	 */
+	protected static function getAttributeMetadataCache() : array {
+		if (is_null(self::getAttributeMetadataCache())) {
+			self::getAllAttributes();
+			if (is_null(self::getAttributeMetadataCache())) {
+				throw new LogicException("Unable to get attribute metadata from DB");
+			}
+		}
+		return self::getAttributeMetadataCache();
 	}
 
 	/**
@@ -162,7 +174,7 @@ class CommissionTypeAttribute {
 
 		$rawAttributes = $stmt->getResult();
 
-		self::$attributeMetadataCache = [];
+		self::getAttributeMetadataCache() = [];
 		self::$groups = [];
 		self::$allAttributes = [];
 
@@ -174,7 +186,7 @@ class CommissionTypeAttribute {
 			if (!array_key_exists($row["GROUP_ID"], self::$groups)) {
 				self::$groups[$row["GROUP_ID"]] = $row["LABEL"];
 			}
-			self::$attributeMetadataCache[$row["SET_KEY"]] = [
+			self::getAttributeMetadataCache()[$row["SET_KEY"]] = [
 				"SET_KEY" => $row["SET_KEY"],
 				"NAME" => $row["NAME"],
 				"DESCRIPTION" => $row["DESCRIPTION"],
