@@ -50,7 +50,7 @@ class UniversalFunctions {
 	 * @return string
 	 */
 	public static function toCamelCase(string $in) : string {
-		return preg_replace("/[^a-zA-Z0-9]/", "", preg_replace_callback("/[^a-zA-Z0-9]([a-zA-Z])/i", function ($m) {return strtoupper($m[1]);}, strtolower($in)));
+		return preg_replace("/[^a-zA-Z0-9]/", "", preg_replace_callback("/[^a-zA-Z0-9]([a-zA-Z])/i", function ($m) {return strtoupper($m[1]);}, strtolower($in))."")."";
 	}
 
 	/**
@@ -60,7 +60,7 @@ class UniversalFunctions {
 	 * @return string
 	 */
 	public static function toDashCase(string $in) : string {
-		return preg_replace("/[^a-zA-Z0-9]/", "-", strtolower($in));
+		return preg_replace("/[^a-zA-Z0-9]/", "-", strtolower($in))."";
 	}
 
 	// https://github.com/mingalevme/utils/blob/master/src/Filesize.php
@@ -139,9 +139,9 @@ class UniversalFunctions {
 		$base = 1024; // none of that 1000/B bs
 		
 		if (strpos($matches[1], '.') !== false) {
-			return intval(floatval($matches[1]) * pow($base, self::UNIT_PREFIXES_POWERS[$prefix]));
+			return (int)(floatval($matches[1]) * (int)pow($base, self::UNIT_PREFIXES_POWERS[$prefix]));
 		} else {
-			return intval($matches[1]) * pow($base, self::UNIT_PREFIXES_POWERS[$prefix]);
+			return (int)($matches[1]) * (int)pow($base, self::UNIT_PREFIXES_POWERS[$prefix]);
 		}
 	}
 
