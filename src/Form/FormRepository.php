@@ -51,9 +51,9 @@ class FormRepository {
 		// remove get
 		$withoutGet = preg_replace('/^get/', '', $in);
 		// convert to dash-case
-		$toDashCase = preg_replace('/([a-z])([A-Z])/', '\1-\2', $withoutGet);
+		$toDashCase = preg_replace('/([a-z])([A-Z])/', '\1-\2', $withoutGet."");
 		// force lowercase
-		return strtolower($toDashCase);
+		return strtolower($toDashCase."");
 	}
 
 	use EmailListFormTrait;
