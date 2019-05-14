@@ -2,6 +2,8 @@
 
 namespace Catalyst\Images;
 
+use \Exception;
+
 /**
  * Used by all models with several images (examples, etc)
  */
@@ -25,6 +27,9 @@ trait HasImageSetTrait {
 	public function getImageSet() : array {
 		if (is_null($this->images)) {
 			$this->initializeImageSet();
+			if (is_null($this->images)) {
+				throw new Exception("Image set for ".__CLASS__." is not properly initializing");
+			}
 		}
 		return $this->images;
 	}

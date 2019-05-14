@@ -2,6 +2,8 @@
 
 namespace Catalyst\Images;
 
+use \Exception;
+
 /**
  * Used by all models with an image
  */
@@ -30,6 +32,9 @@ trait HasImageTrait {
 	public function getImage() : Image {
 		if (is_null($this->image)) {
 			$this->initializeImage();
+			if (is_null($this->image)) {
+				throw new Exception("Image  for ".__CLASS__." is not properly initializing");
+			}
 		}
 		return $this->image;
 	}
