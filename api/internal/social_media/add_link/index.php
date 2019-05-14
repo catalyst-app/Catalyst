@@ -42,7 +42,16 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	if ($parsed === false) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
+		throw new Exception("Unable to parse URL"); // mostly redundant to make phpstan happy
 	}
+
+	$parsed = array_merge([
+		"scheme" => "",
+		"user" => "",
+		"pass" => "",
+		"port" => "",
+		"host" => "",
+	], $parsed);
 
 	// scheme check
 	if (!array_key_exists("scheme", $parsed)) {
