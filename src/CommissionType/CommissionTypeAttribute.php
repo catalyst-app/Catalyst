@@ -120,13 +120,13 @@ class CommissionTypeAttribute {
 	 * Get all attribute metadata info, pulling from DB if needed
 	 */
 	protected static function getAttributeMetadataCache() : array {
-		if (is_null(self::getAttributeMetadataCache())) {
+		if (is_null(self::$attributeMetadataCache)) {
 			self::getAllAttributes();
-			if (is_null(self::getAttributeMetadataCache())) {
+			if (is_null(self::$attributeMetadataCache)) {
 				throw new LogicException("Unable to get attribute metadata from DB");
 			}
 		}
-		return self::getAttributeMetadataCache();
+		return self::$attributeMetadataCache;
 	}
 
 	/**
