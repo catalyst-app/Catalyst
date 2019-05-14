@@ -82,10 +82,10 @@ class Values {
 
 
 
-	const NEWEST_NEWS_ID = 2;
-	const NEWEST_NEWS_LABEL = 'Commission Types Finished!';
-	const NEWEST_NEWS_DATE = 'Jun 6';
-	const NEWEST_NEWS_DESC = 'We have finished development of commission types!  Please give it a spin and try creating one today!  Note that actions do not yet work (with the exception of wishlisting), however, they can be fully shared!';
+	const NEWEST_NEWS_ID = 3;
+	const NEWEST_NEWS_LABEL = 'New Terms of Service!';
+	const NEWEST_NEWS_DATE = 'May 14';
+	const NEWEST_NEWS_DESC = 'Our Terms of Service have been written!  By using or accessing Catalyst, you agree to be bound by these terms.  You may read the full document <a href="'.ROOTDIR.'Help/ToS/">here</a>.';
 
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {

@@ -101,7 +101,7 @@ Resource::pushPageResources();
 							<a href="#" class="right green-text text-darken-4" data-cookie-val="<?= Values::NEWEST_NEWS_ID ?>" id="hide-news-button">hide</a>
 						</p>
 						<p class="no-margin">
-							<?= Values::NEWEST_NEWS_DESC ?> (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>).
+							<?= Values::NEWEST_NEWS_DESC ?><!--  (read more at our <a href="<?= ROOTDIR ?>Blog" class="green-text text-darken-4">blog</a>). -->
 						</p>
 					</div>
 				<?php endif; ?>
