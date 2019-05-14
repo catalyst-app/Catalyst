@@ -7,6 +7,7 @@ use \Catalyst\Form\Form;
 use \Catalyst\Images\MIMEType;
 use \Catalyst\HTTPCode;
 use \Catalyst\Page\UniversalFunctions;
+use \Exception;
 
 /**
  * Represents an image field with multiple images, captions, nsfw, and extra artist/owner info
@@ -290,6 +291,9 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= ' type="text"';
 				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::INFO_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
 				$exploded = explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption(), 2);
+				if ($exploded === false) {
+					throw new Exception("Unable to explode caption");
+				}
 				if (count($exploded) > 1) {
 					$infoStr = trim($exploded[1]);
 				} else {
