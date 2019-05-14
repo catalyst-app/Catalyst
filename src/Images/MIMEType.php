@@ -59,7 +59,13 @@ class MIMEType {
 	 */
 	public static function getFilepathMimeType(string $filepath) : string {
 		$info = finfo_open(FILEINFO_MIME_TYPE);
+		if ($info === false) {
+			return "error/error";
+		}
 		$result = finfo_file($info, $filepath);
+		if ($result === false) {
+			return "error/error";
+		}
 		finfo_close($info);
 		return $result;
 	}
