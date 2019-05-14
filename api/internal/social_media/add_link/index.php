@@ -64,7 +64,7 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	}
 
 	// inline auth (often a sign of phishing or malware)
-	if (array_key_exists("user", $parsed) || array_key_exists("pass", $parsed)) {
+	if (strlen($parsed["user"]."") || strlen($parsed["pass"]."")) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90709, ErrorCodes::ERR_90709);
 	}
@@ -81,7 +81,7 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
 	}
-	if (in_array(str_replace("www.", "", $parsed["host"]), Values::DISALLOWED_DOMAINS)) {
+	if (in_array(str_replace("www.", "", (string)$parsed["host"]), Values::DISALLOWED_DOMAINS)) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90706, ErrorCodes::ERR_90706);
 	}
