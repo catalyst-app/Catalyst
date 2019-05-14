@@ -174,7 +174,7 @@ class CommissionTypeAttribute {
 
 		$rawAttributes = $stmt->getResult();
 
-		self::getAttributeMetadataCache() = [];
+		self::$attributeMetadataCache = [];
 		self::$groups = [];
 		self::$allAttributes = [];
 
@@ -186,7 +186,7 @@ class CommissionTypeAttribute {
 			if (!array_key_exists($row["GROUP_ID"], self::$groups)) {
 				self::$groups[$row["GROUP_ID"]] = $row["LABEL"];
 			}
-			self::getAttributeMetadataCache()[$row["SET_KEY"]] = [
+			self::$attributeMetadataCache[$row["SET_KEY"]] = [
 				"SET_KEY" => $row["SET_KEY"],
 				"NAME" => $row["NAME"],
 				"DESCRIPTION" => $row["DESCRIPTION"],
