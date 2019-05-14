@@ -50,7 +50,7 @@ class TransitEncryption {
 		if ($binary === false) {
 			throw new Exception("Unable to use hex2bin on decrypted RSA");
 		}
-		return $out;
+		return $binary;
 	}
 
 	/**
