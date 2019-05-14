@@ -3,6 +3,7 @@
 namespace Catalyst\Database\Query;
 
 use \Catalyst\Database\Database;
+use \Exception;
 use \PDO;
 
 /**
@@ -40,7 +41,11 @@ class SelectQuery extends AbstractQuery {
 
 		$stmt->execute($this->getParamtersToBind());
 
-		$this->result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($data === false) {
+			throw new Exception("SELECT query returned false");
+		}
+		$this->result = $data;
 
 		self::$totalQueries++;
 
