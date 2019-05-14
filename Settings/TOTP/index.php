@@ -47,11 +47,19 @@ $binaryKey = $_SESSION["user"]->getTotpKey();
 
 $humanReadableKey = TOTP::getHumanKey($binaryKey);
 
-$tmpfname = tempnam(sys_get_temp_dir(), 'FOO');
+$tmpfname = tempnam(sys_get_temp_dir(), 'TOTP_QR_CODE_');
+if ($tmpfname === false) {
+	throw new Exception("Unable to create temporary file for TOTP QR code");
+}
 
 QRcode::png('otpauth://totp/Catalyst:'.$_SESSION["user"]->getUsername().'?secret='.$humanReadableKey.'&issuer=Catalyst&digits=6&period=30', $tmpfname, QR_ECLEVEL_L, 10, 0);
 
-$qr = base64_encode(file_get_contents($tmpfname));
+$contents = file_get_contents($tmpfname);
+if ($contents === false) {
+	throw new Exception("Unable to read temporary file for TOTP QR code");
+}
+
+$qr = base64_encode($contents);
 
 unlink($tmpfname);
 ?>
