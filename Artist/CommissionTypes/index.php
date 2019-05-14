@@ -32,6 +32,7 @@ elseif (!$_SESSION["user"]->isArtist()): ?>
 		</div>
 <?php else: ?>
 <?php
+/** @var CommissionType[] */
 $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage());
 ?>
 		<?php if (count($commissionTypes) != 0): ?>
@@ -83,7 +84,11 @@ $commissionTypes = CommissionType::getForArtist($_SESSION["user"]->getArtistPage
 							<div class="no-bottom-margin col s12">
 								<span>Quick toggles:</span>
 								<?php foreach (CommissionType::QUICK_TOGGLE_BUTTONS as $button): ?>
-									<div class="btn toggle-btn-set-button toggle-btn commission-type-quick-toggle-button <?= htmlspecialchars(call_user_func([$commissionType, $button[1]]) ? "on" : "off") ?>" data-action="<?= htmlspecialchars($button[0]) ?>">
+									<?php
+									/** @var callable */
+									$toggleActiveFunction = [$commissionType, $button[1]];
+									?>
+									<div class="btn toggle-btn-set-button toggle-btn commission-type-quick-toggle-button <?= htmlspecialchars(call_user_func($toggleActiveFunction) ? "on" : "off") ?>" data-action="<?= htmlspecialchars($button[0]) ?>">
 										<?= htmlspecialchars($button[0]) ?>
 									</div>
 								<?php endforeach; ?>
