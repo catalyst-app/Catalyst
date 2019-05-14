@@ -36,7 +36,7 @@ class HTTPCode {
 	 * @return int the code
 	 */
 	public static function get() : int {
-		return http_response_code();
+		return (int)http_response_code();
 	}
 
 	/**
