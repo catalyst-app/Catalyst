@@ -53,6 +53,8 @@ if (!array_key_exists("value", $_POST)) {
 	Response::sendErrorResponse(91605, ErrorCodes::ERR_91605);
 }
 
-call_user_func([$commissionType, CommissionType::QUICK_TOGGLE_BUTTONS[$actionIndex][2]], $_POST["value"] == true);
+/** @var callable */
+$func = [$commissionType, CommissionType::QUICK_TOGGLE_BUTTONS[$actionIndex][2]];
+call_user_func($func, $_POST["value"] == true);
 
 Response::sendSuccessResponse("Success");
