@@ -60,7 +60,7 @@ $imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", 
 $existingImages = $commissionType->getImageSet();
 
 foreach ($existingImages as $image) {
-	if (!array_key_exists($image->getPath(), $imageMeta)) {
+	if (!array_key_exists($image->getPath()."", $imageMeta)) {
 		$image->delete();
 		continue;
 	}

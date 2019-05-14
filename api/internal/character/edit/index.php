@@ -39,7 +39,7 @@ $imageMeta = MultipleImageWithNsfwCaptionAndInfoField::getExtraFields("images", 
 $existingImages = $character->getImageSet();
 
 foreach ($existingImages as $image) {
-	if (!array_key_exists($image->getPath(), $imageMeta)) {
+	if (!array_key_exists($image->getPath()."", $imageMeta)) {
 		$image->delete();
 		continue;
 	}
