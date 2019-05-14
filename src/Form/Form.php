@@ -668,6 +668,8 @@ class Form {
 	 */
 	public function setAdditionalCases(array $additionalCases) : void {
 		$this->additionalCases = [];
-		array_map([$this, "addAdditionalCase"], array_keys($additionalCases), $additionalCases);
+		/** @var callable */
+		$func = [$this, "addAdditionalCase"];
+		array_map($func, array_keys($additionalCases), $additionalCases);
 	}
 }
