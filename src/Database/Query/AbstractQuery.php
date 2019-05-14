@@ -40,7 +40,7 @@ abstract class AbstractQuery {
 	/**
 	 * Result
 	 * 
-	 * @var array
+	 * @var array|int
 	 */
 	protected $result = null;
 

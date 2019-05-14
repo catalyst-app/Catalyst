@@ -41,7 +41,7 @@ class InsertQuery extends AbstractQuery {
 
 		$stmt->execute($this->getParamtersToBind());
 
-		$this->result = Database::getDbh()->lastInsertId();
+		$this->result = (int)Database::getDbh()->lastInsertId();
 
 		self::$totalQueries++;
 
