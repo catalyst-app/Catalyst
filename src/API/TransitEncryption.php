@@ -3,6 +3,7 @@
 namespace Catalyst\API;
 
 use \Catalyst\Secrets;
+use \Exception;
 use \InvalidArgumentException;
 
 /**
@@ -45,6 +46,10 @@ class TransitEncryption {
 		if (!openssl_private_decrypt($in, $out, self::getRsaPrivateKey())) {
 			throw new InvalidArgumentException("Server key could not decrypt the data");
 		}
+		$binary = hex2bin($out);
+		if ($binary === false) {
+			throw new Exception("Unable to use hex2bin on decrypted RSA");
+		}
 		return $out;
 	}
 
@@ -71,8 +76,12 @@ class TransitEncryption {
 
 		$key = self::decryptRsa($json["aesKey"], true);
 		$iv = self::decryptRsa($json["aesIv"], true);
+		$ciphertext = hex2bin($json["cipherText"]);
+		if ($ciphertext === false) {
+			throw new Exception("Unable to use hex2bin on ciphertext");
+		}
 
-		$result = openssl_decrypt(hex2bin($json["cipherText"]), "AES-256-CBC", hex2bin($key), OPENSSL_RAW_DATA, hex2bin($iv));
+		$result = openssl_decrypt($ciphertext, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
 		if ($result === false) {
 			throw new InvalidArgumentException("AES integrity failed");
 		}
