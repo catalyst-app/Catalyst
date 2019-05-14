@@ -457,7 +457,9 @@ abstract class AbstractDatabaseModel implements Serializable {
 		$values = [];
 
 		foreach ($properties as $property) {
-			$values[$property] = call_user_func([$this, "get".$property]);
+			/** @var callable */
+			$func = [$this, "get".$property];
+			$values[$property] = call_user_func($func);
 		}
 
 		return serialize($values);
