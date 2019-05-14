@@ -35,7 +35,8 @@ class Navbar {
 
 		// outermost key is access level
 		// inner arr is: name|callable, name|callable flag, keyword, path, type, [flags]
-		return [
+		/** @var array[array[string|callable,int,string|null,string,int[,string]]] */
+		$items = [
 			"all" => [
 				["Home", self::NAME, "home", ROOTDIR, self::NORMAL_LINK],
 				["Browse", self::NAME, "browse", ROOTDIR."Browse", self::NORMAL_LINK],
@@ -77,6 +78,8 @@ class Navbar {
 				["Register", self::NAME, "register", ROOTDIR."Register", self::NORMAL_LINK],
 			],
 		];
+
+		return $items;
 	}
 
 	/**
