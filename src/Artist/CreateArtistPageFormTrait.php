@@ -72,10 +72,10 @@ trait CreateArtistPageFormTrait {
 		
 		$urlSampleHtml .= '<strong';
 		$urlSampleHtml .= ' id="artist-page-url-sample"';
-		$urlSampleHtml .= ' data-base="'.htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl()))).'"';
+		$urlSampleHtml .= ' data-base="'.htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."").'"';
 		$urlSampleHtml .= '>';
 		
-		$urlSampleHtml .= htmlspecialchars((preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())));
+		$urlSampleHtml .= htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."");
 		
 		$urlSampleHtml .= '</strong>';
 		
