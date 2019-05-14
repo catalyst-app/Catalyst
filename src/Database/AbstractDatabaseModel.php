@@ -69,7 +69,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * Check if a given ID exists in the database.  If so, get prefilled data
 	 * 
 	 * @param int $id
-	 * @return bool|array
+	 * @return false|array
 	 */
 	public static function getInitialData(int $id) {
 		$stmt = new SelectQuery();
