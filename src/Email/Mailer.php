@@ -198,7 +198,7 @@ class Mailer extends PHPMailer {
 					$sign = @openssl_pkcs7_sign(
 						$file,
 						$signed,
-						file_get_contents($this->sign_cert_file),
+						file_get_contents($this->sign_cert_file)."",
 						[file_get_contents($this->sign_key_file), $this->sign_key_pass],
 						[]
 					);
@@ -206,7 +206,7 @@ class Mailer extends PHPMailer {
 					$sign = @openssl_pkcs7_sign(
 						$file,
 						$signed,
-						file_get_contents($this->sign_cert_file),
+						file_get_contents($this->sign_cert_file)."",
 						[file_get_contents($this->sign_key_file), $this->sign_key_pass],
 						[],
 						PKCS7_DETACHED,
@@ -215,7 +215,7 @@ class Mailer extends PHPMailer {
 				}
 				@unlink($file);
 				if ($sign) {
-					$body = file_get_contents($signed);
+					$body = file_get_contents($signed)."";
 					@unlink($signed);
 					//The message returned by openssl contains both headers and body, so need to split them up
 					$parts = explode("\n\n", $body, 2);
