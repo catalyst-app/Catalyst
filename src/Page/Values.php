@@ -89,7 +89,7 @@ class Values {
 	public static function createTitle(string $title, array $values=[]) : string {
 		return preg_replace_callback("/{([^}]+)}/", function($in) use ($values) : string {
 			return $values[$in[1]];
-		}, $title);
+		}, $title)."";
 	}
 
 	public static function createTOC(array $items) : string {
