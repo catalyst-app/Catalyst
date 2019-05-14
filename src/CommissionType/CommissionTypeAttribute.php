@@ -6,6 +6,7 @@ use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\QueryAddition\{JoinClause, MultipleOrderByClause, OrderByClause};
 use \Catalyst\Database\Query\SelectQuery;
 use \InvalidArgumentException;
+use \LogicException;
 
 /**
  * Used to handle array of commission type attributes
@@ -42,11 +43,8 @@ class CommissionTypeAttribute {
 	 * @param string $setKey the ID/key of the attribute
 	 */
 	public function __construct(string $setKey = '') {
-		if (is_null(self::$attributeMetadataCache)) {
-			self::getAllAttributes(); // fill cache
-		}
-
-		if (!array_key_exists($setKey, self::$attributeMetadataCache)) {
+		// note that the getAllAttributes() call here fills the cache
+		if (!array_key_exists($setKey, self::getAllAttributes())) {
 			throw new InvalidArgumentException($setKey." is not a known key");
 		}
 
@@ -93,7 +91,10 @@ class CommissionTypeAttribute {
 	 * @return string
 	 */
 	public static function getGroupLabelFromId(int $id) : string {
-		return self::$groups[$id];
+		if (!array_key_exists($id, self::getAllGroups())) {
+			throw new InvalidArgumentException("Invalid group ID");
+		}
+		return self::getAllGroups()[$id];
 	}
 
 	/**
@@ -103,6 +104,18 @@ class CommissionTypeAttribute {
 		return self::$attributeMetadataCache[$this->getSetKey()]["SORT"];
 	}
 
+	/**
+	 * Get all groups, pulling from DB if needed
+	 */
+	protected static function getAllGroups() : array {
+		if (is_null(self::$groups)) {
+			self::getAllAttributes();
+			if (is_null(self::$groups)) {
+				throw new LogicException("Unable to get groups from DB");
+			}
+		}
+		return self::$groups;
+	}
 
 	/**
 	 * Gets all attributes as self and populates metadata
