@@ -176,7 +176,7 @@ class Image {
 		} else {
 			$result = [];
 			foreach ($this->getFilesystemPaths() as $path) {
-				$result[] = [$path[0], preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path[1], 1)];
+				$result[] = [$path[0], preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path[1], 1).""];
 			}
 			return $result;
 		}
