@@ -11,11 +11,14 @@ parameters:
 		- js
 	ignoreErrors:
 		- '/Class QRcode should be written with ::class notation, string found\./'
-		- '/Constant PAGE_IMAGE not found\./'
-		- '/Call to an undefined method callable::bindTo\(\)/'
+		- '/Cannot call method bindTo\(\) on callable\./'
 		- '/Call to an undefined method Catalyst\\Form\\FormRepository::throwInvalidError/'
 		- '/Using \$this in static method Catalyst\\Form\\FormRepository::get(New|Edit)CommissionTypeForm/'
-		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabase(Row|)Model::deleteSocialChipsFromDatabase\(\)/'
-		- '/Call to an undefined method Catalyst\\Database\\AbstractDatabase(Row|)Model::getImage(Set|)\(\)/'
+		- '/Parameter .+ expects string(, |\|).*string given./'
+		- '/Parameter .+ expects string, string\|.* given./'
+		- '/Parameter .+ expects string, .*(float|int) given./'
+		- '/Variable \$_SESSION in isset\(\) always exists and is not nullable\./'
+		- '/Parameter #1 \(array\) of echo cannot be converted to string\./'
+		- '/Offset string does not exist on array.+/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
