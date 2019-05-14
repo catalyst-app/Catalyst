@@ -60,11 +60,6 @@ trait HasSocialChipsTrait {
 		return $stmt->getResult();
 	}
 
-	/**
-	 * Delete social chips from the database for the object
-	 * 
-	 * @return array Social chips
-	 */
 	public function deleteSocialChipsFromDatabase() : void {
 		$stmt = new DeleteQuery();
 
