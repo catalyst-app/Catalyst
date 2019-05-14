@@ -3,6 +3,7 @@
 namespace Catalyst\Database;
 
 use \Catalyst\{Controller, Secrets};
+use \Exception;
 use \PDO;
 
 /**
@@ -83,5 +84,17 @@ class Database {
 			self::init();
 		}
 		return self::$dbh;
+	}
+
+	public static function getTotalQueryTime() : float {
+		$stmt = self::getDbh()->query("show profiles");
+		if ($stmt === false) {
+			throw new Exception("Unable to calculate SQL debug information.");
+		}
+		$rows = $stmt->fetchAll();
+		if ($rows === false) {
+			throw new Exception("Unable to calculate SQL debug information.");
+		}
+		return array_sum(array_column($rows, "Duration"));
 	}
 }

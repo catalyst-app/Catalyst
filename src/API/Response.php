@@ -31,7 +31,7 @@ class Response {
 				"_commit" => Controller::getCommit(),
 				"_time" => microtime(true)-EXEC_START_TIME,
 				"_queries" => AbstractQuery::getTotalQueries(),
-				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+				"_query_time" => Database::getTotalQueryTime(),
 				"_memory" => UniversalFunctions::humanize(memory_get_peak_usage()),
 			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);
@@ -60,14 +60,14 @@ class Response {
 			"data" => $data,
 			"_debug" => Controller::isDevelMode() ? [
 				"_trace" => Controller::getTrace(true),
-				"_get" => (isset($_GET)) ? $_GET : [],
-				"_post" => (isset($_POST)) ? $_POST : [],
-				"_files" => (isset($_FILES)) ? $_FILES : [],
+				"_get" => $_GET,
+				"_post" => $_POST,
+				"_files" => $_FILES,
 				"_session" => $_SESSION,
 				"_commit" => Controller::getCommit(),
 				"_time" => microtime(true)-EXEC_START_TIME,
 				"_queries" => AbstractQuery::getTotalQueries(),
-				"_query_time" => array_sum(array_column(Database::getDbh()->query("show profiles")->fetchAll(), "Duration")),
+				"_query_time" => Database::getTotalQueryTime(),
 				"_memory" => UniversalFunctions::humanize(memory_get_peak_usage()),
 			] : "PRODUCTION",
 		], Controller::isDevelMode() ? JSON_PRETTY_PRINT : 0);

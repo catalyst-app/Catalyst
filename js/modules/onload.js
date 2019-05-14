@@ -264,17 +264,15 @@ var humanFileSize = function(size) {
 })(jQuery);
 
 <?php if (Controller::isDevelMode()): ?>
-<?php
-$overallTime = microtime(true)-EXEC_START_TIME;
-$stmt = Database::getDbh()->query("show profiles");
-$rows = $stmt->fetchAll();
-$dbDuration = array_sum(array_column($rows, "Duration"));
-?>
-console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
-console.log("''Main JS generation debug: ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
-console.log("''''''Overall: <?= $overallTime ?>s <?= str_repeat("'", 83-strlen($overallTime)) ?>");
-console.log("''''''Database queries: <?= AbstractQuery::getTotalQueries() ?> <?= str_repeat("'", 75-strlen(AbstractQuery::getTotalQueries())) ?>");
-console.log("''''''Database queries time usage: <?= $dbDuration ?>s <?= str_repeat("'", 63-strlen($dbDuration)) ?>");
-console.log("''''''Memory: <?= UniversalFunctions::humanize(memory_get_peak_usage()) ?>s <?= str_repeat("'", 84-strlen(UniversalFunctions::humanize(memory_get_peak_usage()))) ?>");
-console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+	<?php
+	$overallTime = microtime(true)-EXEC_START_TIME;
+	$dbDuration = Database::getTotalQueryTime();
+	?>
+	console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+	console.log("''Main JS generation debug: ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+	console.log("''''''Overall: <?= $overallTime ?>s <?= str_repeat("'", 83-strlen($overallTime)) ?>");
+	console.log("''''''Database queries: <?= AbstractQuery::getTotalQueries() ?> <?= str_repeat("'", 75-strlen(AbstractQuery::getTotalQueries())) ?>");
+	console.log("''''''Database queries time usage: <?= $dbDuration ?>s <?= str_repeat("'", 63-strlen($dbDuration)) ?>");
+	console.log("''''''Memory: <?= UniversalFunctions::humanize(memory_get_peak_usage()) ?>s <?= str_repeat("'", 84-strlen(UniversalFunctions::humanize(memory_get_peak_usage()))) ?>");
+	console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 <?php endif; ?>
