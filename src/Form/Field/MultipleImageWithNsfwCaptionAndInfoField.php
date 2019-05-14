@@ -268,7 +268,7 @@ class MultipleImageWithNsfwCaptionAndInfoField extends MultipleImageField {
 				$str .= ' type="text"';
 				$str .= ' maxlength="255"';
 				$str .= ' id="'.htmlspecialchars($this->getId()."-pre-existing-".self::CAPTION_ID_SUFFIX.$image->getToken()."-".$image->getPath()).'"';
-				$captionWithoutInfo = trim(explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption())[0]);
+				$captionWithoutInfo = trim(explode($this->getInfoCaptionDelimiter(), " ".$image->getCaption())[0]."");
 				$str .= ' value="'.htmlspecialchars($captionWithoutInfo).'"';
 				$str .= '>';
 

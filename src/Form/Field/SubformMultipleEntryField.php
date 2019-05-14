@@ -127,7 +127,7 @@ class SubformMultipleEntryField extends AbstractField {
 		if ($this->isFieldPrefilled()) {
 			foreach ($this->getPrefilledValue() as $entry) {
 				$html = $this->getDisplayHtml();
-				$html = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)).'"', $html);
+				$html = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)."").'"', $html);
 				$html = str_replace('{uniq}', htmlspecialchars(bin2hex(random_bytes(6))), $html);
 				foreach ($entry as $key => $value) {
 					$html = str_replace('{'.$key.'}', htmlspecialchars($value), $html);
