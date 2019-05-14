@@ -237,12 +237,8 @@ abstract class AbstractQuery {
 	 */
 	public function getParamtersToBind() : array {
 		$params = $this->values;
-		if (is_array($this->additionalCapabilities)) {
-			foreach ($this->additionalCapabilities as $item) {
-				$params = array_merge($params, $item->getParamtersToBind());
-			}
-		} elseif (!is_null($this->additionalCapabilities)) {
-			$params = array_merge($params, $this->additionalCapabilities->getParamtersToBind());
+		foreach ($this->additionalCapabilities as $item) {
+			$params = array_merge($params, $item->getParamtersToBind());
 		}
 		return $params;
 	}
