@@ -183,11 +183,17 @@ class Mailer extends PHPMailer {
 				}
 				// @TODO would be nice to use php://temp streams here
 				$file = tempnam(sys_get_temp_dir(), 'mail');
+				if ($file === false) {
+					throw new Exception("Unable to create temporary file");
+				}
 				if (false === file_put_contents($file, $body)) {
 					throw new Exception($this->lang('signing') . ' Could not write temp file');
 				}
 				$signed = tempnam(sys_get_temp_dir(), 'signed');
-				//Workaround for PHP bug https://bugs.php.net/bug.php?id=69197
+				if ($signed === false) {
+					throw new Exception("Unable to create temporary file");
+				}
+				// Workaround for PHP bug https://bugs.php.net/bug.php?id=69197
 				if (empty($this->sign_extracerts_file)) {
 					$sign = @openssl_pkcs7_sign(
 						$file,
