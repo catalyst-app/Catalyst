@@ -49,7 +49,7 @@ foreach ($resources as $resource) {
 	}
 
 	// we add the closure to better separate scopes
-	$output = '(function(){'.implode("\n", $output).')();';
+	$output = '(function(){'.implode("\n", $output).'})();';
 
 	$totalUnminified += strlen($output);
 
