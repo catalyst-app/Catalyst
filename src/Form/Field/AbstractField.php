@@ -138,9 +138,12 @@ abstract class AbstractField {
 	 * Get the error message associated with a code
 	 * 
 	 * @param int $code error code to get message for
-	 * @return string Error mesasge
+	 * @return string Error mesasge, "undefined" if not defined
 	 */
 	public function getErrorMessage(int $code) : string {
+		if (!array_key_exists($code, $this->errors)) {
+			return "undefined";
+		}
 		return $this->errors[$code];
 	}
 
