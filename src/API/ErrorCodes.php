@@ -40,6 +40,38 @@ class ErrorCodes {
 	const ERR_99902 = 'A user is already logged in';
 	const ERR_99903 = 'You are not an artist';
 
+	// test form
+	const ERR_99800 = 'Sample empty for field 0';
+	const ERR_99801 = 'Sample invalid #1 for field 0';
+	const ERR_99802 = 'Sample other type of error for field 0';
+	const ERR_99810 = 'Sample empty for field 0';
+	const ERR_99811 = 'Sample invalid #1 for field 0';
+	const ERR_99812 = 'Sample other type of error for field 0';
+	const ERR_99820 = 'Sample empty for field 0';
+	const ERR_99821 = 'Sample invalid #1 for field 0';
+	const ERR_99822 = 'Sample other type of error for field 0';
+	const ERR_99830 = 'Sample empty for field 0';
+	const ERR_99831 = 'Sample invalid #1 for field 0';
+	const ERR_99832 = 'Sample other type of error for field 0';
+	const ERR_99840 = 'Sample empty for field 0';
+	const ERR_99841 = 'Sample invalid #1 for field 0';
+	const ERR_99842 = 'Sample other type of error for field 0';
+	const ERR_99850 = 'Sample empty for field 0';
+	const ERR_99851 = 'Sample invalid #1 for field 0';
+	const ERR_99852 = 'Sample other type of error for field 0';
+	const ERR_99860 = 'Sample empty for field 0';
+	const ERR_99861 = 'Sample invalid #1 for field 0';
+	const ERR_99862 = 'Sample other type of error for field 0';
+	const ERR_99870 = 'Sample empty for field 0';
+	const ERR_99871 = 'Sample invalid #1 for field 0';
+	const ERR_99872 = 'Sample other type of error for field 0';
+	const ERR_99880 = 'Sample empty for field 0';
+	const ERR_99881 = 'Sample invalid #1 for field 0';
+	const ERR_99882 = 'Sample other type of error for field 0';
+	const ERR_99890 = 'Sample empty for field 0';
+	const ERR_99891 = 'Sample invalid #1 for field 0';
+	const ERR_99892 = 'Sample other type of error for field 0';
+
 	// email list
 	const ERR_90001 = 'No email was entered';
 	const ERR_90002 = 'Invalid email';
