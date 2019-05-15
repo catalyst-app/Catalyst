@@ -48,17 +48,18 @@ foreach ($resources as $resource) {
 		throw new LogicException($withoutFolder." failed with exit code ".$returnCode);
 	}
 
-	$output = implode("\n", $output);
+	// we add the closure to better separate scopes
+	$output = '(function(){'.implode("\n", $output).')();';
 
 	$totalUnminified += strlen($output);
 
 	echo "Got ".strlen($output)." bytes of JS\n";
 
-	$minified = JSMin::minify($output.";");
+	$minified = JSMin::minify($output);
 
 	echo "Minified into ".strlen($minified)." bytes\n";
 
-	$aggregated .= $minified.";";
+	$aggregated .= $minified;
 }
 
 echo "Final JS minified ".$totalUnminified." -> ".strlen($aggregated)." bytes\n";
