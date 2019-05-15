@@ -44,7 +44,7 @@ require_once Values::HEAD_INC;
 				<p class="align-center center tinted-white-text" style="margin-bottom: 1.4em;"><i>Click any of the below features to learn more!</i></p>
 			</div>
 			<p style="margin-bottom: 1.4em;">
-				<span class="flow-text white-text about-page-inline-block about-page-inline-block-selected" data-reveal-clump="feature" data-reveal="feature-character-storage">
+				<span class="flow-text white-text about-page-inline-block" data-reveal-clump="feature" data-reveal="feature-character-storage">
 					<strong>Character Storage</strong>
 				</span>
 				<span class="flow-text white-text about-page-inline-block" data-reveal-clump="feature" data-reveal="feature-connected-profiles">
@@ -68,7 +68,7 @@ require_once Values::HEAD_INC;
 			</p>
 			<div class="container">
 				<div>
-					<div id="feature-character-storage" data-clump="feature">
+					<div id="feature-character-storage" data-clump="feature" class="hide">
 						<p class="tinted-white-text small-margin flow-text">Gone are the days of re-uploading reference sheets, digging through your computer for examples, or forgetting some critical information that your character needs.  Gone are the days of artists not having enough to go on or missing details.</p>
 						<p class="tinted-white-text small-margin flow-text">With Catalyst, users can create as many character profiles as they would like and easily sharing them using custom links.  These profiles are entirely customizable to suit the needs of any character: users can upload and caption as many images as they would like, add full markdown descriptions, change the page colors, and so much more.</p>
 
