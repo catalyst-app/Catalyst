@@ -2,6 +2,6 @@ if (!window.hasOwnProperty("formInputHandlers")) {
 	window.formInputHandlers = {};
 }
 
-VALID = 0;
-INVALID = 1;
-MISSING = 2;
+const VALID = 0;
+const INVALID = 1;
+const MISSING = 2;
