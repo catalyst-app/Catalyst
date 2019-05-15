@@ -134,47 +134,8 @@ class TextField extends AbstractField {
 	 */
 	public function getJsValidator() : string {
 		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
 
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		if ($this->getMaxLength() > 0) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field's length is above maximum (".$this->getMaxLength().")").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-
-		$str .= 'if (';
-		$str .= json_encode($this->getDisallowed()).'.includes($('.json_encode("#".$this->getId()).').val())';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field's value is in our list of disallowed values.  Naughty!").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= 'if (';
-		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field's value does not pass regexp (".$this->getPattern().")").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
+		$str .= 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; };';
 
 		return $str;
 	}
@@ -186,7 +147,7 @@ class TextField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getData()));';
 	}
 
 	/**
