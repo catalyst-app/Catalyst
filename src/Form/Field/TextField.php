@@ -89,11 +89,17 @@ class TextField extends AbstractField {
 		$str .= '<div';
 		$str .= ' class="input-field col s12">';
 
-		$inputClasses = [];
+		$inputClasses = ["form-field"];
 		$str .= '<input';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' type="text"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' data-disallowed="'.htmlspecialchars(json_encode($this->getDisallowed())).'"';
+		$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
+		if ($this->getMaxLength()) {
+			$str .= ' maxlength="'.$this->getMaxLength().'"';
+		}
 
 		if ($this->isFieldPrefilled()) {
 			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || ($this->getMaxLength() && strlen($this->getPrefilledValue()) > $this->getMaxLength())) {
@@ -110,14 +116,6 @@ class TextField extends AbstractField {
 		if ($this->isPrimary()) {
 			$str .= ' autofocus="autofocus"';
 			$inputClasses[] = "active";
-		}
-		
-		if ($this->getPattern() !== '') {
-			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-		}
-		
-		if ($this->getMaxLength() > 0) {
-			$str .= ' maxlength="'.$this->getMaxLength().'"';
 		}
 
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
