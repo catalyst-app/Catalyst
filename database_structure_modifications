@@ -1,0 +1,4 @@
+# This file is a list of commits and SQL commands.  The commit listed is the commit before the upgrade must be done.
+# For example, if git has commits A -> B -> C, and commit B is listed below, the SQL commands must be ran to upgrade from B to C.
+6c9c013da5e33f01c3b4703b87e95d9d5ff63038:
+  INSERT INTO `resources` (`ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `VERSIONED`, `LATEST_SOURCE`, `DATE_OF_LATEST_UPGRADE`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES('DEVEL', 'SCRIPT', 100, 1, 'modules/form_input_textfield.js', 'N/A', 0, NULL, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
