@@ -17,7 +17,9 @@ use \Catalyst\CommissionType\{
 	DeleteCommissionTypeFormTrait,
 	EditCommissionTypeFormTrait,
 	NewCommissionTypeFormTrait};
-use \Catalyst\Form\Form;
+use \Catalyst\Form\{
+	Form,
+	TestFormTrait};
 use \Catalyst\Integrations\{
 	SocialMedia,
 	SocialMediaAdditionFormsTrait};
@@ -79,6 +81,8 @@ class FormRepository {
 	use NewCommissionTypeFormTrait;
 	use EditCommissionTypeFormTrait;
 	use DeleteCommissionTypeFormTrait;
+
+	use TestFormTrait;
 
 	/**
 	 * Get all Forms functions defined in the repository
