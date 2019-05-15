@@ -81,7 +81,12 @@ trait LabelTrait {
 		$str .= '<span';
 		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
 		$str .= ' class="helper-text"';
+		
+		// backwards compatibility, likely not necesary anymore
 		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		
+		$str .= ' data-invalid-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		$str .= ' data-missing-error="'.htmlspecialchars($this->getErrorMessage($this->getMissingErrorCode())).'"';
 		$str .= '>';
 
 		$str .= htmlspecialchars($this->getHelperText());
