@@ -40,11 +40,11 @@ trait TestFormTrait {
 		$textField2->setDisallowed(["abc","def"]);
 		$textField2->setRequired(false);
 		$textField2->setPattern('^([a-g][a-g]?[a-g]?|[h-j]+)$');
-		$textField2->addError(99800, ErrorCodes::ERR_99800);
-		$textField2->setMissingErrorCode(99800);
-		$textField2->addError(99801, ErrorCodes::ERR_99801);
-		$textField2->setInvalidErrorCode(99801);
-		$textField2->addError(99802, ErrorCodes::ERR_99802);
+		$textField2->addError(99803, ErrorCodes::ERR_99803);
+		$textField2->setMissingErrorCode(99803);
+		$textField2->addError(99804, ErrorCodes::ERR_99804);
+		$textField2->setInvalidErrorCode(99804);
+		$textField2->addError(99805, ErrorCodes::ERR_99805);
 		$form->addField($textField2);
 
 		return $form;
