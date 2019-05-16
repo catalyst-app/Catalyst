@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8", true);
 ?>
-function window.totp(K,t) {
+function totp(K,t) {
     function sha1(C){
         function L(x,b){
             return x<<b|x>>>32-b;

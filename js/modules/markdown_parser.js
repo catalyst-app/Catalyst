@@ -4,7 +4,7 @@ header("Cache-Control: max-age=86400", true);
 ?>
 window.markdownCurrentlyParsing = {};
 
-window.renderMarkdownArea = function(area) {
+function renderMarkdownArea(area) {
   var startTime = Date.now();
   window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
   if ($(area).hasClass("raw-inline-markdown")) {
