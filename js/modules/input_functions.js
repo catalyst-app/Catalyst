@@ -41,10 +41,7 @@ function markInputInvalid(e, a) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - called but no elements were given!", true);
 		return;
 	}
-	if ($(e).hasClass("g-recaptcha")) {
-		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - CAPTCHA invalidation has been delegated to markCaptchaInvalid");
-		markCaptchaInvalid(a);
-	} else if ($(e).attr("type") == "checkbox") {
+	if ($(e).attr("type") == "checkbox") {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") was a checkbox, treating as such");
 
 		$(e).addClass("invalid").addClass("marked-invalid").focus();
@@ -70,18 +67,6 @@ function markInputInvalid(e, a) {
 		}
 		$("span.helper-text[for="+$(e).attr("id")+"]").attr("data-error", a);
 	}
-}
-
-function markCaptchaInvalid(a) {
-	window.log(<?= json_encode(basename(__FILE__)) ?>, "markCaptchaInvalid - calling grecaptcha.reset()");
-
-	$(".g-recaptcha").attr("data-error", a).addClass("invalid").removeClass("valid");
-	grecaptcha.reset();
-}
-function markCaptchaValid() {
-	window.log(<?= json_encode(basename(__FILE__)) ?>, "markCaptchaValid - invoked, applying valid class to CAPTCHA");
-
-	$(".g-recaptcha").addClass("valid").removeClass("invalid");
 }
 
 function showErrorMessageForCode(c) {
