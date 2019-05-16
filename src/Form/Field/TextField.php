@@ -91,12 +91,12 @@ class TextField extends AbstractField {
 
 		$inputClasses = ["form-field"];
 		$str .= '<input';
+		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' type="text"';
 		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' type="text"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' data-disallowed="'.htmlspecialchars(json_encode($this->getDisallowed())).'"';
 		$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
+		$str .= ' data-disallowed="'.htmlspecialchars(json_encode($this->getDisallowed())).'"';
 		if ($this->getMaxLength()) {
 			$str .= ' maxlength="'.$this->getMaxLength().'"';
 		}
