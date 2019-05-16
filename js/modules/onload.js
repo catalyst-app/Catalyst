@@ -59,7 +59,7 @@ var humanFileSize = function(size) {
 (function($){
 	$(function(){
 		// toish: "Put it in a closure":tm:
-		function materializeOnload() {
+		function window.materializeOnload() {
 			if ($ === undefined || M === undefined) {
 				window.log(<?= json_encode(basename(__FILE__)) ?>, "materializeOnload - deferring for 100ms (even though I'm not happy about it...)");
 				setTimeout(materializeOnload, 100);

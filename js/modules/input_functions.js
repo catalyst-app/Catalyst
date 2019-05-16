@@ -36,7 +36,7 @@ U+FEFF	ZERO WIDTH NO-BREAK SPACE	foo﻿bar,		size: no width (the character is in
 */
 
 ?>
-function markInputInvalid(e, a) {
+function window.markInputInvalid(e, a) {
 	if ($(e).length == 0) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - called but no elements were given!", true);
 		return;
@@ -69,7 +69,7 @@ function markInputInvalid(e, a) {
 	}
 }
 
-function showErrorMessageForCode(c) {
+function window.showErrorMessageForCode(c) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "showErrorMessageForCode - called for error code "+c);
 
 	switch (c) {
@@ -82,7 +82,7 @@ function showErrorMessageForCode(c) {
 			M.escapeToast("An unknown error occured", 4000);
 	}
 }
-function updateUploadIndicator(f, e) {
+function window.updateUploadIndicator(f, e) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "updateUploadIndicator - an upload (f="+f+") on this page has reached "+((e.loaded*100)/e.total)+"% completion");
 
 	$(f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
