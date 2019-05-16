@@ -4,7 +4,7 @@ header("Cache-Control: max-age=86400", true);
 ?>
 window.markdownCurrentlyParsing = {};
 
-function renderMarkdownArea(area) {
+window.renderMarkdownArea = function(area) {
   var startTime = Date.now();
   window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
   if ($(area).hasClass("raw-inline-markdown")) {
@@ -15,7 +15,7 @@ function renderMarkdownArea(area) {
     $(area).find('.collapsible').collapsible();
     window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered block #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
   }
-}
+};
 
 // FROM WEBPACK
 /******/ (function(modules) { // webpackBootstrap

@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8", true);
 ?>
-function totp(K,t) {
+window.totp = function(K,t) {
     function sha1(C){
         function L(x,b){
             return x<<b|x>>>32-b;
@@ -88,4 +88,4 @@ function totp(K,t) {
     window.log(<?= json_encode(basename(__FILE__)) ?>, "totp - getting code for "+K+" at t="+t+": "+out);
 
     return out;
-}
+};

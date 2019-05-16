@@ -36,7 +36,7 @@ U+FEFF	ZERO WIDTH NO-BREAK SPACE	foo﻿bar,		size: no width (the character is in
 */
 
 ?>
-function markInputInvalid(e, a) {
+window.markInputInvalid = function(e, a) {
 	if ($(e).length == 0) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - called but no elements were given!", true);
 		return;
@@ -67,9 +67,9 @@ function markInputInvalid(e, a) {
 		}
 		$("span.helper-text[for="+$(e).attr("id")+"]").attr("data-error", a);
 	}
-}
+};
 
-function showErrorMessageForCode(c) {
+window.showErrorMessageForCode = function(c) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "showErrorMessageForCode - called for error code "+c);
 
 	switch (c) {
@@ -81,8 +81,8 @@ function showErrorMessageForCode(c) {
 		default:
 			M.escapeToast("An unknown error occured", 4000);
 	}
-}
-function updateUploadIndicator(f, e) {
+};
+window.updateUploadIndicator = function(f, e) {
 	window.log(<?= json_encode(basename(__FILE__)) ?>, "updateUploadIndicator - an upload (f="+f+") on this page has reached "+((e.loaded*100)/e.total)+"% completion");
 
 	$(f+" .indeterminate").removeClass("indeterminate").addClass("determinate");
@@ -91,4 +91,4 @@ function updateUploadIndicator(f, e) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "updateUploadIndicator - an upload (f="+f+") has completed.  Removing determinate progress.");
 		$(f+" .determinate").addClass("indeterminate").removeClass("determinate").attr("style", "");
 	}
-}
+};
