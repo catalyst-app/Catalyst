@@ -11,6 +11,10 @@
 					"shell_cmd": "git diff"
 				},
 				{
+					"name": "Get latest commit",
+					"shell_cmd": "git log -n 1"
+				},
+				{
 					"name": "Test single file",
 					"shell_cmd": "bash -c './test-single \"$file\"'"
 				},
