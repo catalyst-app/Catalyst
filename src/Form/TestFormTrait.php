@@ -47,6 +47,17 @@ trait TestFormTrait {
 		$textField2->addError(99805, ErrorCodes::ERR_99805);
 		$form->addField($textField2);
 
+		$captchaField = new CaptchaField();
+		$captchaField->setDistinguisher("test-captcha");
+		$captchaField->setRequired(true);
+		$captchaField->setSiteKey(CaptchaField::DEBUG_CAPTCHA_KEY);
+		$captchaField->setSecretKey(CaptchaField::DEBUG_CAPTCHA_SECRET);
+		$captchaField->addError(99806, ErrorCodes::ERR_99806);
+		$captchaField->setMissingErrorCode(99806);
+		$captchaField->addError(99807, ErrorCodes::ERR_99807);
+		$captchaField->setInvalidErrorCode(99807);
+		$form->addField($captchaField);
+
 		return $form;
 	}
 }
