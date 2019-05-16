@@ -82,12 +82,14 @@ class CaptchaField extends AbstractField {
 		}
 		$str = '';
 		$str .= '<div';
-		$str .= ' class="g-recaptcha col s12"';
-		$str .= ' data-sitekey="'.htmlspecialchars($this->getSiteKey()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' data-expired-callback="markCaptchaInvalid"';
-		$str .= ' data-callback="markCaptchaValid"';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		$str .= ' class="g-recaptcha col s12 form-field"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
+		$str .= ' data-sitekey="'.htmlspecialchars($this->getSiteKey()).'"';
+		$str .= ' data-expired-callback="verifyCaptchas"';
+		$str .= ' data-callback="verifyCaptchas"';
+		$str .= ' data-invalid-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
+		$str .= ' data-missing-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
 		$str .= '></div>';
 
 		return $str;
@@ -100,11 +102,8 @@ class CaptchaField extends AbstractField {
 	 */
 	public function getJsValidator() : string {
 		$str = '';
-		$str .= 'if (grecaptcha.getResponse() == "") {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', "captcha - grecaptcha.getResponse() returned an empty string.  Invoking markCaptchaInvalid.", true);';
-		$str .= 'markCaptchaInvalid();';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
+
+		$str .= 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; };';
 
 		return $str;
 	}
@@ -116,7 +115,7 @@ class CaptchaField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).',grecaptcha.getResponse());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).',(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getValue()));';
 	}
 
 	/**
