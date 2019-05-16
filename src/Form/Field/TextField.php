@@ -171,20 +171,17 @@ class TextField extends AbstractField {
 				$this->throwMissingError();
 			}
 		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
-				return; // not required and empty, don't do further checks
+			if ($this->getMaxLength() > 0) {
+				if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
+					$this->throwInvalidError();
+				}
 			}
-		}
-		if ($this->getMaxLength() > 0) {
-			if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
+			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
 				$this->throwInvalidError();
 			}
-		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
-			$this->throwInvalidError();
-		}
-		if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
-			$this->throwInvalidError();
+			if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
+				$this->throwInvalidError();
+			}
 		}
 	}
 
