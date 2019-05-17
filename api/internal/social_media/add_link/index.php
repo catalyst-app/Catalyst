@@ -5,13 +5,12 @@ define("REAL_ROOTDIR", "../../../../");
 
 require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\API\{Endpoint, ErrorCodes, Response};
-use \Catalyst\Database\{Column, RawColumn, Tables};
-use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Database\Query\{InsertQuery, SelectQuery};
+use \Catalyst\Artist\Artist;
 use \Catalyst\Form\FormRepository;
 use \Catalyst\HTTPCode;
 use \Catalyst\Integrations\SocialMedia;
 use \Catalyst\Page\Values;
+use \Catalyst\User\User;
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_LOGGED_IN);
 
@@ -70,7 +69,7 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	}
 
 	// weird ports O_o
-	if (array_key_exists("port", $parsed) && $parsed["port"] != 80 && $parsed["port"] != 443 && 
+	if (strlen($parsed["port"]) && $parsed["port"] != 80 && $parsed["port"] != 443 && 
 		$parsed["port"] != 8080 && $parsed["port"] != 8081) {
 		HTTPCode::set(400);
 		Response::sendErrorResponse(90710, ErrorCodes::ERR_90710);
@@ -93,72 +92,14 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	$finalUrl = $_POST["url"];
 }
 
-if ($_POST["dest"] === "User") {
-	$table = Tables::USER_SOCIAL_MEDIA;
-} else {
-	$table = Tables::ARTIST_SOCIAL_MEDIA;
-}
-
 $type = SocialMedia::getTypeFromUrl($finalUrl);
 
-$stmt = new SelectQuery();
-
-$stmt->setTable($table);
-
-$stmt->addColumn(new RawColumn('MAX(`SORT`) AS `NEXT_SORT`'));
-
-$whereClause = new WhereClause();
-
-if ($_POST["dest"] === "User") {
-	$whereClause->addToClause([new Column("USER_ID", $table), "=", $_SESSION["user"]->getId()]);
+if ($_POST["dest"] === "Artist") {
+	$resource = $_SESSION["user"]->getArtistPage();
 } else {
-	$whereClause->addToClause([new Column("ARTIST_ID", $table), "=", $_SESSION["user"]->getArtistPageId()]);
+	$resource = $_SESSION["user"];
 }
-
-$stmt->addAdditionalCapability($whereClause);
-
-$stmt->execute();
-
-$nextSort = $stmt->getResult()[0]["NEXT_SORT"];
-
-if (is_null($nextSort)) {
-	$nextSort = 0;
-} else {
-	$nextSort++;
-}
-
-$stmt = new InsertQuery();
-
-$stmt->setTable($table);
-
-$stmt->addColumn(new Column("SORT", $table));
-$stmt->addValue($nextSort);
-
-if ($_POST["dest"] === "User") {
-	$stmt->addColumn(new Column("USER_ID", $table));
-	$stmt->addValue($_SESSION["user"]->getId());
-} else {
-	$stmt->addColumn(new Column("ARTIST_ID", $table));
-	$stmt->addValue($_SESSION["user"]->getArtistPageId());
-}
-$stmt->addColumn(new Column("NETWORK", $table));
-$stmt->addValue($type);
-$stmt->addColumn(new Column("SERVICE_URL", $table));
-$stmt->addValue($_POST["url"]);
-$stmt->addColumn(new Column("DISP_NAME", $table));
-$stmt->addValue($_POST["label"]);
-
-$stmt->execute();
 
 Response::sendSuccessResponse("Success", [
-	"html" => SocialMedia::getChipHtml([
-		[
-			"id" => $stmt->getResult(),
-			"src" => SocialMedia::getMeta()[$type]["path"],
-			"label" => $_POST["label"],
-			"href" => $finalUrl,
-			"classes" => SocialMedia::getMeta()[$type]["classes"],
-			"tooltip" => SocialMedia::getMeta()[$type]["name"]
-		]
-	], true)
+	"html" => $resource->addSocialChip($type, $_POST["url"], $_POST["label"]),
 ]);
