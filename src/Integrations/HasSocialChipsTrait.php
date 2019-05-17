@@ -4,7 +4,7 @@ namespace Catalyst\Integrations;
 
 use \Catalyst\Database\Column;
 use \Catalyst\Database\QueryAddition\{OrderByClause, WhereClause};
-use \Catalyst\Database\Query\{DeleteQuery, SelectQuery};
+use \Catalyst\Database\Query\{DeleteQuery, InsertQuery, SelectQuery};
 
 /**
  * Used by classes which have social media chips
@@ -45,6 +45,7 @@ trait HasSocialChipsTrait {
 		$stmt->addColumn(new Column("NETWORK", $this->getSocialChipTable()));
 		$stmt->addColumn(new Column("SERVICE_URL", $this->getSocialChipTable()));
 		$stmt->addColumn(new Column("DISP_NAME", $this->getSocialChipTable()));
+		$stmt->addColumn(new Column("SORT", $this->getSocialChipTable()));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column($this->getSocialChipIdColumn(), $this->getSocialChipTable()), "=", $this->getId()]);
@@ -70,6 +71,43 @@ trait HasSocialChipsTrait {
 		$stmt->addAdditionalCapability($whereClause);
 
 		$stmt->execute();
+	}
+
+	/**
+	 * @return string HTML of the chip
+	 */
+	public function addSocialChip(string $type, ?string $url, string $label) : string {
+		// get next sort, forcing to 0 if no items exist
+		$nextSort = max(...array_merge([0,0], array_column($this->getSocialChipsFromDatabase(), "SORT"))) + 1;
+
+		$stmt = new InsertQuery();
+
+		$stmt->setTable($this->getSocialChipTable());
+
+		$stmt->addColumn(new Column($this->getSocialChipIdColumn(), $this->getSocialChipTable()));
+		$stmt->addValue($this->getId());
+
+		$stmt->addColumn(new Column("NETWORK", $this->getSocialChipTable()));
+		$stmt->addValue($type);
+		$stmt->addColumn(new Column("SERVICE_URL", $this->getSocialChipTable()));
+		$stmt->addValue($url);
+		$stmt->addColumn(new Column("DISP_NAME", $this->getSocialChipTable()));
+		$stmt->addValue($label);
+		$stmt->addColumn(new Column("SORT", $this->getSocialChipTable()));
+		$stmt->addValue($nextSort);
+
+		$stmt->execute();
+
+		$id = $stmt->getResult();
+
+		return SocialMedia::getChipHtml(SocialMedia::getChipArray([
+			[
+				"ID" => $id,
+				"NETWORK" => $type,
+				"SERVICE_URL" => $url,
+				"DISP_NAME" => $label,
+			]
+		]), true);
 	}
 
 	/**
