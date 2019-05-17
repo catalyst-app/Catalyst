@@ -11,36 +11,12 @@ class EmailField extends AbstractField {
 	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
 	 * Pattern to match user input against
-	 * 
-	 * @var string
 	 */
-	protected $pattern = '^.{1,}@.{1,}\..{1,}$';
+	const PATTERN = '^.{1,}@.{1,}\..{1,}$';
 	/**
-	 * Maximum string length, <= 0 means none
-	 * 
 	 * Per IETF's RFC (pay attention to the errata), this is 254 chars
-	 * 
-	 * @var int
 	 */
-	protected $maxLength = 254;
-
-	/**
-	 * Get the current regex to match
-	 * 
-	 * @return string Current pattern
-	 */
-	public function getPattern() : string {
-		return $this->pattern;
-	}
-
-	/**
-	 * Get the input's maximum length
-	 * 
-	 * @return int Current maxmimum length
-	 */
-	public function getMaxLength() : int {
-		return $this->maxLength;
-	}
+	const MAX_LENGTH = 254;
 
 	/**
 	 * Return the field's HTML input
@@ -51,14 +27,19 @@ class EmailField extends AbstractField {
 		$str = '';
 		$str .= '<div class="input-field col s12">';
 
-		$inputClasses = [];
+		$inputClasses = ["form-field"];
 		$str .= '<input';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= ' type="email"';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
+		// these attributes aren't actually interpreted, they only exist to help client software/browsers understand limitations
+		$str .= ' pattern="'.htmlspecialchars(self::PATTERN).'"';
+		$str .= ' maxlength="'.htmlspecialchars(self::MAX_LENGTH).'"';
+
 		if ($this->isFieldPrefilled()) {
-			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || ($this->getMaxLength() && strlen($this->getPrefilledValue()) > $this->getMaxLength())) {
+			if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $this->getPrefilledValue()) || (strlen($this->getPrefilledValue()) > self::MAX_LENGTH)) {
 				$this->throwInvalidPrefilledValueError();
 			}
 			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
@@ -73,12 +54,6 @@ class EmailField extends AbstractField {
 			$str .= ' autofocus="autofocus"';
 			$inputClasses[] = "active";
 		}
-
-		$str .= ' maxlength="'.$this->getMaxLength().'"';
-		
-		if ($this->getPattern() !== '') {
-			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-		}
 		
 		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
 		$str .= '>';
@@ -90,42 +65,14 @@ class EmailField extends AbstractField {
 	}
 
 	/**
-	 * Full JS validation code, including if statement and all
+	 * Full JS validation code
 	 * 
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
 		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
 
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length > '.json_encode($this->getMaxLength());
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field value is too long (254 characters, per spec)").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= 'if (';
-		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field value did not pass regexp").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
+		$str .= 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; };';
 
 		return $str;
 	}
@@ -137,7 +84,7 @@ class EmailField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getValue()));';
 	}
 
 	/**
@@ -165,12 +112,12 @@ class EmailField extends AbstractField {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if ($this->getMaxLength() > 0) {
-			if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
+		if (self::MAX_LENGTH > 0) {
+			if (strlen($requestArr[$this->getDistinguisher()]) > self::MAX_LENGTH) {
 				$this->throwInvalidError();
 			}
 		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
+		if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 	}
