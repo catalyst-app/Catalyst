@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,TextField,PasswordField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,PasswordField,CaptchaField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -46,6 +46,26 @@ trait TestFormTrait {
 		$textField2->setInvalidErrorCode(99804);
 		$textField2->addError(99805, ErrorCodes::ERR_99805);
 		$form->addField($textField2);
+
+		$emailField = new EmailField();
+		$emailField->setDistinguisher("test-email-no-req");
+		$emailField->setLabel("Email but it's not required");
+		$emailField->setRequired(false);
+		$emailField->addError(99809, ErrorCodes::ERR_99809);
+		$emailField->setMissingErrorCode(99809);
+		$emailField->addError(99810, ErrorCodes::ERR_99810);
+		$emailField->setInvalidErrorCode(99810);
+		$form->addField($emailField);
+
+		$emailField2 = new EmailField();
+		$emailField2->setDistinguisher("test-email-req");
+		$emailField2->setLabel("Email but it's required");
+		$emailField2->setRequired(true);
+		$emailField2->addError(99812, ErrorCodes::ERR_99812);
+		$emailField2->setMissingErrorCode(99812);
+		$emailField2->addError(99813, ErrorCodes::ERR_99813);
+		$emailField2->setInvalidErrorCode(99813);
+		$form->addField($emailField2);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("test-captcha");
