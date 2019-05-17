@@ -1,3 +1,6 @@
+-- GENERATED AS OF 6c9c013da5e33f01c3b4703b87e95d9d5ff63038
+-- SEE databas_structure_modifications.yaml
+
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
