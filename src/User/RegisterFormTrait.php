@@ -63,7 +63,6 @@ trait RegisterFormTrait {
 		$emailField->setDistinguisher("email");
 		$emailField->setLabel("Email");
 		$emailField->setRequired(false);
-		$emailField->setAutocompleteAttribute(AutocompleteValues::EMAIL);
 		$emailField->addError(90306, ErrorCodes::ERR_90306);
 		$emailField->setMissingErrorCode(90306);
 		$emailField->addError(90307, ErrorCodes::ERR_90307);
