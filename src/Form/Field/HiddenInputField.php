@@ -39,7 +39,18 @@ class HiddenInputField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		return "";
+		$str = '';
+
+		// all this serves to do is provide a placeholder for the client JS
+		$str .= '<input';
+		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' type="hidden"';
+		$str .= ' class="form-field"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
+		$str .= ' data-real-value-selector="'.htmlspecialchars($this->getSelector()).'"';
+		$str .= '>';
+
+		return $str;
 	}
 
 	/**

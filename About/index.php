@@ -34,7 +34,7 @@ require_once Values::HEAD_INC;
 		<div class="container center align-center">
 			<p class="small-margin flow-text">At Catalyst, we strive to improve and quicken the process of commissioning, providing a simple, unified, and mobile-friendly way for artists to list their prices, receive and track commissions, and so much more.</p>
 
-			<p class="small-margin flow-text"><strong>Please note, we are currently in a private beta.</strong>  If you are interested in participating, you may apply in our Telegram and Discord communities.</p>
+			<p class="small-margin flow-text"><strong>Please note, we are currently in a private beta.</strong>  If you are interested in participating, you may apply in our <a href="https://t.catl.st/">Telegram</a> and <a href="https://d.catl.st/">Discord</a> communities.</p>
 
 			<p class="small-margin flow-text">Take a look below to see some of our features!</p>
 		</div>
