@@ -2235,31 +2235,32 @@
         },
         {
             "name": "slam/phpstan-extensions",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Slamdunk/phpstan-extensions.git",
-                "reference": "c98f0ba39ac8a0a1c3b3d31c7bf3b18a83eba597"
+                "reference": "ae291ba9a7431e426fc729db33fbf9af2dcdc1be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/c98f0ba39ac8a0a1c3b3d31c7bf3b18a83eba597",
-                "reference": "c98f0ba39ac8a0a1c3b3d31c7bf3b18a83eba597",
+                "url": "https://api.github.com/repos/Slamdunk/phpstan-extensions/zipball/ae291ba9a7431e426fc729db33fbf9af2dcdc1be",
+                "reference": "ae291ba9a7431e426fc729db33fbf9af2dcdc1be",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
-                "phpstan/phpstan": "^0.11"
+                "phpstan/phpstan": "^0.11",
+                "thecodingmachine/phpstan-strict-rules": "^0.11"
             },
             "require-dev": {
+                "nette/di": "^3.0",
                 "nette/neon": "^3.0",
                 "phpstan/phpstan-php-parser": "^0.11",
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpunit/phpunit": "^7.5",
                 "roave/security-advisories": "dev-master",
                 "slam/php-cs-fixer-extensions": "^1.18",
-                "slam/php-debug-r": "^1.4",
-                "thecodingmachine/phpstan-strict-rules": "^0.11"
+                "slam/php-debug-r": "^1.4"
             },
             "type": "library",
             "autoload": {
@@ -2279,7 +2280,7 @@
                 }
             ],
             "description": "Slam extension of phpstan",
-            "time": "2019-05-14T10:39:49+00:00"
+            "time": "2019-05-17T08:52:49+00:00"
         },
         {
             "name": "symfony/console",
@@ -2589,6 +2590,52 @@
                 "shim"
             ],
             "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "thecodingmachine/phpstan-strict-rules",
+            "version": "v0.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thecodingmachine/phpstan-strict-rules.git",
+                "reference": "663fad8801b24c666f3c695ca6cbbc1cb28776a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thecodingmachine/phpstan-strict-rules/zipball/663fad8801b24c666f3c695ca6cbbc1cb28776a9",
+                "reference": "663fad8801b24c666f3c695ca6cbbc1cb28776a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "phpstan/phpstan": "^0.10|^0.11"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TheCodingMachine\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Négrier",
+                    "email": "d.negrier@thecodingmachine.com"
+                }
+            ],
+            "description": "A set of additional rules for PHPStan based on best practices followed at TheCodingMachine",
+            "time": "2019-01-18T08:10:20+00:00"
         },
         {
             "name": "tubalmartin/cssmin",
