@@ -103,8 +103,6 @@ class PasswordField extends AbstractField {
 	/**
 	 * Return JS code to store the field's value in $formDataName
 	 * 
-	 * @todo experiment with asymmetric password encryption to send
-	 * 
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */

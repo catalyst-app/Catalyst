@@ -6,7 +6,7 @@ use \Catalyst\Form\Form;
 use \InvalidArgumentException;
 
 /**
- * Literally wraps a field in a div...thats all
+ * Literally wraps a field in an element, basic passthrough...thats all
  */
 class WrappedField extends AbstractField {
 	use LabelTrait;

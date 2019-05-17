@@ -128,7 +128,7 @@ class TextField extends AbstractField {
 	}
 
 	/**
-	 * Full JS validation code, including if statement and all
+	 * Full JS validation code
 	 * 
 	 * @return string The JS to validate the field
 	 */
