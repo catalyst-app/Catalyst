@@ -33,8 +33,6 @@ class HiddenInputField extends AbstractField {
 
 	/**
 	 * Return the field's HTML input
-	 * 
-	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
 		$str = '';
