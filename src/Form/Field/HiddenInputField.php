@@ -44,6 +44,7 @@ class HiddenInputField extends AbstractField {
 		$str .= ' class="form-field"';
 		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= ' data-hidden-input-id="'.htmlspecialchars($this->getHiddenInputId()).'"';
+		$str .= ' data-missing-error="'.htmlspecialchars($this->getErrorMessage($this->getMissingErrorCode())).'"';
 		$str .= '>';
 
 		return $str;
@@ -57,19 +58,8 @@ class HiddenInputField extends AbstractField {
 	public function getJsValidator() : string {
 		$str = '';
 
-		$str .= 'if (';
-		if ($this->isRequired()) {
-			$str .= '$('.json_encode("#".$this->getHiddenInputId()).').length !== 1';
-		} else {
-			$str .= '$('.json_encode("#".$this->getHiddenInputId()).').length > 1';
-		}
-		$str .= ') {';
+		$str .= 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; };';
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - zero or multiple fields with ID ".$this->getHiddenInputId()." were found").', true);';
-		$str .= 'M.escapeToast("An unknown error has occured.", 4000);';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-
-		$str .= '}';
 		return $str;
 	}
 
@@ -80,21 +70,7 @@ class HiddenInputField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		$str = '';
-
-		$str .= 'if (';
-		$str .= '$('.json_encode($this->getHiddenInputId()).').length';
-		$str .= ') {';
-
-		$str .= $formDataName.'.append(';
-		$str .= json_encode($this->getDistinguisher());
-		$str .= ', ';
-		$str .= '$('.json_encode("#".$this->getHiddenInputId()).').val()';
-		$str .= ');';
-
-		$str .= '}';
-
-		return $str;
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getValue()));';
 	}
 
 	/**
