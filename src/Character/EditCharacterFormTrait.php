@@ -32,7 +32,7 @@ trait EditCharacterFormTrait {
 
 		$tokenField = new HiddenInputField();
 		$tokenField->setDistinguisher("token");
-		$tokenField->setSelector("#character-token");
+		$tokenField->setHiddenInputId("character-token");
 		$form->addField($tokenField);
 
 		$nameField = new TextField();

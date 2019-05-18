@@ -32,7 +32,7 @@ trait SocialMediaAdditionFormsTrait {
 
 		$destField = new HiddenInputField();
 		$destField->setDistinguisher("dest");
-		$destField->setSelector("#social-dest-type");
+		$destField->setHiddenInputId("social-dest-type");
 		$form->addField($destField);
 
 		$labelField = new TextField();
@@ -88,7 +88,7 @@ trait SocialMediaAdditionFormsTrait {
 
 		$destField = new HiddenInputField();
 		$destField->setDistinguisher("dest");
-		$destField->setSelector("#social-dest-type");
+		$destField->setHiddenInputId("social-dest-type");
 		$form->addField($destField);
 
 		$typeField = new SelectField();

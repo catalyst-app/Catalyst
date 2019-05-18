@@ -13,24 +13,22 @@ class HiddenInputField extends AbstractField {
 	 * 
 	 * @var string
 	 */
-	protected $selector = "";
+	protected $hiddenInputId = "";
 
 	/**
-	 * Get the current selector
-	 * 
-	 * @return string the selector
+	 * Get the ID of the hidden input to get the value from
 	 */
-	public function getSelector() : string {
-		return $this->selector;
+	public function getHiddenInputId() : string {
+		return $this->hiddenInputId;
 	}
 
 	/**
-	 * Set the selector
+	 * Set the hidden input ID
 	 * 
-	 * @param string $selector The new selector
+	 * @param string $hiddenInputId The new hidden input ID
 	 */
-	public function setSelector(string $selector) : void {
-		$this->selector = $selector;
+	public function setHiddenInputId(string $hiddenInputId) : void {
+		$this->hiddenInputId = $hiddenInputId;
 	}
 
 	/**
@@ -47,7 +45,7 @@ class HiddenInputField extends AbstractField {
 		$str .= ' type="hidden"';
 		$str .= ' class="form-field"';
 		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' data-real-value-selector="'.htmlspecialchars($this->getSelector()).'"';
+		$str .= ' data-hidden-input-id="'.htmlspecialchars($this->getHiddenInputId()).'"';
 		$str .= '>';
 
 		return $str;
@@ -63,13 +61,13 @@ class HiddenInputField extends AbstractField {
 
 		$str .= 'if (';
 		if ($this->isRequired()) {
-			$str .= '$('.json_encode($this->getSelector()).').length !== 1';
+			$str .= '$('.json_encode("#".$this->getHiddenInputId()).').length !== 1';
 		} else {
-			$str .= '$('.json_encode($this->getSelector()).').length > 1';
+			$str .= '$('.json_encode("#".$this->getHiddenInputId()).').length > 1';
 		}
 		$str .= ') {';
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - zero or multiple fields with selector ".$this->getSelector()." were found").', true);';
+		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - zero or multiple fields with ID ".$this->getHiddenInputId()." were found").', true);';
 		$str .= 'M.escapeToast("An unknown error has occured.", 4000);';
 		$str .= Form::CANCEL_SUBMISSION_JS;
 
@@ -87,21 +85,13 @@ class HiddenInputField extends AbstractField {
 		$str = '';
 
 		$str .= 'if (';
-		$str .= '$('.json_encode($this->getSelector()).').length !== 1';
+		$str .= '$('.json_encode($this->getHiddenInputId()).').length';
 		$str .= ') {';
 
 		$str .= $formDataName.'.append(';
 		$str .= json_encode($this->getDistinguisher());
 		$str .= ', ';
-		$str .= '""';
-		$str .= ');';
-
-		$str .= '} else {';
-
-		$str .= $formDataName.'.append(';
-		$str .= json_encode($this->getDistinguisher());
-		$str .= ', ';
-		$str .= '$('.json_encode($this->getSelector()).').val()';
+		$str .= '$('.json_encode("#".$this->getHiddenInputId()).').val()';
 		$str .= ');';
 
 		$str .= '}';

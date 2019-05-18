@@ -32,7 +32,7 @@ trait DeleteCharacterFormTrait {
 
 		$tokenField = new HiddenInputField();
 		$tokenField->setDistinguisher("token");
-		$tokenField->setSelector("#character-token");
+		$tokenField->setHiddenInputId("character-token");
 		$form->addField($tokenField);
 
 		$confirmField = new JSConfirmField();
