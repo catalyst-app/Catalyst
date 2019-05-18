@@ -22,6 +22,10 @@ require_once Values::HEAD_INC;
 
 echo UniversalFunctions::createHeading("Browser Test Form");
 
+?>
+	<input type="hidden" id="hidden-field-test" value="foobarbazzle">
+<?php
+
 echo FormRepository::getTestForm()->getHtml();
 
 require_once Values::FOOTER_INC;

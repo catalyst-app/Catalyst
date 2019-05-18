@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,PasswordField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,HiddenInputField,PasswordField,CaptchaField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -66,6 +66,14 @@ trait TestFormTrait {
 		$emailField2->addError(99813, ErrorCodes::ERR_99813);
 		$emailField2->setInvalidErrorCode(99813);
 		$form->addField($emailField2);
+
+		$hiddenInput = new HiddenInputField();
+		$hiddenInput->setDistinguisher("test-hidden-field");
+		$hiddenInput->setHiddenInputId("hidden-field-test");
+		$hiddenInput->setRequired(true);
+		$hiddenInput->addError(99815, ErrorCodes::ERR_99815);
+		$hiddenInput->setMissingErrorCode(99815);
+		$form->addField($hiddenInput);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("test-captcha");
