@@ -10,7 +10,7 @@ require_once REAL_ROOTDIR."src/initializer.php";
 use \Catalyst\Form\Field\CaptchaField;
 ?>
 {
-	<?= require_once REAL_ROOTDIR."js/modules/form_input_header.js"; ?>
+	<?php require_once REAL_ROOTDIR."js/modules/form_input_header.js"; ?>
 
 	const className = <?= json_encode(CaptchaField::class) ?>;
 
