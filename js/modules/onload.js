@@ -45,7 +45,7 @@ U+FEFF  ZERO WIDTH NO-BREAK SPACE   foo﻿bar, size: no width (the character is 
 // ~))))'> 
 //
 // What's this, a possum in the JavaScript?
-// Impossible!
+// Impossumible!
 //
 // (yes spade im looking at you)
 
