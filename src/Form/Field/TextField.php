@@ -166,22 +166,23 @@ class TextField extends AbstractField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
 				$this->throwMissingError();
+			} else {
+				return;
 			}
-		} else {
-			if ($this->getMaxLength() > 0) {
-				if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
-					$this->throwInvalidError();
-				}
-			}
-			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
+		}
+		if ($this->getMaxLength() > 0) {
+			if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
 				$this->throwInvalidError();
 			}
-			if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
-				$this->throwInvalidError();
-			}
+		}
+		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
+			$this->throwInvalidError();
+		}
+		if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
+			$this->throwInvalidError();
 		}
 	}
 

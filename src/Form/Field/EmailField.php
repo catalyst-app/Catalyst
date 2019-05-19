@@ -103,12 +103,10 @@ class EmailField extends AbstractField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
 				$this->throwMissingError();
-			}
-		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+			} else {
 				return; // not required and empty, don't do further checks
 			}
 		}
