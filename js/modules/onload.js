@@ -60,7 +60,7 @@ var humanFileSize = function(size) {
 	$(function(){
 		// toish: "Put it in a closure":tm:
 		function materializeOnload() {
-			if ($ === undefined || M === undefined) {
+			if (typeof $ == "undefined" || typeof M == "undefined") {
 				window.log(<?= json_encode(basename(__FILE__)) ?>, "materializeOnload - deferring for 100ms (even though I'm not happy about it...)");
 				setTimeout(materializeOnload, 100);
 				return;
@@ -71,7 +71,8 @@ var humanFileSize = function(size) {
 				M.toast({html: $("<span></span>").text(a).html()});
 			};
 			window.Materialize = window.M; // legacy
-			$('select').attr("required", false);
+			M.FormSelect.init(document.querySelectorAll("select"));
+			// $('select').attr("required", false);
 			$(".sidenav").sidenav();
 			$(".modal").modal();
 			$('.pushpin').pushpin({
