@@ -27,13 +27,13 @@ window.onerror = function(message, url, lineNumber) {
 				contentType: false,
 				method: "POST"
 			}).done(function(response) {
-				if (typeof M != 'defined' || typeof M.escapeToast != 'defined') {
+				if (typeof M != 'undefined' && typeof M.escapeToast != 'undefined') {
 					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
 				}
 			}).fail(function(response) {
-				if (typeof M != 'defined' || typeof M.escapeToast != 'defined') {
+				if (typeof M != 'undefined' && typeof M.escapeToast != 'undefined') {
 					M.escapeToast("An error occured", 4000);
 				} else {
 					alert("An unknown error occured.");
