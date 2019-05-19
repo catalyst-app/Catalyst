@@ -298,7 +298,12 @@ class Image {
 	 * @return bool If the image is pixel art
 	 */
 	public function isPixelArt() : bool {
-		$imageDimensions = getimagesize($this->getFilesystemPaths()[0][1]); // we know [0] has a MAX width of 512
+		$img = $this->getFilesystemPaths()[0];
+		if (strpos($img[1], "_thumb") !== false && $img[0] !== "image/gif") {
+			// if its a thumbnail then it must NOT be pixel art, unless its a GIF, then we need to continue logic
+			return false;
+		}
+		$imageDimensions = getimagesize($img[1]);
 		if ($imageDimensions === false) { // doesn't exist ?
 			return false;
 		}
