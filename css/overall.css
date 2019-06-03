@@ -990,3 +990,7 @@ a {
 .select-wrapper input.select-dropdown:focus {
   border-bottom: 1px solid var(--main-color);
 }
+
+.modal-content .dropdown-content.select-dropdown {
+	max-height: calc(60vh - 56px) !important;
+}
