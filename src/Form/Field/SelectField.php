@@ -10,16 +10,16 @@ use \Catalyst\Form\Form;
 class SelectField extends AbstractField {
 	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
 	/**
-	 * Options, [value, label]
+	 * Options, [value => label]
 	 * 
-	 * @var string[][]
+	 * @var string[]
 	 */
 	protected $options = [];
 
 	/**
 	 * Get the current options
 	 * 
-	 * @return string[][] Current option array
+	 * @return string[] Current option array
 	 */
 	public function getOptions() : array {
 		return $this->options;
@@ -28,7 +28,7 @@ class SelectField extends AbstractField {
 	/**
 	 * Set the current option set
 	 * 
-	 * @param string[][] $options New options
+	 * @param string[] $options New options
 	 */
 	public function setOptions(array $options) : void {
 		$this->options = $options;
@@ -69,7 +69,7 @@ class SelectField extends AbstractField {
 		$str .= "Choose an option";
 		$str .= '</option>';
 
-		foreach ($this->getOptions() as list($val, $text)) {
+		foreach ($this->getOptions() as $val => $text) {
 			$str .= '<option';
 			if ($this->isFieldPrefilled()) {
 				if ($this->getPrefilledValue() == $val) {
@@ -145,7 +145,7 @@ class SelectField extends AbstractField {
 				return;
 			}
 		}
-		foreach ($this->getOptions() as list($value, $text)) {
+		foreach ($this->getOptions() as $value => $text) {
 			if ($requestArr[$this->getDistinguisher()] == $value) {
 				return;
 			}
