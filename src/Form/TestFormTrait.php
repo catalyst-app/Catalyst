@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,HiddenInputField,PasswordField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,HiddenInputField,PasswordField,SelectField,CaptchaField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -74,6 +74,38 @@ trait TestFormTrait {
 		$hiddenInput->addError(99815, ErrorCodes::ERR_99815);
 		$hiddenInput->setMissingErrorCode(99815);
 		$form->addField($hiddenInput);
+
+		$selectField = new SelectField();
+		$selectField->setDistinguisher("test-select-field-req");
+		$selectField->setLabel("Test select, required");
+		$selectField->setOptions([
+			"key1" => "Fancy value 1",
+			"key2" => "Fancy value 2",
+			"key3" => "Fancy value 3",
+		]);
+		$selectField->setRequired(true);
+		$selectField->setAutocompleteAttribute(AutocompleteValues::ON);
+		$selectField->addError(99818, ErrorCodes::ERR_99818);
+		$selectField->setMissingErrorCode(99818);
+		$selectField->addError(99819, ErrorCodes::ERR_99819);
+		$selectField->setInvalidErrorCode(99819);
+		$form->addField($selectField);
+
+		$selectField2 = new SelectField();
+		$selectField2->setDistinguisher("test-select-field-no-req");
+		$selectField2->setLabel("Test select, not required");
+		$selectField2->setOptions([
+			"key1" => "Fancy value 1",
+			"key2" => "Fancy value 2",
+			"key3" => "Fancy value 3",
+		]);
+		$selectField2->setRequired(false);
+		$selectField2->setAutocompleteAttribute(AutocompleteValues::ON);
+		$selectField2->addError(99821, ErrorCodes::ERR_99821);
+		$selectField2->setMissingErrorCode(99821);
+		$selectField2->addError(99822, ErrorCodes::ERR_99822);
+		$selectField2->setInvalidErrorCode(99822);
+		$form->addField($selectField2);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("test-captcha");
