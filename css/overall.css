@@ -986,3 +986,7 @@ a {
 .datepicker-day-button:focus {
 	background-color: var(--main-color-quarter-alpha);
 }
+
+.select-wrapper input.select-dropdown:focus {
+  border-bottom: 1px solid var(--main-color);
+}
