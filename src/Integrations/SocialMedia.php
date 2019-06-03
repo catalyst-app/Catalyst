@@ -61,6 +61,7 @@ class SocialMedia {
 			$row["INTEGRATION_NAME"] => [
 				"path" => $row["IMAGE_PATH"],
 				"name" => $row["DEFAULT_HUMAN_NAME"],
+				"internal_name" => $row["INTEGRATION_NAME"],
 				"classes" => $row["CHIP_CLASSES"],
 				"visible" => $row["VISIBLE"]
 			]
@@ -70,13 +71,11 @@ class SocialMedia {
 	/**
 	 * Get an array of options for use with a SelectField
 	 * 
-	 * @return string[][]
+	 * @return string[]
 	 */
 	public static function getOtherNetworkAddSelectArray() : array {
 		$arr = array_filter(self::getMeta(), function($in) { return $in["visible"]; });
-		return array_map(function($a, $b) {
-			return [$a, $b["name"]];
-		}, array_keys($arr), $arr);
+		return array_column($arr, "name", "internal_name");
 	}
 
 	/**
