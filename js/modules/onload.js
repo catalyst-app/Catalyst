@@ -184,6 +184,9 @@ var humanFileSize = function(size) {
 			}
 			$(this).removeClass("marked-invalid").removeClass("invalid");
 		});
+		$(document).on("change", ".marked-invalid select", function(e) {
+			$(this).parent().removeClass("marked-invalid").removeClass("invalid");
+		});
 		<?php foreach ($forms as $form): ?>
 			<?= $form->getAllJs(); ?>
 		<?php endforeach; ?>
