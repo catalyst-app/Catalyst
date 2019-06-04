@@ -42,22 +42,20 @@ class SelectField extends AbstractField {
 	public function getHtml() : string {
 		$str = '';
 		
-		// $str .= '<div';
-		// $str .= ' class="input-field col s12">';
+		$str .= '<div';
+		$str .= ' class="input-field col s12">';
 
-		$str .= $this->getLabelHtml();
-
-		$inputClasses = [];
 		$str .= '<select';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' class="browser-default"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' data-option-keys="'.htmlspecialchars(json_encode(array_keys($this->getOptions()))).'"';
 
 		if ($this->isRequired()) {
 			$str .= ' required="required"';
 		}
 		
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
+		$str .= ' class="form-field"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= '>';
 
 		$str .= '<option';
@@ -84,7 +82,9 @@ class SelectField extends AbstractField {
 
 		$str .= '</select>';
 
-		// $str .= '</div>';
+		$str .= $this->getLabelHtml();
+
+		$str .= '</div>';
 		
 		return $str;
 	}
