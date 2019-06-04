@@ -133,11 +133,7 @@ class TextField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-
-		$str .= 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; };';
-
-		return $str;
+		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
 	}
 
 	/**
