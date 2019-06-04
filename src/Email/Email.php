@@ -14,14 +14,14 @@ use \Catalyst\Secrets;
 class Email {
 	public const NO_REPLY_EMAIL = ["no-reply@catalystapp.co", "Catalyst No-Reply"];
 	public const NO_REPLY_PASSWORD = Secrets::NO_REPLY_PASSWORD;
-	public const NO_REPLY_SMIME_PATH = REAL_ROOTDIR."src/smime_keys/no-reply.pem";
-	public const NO_REPLY_SMIME_PASSWORD = Secrets::NO_REPLY_SMIME_PASSWORD;
+	public const NO_REPLY_SMIME_PATH = null;
+	public const NO_REPLY_SMIME_PASSWORD = null;
 
 	// used for logging errors
 	public const ERROR_LOG_EMAIL = ["error_logs@catalystapp.co", "Catalyst Error Logging"];
 	public const ERROR_LOG_PASSWORD = Secrets::ERROR_LOG_PASSWORD;
-	public const ERROR_LOG_SMIME_PATH = REAL_ROOTDIR."src/smime_keys/error_logs.pem";
-	public const ERROR_LOG_SMIME_PASSWORD = Secrets::ERROR_LOG_SMIME_PASSWORD;
+	public const ERROR_LOG_SMIME_PATH = null;
+	public const ERROR_LOG_SMIME_PASSWORD = null;
 
 	public const EMAIL_SMTP = ["catalystapp.co", 587, "tls"];
 
