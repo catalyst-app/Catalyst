@@ -32,7 +32,7 @@ use \Catalyst\Form\Field\TextField;
 			this.id = element.id;
 
 			this.element = element;
-			this.label = document.querySelector("label[for="+this.id+"]")
+			this.label = document.querySelector("label[for="+this.id+"]");
 			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
 
 			this.required = element.getAttribute("required") === "required";
