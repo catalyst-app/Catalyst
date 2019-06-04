@@ -27,6 +27,7 @@ trait EmailListFormTrait {
 		$form->setEndpoint("internal/email_list/");
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
+		$form->setResetOnSuccess(true);
 
 		$completionAction = new AutoClosingModalCompletionAction();
 		$completionAction->setContents("You have been added to the email list!");

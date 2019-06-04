@@ -25,6 +25,7 @@ trait SocialMediaAdditionFormsTrait {
 		$form->setEndpoint("internal/social_media/add_link/");
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
+		$form->setResetOnSuccess(true);
 
 		$completionAction = new CallUserFuncCompletionAction();
 		$completionAction->setFunc("addSocialMediaChip");
@@ -81,6 +82,7 @@ trait SocialMediaAdditionFormsTrait {
 		$form->setEndpoint("internal/social_media/add_other/");
 		$form->setButtonText("ADD");
 		$form->setPrimary(false);
+		$form->setResetOnSuccess(true);
 
 		$completionAction = new CallUserFuncCompletionAction();
 		$completionAction->setFunc("addSocialMediaChip");

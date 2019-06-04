@@ -88,6 +88,13 @@ class Form {
 	protected $primary = true;
 
 	/**
+	 * If form is should clear itself on successful submit
+	 * 
+	 * @var bool
+	 */
+	protected $resetOnSuccess = false;
+
+	/**
 	 * Additional actions to perform upon certain error codes
 	 * 
 	 * @var AbstractCompletionAction[]
@@ -111,8 +118,9 @@ class Form {
 	 * @param string $buttonText
 	 * @param AbstractField[] $fields
 	 * @param bool $primary If the form is the only one on the page (it should be focused automatically if so)
+	 * @param bool $resetOnSuccess If form is should clear itself on successful submit
 	 */
-	public function __construct(string $distinguisher="", ?AbstractCompletionAction $completionAction=null, int $method=self::POST, string $endpoint="", string $buttonText="", array $fields=[], bool $primary=true) {
+	public function __construct(string $distinguisher="", ?AbstractCompletionAction $completionAction=null, int $method=self::POST, string $endpoint="", string $buttonText="", array $fields=[], bool $primary=true, bool $resetOnSuccess=false) {
 		$this->setDistinguisher($distinguisher);
 		$this->setCompletionAction($completionAction);
 		$this->setMethod($method);
@@ -291,6 +299,24 @@ class Form {
 	 */
 	public function setPrimary(bool $primary) : void {
 		$this->primary = $primary;
+	}
+
+	/**
+	 * Get the form's resetOnSuccess status
+	 * 
+	 * @return bool If the form is resetOnSuccess
+	 */
+	public function isResetOnSuccess() : bool {
+		return $this->resetOnSuccess;
+	}
+
+	/**
+	 * Set the form's resetOnSuccess status
+	 * 
+	 * @param bool $resetOnSuccess If the form is resetOnSuccess
+	 */
+	public function setResetOnSuccess(bool $resetOnSuccess) : void {
+		$this->resetOnSuccess = $resetOnSuccess;
 	}
 
 	/**
@@ -529,9 +555,13 @@ class Form {
 		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response);';
 		$str .= 'M.escapeToast("Success", 4000);';
-		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - resetting fields").');';
-		$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
-		$str .= '$('.json_encode('#'.$this->getId()).'+" input[type=text], textarea").removeClass("active").blur();';
+		
+		if ($this->isResetOnSuccess()) {
+			$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - resetting fields").');';
+			$str .= '$('.json_encode('#'.$this->getId()).')[0].reset();';
+			$str .= '$('.json_encode('#'.$this->getId()).'+" input[type=text], textarea").removeClass("active").blur();';
+		}
+		
 		if (!is_null($this->getCompletionAction())) {
 			$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - invoking completion action ".get_class($this->getCompletionAction())).');';
 			if (Controller::isDevelMode()) {
@@ -539,6 +569,7 @@ class Form {
 			}
 			$str .= $this->getCompletionAction()->getJs();
 		}
+		
 		$str .= '} catch (e) {';
 		$str .= 'window.log("Form", '.json_encode($this->getDistinguisher()." - Bad JSON").', true);';
 		$str .= 'showErrorMessageForCode(99999);';
