@@ -15,7 +15,7 @@ trait TestFormTrait {
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
 		$form->setMethod(Form::POST);
-		$form->setEndpoint("internal/test/form/");
+		$form->setEndpoint("internal/test/");
 		$form->setButtonText("LOGIN");
 		$form->setPrimary(true);
 
