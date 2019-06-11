@@ -38,6 +38,10 @@ use \Catalyst\Form\Field\SelectField;
 			this.required = element.getAttribute("required") === "required";
 
 			this.options = JSON.parse(element.getAttribute("data-option-keys"));
+
+			// remove to prevent duplicates for BC instantiation methods
+			this.element.removeEventListener("change", this.verify.bind(this));
+			this.element.addEventListener("change", this.verify.bind(this));
 		}
 
 		/**
@@ -91,6 +95,9 @@ use \Catalyst\Form\Field\SelectField;
 				}
 			}
 			window.log(this.id, "Verification successful");
+
+			this.wrapper.classList.remove("invalid", "marked-invalid");
+
 			return true;
 		}
 	}

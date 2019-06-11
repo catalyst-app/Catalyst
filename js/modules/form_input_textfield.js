@@ -40,6 +40,10 @@ use \Catalyst\Form\Field\TextField;
 			this.pattern = element.getAttribute("pattern");
 			this.maxLength = element.getAttribute("maxlength");
 			this.disallowed = JSON.parse(element.getAttribute("data-disallowed"));
+
+			// remove to prevent duplicates for BC instantiation methods
+			this.element.removeEventListener("input", this.verify.bind(this));
+			this.element.addEventListener("input", this.verify.bind(this));
 		}
 
 		/**
@@ -104,6 +108,9 @@ use \Catalyst\Form\Field\TextField;
 				}
 			}
 			window.log(this.id, "Verification successful");
+
+			this.element.classList.remove("invalid", "marked-invalid");
+
 			return true;
 		}
 	}

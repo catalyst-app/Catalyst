@@ -36,6 +36,10 @@ use \Catalyst\Form\Field\EmailField;
 			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
 
 			this.required = element.getAttribute("required") === "required";
+
+			// remove to prevent duplicates for BC instantiation methods
+			this.element.removeEventListener("input", this.verify.bind(this));
+			this.element.addEventListener("input", this.verify.bind(this));
 		}
 
 		/**
@@ -94,7 +98,11 @@ use \Catalyst\Form\Field\EmailField;
 					return false;
 				}
 			}
+
 			window.log(this.id, "Verification successful");
+
+			this.element.classList.remove("invalid", "marked-invalid");
+
 			return true;
 		}
 	}
