@@ -56,9 +56,8 @@ use \Catalyst\Form\Field\CaptchaField;
 
 			if (!passive) {
 				M.escapeToast(errorMessage);
+				this.element.focus();
 			}
-
-			this.element.focus();
 		}
 
 		/**

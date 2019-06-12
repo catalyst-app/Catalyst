@@ -69,9 +69,8 @@ use \Catalyst\Form\Field\TextField;
 
 			if (!passive) {
 				M.escapeToast(errorMessage);
+				this.element.focus();
 			}
-
-			this.element.focus();
 		}
 
 		/**

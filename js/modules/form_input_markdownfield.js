@@ -70,9 +70,8 @@ use \Catalyst\Form\Field\MarkdownField;
 
 			if (!passive) {
 				M.escapeToast(errorMessage);
+				this.element.focus();
 			}
-
-			this.element.focus();
 		}
 
 		/**

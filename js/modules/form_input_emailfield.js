@@ -65,9 +65,8 @@ use \Catalyst\Form\Field\EmailField;
 
 			if (!passive) {
 				M.escapeToast(errorMessage);
+				this.element.focus();
 			}
-
-			this.element.focus();
 		}
 
 		/**
