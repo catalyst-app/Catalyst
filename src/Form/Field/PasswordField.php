@@ -43,10 +43,12 @@ class PasswordField extends AbstractField {
 		$str = '';
 		$str .= '<div class="input-field col s12">';
 
-		$inputClasses = [];
+		$inputClasses = ["form-field"];
 		$str .= '<input';
 		$str .= ' type="password"';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
+		$str .= ' minlength="'.$this->getMinLength().'"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
 
 		if ($this->isRequired()) {
@@ -127,12 +129,10 @@ class PasswordField extends AbstractField {
 			$this->throwMissingError();
 		}
 		$requestArr[$this->getDistinguisher()] = TransitEncryption::decryptAes($requestArr[$this->getDistinguisher()]);
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
 				$this->throwMissingError();
-			}
-		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+			} else {
 				return;
 			}
 		}
