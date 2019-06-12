@@ -90,7 +90,7 @@ use \Catalyst\Form\Field\NumberField;
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
-			if (this.getValue().length) {
+			if ((""+value).length) {
 				if (this.min > value) {
 					window.log(this.id, "Value "+value+" exceeds minimum "+this.min, true);
 					this.markError(INVALID, passive);
