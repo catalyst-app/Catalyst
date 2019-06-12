@@ -4,7 +4,7 @@ namespace Catalyst\Character;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{HiddenInputField,JSConfirmField};
+use \Catalyst\Form\Field\{HiddenInputField,ConfirmField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -35,7 +35,7 @@ trait DeleteCharacterFormTrait {
 		$tokenField->setHiddenInputId("character-token");
 		$form->addField($tokenField);
 
-		$confirmField = new JSConfirmField();
+		$confirmField = new ConfirmField();
 		$confirmField->setDistinguisher("confirm");
 		$confirmField->setRequired(true);
 		$confirmField->setPrompt("Are you sure you want to delete this character?");

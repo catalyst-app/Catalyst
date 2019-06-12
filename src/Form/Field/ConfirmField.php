@@ -5,9 +5,9 @@ namespace Catalyst\Form\Field;
 use \Catalyst\Form\Form;
 
 /**
- * Requires a user to confirm through js confirm function
+ * Requires a user to confirm through (currently) js confirm function
  */
-class JSConfirmField extends AbstractField {
+class ConfirmField extends AbstractField {
 	/**
 	 * The string to prompt the user with
 	 * @var string
