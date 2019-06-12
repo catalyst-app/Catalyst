@@ -90,13 +90,6 @@ use \Catalyst\Form\Field\TextField;
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
-			if (this.required) {
-				if (!value.length) {
-					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING, passive);
-					return false;
-				}
-			}
 			if (value.length) {
 				if (this.maxLength && value.length > this.maxLength) {
 					window.log(this.id, "Value length "+value.length+" exceeds maximum length "+this.maxLength, true);
@@ -111,6 +104,12 @@ use \Catalyst\Form\Field\TextField;
 				if (this.disallowed.includes(value)) {
 					window.log(this.id, "Value is included within the list of explicitly disallowed values", true);
 					this.markError(INVALID, passive);
+					return false;
+				}
+			} else {
+				if (this.required) {
+					window.log(this.id, "Required but empty value", true);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}

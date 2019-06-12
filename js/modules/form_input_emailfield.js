@@ -86,13 +86,6 @@ use \Catalyst\Form\Field\EmailField;
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
-			if (this.required) {
-				if (!value.length) {
-					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING, passive);
-					return false;
-				}
-			}
 			if (value.length) {
 				if (value.length > <?= json_encode(EmailField::MAX_LENGTH) ?>) {
 					window.log(this.id, "Value length "+value.length+" exceeds maximum length "+<?= json_encode(EmailField::MAX_LENGTH) ?>, true);
@@ -102,6 +95,12 @@ use \Catalyst\Form\Field\EmailField;
 				if (!(new RegExp(<?= json_encode(EmailField::PATTERN) ?>)).test(value)) {
 					window.log(this.id, "Pattern "+<?= json_encode(EmailField::PATTERN) ?>+" does not match value", true);
 					this.markError(INVALID, passive);
+					return false;
+				}
+			} else {
+				if (this.required) {
+					window.log(this.id, "Required but empty value", true);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}
