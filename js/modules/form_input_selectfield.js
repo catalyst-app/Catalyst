@@ -46,8 +46,9 @@ use \Catalyst\Form\Field\SelectField;
 
 		/**
 		 * @param errorType one of MISSING or INVALID
+		 * @param bool passive
 		 */
-		markError(errorType) {
+		markError(errorType, passive) {
 			if (errorType == MISSING) {
 				var errorMessage = this.helperText.getAttribute("data-missing-error");
 				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
@@ -61,7 +62,9 @@ use \Catalyst\Form\Field\SelectField;
 			this.wrapper.classList.add("invalid", "marked-invalid");
 			this.helperText.setAttribute("data-error", errorMessage);
 
-			M.escapeToast(errorMessage);
+			if (!passive) {
+				M.escapeToast(errorMessage);
+			}
 
 			this.element.focus();
 		}
@@ -74,23 +77,25 @@ use \Catalyst\Form\Field\SelectField;
 		}
 
 		/**
+		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+		 *     false if verify is being called from input
 		 * @return bool
 		 */
-		verify() {
+		verify(passive=false) {
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
 			if (this.required) {
 				if (!value.length) {
 					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}
 			if (value.length) {
 				if (!this.options.includes(value)) {
 					window.log(this.id, "Value is not within the list of possible options (how ???)", true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 			}

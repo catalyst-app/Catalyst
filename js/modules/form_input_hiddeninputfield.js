@@ -39,8 +39,9 @@ use \Catalyst\Form\Field\HiddenInputField;
 
 		/**
 		 * @param errorType one of MISSING or INVALID
+		 * @param bool passive
 		 */
-		markError(errorType) {
+		markError(errorType, passive) {
 			if (errorType == MISSING) {
 				window.log(this.id, "Showing message for error type MISSING and throwing exception", true);
 				M.escapeToast(this.element.getAttribute("data-missing-error"));
@@ -51,7 +52,9 @@ use \Catalyst\Form\Field\HiddenInputField;
 				throw "Invalid error type passed to "+className+".markError ("+errorType+")";
 			}
 
-			throw className+" – the actual page does not have the element ID "+this.hiddenInputId;
+			if (!passive) {
+				throw className+" – the actual page does not have the element ID "+this.hiddenInputId;
+			}
 		}
 
 		/**
@@ -62,9 +65,11 @@ use \Catalyst\Form\Field\HiddenInputField;
 		}
 
 		/**
+		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+		 *     false if verify is being called from input
 		 * @return bool
 		 */
-		verify() {
+		verify(passive=false) {
 			window.log(this.id, "Verifying hidden input field exists");
 
 			if (this.hiddenInput == null) {

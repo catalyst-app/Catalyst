@@ -43,13 +43,15 @@ use \Catalyst\Form\Field\TextField;
 
 			// remove to prevent duplicates for BC instantiation methods
 			this.element.removeEventListener("input", this.verify.bind(this));
-			this.element.addEventListener("input", this.verify.bind(this));
+			this.element.removeEventListener("input", this.verify.bind(this, true));
+			this.element.addEventListener("input", this.verify.bind(this, true));
 		}
 
 		/**
 		 * @param errorType one of MISSING or INVALID
+		 * @param bool passive
 		 */
-		markError(errorType) {
+		markError(errorType, passive) {
 			if (errorType == MISSING) {
 				var errorMessage = this.helperText.getAttribute("data-missing-error");
 				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
@@ -64,7 +66,9 @@ use \Catalyst\Form\Field\TextField;
 			this.label.classList.add("active");
 			this.helperText.setAttribute("data-error", errorMessage);
 
-			M.escapeToast(errorMessage);
+			if (!passive) {
+				M.escapeToast(errorMessage);
+			}
 
 			this.element.focus();
 		}
@@ -77,33 +81,35 @@ use \Catalyst\Form\Field\TextField;
 		}
 
 		/**
+		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+		 *     false if verify is being called from input
 		 * @return bool
 		 */
-		verify() {
+		verify(passive=false) {
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
 			if (this.required) {
 				if (!value.length) {
 					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}
 			if (value.length) {
 				if (this.maxLength && value.length > this.maxLength) {
 					window.log(this.id, "Value length "+value.length+" exceeds maximum length "+this.maxLength, true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 				if (!(new RegExp(this.pattern)).test(value)) {
 					window.log(this.id, "Pattern "+this.pattern+" does not match value", true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 				if (this.disallowed.includes(value)) {
 					window.log(this.id, "Value is included within the list of explicitly disallowed values", true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 			}

@@ -36,8 +36,9 @@ use \Catalyst\Form\Field\CaptchaField;
 
 		/**
 		 * @param errorType one of MISSING or INVALID
+		 * @param bool passive
 		 */
-		markError(errorType) {
+		markError(errorType, passive) {
 			if (errorType == MISSING) {
 				var errorMessage = this.element.getAttribute("data-missing-error");
 				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
@@ -53,7 +54,9 @@ use \Catalyst\Form\Field\CaptchaField;
 			this.element.classList.add("invalid");
 			this.element.classList.remove("valid");
 
-			M.escapeToast(errorMessage);
+			if (!passive) {
+				M.escapeToast(errorMessage);
+			}
 
 			this.element.focus();
 		}
@@ -66,15 +69,17 @@ use \Catalyst\Form\Field\CaptchaField;
 		}
 
 		/**
+		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+		 *     false if verify is being called from input
 		 * @return bool
 		 */
-		verify() {
+		verify(passive=false) {
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
 			if (!value.length) {
 				window.log(this.id, "CAPTCHA value is missing or invalid (no way to tell)", true);
-				this.markError(INVALID);
+				this.markError(INVALID, passive);
 				return false;
 			}
 

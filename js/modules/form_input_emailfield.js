@@ -44,8 +44,9 @@ use \Catalyst\Form\Field\EmailField;
 
 		/**
 		 * @param errorType one of MISSING or INVALID
+		 * @param bool passive
 		 */
-		markError(errorType) {
+		markError(errorType, passive) {
 			if (errorType == MISSING) {
 				var errorMessage = this.helperText.getAttribute("data-missing-error");
 				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
@@ -60,7 +61,9 @@ use \Catalyst\Form\Field\EmailField;
 			this.label.classList.add("active");
 			this.helperText.setAttribute("data-error", errorMessage);
 
-			M.escapeToast(errorMessage);
+			if (!passive) {
+				M.escapeToast(errorMessage);
+			}
 
 			this.element.focus();
 		}
@@ -73,28 +76,30 @@ use \Catalyst\Form\Field\EmailField;
 		}
 
 		/**
+		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+		 *     false if verify is being called from input
 		 * @return bool
 		 */
-		verify() {
+		verify(passive=false) {
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
 			if (this.required) {
 				if (!value.length) {
 					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}
 			if (value.length) {
 				if (value.length > <?= json_encode(EmailField::MAX_LENGTH) ?>) {
 					window.log(this.id, "Value length "+value.length+" exceeds maximum length "+<?= json_encode(EmailField::MAX_LENGTH) ?>, true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 				if (!(new RegExp(<?= json_encode(EmailField::PATTERN) ?>)).test(value)) {
 					window.log(this.id, "Pattern "+<?= json_encode(EmailField::PATTERN) ?>+" does not match value", true);
-					this.markError(INVALID);
+					this.markError(INVALID, passive);
 					return false;
 				}
 			}
