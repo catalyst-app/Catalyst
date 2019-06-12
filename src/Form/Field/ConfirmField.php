@@ -5,7 +5,7 @@ namespace Catalyst\Form\Field;
 use \Catalyst\Form\Form;
 
 /**
- * Requires a user to confirm through (currently) js confirm function
+ * Requires a user to confirm through (currently) js confirm function during the validation
  */
 class ConfirmField extends AbstractField {
 	/**
@@ -48,19 +48,7 @@ class ConfirmField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '!confirm('.json_encode($this->getPrompt()).')';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - JS confirmation dialog not accepted, aborting").', true);';
-			$str .= 'M.escapeToast("Action canceled", 4000);';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-
-		return $str;
+		return 'if (!(new window.formInputHandlers['.json_encode(self::class).']('.json_encode($this->getId()).', '.json_encode($this->getPrompt()).').verify())) { return; }';
 	}
 
 	/**
