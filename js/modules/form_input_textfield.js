@@ -42,7 +42,7 @@ use \Catalyst\Form\Field\TextField;
 			this.disallowed = JSON.parse(element.getAttribute("data-disallowed"));
 
 			// remove to prevent duplicates for BC instantiation methods
-			this.element.removeEventListener("input", this.verify.bind(this));
+			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");
 			this.element.removeEventListener("input", this.verify.bind(this, true));
 			this.element.addEventListener("input", this.verify.bind(this, true));
 		}

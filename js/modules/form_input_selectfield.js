@@ -40,8 +40,9 @@ use \Catalyst\Form\Field\SelectField;
 			this.options = JSON.parse(element.getAttribute("data-option-keys"));
 
 			// remove to prevent duplicates for BC instantiation methods
-			this.element.removeEventListener("change", this.verify.bind(this));
-			this.element.addEventListener("change", this.verify.bind(this));
+			window.log(this.id, "Adding this.verify as a listener for change events if it was not already");
+			this.element.removeEventListener("change", this.verify.bind(this, true));
+			this.element.addEventListener("change", this.verify.bind(this, true));
 		}
 
 		/**
