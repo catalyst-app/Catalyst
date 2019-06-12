@@ -22,7 +22,7 @@ class NumberField extends AbstractField {
 	 */
 	protected $max = 2147483647; // no we cant use PHP_INT_MAX because not everyone's 64 bit >:/
 	/**
-	 * Maximum number
+	 * Maximum precision (in number of decimals)
 	 * 
 	 * @var int
 	 */
