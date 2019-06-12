@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,EmailField,TextField,NumberField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -117,6 +117,20 @@ trait TestFormTrait {
 		$markdownField->addError(99825, ErrorCodes::ERR_99825);
 		$markdownField->setInvalidErrorCode(99825);
 		$form->addField($markdownField);
+
+		$numberField = new NumberField();
+		$numberField->setDistinguisher("test-number-field-req");
+		$numberField->setLabel("Test number field, required, min 10, max 20, precision 2");
+		$numberField->setRequired(true);
+		$numberField->setMin(10);
+		$numberField->setMax(20);
+		$numberField->setPrecision(2);
+		$numberField->setAutocompleteAttribute(AutocompleteValues::OFF);
+		$numberField->addError(99827, ErrorCodes::ERR_99827);
+		$numberField->setMissingErrorCode(99827);
+		$numberField->addError(99828, ErrorCodes::ERR_99828);
+		$numberField->setInvalidErrorCode(99828);
+		$form->addField($numberField);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("test-captcha");
