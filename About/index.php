@@ -118,6 +118,7 @@ require_once Values::HEAD_INC;
 				["href" => "https://gh.catl.st/", "img" => "github", "label" => "GitHub"],
 				["href" => "https://tw.catl.st/", "img" => "twitter", "label" => "Twitter"],
 				["href" => "https://d.catl.st/", "img" => "discord", "label" => "Discord"],
+				["href" => "https://stream.catl.st/", "img" => "twitch", "label" => "Twitch"],
 				["href" => "https://fa.catl.st/", "img" => "furaffinity", "label" => "FurAffinity"],
 				["href" => "https://da.catl.st/", "img" => "deviantart", "label" => "DeviantArt"],
 				["href" => "https://weasyl.catl.st/", "img" => "weasyl", "label" => "Weasyl"],
