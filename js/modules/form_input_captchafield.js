@@ -29,9 +29,9 @@ use \Catalyst\Form\Field\CaptchaField;
 				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
 			}
 
-			this.id = element.id;
-
 			this.element = element;
+
+			this.id = this.element.id;
 		}
 
 		/**

@@ -29,13 +29,14 @@ use \Catalyst\Form\Field\EmailField;
 				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
 			}
 
-			this.id = element.id;
-
 			this.element = element;
+			
+			this.id = this.element.id;
+
 			this.label = document.querySelector("label[for="+this.id+"]");
 			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
 
-			this.required = element.getAttribute("required") === "required";
+			this.required = this.element.getAttribute("required") === "required";
 
 			// remove to prevent duplicates for BC instantiation methods
 			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");

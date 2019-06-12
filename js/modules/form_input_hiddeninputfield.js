@@ -29,11 +29,11 @@ use \Catalyst\Form\Field\HiddenInputField;
 				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
 			}
 
-			this.id = element.id;
-
 			this.element = element;
+			
+			this.id = this.element.id;
 
-			this.hiddenInputId = element.getAttribute("data-hidden-input-id");
+			this.hiddenInputId = this.element.getAttribute("data-hidden-input-id");
 			this.hiddenInput = document.getElementById(this.hiddenInputId);
 		}
 

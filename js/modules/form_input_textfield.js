@@ -29,17 +29,18 @@ use \Catalyst\Form\Field\TextField;
 				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
 			}
 
-			this.id = element.id;
-
 			this.element = element;
+
+			this.id = this.element.id;
+
 			this.label = document.querySelector("label[for="+this.id+"]");
 			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
 
-			this.required = element.getAttribute("required") === "required";
+			this.required = this.element.getAttribute("required") === "required";
 
-			this.pattern = element.getAttribute("pattern");
-			this.maxLength = element.getAttribute("maxlength");
-			this.disallowed = JSON.parse(element.getAttribute("data-disallowed"));
+			this.pattern = this.element.getAttribute("pattern");
+			this.maxLength = this.element.getAttribute("maxlength");
+			this.disallowed = JSON.parse(this.element.getAttribute("data-disallowed"));
 
 			// remove to prevent duplicates for BC instantiation methods
 			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");

@@ -29,15 +29,16 @@ use \Catalyst\Form\Field\SelectField;
 				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
 			}
 
-			this.id = element.id;
-
 			this.element = element;
-			this.wrapper = element.parentNode;
+
+			this.id = this.element.id;
+
+			this.wrapper = this.element.parentNode;
 			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
 
-			this.required = element.getAttribute("required") === "required";
+			this.required = this.element.getAttribute("required") === "required";
 
-			this.options = JSON.parse(element.getAttribute("data-option-keys"));
+			this.options = JSON.parse(this.element.getAttribute("data-option-keys"));
 
 			// remove to prevent duplicates for BC instantiation methods
 			window.log(this.id, "Adding this.verify as a listener for change events if it was not already");
@@ -86,17 +87,16 @@ use \Catalyst\Form\Field\SelectField;
 			let value = this.getValue();
 			window.log(this.id, "Verifying with value "+JSON.stringify(value));
 
-			if (this.required) {
-				if (!value.length) {
-					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING, passive);
-					return false;
-				}
-			}
 			if (value.length) {
 				if (!this.options.includes(value)) {
 					window.log(this.id, "Value is not within the list of possible options (how ???)", true);
 					this.markError(INVALID, passive);
+					return false;
+				}
+			} else {
+				if (this.required) {
+					window.log(this.id, "Required but empty value", true);
+					this.markError(MISSING, passive);
 					return false;
 				}
 			}
