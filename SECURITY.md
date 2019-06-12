@@ -6,4 +6,4 @@ The latest commit and the current commit being used in our production or develop
 
 ## Reporting a Vulnerability
 
-Please e-mail [bugs@catalystapp.co](bugs@catalystapp.co) or talk to Fauxil directly.  From there, we will determine the severity and appropriate response.
+Please e-mail [bugs@catalystapp.co](mailto:bugs@catalystapp.co) or talk to Fauxil directly.  From there, we will determine the severity and appropriate response.
