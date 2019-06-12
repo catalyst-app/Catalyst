@@ -92,9 +92,10 @@ class NumberField extends AbstractField {
 		$str .= '<div';
 		$str .= ' class="input-field col s12">';
 
-		$inputClasses = [];
+		$inputClasses = ["form-field"];
 		$str .= '<input';
 		$str .= ' type="number"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
 		$str .= ' step="'.(10**-$this->getPrecision()).'"';
 		$str .= ' inputmode="numeric"';
 		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
@@ -132,45 +133,12 @@ class NumberField extends AbstractField {
 	}
 
 	/**
-	 * Full JS validation code, including if statement and all
+	 * Full JS validation code
 	 * 
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val() < '.json_encode($this->getMin());
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is smaller than minumum (".$this->getMin().")").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val() > '.json_encode($this->getMax());
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is larger than maximum (".$this->getMax().")").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
-
-		return $str;
+		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
 	}
 
 	/**
@@ -180,7 +148,7 @@ class NumberField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', Math.round(parseFloat($('.json_encode("#".$this->getId()).').val()) * Math.pow(10, '.$this->getPrecision().')) / Math.pow(10, '.$this->getPrecision().'));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getValue()));';
 	}
 
 	/**
@@ -199,16 +167,14 @@ class NumberField extends AbstractField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
-		if ($this->isRequired()) {
-			if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
+		if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
+			if ($this->isRequired()) {
 				$this->throwMissingError();
-			}
-		} else {
-			if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
-				return; // not required and empty, don't do further checks
+			} else {
+				return;
 			}
 		}
-		if (!preg_match('/^[0-9]+(\.[0-9][0-9]?)?$/', $requestArr[$this->getDistinguisher()])) {
+		if (!preg_match('/^[0-9]+(\.[0-9]+)?$/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 		$requestArr[$this->getDistinguisher()] = round((float)$requestArr[$this->getDistinguisher()], $this->getPrecision());
