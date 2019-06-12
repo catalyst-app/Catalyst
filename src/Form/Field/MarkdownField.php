@@ -22,31 +22,20 @@ class MarkdownField extends AbstractField {
 		$str .= ' class="col s12 no-bottom-margin"';
 		$str .= '>';
 		$str .= 'Catalyst uses a modified version of Markdown in this field.  Please see ';
-		$str .= '<a';
-		$str .= ' href="'.ROOTDIR.'Markdown"';
-		$str .= ' tabindex="-1"';
-		$str .= ' target="_blank"';
-		$str .= '>';
-		$str .= 'this page';
-		$str .= '</a>';
+		$str .= '<a href="'.ROOTDIR.'Markdown" tabindex="-1" target="_blank">this page</a>';
 		$str .= ' for help.';
 		$str .= '</p>';
 
-		$str .= '<div';
-		$str .= ' class="col s12"';
-		$str .= '>';
+		$str .= '<div class="col s12">';
 
-		$str .= '<div';
-		$str .= ' class="row"';
-		$str .= '>';
+		$str .= '<div class="row">';
 
-		$str .= '<div';
-		$str .= ' class="input-field col s12 m6"';
-		$str .= '>';
+		$str .= '<div class="input-field col s12 m6">';
 
 		$str .= '<textarea';
 		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' class="materialize-textarea markdown-field"';
+		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
+		$str .= ' class="materialize-textarea markdown-field form-field"';
 
 		if ($this->isRequired()) {
 			$str .= ' required="required"';
@@ -130,8 +119,8 @@ class MarkdownField extends AbstractField {
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
 			$this->throwMissingError();
 		}
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
 				$this->throwMissingError();
 			}
 		}
