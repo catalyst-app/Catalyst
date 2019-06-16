@@ -48,8 +48,7 @@ foreach ($resources as $resource) {
 		throw new LogicException($withoutFolder." failed with exit code ".$returnCode);
 	}
 
-	// we add the closure to better separate scopes
-	$output = '(function(){'.implode("\n", $output).'})();';
+	$output = implode("\n", $output).";";
 
 	$totalUnminified += strlen($output);
 
