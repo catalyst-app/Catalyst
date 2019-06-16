@@ -1,0 +1,34 @@
+--- node_modules/nativejsx/source/walkers.js	Sun Mar  4 17:40:53 2018
++++ node_modules/nativejsx/source/walkers.js	Fri Jun 14 20:43:48 2019
+@@ -163,7 +163,9 @@
+ 
+   for (let child of node.children) {
+     switch (child.type) {
++      case 'JSXText':
+       case 'Literal':
++        child.type = 'Literal'
+         const value = child.value.replace('\n', '').trim()
+ 
+         if (value.length) {
+--- node_modules/nativejsx/source/compositions.js	Sun Mar  4 17:40:53 2018
++++ node_modules/nativejsx/source/compositions.js	Fri Jun 14 23:03:04 2019
+@@ -6,7 +6,18 @@
+  */
+ 
+ const attributes = { 'className': 'class' }
+-const properties = ['required', 'disabled']
++const properties = [
++  'autofocus',
++  'disabled',
++  'form',
++  'id',
++  'name',
++  'readonly',
++  'required',
++  'tabindex',
++  'type',
++  'value'
++]
+
+ compositions.createElement = (variable, tag) => {
+   return generators.variableDeclaration(

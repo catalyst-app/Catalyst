@@ -59,3 +59,40 @@ if (!String.prototype.startsWith) {
 		}
 	});
 }
+
+// Adapted from https://github.com/treycordova/nativejsx
+// used for nativejsx-generated code
+if (typeof HTMLElement.prototype.appendChildren !== 'function') {
+  HTMLElement.prototype.appendChildren = function (children) {
+    children = Array.isArray(children) ? children : [children];
+    children.forEach(function (child) {
+      if (child instanceof HTMLElement) {
+        this.appendChild(child);
+      } else if (child || typeof child === 'string') {
+        this.appendChild(document.createTextNode(child.toString()));
+      }
+    }.bind(this));
+  };
+}
+if (typeof HTMLElement.prototype.setAttributes !== 'function') {
+  HTMLElement.prototype.setAttributes = function (attributes) {
+    var isPlainObject = Object.prototype.toString.call(attributes) === '[object Object]' &&
+      typeof attributes.constructor === 'function' &&
+      Object.prototype.toString.call(attributes.constructor.prototype) === '[object Object]' &&
+      attributes.constructor.prototype.hasOwnProperty('isPrototypeOf');
+
+    if (isPlainObject) {
+      for (var key in attributes) {
+        this.setAttribute(key, attributes[key]);
+      }
+    } else {
+      throw new DOMException('Failed to execute \'setAttributes\' on \'Element\': ' + Object.prototype.toString.call(attributes) + ' is not a plain object.');
+    }
+  };
+}
+if (typeof HTMLElement.prototype.setStyles !== 'function') {
+  HTMLElement.prototype.setStyles = function (styles) {
+    for (var style in styles) this.style[style] = styles[style];
+  };
+}
+
