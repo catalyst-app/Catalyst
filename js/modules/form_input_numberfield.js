@@ -43,9 +43,8 @@ use \Catalyst\Form\Field\NumberField;
 			this.precision = parseFloat(this.element.getAttribute("step"));
 
 			// remove to prevent duplicates for BC instantiation methods
-			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");
-			this.element.removeEventListener("input", this.verify.bind(this, true));
-			this.element.addEventListener("input", this.verify.bind(this, true));
+			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");this.verify.bind(this, true), 
+			this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
 		}
 
 		/**
