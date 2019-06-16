@@ -80,6 +80,23 @@ class TextField extends AbstractField {
 	}
 
 	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"pattern" => $this->getPattern(),
+			"disallowed" => $this->getDisallowed(),
+			"maxlength" => $this->getMaxLength(),
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
