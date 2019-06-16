@@ -93,4 +93,16 @@ trait LabelTrait {
 
 		return $str;
 	}
+
+	/**
+	 * @return array Properties to use for the WebComponent
+	 */
+	protected function getLabelProperties() : array {
+		return [
+			"label" => $this->getLabel(),
+			"invalidError" => $this->getErrorMessage($this->getInvalidErrorCode()),
+			"missingError" => $this->getErrorMessage($this->getMissingErrorCode()),
+			"helperText" => $this->getHelperText(),
+		];
+	}
 }
