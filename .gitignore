@@ -47,3 +47,6 @@ scripts/tmp
 js/dist
 css/overall.min.css
 .DS_Store
+
+scripts/form-field-dom-from-jsx/node_modules
+scripts/form-field-dom-from-jsx/out
