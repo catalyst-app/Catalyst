@@ -109,7 +109,7 @@ class PasswordField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', encryptString(btoa($('.json_encode("#".$this->getId()).').val())));'; // yes, this is half-assing it.  it works, and is better than 99% of sites
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
 	}
 
 	/**

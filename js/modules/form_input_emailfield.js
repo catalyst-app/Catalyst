@@ -77,6 +77,13 @@ use \Catalyst\Form\Field\EmailField;
 		}
 
 		/**
+		 * @return string
+		 */
+		getAggregationValue() {
+			return this.getValue();
+		}
+
+		/**
 		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
 		 *     false if verify is being called from input
 		 * @return bool
