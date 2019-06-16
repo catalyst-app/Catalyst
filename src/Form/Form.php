@@ -128,6 +128,7 @@ class Form {
 		$this->setButtonText($buttonText);
 		$this->setFields($fields);
 		$this->setPrimary($primary);
+		$this->setResetOnSuccess($resetOnSuccess);
 	}
 
 	/**
