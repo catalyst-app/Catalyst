@@ -60,17 +60,15 @@ trait LabelTrait {
 	 * 
 	 * @return string
 	 */
-	protected function getLabelHtml(bool $escapeLabelText=true) : string {
+	protected function getLabelHtml() : string {
 		$str = '';
 		
 		$str .= '<label';
 		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
 		$str .= '>';
-		if ($escapeLabelText) {
-			$str .= htmlspecialchars($this->getLabel());
-		} else {
-			$str .= $this->getLabel();
-		}
+	
+		$str .= htmlspecialchars($this->getLabel());
+	
 		if ($this->isRequired()) {
 			$str .= '<span class="red-text">';
 			$str .= '&nbsp;*';
