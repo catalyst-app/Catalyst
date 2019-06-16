@@ -20,5 +20,6 @@ parameters:
 		- '/Variable \$_SESSION in isset\(\) always exists and is not nullable\./'
 		- '/Parameter #1 \(array\) of echo cannot be converted to string\./'
 		- '/Offset string does not exist on array.+/'
+		- '/.+unsafe to use, rely on Symfony.+/'
 includes:
 	- vendor/slam/phpstan-extensions/conf/slam-rules.neon
