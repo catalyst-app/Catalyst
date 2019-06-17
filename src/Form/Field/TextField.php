@@ -29,6 +29,13 @@ class TextField extends AbstractField {
 	protected $disallowed = [];
 
 	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "text-field";
+	}
+
+	/**
 	 * Get the current regex to match
 	 * 
 	 * @return string Current pattern
@@ -80,50 +87,35 @@ class TextField extends AbstractField {
 	}
 
 	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"pattern" => $this->getPattern(),
+			"disallowed" => $this->getDisallowed(),
+			"maxlength" => $this->getMaxLength(),
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		$str .= '<div';
-		$str .= ' class="input-field col s12">';
+		$str  = '';
 
-		$inputClasses = ["form-field"];
-		$str .= '<input';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' type="text"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-		$str .= ' data-disallowed="'.htmlspecialchars(json_encode($this->getDisallowed())).'"';
-		if ($this->getMaxLength()) {
-			$str .= ' maxlength="'.$this->getMaxLength().'"';
-		}
+		$str .= '<'.self::getWebComponentName();
+		$str .= ' data-properties="'.htmlspecialchars(json_encode($this->getProperties())).'">';
 
-		if ($this->isFieldPrefilled()) {
-			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue()) || ($this->getMaxLength() && strlen($this->getPrefilledValue()) > $this->getMaxLength())) {
-				$this->throwInvalidPrefilledValueError();
-			}
-			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
-			$inputClasses[] = "active";
-		}
+		$str .= '</'.self::getWebComponentName().'>';
 
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		if ($this->isPrimary()) {
-			$str .= ' autofocus="autofocus"';
-			$inputClasses[] = "active";
-		}
-
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
-		$str .= '>';
-		
-		$str .= $this->getLabelHtml();
-
-		$str .= '</div>';
 		return $str;
 	}
 
@@ -133,7 +125,7 @@ class TextField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
@@ -143,7 +135,7 @@ class TextField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
