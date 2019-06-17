@@ -75,7 +75,7 @@ Follow us!  I ask for help often in the Discord and Telegram!
 # Basic Feature List
 # Additional Features
 
-See our [Trello](https://trello.com/b/X37KEv4A/catalyst)!
+See our [Trello](https://trello.com/b/X37KEv4A/catalyst) for a general idea!  However, we now use [Conveyor](https://conveyor.com) for real management so the Trello may be inconsistent, inaccurate, or otherwise outdated.
 
 # Developer Notes
 
