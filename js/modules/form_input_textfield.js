@@ -5,10 +5,6 @@ if (!window.hasOwnProperty("formInputHandlers")) {
 	window.formInputHandlers = {};
 }
 
-let VALID = 0;
-let INVALID = 1;
-let MISSING = 2;
-
 class TextField extends HTMLElement {
 	constructor(properties) {
 		super();
@@ -18,8 +14,10 @@ class TextField extends HTMLElement {
 		// decide if the HTML was created beforehand (e.g. from server) or without attributed (e.g. document.createElement)
 		if (properties != undefined) {
 			this.properties = properties;
-		} else {
+		} else if (this.getAttribute("data-properties") != null) {
 			this.properties = JSON.parse(this.getAttribute("data-properties"));
+		} else {
+			throw new Error("Element created without properties.");
 		}
 
 		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
@@ -56,8 +54,8 @@ class TextField extends HTMLElement {
 				var $$d = new FormLabelHelperSpan(this.properties).children[0];
 				$$a.appendChild(this.helperText = $$d);
 				return $$a;
-			}).call(this);
-		}).call(this));
+			})();
+		})());
 
 		this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
 	}
@@ -136,4 +134,3 @@ class TextField extends HTMLElement {
 window.formInputHandlers[className] = TextField;
 
 window.customElements.define("text-field", TextField);
-

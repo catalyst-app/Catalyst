@@ -5,8 +5,10 @@ class FormLabelHelperSpan extends HTMLElement {
 		// decide if the HTML was created beforehand (e.g. from server) or without attributed (e.g. document.createElement)
 		if (properties != undefined) {
 			this.properties = properties;
-		} else {
+		} else if (this.getAttribute("data-properties") != null) {
 			this.properties = JSON.parse(this.getAttribute("data-properties"));
+		} else {
+			throw new Error("Element created without properties.");
 		}
 
 		window.log(this.constructor.name, "Constructing a label helper span object to represent "+this.properties.distinguisher);
@@ -17,11 +19,11 @@ class FormLabelHelperSpan extends HTMLElement {
 			$$a.setAttribute('class', 'helper-text');
 			$$a.appendChildren(this.properties.helperText);
 			return $$a;
-		}).call(this));
+		})());
 	}
 
 	connectedCallback() {
-		throw "FormLabel should NEVER be added to the DOM.  It is for templating only.  If you wish to use it, create an instance and add .children[0] (the standard label element itself) to your DOM.";
+		throw new Error("FormLabel should NEVER be added to the DOM.  It is for templating only.  If you wish to use it, create an instance and add .children[0] (the standard label element itself) to your DOM.");
 	}
 }
 
