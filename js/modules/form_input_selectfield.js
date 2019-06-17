@@ -76,12 +76,7 @@ use \Catalyst\Form\Field\SelectField;
 			return this.element.value;
 		}
 
-		/**
-		 * @return string
-		 */
-		getAggregationValue() {
-			return this.getValue();
-		}
+		getAggregationValue = this.getValue;
 
 		/**
 		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
