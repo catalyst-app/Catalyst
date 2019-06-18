@@ -9,8 +9,6 @@ class TextField extends HTMLElement {
 	constructor(properties) {
 		super();
 
-		this.test = "TEST";
-
 		// decide if the HTML was created beforehand (e.g. from server) or without attributed (e.g. document.createElement)
 		if (properties != undefined) {
 			this.properties = properties;
