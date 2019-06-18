@@ -13,9 +13,6 @@ class TextField extends HTMLElement {
 
 		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
 
-		// BC
-		this.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
-
 		// var host = this.attachShadow({ mode: "open" });
 		this.appendChild((() => {
 			let optionalAttributes = {};

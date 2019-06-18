@@ -13,9 +13,6 @@ class SelectField extends HTMLElement {
 
 		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
 
-		// BC
-		this.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
-
 		this.appendChild((() => {
 			var $$a = this.wrapper = document.createElement('div');
 			$$a.setAttribute('class', 'input-field col s12');
