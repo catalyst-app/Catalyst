@@ -27,15 +27,15 @@ class SelectField extends HTMLElement {
 			$$c.value = '';
 			$$c.selected = this.properties.value == null || this.properties.value == '';
 			$$b.appendChild($$c);
-	        var $$d = document.createTextNode('Choose an option');
-	        $$c.appendChild($$d);
+			var $$d = document.createTextNode('Choose an option');
+			$$c.appendChild($$d);
 			$$b.appendChildren(Object.keys(this.properties.options).map(key => (function () {
-		        var $$f = document.createElement('option');
-		        $$f.value = key;
-		        $$f.selected = this.properties.options[key] == key;
-		        $$f.appendChildren(this.properties.options[key]);
-		        return $$f;
-		    }).call(this)));
+				var $$f = document.createElement('option');
+				$$f.value = key;
+				$$f.selected = this.properties.options[key] == key;
+				$$f.appendChildren(this.properties.options[key]);
+				return $$f;
+			}).call(this)));
 			var $$h = this.label = new FormLabel(this.properties).children[0];
 			$$a.appendChild($$h);
 			var $$i = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
