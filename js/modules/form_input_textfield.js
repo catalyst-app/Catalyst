@@ -1,10 +1,3 @@
-let className = "Catalyst\\Form\\Field\\TextField";
-window.log("Form input handlers", "Registering "+className);
-
-if (!window.hasOwnProperty("formInputHandlers")) {
-	window.formInputHandlers = {};
-}
-
 class TextField extends HTMLElement {
 	constructor(properties) {
 		super();
@@ -47,10 +40,10 @@ class TextField extends HTMLElement {
 				$$b.setAttribute('class', className);
 				$$b.setAttributes(optionalAttributes);
 				$$a.appendChild($$b);
-				var $$c = new FormLabel(this.properties).children[0];
-				$$a.appendChild(this.label = $$c);
-				var $$d = new FormLabelHelperSpan(this.properties).children[0];
-				$$a.appendChild(this.helperText = $$d);
+				var $$c = this.label = new FormLabel(this.properties).children[0];
+				$$a.appendChild($$c);
+				var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+				$$a.appendChild($$d);
 				return $$a;
 			})();
 		})());
@@ -124,6 +117,14 @@ class TextField extends HTMLElement {
 	}
 }
 
-window.formInputHandlers[className] = TextField;
+// BC
+{
+	window.log("Form input handlers", "Registering TextField");
+
+	if (!window.hasOwnProperty("formInputHandlers")) {
+		window.formInputHandlers = {};
+	}
+	window.formInputHandlers["Catalyst\\Form\\Field\\TextField"] = TextField;
+}
 
 window.customElements.define("text-field", TextField);
