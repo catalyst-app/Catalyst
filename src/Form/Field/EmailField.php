@@ -19,49 +19,35 @@ class EmailField extends AbstractField {
 	const MAX_LENGTH = 254;
 
 	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "email-field";
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"pattern" => self::PATTERN,
+			"maxlength" => self::MAX_LENGTH,
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		$str .= '<div class="input-field col s12">';
-
-		$inputClasses = ["form-field"];
-		$str .= '<input';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' type="email"';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-
-		// these attributes aren't actually interpreted, they only exist to help client software/browsers understand limitations
-		$str .= ' pattern="'.htmlspecialchars(self::PATTERN).'"';
-		$str .= ' maxlength="'.htmlspecialchars(self::MAX_LENGTH).'"';
-
-		if ($this->isFieldPrefilled()) {
-			if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $this->getPrefilledValue()) || (strlen($this->getPrefilledValue()) > self::MAX_LENGTH)) {
-				$this->throwInvalidPrefilledValueError();
-			}
-			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
-			$inputClasses[] = "active";
-		}
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		if ($this->isPrimary()) {
-			$str .= ' autofocus="autofocus"';
-			$inputClasses[] = "active";
-		}
-		
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
-		$str .= '>';
-		
-		$str .= $this->getLabelHtml();
-		
-		$str .= '</div>';
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -70,7 +56,7 @@ class EmailField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
@@ -80,7 +66,7 @@ class EmailField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
