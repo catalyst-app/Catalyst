@@ -14,7 +14,7 @@ class SelectField extends HTMLElement {
 		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
 
 		this.appendChild((() => {
-			var $$a = this.wrapper = document.createElement('div');
+			var $$a = document.createElement('div');
 			$$a.setAttribute('class', 'input-field col s12');
 			var $$b = this.element = document.createElement('select');
 			$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
@@ -27,19 +27,19 @@ class SelectField extends HTMLElement {
 			$$c.value = '';
 			$$c.selected = this.properties.value == null || this.properties.value == '';
 			$$b.appendChild($$c);
-			$$b.appendChildren(Object.keys(this.properties).forEach(function (key) {
-			    return function () {
-			        var $$e = document.createElement('option');
-			        $$e.value = key;
-			        $$e.selected = this.properties.value == key;
-			        $$e.appendChildren(this.properties.options[key]);
-			        return $$e;
-			    }.call(this);
-			}));
-			var $$g = this.label = new FormLabel(this.properties).children[0];
-			$$a.appendChild($$g);
-			var $$h = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+	        var $$d = document.createTextNode('Choose an option');
+	        $$c.appendChild($$d);
+			$$b.appendChildren(Object.keys(this.properties.options).map(key => (function () {
+		        var $$f = document.createElement('option');
+		        $$f.value = key;
+		        $$f.selected = this.properties.options[key] == key;
+		        $$f.appendChildren(this.properties.options[key]);
+		        return $$f;
+		    }).call(this)));
+			var $$h = this.label = new FormLabel(this.properties).children[0];
 			$$a.appendChild($$h);
+			var $$i = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+			$$a.appendChild($$i);
 			return $$a;
 		})());
 
@@ -53,7 +53,7 @@ class SelectField extends HTMLElement {
 	markError(errorMessage, passive) {
 		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
 
-		this.wrapper.classList.add("invalid", "marked-invalid");
+		this.element.parentNode.classList.add("invalid", "marked-invalid");
 		this.helperText.setAttribute("data-error", errorMessage);
 
 		if (!passive) {
@@ -95,7 +95,7 @@ class SelectField extends HTMLElement {
 		}
 		window.log(this.properties.distinguisher, "Verification successful");
 
-		this.wrapper.classList.remove("invalid", "marked-invalid");
+		this.element.parentNode.classList.remove("invalid", "marked-invalid");
 
 		return true;
 	}
