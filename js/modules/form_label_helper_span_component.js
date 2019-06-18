@@ -15,7 +15,7 @@ class FormLabelHelperSpan extends HTMLElement {
 
 		this.appendChild((() => {
 			var $$a = document.createElement('span');
-			$$a.setAttribute('for', this.properties.formDistinguisher + '-input-' + this.properties.distinguisher + '-element');
+			$$a.setAttribute('for', this.properties.formDistinguisher + '-input-' + this.properties.distinguisher);
 			$$a.setAttribute('class', 'helper-text');
 			$$a.appendChildren(this.properties.helperText);
 			return $$a;

@@ -27,7 +27,7 @@ class TextField extends HTMLElement {
 				var $$a = document.createElement('div');
 				$$a.setAttribute('class', 'input-field col s12');
 				var $$b = this.element = document.createElement('input');
-				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher + '-element';
+				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
 				$$b.type = 'text';
 				$$b.setAttribute('autocomplete', this.properties.autocomplete);
 				$$b.setAttribute('pattern', this.properties.pattern);
