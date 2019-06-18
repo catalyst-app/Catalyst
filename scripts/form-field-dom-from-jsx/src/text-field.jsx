@@ -6,7 +6,7 @@
   }
 
   let className = "form-field";
-  if (this.properties.required || this.properties.primary) {
+  if (this.properties.value != null || this.properties.primary) {
     className += " active";
   }
 
@@ -18,7 +18,7 @@
        form={ this.properties.formDistinguisher+"-form-element" }
        autocomplete={ this.properties.autocomplete }
        pattern={ this.properties.pattern }
-       value={ this.properties.value }
+       value={ this.properties.value == null ? "" : this.properties.value }
        required={ this.properties.required }
        autofocus={ this.properties.primary }
        className={ className }

@@ -32,7 +32,7 @@ class TextField extends HTMLElement {
 				optionalAttributes['maxlength'] = this.properties.maxlength;
 			}
 			let className = 'form-field';
-			if (this.properties.required || this.properties.primary) {
+			if (this.properties.value != null || this.properties.primary) {
 				className += ' active';
 			}
 			return (() => {
@@ -43,7 +43,7 @@ class TextField extends HTMLElement {
 				$$b.type = 'text';
 				$$b.setAttribute('autocomplete', this.properties.autocomplete);
 				$$b.setAttribute('pattern', this.properties.pattern);
-				$$b.value = this.properties.value;
+				$$b.value = this.properties.value == null ? '' : this.properties.value;
 				$$b.required = this.properties.required;
 				$$b.autofocus = this.properties.primary;
 				$$b.setAttribute('class', className);
