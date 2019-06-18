@@ -35,38 +35,33 @@ class PasswordField extends AbstractField {
 	}
 
 	/**
+	 * @return the name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "password-field";
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"minlength" => $this->getMinLength(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		$str .= '<div class="input-field col s12">';
-
-		$inputClasses = ["form-field"];
-		$str .= '<input';
-		$str .= ' type="password"';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' minlength="'.$this->getMinLength().'"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		if ($this->isPrimary()) {
-			$str .= ' autofocus="autofocus"';
-			$inputClasses[] = "active";
-		}
-		
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
-		$str .= '>';
-		
-		$str .= $this->getLabelHtml();
-
-		$str .= '</div>';
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -75,31 +70,7 @@ class PasswordField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length < '.json_encode($this->getMinLength());
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field's length is below minimum (".$this->getMinLength().")").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-		
-		$str .= '}';
-
-		return $str;
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -109,7 +80,7 @@ class PasswordField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', encryptString(btoa($('.json_encode("#".$this->getId()).').val())));'; // yes, this is half-assing it.  it works, and is better than 99% of sites
+  		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
