@@ -1,110 +1,117 @@
-<?php
-header("Content-Type: application/javascript; charset=UTF-8", true);
+class SelectField extends HTMLElement {
+	constructor(properties) {
+		super();
 
-define("ROOTDIR", "../../");
-define("REAL_ROOTDIR", "../../");
-
-define("NO_SESSION", true);
-
-require_once REAL_ROOTDIR."src/initializer.php";
-use \Catalyst\Form\Field\SelectField;
-?>
-{
-	<?php require_once REAL_ROOTDIR."js/modules/form_input_header.js"; ?>
-	
-	const className = <?= json_encode(SelectField::class) ?>;
-
-	window.log("Form input handlers", "Registering "+className);
-
-	window.formInputHandlers[className] = class {
-		constructor(element) {
-			this.fieldType = className;
-
-			window.log(className, "Constructing an object to represent #"+element.id);
-
-			if (!(element instanceof HTMLElement)) {
-				throw "Provided element to "+className+" constructor is not a HTMLElement";
-			}
-			if (element.getAttribute("data-field-type") !== className) {
-				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
-			}
-
-			this.element = element;
-
-			this.id = this.element.id;
-
-			this.wrapper = this.element.parentNode;
-			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
-
-			this.required = this.element.getAttribute("required") === "required";
-
-			this.options = JSON.parse(this.element.getAttribute("data-option-keys"));
-
-			// remove to prevent duplicates for BC instantiation methods
-			window.log(this.id, "Adding this.verify as a listener for change events if it was not already");this.verify.bind(this, true), 
-			this.element.addEventListener("change", this.verify.bind(this, true), {passive: true});
+		// decide if the HTML was created beforehand (e.g. from server) or without attributed (e.g. document.createElement)
+		if (properties != undefined) {
+			this.properties = properties;
+		} else if (this.getAttribute("data-properties") != null) {
+			this.properties = JSON.parse(this.getAttribute("data-properties"));
+		} else {
+			throw new Error("Element created without properties.");
 		}
 
-		/**
-		 * @param errorType one of MISSING or INVALID
-		 * @param bool passive
-		 */
-		markError(errorType, passive) {
-			if (errorType == MISSING) {
-				var errorMessage = this.helperText.getAttribute("data-missing-error");
-				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
-			} else if (errorType == INVALID) {
-				var errorMessage = this.helperText.getAttribute("data-invalid-error");
-				window.log(this.id, "Marking with error type INVALID, error message "+errorMessage, true);
-			} else {
-				throw "Invalid error type passed to "+className+".markError ("+errorType+")";
-			}
+		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
 
-			this.wrapper.classList.add("invalid", "marked-invalid");
-			this.helperText.setAttribute("data-error", errorMessage);
+		// BC
+		this.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
 
-			if (!passive) {
-				M.escapeToast(errorMessage);
-				this.element.focus();
-			}
-		}
+		this.appendChild((() => {
+			var $$a = this.wrapper = document.createElement('div');
+			$$a.setAttribute('class', 'input-field col s12');
+			var $$b = this.element = document.createElement('select');
+			$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
+			$$b.name = this.properties.distinguisher;
+			$$b.setAttribute('autocomplete', this.properties.autocomplete);
+			$$b.required = this.properties.required;
+			$$b.setAttribute('class', 'form-field');
+			$$a.appendChild($$b);
+			var $$c = document.createElement('option');
+			$$c.value = '';
+			$$c.selected = this.properties.value == null || this.properties.value == '';
+			$$b.appendChild($$c);
+			$$b.appendChildren(Object.keys(this.properties).forEach(function (key) {
+			    return function () {
+			        var $$e = document.createElement('option');
+			        $$e.value = key;
+			        $$e.selected = this.properties.value == key;
+			        $$e.appendChildren(this.properties.options[key]);
+			        return $$e;
+			    }.call(this);
+			}));
+			var $$g = this.label = new FormLabel(this.properties).children[0];
+			$$a.appendChild($$g);
+			var $$h = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+			$$a.appendChild($$h);
+			return $$a;
+		})());
 
-		/**
-		 * @return string
-		 */
-		getValue() {
-			return this.element.value;
-		}
+		this.element.addEventListener("change", this.verify.bind(this, true), {passive: true});
+	}
 
-		getAggregationValue = this.getValue;
+	/**
+	 * @param string errorMessage
+	 * @param bool passive
+	 */
+	markError(errorMessage, passive) {
+		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
 
-		/**
-		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
-		 *     false if verify is being called from input
-		 * @return bool
-		 */
-		verify(passive=false) {
-			let value = this.getValue();
-			window.log(this.id, "Verifying with value "+JSON.stringify(value));
+		this.wrapper.classList.add("invalid", "marked-invalid");
+		this.helperText.setAttribute("data-error", errorMessage);
 
-			if (value.length) {
-				if (!this.options.includes(value)) {
-					window.log(this.id, "Value is not within the list of possible options (how ???)", true);
-					this.markError(INVALID, passive);
-					return false;
-				}
-			} else {
-				if (this.required) {
-					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING, passive);
-					return false;
-				}
-			}
-			window.log(this.id, "Verification successful");
-
-			this.wrapper.classList.remove("invalid", "marked-invalid");
-
-			return true;
+		if (!passive) {
+			M.escapeToast(errorMessage);
+			this.element.focus();
 		}
 	}
-};
+
+	/**
+	 * @return string
+	 */
+	getValue() {
+		return this.element.value;
+	}
+
+	getAggregationValue = this.getValue;
+
+	/**
+	 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+	 *     false if verify is being called from input
+	 * @return bool
+	 */
+	verify(passive=false) {
+		let value = this.getValue();
+		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify(value));
+
+		if (value.length) {
+			if (!this.properties.options.hasOwnProperty(value)) {
+				window.log(this.properties.distinguisher, "Value is not within the list of possible options (how ???)", true);
+				this.markError(this.properties.invalidError, passive);
+				return false;
+			}
+		} else {
+			if (this.properties.required) {
+				window.log(this.properties.distinguisher, "Required but empty value", true);
+				this.markError(this.properties.missingError, passive);
+				return false;
+			}
+		}
+		window.log(this.properties.distinguisher, "Verification successful");
+
+		this.wrapper.classList.remove("invalid", "marked-invalid");
+
+		return true;
+	}
+}
+
+// BC
+{
+	window.log("Form input handlers", "Registering SelectField");
+
+	if (!window.hasOwnProperty("formInputHandlers")) {
+		window.formInputHandlers = {};
+	}
+	window.formInputHandlers["Catalyst\\Form\\Field\\SelectField"] = SelectField;
+}
+
+window.customElements.define("select-field", SelectField);

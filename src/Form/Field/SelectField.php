@@ -35,58 +35,33 @@ class SelectField extends AbstractField {
 	}
 
 	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "select-field";
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"options" => $this->getOptions(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		
-		$str .= '<div';
-		$str .= ' class="input-field col s12">';
-
-		$str .= '<select';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' data-option-keys="'.htmlspecialchars(json_encode(array_keys($this->getOptions()))).'"';
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-		
-		$str .= ' class="form-field"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= '>';
-
-		$str .= '<option';
-		$str .= ' value=""';
-		if (!$this->isFieldPrefilled()) {
-			$str .= ' selected="selected"';
-		}
-		$str .= '>';
-		$str .= "Choose an option";
-		$str .= '</option>';
-
-		foreach ($this->getOptions() as $val => $text) {
-			$str .= '<option';
-			if ($this->isFieldPrefilled()) {
-				if ($this->getPrefilledValue() == $val) {
-					$str .= ' selected="selected"';
-				}
-			}
-			$str .= ' value="'.htmlspecialchars($val).'"';
-			$str .= '>';
-			$str .= htmlspecialchars($text);
-			$str .= '</option>';
-		}
-
-		$str .= '</select>';
-
-		$str .= $this->getLabelHtml();
-
-		$str .= '</div>';
-		
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -95,7 +70,7 @@ class SelectField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
@@ -105,7 +80,7 @@ class SelectField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
