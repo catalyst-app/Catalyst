@@ -272,6 +272,28 @@ abstract class AbstractField {
 	}
 
 	/**
+	 * Temporary to ensure getWebComponentHtml works typewise
+	 */
+	public static function getWebComponentName() : string { throw new LogicException("Getting webcomponent name of abstract field"); }
+	public function getProperties() : array { throw new LogicException("Getting properties of abstract field"); }
+
+	/**
+	 * Temporary measure to provide a standard interface by which to generate webcomponent HTML
+	 * 
+	 * @return string The HTML
+	 */
+	public function getWebComponentHtml() : string {
+		$str  = '';
+
+		$str .= '<'.static::getWebComponentName();
+		$str .= ' data-properties="'.htmlspecialchars(json_encode($this->getProperties())).'">';
+
+		$str .= '</'.static::getWebComponentName().'>';
+
+		return $str;
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display

@@ -109,14 +109,7 @@ class TextField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str  = '';
-
-		$str .= '<'.self::getWebComponentName();
-		$str .= ' data-properties="'.htmlspecialchars(json_encode($this->getProperties())).'">';
-
-		$str .= '</'.self::getWebComponentName().'>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
