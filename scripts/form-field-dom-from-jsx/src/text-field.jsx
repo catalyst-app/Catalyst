@@ -15,7 +15,6 @@
       <input id={ this.properties.formDistinguisher+"-input-"+this.properties.distinguisher }
        name={ this.properties.distinguisher }
        type="text"
-       form={ this.properties.formDistinguisher+"-form-element" }
        autocomplete={ this.properties.autocomplete }
        pattern={ this.properties.pattern }
        value={ this.properties.value == null ? "" : this.properties.value }
