@@ -35,7 +35,7 @@ class PasswordField extends AbstractField {
 	}
 
 	/**
-	 * @return the name of the web component tag
+	 * @return string the name of the web component tag
 	 */
 	public static function getWebComponentName() : string {
 		return "password-field";
