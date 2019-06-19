@@ -39,11 +39,7 @@ trait RegisterFormTrait {
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$usernameField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
 		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
-		$usernameField->addError(90301, ErrorCodes::ERR_90301);
-		$usernameField->setMissingErrorCode(90301);
-		$usernameField->addError(90302, ErrorCodes::ERR_90302);
-		$usernameField->setInvalidErrorCode(90302);
-		$usernameField->addError(90303, ErrorCodes::ERR_90303);
+		$usernameField->setCustomErrorMessage("alreadyInUse", "This username has already been taken, please try something else");
 		$form->addField($usernameField);
 
 		$nicknameField = new TextField();
@@ -53,10 +49,7 @@ trait RegisterFormTrait {
 		$nicknameField->setMaxLength(100);
 		$nicknameField->setPattern('^.{2,100}$');
 		$nicknameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nicknameField->addError(90304, ErrorCodes::ERR_90304);
-		$nicknameField->setMissingErrorCode(90304);
-		$nicknameField->addError(90305, ErrorCodes::ERR_90305);
-		$nicknameField->setInvalidErrorCode(90305);
+		$nicknameField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		$form->addField($nicknameField);
 
 		$emailField = new EmailField();
@@ -178,9 +171,8 @@ trait RegisterFormTrait {
 		$referrerField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$referrerField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
 		$referrerField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$referrerField->addError(90325, ErrorCodes::ERR_90325);
-		$referrerField->setInvalidErrorCode(90325);
-		$referrerField->addError(90326, ErrorCodes::ERR_90326);
+		$referrerField->setCustomErrorMessage("patternMismatch", "Please make sure you use your referrer's username");
+		$referrerField->setCustomErrorMessage("usernameDoesNotExist", "This username does not exist");
 		$form->addField($referrerField);
 
 		$captchaField = new CaptchaField();

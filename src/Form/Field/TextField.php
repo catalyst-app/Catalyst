@@ -36,6 +36,18 @@ class TextField extends AbstractField {
 	}
 
 	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return parent::getDefaultErrorMessages() + [
+			"patternMismatch" => "Please follow the requiried format",
+			"exceedsMaxLength" => "This value is longer than the permitted ".$this->getMaxLength()." character".($this->getMaxLength() != 1 ? "s" : ""),
+			"disallowedValue" => "This value can not be used, please try something else",
+		];
+	}
+
+	/**
 	 * Get the current regex to match
 	 * 
 	 * @return string Current pattern
@@ -100,6 +112,7 @@ class TextField extends AbstractField {
 			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
 		] + $this->getLabelProperties();
 	}
 
@@ -145,25 +158,25 @@ class TextField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if (empty($requestArr[$this->getDistinguisher()])) {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			} else {
 				return;
 			}
 		}
 		if ($this->getMaxLength() > 0) {
 			if (strlen($requestArr[$this->getDistinguisher()]) > $this->getMaxLength()) {
-				$this->throwInvalidError();
+				$this->throwError("exceedsMaxLength");
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
-			$this->throwInvalidError();
+			$this->throwError("patternMismatch");
 		}
 		if (in_array($requestArr[$this->getDistinguisher()], $this->getDisallowed())) {
-			$this->throwInvalidError();
+			$this->throwError("disallowedValue");
 		}
 	}
 

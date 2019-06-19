@@ -42,26 +42,11 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<ul class="browser-default">
 					<li class="flow-text"><span class="code">error</span>: a boolean which states whether or not the request succeeded.</li>
 					<li class="flow-text"><span class="code">http_code</span>: the HTTP code returned (see <a href="#response-codes">Response Codes</a>)</li>
-					<li class="flow-text"><span class="code">error_code</span>: an error code specific to the endpoint.  Zero on success.</li>
+					<li class="flow-text"><span class="code">error_location</span>: the component of the request where the issue occured, <span class="code">_global</span> if the issue applies to the request as a whole, or <span class="code">_server</span> if there was a server error.</li>
+					<li class="flow-text"><span class="code">error_type</span>: the type of error, generally specific to the datatype and context.  Common examples include <span class="code">requiredButMissing</span> and <span class="code">doesNotExist</span></li>
 					<li class="flow-text"><span class="code">message</span>: a message containing more information ("Success", "Invalid Password")</li>
 					<li class="flow-text"><span class="code">data</span>: an object which contains any applicable return data</li>
 					<li class="flow-text"><span class="code">?_debug</span>: debug information which we use to squish bugs</li>
-				</ul>
-				<p class="flow-text">Generic error codes</p>
-				<ul class="browser-default">
-					<li class="flow-text"><strong>10001</strong>: Endpoint not found</li>
-					<li class="flow-text"><strong>10002</strong>: Invalid method ("GET", "POST", etc)</li>
-					<p>We have many internal error codes which may mean different things, however 99999 is likely the only one you will see.</p>
-					<li class="flow-text"><strong>99990</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99991</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99992</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99993</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99994</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99995</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99996</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99997</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99998</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
-					<li class="flow-text"><strong>99999</strong>: An internal error occured.  Please contact <span class="code">bugs@catalystapp.co</span> with the timestamp, what you were doing, and an explaination of the issue.</li>
 				</ul>
 			</div>
 			<div class="divider"></div>
@@ -76,15 +61,6 @@ echo UniversalFunctions::createHeading("API Documentation");
 					<p class="no-top-margin"><strong>Example: </strong><span class="code">Client: v8ayeztxskdm8x0sm,xm0xzvm3jncdjsm1iejasjkfv8mkktbyrmzakegcwnc9pmw107fbmy3zbwls</span></p>
 					<li class="flow-text"><strong>User</strong>: A string which contains your user's access token and secret, separated by a comma.</li>
 					<p class="no-top-margin"><strong>Example: </strong><span class="code">User: 4yt43e1wbgzt1397wcbpv249v51vroh2doc8uhte,2s9wc0nr9d7z17hh6943d66e5br06pnrpt6f3noz42mc9vsep43rg7nf7xai</span></p>
-				</ul>
-				<p class="flow-text">Error codes</p>
-				<ul class="browser-default">
-					<li class="flow-text"><strong>11001</strong>: Client header not passed</li>
-					<li class="flow-text"><strong>11002</strong>: User header not passed</li>
-					<li class="flow-text"><strong>11003</strong>: Client header is invalid</li>
-					<li class="flow-text"><strong>11004</strong>: User header is invalid</li>
-					<li class="flow-text"><strong>11005</strong>: Client does not exist (was your API access revoked?)</li>
-					<li class="flow-text"><strong>11006</strong>: User tokens are invalid (did the user revoke your API access to their account?)</li>
 				</ul>
 			</div>
 			<div class="divider"></div>

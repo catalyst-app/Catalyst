@@ -36,10 +36,7 @@ trait NewCommissionTypeFormTrait {
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
 		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nameField->addError(91501, ErrorCodes::ERR_91501);
-		$nameField->setMissingErrorCode(91501);
-		$nameField->addError(91502, ErrorCodes::ERR_91502);
-		$nameField->setInvalidErrorCode(91502);
+		$nameField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		$form->addField($nameField);
 
 		$blurbNote = new StaticHTMLField();
@@ -53,10 +50,7 @@ trait NewCommissionTypeFormTrait {
 		$blurbField->setPattern('^.{2,255}$');
 		$blurbField->setMaxLength(255);
 		$blurbField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$blurbField->addError(91503, ErrorCodes::ERR_91503);
-		$blurbField->setMissingErrorCode(91503);
-		$blurbField->addError(91504, ErrorCodes::ERR_91504);
-		$blurbField->setInvalidErrorCode(91504);
+		$blurbField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		$form->addField($blurbField);
 
 		$descriptionField = new MarkdownField();
@@ -84,10 +78,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostField->setPattern('^.{2,64}$');
 		$baseCostField->setMaxLength(64);
 		$baseCostField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$baseCostField->addError(91507, ErrorCodes::ERR_91507);
-		$baseCostField->setMissingErrorCode(91507);
-		$baseCostField->addError(91508, ErrorCodes::ERR_91508);
-		$baseCostField->setInvalidErrorCode(91508);
+		$baseCostField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 
 		$baseCostFieldWrapper->setField($baseCostField);
 		$form->addField($baseCostFieldWrapper);
@@ -135,10 +126,7 @@ trait NewCommissionTypeFormTrait {
 		$stageEntryField->setPattern('^.{2,255}$');
 		$stageEntryField->setMaxLength(255);
 		$stageEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$stageEntryField->addError(91528, ErrorCodes::ERR_91528);
-		$stageEntryField->setMissingErrorCode(91528);
-		$stageEntryField->addError(91529, ErrorCodes::ERR_91529);
-		$stageEntryField->setInvalidErrorCode(91529);
+		$stageEntryField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 
 		$stagesField->addField($stageEntryField);
 
@@ -166,10 +154,7 @@ trait NewCommissionTypeFormTrait {
 		$typeEntryField->setPattern('^.{2,64}$');
 		$typeEntryField->setMaxLength(64);
 		$typeEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$typeEntryField->addError(91530, ErrorCodes::ERR_91530);
-		$typeEntryField->setMissingErrorCode(91530);
-		$typeEntryField->addError(91531, ErrorCodes::ERR_91531);
-		$typeEntryField->setInvalidErrorCode(91531);
+		$typeEntryField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 
 		$typeEntryWrapper->setField($typeEntryField);
 		$paymentsField->addField($typeEntryWrapper);
@@ -182,10 +167,6 @@ trait NewCommissionTypeFormTrait {
 		$addressEntryField->setLabel("Address");
 		$addressEntryField->setRequired(true);
 		$addressEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
-		$addressEntryField->setMissingErrorCode(91532);
-		$addressEntryField->addError(91532, ErrorCodes::ERR_91532);
-		$addressEntryField->setInvalidErrorCode(91532);
 
 		$addressEntryWrapper->setField($addressEntryField);
 		$paymentsField->addField($addressEntryWrapper);
@@ -198,10 +179,6 @@ trait NewCommissionTypeFormTrait {
 		$instructionsField->setLabel("Instructions/Notes");
 		$instructionsField->setRequired(false);
 		$instructionsField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
-		$instructionsField->setMissingErrorCode(91533);
-		$instructionsField->addError(91533, ErrorCodes::ERR_91533);
-		$instructionsField->setInvalidErrorCode(91533);
 		
 		$instructionsEntryWrapper->setField($instructionsField);
 		$paymentsField->addField($instructionsEntryWrapper);
@@ -239,10 +216,7 @@ trait NewCommissionTypeFormTrait {
 		$modifierEntryField->setPattern('^.{2,60}$');
 		$modifierEntryField->setMaxLength(60);
 		$modifierEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$modifierEntryField->addError(91534, ErrorCodes::ERR_91534);
-		$modifierEntryField->setMissingErrorCode(91534);
-		$modifierEntryField->addError(91535, ErrorCodes::ERR_91535);
-		$modifierEntryField->setInvalidErrorCode(91535);
+		$modifierEntryField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 
 		$modifierEntryWrapper->setField($modifierEntryField);
 		$modifiersField->addField($modifierEntryWrapper);
@@ -257,10 +231,7 @@ trait NewCommissionTypeFormTrait {
 		$baseCostEntryField->setPattern('^.{2,64}$');
 		$baseCostEntryField->setMaxLength(64);
 		$baseCostEntryField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$baseCostEntryField->addError(91536, ErrorCodes::ERR_91536);
-		$baseCostEntryField->setMissingErrorCode(91536);
-		$baseCostEntryField->addError(91537, ErrorCodes::ERR_91537);
-		$baseCostEntryField->setInvalidErrorCode(91537);
+		$baseCostEntryField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 
 		$baseCostEntryWrapper->setField($baseCostEntryField);
 		$modifiersField->addField($baseCostEntryWrapper);

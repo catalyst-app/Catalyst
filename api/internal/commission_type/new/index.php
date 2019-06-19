@@ -111,4 +111,4 @@ CommissionType::create([
 	"_stages" => $stages,
 ]);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

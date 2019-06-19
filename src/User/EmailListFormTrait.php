@@ -47,13 +47,9 @@ trait EmailListFormTrait {
 
 		$contextField = new TextField();
 		$contextField->setDistinguisher("context");
-		$contextField->setLabel("Name or other information");
+		$contextField->setLabel("Name and other information");
 		$contextField->setRequired(true);
 		$contextField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$contextField->addError(90003, ErrorCodes::ERR_90003);
-		$contextField->setMissingErrorCode(90003);
-		$contextField->addError(90004, ErrorCodes::ERR_90004);
-		$contextField->setInvalidErrorCode(90004);
 		$form->addField($contextField);
 
 		$informationRequestField = new CheckboxField();

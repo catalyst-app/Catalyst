@@ -14,7 +14,7 @@ FormRepository::getDeactivateForm()->checkServerSide();
 
 if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername())) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90602, ErrorCodes::ERR_90602);
+	Response::sendError("username", "notCurrentUsername");
 }
 
 if (!$_SESSION["user"]->verifyPassword($_POST["password"])) {
@@ -26,4 +26,4 @@ $_SESSION["user"]->delete();
 
 $_SESSION = [];
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

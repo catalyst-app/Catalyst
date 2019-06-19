@@ -35,12 +35,10 @@ trait TOTPLoginFormTrait {
 		$tokenField->setDistinguisher("totp-code");
 		$tokenField->setLabel("Authentication Code");
 		$tokenField->setRequired(true);
-		$tokenField->setPattern('[0-9]*');
+		$tokenField->setPattern('^[0-9]{6}$');
 		$tokenField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$tokenField->addError(90202, ErrorCodes::ERR_90202);
-		$tokenField->setMissingErrorCode(90202);
-		$tokenField->addError(90203, ErrorCodes::ERR_90203);
-		$tokenField->setInvalidErrorCode(90203);
+		$tokenField->setCustomErrorMessage("patternMismatch", "This should be exactly six digits");
+		$tokenField->setCustomErrorMessage("invalidCode", "This code is incorrect, please make sure your device's clock is correct");
 		$form->addField($tokenField);
 
 		$goBackNotice = new StaticHTMLField();

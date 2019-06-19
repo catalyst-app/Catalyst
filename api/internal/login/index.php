@@ -17,7 +17,7 @@ $id = User::getIdFromUsername($_POST["username"], true);
 
 if ($id == -1) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90103, ErrorCodes::ERR_90103);
+	Response::sendError("username", "usernameDoesNotExist");
 }
 
 $user = new User($id);
@@ -25,7 +25,7 @@ $user = new User($id);
 // deactivation nukes password
 if ($user->isDeactivated()) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90109, ErrorCodes::ERR_90109);
+	Response::sendError("username", "deactivated");
 }
 
 if (!$user->verifyPassword($_POST["password"])) {
@@ -36,7 +36,7 @@ if (!$user->verifyPassword($_POST["password"])) {
 // suspension is serious, and should be displayed only when password is correct
 if ($user->isSuspended()) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90108, ErrorCodes::ERR_90108);
+	Response::sendError("username", "suspended");
 }
 
 if ($user->isTotpEnabled()) {
@@ -47,4 +47,4 @@ if ($user->isTotpEnabled()) {
 
 $_SESSION["user"] = $user;
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

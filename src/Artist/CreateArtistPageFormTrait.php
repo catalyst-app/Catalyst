@@ -37,11 +37,8 @@ trait CreateArtistPageFormTrait {
 		$nameField->setRequired(true);
 		$nameField->setMaxLength(255);
 		$nameField->setPattern('^.{2,255}$');
+		$nameField->setCustomErrorMessage("patternMismatch", "Please keep your name between 2 and 255 characters.");
 		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nameField->addError(91201, ErrorCodes::ERR_91201);
-		$nameField->setMissingErrorCode(91201);
-		$nameField->addError(91202, ErrorCodes::ERR_91202);
-		$nameField->setInvalidErrorCode(91202);
 		$form->addField($nameField);
 
 		$urlField = new TextField();
@@ -53,11 +50,8 @@ trait CreateArtistPageFormTrait {
 		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
 		$urlField->setHelperText("Between 4 and 255 characters, containing letters, numbers, dashes, underscores, and dots (not at the end)");
 		$urlField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
-		$urlField->addError(91203, ErrorCodes::ERR_91203);
-		$urlField->setMissingErrorCode(91203);
-		$urlField->addError(91204, ErrorCodes::ERR_91204);
-		$urlField->setInvalidErrorCode(91204);
-		$urlField->addError(91205, ErrorCodes::ERR_91205);
+		$urlField->setCustomErrorMessage("patternMismatch", "Please ensure the value is at least four characters and that you are only using letters, numbers, and the symbols ._- (and that there is not a period at the end)");
+		$urlField->setCustomErrorMessage("urlInUse", "This URL is already in use by another user.  Please try something else.");
 		$form->addField($urlField);
 
 		$urlSample = new StaticHTMLField();

@@ -43,11 +43,7 @@ trait SettingsFormTrait {
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$usernameField->setHelperText("2-64 characters of letters, numbers, period, dashes, and underscores only.");
 		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
-		$usernameField->addError(90501, ErrorCodes::ERR_90501);
-		$usernameField->setMissingErrorCode(90501);
-		$usernameField->addError(90502, ErrorCodes::ERR_90502);
-		$usernameField->setInvalidErrorCode(90502);
-		$usernameField->addError(90503, ErrorCodes::ERR_90503);
+		$usernameField->setCustomErrorMessage("alreadyInUse", "This username has already been taken, please try something else");
 		if (!is_null($user)) {
 			$usernameField->setPrefilledValue($user->getUsername());
 		}
@@ -60,10 +56,7 @@ trait SettingsFormTrait {
 		$nicknameField->setMaxLength(100);
 		$nicknameField->setPattern('^.{2,100}$');
 		$nicknameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nicknameField->addError(90504, ErrorCodes::ERR_90504);
-		$nicknameField->setMissingErrorCode(90504);
-		$nicknameField->addError(90505, ErrorCodes::ERR_90505);
-		$nicknameField->setInvalidErrorCode(90505);
+		$nicknameField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		if (!is_null($user)) {
 			$nicknameField->setPrefilledValue($user->getNickname());
 		}

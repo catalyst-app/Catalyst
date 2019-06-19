@@ -20,6 +20,10 @@ if ($_SESSION["user"]->isArtist() || $_SESSION["user"]->wasArtist()) {
 	Response::sendErrorResponse(91215, ErrorCodes::ERR_91215);
 }
 
+if (Artist::getIdFromUrl($_POST["url"]) !== -1) {
+	Response::sendError("url", "urlInUse");
+}
+
 $token = Tokens::generateArtistToken();
 
 $image = null;
@@ -43,4 +47,4 @@ Artist::create([
 	"COLOR" => hex2bin($_POST["color"]),
 ]);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

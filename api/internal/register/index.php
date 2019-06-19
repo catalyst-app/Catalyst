@@ -17,14 +17,14 @@ FormRepository::getRegisterForm()->checkServerSide();
 // username in use
 if (User::getIdFromUsername($_POST["username"], true) != -1) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90303, ErrorCodes::ERR_90303);
+	Response::sendError("username", "alreadyInUse");
 }
 
 // check referrer
 if (!empty($_POST["referrer"])) {
 	if (User::getIdFromUsername($_POST["referrer"], true) == -1) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90326, ErrorCodes::ERR_90326);
+		Response::sendError("referrer", "usernameDoesNotExist");
 	}
 }
 
@@ -64,4 +64,4 @@ $_SESSION["user"] = User::create([
 ]);
 
 HTTPCode::set(201);
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

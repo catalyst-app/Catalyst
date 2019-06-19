@@ -22,7 +22,7 @@ abstract class AbstractDatabaseRowModel extends AbstractDatabaseModel {
 	public function delete() : void {
 		$this->additionalDeletion();
 
-		$this->clearCache();
+		$this->_clearCache();
 
 		if (!array_key_exists(static::getTable(), self::$toDelete)) {
 			self::$toDelete[static::getTable()] = [];

@@ -30,4 +30,4 @@ $artist->setDeleted(false);
 
 $_SESSION["user"]->setArtistPageId($aid);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

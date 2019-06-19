@@ -42,10 +42,7 @@ trait SocialMediaAdditionFormsTrait {
 		$labelField->setRequired(true);
 		$labelField->setPattern('^.{2,64}$');
 		$labelField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$labelField->addError(90702, ErrorCodes::ERR_90702);
-		$labelField->setMissingErrorCode(90702);
-		$labelField->addError(90703, ErrorCodes::ERR_90703);
-		$labelField->setInvalidErrorCode(90703);
+		$labelField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		$form->addField($labelField);
 
 		$urlField = new TextField();
@@ -54,15 +51,13 @@ trait SocialMediaAdditionFormsTrait {
 		$urlField->setRequired(true);
 		$urlField->setPattern('^(https?://.{1,}\..{1,}|.{1,}@.{1,}\..{1,})$');
 		$urlField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$urlField->addError(90704, ErrorCodes::ERR_90704);
-		$urlField->setMissingErrorCode(90704);
-		$urlField->addError(90705, ErrorCodes::ERR_90705);
-		$urlField->setInvalidErrorCode(90705);
-		$urlField->addError(90706, ErrorCodes::ERR_90706);
-		$urlField->addError(90707, ErrorCodes::ERR_90707);
-		$urlField->addError(90708, ErrorCodes::ERR_90708);
-		$urlField->addError(90709, ErrorCodes::ERR_90709);
-		$urlField->addError(90710, ErrorCodes::ERR_90710);
+		$urlField->setCustomErrorMessage("patternMismatch", "This looks a bit off, please make sure you are including https:// for a URL");
+		$urlField->setCustomErrorMessage("disallowedDomain", "This domain is not allowed");
+		$urlField->setCustomErrorMessage("ipAddress", "We do not allow direct IP addresses");
+		$urlField->setCustomErrorMessage("invalidScheme", "Only http, https, and e-mail addresses are allowed");
+		$urlField->setCustomErrorMessage("inlineAuthentication", "Embedded HTTP credentials are not allowed");
+		$urlField->setCustomErrorMessage("invalidPort", "We only allow ports 80, 443, 8080, and 8081.  Contact support to unlock additional ports");
+		$urlField->setCustomErrorMessage("javascriptScheme", "It's ".date("Y").", did you seriously expect that to work?");
 		$form->addField($urlField);
 
 		return $form;
@@ -111,10 +106,6 @@ trait SocialMediaAdditionFormsTrait {
 		$labelField->setRequired(true);
 		$labelField->setPattern('^.{2,64}$');
 		$labelField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$labelField->addError(90702, ErrorCodes::ERR_90702);
-		$labelField->setMissingErrorCode(90702);
-		$labelField->addError(90703, ErrorCodes::ERR_90703);
-		$labelField->setInvalidErrorCode(90703);
 		$form->addField($labelField);
 
 		return $form;

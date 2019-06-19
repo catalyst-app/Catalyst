@@ -49,7 +49,7 @@ class EmailField extends HTMLElement {
 	 * @param bool passive
 	 */
 	markError(errorMessage, passive) {
-		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
+		window.log(this.properties.distinguisher, "Marking with error message "+errorMessage, true);
 
 		this.element.classList.add("invalid", "marked-invalid");
 		this.label.classList.add("active");

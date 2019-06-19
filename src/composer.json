@@ -12,6 +12,8 @@
         "phpstan/phpstan": "*",
         "slam/phpstan-extensions": "*",
         "mrclay/minify": "*",
-        "phan/phan": "*"
+        "phan/phan": "*",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan-deprecation-rules": "^0.11.2"
     }
 }

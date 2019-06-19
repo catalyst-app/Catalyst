@@ -309,7 +309,7 @@ class Controller {
 		ob_clean(); // clean out output buffer, as we're about to show errors
 		if (Endpoint::isEndpoint()) {
 			if (!headers_sent()) {
-				Response::sendErrorResponse(99999, ErrorCodes::ERR_99999, ["tracking_id" => $trackingId]);
+				Response::sendError("_global", "unknownError", ["tracking_id" => $trackingId]);
 			} else {
 				trigger_error("API ENDPOINT HEADERS (SOMEHOW) ALREADY SENT BEFORE ERROR!", E_USER_NOTICE);
 			}

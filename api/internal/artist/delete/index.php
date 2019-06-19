@@ -19,4 +19,4 @@ if (!$_SESSION["user"]->isArtist()) {
 
 $artistId = $_SESSION["user"]->getArtistPage()->delete();
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

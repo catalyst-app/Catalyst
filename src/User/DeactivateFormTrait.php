@@ -37,10 +37,8 @@ trait DeactivateFormTrait {
 		$usernameField->setRequired(true);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
-		$usernameField->addError(90601, ErrorCodes::ERR_90601);
-		$usernameField->setMissingErrorCode(90601);
-		$usernameField->addError(90602, ErrorCodes::ERR_90602);
-		$usernameField->setInvalidErrorCode(90602);
+		$usernameField->setCustomErrorMessage("patternMismatch", "This is not a valid username");
+		$usernameField->setCustomErrorMessage("notCurrentUsername", "This does not match your username");
 		$form->addField($usernameField);
 
 		$passwordField = new PasswordField();

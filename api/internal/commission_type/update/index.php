@@ -188,4 +188,4 @@ foreach ($toDelete as $stage) {
 	$stage->delete();
 }
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

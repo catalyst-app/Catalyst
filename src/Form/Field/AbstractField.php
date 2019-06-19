@@ -34,9 +34,17 @@ abstract class AbstractField {
 	/**
 	 * Array of error_code => error_message
 	 * 
+	 * @deprecated
 	 * @var string[]
 	 */
 	protected $errors = [];
+
+	/**
+	 * Array of errorType => errorMessage for custom messages, based on getDefaultErrorMessages
+	 * 
+	 * @var string[]
+	 */
+	protected $customErrorMessages = [];
 
 	/**
 	 * Error code to send if the field is missing
@@ -126,8 +134,36 @@ abstract class AbstractField {
 	}
 
 	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "Please enter a value",
+		];
+	}
+
+	/**
+	 * Set a custom error message for an error type
+	 * @param string $errorType
+	 * @param string $errorMessage
+	 */
+	public function setCustomErrorMessage(string $errorType, string $errorMessage) : void {
+		$this->customErrorMessages[$errorType] = $errorMessage;
+	}
+
+	/**
+	 * Get the error messages for the field
+	 * @return string[]
+	 */
+	public function getErrorMessages() : array {
+		return array_merge($this->getDefaultErrorMessages(), $this->customErrorMessages);
+	}
+
+	/**
 	 * Errors which this field is associated with
 	 * 
+	 * @deprecated
 	 * @return array Keyed array of $code => $message
 	 */
 	public function getErrors() : array {
@@ -137,6 +173,7 @@ abstract class AbstractField {
 	/**
 	 * Get the error message associated with a code
 	 * 
+	 * @deprecated
 	 * @param int $code error code to get message for
 	 * @return string Error mesasge, "undefined" if not defined
 	 */
@@ -150,6 +187,7 @@ abstract class AbstractField {
 	/**
 	 * Add an error to the array
 	 * 
+	 * @deprecated
 	 * @param int $code The error code
 	 * @param string $message The error message, to be displayed inline with input
 	 * 	Ex: displayed under text elements in red
@@ -161,6 +199,7 @@ abstract class AbstractField {
 	/**
 	 * Update an existing error code/message
 	 * 
+	 * @deprecated
 	 * @param int $code The error code
 	 * @param string $message The error message
 	 */
@@ -171,6 +210,7 @@ abstract class AbstractField {
 	/**
 	 * Set the error array to an entirely new one
 	 * 
+	 * @deprecated
 	 * @param array $errors The new array of errors, keyed $code => $message
 	 */
 	public function setErrors(array $errors) : void {
@@ -181,6 +221,7 @@ abstract class AbstractField {
 	/**
 	 * Remove an error/message association
 	 * 
+	 * @deprecated
 	 * @param int $code The error code to remove
 	 */
 	public function removeError(int $code) : void {
@@ -192,6 +233,7 @@ abstract class AbstractField {
 	/**
 	 * Get the error code for when the field is missing
 	 * 
+	 * @deprecated
 	 * @return int The error code sent when the field is missing
 	 */
 	public function getMissingErrorCode() : int {
@@ -201,6 +243,7 @@ abstract class AbstractField {
 	/**
 	 * Set the error code for when the field is missing
 	 * 
+	 * @deprecated
 	 * @param int $missingErrorCode The error code to set the missing code to
 	 */
 	public function setMissingErrorCode(int $missingErrorCode) : void {
@@ -210,6 +253,7 @@ abstract class AbstractField {
 	/**
 	 * Get the error code for when the field is missing
 	 * 
+	 * @deprecated
 	 * @return int The error code sent when the field is missing
 	 */
 	public function getInvalidErrorCode() : int {
@@ -219,6 +263,7 @@ abstract class AbstractField {
 	/**
 	 * Set the error code for when the field is invalid
 	 * 
+	 * @deprecated
 	 * @param int $invalidErrorCode The error code to return on invalid data
 	 */
 	public function setInvalidErrorCode(int $invalidErrorCode) : void {
@@ -249,6 +294,7 @@ abstract class AbstractField {
 	/**
 	 * Return the field's ID attribute
 	 * 
+	 * @deprecated
 	 * @return string The Field's ID
 	 */
 	public function getId() : string {
@@ -256,6 +302,7 @@ abstract class AbstractField {
 	}
 
 	/**
+	 * @deprecated
 	 * Throw an error for a missing field
 	 */
 	protected function throwMissingError() : void {
@@ -264,6 +311,7 @@ abstract class AbstractField {
 	}
 
 	/**
+	 * @deprecated
 	 * Throws an error for an invalid field
 	 */
 	protected function throwInvalidError() : void {
@@ -272,14 +320,33 @@ abstract class AbstractField {
 	}
 
 	/**
-	 * Temporary to ensure getWebComponentHtml works typewise
+	 * Throws an error of the given type
+	 * @param string $errorType
 	 */
-	public static function getWebComponentName() : string { throw new LogicException("Getting webcomponent name of abstract field"); }
-	public function getProperties() : array { throw new LogicException("Getting properties of abstract field"); }
+	protected function throwError(string $errorType) : void {
+		HTTPCode::set(400);
+		Response::sendError($errorType, $this->getErrors()[$errorType]);
+	}
+
+	/**
+	 * Get the tag name for the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		throw new LogicException("Getting webcomponent name of abstract field");
+	}
+
+	/**
+	 * Get the properties to define the web component field
+	 * @return array
+	 */
+	public function getProperties() : array {
+		throw new LogicException("Getting properties of abstract field");
+	}
 
 	/**
 	 * Temporary measure to provide a standard interface by which to generate webcomponent HTML
 	 * 
+	 * @deprecated
 	 * @return string The HTML
 	 */
 	public function getWebComponentHtml() : string {
@@ -296,6 +363,7 @@ abstract class AbstractField {
 	/**
 	 * Return the field's HTML input
 	 * 
+	 * @deprecated
 	 * @return string The HTML to display
 	 */
 	abstract public function getHtml() : string;
@@ -303,6 +371,7 @@ abstract class AbstractField {
 	/**
 	 * Full JS validation code, including if statement and all
 	 * 
+	 * @deprecated
 	 * @return string The JS to validate the field
 	 */
 	abstract public function getJsValidator() : string;
@@ -310,6 +379,7 @@ abstract class AbstractField {
 	/**
 	 * Return JS code to store the field's value in $formDataName
 	 * 
+	 * @deprecated
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */
@@ -318,6 +388,7 @@ abstract class AbstractField {
 	/**
 	 * Return JS code which should be added in the main onload closure
 	 * 
+	 * @deprecated
 	 * @return string
 	 */
 	public function getJsOnload() : string {

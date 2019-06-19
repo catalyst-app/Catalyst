@@ -32,6 +32,6 @@ if ($_POST["dest"] === "Artist") {
 	$resource = $_SESSION["user"];
 }
 
-Response::sendSuccessResponse("Success", [
+Response::sendSuccess("Success", [
 	"html" => $resource->addSocialChip($_POST["type"], null, $_POST["label"]),
 ]);

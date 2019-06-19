@@ -38,10 +38,7 @@ trait NewCharacterFormTrait {
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
 		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nameField->addError(90801, ErrorCodes::ERR_90801);
-		$nameField->setMissingErrorCode(90801);
-		$nameField->addError(90802, ErrorCodes::ERR_90802);
-		$nameField->setInvalidErrorCode(90802);
+		$nameField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		$form->addField($nameField);
 
 		$descriptionField = new MarkdownField();

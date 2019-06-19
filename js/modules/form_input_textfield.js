@@ -53,7 +53,7 @@ class TextField extends HTMLElement {
 	 * @param bool passive
 	 */
 	markError(errorMessage, passive) {
-		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
+		window.log(this.properties.distinguisher, "Marking with error message "+errorMessage, true);
 
 		this.element.classList.add("invalid", "marked-invalid");
 		this.label.classList.add("active");
@@ -86,23 +86,23 @@ class TextField extends HTMLElement {
 		if (value.length) {
 			if (this.properties.maxlength && value.length > this.properties.maxlength) {
 				window.log(this.properties.distinguisher, "Value length "+value.length+" exceeds maximum length "+this.properties.maxlength, true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.exceedsMaxLength, passive);
 				return false;
 			}
 			if (!(new RegExp(this.properties.pattern)).test(value)) {
 				window.log(this.properties.distinguisher, "Pattern "+this.properties.pattern+" does not match value", true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.patternMismatch, passive);
 				return false;
 			}
 			if (this.properties.disallowed.includes(value)) {
 				window.log(this.properties.distinguisher, "Value is included within the list of explicitly disallowed values", true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.disallowedValue, passive);
 				return false;
 			}
 		} else {
 			if (this.properties.required) {
 				window.log(this.properties.distinguisher, "Required but empty value", true);
-				this.markError(this.properties.missingError, passive);
+				this.markError(this.properties.errors.requiredButMissing, passive);
 				return false;
 			}
 		}

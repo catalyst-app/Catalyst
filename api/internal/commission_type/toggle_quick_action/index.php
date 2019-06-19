@@ -57,4 +57,4 @@ if (!array_key_exists("value", $_POST)) {
 $func = [$commissionType, CommissionType::QUICK_TOGGLE_BUTTONS[$actionIndex][2]];
 call_user_func($func, $_POST["value"] == true);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

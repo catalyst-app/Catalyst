@@ -51,7 +51,7 @@ class SelectField extends HTMLElement {
 	 * @param bool passive
 	 */
 	markError(errorMessage, passive) {
-		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
+		window.log(this.properties.distinguisher, "Marking with error message "+errorMessage, true);
 
 		this.element.parentNode.classList.add("invalid", "marked-invalid");
 		this.helperText.setAttribute("data-error", errorMessage);

@@ -19,9 +19,9 @@ if ($_SESSION["user"]->isEmailVerified() || is_null($_SESSION["user"]->getEmail(
 
 if ($_POST["token"] != $_SESSION["user"]->getEmailToken()) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90402, ErrorCodes::ERR_90402);
+	Response::sendError("token", "incorrectToken");
 }
 
 $_SESSION["user"]->setEmailVerified(true);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

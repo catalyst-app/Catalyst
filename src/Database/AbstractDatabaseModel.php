@@ -198,7 +198,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * 
 	 * @param string|null $toClear the item to remove, or null for all
 	 */
-	public function clearCache(?string $toClear=null) : void {
+	public function _clearCache(?string $toClear=null) : void {
 		$this->writeUpdates();
 		if (is_null($toClear)) {
 			self::$cache[static::class][$this->id] = [];
@@ -338,7 +338,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	public function delete() : void {
 		$this->additionalDeletion();
 
-		$this->clearCache();
+		$this->_clearCache();
 
 		$stmt = new UpdateQuery();
 

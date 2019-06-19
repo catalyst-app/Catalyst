@@ -69,6 +69,6 @@ if (isset($_FILES["images"])) {
 	}
 }
 
-Response::sendSuccessResponse("Success", [
+Response::sendSuccess("Success", [
 	"redirect" => "Character/View/".$_POST["token"]
 ]);

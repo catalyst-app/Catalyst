@@ -30,17 +30,17 @@ if ($_POST["dest"] === "Artist") {
 
 if (strpos($_POST["url"], "javascript:") === 0) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90711, ErrorCodes::ERR_90711);
+	Response::sendError("url", "javascriptScheme");
 }
 
-if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
+if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"]) && strpos($_POST["url"], "://") === false) {
 	$finalUrl = 'mailto:'.$_POST["url"];
 } else {
 	// we already verify regex
 	$parsed = parse_url($_POST["url"]);
 	if ($parsed === false) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
+		Response::sendError("url", "patternMismatch");
 		throw new Exception("Unable to parse URL"); // mostly redundant to make phpstan happy
 	}
 
@@ -55,38 +55,38 @@ if (preg_match('/^.{1,}@.{1,}\..{1,}$/', $_POST["url"])) {
 	// scheme check
 	if (!array_key_exists("scheme", $parsed)) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
+		Response::sendError("url", "patternMismatch");
 	}
 	if ($parsed["scheme"] !== "http" && $parsed["scheme"] !== "https") {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90708, ErrorCodes::ERR_90708);
+		Response::sendError("url", "invalidScheme");
 	}
 
 	// inline auth (often a sign of phishing or malware)
 	if (strlen($parsed["user"]."") || strlen($parsed["pass"]."")) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90709, ErrorCodes::ERR_90709);
+		Response::sendError("url", "inlineAuthentication");
 	}
 
 	// weird ports O_o
 	if (strlen($parsed["port"]) && $parsed["port"] != 80 && $parsed["port"] != 443 && 
 		$parsed["port"] != 8080 && $parsed["port"] != 8081) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90710, ErrorCodes::ERR_90710);
+		Response::sendError("url", "invalidPort");
 	}
 
 	// and finally, host
 	if (!array_key_exists("host", $parsed)) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90705, ErrorCodes::ERR_90705);
+		Response::sendError("url", "patternMismatch");
 	}
 	if (in_array(str_replace("www.", "", (string)$parsed["host"]), Values::DISALLOWED_DOMAINS)) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90706, ErrorCodes::ERR_90706);
+		Response::sendError("url", "disallowedDomain");
 	}
 	if (preg_match('/(?:\d{1,3}\.){3}\d{1,3}/', $parsed["host"])) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90707, ErrorCodes::ERR_90707);
+		Response::sendError("url", "ipAddress");
 	}
 
 	$finalUrl = $_POST["url"];
@@ -100,6 +100,6 @@ if ($_POST["dest"] === "Artist") {
 	$resource = $_SESSION["user"];
 }
 
-Response::sendSuccessResponse("Success", [
+Response::sendSuccess("Success", [
 	"html" => $resource->addSocialChip($type, $_POST["url"], $_POST["label"]),
 ]);

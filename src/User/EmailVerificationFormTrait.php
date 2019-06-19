@@ -44,10 +44,8 @@ trait EmailVerificationFormTrait {
 		$tokenField->setMaxLength(Tokens::EMAIL_VERIFICATION_TOKEN_LENGTH);
 		$tokenField->setPattern(Tokens::EMAIL_VERIFICATION_TOKEN_REGEX);
 		$tokenField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$tokenField->addError(90401, ErrorCodes::ERR_90401);
-		$tokenField->setMissingErrorCode(90401);
-		$tokenField->addError(90402, ErrorCodes::ERR_90402);
-		$tokenField->setInvalidErrorCode(90402);
+		$tokenField->setCustomErrorMessage("patternMismatch", "This token seems a little weird looking");
+		$tokenField->setCustomErrorMessage("incorrectToken", "This token does not match your account – are you logged into the right user?");
 		$form->addField($tokenField);
 
 		$captchaField = new CaptchaField();

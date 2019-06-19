@@ -52,7 +52,7 @@ class PasswordField extends HTMLElement {
 	 * @param bool passive
 	 */
 	markError(errorMessage, passive) {
-		window.log(this.properties.distinguisher, "Marking with error error message "+errorMessage, true);
+		window.log(this.properties.distinguisher, "Marking with error message "+errorMessage, true);
 
 		this.element.classList.add("invalid", "marked-invalid");
 		this.label.classList.add("active");
@@ -87,7 +87,7 @@ class PasswordField extends HTMLElement {
 	 */
 	verify(passive=false) {
 		let value = this.getValue();
-		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify(value));
+		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify("•".repeat(value.length)));
 
 		if (value.length) {
 			if (value.length < this.properties.minlength) {

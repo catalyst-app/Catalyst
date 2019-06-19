@@ -30,4 +30,4 @@ WishlistItem::create([
 	"COMMISSION_TYPE_ID" => $commissionType->getId(),
 ]);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

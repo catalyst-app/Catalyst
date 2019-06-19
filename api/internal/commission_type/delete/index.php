@@ -43,4 +43,4 @@ if (is_null($commissionType)) {
 
 $commissionType->delete();
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

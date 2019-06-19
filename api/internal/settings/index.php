@@ -17,7 +17,7 @@ FormRepository::getSettingsForm()->checkServerSide();
 if ($_POST["username"] != $_SESSION["user"]->getUsername()) {
 	if (User::getIdFromUsername($_POST["username"], true) !== -1) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90503, ErrorCodes::ERR_90503);
+		Response::sendError("username", "alreadyInUse");
 	}
 }
 
@@ -99,8 +99,8 @@ $_SESSION["user"]->setColor($_POST["color"]);
 $_SESSION["user"]->setNickname($_POST["nickname"] ? $_POST["nickname"] : $_POST["username"]);
 
 if ($resendVerificationEmail) {
-	$_SESSION["user"]->clearCache();
+	$_SESSION["user"]->_clearCache();
 	$_SESSION["user"]->sendVerificationEmail();
 }
 
-Response::sendSuccessResponse("Success", ["redirect_to_totp" => $redirectToTotp]);
+Response::sendSuccess("Success", ["redirect_to_totp" => $redirectToTotp]);

@@ -48,4 +48,4 @@ foreach ($order as $token) {
 	$commissionType->setSort($i++);
 }
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

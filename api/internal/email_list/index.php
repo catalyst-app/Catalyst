@@ -61,4 +61,4 @@ if ($_POST["request-info"] == "true") {
 	);
 }
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

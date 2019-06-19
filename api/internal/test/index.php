@@ -13,4 +13,4 @@ Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
 FormRepository::getTestForm()->checkServerSide();
 
-Response::sendSuccessResponse("Server side verification works");
+Response::sendError("_global", "Server side verification worked, but here's this for debug.");

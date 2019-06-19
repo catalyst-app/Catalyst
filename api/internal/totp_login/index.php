@@ -26,9 +26,9 @@ if (!$_SESSION["pending_user"]->isTotpEnabled()) {
 $key = $_SESSION["pending_user"]->getTotpKey();
 if (!TOTP::checkToken($key, $_POST["totp-code"])) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90204, ErrorCodes::ERR_90204);
+	Response::sendError("totp-code", "invalidCode");
 }
 
 $_SESSION["user"] = $_SESSION["pending_user"];
 unset($_SESSION["pending_user"]);
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

@@ -34,4 +34,4 @@ if (isset($_FILES["image"])) {
 	}
 }
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

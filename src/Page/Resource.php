@@ -283,7 +283,7 @@ class Resource extends AbstractDatabaseModel {
 	 * @param string[] $attributes Attributes to attach to the element
 	 * @return string
 	 */
-	protected static function buildScriptTag(string $src, array $attributes) {
+	protected static function buildScriptTag(string $src, array $attributes) : string {
 		$tag = '<script';
 
 		$attributes["src"] = $src;
@@ -307,7 +307,7 @@ class Resource extends AbstractDatabaseModel {
 	 * @param string[] $attributes Attributes to attach to the element
 	 * @return string
 	 */
-	protected static function buildStyleTag(string $href, array $attributes) {
+	protected static function buildStyleTag(string $href, array $attributes) : string {
 		$tag = '<link';
 
 		$attributes["href"] = $href;

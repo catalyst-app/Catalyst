@@ -56,4 +56,4 @@ $stmt->addAdditionalCapability($whereClause);
 
 $stmt->execute();
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

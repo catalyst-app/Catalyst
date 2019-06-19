@@ -31,6 +31,6 @@ if (isset($_FILES["images"])) {
 
 $character = Character::create($values);
 
-Response::sendSuccessResponse("Success", [
+Response::sendSuccess("Success", [
 	"redirect" => "Character/View/".$character->getToken()
 ]);

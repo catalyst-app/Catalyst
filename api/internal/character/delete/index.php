@@ -27,4 +27,4 @@ if ($character->getOwnerId() != $_SESSION["user"]->getId()) {
 
 $character->delete();
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

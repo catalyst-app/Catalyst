@@ -41,10 +41,7 @@ trait EditArtistPageFormTrait {
 		$nameField->setMaxLength(255);
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nameField->addError(91401, ErrorCodes::ERR_91401);
-		$nameField->setMissingErrorCode(91401);
-		$nameField->addError(91402, ErrorCodes::ERR_91402);
-		$nameField->setInvalidErrorCode(91402);
+		$nameField->setCustomErrorMessage("patternMismatch", "Please keep your name between 2 and 255 characters.");
 		if ($isArtist) {
 			$nameField->setPrefilledValue($artist->getName());
 		}
@@ -59,11 +56,8 @@ trait EditArtistPageFormTrait {
 		$urlField->setPattern('^[A-Za-z0-9._-]{3,254}[A-Za-z0-9_-]$');
 		$urlField->setDisallowed(["Edit", "New", "ToS", "CommissionTypes"]);
 		$urlField->setHelperText("Between 4 and 255 characters, containing letters, numbers, dashes, underscores, and dots (not at the end)");
-		$urlField->addError(91403, ErrorCodes::ERR_91403);
-		$urlField->setMissingErrorCode(91403);
-		$urlField->addError(91404, ErrorCodes::ERR_91404);
-		$urlField->setInvalidErrorCode(91404);
-		$urlField->addError(91405, ErrorCodes::ERR_91405);
+		$urlField->setCustomErrorMessage("patternMismatch", "Please ensure the value is at least four characters and that you are only using letters, numbers, and the symbols ._- (and that there is not a period at the end)");
+		$urlField->setCustomErrorMessage("urlInUse", "This URL is already in use by another user.  Please try something else.");
 		if ($isArtist) {
 			$urlField->setPrefilledValue($artist->getUrl());
 		}

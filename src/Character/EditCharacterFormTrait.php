@@ -42,10 +42,7 @@ trait EditCharacterFormTrait {
 		$nameField->setPattern('^.{2,255}$');
 		$nameField->setMaxLength(255);
 		$nameField->setAutocompleteAttribute(AutocompleteValues::NICKNAME);
-		$nameField->addError(91001, ErrorCodes::ERR_91001);
-		$nameField->setMissingErrorCode(91001);
-		$nameField->addError(91002, ErrorCodes::ERR_91002);
-		$nameField->setInvalidErrorCode(91002);
+		$nameField->setCustomErrorMessage("patternMismatch", "Please use at least two characters");
 		if (!is_null($character)) {
 			$nameField->setPrefilledValue($character->getName());
 		}

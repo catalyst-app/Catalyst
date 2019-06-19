@@ -167,12 +167,12 @@ var humanFileSize = function(size) {
 			// restore original text (if applicable)
 			$(labelSpan).text($(labelSpan).attr("data-original"));
 		});
-		$(document).on("input", ".marked-invalid", function(e) {
-			if ($(this).attr("type") == "checkbox") {
-				return; // should be caught in :checkbox.change
-			}
-			$(this).removeClass("marked-invalid").removeClass("invalid");
-		});
+		// $(document).on("input", ".marked-invalid", function(e) {
+		// 	if ($(this).attr("type") == "checkbox") {
+		// 		return; // should be caught in :checkbox.change
+		// 	}
+		// 	$(this).removeClass("marked-invalid").removeClass("invalid");
+		// });
 		<?php foreach ($forms as $form): ?>
 			<?= $form->getAllJs(); ?>
 		<?php endforeach; ?>

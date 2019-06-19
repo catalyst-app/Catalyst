@@ -41,13 +41,9 @@ trait LoginFormTrait {
 		$usernameField->setRequired(true);
 		$usernameField->setPattern('^([A-Za-z0-9._-]){2,64}$');
 		$usernameField->setAutocompleteAttribute(AutocompleteValues::USERNAME);
-		$usernameField->addError(90101, ErrorCodes::ERR_90101);
-		$usernameField->setMissingErrorCode(90101);
-		$usernameField->addError(90102, ErrorCodes::ERR_90102);
-		$usernameField->setInvalidErrorCode(90102);
-		$usernameField->addError(90103, ErrorCodes::ERR_90103);
-		$usernameField->addError(90108, ErrorCodes::ERR_90108);
-		$usernameField->addError(90109, ErrorCodes::ERR_90109);
+		$usernameField->setCustomErrorMessage("usernameDoesNotExist", "This username does not exist");
+		$usernameField->setCustomErrorMessage("suspended", "Your account has been suspended.  Check your e-mail or contact support for more information");
+		$usernameField->setCustomErrorMessage("deactivated", "This account has been permanently deactivated.");
 		$form->addField($usernameField);
 
 		$passwordField = new PasswordField();

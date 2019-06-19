@@ -585,6 +585,15 @@ class Form {
 
 		$str .= 'try {';
 		$str .= 'var data = JSON.parse(response.responseText);';
+		$str .= 'if (data.hasOwnProperty("error_type")) {';
+			$str .= 'let fields = document.querySelectorAll("[data-properties^=\"{\"]");';
+			$str .= 'for (let i=0; i<fields.length; i++) {';
+				$str .= 'if (fields[i].properties.distinguisher == data.error_location) {';
+					$str .= 'fields[i].markError(fields[i].properties.errors[data.error_type]);';
+				$str .= '}';
+			$str .= '}';
+			$str .= 'return;';
+		$str .= '}';
 		$str .= 'switch (data.error_code) {';
 		foreach ($this->getFields() as $field) {
 			foreach ($field->getErrors() as $code => $message) {

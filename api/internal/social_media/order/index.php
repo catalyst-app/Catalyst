@@ -76,4 +76,4 @@ foreach ($order as $id) {
 
 Database::getDbh()->commit();
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");

@@ -27,4 +27,4 @@ $commissionType = new CommissionType($commissionTypeId);
 
 WishlistItem::remove($_SESSION["user"], $commissionType);
 
-Response::sendSuccessResponse("Success");
+Response::sendSuccess("Success");
