@@ -83,12 +83,7 @@ trait SettingsFormTrait {
 		$newPasswordField->setLabel("New Password");
 		$newPasswordField->setHelperText('Only use this field if you wish to change your password.');
 		$newPasswordField->setRequired(false);
-		$newPasswordField->setMinLength(8);
 		$newPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$newPasswordField->addError(90509, ErrorCodes::ERR_90509);
-		$newPasswordField->setMissingErrorCode(90509);
-		$newPasswordField->addError(90510, ErrorCodes::ERR_90510);
-		$newPasswordField->setInvalidErrorCode(90510);
 		$form->addField($newPasswordField);
 
 		$confirmNewPasswordField = new ConfirmPasswordField();
@@ -180,12 +175,7 @@ trait SettingsFormTrait {
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Old Password");
 		$passwordField->setRequired(true);
-		$passwordField->setMinLength(8);
 		$passwordField->setAutocompleteAttribute(AutocompleteValues::CURRENT_PASSWORD);
-		$passwordField->addError(90521, ErrorCodes::ERR_90521);
-		$passwordField->setMissingErrorCode(90521);
-		$passwordField->addError(90522, ErrorCodes::ERR_90522);
-		$passwordField->setInvalidErrorCode(90522);
 		$form->addField($passwordField);
 
 		return $form;

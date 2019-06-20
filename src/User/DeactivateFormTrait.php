@@ -45,12 +45,7 @@ trait DeactivateFormTrait {
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
-		$passwordField->setMinLength(8);
 		$passwordField->setAutocompleteAttribute(AutocompleteValues::CURRENT_PASSWORD);
-		$passwordField->addError(90603, ErrorCodes::ERR_90603);
-		$passwordField->setMissingErrorCode(90603);
-		$passwordField->addError(90604, ErrorCodes::ERR_90604);
-		$passwordField->setInvalidErrorCode(90604);
 		$form->addField($passwordField);
 
 		return $form;

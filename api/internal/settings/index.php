@@ -23,7 +23,7 @@ if ($_POST["username"] != $_SESSION["user"]->getUsername()) {
 
 if (!$_SESSION["user"]->verifyPassword($_POST["password"])) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90522, ErrorCodes::ERR_90522);
+	Response::sendError("password", "incorrectPassword");
 }
 
 // check email is free/own

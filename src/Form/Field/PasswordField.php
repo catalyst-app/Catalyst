@@ -42,6 +42,18 @@ class PasswordField extends AbstractField {
 	}
 
 	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return parent::getDefaultErrorMessages() + [
+			"belowMinLength" => "Please use at least ".$this->getMinLength()." character".($this->getMinLength() != 1 ? "s" : ""),
+			// not used by class, however, frequently used by implementing clients, therefore, it seems best to include it for the sake of a standard naming if nothing else
+			"incorrectPassword" => "This password is incorrect.  Please contact support if you need to reset it",
+		];
+	}
+
+	/**
 	 * @return array Properties for the created field element
 	 */
 	public function getProperties() : array {
@@ -52,6 +64,7 @@ class PasswordField extends AbstractField {
 			"minlength" => $this->getMinLength(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
 		] + $this->getLabelProperties();
 	}
 
@@ -97,18 +110,18 @@ class PasswordField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		$requestArr[$this->getDistinguisher()] = TransitEncryption::decryptAes($requestArr[$this->getDistinguisher()]);
 		if (empty($requestArr[$this->getDistinguisher()])) {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			} else {
 				return;
 			}
 		}
 		if (strlen($requestArr[$this->getDistinguisher()]) < $this->getMinLength()) {
-			$this->throwInvalidError();
+			$this->throwError("belowMinLength");
 		}
 	}
 

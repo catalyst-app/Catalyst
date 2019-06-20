@@ -19,7 +19,7 @@ if (strtolower($_POST["username"]) != strtolower($_SESSION["user"]->getUsername(
 
 if (!$_SESSION["user"]->verifyPassword($_POST["password"])) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90604, ErrorCodes::ERR_90604);
+	Response::sendError("password", "incorrectPassword");
 }
 
 $_SESSION["user"]->delete();

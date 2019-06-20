@@ -30,7 +30,7 @@ if ($user->isDeactivated()) {
 
 if (!$user->verifyPassword($_POST["password"])) {
 	HTTPCode::set(400);
-	Response::sendErrorResponse(90105, ErrorCodes::ERR_90105);
+	Response::sendError("password", "incorrectPassword");
 }
 
 // suspension is serious, and should be displayed only when password is correct

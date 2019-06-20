@@ -50,12 +50,7 @@ trait LoginFormTrait {
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
-		$passwordField->setMinLength(8);
 		$passwordField->setAutocompleteAttribute(AutocompleteValues::CURRENT_PASSWORD);
-		$passwordField->addError(90104, ErrorCodes::ERR_90104);
-		$passwordField->setMissingErrorCode(90104);
-		$passwordField->addError(90105, ErrorCodes::ERR_90105);
-		$passwordField->setInvalidErrorCode(90105);
 		$form->addField($passwordField);
 
 		$captchaField = new CaptchaField();

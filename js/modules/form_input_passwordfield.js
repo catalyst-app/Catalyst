@@ -92,13 +92,13 @@ class PasswordField extends HTMLElement {
 		if (value.length) {
 			if (value.length < this.properties.minlength) {
 				window.log(this.properties.distinguisher, "Value length "+value.length+" is below minimum length "+this.properties.minlength, true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.belowMinLength, passive);
 				return false;
 			}
 		} else {
 			if (this.properties.required) {
 				window.log(this.properties.distinguisher, "Required but empty value", true);
-				this.markError(this.properties.missingError, passive);
+				this.markError(this.properties.errors.requiredButMissing, passive);
 				return false;
 			}
 		}
