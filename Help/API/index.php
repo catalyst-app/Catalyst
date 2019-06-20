@@ -42,7 +42,7 @@ echo UniversalFunctions::createHeading("API Documentation");
 				<ul class="browser-default">
 					<li class="flow-text"><span class="code">error</span>: a boolean which states whether or not the request succeeded.</li>
 					<li class="flow-text"><span class="code">http_code</span>: the HTTP code returned (see <a href="#response-codes">Response Codes</a>)</li>
-					<li class="flow-text"><span class="code">error_location</span>: the component of the request where the issue occured, <span class="code">_global</span> if the issue applies to the request as a whole, or <span class="code">_server</span> if there was a server error.</li>
+					<li class="flow-text"><span class="code">error_location</span>: the component of the request where the issue occured or <span class="code">_global</span> if the issue applies to the request as a whole (or a server error occured).</li>
 					<li class="flow-text"><span class="code">error_type</span>: the type of error, generally specific to the datatype and context.  Common examples include <span class="code">requiredButMissing</span> and <span class="code">doesNotExist</span></li>
 					<li class="flow-text"><span class="code">message</span>: a message containing more information ("Success", "Invalid Password")</li>
 					<li class="flow-text"><span class="code">data</span>: an object which contains any applicable return data</li>
