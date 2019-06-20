@@ -56,12 +56,7 @@ trait RegisterFormTrait {
 		$emailField->setDistinguisher("email");
 		$emailField->setLabel("Email");
 		$emailField->setRequired(false);
-		$emailField->addError(90306, ErrorCodes::ERR_90306);
-		$emailField->setMissingErrorCode(90306);
-		$emailField->addError(90307, ErrorCodes::ERR_90307);
-		$emailField->setInvalidErrorCode(90307);
-		$emailField->addError(90308, ErrorCodes::ERR_90308);
-		$emailField->addError(90324, ErrorCodes::ERR_90324);
+		$emailField->setCustomErrorMessage("alreadyInUse", ErrorCodes::ERR_90308);
 		$form->addField($emailField);
 
 		$passwordField = new PasswordField();

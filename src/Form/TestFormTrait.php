@@ -41,20 +41,12 @@ trait TestFormTrait {
 		$emailField->setDistinguisher("test-email-no-req");
 		$emailField->setLabel("Email but it's not required");
 		$emailField->setRequired(false);
-		$emailField->addError(99809, ErrorCodes::ERR_99809);
-		$emailField->setMissingErrorCode(99809);
-		$emailField->addError(99810, ErrorCodes::ERR_99810);
-		$emailField->setInvalidErrorCode(99810);
 		$form->addField($emailField);
 
 		$emailField2 = new EmailField();
 		$emailField2->setDistinguisher("test-email-req");
 		$emailField2->setLabel("Email but it's required");
 		$emailField2->setRequired(true);
-		$emailField2->addError(99812, ErrorCodes::ERR_99812);
-		$emailField2->setMissingErrorCode(99812);
-		$emailField2->addError(99813, ErrorCodes::ERR_99813);
-		$emailField2->setInvalidErrorCode(99813);
 		$form->addField($emailField2);
 
 		$hiddenInput = new HiddenInputField();

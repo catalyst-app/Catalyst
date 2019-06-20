@@ -39,10 +39,6 @@ trait EmailListFormTrait {
 		$emailField->setLabel("Email");
 		$emailField->setRequired(true);
 		$emailField->setAutocompleteAttribute(AutocompleteValues::EMAIL);
-		$emailField->addError(90001, ErrorCodes::ERR_90001);
-		$emailField->setMissingErrorCode(90001);
-		$emailField->addError(90002, ErrorCodes::ERR_90002);
-		$emailField->setInvalidErrorCode(90002);
 		$form->addField($emailField);
 
 		$contextField = new TextField();

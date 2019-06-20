@@ -82,18 +82,23 @@ class EmailField extends HTMLElement {
 		if (value.length) {
 			if (value.length > this.properties.maxlength) {
 				window.log(this.properties.distinguisher, "Value length "+value.length+" exceeds maximum length "+this.properties.maxlength, true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.aboveMaxLength, passive);
 				return false;
 			}
 			if (!(new RegExp(this.properties.pattern)).test(value)) {
 				window.log(this.properties.distinguisher, "Pattern "+this.properties.pattern+" does not match value", true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.patternMismatch, passive);
+				return false;
+			}
+			if (/cat(l.st|alystapp.co)$/.test(value)) {
+				window.log(this.properties.distinguisher, "Value ends in catl.st or catalystapp.co", true);
+				this.markError(this.properties.errors.internalEmail, passive);
 				return false;
 			}
 		} else {
 			if (this.properties.required) {
 				window.log(this.properties.distinguisher, "Required but empty value", true);
-				this.markError(this.properties.missingError, passive);
+				this.markError(this.properties.errors.requiredButMissing, passive);
 				return false;
 			}
 		}

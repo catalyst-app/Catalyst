@@ -26,6 +26,18 @@ class EmailField extends AbstractField {
 	}
 
 	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return parent::getDefaultErrorMessages() + [
+			"patternMismatch" => "This e-mail address does not seem valid",
+			"aboveMaxLength" => "This seems a little too long to be an e-mail address",
+			"internalEmail" => "@catalystapp.co and @catl.st e-mails are disallowed",
+		];
+	}
+
+	/**
 	 * @return array Properties for the created field element
 	 */
 	public function getProperties() : array {
@@ -38,6 +50,7 @@ class EmailField extends AbstractField {
 			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
 		] + $this->getLabelProperties();
 	}
 
@@ -83,22 +96,25 @@ class EmailField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if (empty($requestArr[$this->getDistinguisher()])) {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			} else {
 				return; // not required and empty, don't do further checks
 			}
 		}
 		if (self::MAX_LENGTH > 0) {
 			if (strlen($requestArr[$this->getDistinguisher()]) > self::MAX_LENGTH) {
-				$this->throwInvalidError();
+				$this->throwError("aboveMaxLength");
 			}
 		}
 		if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $requestArr[$this->getDistinguisher()])) {
-			$this->throwInvalidError();
+			$this->throwError("patternMismatch");
+		}
+		if (!preg_match('/cat(l\.st|alystapp\.co)$/', $requestArr[$this->getDistinguisher()])) {
+			$this->throwError("internalEmail");
 		}
 	}
 

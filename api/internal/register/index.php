@@ -30,13 +30,9 @@ if (!empty($_POST["referrer"])) {
 
 // check email
 if (!empty($_POST["email"])) {
-	if (strpos($_POST["email"], "@catalystapp.co") !== false || strpos($_POST["email"], "@catl.st") !== false) {
-		HTTPCode::set(400);
-		Response::sendErrorResponse(90324, ErrorCodes::ERR_90324);
-	}
 	if (User::getIdFromEmail($_POST["email"], true) != -1) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90308, ErrorCodes::ERR_90308);
+		Response::sendError("email", "alreadyInUse");
 	}
 }
 

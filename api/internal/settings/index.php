@@ -30,11 +30,7 @@ if (!$_SESSION["user"]->verifyPassword($_POST["password"])) {
 if (!empty($_POST["email"]) && $_POST["email"] != $_SESSION["user"]->getEmail()) {
 	if (User::getIdFromEmail($_POST["email"], true) != -1) {
 		HTTPCode::set(400);
-		Response::sendErrorResponse(90508, ErrorCodes::ERR_90508);
-	}
-	if (strpos($_POST["email"], "@catalystapp.co") !== false || strpos($_POST["email"], "@catl.st") !== false) {
-		HTTPCode::set(400);
-		Response::sendErrorResponse(90523, ErrorCodes::ERR_90523);
+		Response::sendError("email", "alreadyInUse");
 	}
 }
 

@@ -67,12 +67,7 @@ trait SettingsFormTrait {
 		$emailField->setLabel("Email");
 		$emailField->setRequired(false);
 		$emailField->setAutocompleteAttribute(AutocompleteValues::EMAIL);
-		$emailField->addError(90506, ErrorCodes::ERR_90506);
-		$emailField->setMissingErrorCode(90506);
-		$emailField->addError(90507, ErrorCodes::ERR_90507);
-		$emailField->setInvalidErrorCode(90507);
-		$emailField->addError(90508, ErrorCodes::ERR_90508);
-		$emailField->addError(90523, ErrorCodes::ERR_90523);
+		$emailField->setCustomErrorMessage("alreadyInUse", ErrorCodes::ERR_90308);
 		if (!is_null($user) && !is_null($user->getEmail())) {
 			$emailField->setPrefilledValue($user->getEmail());
 		}
