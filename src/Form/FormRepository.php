@@ -39,6 +39,7 @@ use \ReflectionClass;
  * Simply a repository of forms for the site.
  * 
  * Methods should not be defomed in this file, but in traits which are used here
+ * @deprecated
  */
 class FormRepository {
 	/**
