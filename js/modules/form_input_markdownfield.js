@@ -80,7 +80,13 @@ use \Catalyst\Form\Field\MarkdownField;
 			return this.element.value;
 		}
 
-		getAggregationValue = this.getValue;
+		/**
+		 * The value to actually be sent to the server
+		 * @return string
+		 */
+		getAggregationValue() {
+			return this.getValue();
+		}
 
 		/**
 		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
