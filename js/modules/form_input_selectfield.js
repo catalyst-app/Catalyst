@@ -83,13 +83,13 @@ class SelectField extends HTMLElement {
 		if (value.length) {
 			if (!this.properties.options.hasOwnProperty(value)) {
 				window.log(this.properties.distinguisher, "Value is not within the list of possible options (how ???)", true);
-				this.markError(this.properties.invalidError, passive);
+				this.markError(this.properties.errors.invalidResponse, passive);
 				return false;
 			}
 		} else {
 			if (this.properties.required) {
 				window.log(this.properties.distinguisher, "Required but empty value", true);
-				this.markError(this.properties.missingError, passive);
+				this.markError(this.properties.errors.requiredButMissing, passive);
 				return false;
 			}
 		}

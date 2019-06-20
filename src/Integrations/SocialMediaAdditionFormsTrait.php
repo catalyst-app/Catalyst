@@ -94,10 +94,6 @@ trait SocialMediaAdditionFormsTrait {
 		$typeField->setOptions(SocialMedia::getOtherNetworkAddSelectArray());
 		$typeField->setRequired(true);
 		$typeField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$typeField->addError(90712, ErrorCodes::ERR_90712);
-		$typeField->setMissingErrorCode(90712);
-		$typeField->addError(90713, ErrorCodes::ERR_90713);
-		$typeField->setInvalidErrorCode(90713);
 		$form->addField($typeField);
 
 		$labelField = new TextField();

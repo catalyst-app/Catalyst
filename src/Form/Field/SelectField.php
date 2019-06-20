@@ -42,6 +42,16 @@ class SelectField extends AbstractField {
 	}
 
 	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return parent::getDefaultErrorMessages() + [
+			"invalidResponse" => "This select box is having some internal issues, please contact support",
+		];
+	}
+
+	/**
 	 * @return array Properties for the created field element
 	 */
 	public function getProperties() : array {
@@ -52,6 +62,7 @@ class SelectField extends AbstractField {
 			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"options" => $this->getOptions(),
+			"errors" => $this->getErrorMessages(),
 		] + $this->getLabelProperties();
 	}
 
@@ -97,17 +108,17 @@ class SelectField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if (empty($requestArr[$this->getDistinguisher()])) {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			} else {
 				return;
 			}
 		}
 		if (!in_array($requestArr[$this->getDistinguisher()], array_keys($this->getOptions()))) {
-			$this->throwInvalidError();
+			$this->throwError("invalidResponse");
 		}
 	}
 

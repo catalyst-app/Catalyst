@@ -75,10 +75,6 @@ trait TestFormTrait {
 		]);
 		$selectField->setRequired(true);
 		$selectField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$selectField->addError(99818, ErrorCodes::ERR_99818);
-		$selectField->setMissingErrorCode(99818);
-		$selectField->addError(99819, ErrorCodes::ERR_99819);
-		$selectField->setInvalidErrorCode(99819);
 		$form->addField($selectField);
 
 		$selectField2 = new SelectField();
@@ -91,10 +87,6 @@ trait TestFormTrait {
 		]);
 		$selectField2->setRequired(false);
 		$selectField2->setAutocompleteAttribute(AutocompleteValues::ON);
-		$selectField2->addError(99821, ErrorCodes::ERR_99821);
-		$selectField2->setMissingErrorCode(99821);
-		$selectField2->addError(99822, ErrorCodes::ERR_99822);
-		$selectField2->setInvalidErrorCode(99822);
 		$form->addField($selectField2);
 
 		$markdownField = new MarkdownField();
