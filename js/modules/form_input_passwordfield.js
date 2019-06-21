@@ -44,7 +44,7 @@ class PasswordField extends HTMLElement {
 			})();
 		})());
 
-		this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
+		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
 	}
 
 	/**
@@ -110,14 +110,16 @@ class PasswordField extends HTMLElement {
 	}
 }
 
-// BC
-{
-	window.log("Form input handlers", "Registering PasswordField");
+window.addEventListener('load', () => {
+	// BC
+	{
+		window.log("Form input handlers", "Registering PasswordField");
 
-	if (!window.hasOwnProperty("formInputHandlers")) {
-		window.formInputHandlers = {};
+		if (!window.hasOwnProperty("formInputHandlers")) {
+			window.formInputHandlers = {};
+		}
+		window.formInputHandlers["Catalyst\\Form\\Field\\PasswordField"] = PasswordField;
 	}
-	window.formInputHandlers["Catalyst\\Form\\Field\\PasswordField"] = PasswordField;
-}
 
-window.customElements.define("password-field", PasswordField);
+	window.customElements.define("password-field", PasswordField);
+}, {passive: true});

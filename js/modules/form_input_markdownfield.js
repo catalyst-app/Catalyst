@@ -40,12 +40,11 @@ use \Catalyst\Form\Field\MarkdownField;
 			this.required = element.getAttribute("required") === "required";
 
 			// remove to prevent duplicates for BC instantiation methods
-			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");this.verify.bind(this, true), 
-			this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
+			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");
+			this.addEventListener("input", this.verify.bind(this, true), {passive: true});
 
 			window.log(this.id, "Adding this.render as a listener for input events if it was not already");
-			this.element.removeEventListener("input", this.render.bind(this));
-			this.element.addEventListener("input", this.render.bind(this));
+			this.addEventListener("input", this.render.bind(this));
 		}
 
 		/**

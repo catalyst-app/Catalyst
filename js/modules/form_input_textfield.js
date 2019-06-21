@@ -45,7 +45,7 @@ class TextField extends HTMLElement {
 			})();
 		})());
 
-		this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
+		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
 	}
 
 	/**
@@ -120,14 +120,16 @@ class TextField extends HTMLElement {
 	}
 }
 
-// BC
-{
-	window.log("Form input handlers", "Registering TextField");
+window.addEventListener('load', () => {
+	// BC
+	{
+		window.log("Form input handlers", "Registering TextField");
 
-	if (!window.hasOwnProperty("formInputHandlers")) {
-		window.formInputHandlers = {};
+		if (!window.hasOwnProperty("formInputHandlers")) {
+			window.formInputHandlers = {};
+		}
+		window.formInputHandlers["Catalyst\\Form\\Field\\TextField"] = TextField;
 	}
-	window.formInputHandlers["Catalyst\\Form\\Field\\TextField"] = TextField;
-}
 
-window.customElements.define("text-field", TextField);
+	window.customElements.define("text-field", TextField);
+}, {passive: true});

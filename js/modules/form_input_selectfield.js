@@ -43,7 +43,7 @@ class SelectField extends HTMLElement {
 			return $$a;
 		})());
 
-		this.element.addEventListener("change", this.verify.bind(this, true), {passive: true});
+		this.addEventListener("change", this.verify.bind(this, true), {passive: true});
 	}
 
 	/**
@@ -107,14 +107,16 @@ class SelectField extends HTMLElement {
 	}
 }
 
-// BC
-{
-	window.log("Form input handlers", "Registering SelectField");
+window.addEventListener('load', () => {
+	// BC
+	{
+		window.log("Form input handlers", "Registering SelectField");
 
-	if (!window.hasOwnProperty("formInputHandlers")) {
-		window.formInputHandlers = {};
+		if (!window.hasOwnProperty("formInputHandlers")) {
+			window.formInputHandlers = {};
+		}
+		window.formInputHandlers["Catalyst\\Form\\Field\\SelectField"] = SelectField;
 	}
-	window.formInputHandlers["Catalyst\\Form\\Field\\SelectField"] = SelectField;
-}
 
-window.customElements.define("select-field", SelectField);
+	window.customElements.define("select-field", SelectField);
+}, {passive: true});

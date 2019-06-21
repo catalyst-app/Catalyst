@@ -41,7 +41,7 @@ class EmailField extends HTMLElement {
 			})();
 		})());
 
-		this.element.addEventListener("input", this.verify.bind(this, true), {passive: true});
+		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
 	}
 
 	/**
@@ -117,14 +117,16 @@ class EmailField extends HTMLElement {
 	}
 }
 
-// BC
-{
-	window.log("Form input handlers", "Registering EmailField");
+window.addEventListener('load', () => {
+	// BC
+	{
+		window.log("Form input handlers", "Registering EmailField");
 
-	if (!window.hasOwnProperty("formInputHandlers")) {
-		window.formInputHandlers = {};
+		if (!window.hasOwnProperty("formInputHandlers")) {
+			window.formInputHandlers = {};
+		}
+		window.formInputHandlers["Catalyst\\Form\\Field\\EmailField"] = TextField;
 	}
-	window.formInputHandlers["Catalyst\\Form\\Field\\EmailField"] = TextField;
-}
 
-window.customElements.define("email-field", EmailField);
+	window.customElements.define("email-field", EmailField);
+}, {passive: true});
