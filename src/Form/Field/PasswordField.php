@@ -6,7 +6,7 @@ use \Catalyst\Form\Form;
 use \Catalyst\API\TransitEncryption;
 
 /**
- * Represents a text field
+ * Represents a field
  */
 class PasswordField extends AbstractField {
 	use LabelTrait, SupportsAutocompleteAttributeTrait;
