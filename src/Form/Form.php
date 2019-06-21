@@ -350,6 +350,7 @@ class Form {
 	/**
 	 * Get the form's header/opening tag
 	 * 
+	 * @deprecated
 	 * @return string the opening tag
 	 */
 	public function getFormHeader() : string {
@@ -369,6 +370,7 @@ class Form {
 	/**
 	 * Get the submission button HTML
 	 * 
+	 * @deprecated
 	 * @return string The ending html
 	 */
 	public function getSubmitButton() : string {
@@ -428,6 +430,7 @@ class Form {
 	/**
 	 * Get the form's HTML
 	 * 
+	 * @deprecated Until rewrote in webcomponents
 	 * @return string The form's HTML
 	 */
 	public function getHtml(bool $section=true) : string {
@@ -471,6 +474,7 @@ class Form {
 	/**
 	 * Get the code to show the progress bar
 	 * 
+	 * @deprecated
 	 * @return string JS to show progress bar
 	 */
 	public function getShowProgressBarJs() : string {
@@ -484,6 +488,7 @@ class Form {
 	/**
 	 * Get the code to hide the progress bar
 	 * 
+	 * @deprecated
 	 * @return string JS to hide progress bar
 	 */
 	public function getHideProgressBarJs() : string {
@@ -497,6 +502,7 @@ class Form {
 	/**
 	 * Return all the JS validation checks
 	 * 
+	 * @deprecated
 	 * @return string Form validation checks
 	 */
 	public function getJsValidation() : string {
@@ -511,6 +517,7 @@ class Form {
 	/**
 	 * Return code used to aggregate all form elements into self::FORM_DATA_VAR_NAME
 	 * 
+	 * @deprecated
 	 * @return string Aggregation code
 	 */
 	public function getJsAggregator() : string {
@@ -527,6 +534,7 @@ class Form {
 	/**
 	 * Return code used to send and process AJAX request
 	 * 
+	 * @deprecated
 	 * @return string AJAX request
 	 */
 	public function getJsAjaxRequest() : string {
@@ -631,6 +639,7 @@ class Form {
 	/**
 	 * Get all of the JavaScript for the form
 	 * 
+	 * @deprecated
 	 * @return string JS code
 	 */
 	public function getAllJs() : string {
