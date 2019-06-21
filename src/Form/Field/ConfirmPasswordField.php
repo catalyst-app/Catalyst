@@ -7,31 +7,74 @@ use \Catalyst\Form\Form;
 use \InvalidArgumentException;
 
 /**
- * Represents a text field
+ * Represents a field
  */
-class ConfirmPasswordField extends PasswordField {
+class ConfirmPasswordField extends AbstractField {
+	use LabelTrait, SupportsAutocompleteAttributeTrait;
 	/**
 	 * Minimum length for the password
-	 * @var PasswordField|null
+	 * @var int
 	 */
-	protected $linkedField = null;
+	protected $minLength = 8;
 
 	/**
-	 * Get the field which must match
+	 * Get the password's minimum length
 	 * 
-	 * @return PasswordField|null Field to match
+	 * @return int Minimum password length
 	 */
-	public function getLinkedField() : ?PasswordField {
-		return $this->linkedField;
+	public function getMinLength() : int {
+		return $this->minLength;
 	}
 
 	/**
-	 * Set the field which must match
+	 * Set the password's minimum length
 	 * 
-	 * @param PasswordField|null $linkedField New field to match
+	 * @param int $minLength New minimum password length
 	 */
-	public function setLinkedField(?PasswordField $linkedField) : void {
-		$this->linkedField = $linkedField;
+	public function setMinLength(int $minLength) : void {
+		$this->minLength = $minLength;
+	}
+
+	/**
+	 * @return string the name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "confirm-password-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return parent::getDefaultErrorMessages() + [
+			"belowMinLength" => "Please use at least ".$this->getMinLength()." character".($this->getMinLength() != 1 ? "s" : ""),
+			"confirmationMismatch" => "The confirmation does not match",
+		];
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"minlength" => $this->getMinLength(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
+	 * Return the field's HTML input
+	 * 
+	 * @return string The HTML to display
+	 */
+	public function getHtml() : string {
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -40,28 +83,17 @@ class ConfirmPasswordField extends PasswordField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		if (is_null($this->getLinkedField())) {
-			throw new InvalidArgumentException("No field was linked to ConfirmPasswordField");
-		}
-		$str = parent::getJsValidator();
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
+	}
 
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val()';
-		$str .= '!==';
-		$str .= '$('.json_encode("#".$this->getLinkedField()->getId()).').val()';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - does not match linked field (".$this->getLinkedField()->getId().")").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
-
-		return $str;
+	/**
+	 * Return JS code to store the field's value in $formDataName
+	 * 
+	 * @param string $formDataName The name of the FormData variable
+	 * @return string Code to use to store field in $formDataName
+	 */
+	public function getJsAggregator(string $formDataName) : string {
+  		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
@@ -70,6 +102,7 @@ class ConfirmPasswordField extends PasswordField {
 	 * @param array $requestArr Array to find the form data in
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
+		// note that we only send the single field to the server.  Check for a match is only done on the JS
 		if (is_null($requestArr)) {
 			if ($this->getForm()->getMethod() == Form::POST) {
 				$requestArr = &$_POST;
@@ -77,24 +110,19 @@ class ConfirmPasswordField extends PasswordField {
 				$requestArr = &$_GET;
 			}
 		}
-		if (is_null($this->getLinkedField())) {
-			throw new InvalidArgumentException("No field was linked to ConfirmPasswordField");
-		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		$requestArr[$this->getDistinguisher()] = TransitEncryption::decryptAes($requestArr[$this->getDistinguisher()]);
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
-				$this->throwMissingError();
-			}
-		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
-				return; // not required and empty, don't do further checks
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
+				$this->throwError("requiredButMissing");
+			} else {
+				return;
 			}
 		}
-		if ($requestArr[$this->getDistinguisher()] !== $requestArr[$this->getLinkedField()->getDistinguisher()]) {
-			$this->throwInvalidError();
+		if (strlen($requestArr[$this->getDistinguisher()]) < $this->getMinLength()) {
+			$this->throwError("belowMinLength");
 		}
 	}
 

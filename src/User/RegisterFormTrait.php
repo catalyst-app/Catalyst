@@ -59,34 +59,16 @@ trait RegisterFormTrait {
 		$emailField->setCustomErrorMessage("alreadyInUse", ErrorCodes::ERR_90308);
 		$form->addField($emailField);
 
-		$passwordField = new PasswordField();
+		$passwordField = new ConfirmPasswordField();
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Password");
 		$passwordField->setRequired(true);
 		$passwordField->setMinLength(8);
-		$passwordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$passwordField->addError(90309, ErrorCodes::ERR_90309);
-		$passwordField->setMissingErrorCode(90309);
-		$passwordField->addError(90310, ErrorCodes::ERR_90310);
-		$passwordField->setInvalidErrorCode(90310);
 		$form->addField($passwordField);
 
 		$passwordMinimumMessage = new StaticHTMLField();
 		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Please use at least 8 characters, however, a longer, random generated one is suggested.  You may easily generate one <a target="_blank" tabindex="-1" href="https://passwordsgenerator.net/?length=60&symbols=1&numbers=1&lowercase=1&uppercase=1&similar=0&ambiguous=0&client=1&autoselect=1">here</a>.</p>');
 		$form->addField($passwordMinimumMessage);
-
-		$confirmPasswordField = new ConfirmPasswordField();
-		$confirmPasswordField->setDistinguisher("confirm-password");
-		$confirmPasswordField->setLabel("Confirm Password");
-		$confirmPasswordField->setRequired(true);
-		$confirmPasswordField->setMinLength(8);
-		$confirmPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$confirmPasswordField->addError(90311, ErrorCodes::ERR_90311);
-		$confirmPasswordField->setMissingErrorCode(90311);
-		$confirmPasswordField->addError(90312, ErrorCodes::ERR_90312);
-		$confirmPasswordField->setInvalidErrorCode(90312);
-		$confirmPasswordField->setLinkedField($passwordField);
-		$form->addField($confirmPasswordField);
 
 		$colorField = new ColorField();
 		$colorField->setDistinguisher("color");

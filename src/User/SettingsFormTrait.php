@@ -73,26 +73,12 @@ trait SettingsFormTrait {
 		}
 		$form->addField($emailField);
 
-		$newPasswordField = new PasswordField();
+		$newPasswordField = new ConfirmPasswordField();
 		$newPasswordField->setDistinguisher("new-password");
 		$newPasswordField->setLabel("New Password");
 		$newPasswordField->setHelperText('Only use this field if you wish to change your password.');
 		$newPasswordField->setRequired(false);
-		$newPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
 		$form->addField($newPasswordField);
-
-		$confirmNewPasswordField = new ConfirmPasswordField();
-		$confirmNewPasswordField->setDistinguisher("confirm-new-password");
-		$confirmNewPasswordField->setLabel("Confirm New Password");
-		$confirmNewPasswordField->setRequired(false);
-		$confirmNewPasswordField->setMinLength(8);
-		$confirmNewPasswordField->setAutocompleteAttribute(AutocompleteValues::NEW_PASSWORD);
-		$confirmNewPasswordField->addError(90511, ErrorCodes::ERR_90511);
-		$confirmNewPasswordField->setMissingErrorCode(90511);
-		$confirmNewPasswordField->addError(90512, ErrorCodes::ERR_90512);
-		$confirmNewPasswordField->setInvalidErrorCode(90512);
-		$confirmNewPasswordField->setLinkedField($newPasswordField);
-		$form->addField($confirmNewPasswordField);
 
 		$twoFactorField = new CheckboxField();
 		$twoFactorField->setDistinguisher("two-factor");
@@ -170,7 +156,6 @@ trait SettingsFormTrait {
 		$passwordField->setDistinguisher("password");
 		$passwordField->setLabel("Old Password");
 		$passwordField->setRequired(true);
-		$passwordField->setAutocompleteAttribute(AutocompleteValues::CURRENT_PASSWORD);
 		$form->addField($passwordField);
 
 		return $form;
