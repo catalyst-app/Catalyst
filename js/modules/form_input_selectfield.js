@@ -106,17 +106,3 @@ class SelectField extends HTMLElement {
 		return true;
 	}
 }
-
-window.addEventListener('load', () => {
-	// BC
-	{
-		window.log("Form input handlers", "Registering SelectField");
-
-		if (!window.hasOwnProperty("formInputHandlers")) {
-			window.formInputHandlers = {};
-		}
-		window.formInputHandlers["Catalyst\\Form\\Field\\SelectField"] = SelectField;
-	}
-
-	window.customElements.define("select-field", SelectField);
-}, {passive: true});

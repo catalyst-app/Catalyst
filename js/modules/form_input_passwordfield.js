@@ -109,17 +109,3 @@ class PasswordField extends HTMLElement {
 		return true;
 	}
 }
-
-window.addEventListener('load', () => {
-	// BC
-	{
-		window.log("Form input handlers", "Registering PasswordField");
-
-		if (!window.hasOwnProperty("formInputHandlers")) {
-			window.formInputHandlers = {};
-		}
-		window.formInputHandlers["Catalyst\\Form\\Field\\PasswordField"] = PasswordField;
-	}
-
-	window.customElements.define("password-field", PasswordField);
-}, {passive: true});

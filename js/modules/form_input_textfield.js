@@ -119,17 +119,3 @@ class TextField extends HTMLElement {
 		return true;
 	}
 }
-
-window.addEventListener('load', () => {
-	// BC
-	{
-		window.log("Form input handlers", "Registering TextField");
-
-		if (!window.hasOwnProperty("formInputHandlers")) {
-			window.formInputHandlers = {};
-		}
-		window.formInputHandlers["Catalyst\\Form\\Field\\TextField"] = TextField;
-	}
-
-	window.customElements.define("text-field", TextField);
-}, {passive: true});

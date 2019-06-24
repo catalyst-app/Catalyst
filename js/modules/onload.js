@@ -261,6 +261,37 @@ var humanFileSize = function(size) {
 	});
 })(jQuery);
 
+window.addEventListener('load', () => {
+	if (!window.hasOwnProperty("formInputHandlers")) {
+		window.formInputHandlers = {};
+	}
+
+	var toRegister = {
+		"form-label-helper-span": FormLabelHelperSpan,
+		"form-label": FormLabel,
+
+		"select-field": SelectField,
+		"text-field": TextField,
+		"password-field": PasswordField,
+		"email-field": EmailField,
+		"confirm-password-field": ConfirmPasswordField,
+
+		"placeholder-number-field": window.formInputHandlers["Catalyst\\Form\\Field\\NumberField"],
+		"placeholder-markdown-field": window.formInputHandlers["Catalyst\\Form\\Field\\MarkdownField"],
+		"placeholder-hidden-input-field": window.formInputHandlers["Catalyst\\Form\\Field\\HiddenInputField"],
+		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"],
+		"placeholder-captcha-field": window.formInputHandlers["Catalyst\\Form\\Field\\CaptchaField"]
+	};
+
+	for (var element in toRegister) {
+		window.log("Form component registration", "Registering "+element);
+
+		window.formInputHandlers["Catalyst\\Form\\Field\\"+toRegister[element].prototype.constructor.name] = toRegister[element];
+
+		window.customElements.define(element, toRegister[element]);
+	}
+}, {passive: true});
+
 <?php if (Controller::isDevelMode()): ?>
 	<?php
 	$overallTime = microtime(true)-EXEC_START_TIME;

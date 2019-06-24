@@ -31,5 +31,3 @@ class FormLabel extends HTMLElement {
 		throw new Error("FormLabel should NEVER be added to the DOM.  It is for templating only.  If you wish to use it, create an instance and add .children[0] (the standard label element itself) to your DOM.");
 	}
 }
-
-window.customElements.define("form-label", FormLabel);

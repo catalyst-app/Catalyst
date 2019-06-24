@@ -98,17 +98,3 @@ class ConfirmPasswordField extends HTMLElement {
 		return pass;
 	}
 }
-
-window.addEventListener('load', () => {
-	// BC
-	{
-		window.log("Form input handlers", "Registering ConfirmPasswordField");
-
-		if (!window.hasOwnProperty("formInputHandlers")) {
-			window.formInputHandlers = {};
-		}
-		window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmPasswordField"] = ConfirmPasswordField;
-	}
-
-	window.customElements.define("confirm-password-field", ConfirmPasswordField);
-}, {passive: true});

@@ -116,17 +116,3 @@ class EmailField extends HTMLElement {
 		return true;
 	}
 }
-
-window.addEventListener('load', () => {
-	// BC
-	{
-		window.log("Form input handlers", "Registering EmailField");
-
-		if (!window.hasOwnProperty("formInputHandlers")) {
-			window.formInputHandlers = {};
-		}
-		window.formInputHandlers["Catalyst\\Form\\Field\\EmailField"] = TextField;
-	}
-
-	window.customElements.define("email-field", EmailField);
-}, {passive: true});
