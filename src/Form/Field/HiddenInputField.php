@@ -32,22 +32,39 @@ class HiddenInputField extends AbstractField {
 	}
 
 	/**
+	 * @return string the name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "hidden-input-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "An unknown error occured.  Please contact the site administrators.",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"hiddenInputId" => $this->getHiddenInputId(),
+			"errors" => $this->getErrorMessages(),
+		];
+	}
+
+	/**
 	 * Return the field's HTML input
 	 */
 	public function getHtml() : string {
-		$str = '';
-
-		// all this serves to do is provide a placeholder for the client JS
-		$str .= '<input';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' type="hidden"';
-		$str .= ' class="form-field"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' data-hidden-input-id="'.htmlspecialchars($this->getHiddenInputId()).'"';
-		$str .= ' data-missing-error="'.htmlspecialchars($this->getErrorMessage($this->getMissingErrorCode())).'"';
-		$str .= '>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -56,7 +73,7 @@ class HiddenInputField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
@@ -66,7 +83,7 @@ class HiddenInputField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
@@ -83,11 +100,11 @@ class HiddenInputField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if ($this->isRequired()) {
 			if (empty($requestArr[$this->getDistinguisher()])) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			}
 		}
 	}
