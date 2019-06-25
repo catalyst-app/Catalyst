@@ -53,10 +53,6 @@ trait EmailVerificationFormTrait {
 		$captchaField->setRequired(true);
 		$captchaField->setSiteKey("6LdGBEEUAAAAAMHsFHz4BRvEnIq1NMuuU_Keo7nn");
 		$captchaField->setSecretKey(Secrets::EMAIL_VERIFICATION_CAPTCHA_SECRET);
-		$captchaField->addError(90403, ErrorCodes::ERR_90403);
-		$captchaField->setMissingErrorCode(90403);
-		$captchaField->addError(90404, ErrorCodes::ERR_90404);
-		$captchaField->setInvalidErrorCode(90404);
 		$form->addField($captchaField);
 
 		return $form;

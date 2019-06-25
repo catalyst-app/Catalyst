@@ -62,10 +62,6 @@ trait EmailListFormTrait {
 		$captchaField->setRequired(true);
 		$captchaField->setSiteKey("6LdaGlcUAAAAAE0HWwoFT4Y81ifwLV6nCsvQobk4");
 		$captchaField->setSecretKey(Secrets::EMAIL_LIST_CAPTCHA_SECRET);
-		$captchaField->addError(90006, ErrorCodes::ERR_90006);
-		$captchaField->setMissingErrorCode(90006);
-		$captchaField->addError(90007, ErrorCodes::ERR_90007);
-		$captchaField->setInvalidErrorCode(90007);
 		$form->addField($captchaField);
 
 		return $form;

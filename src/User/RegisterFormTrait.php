@@ -157,10 +157,6 @@ trait RegisterFormTrait {
 		$captchaField->setRequired(true);
 		$captchaField->setSiteKey("6Lf7A0EUAAAAAM7naF_3NGWGVAxMUK-qPQABEdAl");
 		$captchaField->setSecretKey(Secrets::REGISTER_CAPTCHA_SECRET);
-		$captchaField->addError(90322, ErrorCodes::ERR_90322);
-		$captchaField->setMissingErrorCode(90322);
-		$captchaField->addError(90323, ErrorCodes::ERR_90323);
-		$captchaField->setInvalidErrorCode(90323);
 		$form->addField($captchaField);
 
 		return $form;

@@ -58,10 +58,6 @@ trait LoginFormTrait {
 		$captchaField->setRequired(true);
 		$captchaField->setSiteKey("6LfGBUEUAAAAAIC4spvBe8kIKhQlU_JsAVuTfnid");
 		$captchaField->setSecretKey(Secrets::LOGIN_CAPTCHA_SECRET);
-		$captchaField->addError(90106, ErrorCodes::ERR_90106);
-		$captchaField->setMissingErrorCode(90106);
-		$captchaField->addError(90107, ErrorCodes::ERR_90107);
-		$captchaField->setInvalidErrorCode(90107);
 		$form->addField($captchaField);
 
 		return $form;
