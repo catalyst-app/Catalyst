@@ -115,7 +115,7 @@ class CaptchaField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -125,7 +125,7 @@ class CaptchaField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.getAggregationValue());';
 	}
 
 	/**
