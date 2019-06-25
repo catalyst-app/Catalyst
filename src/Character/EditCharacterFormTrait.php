@@ -53,10 +53,6 @@ trait EditCharacterFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$descriptionField->addError(91003, ErrorCodes::ERR_91003);
-		$descriptionField->setMissingErrorCode(91003);
-		$descriptionField->addError(91004, ErrorCodes::ERR_91004);
-		$descriptionField->setInvalidErrorCode(91004);
 		if (!is_null($character)) {
 			$descriptionField->setPrefilledValue($character->getDescription());
 		}

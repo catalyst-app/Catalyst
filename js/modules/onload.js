@@ -108,7 +108,6 @@ var humanFileSize = function(size) {
 					);
 				}, 1000);
 			});
-			$('textarea').trigger('autoresize');
 			M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 				showClearBtn: true
 			});
@@ -141,16 +140,6 @@ var humanFileSize = function(size) {
 			if ($(this).scrollLeft() != orig) {
 				e.preventDefault();
 			}
-		});
-
-		/* MARKDOWN */
-		for (var i = 0; i < document.querySelectorAll(".markdown-field.form-field").length; i++) {
-			new window.formInputHandlers["Catalyst\\Form\\Field\\MarkdownField"](document.querySelectorAll(".markdown-field.form-field")[i]);
-		}
-		$(document).on("click", ".markdown-rendered-checkbox", function(e) {
-			e.preventDefault && e.preventDefault();
-			e.stopPropogation && e.stopPropogation();
-			return false;
 		});
 
 		/* EASTER EGGS */
@@ -277,9 +266,9 @@ window.addEventListener('load', () => {
 		"confirm-password-field": ConfirmPasswordField,
 		"captcha-field": CaptchaField,
 		"hidden-input-field": HiddenInputField,
+		"markdown-field": MarkdownField,
 
 		"placeholder-number-field": window.formInputHandlers["Catalyst\\Form\\Field\\NumberField"],
-		"placeholder-markdown-field": window.formInputHandlers["Catalyst\\Form\\Field\\MarkdownField"],
 		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"]
 	};
 

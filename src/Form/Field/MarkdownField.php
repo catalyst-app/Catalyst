@@ -16,60 +16,42 @@ class MarkdownField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
+		return $this->getWebComponentHtml();
+	}
 
-		$str .= '<p';
-		$str .= ' class="col s12 no-bottom-margin"';
-		$str .= '>';
-		$str .= 'Catalyst uses a modified version of Markdown in this field.  Please see ';
-		$str .= '<a href="'.ROOTDIR.'Markdown" tabindex="-1" target="_blank">this page</a>';
-		$str .= ' for help.';
-		$str .= '</p>';
+	/**
+	 * @return string the name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "markdown-field";
+	}
 
-		$str .= '<div class="col s12">';
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "Please verify that you are not a robot",
+			"unknownError" => "Please check your network connection.  If this error persists, contact support",
+			"expired" => "Please re-solve the CAPTCHA, you took too long to submit",
+			"verificationFailed" => "Please try again.  If this error persists, contact support",
+		] + parent::getDefaultErrorMessages();
+	}
 
-		$str .= '<div class="row">';
-
-		$str .= '<div class="input-field col s12 m6">';
-
-		$str .= '<textarea';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' class="materialize-textarea markdown-field form-field"';
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-
-		if ($this->isFieldPrefilled()) {
-			$str .= htmlspecialchars($this->getPrefilledValue());
-		}
-
-		$str .= '</textarea>';
-
-		$str .= $this->getLabelHtml();
-
-		$str .= '</div>';
-
-		$str .= '<div';
-		$str .= ' class="col s12 m6 markdown-target markdown-preview raw-markdown"';
-		$str .= ' data-field="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-
-		if ($this->isFieldPrefilled()) {
-			$str .= htmlspecialchars($this->getPrefilledValue());
-		}
-
-		$str .= '</div>';
-		
-		$str .= '</div>';
-		
-		$str .= '</div>';
-
-		return $str;
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties();
 	}
 
 	/**
@@ -78,7 +60,7 @@ class MarkdownField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -88,7 +70,7 @@ class MarkdownField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**

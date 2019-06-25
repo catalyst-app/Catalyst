@@ -415,6 +415,14 @@ footer a {
 	border: 1px solid #ccc;
 }
 
+.markdown-preview::before {
+	content: "Preview";
+	display: block;
+	font-size: 0.8rem;
+	color: grey;
+	margin-top: 0.5rem;
+}
+
 .rendered-markdown ul:not(.collapsible) {
 	padding-left: 1.6em;
 	list-style-type: initial;

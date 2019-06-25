@@ -74,10 +74,6 @@ trait EditCommissionTypeFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$descriptionField->addError(91705, ErrorCodes::ERR_91705);
-		$descriptionField->setMissingErrorCode(91705);
-		$descriptionField->addError(91706, ErrorCodes::ERR_91706);
-		$descriptionField->setInvalidErrorCode(91706);
 		if (!is_null($commissionType)) {
 			$descriptionField->setPrefilledValue($commissionType->getDescription());
 		}

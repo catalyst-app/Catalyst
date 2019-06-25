@@ -86,10 +86,6 @@ trait TestFormTrait {
 		$markdownField->setLabel("Test markdown field, required");
 		$markdownField->setRequired(true);
 		$markdownField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$markdownField->addError(99824, ErrorCodes::ERR_99824);
-		$markdownField->setMissingErrorCode(99824);
-		$markdownField->addError(99825, ErrorCodes::ERR_99825);
-		$markdownField->setInvalidErrorCode(99825);
 		$form->addField($markdownField);
 
 		$numberField = new NumberField();

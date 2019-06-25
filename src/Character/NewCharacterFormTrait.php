@@ -46,10 +46,6 @@ trait NewCharacterFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$descriptionField->addError(90803, ErrorCodes::ERR_90803);
-		$descriptionField->setMissingErrorCode(90803);
-		$descriptionField->addError(90804, ErrorCodes::ERR_90804);
-		$descriptionField->setInvalidErrorCode(90804);
 		$form->addField($descriptionField);
 
 		$imagesField = new MultipleImageWithNsfwCaptionAndInfoField();

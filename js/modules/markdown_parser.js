@@ -1,21 +1,28 @@
-<?php
-header("Content-Type: application/javascript; charset=UTF-8", true);
-header("Cache-Control: max-age=86400", true);
-?>
-window.markdownCurrentlyParsing = {};
-
-window.renderMarkdownArea = function(area) {
+function renderMarkdownArea(area) {
   var startTime = Date.now();
-  window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendering #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field")));
-  if ($(area).hasClass("raw-inline-markdown")) {
-    $(area).attr("data-src", $(area).html()).html(md.renderInline($(area).html())).removeClass('raw-inline-markdown').addClass('rendered-markdown');
-    window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered inline block #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
-  } else {
-    $(area).attr("data-src", $(area).html()).html(md.render($(area).html())).removeClass('raw-markdown').addClass('rendered-markdown');
-    $(area).find('.collapsible').collapsible();
-    window.log(<?= json_encode(basename(__FILE__)) ?>, "renderMarkdownArea - rendered block #"+($(area).attr("id") ? $(area).attr("id") : $(area).attr("data-field"))+" in "+((Date.now()-startTime)/1000)+"s");
-  }
-};
+
+  var renderer = area.classList.contains("raw-inline-markdown") ? "renderInline" : "render";
+
+  window.log("markdown_parser", "rendering #"+area.id+" with "+renderer);
+
+  area.innerHTML = md[renderer](area.innerHTML);
+  area.classList.remove("raw-inline-markdown", "raw-markdown");
+  area.classList.add("rendered-markdown");
+
+  M.Collapsible.init(area.querySelectorAll('.collapsible'), { accordion: false });
+
+  // this used to be a document-wide filtered listener with jQuery, now this is used
+  // as of now, this cannot be expanded to the entire field (removing the need for a loop/array) due to the collapsible support
+  Array.from(area.getElementsByClassName("markdown-rendered-checkbox")).forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      e.preventDefault && e.preventDefault();
+      e.stopPropogation && e.stopPropogation();
+      return false;
+    }, { "capture": true });
+  });
+
+  window.log("markdown_parser", "rendered #"+area.id+" in "+(Date.now()-startTime)+"ms");
+}
 
 // FROM WEBPACK
 /******/ (function(modules) { // webpackBootstrap
@@ -9452,7 +9459,6 @@ checkboxReplace = function(md, options, Token) {
     if (options.divWrap) {
       nodes.push(new Token("checkbox_close", "div", -1));
     }
-    console.log(nodes);
     return nodes;
   };
   splitTextToken = function(original, Token) {

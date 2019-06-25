@@ -84,10 +84,6 @@ trait CreateArtistPageFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$descriptionField->addError(91206, ErrorCodes::ERR_91206);
-		$descriptionField->setMissingErrorCode(91206);
-		$descriptionField->addError(91207, ErrorCodes::ERR_91207);
-		$descriptionField->setInvalidErrorCode(91207);
 		$form->addField($descriptionField);
 
 		$profilePictureField = new ImageField();
@@ -125,10 +121,6 @@ trait CreateArtistPageFormTrait {
 		$tosField->setLabel("Terms of Service");
 		$tosField->setRequired(true);
 		$tosField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$tosField->addError(91213, ErrorCodes::ERR_91213);
-		$tosField->setMissingErrorCode(91213);
-		$tosField->addError(91214, ErrorCodes::ERR_91214);
-		$tosField->setInvalidErrorCode(91214);
 		$form->addField($tosField);
 
 		$tosNote = new StaticHTMLField();

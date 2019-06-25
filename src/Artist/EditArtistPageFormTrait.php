@@ -97,10 +97,6 @@ trait EditArtistPageFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$descriptionField->addError(91406, ErrorCodes::ERR_91406);
-		$descriptionField->setMissingErrorCode(91406);
-		$descriptionField->addError(91407, ErrorCodes::ERR_91407);
-		$descriptionField->setInvalidErrorCode(91407);
 		if ($isArtist) {
 			$descriptionField->setPrefilledValue($artist->getDescription());
 		}
@@ -141,10 +137,6 @@ trait EditArtistPageFormTrait {
 		$tosField->setLabel("Terms of Service");
 		$tosField->setRequired(true);
 		$tosField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$tosField->addError(91413, ErrorCodes::ERR_91413);
-		$tosField->setMissingErrorCode(91413);
-		$tosField->addError(91414, ErrorCodes::ERR_91414);
-		$tosField->setInvalidErrorCode(91414);
 		if ($isArtist) {
 			$tosField->setPrefilledValue($artist->getCurrentTosWithoutDate());
 		}

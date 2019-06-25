@@ -58,10 +58,6 @@ trait NewCommissionTypeFormTrait {
 		$descriptionField->setLabel("Description");
 		$descriptionField->setRequired(true);
 		$descriptionField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$descriptionField->addError(91505, ErrorCodes::ERR_91505);
-		$descriptionField->setMissingErrorCode(91505);
-		$descriptionField->addError(91506, ErrorCodes::ERR_91506);
-		$descriptionField->setInvalidErrorCode(91506);
 		$form->addField($descriptionField);
 
 		$costsNote = new StaticHTMLField();
