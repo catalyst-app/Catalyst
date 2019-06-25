@@ -69,30 +69,44 @@ class CaptchaField extends AbstractField {
 	}
 
 	/**
+	 * @return string the name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "captcha-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "Please verify that you are not a robot",
+			"unknownError" => "Please check your network connection.  If this error persists, contact support",
+			"expired" => "Please re-solve the CAPTCHA, you took too long to submit",
+			"verificationFailed" => "Please try again.  If this error persists, contact support",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"siteKey" => $this->getSiteKey(),
+			"errors" => $this->getErrorMessages(),
+		];
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		if (!$this->isRequired()) {
-			throw new LogicException("CaptchaField must be required");
-		}
-		if (empty($this->getSiteKey())) {
-			throw new InvalidArgumentException("CaptchaField must have a site key set");
-		}
-		$str = '';
-		$str .= '<div';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' class="g-recaptcha col s12 form-field"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' data-sitekey="'.htmlspecialchars($this->getSiteKey()).'"';
-		$str .= ' data-expired-callback="verifyCaptchas"';
-		$str .= ' data-callback="verifyCaptchas"';
-		$str .= ' data-invalid-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= ' data-missing-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '></div>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -101,7 +115,7 @@ class CaptchaField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -111,14 +125,15 @@ class CaptchaField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).',(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
-	 * Verify the ReCaptcha v2
+	 * Verify the ReCaptcha v2 (provided dev mode is disabled)
 	 * 
 	 * @param array $requestArr Array to find the form data in
-	 * @throws LogicException Field is not required
+	 * @throws LogicException Secret key is not set
+	 * @throws RuntimeException Response was not valid whatsoever
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		if (is_null($requestArr)) {
@@ -128,14 +143,17 @@ class CaptchaField extends AbstractField {
 				$requestArr = &$_GET;
 			}
 		}
-		if (!$this->isRequired()) {
-			throw new LogicException("CaptchaField must be required");
-		}
 		if (empty($this->getSecretKey())) {
-			throw new InvalidArgumentException("CaptchaField must have a secret key set");
+			throw new LogicException("CaptchaField must have a secret key set");
+		}
+		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
+			$this->throwError("requiredButMissing");
+		}
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			$this->throwError("requiredButMissing");
 		}
 		if (Controller::isDevelMode()) {
-			return; // dont verify captchas in dev mode
+			return; // we don't verify captchas in dev mode (potentially offline/excessive)
 		}
 		$opts = [
 			"http" => [
@@ -150,10 +168,10 @@ class CaptchaField extends AbstractField {
 		];
 		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify", false, stream_context_create($opts));
 		if ($response === false) {
-			throw new Exception("Unable to query reCAPTCHA.");
+			throw new RuntimeException("Unable to query reCAPTCHA.");
 		}
 		if (!json_decode($response)->success) {
-			$this->throwInvalidError();
+			$this->throwError("verificationFailed");
 		}
 	}
 }

@@ -46,11 +46,11 @@ class PasswordField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return parent::getDefaultErrorMessages() + [
+		return [
 			"belowMinLength" => "Please use at least ".$this->getMinLength()." character".($this->getMinLength() != 1 ? "s" : ""),
 			// not used by class, however, frequently used by implementing clients, therefore, it seems best to include it for the sake of a standard naming if nothing else
 			"incorrectPassword" => "This password is incorrect.  Please contact support if you need to reset it",
-		];
+		] + parent::getDefaultErrorMessages();
 	}
 
 	/**

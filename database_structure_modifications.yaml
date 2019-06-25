@@ -25,3 +25,5 @@ d6e2b9d0dd283efc2905a0fa373c227de2b56167:
   INSERT INTO `resources` (`ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `VERSIONED`, `LATEST_SOURCE`, `DATE_OF_LATEST_UPGRADE`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES('DEVEL', 'SCRIPT', 80, 1, 'modules/form_input_passwordfield.js', 'N/A', 0, NULL, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
 fca21008bdd1ccc4e1326abd40880e2c79631dc4:
   INSERT INTO `resources` (`ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `VERSIONED`, `LATEST_SOURCE`, `DATE_OF_LATEST_UPGRADE`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES('DEVEL', 'SCRIPT', 80, 1, 'modules/form_input_passwordfield.js', 'N/A', 0, NULL, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+a7ff9458bd6328bb7c5b13b72f6faa259b2d36de:
+  UPDATE `resources` SET `NAME`='https://google.com/recaptcha/api.js?render=explicit', `MINIFIED_NAME`='https://google.com/recaptcha/api.js?render=explicit' WHERE `NAME`='https://google.com/recaptcha/api.js';

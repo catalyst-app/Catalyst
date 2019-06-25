@@ -40,11 +40,11 @@ class TextField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return parent::getDefaultErrorMessages() + [
-			"patternMismatch" => "Please follow the requiried format",
+		return [
+			"patternMismatch" => "Please follow the required format",
 			"exceedsMaxLength" => "This value is longer than the permitted ".$this->getMaxLength()." character".($this->getMaxLength() != 1 ? "s" : ""),
 			"disallowedValue" => "This value can not be used, please try something else",
-		];
+		] + parent::getDefaultErrorMessages();
 	}
 
 	/**

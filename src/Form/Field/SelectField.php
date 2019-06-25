@@ -46,9 +46,9 @@ class SelectField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return parent::getDefaultErrorMessages() + [
+		return [
 			"invalidResponse" => "This select box is having some internal issues, please contact support",
-		];
+		] + parent::getDefaultErrorMessages();
 	}
 
 	/**

@@ -275,12 +275,12 @@ window.addEventListener('load', () => {
 		"password-field": PasswordField,
 		"email-field": EmailField,
 		"confirm-password-field": ConfirmPasswordField,
+		"captcha-field": CaptchaField,
 
 		"placeholder-number-field": window.formInputHandlers["Catalyst\\Form\\Field\\NumberField"],
 		"placeholder-markdown-field": window.formInputHandlers["Catalyst\\Form\\Field\\MarkdownField"],
 		"placeholder-hidden-input-field": window.formInputHandlers["Catalyst\\Form\\Field\\HiddenInputField"],
-		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"],
-		"placeholder-captcha-field": window.formInputHandlers["Catalyst\\Form\\Field\\CaptchaField"]
+		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"]
 	};
 
 	for (var element in toRegister) {

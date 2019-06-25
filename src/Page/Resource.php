@@ -257,7 +257,7 @@ class Resource extends AbstractDatabaseModel {
 	public function getTag() : string {
 		$path = $this->getResolvedPath();
 
-		$path .= "?commit=".Controller::getCommit();
+		$path .= (strpos($path, "?") === false ? "?" : "&") . "commit=".Controller::getCommit();
 		if (Controller::isDevelMode()) {
 			$path .= microtime(true);
 		}

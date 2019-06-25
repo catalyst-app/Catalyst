@@ -47,10 +47,10 @@ class ConfirmPasswordField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return parent::getDefaultErrorMessages() + [
+		return [
 			"belowMinLength" => "Please use at least ".$this->getMinLength()." character".($this->getMinLength() != 1 ? "s" : ""),
 			"confirmationMismatch" => "The confirmation does not match",
-		];
+		] + parent::getDefaultErrorMessages();
 	}
 
 	/**

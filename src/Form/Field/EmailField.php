@@ -30,11 +30,11 @@ class EmailField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return parent::getDefaultErrorMessages() + [
+		return [
 			"patternMismatch" => "This e-mail address does not seem valid",
 			"aboveMaxLength" => "This seems a little too long to be an e-mail address",
 			"internalEmail" => "@catalystapp.co and @catl.st e-mails are disallowed",
-		];
+		] + parent::getDefaultErrorMessages();
 	}
 
 	/**
