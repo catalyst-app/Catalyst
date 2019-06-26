@@ -96,44 +96,26 @@ trait RegisterFormTrait {
 
 		$nsfwProfilePictureField = new CheckboxField();
 		$nsfwProfilePictureField->setDistinguisher("profile-picture-is-nsfw");
-		$nsfwProfilePictureField->setLabel("My profile picture is explicit or mature");
+		$nsfwProfilePictureField->setLabel("My profile picture is [explicit or mature](".ROOTDIR."FAQ/#explicit)");
 		$nsfwProfilePictureField->setRequired(false);
-		$nsfwProfilePictureField->addError(90318, ErrorCodes::ERR_90318);
-		$nsfwProfilePictureField->setMissingErrorCode(90318);
-		$nsfwProfilePictureField->addError(90318, ErrorCodes::ERR_90318);
-		$nsfwProfilePictureField->setInvalidErrorCode(90318);
 		$form->addField($nsfwProfilePictureField);
-
-		$form->addStaticHtml('<p class="no-top-margin col s12">Go <a target="_blank" href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
 
 		$nsfwAccessField = new CheckboxField();
 		$nsfwAccessField->setDistinguisher("nsfw-access");
 		$nsfwAccessField->setLabel("I am above 18 years old and wish to see NSFW content");
 		$nsfwAccessField->setRequired(false);
-		$nsfwAccessField->addError(90319, ErrorCodes::ERR_90319);
-		$nsfwAccessField->setMissingErrorCode(90319);
-		$nsfwAccessField->addError(90319, ErrorCodes::ERR_90319);
-		$nsfwAccessField->setInvalidErrorCode(90319);
 		$form->addField($nsfwAccessField);
 
 		$minimumAgeField = new CheckboxField();
 		$minimumAgeField->setDistinguisher("age");
 		$minimumAgeField->setLabel("I am above 13 years old, or 16 if I am in the EU");
 		$minimumAgeField->setRequired(true);
-		$minimumAgeField->addError(90327, ErrorCodes::ERR_90327);
-		$minimumAgeField->setMissingErrorCode(90327);
-		$minimumAgeField->addError(90328, ErrorCodes::ERR_90328);
-		$minimumAgeField->setInvalidErrorCode(90328);
 		$form->addField($minimumAgeField);
 
 		$tosAcceptanceField = new CheckboxField();
 		$tosAcceptanceField->setDistinguisher("tos-acceptance");
-		$tosAcceptanceField->setLabel('I accept the <a target="_blank" href="'.ROOTDIR.'Help/TOS">terms of service</a> and agree to and understand the <a target="_blank" href="'.ROOTDIR.'Help/Privacy">privacy policy</a>');
+		$tosAcceptanceField->setLabel('I accept the [terms of service]('.ROOTDIR.'Help/TOS) and I agree to and understand the [privacy policy]('.ROOTDIR.'Help/Privacy)');
 		$tosAcceptanceField->setRequired(true);
-		$tosAcceptanceField->addError(90320, ErrorCodes::ERR_90320);
-		$tosAcceptanceField->setMissingErrorCode(90320);
-		$tosAcceptanceField->addError(90321, ErrorCodes::ERR_90321);
-		$tosAcceptanceField->setInvalidErrorCode(90321);
 		$form->addField($tosAcceptanceField);
 
 		$referrerField = new TextField();

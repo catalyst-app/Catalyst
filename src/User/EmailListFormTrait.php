@@ -52,9 +52,6 @@ trait EmailListFormTrait {
 		$informationRequestField->setDistinguisher("request-info");
 		$informationRequestField->setLabel("I would like a staff member to personally contact me with additional information about our services");
 		$informationRequestField->setRequired(false);
-		$informationRequestField->addError(90005, ErrorCodes::ERR_90005);
-		$informationRequestField->setMissingErrorCode(90005);
-		$informationRequestField->setInvalidErrorCode(90005);
 		$form->addField($informationRequestField);
 
 		$captchaField = new CaptchaField();

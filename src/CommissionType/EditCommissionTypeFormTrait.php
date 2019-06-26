@@ -359,10 +359,6 @@ trait EditCommissionTypeFormTrait {
 		$visibleCheckbox->setRequired(false);
 		$visibleCheckbox->setLabel("This commission type should be listed publicly on my page");
 		$visibleCheckbox->setDistinguisher("visible");
-		$visibleCheckbox->addError(91743, ErrorCodes::ERR_91743);
-		$visibleCheckbox->setMissingErrorCode(91743);
-		$visibleCheckbox->addError(91744, ErrorCodes::ERR_91744);
-		$visibleCheckbox->setInvalidErrorCode(91744);
 		if (!is_null($commissionType)) {
 			$visibleCheckbox->setPrefilledValue($commissionType->isVisible());
 		}
@@ -372,10 +368,6 @@ trait EditCommissionTypeFormTrait {
 
 		$acceptingCheckboxGeneric = new CheckboxField();
 		$acceptingCheckboxGeneric->setRequired(false);
-		$acceptingCheckboxGeneric->addError(91741, ErrorCodes::ERR_91741);
-		$acceptingCheckboxGeneric->setMissingErrorCode(91741);
-		$acceptingCheckboxGeneric->addError(91742, ErrorCodes::ERR_91742);
-		$acceptingCheckboxGeneric->setInvalidErrorCode(91742);
 		foreach (["Quotes", "Requests", "Trades", "Commissions"] as $item) {
 			$acceptingCheckboxGeneric->setLabel($item);
 			$acceptingCheckboxGeneric->setDistinguisher("accepting-".strtolower($item));

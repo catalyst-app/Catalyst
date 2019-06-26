@@ -94,11 +94,8 @@ trait EditCharacterFormTrait {
 		$publicCheckboxField = new CheckboxField();
 		$publicCheckboxField->setDistinguisher("public");
 		$publicCheckboxField->setLabel("Make this character public");
+		$publicCheckboxField->setPrefilledValue(true);
 		$publicCheckboxField->setRequired(false);
-		$publicCheckboxField->addError(91010, ErrorCodes::ERR_91010);
-		$publicCheckboxField->setMissingErrorCode(91010);
-		$publicCheckboxField->addError(91011, ErrorCodes::ERR_91011);
-		$publicCheckboxField->setInvalidErrorCode(91011);
 		if (!is_null($character)) {
 			$publicCheckboxField->setPrefilledValue($character->isPublic());
 		}

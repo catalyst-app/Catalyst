@@ -84,10 +84,6 @@ trait SettingsFormTrait {
 		$twoFactorField->setDistinguisher("two-factor");
 		$twoFactorField->setLabel("Enable two-factor authentication (Google Authenticator or similar required)");
 		$twoFactorField->setRequired(false);
-		$twoFactorField->addError(90513, ErrorCodes::ERR_90513);
-		$twoFactorField->setMissingErrorCode(90513);
-		$twoFactorField->addError(90513, ErrorCodes::ERR_90513);
-		$twoFactorField->setInvalidErrorCode(90513);
 		if (!is_null($user)) {
 			$twoFactorField->setPrefilledValue($user->isTotpEnabled());
 		}
@@ -124,27 +120,17 @@ trait SettingsFormTrait {
 
 		$nsfwProfilePictureField = new CheckboxField();
 		$nsfwProfilePictureField->setDistinguisher("profile-picture-is-nsfw");
-		$nsfwProfilePictureField->setLabel("My profile picture is explicit or mature");
+		$nsfwProfilePictureField->setLabel("My profile picture is [explicit or mature](".ROOTDIR."FAQ/#explicit)");
 		$nsfwProfilePictureField->setRequired(false);
-		$nsfwProfilePictureField->addError(90519, ErrorCodes::ERR_90519);
-		$nsfwProfilePictureField->setMissingErrorCode(90519);
-		$nsfwProfilePictureField->addError(90519, ErrorCodes::ERR_90519);
-		$nsfwProfilePictureField->setInvalidErrorCode(90519);
 		if (!is_null($user)) {
 			$nsfwProfilePictureField->setPrefilledValue($user->getImage()->isNsfw());
 		}
 		$form->addField($nsfwProfilePictureField);
 
-		$form->addStaticHtml('<p class="no-top-margin col s12">Go <a target="_blank" href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
-
 		$nsfwAccessField = new CheckboxField();
 		$nsfwAccessField->setDistinguisher("nsfw-access");
 		$nsfwAccessField->setLabel("I am above 18 years old and wish to see NSFW content");
 		$nsfwAccessField->setRequired(false);
-		$nsfwAccessField->addError(90520, ErrorCodes::ERR_90520);
-		$nsfwAccessField->setMissingErrorCode(90520);
-		$nsfwAccessField->addError(90520, ErrorCodes::ERR_90520);
-		$nsfwAccessField->setInvalidErrorCode(90520);
 		if (!is_null($user)) {
 			$nsfwAccessField->setPrefilledValue($user->isNsfw());
 		}
