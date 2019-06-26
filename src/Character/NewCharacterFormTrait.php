@@ -87,9 +87,7 @@ trait NewCharacterFormTrait {
 		$publicCheckboxField->setInvalidErrorCode(90811);
 		$form->addField($publicCheckboxField);
 
-		$publicNotice = new StaticHTMLField();
-		$publicNotice->setHtml('<p class="col s12 no-margin">If this character is public, anyone can see it on your profile and access it with its link.  Otherwise, only you and artists you commission may see it.</p>');
-		$form->addField($publicNotice);
+		$form->addStaticHtml('<p class="col s12 no-margin">If this character is public, anyone can see it on your profile and access it with its link.  Otherwise, only you and artists you commission may see it.</p>');
 
 		return $form;
 	}

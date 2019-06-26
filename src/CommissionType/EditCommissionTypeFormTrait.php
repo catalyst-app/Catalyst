@@ -52,9 +52,7 @@ trait EditCommissionTypeFormTrait {
 		}
 		$form->addField($nameField);
 
-		$blurbNote = new StaticHTMLField();
-		$blurbNote->setHtml('<p class="col s12 no-bottom-margin">Blurbs are shown in search results, wishlists, etc.</p>');
-		$form->addField($blurbNote);
+		$form->addStaticHtml('<p class="col s12 no-bottom-margin">Blurbs are shown in search results, wishlists, etc.</p>');
 
 		$blurbField = new TextField();
 		$blurbField->setDistinguisher("blurb");
@@ -79,9 +77,7 @@ trait EditCommissionTypeFormTrait {
 		}
 		$form->addField($descriptionField);
 
-		$costsNote = new StaticHTMLField();
-		$costsNote->setHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging. </p>');
-		$form->addField($costsNote);
+		$form->addStaticHtml('<p class="col s12 no-bottom-margin">The base cost is the minimum cost of the commission type, in whatever units you are charging. </p>');
 
 		$baseCostFieldWrapper = new WrappedField();
 		$baseCostFieldWrapper->setWrapperClasses("col s12 m6");
@@ -372,9 +368,7 @@ trait EditCommissionTypeFormTrait {
 		}
 		$form->addField($visibleCheckbox);
 
-		$acceptingHeader = new StaticHTMLField();
-		$acceptingHeader->setHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
-		$form->addField($acceptingHeader);
+		$form->addStaticHtml('<p class="col s12 no-bottom-margin">For this commission type, I am currently accepting:</p>');
 
 		$acceptingCheckboxGeneric = new CheckboxField();
 		$acceptingCheckboxGeneric->setRequired(false);

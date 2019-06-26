@@ -4,7 +4,7 @@ namespace Catalyst\Form;
 
 use \Catalyst\API\{ErrorCodes, Response};
 use \Catalyst\Form\CompletionAction\AbstractCompletionAction;
-use \Catalyst\Form\Field\{AbstractField,ImageField};
+use \Catalyst\Form\Field\{AbstractField,ImageField,StaticHTMLField};
 use \Catalyst\{Controller, HTTPCode};
 use \Exception;
 use \InvalidArgumentException;
@@ -263,6 +263,17 @@ class Form {
 	public function addField(AbstractField $field) : void {
 		$field->setForm($this);
 		$this->fields[] = $field;
+	}
+
+	/**
+	 * Add a block of static HTML (via StaticHTMLField)
+	 * 
+	 * @param string $html HTML block to add
+	 */
+	public function addStaticHtml(string $html) : void {
+		$staticField = new StaticHTMLField();
+		$staticField->setStaticHtml($html);
+		$this->addField($staticField);
 	}
 
 	/**

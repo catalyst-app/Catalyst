@@ -3,33 +3,59 @@
 namespace Catalyst\Form\Field;
 
 /**
- * A sttic html field
+ * A static html field
  */
 class StaticHTMLField extends AbstractField {
 	/**
 	 * The HTML to display
 	 * @var string
 	 */
-	protected $html = "";
+	protected $staticHtml = "";
+
+	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "static-html-field";
+	}
 
 	/**
 	 * Set the HTML to display to a new value
 	 * 
-	 * @param string $html New HTML
+	 * @param string $staticHtml New HTML
 	 */
-	public function setHtml(string $html) : void {
-		$this->html = $html;
+	public function setStaticHtml(string $staticHtml) : void {
+		$this->staticHtml = $staticHtml;
 	}
 
 	/**
-	 * Return the field's HTML to display
-	 * 
-	 * Acts as a getter, but also satiates AbstractField's requriements, which is why its down here
+	 * Return the field's static HTML to display
 	 * 
 	 * @return string The field's HTML
 	 */
+	public function getStaticHtml() : string {
+		return $this->staticHtml;
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => "static-html-".hash("sha256", $this->getStaticHtml()),
+			"html" => $this->getStaticHtml(),
+			"errors" => $this->getErrorMessages(),
+		];
+	}
+
+	/**
+	 * Return the field's HTML input
+	 * 
+	 * @return string The HTML to display
+	 */
 	public function getHtml() : string {
-		return $this->html;
+		return $this->getWebComponentHtml();
 	}
 
 	/**

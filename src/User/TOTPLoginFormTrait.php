@@ -41,13 +41,9 @@ trait TOTPLoginFormTrait {
 		$tokenField->setCustomErrorMessage("invalidCode", "This code is incorrect, please make sure your device's clock is correct");
 		$form->addField($tokenField);
 
-		$goBackNotice = new StaticHTMLField();
-		$goBackNotice->setHtml('<p class="col s12 no-margin">If you would like to go back and login with a different account, click <a href="'.ROOTDIR.'/Login/">here</a></p>');
-		$form->addField($goBackNotice);
+		$form->addStaticHtml('<p class="col s12 no-margin">If you would like to go back and login with a different account, click <a href="'.ROOTDIR.'/Login/">here</a></p>');
 
-		$noCodeMessage = new StaticHTMLField();
-		$noCodeMessage->setHtml('<p class="col s12 no-top-margin">If you do not have access to this code, please <a href="'.ROOTDIR.'Help">contact support</a> with your recovery key.</p>');
-		$form->addField($noCodeMessage);
+		$form->addStaticHtml('<p class="col s12 no-top-margin">If you do not have access to this code, please <a href="'.ROOTDIR.'Help">contact support</a> with your recovery key.</p>');
 
 		return $form;
 	}

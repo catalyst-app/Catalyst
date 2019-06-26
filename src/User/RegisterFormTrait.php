@@ -66,9 +66,7 @@ trait RegisterFormTrait {
 		$passwordField->setMinLength(8);
 		$form->addField($passwordField);
 
-		$passwordMinimumMessage = new StaticHTMLField();
-		$passwordMinimumMessage->setHtml('<p class="no-top-margin col s12">Please use at least 8 characters, however, a longer, random generated one is suggested.  You may easily generate one <a target="_blank" tabindex="-1" href="https://passwordsgenerator.net/?length=60&symbols=1&numbers=1&lowercase=1&uppercase=1&similar=0&ambiguous=0&client=1&autoselect=1">here</a>.</p>');
-		$form->addField($passwordMinimumMessage);
+		$form->addStaticHtml('<p class="no-top-margin col s12">Please use at least 8 characters, however, a longer, random generated one is suggested.  You may easily generate one <a target="_blank" tabindex="-1" href="https://passwordsgenerator.net/?length=60&symbols=1&numbers=1&lowercase=1&uppercase=1&similar=0&ambiguous=0&client=1&autoselect=1">here</a>.</p>');
 
 		$colorField = new ColorField();
 		$colorField->setDistinguisher("color");
@@ -106,9 +104,7 @@ trait RegisterFormTrait {
 		$nsfwProfilePictureField->setInvalidErrorCode(90318);
 		$form->addField($nsfwProfilePictureField);
 
-		$explicitDefinitionMessage = new StaticHTMLField();
-		$explicitDefinitionMessage->setHtml('<p class="no-top-margin col s12">Go <a target="_blank" href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
-		$form->addField($explicitDefinitionMessage);
+		$form->addStaticHtml('<p class="no-top-margin col s12">Go <a target="_blank" href="'.ROOTDIR.'FAQ/#explicit">here</a> to see the difference between safe, mature, and explicit.</p>');
 
 		$nsfwAccessField = new CheckboxField();
 		$nsfwAccessField->setDistinguisher("nsfw-access");

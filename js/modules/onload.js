@@ -287,6 +287,7 @@ window.addEventListener('load', () => {
 		"hidden-input-field": HiddenInputField,
 		"markdown-field": MarkdownField,
 		"number-field": NumberField,
+		"static-html-field": StaticHTMLField,
 
 		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"]
 	};

@@ -54,30 +54,16 @@ trait CreateArtistPageFormTrait {
 		$urlField->setCustomErrorMessage("urlInUse", "This URL is already in use by another user.  Please try something else.");
 		$form->addField($urlField);
 
-		$urlSample = new StaticHTMLField();
+		$urlSample = '';
+		$urlSample .= '<p class="col s12 no-top-margin">';
+		$urlSample .= 'This will be the link to your page: ';
+		$urlSample .= '<strong id="artist-page-url-sample" data-base="'.htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."").'"';
+		$urlSample .= '>';
+		$urlSample .= htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."");
+		$urlSample .= '</strong>';
+		$urlSample .= '</p>';
 		
-		$urlSampleHtml = '';
-
-		$urlSampleHtml .= '<p';
-		$urlSampleHtml .= ' class="col s12 no-top-margin"';
-		$urlSampleHtml .= '>';
-
-		$urlSampleHtml .= 'This will be the link to your page: ';
-		
-		$urlSampleHtml .= '<strong';
-		$urlSampleHtml .= ' id="artist-page-url-sample"';
-		$urlSampleHtml .= ' data-base="'.htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."").'"';
-		$urlSampleHtml .= '>';
-		
-		$urlSampleHtml .= htmlspecialchars(preg_replace('/New\/?$/', '', UniversalFunctions::getRequestUrl())."");
-		
-		$urlSampleHtml .= '</strong>';
-		
-		$urlSampleHtml .= '</p>';
-		
-		$urlSample->setHtml($urlSampleHtml);
-		
-		$form->addField($urlSample);
+		$form->addStaticHtml($urlSample);
 
 		$descriptionField = new MarkdownField();
 		$descriptionField->setDistinguisher("description");
@@ -123,32 +109,12 @@ trait CreateArtistPageFormTrait {
 		$tosField->setAutocompleteAttribute(AutocompleteValues::OFF);
 		$form->addField($tosField);
 
-		$tosNote = new StaticHTMLField();
-		
-		$str = '';
+		$tosNote = '';
+		$tosNote .= '<p class="col s12 no-margin">We <strong>highly</strong> suggest that any creator, no matter what, have a ToS.</p>';
+		$tosNote .= '<p class="col s12 no-margin">We recommend including at least the following items: what you will not do, payment information, refund information, shipping information, sharing of finished art, commercial use, and changes to the finished product.</p>';
+		$tosNote .= '<p class="col s12 no-top-margin">Want ideas for what to include?  Check out our <a href="'.ROOTDIR.'Help/ToSGuide/">Terms of Service Guide</a>!</p>';
 
-		$str .= '<p';
-		$str .= ' class="col s12 no-margin"';
-		$str .= '>';
-		$str .= 'We ';
-		$str .= '<strong>highly</strong>';
-		$str .= ' suggest that any creator, no matter what, have a ToS.';
-		$str .= '</p>';
-
-		$str .= '<p';
-		$str .= ' class="col s12 no-margin"';
-		$str .= '>';
-		$str .= 'We recommend including at least the following items: what you will not do, payment information, refund information, shipping information, sharing of finished art, commercial use, and changes to the finished product.';
-		$str .= '</p>';
-
-		$str .= '<p';
-		$str .= ' class="col s12 no-top-margin"';
-		$str .= '>';
-		$str .= 'Want ideas for what to include?  Check out our <a href="'.ROOTDIR.'Help/ToSGuide/">Terms of Service Guide</a>!';
-		$str .= '</p>';
-
-		$tosNote->setHtml($str);
-		$form->addField($tosNote);
+		$form->addStaticHtml($tosNote);
 
 		return $form;
 	}
