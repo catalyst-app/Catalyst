@@ -141,15 +141,6 @@ class ErrorCodes {
 	const ERR_99897 = 'Sample invalid #1 for field 32';
 	const ERR_99898 = 'Sample other type of error for field 32';
 
-	// email list
-	const ERR_90001 = 'No email was entered';
-	const ERR_90002 = 'Invalid email';
-	const ERR_90003 = 'No context was entered';
-	const ERR_90004 = 'Invalid context';
-	const ERR_90005 = 'Invalid/missing information request checkbox';
-	const ERR_90006 = 'No captcha was sent';
-	const ERR_90007 = 'Invalid captcha';
-
 	// login
 	const ERR_90101 = 'No username was entered';
 	const ERR_90102 = 'Invalid username';
