@@ -14,4 +14,4 @@ $ node run.js
 
 This will compile all of the JSX in the src/ folder and place similarly-named filies in the out/ folder.
 
-Please note, I am no expert in Node by any means, so I am not terribly sure what the requirements for versioning are.  I do know it works on node version 6.10.0, so I have been using that.
+Please note, I am no expert in Node by any means, so I am not terribly sure what the requirements for versioning are.  I do know it works on node version 6.1.0, so I have been using that.
