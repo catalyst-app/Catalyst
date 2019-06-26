@@ -41,32 +41,15 @@ window.markInputInvalid = function(e, a) {
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - called but no elements were given!", true);
 		return;
 	}
-	if ($(e).attr("type") == "checkbox") {
-		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") was a checkbox, treating as such");
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") treated as a generic form element");
 
-		$(e).addClass("invalid").addClass("marked-invalid").focus();
-		
-		var labelSpan = $(e).next();
-		if ($(labelSpan).attr("data-original") === undefined) {
-			$(labelSpan).attr("data-original", $(labelSpan).text());
-		}
-		// restore original text (if applicable)
-		$(labelSpan).text($(labelSpan).attr("data-original"));
-		var errorSpan = $("<span></span>").text(a);
-		errorSpan.html("&nbsp;("+errorSpan.html()+")");
-		errorSpan.addClass("red-text");
-		$(labelSpan).append(errorSpan);
-	} else {
-		window.log(<?= json_encode(basename(__FILE__)) ?>, "markInputInvalid - invalid element ("+$(e).attr("id")+") treated as a generic form element");
-
-		$(e).addClass("invalid").addClass("marked-invalid").focus();
-		$("label[for="+$(e).attr("id")+"]").addClass("active");
-		// add helper text if it doesn't exist, BC
-		if ($("span.helper-text[for="+$(e).attr("id")+"]").length == 0) {
-			$(e).parent().append($("<span></span>").addClass("helper-text").attr("for", $(e).attr("id")));
-		}
-		$("span.helper-text[for="+$(e).attr("id")+"]").attr("data-error", a);
+	$(e).addClass("invalid").addClass("marked-invalid").focus();
+	$("label[for="+$(e).attr("id")+"]").addClass("active");
+	// add helper text if it doesn't exist, BC
+	if ($("span.helper-text[for="+$(e).attr("id")+"]").length == 0) {
+		$(e).parent().append($("<span></span>").addClass("helper-text").attr("for", $(e).attr("id")));
 	}
+	$("span.helper-text[for="+$(e).attr("id")+"]").attr("data-error", a);
 };
 
 window.showErrorMessageForCode = function(c) {
