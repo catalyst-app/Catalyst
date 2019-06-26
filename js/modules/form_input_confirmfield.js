@@ -27,11 +27,11 @@ use \Catalyst\Form\Field\ConfirmField;
 		}
 
 		verify() {
-			window.log(this.id, "Showing dialog");
+			window.log(this.properties.distinguisher, "Showing dialog");
 
 			var result = confirm(this.prompt);
 
-			window.log(this.id, "Confirmation dialogue gave result "+result);
+			window.log(this.properties.distinguisher, "Confirmation dialogue gave result "+result);
 
 			return result;
 		}

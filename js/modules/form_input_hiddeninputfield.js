@@ -52,15 +52,15 @@ class HiddenInputField extends HTMLElement {
 	 * @return bool
 	 */
 	verify(passive=false) {
-		window.log(this.id, "Verifying hidden input field exists");
+		window.log(this.properties.distinguisher, "Verifying hidden input field exists");
 
 		if (this.document.getElementById(this.properties.hiddenInputId) == null) {
-			window.log(this.id, "Element with ID "+this.hiddenInputId+" does not exist", true);
+			window.log(this.properties.distinguisher, "Element with ID "+this.hiddenInputId+" does not exist", true);
 			this.markError(this.errors.requiredButMissing());
 			return false;
 		}
 		
-		window.log(this.id, "Verification successful");
+		window.log(this.properties.distinguisher, "Verification successful");
 		return true;
 	}
 }
