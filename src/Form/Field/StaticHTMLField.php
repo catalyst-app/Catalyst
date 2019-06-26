@@ -61,28 +61,28 @@ class StaticHTMLField extends AbstractField {
 	/**
 	 * Full JS validation code, including if statement and all
 	 * 
-	 * None for this field, as it is just static HTML
+	 * None for this field, as it is just static
 	 * 
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return '';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
 	 * Return JS code to store the field's value in $formDataName
 	 * 
-	 * None for this field, as it is just static HTML
+	 * None for this field, as it is just a static thing, but here for consistency
 	 * 
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return '';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
-	 * Nothing to be done, as it is just static HTML
+	 * Nothing to be done, as it is just a static thing, but here for consistency
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		return;
