@@ -284,8 +284,7 @@ window.addEventListener('load', () => {
 		"markdown-field": MarkdownField,
 		"number-field": NumberField,
 		"static-html-field": StaticHTMLField,
-
-		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"]
+		"confirm-field": ConfirmField
 	};
 
 	for (var element in toRegister) {

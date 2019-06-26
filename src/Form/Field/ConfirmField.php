@@ -24,6 +24,23 @@ class ConfirmField extends AbstractField {
 	}
 
 	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "confirm-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "Please confirm the action",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
 	 * Set the field's prompt
 	 * 
 	 * @param string $prompt
@@ -33,39 +50,51 @@ class ConfirmField extends AbstractField {
 	}
 
 	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => "static-html-".hash("sha256", $this->getStaticHtml()),
+			"prompt" => $this->getPrompt(),
+			"errors" => $this->getErrorMessages(),
+		];
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
-	 * No HTML for this
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		return '';
+		return $this->getWebComponentHtml();
 	}
 
 	/**
 	 * Full JS validation code, including if statement and all
 	 * 
+	 * None for this field, as it is just static
+	 * 
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).']('.json_encode($this->getId()).', '.json_encode($this->getPrompt()).').verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').verify()) { return; }';
 	}
 
 	/**
 	 * Return JS code to store the field's value in $formDataName
 	 * 
-	 * No aggregation as no value
+	 * None for this field, as it is just a static thing, but here for consistency
+	 * 
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return '';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').getAggregationValue());';
 	}
 
 	/**
-	 * Check the field's forms on the servers side
-	 * 
-	 * No validation
+	 * Nothing to be done, as it is just a static thing, but here for consistency
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
 		return;
