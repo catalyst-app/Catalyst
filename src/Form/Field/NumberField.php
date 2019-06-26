@@ -113,11 +113,10 @@ class NumberField extends AbstractField {
 			"min" => $this->getMin(),
 			"max" => $this->getMax(),
 			"precision" => $this->getPrecision(),
-			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
 			"errors" => $this->getErrorMessages(),
-		] + $this->getLabelProperties();
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**

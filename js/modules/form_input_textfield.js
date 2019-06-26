@@ -19,22 +19,19 @@ class TextField extends HTMLElement {
 			if (this.properties.maxlength) {
 				optionalAttributes['maxlength'] = this.properties.maxlength;
 			}
-			let className = 'form-field';
-			if (this.properties.value != null || this.properties.primary) {
-				className += ' active';
-			}
 			return (() => {
 				var $$a = document.createElement('div');
 				$$a.setAttribute('class', 'input-field col s12');
 				var $$b = this.element = document.createElement('input');
 				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
+				$$b.name = this.properties.distinguisher;
 				$$b.type = 'text';
 				$$b.setAttribute('autocomplete', this.properties.autocomplete);
 				$$b.setAttribute('pattern', this.properties.pattern);
-				$$b.value = this.properties.value == null ? '' : this.properties.value;
+				$$b.value = this.properties.isFieldPrefilled ? this.properties.value : '';
 				$$b.required = this.properties.required;
 				$$b.autofocus = this.properties.primary;
-				$$b.setAttribute('class', className);
+				$$b.setAttribute('class', 'form-field' + (this.properties.value != null || this.properties.primary ? ' active' : ''));
 				$$b.setAttributes(optionalAttributes);
 				$$a.appendChild($$b);
 				var $$c = this.label = new FormLabel(this.properties).children[0];

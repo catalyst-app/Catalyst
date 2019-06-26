@@ -25,14 +25,14 @@ class SelectField extends HTMLElement {
 			$$a.appendChild($$b);
 			var $$c = document.createElement('option');
 			$$c.value = '';
-			$$c.selected = this.properties.value == null || this.properties.value == '';
+			$$c.selected = this.properties.valueIsPrefilled || this.properties.value == '';
 			$$b.appendChild($$c);
 			var $$d = document.createTextNode('Choose an option');
 			$$c.appendChild($$d);
 			$$b.appendChildren(Object.keys(this.properties.options).map(key => (function () {
 				var $$f = document.createElement('option');
 				$$f.value = key;
-				$$f.selected = this.properties.options[key] == key;
+				$$f.selected = this.properties.valueIsPrefilled && this.properties.value == key
 				$$f.appendChildren(this.properties.options[key]);
 				return $$f;
 			}).call(this)));

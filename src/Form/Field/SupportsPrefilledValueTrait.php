@@ -50,6 +50,18 @@ trait SupportsPrefilledValueTrait {
 	}
 
 	/**
+	 * Return properties to be sent to the client webcomponent
+	 * 
+	 * @return array
+	 */
+	protected function getPrefilledValueProperties() : array {
+		return [
+			"value" => $this->getPrefilledValue(),
+			"valueIsPrefilled" => $this->isFieldPrefilled(),
+		];
+	}
+
+	/**
 	 * Throws an error regarding an invalid prefilled value
 	 * 
 	 * @throws InvalidArgumentException

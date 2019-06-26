@@ -17,6 +17,7 @@ class FormLabel extends HTMLElement {
 		this.appendChild((() => {
 			var $$a = document.createElement('label');
 			$$a.setAttribute('for', this.properties.formDistinguisher + '-input-' + this.properties.distinguisher);
+			$$a.setAttribute('class', this.properties.hasOwnProperty('primary') && this.properties.primary || this.properties.hasOwnProperty('valueIsPrefilled') && this.properties.valueIsPrefilled ? ' active' : '');
 			$$a.appendChildren(this.properties.label);
 			var $$c = document.createElement('span');
 			$$c.setAttribute('class', 'red-text' + (this.properties.required ? '' : ' hide'));

@@ -33,7 +33,7 @@ class NumberField extends HTMLElement {
 				$$b.setAttribute('step', 10 ** -this.properties.precision);
 				$$b.setAttribute('inputmode', this.properties.precision > 0 ? 'decimal' : 'numeric');
 				$$b.setAttribute('autocomplete', this.properties.autocomplete);
-				$$b.value = this.properties.value == null ? '' : this.properties.value;
+				$$b.value = this.properties.valueIsPrefilled ? this.properties.value : '';
 				$$b.required = this.properties.required;
 				$$b.autofocus = this.properties.primary;
 				$$b.setAttribute('class', 'form-field' + (this.properties.value != null || this.properties.primary ? ' active' : ''));

@@ -47,11 +47,10 @@ class EmailField extends AbstractField {
 			"autocomplete" => $this->getAutocompleteAttribute(),
 			"pattern" => self::PATTERN,
 			"maxlength" => self::MAX_LENGTH,
-			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
 			"errors" => $this->getErrorMessages(),
-		] + $this->getLabelProperties();
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**

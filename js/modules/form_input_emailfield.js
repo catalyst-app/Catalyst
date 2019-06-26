@@ -28,7 +28,7 @@ class EmailField extends HTMLElement {
 				$$b.setAttribute('autocomplete', this.properties.autocomplete);
 				$$b.setAttribute('pattern', this.properties.pattern);
 				$$b.setAttribute('maxlength', this.properties.maxlength);
-				$$b.value = this.properties.value == null ? '' : this.properties.value;
+				$$b.value = this.properties.valueIsPrefilled ? this.properties.value : '';
 				$$b.required = this.properties.required;
 				$$b.autofocus = this.properties.primary;
 				$$b.setAttribute('class', className);

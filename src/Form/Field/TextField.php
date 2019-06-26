@@ -109,11 +109,10 @@ class TextField extends AbstractField {
 			"pattern" => $this->getPattern(),
 			"disallowed" => $this->getDisallowed(),
 			"maxlength" => $this->getMaxLength(),
-			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
 			"errors" => $this->getErrorMessages(),
-		] + $this->getLabelProperties();
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**

@@ -59,11 +59,10 @@ class SelectField extends AbstractField {
 			"formDistinguisher" => $this->getForm()->getDistinguisher(),
 			"distinguisher" => $this->getDistinguisher(),
 			"autocomplete" => $this->getAutocompleteAttribute(),
-			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"options" => $this->getOptions(),
 			"errors" => $this->getErrorMessages(),
-		] + $this->getLabelProperties();
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**

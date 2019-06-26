@@ -5,11 +5,6 @@
     optionalAttributes["maxlength"] = this.properties.maxlength;
   }
 
-  let className = "form-field";
-  if (this.properties.value != null || this.properties.primary) {
-    className += " active";
-  }
-
   return (
     <div className="input-field col s12">
       <input id={ this.properties.formDistinguisher+"-input-"+this.properties.distinguisher }
@@ -17,10 +12,10 @@
        type="text"
        autocomplete={ this.properties.autocomplete }
        pattern={ this.properties.pattern }
-       value={ this.properties.value == null ? "" : this.properties.value }
+       value={ this.properties.isFieldPrefilled ? this.properties.value : "" }
        required={ this.properties.required }
        autofocus={ this.properties.primary }
-       className={ className }
+       className={ "form-field" + (this.properties.value != null || this.properties.primary ? " active" : "") }
        { ...optionalAttributes } />
       <form-label data-properties={ JSON.stringify(this.properties) } />
       <form-label-helper-span data-properties={ JSON.stringify(this.properties) } />
