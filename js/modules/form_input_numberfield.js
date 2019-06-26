@@ -1,134 +1,129 @@
-<?php
-header("Content-Type: application/javascript; charset=UTF-8", true);
+class NumberField extends HTMLElement {
+	constructor(properties) {
+		super();
 
-define("ROOTDIR", "../../");
-define("REAL_ROOTDIR", "../../");
-
-define("NO_SESSION", true);
-
-require_once REAL_ROOTDIR."src/initializer.php";
-use \Catalyst\Form\Field\NumberField;
-?>
-{
-	<?php require_once REAL_ROOTDIR."js/modules/form_input_header.js"; ?>
-	
-	const className = <?= json_encode(NumberField::class) ?>;
-
-	window.log("Form input handlers", "Registering "+className);
-
-	window.formInputHandlers[className] = class {
-		constructor(element) {
-			this.fieldType = className;
-
-			window.log(className, "Constructing an object to represent #"+element.id);
-
-			if (!(element instanceof HTMLElement)) {
-				throw "Provided element to "+className+" constructor is not a HTMLElement";
-			}
-			if (element.getAttribute("data-field-type") !== className) {
-				throw "Provided element to "+className+" constructor does not have a data-field-type of "+className;
-			}
-
-			this.element = element;
-
-			this.id = element.id;
-
-			this.label = document.querySelector("label[for="+this.id+"]");
-			this.helperText = document.querySelector("span.helper-text[for="+this.id+"]");
-
-			this.required = this.element.getAttribute("required") === "required";
-
-			this.min = parseInt(this.element.getAttribute("min"));
-			this.max = parseInt(this.element.getAttribute("max"));
-			this.precision = parseFloat(this.element.getAttribute("step"));
-
-			// remove to prevent duplicates for BC instantiation methods
-			window.log(this.id, "Adding this.verify as a listener for input events if it was not already");this.verify.bind(this, true), 
-			this.addEventListener("input", this.verify.bind(this, true), {passive: true});
+		// decide if the HTML was created beforehand (e.g. from server) or without attributed (e.g. document.createElement)
+		if (properties != undefined) {
+			this.properties = properties;
+		} else if (this.getAttribute("data-properties") != null) {
+			this.properties = JSON.parse(this.getAttribute("data-properties"));
+		} else {
+			throw new Error("Element created without properties.");
 		}
 
-		/**
-		 * @param errorType one of MISSING or INVALID
-		 * @param bool passive
-		 */
-		markError(errorType, passive) {
-			if (errorType == MISSING) {
-				var errorMessage = this.helperText.getAttribute("data-missing-error");
-				window.log(this.id, "Marking with error type MISSING, error message "+errorMessage, true);
-			} else if (errorType == INVALID) {
-				var errorMessage = this.helperText.getAttribute("data-invalid-error");
-				window.log(this.id, "Marking with error type INVALID, error message "+errorMessage, true);
-			} else {
-				throw "Invalid error type passed to "+className+".markError ("+errorType+")";
+		window.log(this.constructor.name, "Constructing an object to represent "+this.properties.distinguisher);
+
+		// var host = this.attachShadow({ mode: "open" });
+		this.appendChild((() => {
+			let optionalAttributes = {};
+			if (this.properties.maxlength) {
+				optionalAttributes['maxlength'] = this.properties.maxlength;
 			}
-
-			this.element.classList.add("invalid", "marked-invalid");
-			this.label.classList.add("active");
-			this.helperText.setAttribute("data-error", errorMessage);
-
-			if (!passive) {
-				M.escapeToast(errorMessage);
-				this.element.focus();
+			let className = 'form-field';
+			if (this.properties.value != null || this.properties.primary) {
+				className += ' active';
 			}
-		}
+			return (() => {
+				var $$a = document.createElement('div');
+				$$a.setAttribute('class', 'input-field col s12');
+				var $$b = this.element = document.createElement('input');
+				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
+				$$b.name = this.properties.distinguisher;
+				$$b.type = 'number';
+				$$b.setAttribute('step', 10 ** -this.properties.precision);
+				$$b.setAttribute('inputmode', this.properties.precision > 0 ? 'decimal' : 'numeric');
+				$$b.setAttribute('autocomplete', this.properties.autocomplete);
+				$$b.value = this.properties.value == null ? '' : this.properties.value;
+				$$b.required = this.properties.required;
+				$$b.autofocus = this.properties.primary;
+				$$b.setAttribute('class', 'form-field' + (this.properties.value != null || this.properties.primary ? ' active' : ''));
+				$$b.setAttribute('min', this.properties.min);
+				$$b.setAttribute('max', this.properties.max);
+				$$a.appendChild($$b);
+				var $$c = this.label = new FormLabel(this.properties).children[0];
+				$$a.appendChild($$c);
+				var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+				$$a.appendChild($$d);
+				return $$a;
+			})();
+		})());
 
-		/**
-		 * @return string
-		 */
-		getValue() {
-			return parseFloat(this.element.value);
-		}
+		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
+	}
 
-		/**
-		 * The value to actually be sent to the server
-		 * @return string
-		 */
-		getAggregationValue() {
-			return this.getValue();
-		}
+	/**
+	 * @param string errorMessage
+	 * @param bool passive
+	 */
+	markError(errorMessage, passive) {
+		window.log(this.properties.distinguisher, "Marking with error message "+errorMessage, true);
 
-		/**
-		 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
-		 *     false if verify is being called from input
-		 * @return bool
-		 */
-		verify(passive=false) {
-			let value = this.getValue();
-			window.log(this.id, "Verifying with value "+JSON.stringify(value));
+		this.element.classList.add("invalid", "marked-invalid");
+		this.label.classList.add("active");
+		this.helperText.setAttribute("data-error", errorMessage);
 
-			if ((""+value).length) {
-				if (this.min > value) {
-					window.log(this.id, "Value "+value+" exceeds minimum "+this.min, true);
-					this.markError(INVALID, passive);
-					return false;
-				}
-				if (this.max < value) {
-					window.log(this.id, "Value "+value+" exceeds maximum "+this.max, true);
-					this.markError(INVALID, passive);
-					return false;
-				}
-				if (!(new RegExp('^[0-9]+(\.[0-9]+)?$')).test(value)) {
-					window.log(this.id, "Pattern ^[0-9]+(\.[0-9][0-9]?)?$ does not match value "+value, true);
-					this.markError(INVALID, passive);
-					return false;
-				}
-				if (Math.round(value*(1/this.precision)) != value*(1/this.precision)) {
-					window.log(this.id, "Value is more precise than allowed ("+this.precision+")", true);
-					this.markError(INVALID, passive);
-					return false;
-				}
-			} else {
-				if (this.required) {
-					window.log(this.id, "Required but empty value", true);
-					this.markError(MISSING, passive);
-					return false;
-				}
-			}
-			window.log(this.id, "Verification successful");
-
-			this.element.classList.remove("invalid", "marked-invalid");
-
-			return true;
+		if (!passive) {
+			M.escapeToast(errorMessage);
+			this.element.focus();
 		}
 	}
-};
+
+	/**
+	 * @return string
+	 */
+	getValue() {
+		return this.element.value;
+	}
+
+	/**
+	 * The value to actually be sent to the server
+	 * @return string
+	 */
+	getAggregationValue() {
+		return this.getValue();
+	}
+
+	/**
+	 * @param bool passive If the form is actively verifying the content (and thus toasts/etc should show) or
+	 *     false if verify is being called from input
+	 * @return bool
+	 */
+	verify(passive=false) {
+		let value = this.getValue();
+		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify(value));
+
+		if ((""+value).length) {
+			if (this.properties.min > value) {
+				window.log(this.properties.distinguisher, "Value "+value+" is below minimum "+this.properties.min, true);
+				this.markError(this.properties.errors.belowMinimum, passive);
+				return false;
+			}
+			if (this.properties.max < value) {
+				window.log(this.properties.distinguisher, "Value "+value+" exceeds maximum "+this.properties.max, true);
+				this.markError(this.properties.errors.exceedsMaximum, passive);
+				return false;
+			}
+			if (!(new RegExp('^-?[0-9]+(\.[0-9]+)?$')).test(value)) {
+				window.log(this.properties.distinguisher, "Pattern ^[0-9]+(\.[0-9][0-9]?)?$ (hardcoded into class) does not match value "+value, true);
+				this.markError(this.properties.errors.notANumber, passive);
+				return false;
+			}
+			if (Math.round(value*(10**this.properties.precision)) != value*(10**this.properties.precision)) {
+				window.log(this.properties.distinguisher, "Value is more precise than allowed ("+this.properties.precision+")", true);
+				this.markError(this.properties.errors.tooPrecise, passive);
+				return false;
+			}
+		} else {
+			if (this.properties.required) {
+				window.log(this.properties.distinguisher, "Required but empty value", true);
+				this.markError(this.properties.errors.requiredButMissing, passive);
+				return false;
+			}
+		}
+		window.log(this.properties.distinguisher, "Verification successful");
+
+		this.element.classList.remove("invalid", "marked-invalid");
+
+		return true;
+	}
+}
