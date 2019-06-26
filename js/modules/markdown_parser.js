@@ -3989,7 +3989,7 @@ module.exports = function linkify(state) {
             fullUrl.startsWith("https://catalystapp.co") ||
             fullUrl.startsWith("http://beta.catalystapp.co") ||
             fullUrl.startsWith("https://beta.catalystapp.co") ||
-            fullUrl.startsWith("#"));
+            fullUrl.startsWith("#")) && !fullUrl.includes("Help/");
           token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
           token.level   = level++;
           token.markup  = 'linkify';
@@ -7139,7 +7139,7 @@ module.exports = function autolink(state, silent) {
         fullUrl.startsWith("https://catalystapp.co") ||
         fullUrl.startsWith("http://beta.catalystapp.co") ||
         fullUrl.startsWith("https://beta.catalystapp.co") ||
-        fullUrl.startsWith("#"));
+        fullUrl.startsWith("#")) && !fullUrl.includes("Help/");
       token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
       token.markup  = 'autolink';
       token.info    = 'auto';
@@ -7169,7 +7169,7 @@ module.exports = function autolink(state, silent) {
         fullUrl.startsWith("https://catalystapp.co") ||
         fullUrl.startsWith("http://beta.catalystapp.co") ||
         fullUrl.startsWith("https://beta.catalystapp.co") ||
-        fullUrl.startsWith("#"));
+        fullUrl.startsWith("#")) && !fullUrl.includes("Help/");
       token.attrs   = [ [ 'href', fullUrl ], [ 'target', internal ? '_self' :  '_blank' ], ['rel', 'noopener'] ];
       token.attrs   = [ [ 'href', fullUrl ] ];
       token.markup  = 'autolink';
