@@ -270,10 +270,6 @@ window.addEventListener('load', () => {
 		console.time("Webcomponent form definitions");
 	}
 
-	if (!window.hasOwnProperty("formInputHandlers")) {
-		window.formInputHandlers = {};
-	}
-
 	var toRegister = {
 		"form-label-helper-span": FormLabelHelperSpan,
 		"form-label": FormLabel,
@@ -298,8 +294,6 @@ window.addEventListener('load', () => {
 		}
 
 		window.log("Form component registration", "Registering "+element);
-
-		window.formInputHandlers["Catalyst\\Form\\Field\\"+toRegister[element].prototype.constructor.name] = toRegister[element];
 
 		window.customElements.define(element, toRegister[element]);
 
