@@ -26,4 +26,4 @@ fca21008bdd1ccc4e1326abd40880e2c79631dc4:
 a7ff9458bd6328bb7c5b13b72f6faa259b2d36de:
   UPDATE `resources` SET `NAME`='https://google.com/recaptcha/api.js?render=explicit', `MINIFIED_NAME`='https://google.com/recaptcha/api.js?render=explicit' WHERE `NAME`='https://google.com/recaptcha/api.js';
 5188821d1591c7734b571fd4254451fae17acdc9:
-  INSERT INTO `resources` (`ENVIRONMENT`, `TYPE`, `PRIORITY`, `LOCAL`, `NAME`, `MINIFIED_NAME`, `VERSIONED`, `LATEST_SOURCE`, `DATE_OF_LATEST_UPGRADE`, `GITHUB_REPO_NAME`, `CHANGELOG_URL`, `CURRENT_VERSION`, `LATEST_VERSION`, `ATTRIBUTES`) VALUES('DEVEL', 'SCRIPT', 100, 1, 'modules/form_input_statichtmlfield.js', 'N/A', 0, NULL, NULL, NULL, 'N/A', NULL, NULL, '[\"defer\"]');
+  UPDATE `resources` SET `PRIORITY`=90 WHERE `NAME`='modules/form_input_passwordfield.js';
