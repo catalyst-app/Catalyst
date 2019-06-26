@@ -31,12 +31,7 @@ class MarkdownField extends AbstractField {
 	 * @return string[]
 	 */
 	protected function getDefaultErrorMessages() : array {
-		return [
-			"requiredButMissing" => "Please verify that you are not a robot",
-			"unknownError" => "Please check your network connection.  If this error persists, contact support",
-			"expired" => "Please re-solve the CAPTCHA, you took too long to submit",
-			"verificationFailed" => "Please try again.  If this error persists, contact support",
-		] + parent::getDefaultErrorMessages();
+		return parent::getDefaultErrorMessages();
 	}
 
 	/**
@@ -47,11 +42,10 @@ class MarkdownField extends AbstractField {
 			"formDistinguisher" => $this->getForm()->getDistinguisher(),
 			"distinguisher" => $this->getDistinguisher(),
 			"autocomplete" => $this->getAutocompleteAttribute(),
-			"value" => $this->getPrefilledValue(),
 			"required" => $this->isRequired(),
 			"primary" => $this->isPrimary(),
 			"errors" => $this->getErrorMessages(),
-		] + $this->getLabelProperties();
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**
