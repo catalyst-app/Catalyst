@@ -65,6 +65,11 @@ var humanFileSize = function(size) {
 				setTimeout(materializeOnload, 100);
 				return;
 			}
+
+			if (window.devMode) {
+				console.time("materializeOnload");
+			}
+
 			window.log(<?= json_encode(basename(__FILE__)) ?>, "materializeOnload - invoked");
 			// its bullshit that they removed the old toast function API
 			window.M["escapeToast"] = function(a) {
@@ -119,6 +124,10 @@ var humanFileSize = function(size) {
 					M.Modal.getInstance($("#commission-type-info-modal-"+window.location.hash.substr(1))[0]).open();
 				}
 			}
+
+			if (window.devMode) {
+				console.timeEnd("materializeOnload");
+			}
 		}
 
 		materializeOnload();
@@ -151,6 +160,9 @@ var humanFileSize = function(size) {
 		<?php endif; ?>
 
 		/* FORMS */
+		if (window.devMode) {
+			console.time("Legacy forms definition");
+		}
 		$(document).on("change", ":checkbox", function(e) {
 			var labelSpan = $(this).next();
 			// restore original text (if applicable)
@@ -165,6 +177,9 @@ var humanFileSize = function(size) {
 		<?php foreach ($forms as $form): ?>
 			<?= $form->getAllJs(); ?>
 		<?php endforeach; ?>
+		if (window.devMode) {
+			console.timeEnd("Legacy forms definition");
+		}
 
 		/* IMAGE UPLOADING WITH NSFW, CAPTIONS, and INFO */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'image_upload_arranger.js'; ?>
@@ -238,7 +253,7 @@ var humanFileSize = function(size) {
 		/* ABOUT PAGE INTERACTIVE TERMS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'about_page_interactive_terms.js'; ?>
 
-		<?php if (Controller::isDevelMode()): ?>
+		if (window.devMode) {
 			$(document).on("click", ".brand-logo", function(e) {
 				e.preventDefault();
 
@@ -246,11 +261,15 @@ var humanFileSize = function(size) {
 
 				return false;
 			});
-		<?php endif; ?>
+		}
 	});
 })(jQuery);
 
 window.addEventListener('load', () => {
+	if (window.devMode) {
+		console.time("Webcomponent form definitions");
+	}
+
 	if (!window.hasOwnProperty("formInputHandlers")) {
 		window.formInputHandlers = {};
 	}
@@ -267,17 +286,29 @@ window.addEventListener('load', () => {
 		"captcha-field": CaptchaField,
 		"hidden-input-field": HiddenInputField,
 		"markdown-field": MarkdownField,
+		"number-field": NumberField,
 
-		"placeholder-number-field": window.formInputHandlers["Catalyst\\Form\\Field\\NumberField"],
 		"placeholder-confirm-field": window.formInputHandlers["Catalyst\\Form\\Field\\ConfirmField"]
 	};
 
 	for (var element in toRegister) {
+		if (window.devMode) {
+			console.time("Webcomponent registration of "+element);
+		}
+
 		window.log("Form component registration", "Registering "+element);
 
 		window.formInputHandlers["Catalyst\\Form\\Field\\"+toRegister[element].prototype.constructor.name] = toRegister[element];
 
 		window.customElements.define(element, toRegister[element]);
+
+		if (window.devMode) {
+			console.timeEnd("Webcomponent registration of "+element);
+		}
+	}
+
+	if (window.devMode) {
+		console.timeEnd("Webcomponent form definitions");
 	}
 }, {passive: true});
 

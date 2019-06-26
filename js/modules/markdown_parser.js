@@ -5,6 +5,10 @@ function renderMarkdownArea(area) {
 
   window.log("markdown_parser", "rendering #"+area.id+" with "+renderer);
 
+  if (window.devMode) {
+    console.time("Render #"+area.id);
+  }
+
   area.innerHTML = md[renderer](area.innerHTML);
   area.classList.remove("raw-inline-markdown", "raw-markdown");
   area.classList.add("rendered-markdown");
@@ -21,7 +25,9 @@ function renderMarkdownArea(area) {
     }, { "capture": true });
   });
 
-  window.log("markdown_parser", "rendered #"+area.id+" in "+(Date.now()-startTime)+"ms");
+  if (window.devMode) {
+    console.timeEnd("Render #"+area.id);
+  }
 }
 
 // FROM WEBPACK

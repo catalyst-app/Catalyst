@@ -29,6 +29,26 @@ class NumberField extends AbstractField {
 	protected $precision = 0;
 
 	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "number-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"exceedsMaximum" => "The maximum allowed value is ".$this->getMax(),
+			"belowMinimum" => "The minimum allowed value is ".$this->getMin(),
+			"notANumber" => "Please enter a valid number",
+			"tooPrecise" => ($this->getPrecision() ? "Please use no more than ".$this->getPrecision()." decimal place".($this->getPrecision() > 1 ? "s" : "") : "Please enter a whole number"),
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
 	 * Get the input's maximum
 	 * 
 	 * @return int Current maxmimum
@@ -83,53 +103,30 @@ class NumberField extends AbstractField {
 	}
 
 	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"min" => $this->getMin(),
+			"max" => $this->getMax(),
+			"precision" => $this->getPrecision(),
+			"value" => $this->getPrefilledValue(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		$str .= '<div';
-		$str .= ' class="input-field col s12">';
-
-		$inputClasses = ["form-field"];
-		$str .= '<input';
-		$str .= ' type="number"';
-		$str .= ' data-field-type="'.htmlspecialchars(self::class).'"';
-		$str .= ' step="'.(10**-$this->getPrecision()).'"';
-		$str .= ' inputmode="numeric"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-
-		if ($this->isFieldPrefilled()) {
-			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
-			$inputClasses[] = "active";
-		}
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		if ($this->isPrimary()) {
-			$str .= ' autofocus="autofocus"';
-			$inputClasses[] = "active";
-		}
-		
-		if ($this->getPrecision() <= 0) {
-			$str .= ' pattern="[0-9]*"';
-		} else {
-			$str .= ' pattern="[0-9]+(\.[0-9][0-9]?)?"';
-		}
-		
-		$str .= ' min="'.$this->getMin().'"';
-		$str .= ' max="'.$this->getMax().'"';
-
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
-		$str .= '>';
-		
-		$str .= $this->getLabelHtml();
-		
-		$str .= '</div>';
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -138,7 +135,7 @@ class NumberField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		return 'if (!(new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).verify())) { return; }';
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -148,7 +145,7 @@ class NumberField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', (new window.formInputHandlers['.json_encode(self::class).'](document.getElementById('.json_encode($this->getId()).')).getAggregationValue()));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
@@ -174,7 +171,7 @@ class NumberField extends AbstractField {
 				return;
 			}
 		}
-		if (!preg_match('/^[0-9]+(\.[0-9]+)?$/', $requestArr[$this->getDistinguisher()])) {
+		if (!preg_match('/^-?[0-9]+(\.[0-9]+)?$/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwInvalidError();
 		}
 		$requestArr[$this->getDistinguisher()] = round((float)$requestArr[$this->getDistinguisher()], $this->getPrecision());

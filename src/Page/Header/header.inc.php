@@ -87,6 +87,10 @@ Resource::pushPageResources();
 		<link rel="canonical" href="<?= htmlspecialchars(UniversalFunctions::getCanonicalRequestUrl()) ?>"/>
 		<link rel='publisher' href="https://plus.google.com/102762464787584663279/"/>
 		<link rel="image_src" href="https://catalystapp.co/img/logo/white/logo.png" type="image/png"/>
+
+		<script type="text/javascript">
+			window.devMode = <?= json_encode(Controller::isDevelMode()) ?>;
+		</script>
 	</head>
 	<body>
 		<?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
