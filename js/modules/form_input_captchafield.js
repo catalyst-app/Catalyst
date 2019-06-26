@@ -21,12 +21,22 @@ class CaptchaField extends HTMLElement {
 			return $$a;
 		})());
 
-		this.widgetId = grecaptcha.render(this.element, {
-			"sitekey": this.properties.siteKey,
-			"callback": this.successCallback.bind(this),
-			"expired-callback": this.expiredCallback.bind(this),
-			"error-callback": this.errorCallback.bind(this)
-		});
+		setTimeout(() => {
+			window.log(this.properties.distinguisher, "Actually rendering CAPTCHA, deferred from onload");
+
+			if (window.devMode) {
+				console.time("Render CAPTCHA "+this.properties.distinguisher);
+			}
+			this.widgetId = grecaptcha.render(this.element, {
+				"sitekey": this.properties.siteKey,
+				"callback": this.successCallback.bind(this),
+				"expired-callback": this.expiredCallback.bind(this),
+				"error-callback": this.errorCallback.bind(this)
+			});
+			if (window.devMode) {
+				console.timeEnd("Render CAPTCHA "+this.properties.distinguisher);
+			}
+		}, 1000);
 	}
 
 	/**
