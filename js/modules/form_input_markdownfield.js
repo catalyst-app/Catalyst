@@ -16,8 +16,8 @@ class MarkdownField extends HTMLElement {
 		// var host = this.attachShadow({ mode: "open" });
 		this.appendChild((() => {
 			var firstMarkdownField = true;
-			if (this.parentNode.getElementsByTagName('markdown-field') > 1) {
-				if (this.parentNode.getElementsByTagName('markdown-field')[0] != this) {
+			if (document.getElementsByTagName('markdown-field').length > 1) {
+				if (document.getElementsByTagName('markdown-field')[0] != this) {
 					var firstMarkdownField = false;
 				}
 			}
@@ -52,7 +52,7 @@ class MarkdownField extends HTMLElement {
 				$$j.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
 				$$j.name = this.properties.distinguisher;
 				$$i.appendChild($$j);
-				$$j.appendChildren(this.properties.value == null ? '' : this.properties.value);
+				$$j.appendChildren(this.properties.valueIsPrefilled ? this.properties.value : '');
 				var $$l = this.label = new FormLabel(this.properties).children[0];
 				$$i.appendChild($$l);
 				var $$m = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
@@ -61,6 +61,8 @@ class MarkdownField extends HTMLElement {
 				$$n.setAttribute('class', 'col s12 m6 markdown-target markdown-preview raw-markdown');
 				$$n.id = '-preview-' + this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
 				$$h.appendChild($$n);
+				$$n.appendChildren(this.properties.valueIsPrefilled ? this.properties.value : '');
+				renderMarkdownArea($$n);
 				return $$a;
 			})();
 		})());

@@ -2,8 +2,8 @@
   // only show note on first
   var firstMarkdownField = true;
 
-  if (this.parentNode.getElementsByTagName("markdown-field") > 1) {
-    if (this.parentNode.getElementsByTagName("markdown-field")[0] != this) {
+  if (document.getElementsByTagName("markdown-field").length > 1) {
+    if (document.getElementsByTagName("markdown-field")[0] != this) {
       var firstMarkdownField = false;
     }
   }
@@ -25,13 +25,14 @@
              id={ this.properties.formDistinguisher+"-input-"+this.properties.distinguisher }
              name={ this.properties.distinguisher }
              >
-             { this.properties.value == null ? "" : this.properties.value }
+              { this.properties.valueIsPrefilled ? this.properties.value : "" }
             </textarea>
             <form-label data-properties={ JSON.stringify(this.properties) } />
             <form-label-helper-span data-properties={ JSON.stringify(this.properties) } />
           </div>
 
           <div class="col s12 m6 markdown-target markdown-preview raw-markdown" id={ "-preview-"+this.properties.formDistinguisher+"-input-"+this.properties.distinguisher }>
+            { this.properties.valueIsPrefilled ? this.properties.value : "" }
           </div>
         </div>
       </div>
