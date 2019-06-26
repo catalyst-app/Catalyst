@@ -11,8 +11,8 @@
  
          if (value.length) {
 --- node_modules/nativejsx/source/compositions.js	Sun Mar  4 17:40:53 2018
-+++ node_modules/nativejsx/source/compositions.js	Mon Jun 17 21:23:04 2019
-@@ -6,7 +6,19 @@
++++ node_modules/nativejsx/source/compositions.js	Mon Jun 26 10:03:04 2019
+@@ -6,7 +6,20 @@
   */
  
  const attributes = { 'className': 'class' }
@@ -23,6 +23,7 @@
 +  'form',
 +  'id',
 +  'name',
++  'checked',
 +  'readonly',
 +  'required',
 +  'tabindex',

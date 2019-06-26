@@ -10,58 +10,63 @@ use \Catalyst\Form\Form;
 class CheckboxField extends AbstractField {
 	use LabelTrait, SupportsPrefilledValueTrait;
 	/**
+	 * The size of the checkbox field, as specified in units for materialize's grid system
+	 *
+	 * @var string
+	 */
+	protected $size = "col s12";
+
+	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "checkbox-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"requiredButMissing" => "You must check this box to continue",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return string Current size
+	 */
+	public function getSize() : string {
+		return $this->size;
+	}
+
+	/**
+	 * @param string $size New size
+	 */
+	public function setSize(string $size) : void {
+		$this->size = $size;
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"size" => $this->getSize(),
+			"required" => $this->isRequired(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
+	}
+
+	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		
-		$str .= '<p';
-		$str .= ' class="col s12 small-margin"';
-		$str .= '>';
-
-		$str .= '<label';
-		$str .= ' for="'.htmlspecialchars($this->getId()).'"';
-		$str .= '>';
-
-		$str .= '<input';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= ' type="checkbox"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' class="filled-in"';
-		if ($this->isFieldPrefilled()) {
-			if (!is_bool($this->getPrefilledValue())) {
-				$this->throwInvalidPrefilledValueError();
-			}
-			if ($this->getPrefilledValue()) {
-				$str .= ' checked="checked"';
-			}
-		}
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-		$str .= '>';
-
-		$str .= '<span';
-		$str .= ' data-error="'.htmlspecialchars($this->getErrorMessage($this->getInvalidErrorCode())).'"';
-		$str .= '>';
-
-		$str .= ($this->getLabel());
-		
-		if ($this->isRequired()) {
-			$str .= '<span class="red-text">';
-			$str .= '&nbsp;*';
-			$str .= '</span>';
-		}
-
-		$str .= '</span>';
-
-		$str .= '</label>';
-
-		$str .= '</p>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -70,19 +75,7 @@ class CheckboxField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '!$('.json_encode("#".$this->getId()).').is(":checked")';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but was not checked").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-
-		return $str;
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -92,7 +85,7 @@ class CheckboxField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').is(":checked"));';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**

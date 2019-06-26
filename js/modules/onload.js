@@ -284,7 +284,8 @@ window.addEventListener('load', () => {
 		"markdown-field": MarkdownField,
 		"number-field": NumberField,
 		"static-html-field": StaticHTMLField,
-		"confirm-field": ConfirmField
+		"confirm-field": ConfirmField,
+		"checkbox-field": CheckboxField
 	};
 
 	for (var element in toRegister) {
