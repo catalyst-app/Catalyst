@@ -110,17 +110,17 @@ class MarkdownField extends HTMLElement {
 	 */
 	verify(passive=false) {
 		let value = this.getValue();
-		window.log(this.distinguisher, "Verifying with value "+JSON.stringify(value));
+		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify(value));
 
 		if (this.required) {
 			if (!value.length) {
-				window.log(this.distinguisher, "Required but empty value", true);
+				window.log(this.properties.distinguisher, "Required but empty value", true);
 				this.markError(this.properties.errors.requiredButMissing, passive);
 				return false;
 			}
 		}
 
-		window.log(this.distinguisher, "Verification successful");
+		window.log(this.properties.distinguisher, "Verification successful");
 
 		this.element.classList.remove("invalid", "marked-invalid");
 
@@ -131,13 +131,13 @@ class MarkdownField extends HTMLElement {
 	 * Render the field
 	 */
 	render() {
-		window.log(this.distinguisher, "Clearing existing render timeout");
+		window.log(this.properties.distinguisher, "Clearing existing render timeout");
 		clearTimeout(this.timeout);
 
-		window.log(this.distinguisher, "Setting render timeout for 200ms");
+		window.log(this.properties.distinguisher, "Setting render timeout for 200ms");
 
 		this.timeout = setTimeout((function() {
-			window.log(this.distinguisher, "rendering");
+			window.log(this.properties.distinguisher, "rendering");
 			this.preview.classList.replace("rendered-markdown", "raw-markdown");
 			this.preview.textContent = this.getValue();
 
