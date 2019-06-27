@@ -86,10 +86,6 @@ trait NewCommissionTypeFormTrait {
 		$baseCostUsdField->setMin(0);
 		$baseCostUsdField->setMax(1000000);
 		$baseCostUsdField->setAutocompleteAttribute(AutocompleteValues::TRANSACTION_AMOUNT);
-		$baseCostUsdField->addError(91509, ErrorCodes::ERR_91509);
-		$baseCostUsdField->setMissingErrorCode(91509);
-		$baseCostUsdField->addError(91510, ErrorCodes::ERR_91510);
-		$baseCostUsdField->setInvalidErrorCode(91510);
 
 		$baseCostUsdFieldWrapper->setField($baseCostUsdField);
 		$form->addField($baseCostUsdFieldWrapper);
@@ -239,10 +235,6 @@ trait NewCommissionTypeFormTrait {
 		$baseCostUsdEntryField->setMin(0);
 		$baseCostUsdEntryField->setMax(10000);
 		$baseCostUsdEntryField->setAutocompleteAttribute(AutocompleteValues::TRANSACTION_AMOUNT);
-		$baseCostUsdEntryField->addError(91538, ErrorCodes::ERR_91538);
-		$baseCostUsdEntryField->setMissingErrorCode(91538);
-		$baseCostUsdEntryField->addError(91539, ErrorCodes::ERR_91539);
-		$baseCostUsdEntryField->setInvalidErrorCode(91539);
 		
 		$baseCostUsdEntryWrapper->setField($baseCostUsdEntryField);
 		$modifiersField->addField($baseCostUsdEntryWrapper);
