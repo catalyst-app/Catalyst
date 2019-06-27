@@ -12,7 +12,7 @@
        type="text"
        autocomplete={ this.properties.autocomplete }
        pattern={ this.properties.pattern }
-       value={ this.properties.isFieldPrefilled ? this.properties.value : "" }
+       value={ this.properties.valueIsPrefilled ? this.properties.value : "" }
        required={ this.properties.required }
        autofocus={ this.properties.primary }
        className={ "form-field" + (this.properties.value != null || this.properties.primary ? " active" : "") }
