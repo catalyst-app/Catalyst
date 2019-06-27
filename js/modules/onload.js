@@ -190,9 +190,6 @@ var humanFileSize = function(size) {
 		/* SUBFORM THING */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'subform_entry_field.js'; ?>
 
-		/* COLOR PICKER */
-		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'color_picker.js'; ?>
-
 		/* TOGGLEABLE BUTTONS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'toggle_buttons.js'; ?>
 
@@ -285,7 +282,8 @@ window.addEventListener('load', () => {
 		"number-field": NumberField,
 		"static-html-field": StaticHTMLField,
 		"confirm-field": ConfirmField,
-		"checkbox-field": CheckboxField
+		"checkbox-field": CheckboxField,
+		"color-field": ColorField
 	};
 
 	for (var element in toRegister) {

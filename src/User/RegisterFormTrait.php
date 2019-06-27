@@ -72,11 +72,6 @@ trait RegisterFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(90313, ErrorCodes::ERR_90313);
-		$colorField->setMissingErrorCode(90313);
-		$colorField->addError(90314, ErrorCodes::ERR_90314);
-		$colorField->setInvalidErrorCode(90314);
 		$form->addField($colorField);
 
 		$profilePictureField = new ImageField();

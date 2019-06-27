@@ -107,11 +107,6 @@ trait EditArtistPageFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(91411, ErrorCodes::ERR_91411);
-		$colorField->setMissingErrorCode(91411);
-		$colorField->addError(91412, ErrorCodes::ERR_91412);
-		$colorField->setInvalidErrorCode(91412);
 		if ($isArtist) {
 			$colorField->setPrefilledValue($artist->getColor());
 		}

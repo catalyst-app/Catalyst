@@ -10,85 +10,44 @@ use \Catalyst\Page\Values;
  * Represents a field to pick a color from the allowed values
  */
 class ColorField extends AbstractField {
-	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
+	use LabelTrait, SupportsPrefilledValueTrait;
+	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "color-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"invalidColor" => "We aren't quite sure how, but this color is not valid.  Please try selecting again",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"colorMap" => Color::COLOR_BY_HEX,
+			"required" => $this->isRequired(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
+	}
+
 	/**
 	 * Return the field's HTML input
 	 * 
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		if ($this->isFieldPrefilled()) {
-			if (!in_array($this->getPrefilledValue(), array_keys(Color::HEX_MAP))) {
-				$this->throwInvalidError();
-			}
-		}
-		$str = '';
-		$str .= '<div';
-		$str .= ' data-for="'.htmlspecialchars($this->getId()).'"';
-		$str .= ' class="color-field col s12">';
-
-		$str .= '<div';
-		$str .= ' class="chosen-color btn"';
-		$str .= ' data-for="'.htmlspecialchars($this->getId()).'"';
-		if ($this->isFieldPrefilled()) {
-			$str .= ' style="background-color: #'.($this->getPrefilledValue()).'"';
-		} else {
-			$str .= ' style="background-color: #'.(Values::DEFAULT_COLOR).'"';
-		}
-		$str .= '>';
-		$str .= '</div>';
-
-		$str .= '<div';
-		$str .= ' class="color-input-wrapper">';
-
-		$str .= '<div';
-		$str .= ' class="input-field col s12">';
-
-		$str .= '<input';
-		$str .= ' readonly="readonly"';
-		$str .= ' type="text"';
-		$str .= ' class="active"';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-		if ($this->isFieldPrefilled()) {
-			$str .= ' value="'.$this->getPrefilledValue().'"';
-		} else {
-			$str .= ' value="'.Values::DEFAULT_COLOR.'"';
-		}
-		$str .= '>';
-
-		$str .= $this->getLabelHtml();
-		
-		$str .= '</div>';
-		
-		$str .= '</div>';
-		
-		$str .= '</div>';
-
-		$str .= '<div';
-		$str .= ' class="color-picker-modal modal bottom-sheet">';
-		$str .= '<div';
-		$str .= ' class="modal-content">';
-		$str .= '<h3>Color</h3>';
-		$str .= '<h5>Choose a color</h5>';
-		$str .= '<div';
-		$str .= ' class="row">';
-
-		// get the maximum swatches, either of a category or of categories themselves
-		$numColorSwatches = max(count(Color::COLOR_BY_CATEGORY), max(array_map("count", Color::COLOR_BY_CATEGORY)));
-
-		for ($i = 0; $i < $numColorSwatches; $i++) {
-			$str .= '<div';
-			$str .= ' class="color-swatch col l2 m3 s12"';
-			$str .= '>';
-			$str .= '</div>';
-		}
-
-		$str .= '</div>';
-		$str .= '</div>';
-		$str .= '</div>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -97,32 +56,7 @@ class ColorField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." is required, but is empty (???)").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		$str .= 'if (';
-		$str .= '!'.json_encode(array_keys(Color::HEX_MAP)).'.includes($('.json_encode("#".$this->getId()).').val())';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - color ").'+$('.json_encode("#".$this->getId()).').val()+'.json_encode(" was somehow not in the valid color list, per .includes").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
-
-		return $str;
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -132,7 +66,7 @@ class ColorField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.parentNode.parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
@@ -163,14 +97,5 @@ class ColorField extends AbstractField {
 		if (!in_array($requestArr[$this->getDistinguisher()], array_keys(Color::HEX_MAP))) {
 			$this->throwInvalidError();
 		}
-	}
-
-	/**
-	 * Get the default autocomplete attribute value
-	 *
-	 * @return string
-	 */
-	public static function getDefaultAutocompleteAttribute() : string {
-		return AutocompleteValues::ON;
 	}
 }

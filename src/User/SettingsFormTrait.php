@@ -93,11 +93,6 @@ trait SettingsFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(90514, ErrorCodes::ERR_90514);
-		$colorField->setMissingErrorCode(90514);
-		$colorField->addError(90515, ErrorCodes::ERR_90515);
-		$colorField->setInvalidErrorCode(90515);
 		if (!is_null($user)) {
 			$colorField->setPrefilledValue($user->getColor());
 		}

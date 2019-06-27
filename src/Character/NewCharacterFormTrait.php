@@ -70,11 +70,6 @@ trait NewCharacterFormTrait {
 		if (User::isLoggedIn()) {
 			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
 		}
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(90808, ErrorCodes::ERR_90808);
-		$colorField->setMissingErrorCode(90808);
-		$colorField->addError(90809, ErrorCodes::ERR_90809);
-		$colorField->setInvalidErrorCode(90809);
 		$form->addField($colorField);
 
 		$publicCheckboxField = new CheckboxField();

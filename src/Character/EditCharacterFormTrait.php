@@ -81,11 +81,6 @@ trait EditCharacterFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(91008, ErrorCodes::ERR_91008);
-		$colorField->setMissingErrorCode(91008);
-		$colorField->addError(91009, ErrorCodes::ERR_91009);
-		$colorField->setInvalidErrorCode(91009);
 		if (!is_null($character)) {
 			$colorField->setPrefilledValue($character->getColor());
 		}

@@ -92,11 +92,6 @@ trait CreateArtistPageFormTrait {
 		$colorField->setDistinguisher("color");
 		$colorField->setLabel("Color");
 		$colorField->setRequired(true);
-		$colorField->setAutocompleteAttribute(AutocompleteValues::ON);
-		$colorField->addError(91211, ErrorCodes::ERR_91211);
-		$colorField->setMissingErrorCode(91211);
-		$colorField->addError(91212, ErrorCodes::ERR_91212);
-		$colorField->setInvalidErrorCode(91212);
 		if (User::isLoggedIn()) {
 			$colorField->setPrefilledValue($_SESSION["user"]->getColor());
 		}
