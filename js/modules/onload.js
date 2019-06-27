@@ -264,7 +264,8 @@ window.addEventListener('load', () => {
 		"confirm-field": ConfirmField,
 		"checkbox-field": CheckboxField,
 		"color-field": ColorField,
-		"date-field": DateField
+		"date-field": DateField,
+		"time-field": TimeField
 	};
 
 	for (var element in toRegister) {

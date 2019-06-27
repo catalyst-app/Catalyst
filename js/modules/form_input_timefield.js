@@ -1,4 +1,4 @@
-class DateField extends HTMLElement {
+class TimeField extends HTMLElement {
 	constructor(properties) {
 		super();
 
@@ -19,7 +19,7 @@ class DateField extends HTMLElement {
 			$$a.setAttribute('class', 'input-field col s12');
 			var $$b = this.element = document.createElement('input');
 			$$b.type = 'text';
-			$$b.setAttribute('class', 'datepicker ' + (this.properties.primary || this.properties.valueIsPrefilled ? ' active' : ''));
+			$$b.setAttribute('class', 'timepicker ' + (this.properties.primary || this.properties.valueIsPrefilled ? ' active' : ''));
 			$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
 			$$b.setAttribute('autocomplete', this.properties.autocomplete);
 			$$b.required = this.properties.required;
@@ -33,10 +33,9 @@ class DateField extends HTMLElement {
 			return $$a;
 		})());
 
-		this.pickerInstance = M.Datepicker.init(this.element, {
-			showDaysInNextAndPreviousMonths: true,
+		this.pickerInstance = M.Timepicker.init(this.element, {
 			onSelect: this.verify.bind(this, true),
-			onClose: this.verify.bind(this, true),
+			onCloseEnd: this.verify.bind(this, true),
 			showClearBtn: true
 		});
 	}
@@ -63,7 +62,7 @@ class DateField extends HTMLElement {
 	 */
 	getValue() {
 		if (this.pickerInstance.isOpen) {
-			this.element.value = this.pickerInstance.toString();
+			this.element.value = M.Timepicker._addLeadingZero(this.pickerInstance.hours)+':'+M.Timepicker._addLeadingZero(this.pickerInstance.minutes)+" "+this.pickerInstance.amOrPm;;
 			if (this.element.value.length) {
 				this.label.classList.add("active");
 			}
@@ -90,9 +89,9 @@ class DateField extends HTMLElement {
 		window.log(this.properties.distinguisher, "Verifying with value "+JSON.stringify(value));
 
 		if (value.length) {
-			if (!/^((Jan|Mar|May|Jul|Aug|Oct|Dec)\s(0[1-9]|[1-2][0-9]|3[0-1]),\s2[0-9]{3}|(Apr|Jun|Sep|Nov)\s(0[1-9]|[1-2][0-9]|30),\s2[0-9]{3}|Feb\s(0[1-9]|[1-2][0-8]),\s2[0-9]{3}|Feb\s29,\s2([048]00|[0-9][02468][48]|[0-9][13579][26]))$/.test(value)) {
-				window.log(this.properties.distinguisher, "Pattern ^((Jan|Mar|May|Jul|Aug|Oct|Dec)\\s(0[1-9]|[1-2][0-9]|3[0-1]),\\s2[0-9]{3}|(Apr|Jun|Sep|Nov)\\s(0[1-9]|[1-2][0-9]|30),\\s2[0-9]{3}|Feb\\s(0[1-9]|[1-2][0-8]),\\s2[0-9]{3}|Feb\s29,\\s2([048]00|[0-9][02468][48]|[0-9][13579][26]))$ does not match value", true);
-				this.markError(this.properties.errors.invalidDate, passive);
+			if (!/^(0?[1-9]|1[0-2]):[0-5][0-9]\s(A|P)M$/.test(value)) {
+				window.log(this.properties.distinguisher, "Pattern ^(0?[1-9]|1[0-2]):[0-5][0-9]\s(A|P)M$ does not match value", true);
+				this.markError(this.properties.errors.invalidTime, passive);
 				return false;
 			}
 		} else {
