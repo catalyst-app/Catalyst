@@ -161,21 +161,27 @@ class NumberField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
-		if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN" || $requestArr[$this->getDistinguisher()] === "") {
+		if ($requestArr[$this->getDistinguisher()] === "") {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			} else {
 				return;
 			}
 		}
+		if (strtoupper($requestArr[$this->getDistinguisher()]) === "NAN") {
+			$this->throwError("notANumber");
+		}
 		if (!preg_match('/^-?[0-9]+(\.[0-9]+)?$/', $requestArr[$this->getDistinguisher()])) {
-			$this->throwInvalidError();
+			$this->throwError("notANumber");
 		}
 		$requestArr[$this->getDistinguisher()] = round((float)$requestArr[$this->getDistinguisher()], $this->getPrecision());
-		if ($requestArr[$this->getDistinguisher()] > $this->getMax() || $requestArr[$this->getDistinguisher()] < $this->getMin()) {
-			$this->throwInvalidError();
+		if ($requestArr[$this->getDistinguisher()] > $this->getMax()) {
+			$this->throwError("exceedsMaximum");
+		}
+		if ($requestArr[$this->getDistinguisher()] < $this->getMin()) {
+			$this->throwError("belowMinimum");
 		}
 	}
 

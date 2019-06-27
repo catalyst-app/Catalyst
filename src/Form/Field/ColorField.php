@@ -83,11 +83,11 @@ class ColorField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if ($this->isRequired()) {
 			if (empty($requestArr[$this->getDistinguisher()])) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			}
 		} else {
 			if (empty($requestArr[$this->getDistinguisher()])) {
@@ -95,7 +95,7 @@ class ColorField extends AbstractField {
 			}
 		}
 		if (!in_array($requestArr[$this->getDistinguisher()], array_keys(Color::HEX_MAP))) {
-			$this->throwInvalidError();
+			$this->throwError("invalidColor");
 		}
 	}
 }

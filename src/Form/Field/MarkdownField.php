@@ -81,11 +81,11 @@ class MarkdownField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if (empty($requestArr[$this->getDistinguisher()])) {
 			if ($this->isRequired()) {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			}
 		}
 	}

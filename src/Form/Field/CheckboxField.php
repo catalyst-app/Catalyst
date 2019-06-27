@@ -102,11 +102,11 @@ class CheckboxField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
 		if ($this->isRequired()) {
 			if ($requestArr[$this->getDistinguisher()] !== "true") {
-				$this->throwMissingError();
+				$this->throwError("requiredButMissing");
 			}
 		}
 	}
