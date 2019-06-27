@@ -55,7 +55,7 @@ class ConfirmField extends AbstractField {
 	public function getProperties() : array {
 		return [
 			"formDistinguisher" => $this->getForm()->getDistinguisher(),
-			"distinguisher" => "static-html-".hash("sha256", $this->getStaticHtml()),
+			"distinguisher" => $this->getDistinguisher(),
 			"prompt" => $this->getPrompt(),
 			"errors" => $this->getErrorMessages(),
 		];
