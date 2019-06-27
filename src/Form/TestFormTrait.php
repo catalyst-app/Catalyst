@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,ConfirmField,EmailField,TextField,NumberField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,ConfirmField,DateField,EmailField,TextField,NumberField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -96,11 +96,13 @@ trait TestFormTrait {
 		$numberField->setMax(20);
 		$numberField->setPrecision(2);
 		$numberField->setAutocompleteAttribute(AutocompleteValues::OFF);
-		$numberField->addError(99827, ErrorCodes::ERR_99827);
-		$numberField->setMissingErrorCode(99827);
-		$numberField->addError(99828, ErrorCodes::ERR_99828);
-		$numberField->setInvalidErrorCode(99828);
 		$form->addField($numberField);
+
+		$dateField = new DateField();
+		$dateField->setDistinguisher("test-date-field");
+		$dateField->setLabel("Date!");
+		$dateField->setRequired(true);
+		$form->addField($dateField);
 
 		$numberField = new ConfirmField();
 		$numberField->setDistinguisher("test-number-field-req");

@@ -249,11 +249,11 @@ window.addEventListener('load', () => {
 
 	var toRegister = {
 		"form-label-helper-span": FormLabelHelperSpan,
-		"form-label": FormLabel,
+		"form-label": FormLabel, // these MUST come before any elements below which inhertis them
 
 		"select-field": SelectField,
 		"text-field": TextField,
-		"password-field": PasswordField,
+		"password-field": PasswordField, // this MUST come prior to ConfirmPasswordField
 		"email-field": EmailField,
 		"confirm-password-field": ConfirmPasswordField,
 		"captcha-field": CaptchaField,
@@ -263,7 +263,8 @@ window.addEventListener('load', () => {
 		"static-html-field": StaticHTMLField,
 		"confirm-field": ConfirmField,
 		"checkbox-field": CheckboxField,
-		"color-field": ColorField
+		"color-field": ColorField,
+		"date-field": DateField
 	};
 
 	for (var element in toRegister) {

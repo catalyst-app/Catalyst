@@ -9,12 +9,40 @@ use \Catalyst\Form\Form;
  */
 class DateField extends AbstractField {
 	use LabelTrait, SupportsAutocompleteAttributeTrait, SupportsPrefilledValueTrait;
-
 	/**
 	 * Pattern to match a valid date
 	 */
-	public function getPattern() : string {
-		return '^((Jan|Mar|May|Jul|Aug|Oct|Dec)\s(0[1-9]|[1-2][0-9]|3[0-1]),\s2[0-9]{3}|(Apr|Jun|Sep|Nov)\s(0[1-9]|[1-2][0-9]|30),\s2[0-9]{3}|Feb\s(0[1-9]|[1-2][0-8]),\s2[0-9]{3}|Feb\s29,\s2([048]00|[0-9][02468][48]|[0-9][13579][26]))$';
+	const PATTERN = '^((Jan|Mar|May|Jul|Aug|Oct|Dec)\s(0[1-9]|[1-2][0-9]|3[0-1]),\s2[0-9]{3}|(Apr|Jun|Sep|Nov)\s(0[1-9]|[1-2][0-9]|30),\s2[0-9]{3}|Feb\s(0[1-9]|[1-2][0-8]),\s2[0-9]{3}|Feb\s29,\s2([048]00|[0-9][02468][48]|[0-9][13579][26]))$';
+
+	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "date-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return [
+			"invalidDate" => "This date is not valid – please use the picker",
+		] + parent::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"formDistinguisher" => $this->getForm()->getDistinguisher(),
+			"distinguisher" => $this->getDistinguisher(),
+			"autocomplete" => $this->getAutocompleteAttribute(),
+			"required" => $this->isRequired(),
+			"primary" => $this->isPrimary(),
+			"errors" => $this->getErrorMessages(),
+		] + $this->getLabelProperties() + $this->getPrefilledValueProperties();
 	}
 
 	/**
@@ -23,76 +51,16 @@ class DateField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		$str = '';
-		$str .= '<div class="input-field col s12">';
-
-		$inputClasses = ["datepicker"];
-		$str .= '<input';
-		$str .= ' type="text"';
-		$str .= ' autocomplete="'.htmlspecialchars($this->getAutocompleteAttribute()).'"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
-
-		if ($this->isFieldPrefilled()) {
-			if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $this->getPrefilledValue())) {
-				$this->throwInvalidPrefilledValueError();
-			}
-			$str .= ' value="'.htmlspecialchars($this->getPrefilledValue()).'"';
-			$inputClasses[] = "active";
-		}
-
-		if ($this->isRequired()) {
-			$str .= ' required="required"';
-		}
-
-		if ($this->isPrimary()) {
-			$str .= ' autofocus="autofocus"';
-			$inputClasses[] = "active";
-		}
-
-		if ($this->getPattern() !== '') {
-			$str .= ' pattern="'.htmlspecialchars($this->getPattern()).'"';
-		}
-		
-		$str .= ' class="'.htmlspecialchars(implode(" ", $inputClasses)).'"';
-		$str .= '>';
-		
-		$str .= $this->getLabelHtml();
-		
-		$str .= '</div>';
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
-	 * Full JS validation code, including if statement and all
+	 * Full JS validation code
 	 * 
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		$str = '';
-		if ($this->isRequired()) {
-			$str .= 'if (';
-			$str .= '$('.json_encode("#".$this->getId()).').val().length === 0';
-			$str .= ') {';
-			$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field is required, but empty").', true);';
-			$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getMissingErrorCode())).');';
-			$str .= Form::CANCEL_SUBMISSION_JS;
-			$str .= '}';
-		}
-		$str .= 'if (';
-		$str .= '$('.json_encode("#".$this->getId()).').val().length !== 0';
-		$str .= ') {';
-
-		$str .= 'if (';
-		$str .= '!(new RegExp('.json_encode($this->getPattern()).').test($('.json_encode("#".$this->getId()).').val()))';
-		$str .= ') {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - field value did not pass regexp").', true);';
-		$str .= 'markInputInvalid('.json_encode('#'.$this->getId()).', '.json_encode($this->getErrorMessage($this->getInvalidErrorCode())).');';
-		$str .= Form::CANCEL_SUBMISSION_JS;
-		$str .= '}';
-
-		$str .= '}';
-
-		return $str;
+		return 'if (!document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.verify()) { return; }';
 	}
 
 	/**
@@ -102,7 +70,7 @@ class DateField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', $('.json_encode("#".$this->getId()).').val());';
+		return $formDataName.'.append('.json_encode($this->getDistinguisher()).', document.getElementById('.json_encode($this->getId()).').parentNode.parentNode.getAggregationValue());';
 	}
 
 	/**
@@ -119,19 +87,17 @@ class DateField extends AbstractField {
 			}
 		}
 		if (!array_key_exists($this->getDistinguisher(), $requestArr)) {
-			$this->throwMissingError();
+			$this->throwError("requiredButMissing");
 		}
-		if ($this->isRequired()) {
-			if (empty($requestArr[$this->getDistinguisher()])) {
-				$this->throwMissingError();
-			}
-		} else {
-			if (empty($requestArr[$this->getDistinguisher()])) {
+		if (empty($requestArr[$this->getDistinguisher()])) {
+			if ($this->isRequired()) {
+				$this->throwError("requiredButMissing");
+			} else {
 				return; // not required and empty, don't do further checks
 			}
 		}
-		if (!preg_match('/'.str_replace("/", "\\/", $this->getPattern()).'/', $requestArr[$this->getDistinguisher()])) {
-			$this->throwInvalidError();
+		if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $requestArr[$this->getDistinguisher()])) {
+			$this->throwError("invalidDate");
 		}
 	}
 
