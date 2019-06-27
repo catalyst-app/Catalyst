@@ -112,7 +112,7 @@ class EmailField extends AbstractField {
 		if (!preg_match('/'.str_replace("/", "\\/", self::PATTERN).'/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwError("patternMismatch");
 		}
-		if (!preg_match('/cat(l\.st|alystapp\.co)$/', $requestArr[$this->getDistinguisher()])) {
+		if (preg_match('/cat(l\.st|alystapp\.co)$/', $requestArr[$this->getDistinguisher()])) {
 			$this->throwError("internalEmail");
 		}
 	}

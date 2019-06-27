@@ -325,7 +325,7 @@ abstract class AbstractField {
 	 */
 	protected function throwError(string $errorType) : void {
 		HTTPCode::set(400);
-		Response::sendError($errorType, $this->getErrors()[$errorType]);
+		Response::sendError($this->getDistinguisher(), $errorType);
 	}
 
 	/**
