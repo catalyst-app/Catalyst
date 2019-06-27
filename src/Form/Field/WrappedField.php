@@ -23,6 +23,43 @@ class WrappedField extends AbstractField {
 	protected $wrapperClasses = "";
 
 	/**
+	 * Create a WrappedField
+	 * @param null|AbstractField $field
+	 * @param string $classes
+	 */
+	public function __construct(?AbstractField $field=null, string $classes="") {
+		parent::__construct();
+
+		$this->setField($field);
+		$this->setWrapperClasses($classes);
+	}
+
+	/**
+	 * @return string The name of the web component tag
+	 */
+	public static function getWebComponentName() : string {
+		return "wrapped-field";
+	}
+
+	/**
+	 * Get the DESCRIPTIVE error message types and default messages
+	 * @return string[]
+	 */
+	protected function getDefaultErrorMessages() : array {
+		return $this->getField()::getDefaultErrorMessages();
+	}
+
+	/**
+	 * @return array Properties for the created field element
+	 */
+	public function getProperties() : array {
+		return [
+			"_wrapperClasses" => $this->getWrapperClasses(),
+			"_wrappedComponentName" => $this->getField()->getWebComponentName(),
+		] + $this->getField()->getProperties();
+	}
+
+	/**
 	 * Get the field to wrap
 	 * 
 	 * @return AbstractField|null
@@ -34,10 +71,14 @@ class WrappedField extends AbstractField {
 	/**
 	 * Set the field to wrap
 	 * 
-	 * @param AbstractField $field
+	 * @param null|AbstractField $field
 	 */
-	public function setField(AbstractField $field) : void {
+	public function setField(?AbstractField $field) : void {
 		$this->field = $field;
+
+		if ($this->getField() != null) {
+			$this->setDistinguisher($this->getField()->getDistinguisher());
+		}
 	}
 
 	/**
@@ -64,9 +105,6 @@ class WrappedField extends AbstractField {
 	 * @param Form $form
 	 */
 	public function setForm(Form $form) : void {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
 		$this->form = $form;
 		$this->getField()->setForm($form);
 	}
@@ -77,19 +115,7 @@ class WrappedField extends AbstractField {
 	 * @return string The HTML to display
 	 */
 	public function getHtml() : string {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
-		$str = '';
-
-		$str .= '<div';
-		$str .= ' class="'.htmlspecialchars($this->getWrapperClasses()).'">';
-
-		$str .= $this->getField()->getHtml();
-
-		$str .= '</div>';
-
-		return $str;
+		return $this->getWebComponentHtml();
 	}
 
 	/**
@@ -98,9 +124,6 @@ class WrappedField extends AbstractField {
 	 * @return string The JS to validate the field
 	 */
 	public function getJsValidator() : string {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
 		return $this->getField()->getJsValidator();
 	}
 
@@ -111,9 +134,6 @@ class WrappedField extends AbstractField {
 	 * @return string Code to use to store field in $formDataName
 	 */
 	public function getJsAggregator(string $formDataName) : string {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
 		return $this->getField()->getJsAggregator($formDataName);
 	}
 
@@ -123,9 +143,6 @@ class WrappedField extends AbstractField {
 	 * @return string
 	 */
 	public function getJsOnload() : string {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
 		return $this->getField()->getJsOnload();
 	}
 
@@ -135,9 +152,6 @@ class WrappedField extends AbstractField {
 	 * @param array $requestArr Array to find the form data in
 	 */
 	public function checkServerSide(?array &$requestArr=null) : void {
-		if (is_null($this->getField())) {
-			throw new InvalidArgumentException(basename(__CLASS__)." not given a field to wrap");
-		}
 		$this->getField()->checkServerSide($requestArr);
 	}
 }

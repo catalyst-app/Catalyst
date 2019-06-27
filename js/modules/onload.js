@@ -265,7 +265,9 @@ window.addEventListener('load', () => {
 		"checkbox-field": CheckboxField,
 		"color-field": ColorField,
 		"date-field": DateField,
-		"time-field": TimeField
+		"time-field": TimeField,
+
+		"wrapped-field": WrappedField // must be after ALL others
 	};
 
 	for (var element in toRegister) {
