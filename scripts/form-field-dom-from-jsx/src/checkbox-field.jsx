@@ -4,7 +4,6 @@
       <input
        type="checkbox"
        id={ this.properties.formDistinguisher+"-input-"+this.properties.distinguisher }
-       class="filled-in"
        autocomplete="off"
        class="filled-in"
        checked={ this.properties.valueIsPrefilled ? this.properties.value : false } 
