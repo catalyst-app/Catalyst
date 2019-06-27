@@ -51,11 +51,11 @@ class ConfirmField extends HTMLElement {
 	verify(passive=false) {
 		if (!passive) {
 			window.log(this.properties.distinguisher, "Showing JS prompt");
-			var result = confirm(this.prompt);
+			var result = confirm(this.properties.prompt);
 
 			if (!result) {
 				window.log(this.properties.distinguisher, "Got no/cancel response, aborting");
-				this.markError(this.errors.requiredButMissing);
+				this.markError(this.properties.errors.requiredButMissing);
 				return false;
 			}
 		} else {

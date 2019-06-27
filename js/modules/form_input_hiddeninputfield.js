@@ -54,9 +54,9 @@ class HiddenInputField extends HTMLElement {
 	verify(passive=false) {
 		window.log(this.properties.distinguisher, "Verifying hidden input field exists");
 
-		if (this.document.getElementById(this.properties.hiddenInputId) == null) {
+		if (document.getElementById(this.properties.hiddenInputId) == null) {
 			window.log(this.properties.distinguisher, "Element with ID "+this.hiddenInputId+" does not exist", true);
-			this.markError(this.errors.requiredButMissing());
+			this.markError(this.properties.errors.requiredButMissing);
 			return false;
 		}
 		
