@@ -15,37 +15,27 @@ class NumberField extends HTMLElement {
 
 		// var host = this.attachShadow({ mode: "open" });
 		this.appendChild((() => {
-			let optionalAttributes = {};
-			if (this.properties.maxlength) {
-				optionalAttributes['maxlength'] = this.properties.maxlength;
-			}
-			let className = 'form-field';
-			if (this.properties.value != null || this.properties.primary) {
-				className += ' active';
-			}
-			return (() => {
-				var $$a = document.createElement('div');
-				$$a.setAttribute('class', 'input-field col s12');
-				var $$b = this.element = document.createElement('input');
-				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
-				$$b.name = this.properties.distinguisher;
-				$$b.type = 'number';
-				$$b.setAttribute('step', 10 ** -this.properties.precision);
-				$$b.setAttribute('inputmode', this.properties.precision > 0 ? 'decimal' : 'numeric');
-				$$b.setAttribute('autocomplete', this.properties.autocomplete);
-				$$b.value = this.properties.valueIsPrefilled ? this.properties.value : '';
-				$$b.required = this.properties.required;
-				$$b.autofocus = this.properties.primary;
-				$$b.setAttribute('class', 'form-field' + (this.properties.value != null || this.properties.primary ? ' active' : ''));
-				$$b.setAttribute('min', this.properties.min);
-				$$b.setAttribute('max', this.properties.max);
-				$$a.appendChild($$b);
-				var $$c = this.label = new FormLabel(this.properties).children[0];
-				$$a.appendChild($$c);
-				var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
-				$$a.appendChild($$d);
-				return $$a;
-			})();
+			var $$a = document.createElement('div');
+			$$a.setAttribute('class', 'input-field col s12');
+			var $$b = this.element = document.createElement('input');
+			$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
+			$$b.name = this.properties.distinguisher;
+			$$b.type = 'number';
+			$$b.setAttribute('step', 10 ** -this.properties.precision);
+			$$b.setAttribute('inputmode', this.properties.precision > 0 ? 'decimal' : 'numeric');
+			$$b.setAttribute('autocomplete', this.properties.autocomplete);
+			$$b.value = this.properties.valueIsPrefilled ? this.properties.value : '';
+			$$b.required = this.properties.required;
+			$$b.autofocus = this.properties.primary;
+			$$b.setAttribute('class', 'form-field' + (this.properties.value != null || this.properties.primary ? ' active' : ''));
+			$$b.setAttribute('min', this.properties.min);
+			$$b.setAttribute('max', this.properties.max);
+			$$a.appendChild($$b);
+			var $$c = this.label = new FormLabel(this.properties).children[0];
+			$$a.appendChild($$c);
+			var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+			$$a.appendChild($$d);
+			return $$a;
 		})());
 
 		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
@@ -104,7 +94,7 @@ class NumberField extends HTMLElement {
 				return false;
 			}
 			if (!(new RegExp('^-?[0-9]+(\.[0-9]+)?$')).test(value)) {
-				window.log(this.properties.distinguisher, "Pattern ^[0-9]+(\.[0-9][0-9]?)?$ (hardcoded into class) does not match value "+value, true);
+				window.log(this.properties.distinguisher, "Pattern ^-?[0-9]+(\.[0-9][0-9]?)?$ (hardcoded into class) does not match value "+value, true);
 				this.markError(this.properties.errors.notANumber, passive);
 				return false;
 			}

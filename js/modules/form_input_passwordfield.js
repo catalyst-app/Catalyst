@@ -15,33 +15,23 @@ class PasswordField extends HTMLElement {
 
 		// var host = this.attachShadow({ mode: "open" });
 		this.appendChild((() => {
-			let optionalAttributes = {};
-			if (this.properties.maxlength) {
-				optionalAttributes['maxlength'] = this.properties.maxlength;
-			}
-			let className = 'form-field';
-			if (this.properties.value != null || this.properties.primary) {
-				className += ' active';
-			}
-			return (() => {
-				var $$a = document.createElement('div');
-				$$a.setAttribute('class', 'input-field col s12');
-				var $$b = this.element = document.createElement('input');
-				$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
-				$$b.name = this.properties.distinguisher;
-				$$b.type = 'password';
-				$$b.setAttribute('autocomplete', this.properties.autocomplete);
-				$$b.required = this.properties.required;
-				$$b.autofocus = this.properties.primary;
-				$$b.setAttribute('minlength', this.properties.minlength);
-				$$b.setAttribute('class', 'form-field');
-				$$a.appendChild($$b);
-				var $$c = this.label = new FormLabel(this.properties).children[0];
-				$$a.appendChild($$c);
-				var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
-				$$a.appendChild($$d);
-				return $$a;
-			})();
+			var $$a = document.createElement('div');
+			$$a.setAttribute('class', 'input-field col s12');
+			var $$b = this.element = document.createElement('input');
+			$$b.id = this.properties.formDistinguisher + '-input-' + this.properties.distinguisher;
+			$$b.name = this.properties.distinguisher;
+			$$b.type = 'password';
+			$$b.setAttribute('autocomplete', this.properties.autocomplete);
+			$$b.required = this.properties.required;
+			$$b.autofocus = this.properties.primary;
+			$$b.setAttribute('minlength', this.properties.minlength);
+			$$b.setAttribute('class', 'form-field');
+			$$a.appendChild($$b);
+			var $$c = this.label = new FormLabel(this.properties).children[0];
+			$$a.appendChild($$c);
+			var $$d = this.helperText = new FormLabelHelperSpan(this.properties).children[0];
+			$$a.appendChild($$d);
+			return $$a;
 		})());
 
 		this.addEventListener("input", this.verify.bind(this, true), {passive: true});
