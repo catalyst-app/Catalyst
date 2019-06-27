@@ -3,7 +3,7 @@
 namespace Catalyst\Form;
 
 use \Catalyst\API\ErrorCodes;
-use \Catalyst\Form\Field\{AutocompleteValues,ConfirmField,DateField,TimeField,EmailField,TextField,NumberField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues,ColorField,ConfirmField,DateField,TimeField,EmailField,TextField,NumberField,HiddenInputField,MarkdownField,PasswordField,SelectField,CaptchaField,WrappedField};
 use \Catalyst\Form\Form;
 
 trait TestFormTrait {
@@ -21,12 +21,12 @@ trait TestFormTrait {
 
 		$textField = new TextField();
 		$textField->setDistinguisher("text-field-test-one");
-		$textField->setLabel("Required test field with pattern ^([a-g][a-g]?[a-g]?|[h-j]+)$, max length 10, disallowed 'abc','def'");
+		$textField->setLabel("WRAPPED Required test field with pattern ^([a-g][a-g]?[a-g]?|[h-j]+)$, max length 10, disallowed 'abc','def'");
 		$textField->setMaxLength(10);
 		$textField->setDisallowed(["abc","def"]);
 		$textField->setRequired(true);
 		$textField->setPattern('^([a-g][a-g]?[a-g]?|[h-j]+)$');
-		$form->addField($textField);
+		$form->addField(new WrappedField($textField, "col s6"));
 
 		$textField2 = new TextField();
 		$textField2->setDistinguisher("text-field-test-two");
@@ -110,14 +110,15 @@ trait TestFormTrait {
 		$timeField->setRequired(true);
 		$form->addField($timeField);
 
-		$numberField = new ConfirmField();
-		$numberField->setDistinguisher("test-number-field-req");
-		$numberField->setPrompt("Are you sure");
-		$numberField->addError(99830, ErrorCodes::ERR_99830);
-		$numberField->setMissingErrorCode(99830);
-		$numberField->addError(99831, ErrorCodes::ERR_99831);
-		$numberField->setInvalidErrorCode(99831);
-		$form->addField($numberField);
+		$colorField = new ColorField();
+		$colorField->setDistinguisher("test-color-field");
+		$colorField->setLabel("Colouuuuuur");
+		$form->addField($colorField);
+
+		$confirmField = new ConfirmField();
+		$confirmField->setDistinguisher("test-confirm-field-req");
+		$confirmField->setPrompt("Are you sure");
+		$form->addField($confirmField);
 
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("test-captcha");
