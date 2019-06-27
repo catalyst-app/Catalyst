@@ -43,6 +43,14 @@ class SelectField extends HTMLElement {
 			return $$a;
 		})());
 
+
+		M.FormSelect.init(this.element, {
+			dropdownOptions: {
+				container: document.body,
+				belowOrigin: true
+			}
+		});
+
 		this.addEventListener("change", this.verify.bind(this, true), {passive: true});
 	}
 

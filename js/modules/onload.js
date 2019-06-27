@@ -76,15 +76,6 @@ var humanFileSize = function(size) {
 				M.toast({html: $("<span></span>").text(a).html()});
 			};
 			window.Materialize = window.M; // legacy
-			M.FormSelect.init(
-				document.querySelectorAll("select"),
-				{
-					dropdownOptions: {
-						container: document.body,
-						belowOrigin: true
-					}
-				}
-			);
 			// $('select').attr("required", false);
 			$(".sidenav").sidenav();
 			$(".modal").modal();
@@ -163,17 +154,6 @@ var humanFileSize = function(size) {
 		if (window.devMode) {
 			console.time("Legacy forms definition");
 		}
-		$(document).on("change", ":checkbox", function(e) {
-			var labelSpan = $(this).next();
-			// restore original text (if applicable)
-			$(labelSpan).text($(labelSpan).attr("data-original"));
-		});
-		// $(document).on("input", ".marked-invalid", function(e) {
-		// 	if ($(this).attr("type") == "checkbox") {
-		// 		return; // should be caught in :checkbox.change
-		// 	}
-		// 	$(this).removeClass("marked-invalid").removeClass("invalid");
-		// });
 		<?php foreach ($forms as $form): ?>
 			<?= $form->getAllJs(); ?>
 		<?php endforeach; ?>
