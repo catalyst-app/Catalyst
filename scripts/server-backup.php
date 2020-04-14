@@ -122,7 +122,7 @@ logLine("Generating folder to save backup data...");
 $folder = date("Y-m-d");
 
 logLine("Saving to /var/www/backups/".$folder."/");
-logLine("  and catalyst-backups@xn--fp8h58f.ws:/home/catalyst-backups/".$folder."/");
+logLine("  and catalyst-backups@home.ncovercash.dev:/home/catalyst-backups/".$folder."/");
 
 if (file_exists("/var/www/backups/".$folder."/")) {
 	logLine("/var/www/backups/".$folder."/ EXISTS!!  ABORTING");
@@ -132,7 +132,7 @@ if (file_exists("/var/www/backups/".$folder."/")) {
 
 logLine("Connecting to remote backup server...");
 
-$ssh = new SSH2("xn--fp8h58f.ws");
+$ssh = new SSH2("home.ncovercash.dev");
 
 logLine("Authenticating with SSH server");
 
@@ -155,7 +155,7 @@ logLine("SSH: CLIENT: ".$existingBackupTestStr);
 logLine("SSH: SERVER: ".trim($result));
 
 if (trim($result) == "true") {
-	throw new Exception("xn--fp8h58f.ws:/home/catalyst-backups/".$folder."/ already exists, aborting backup");
+	throw new Exception("home.ncovercash.dev:/home/catalyst-backups/".$folder."/ already exists, aborting backup");
 }
 
 logLine("Creating remote backup folders");
