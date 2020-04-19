@@ -1613,9 +1613,6 @@ class Email {
 		}
 
 		if ($mail->send()) {
-			if ($copyToSent) {
-				$mail->copyToFolder("Sent");
-			}
 			return true;
 		} else {
 			return false;
