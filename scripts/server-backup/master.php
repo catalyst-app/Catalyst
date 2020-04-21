@@ -114,7 +114,7 @@ if ($returnCode) {
 	trigger_error("version-backups returned a non-zero exit code", E_USER_NOTICE);
 }
 
-echo "  Running ./push-offsite"
+echo "  Running ./push-offsite"."\n";
 
 $output = [];
 $returnCode = 0;
