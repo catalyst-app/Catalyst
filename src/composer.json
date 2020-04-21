@@ -2,11 +2,8 @@
     "require": {
         "phpmailer/phpmailer": "*",
         "pguardiario/phpuri": "*",
-        "ddeboer/imap": "*",
         "whichbrowser/parser": "*",
-        "ralouphie/getallheaders": "*",
-        "ifsnop/mysqldump-php": "*",
-        "phpseclib/phpseclib": "~2.0"
+        "ralouphie/getallheaders": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
