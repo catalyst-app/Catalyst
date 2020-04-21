@@ -2,7 +2,6 @@
 
 namespace Catalyst\Email;
 
-use \Ddeboer\Imap\Server;
 use \Exception;
 use \PHPMailer\PHPMailer\PHPMailer;
 
@@ -234,25 +233,5 @@ class Mailer extends PHPMailer {
 		}
 
 		return $body;
-	}
-
-	/**
-	 * Save email to a folder
-	 *
-	 * @param string $folderPath Where to save the mail
-	 * @param bool $markAsRead Whether or not to mark the mail as read
-	 */
-	public function copyToFolder(string $folderPath="Sent", bool $markAsRead=true) : void {
-		$message = $this->MIMEHeader.$this->MIMEBody;
-
-		if (extension_loaded("imap")) {
-			$server = new Server($this->Host, "993", "/imap/ssl/novalidate-cert"); // i know this is bad but its the best I can do until php_imap supports SANs.
-			                                                                       // this may be fixed upon the next SSL renew when I put catalystapp.co first, not sure (5/7/19)
-			$connection = $server->authenticate($this->Username, $this->Password);
-
-			$mailbox = $connection->getMailbox($folderPath);
-			
-			$mailbox->addMessage($message, $markAsRead ? '\\Seen' : null);
-		}
 	}
 }
