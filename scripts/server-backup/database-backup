@@ -9,5 +9,8 @@
 # -Q Quote identifiers (such as database, table, and column names) within backtick (`) characters.
 # -r Output file
 # --skip-extended-insert Keep separate rows in separate inserts
-echo mysqldump --defaults-file=$1 -i -c -B --default-character-set=utf8mb4 --order-by-primary -Q -r $BACKUP_DIR"database.sql" --skip-extended-insert $DB_NAME
-mysqldump --defaults-file=$1 -i -c -B --default-character-set=utf8mb4 --order-by-primary -Q -r $BACKUP_DIR"database.sql" --skip-extended-insert $DB_NAME
+# --hex-dump dump binary reliably
+echo Running mysqldump --defaults-file=$1 -i -c -B --default-character-set=utf8mb4 --order-by-primary -Q -r $BACKUP_DIR"database.sql" --skip-extended-insert --hex-blob $DB_NAME
+mysqldump --defaults-file=$1 -i -c -B --default-character-set=utf8mb4 --order-by-primary -Q -r $BACKUP_DIR"database.sql" --skip-extended-insert --hex-blob $DB_NAME
+
+exit $? # use same code as mysqldump

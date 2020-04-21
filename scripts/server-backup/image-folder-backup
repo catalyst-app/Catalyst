@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir -p $1
+find $1 -type f -not -name "*_thumb.*" -exec cp -t $BACKUP_DIR""$2 {} +
+exit $?
