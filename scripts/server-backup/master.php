@@ -14,11 +14,7 @@ use \Catalyst\Images\Folders;
 use \Catalyst\Page\UniversalFunctions;
 use \Catalyst\Secrets;
 
-$logStartMs = microtime(true);
-
 echo "Starting backup process at ".date("r")."\n";
-
-echo "Starting backup process at ".$logStart."\n";
 echo "Backup user: ".`whoami`."\n";
 echo "Backup directory: ".REAL_ROOTDIR." (script in ".__DIR__.")"."\n";
 echo "Process ID: ".getmypid()."\n";
@@ -41,14 +37,19 @@ echo "--------------------------------------------"."\n";
 echo "  Generating temporary config file for auth"."\n";
 
 $dbAuthFile = tempnam(sys_get_temp_dir(), ".catalyst-backup-my-cnf");
-file_put_contents($dbAuthFile, <<<DB_AUTH_FILE
-[mysqldump]
-user={Database::DB_USER}
-password={Database::DB_PASSWORD}
-DB_AUTH_FILE
+file_put_contents($dbAuthFile, sprintf(<<<'DB_AUTH_FILE'
+	[mysqldump]
+	user=%s
+	password=%s
+	DB_AUTH_FILE
+	, Database::DB_USER, Database::DB_PASSWORD)
 );
 
 echo "  Running: ./database-backup ".$dbAuthFile."\n";
+
+echo "  Deleting auth file "."\n";
+
+unlink($dbAuthFile)
 
 __halt_compiler();
 echo "--------------------------------------------"."\n";
