@@ -6,6 +6,8 @@ if (php_sapi_name() !== 'cli') {
 
 $logStartMs = microtime(true);
 
+chdir(__DIR__);
+
 define("ROOTDIR", "/var/www/beta.catalystapp.co/");
 define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
@@ -130,7 +132,7 @@ file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BACKUP
 		"ignore_errors" => true,
 		"header" => "Content-Type: application/x-www-form-urlencoded",
 		"content" => json_encode([
-			"content" => $date." backup completed in ".(microtime(true)-$logStartMs)." seconds",
+			"content" => date("Y-m-d")." backup completed in ".(microtime(true)-$logStartMs)." seconds",
 		])
 	]
 ]));
