@@ -296,13 +296,13 @@ class Controller {
 			HTTPCode::set(500);
 		}
 		if (php_sapi_name() === 'cli') {
-			echo "An unexpected error occured!  Information:\n".
+			fwrite(STDERR, "An unexpected error occured!  Information:\n".
 				"  ERRNO:      ".$errno."\n".
 				"  ERRSTR:     ".$errstr."\n".
 				"  ERRFILE:    ".$errfile."\n".
 				"  ERRLINE:    ".$errline."\n".
 				"  TRACK_ID:    ".$trackingId."\n".
-				"  ARGV:   ".implode(" | ", $_SERVER["argv"])."\n";
+				"  ARGV:   ".implode(" | ", $_SERVER["argv"])."\n");
 			flush();
 			exit(1); // non-zero error codes ye
 		}
