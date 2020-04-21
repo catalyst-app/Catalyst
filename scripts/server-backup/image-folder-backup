@@ -1,5 +1,5 @@
 #!/bin/bash
 
 mkdir -p $BACKUP_DIR"img/"$2
-find $1 -type f -not -name "*_thumb.*" -exec cp -t $BACKUP_DIR"img/"$2 {} +
+rsync -avz --exclude '*_thumb.*' $1/* $BACKUP_DIR"img/"$2
 exit $?

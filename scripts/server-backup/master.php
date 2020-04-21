@@ -82,7 +82,7 @@ $imageFolders = [
 echo count($imageFolders)." folders known: ".json_encode($imageFolders)."\n";
 
 foreach ($imageFolders as $imageFolder) {
-	echo "  Running ./image-folder-backup ".REAL_ROOTDIR.$imageFolder." ".$imageFolder;
+	echo "  Running ./image-folder-backup ".REAL_ROOTDIR.$imageFolder." ".$imageFolder."\n";
 
 	$output = [];
 	$returnCode = 0;
