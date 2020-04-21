@@ -1,5 +1,5 @@
 MAILTO="error_logs@catalystapp.co"
 0 0 * * 5 cd scripts/ && php scripts/staff-reminders.php
 0 0 * * * cd scripts/ && php scripts/patronage_builder.php
-0 0 * * * php scripts/server-backup.php
+0 0 * * * php scripts/server-backup/master.php
 0 12 * * * php scripts/resource-updater.php
