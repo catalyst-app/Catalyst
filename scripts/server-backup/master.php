@@ -45,7 +45,16 @@ file_put_contents($dbAuthFile, sprintf(<<<'DB_AUTH_FILE'
 	, Database::DB_USER, Database::DB_PASSWORD)
 );
 
-echo "  Running: ./database-backup ".$dbAuthFile."\n";
+echo "  Running: ./database-backup ".escapeshellarg($dbAuthFile)."\n";
+
+$output = [];
+$returnCode = 0;
+exec("./database-backup ".escapeshellarg($dbAuthFile), $output, $returnCode);
+
+echo "Ouput (".$returnCode.")"."\n";
+foreach ($output as $row) {
+	echo $row."\n";
+}
 
 echo "  Deleting auth file "."\n";
 
