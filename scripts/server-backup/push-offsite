@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ssh catalyst-backups@home.ncovercash.dev "git -C ~/backups/ pull origin master"
+exit $?

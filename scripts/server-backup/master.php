@@ -104,7 +104,7 @@ echo "--------------------------------------------"."\n";
 echo "  VERSION CONTROL"."\n";
 echo "--------------------------------------------"."\n";
 
-echo "  Running ./version-backups"
+echo "  Running ./version-backups"."\n";
 
 $output = [];
 $returnCode = 0;

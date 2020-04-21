@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git -C $BACKUP_DIR git add .
+git -C $BACKUP_DIR git commit -m "Backup at $(date)"
+exit $?
