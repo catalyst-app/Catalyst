@@ -24,7 +24,7 @@ echo "--------------------------------------------"."\n";
 echo "Setting environment variables..."."\n";
 
 echo "-BACKUP_DIR=/var/www/backups/"."\n";
-putenv("BACKUP_DIR=/var/www/backups/"."/");
+putenv("BACKUP_DIR=/var/www/backups/");
 
 echo "Generating folder to save backup data..."."\n";
 
@@ -44,6 +44,8 @@ file_put_contents($dbAuthFile, sprintf(<<<'DB_AUTH_FILE'
 	DB_AUTH_FILE
 	, Database::DB_USER, Database::DB_PASSWORD)
 );
+
+putenv("DB_NAME=".Database::DB_NAME)
 
 echo "  Running: ./database-backup ".escapeshellarg($dbAuthFile)."\n";
 
