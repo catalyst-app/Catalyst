@@ -56,7 +56,7 @@ exec("./database-backup ".escapeshellarg($dbAuthFile), $output, $returnCode);
 echo "  Generated a ".UniversalFunctions::humanize(filesize("/var/www/backups/database.sql"))." database backup file"."\n";
 
 if ($returnCode) {
-	trigger_error("mysqldump in database-backup returned a non-zero exit code")
+	trigger_error("mysqldump in database-backup returned a non-zero exit code", E_USER_NOTICE);
 }
 
 echo "Ouput (".$returnCode.")"."\n";
@@ -89,7 +89,7 @@ foreach ($imageFolders as $imageFolder) {
 	exec("./image-folder-backup ".escapeshellarg(REAL_ROOTDIR.$imageFolder)." ".escapeshellarg($imageFolder), $output, $returnCode);
 
 	if ($returnCode) {
-		trigger_error("image-folder-backup in database-backup returned a non-zero exit code")
+		trigger_error("image-folder-backup in database-backup returned a non-zero exit code", E_USER_NOTICE);
 	}
 
 	echo "Ouput (".$returnCode.")"."\n";
