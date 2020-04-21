@@ -4,6 +4,8 @@ if (php_sapi_name() !== 'cli') {
 	die("No");
 }
 
+$logStartMs = microtime(true);
+
 define("ROOTDIR", "/var/www/beta.catalystapp.co/");
 define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
@@ -89,13 +91,37 @@ foreach ($imageFolders as $imageFolder) {
 	exec("./image-folder-backup ".escapeshellarg(REAL_ROOTDIR.$imageFolder)." ".escapeshellarg($imageFolder), $output, $returnCode);
 
 	if ($returnCode) {
-		trigger_error("image-folder-backup in database-backup returned a non-zero exit code", E_USER_NOTICE);
+		trigger_error("image-folder-backup returned a non-zero exit code", E_USER_NOTICE);
 	}
 
 	echo "Ouput (".$returnCode.")"."\n";
 	foreach ($output as $row) {
 		echo $row."\n";
 	}
+}
+
+echo "--------------------------------------------"."\n";
+echo "  VERSION CONTROL"."\n";
+echo "--------------------------------------------"."\n";
+
+echo "  Running ./version-backups"
+
+$output = [];
+$returnCode = 0;
+exec("./version-backups ".escapeshellarg(REAL_ROOTDIR.$imageFolder)." ".escapeshellarg($imageFolder), $output, $returnCode);
+
+if ($returnCode) {
+	trigger_error("version-backups returned a non-zero exit code", E_USER_NOTICE);
+}
+
+echo "  Running ./push-offsite"
+
+$output = [];
+$returnCode = 0;
+exec("./push-offsite ".escapeshellarg(REAL_ROOTDIR.$imageFolder)." ".escapeshellarg($imageFolder), $output, $returnCode);
+
+if ($returnCode) {
+	trigger_error("push-offsite returned a non-zero exit code", E_USER_NOTICE);
 }
 
 file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BACKUP_WEBHOOK_TOKEN, false, stream_context_create([
@@ -105,22 +131,6 @@ file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BACKUP
 		"header" => "Content-Type: application/x-www-form-urlencoded",
 		"content" => json_encode([
 			"content" => $date." backup completed in ".(microtime(true)-$logStartMs)." seconds",
-			"embeds" => [
-				[
-					"title" => "Data",
-					"fields" => [
-						[
-							"name" => 'Number of images',
-							"value" => count($imageNames),
-						],
-						[
-							"name" => 'Number of image archives',
-							"value" => $j,
-						],
-					],
-					"description" => "Please see the embed fields"
-				]
-			]
 		])
 	]
 ]));
