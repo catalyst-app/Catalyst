@@ -9,7 +9,6 @@ use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", Values::STATUS[0]);
 define("PAGE_TITLE", Values::createTitle(Values::STATUS[1], []));
-define("NO_HEADER", 1);
 
 if (User::isLoggedIn()) {
 	define("PAGE_COLOR", $_SESSION["user"]->getColor());
@@ -18,6 +17,8 @@ if (User::isLoggedIn()) {
 }
 
 require_once Values::HEAD_INC;
+
+echo UniversalFunctions::createHeading("System Status");
 ?></div>
 	<?php include('status.html'); ?>
 		</div>

@@ -8,7 +8,7 @@ class Values {
 
 	const ABOUT_US = ["about", "About Us"];
 
-	const STATUS = ["status", "Status"];
+	const STATUS = ["status", "System Status"];
 	
 	const API_DOCS = ["about", "API Docs"];
 	
