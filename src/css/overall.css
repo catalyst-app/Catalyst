@@ -865,13 +865,13 @@ input[type=checkbox] + label + span.invalid-text {
 
 [type="checkbox"].filled-in:checked + label:after, [type="checkbox"].filled-in:checked + span:not(.lever):after {
 	border: 2px solid var(--main-color);
-	background-color: var(--main-color);
+	background-color: var(--main-color-quarter-alpha);
 	transition: background-color 400ms, border 400ms;
 }
 
 [type="checkbox"].filled-in.tabbed:checked:focus + span:not(.lever):after {
 	background-color: var(--main-color);
-	border-color: var(--main-color);
+	border-color: var(--main-color-quarter-alpha);
 	transition: background-color 400ms, border-color 400ms
 }
 
@@ -879,7 +879,7 @@ input[type=checkbox] + label + span.invalid-text {
 
 
 .switch label input[type=checkbox]:checked + .lever:after {
-	background-color: var(--main-color);
+	background-color: var(--main-color-quarter-alpha);
 	transition: background-color 400ms;
 }
 
@@ -890,7 +890,7 @@ input[type=checkbox] + label + span.invalid-text {
 [type="checkbox"].filled-in:checked + label:after,
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after, 
 .progress .indeterminate, .progress .determinate, .btn-floating, button:focus, .btn:not(.chosen-color), .btn-large:not(.chosen-color) {
-	background-color: var(--main-color);
+	background-color: var(--main-color-quarter-alpha);
 	transition: background-color 400ms;
 }
 
