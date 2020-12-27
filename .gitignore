@@ -2,32 +2,32 @@ src/php/vendor
 
 src/php/Secrets.php
 
-internal_assets/profile_pictures/*
-!internal_assets/profile_pictures/default.png
-!internal_assets/profile_pictures/default.svg
-!internal_assets/profile_pictures/default.webp
-!internal_assets/profile_pictures/.htaccess
+external_assets/profile_pictures/*
+!external_assets/profile_pictures/default.png
+!external_assets/profile_pictures/default.svg
+!external_assets/profile_pictures/default.webp
+!external_assets/profile_pictures/.htaccess
 
-internal_assets/commission_type_images/*
-!internal_assets/commission_type_images/default.png
-!internal_assets/commission_type_images/default.svg
-!internal_assets/commission_type_images/default.webp
-!internal_assets/commission_type_images/.htaccess
+external_assets/commission_type_images/*
+!external_assets/commission_type_images/default.png
+!external_assets/commission_type_images/default.svg
+!external_assets/commission_type_images/default.webp
+!external_assets/commission_type_images/.htaccess
 
-internal_assets/character_images/*
-!internal_assets/character_images/default.png
-!internal_assets/character_images/default.svg
-!internal_assets/character_images/default.webp
-!internal_assets/character_images/.htaccess
+external_assets/character_images/*
+!external_assets/character_images/default.png
+!external_assets/character_images/default.svg
+!external_assets/character_images/default.webp
+!external_assets/character_images/.htaccess
 
-internal_assets/artist_images/*
-!internal_assets/artist_images/default.png
-!internal_assets/artist_images/default.svg
-!internal_assets/artist_images/default.webp
-!internal_assets/artist_images/.htaccess
+external_assets/artist_images/*
+!external_assets/artist_images/default.png
+!external_assets/artist_images/default.svg
+!external_assets/artist_images/default.webp
+!external_assets/artist_images/.htaccess
 
-internal_icons/patron_icons/*
-!internal_icons/patron_icons/.empty
+internal_assets/patron_icons/*
+!internal_assets/patron_icons/.empty
 
 subl-project.sublime-workspace
 
