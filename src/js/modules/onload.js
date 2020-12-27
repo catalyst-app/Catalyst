@@ -1,8 +1,8 @@
 <?php
 header("Content-Type: application/javascript; charset=UTF-8", true);
 
-define("ROOTDIR", "../../");
-define("REAL_ROOTDIR", "../../");
+define("ROOTDIR", "../../../");
+define("REAL_ROOTDIR", "../../../");
 
 define("NO_SESSION", true);
 
