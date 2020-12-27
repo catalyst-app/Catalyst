@@ -8,7 +8,7 @@ if (php_sapi_name() !== 'cli') {
 define("ROOTDIR", "/var/www/beta.catalystapp.co/");
 define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\Email\Email;
 
 /**

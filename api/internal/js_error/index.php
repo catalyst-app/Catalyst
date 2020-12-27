@@ -1,9 +1,9 @@
 <?php
 
 define("ROOTDIR", isset($_POST["rootdir"]) ? $_POST["rootdir"] : "");
-define("REAL_ROOTDIR", "../../../");
+define("REAL_ROOTDIR", "../../../../");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\API\{Endpoint, Response};
 
 Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);

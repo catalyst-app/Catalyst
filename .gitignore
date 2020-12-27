@@ -1,34 +1,33 @@
-src/vendor
+src/php/vendor
 
-src/Secrets.php
-src/smime_keys
+src/php/Secrets.php
 
-profile_pictures/*
-!profile_pictures/default.png
-!profile_pictures/default.svg
-!profile_pictures/default.webp
-!profile_pictures/.htaccess
+internal_assets/profile_pictures/*
+!internal_assets/profile_pictures/default.png
+!internal_assets/profile_pictures/default.svg
+!internal_assets/profile_pictures/default.webp
+!internal_assets/profile_pictures/.htaccess
 
-commission_type_images/*
-!commission_type_images/default.png
-!commission_type_images/default.svg
-!commission_type_images/default.webp
-!commission_type_images/.htaccess
+internal_assets/commission_type_images/*
+!internal_assets/commission_type_images/default.png
+!internal_assets/commission_type_images/default.svg
+!internal_assets/commission_type_images/default.webp
+!internal_assets/commission_type_images/.htaccess
 
-character_images/*
-!character_images/default.png
-!character_images/default.svg
-!character_images/default.webp
-!character_images/.htaccess
+internal_assets/character_images/*
+!internal_assets/character_images/default.png
+!internal_assets/character_images/default.svg
+!internal_assets/character_images/default.webp
+!internal_assets/character_images/.htaccess
 
-artist_images/*
-!artist_images/default.png
-!artist_images/default.svg
-!artist_images/default.webp
-!artist_images/.htaccess
+internal_assets/artist_images/*
+!internal_assets/artist_images/default.png
+!internal_assets/artist_images/default.svg
+!internal_assets/artist_images/default.webp
+!internal_assets/artist_images/.htaccess
 
-img/patron_icons/*
-!img/patron_icons/.empty
+internal_icons/patron_icons/*
+!internal_icons/patron_icons/.empty
 
 subl-project.sublime-workspace
 
@@ -44,9 +43,6 @@ scripts/PatronReport*.csv
 
 scripts/tmp
 
-js/dist
-css/overall.min.css
+src/js/dist
+src/css/overall.min.css
 .DS_Store
-
-scripts/form-field-dom-from-jsx/node_modules
-scripts/form-field-dom-from-jsx/out

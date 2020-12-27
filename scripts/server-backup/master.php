@@ -11,7 +11,7 @@ chdir(__DIR__);
 define("ROOTDIR", "/var/www/beta.catalystapp.co/");
 define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\Database\Database;
 use \Catalyst\Email\Email;
 use \Catalyst\Images\Folders;

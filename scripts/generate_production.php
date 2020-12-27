@@ -6,9 +6,9 @@ if (php_sapi_name() !== 'cli') {
 
 // register with the internal api
 define("ROOTDIR", "../");
-define("REAL_ROOTDIR", "../");
+define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Page\Resource;
 use \tubalmartin\CssMin\Minifier;
@@ -40,9 +40,9 @@ foreach ($resources as $resource) {
 	$output = '';
 	$returnCode = 0;
 
-	echo "Executing ".'cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder."\n";
+	echo "Executing ".'cd '.REAL_ROOTDIR.'src/js/modules/ && php '.$withoutFolder."\n";
 
-	exec('cd '.REAL_ROOTDIR.'js/modules/ && php '.$withoutFolder, $output, $returnCode);
+	exec('cd '.REAL_ROOTDIR.'src/js/modules/ && php '.$withoutFolder, $output, $returnCode);
 
 	if ($returnCode) {
 		throw new LogicException($withoutFolder." failed with exit code ".$returnCode);
@@ -63,18 +63,18 @@ foreach ($resources as $resource) {
 
 echo "Final JS minified ".$totalUnminified." -> ".strlen($aggregated)." bytes\n";
 
-if (!file_exists(REAL_ROOTDIR."js/dist/")) {
-	mkdir(REAL_ROOTDIR."js/dist/");
+if (!file_exists(REAL_ROOTDIR."src/js/dist/")) {
+	mkdir(REAL_ROOTDIR."src/js/dist/");
 }
 
-file_put_contents(REAL_ROOTDIR."js/dist/packed.min.js", $aggregated);
+file_put_contents(REAL_ROOTDIR."src/js/dist/packed.min.js", $aggregated);
 
-echo "Stored minified JS in js/dist/packed.min.js\n";
+echo "Stored minified JS in src/js/dist/packed.min.js\n";
 
 $output = '';
 $returnCode = 0;
 
-exec('cd '.REAL_ROOTDIR.'css/ && php overall.css', $output, $returnCode);
+exec('cd '.REAL_ROOTDIR.'src/css/ && php overall.css', $output, $returnCode);
 
 $output = implode("\n", $output);
 
@@ -86,6 +86,6 @@ $minifiedCss = (new Minifier())->run($output);
 
 echo "Minified overall.css (".strlen($output).") -> overall.min.css (".strlen($minifiedCss).")\n";
 
-file_put_contents(REAL_ROOTDIR."css/overall.min.css", $minifiedCss);
+file_put_contents(REAL_ROOTDIR."src/css/overall.min.css", $minifiedCss);
 
 echo "Done!\n";

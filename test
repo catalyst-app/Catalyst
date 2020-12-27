@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./src/vendor/bin/phpstan analyse -c src/phpstan.neon -l max --autoload-file=src/phpstan-init.php . js/modules/ css/;
+./src/vendor/bin/phpstan analyse -c src/php/phpstan.neon -l max --autoload-file=src/php/phpstan-init.php . js/modules/ css/;

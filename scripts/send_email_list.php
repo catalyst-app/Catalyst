@@ -18,9 +18,9 @@ if ($htmlInput === false) {
 
 // register with the internal api
 define("ROOTDIR", "../");
-define("REAL_ROOTDIR", "../");
+define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\Query\SelectQuery;

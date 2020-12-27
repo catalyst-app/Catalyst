@@ -5,9 +5,9 @@ if (php_sapi_name() !== 'cli') {
 }
 
 define("ROOTDIR", "../");
-define("REAL_ROOTDIR", "../");
+define("REAL_ROOTDIR", "../../");
 
-require_once REAL_ROOTDIR."src/initializer.php";
+require_once REAL_ROOTDIR."src/php/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Email\Email;
 use \Catalyst\Images\{Folders,Image,MIMEType};

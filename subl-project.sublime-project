@@ -31,12 +31,9 @@
 		{
 			"folder_exclude_patterns":
 			[
-				"src/vendor",
-				"artist_images",
-				"character_images",
-				"commission_type_images",
-				"integration_icons",
-				"profile_pictures"
+				"src/php/vendor",
+				"external_assets",
+				"internal_assets"
 			],
 			"name": "Catalyst",
 			"path": "."
