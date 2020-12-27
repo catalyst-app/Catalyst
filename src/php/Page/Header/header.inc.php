@@ -93,7 +93,7 @@ Resource::pushPageResources();
 		</script>
 	</head>
 	<body>
-		<?php require REAL_ROOTDIR."src/Page/Navigation/navbar.inc.php"; ?> 
+		<?php require REAL_ROOTDIR."src/php/Page/Navigation/navbar.inc.php"; ?> 
 		<div class="container">
 			<?php if (!defined("NO_HEADER") || !NO_HEADER): ?>
 				<?php if (Controller::isDevelMode() && (!array_key_exists("last_news", $_COOKIE) || $_COOKIE["last_news"] != Values::NEWEST_NEWS_ID)): ?>
