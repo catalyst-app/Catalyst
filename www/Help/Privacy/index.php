@@ -39,7 +39,7 @@ echo UniversalFunctions::createHeading("Privacy Policy");
 					</div>
 					<div class="divider hide-on-med-and-up"></div>
 
-					<div class="raw-markdown"><?= file_get_contents(REAL_ROOTDIR."legal/PRIVACY_POLICY.md") ?></div>
+					<div class="raw-markdown"><?= file_get_contents(REAL_ROOTDIR."internal_assets/legal/PRIVACY_POLICY.md") ?></div>
 				</div>
 			
 				<div class="col s12 m3 l2 hide-on-small-only">

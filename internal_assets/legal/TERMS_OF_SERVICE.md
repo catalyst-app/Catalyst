@@ -20,7 +20,7 @@ By visiting, accessing, using, or registering on our website or with any of our 
   * If you are between this age and the age of majority, you additionally agree that your legal guardian has reviewed, understood, and agreed to be bound to this Agreement.
 * By accessing our services, viewing any content hosted on our services, or otherwise interacting with our service, you agree to this Agreement.  If you do not accept these terms then you may not use our website, services, platforms, or anything else provided by us.
 * You (or, if applicable, your guardian) agree to be bound to any modifications or revisions of this Agreement.  Although we will attempt to notify you for significant and substantial updates, you agree to be bound by such modifications.
-  * The history of this document may be tracked on our public [GitHub commit history](https://github.com/catalyst-app/Catalyst/commits/master/legal/TERMS_OF_SERVICE.md).
+  * The history of this document may be tracked on our public [GitHub commit history](https://github.com/catalyst-app/Catalyst/commits/master/internal_assets/legal/TERMS_OF_SERVICE.md).
 
 #### Account
 

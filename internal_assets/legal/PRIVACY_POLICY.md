@@ -6,7 +6,7 @@ This policy does NOT apply to services operated by users of our platform, althou
 
 Catalyst may need to occasionally update this Privacy Policy in order to comply with new regulations or further our commitment to protecting your privacy.  In the event of substantial or significant updates, Catalyst will notify users and visitors of changes through page banners, social media posts, and, in the event of significant changes, email notifications to all email addresses registered through the service.  Catalyst may not necessarily notify users in the event of minor changes, such as, but not limited to, spelling or grammatical fixes, formatting updates, or other small changes which do not affect the meaning of this Policy.  We encourage users to frequently review this Policy in order to fully understand our policies and stay up-to-date with any changes.
 
-You may review the changes and historical versions of this document at our public [GitHub commit history](https://github.com/catalyst-app/Catalyst/commits/master/legal/PRIVACY_POLICY.md).
+You may review the changes and historical versions of this document at our public [GitHub commit history](https://github.com/catalyst-app/Catalyst/commits/master/internal_assets/legal/PRIVACY_POLICY.md).
 
 Continued usage of the platform and services therein or provision of personal information constitutes agreeance with our current Privacy Policy.
 

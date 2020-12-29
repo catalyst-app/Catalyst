@@ -44,7 +44,7 @@ echo UniversalFunctions::createHeading("Terms of Service");
 					</div>
 					<div class="divider hide-on-med-and-up"></div>
 
-					<div class="raw-markdown"><?= file_get_contents(REAL_ROOTDIR."legal/TERMS_OF_SERVICE.md") ?></div>
+					<div class="raw-markdown"><?= file_get_contents(REAL_ROOTDIR."internal_assets/legal/TERMS_OF_SERVICE.md") ?></div>
 				</div>
 			
 				<div class="col s12 m3 l2 hide-on-small-only">
