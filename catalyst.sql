@@ -714,9 +714,9 @@ INSERT INTO `patrons` (`ID`, `PATREON_ID`, `NAME`, `CURRENT`, `PLEDGED_CENTS`, `
 
 CREATE TABLE `pending_thumbnail_queue` (
   `ID` int(11) UNSIGNED NOT NULL COMMENT 'Unique DB Identifier of the row',
-  `FOLDER` varchar(22) NOT NULL COMMENT 'Folder the image resides in',
-  `TOKEN` varchar(12) NOT NULL COMMENT 'Token for the image',
-  `PATH` varchar(64) NOT NULL COMMENT 'Image path'
+  `FOLDER` varchar(128) NOT NULL COMMENT 'Folder the image resides in',
+  `TOKEN` varchar(128) NOT NULL COMMENT 'Token for the image',
+  `PATH` varchar(128) NOT NULL COMMENT 'Image path'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
