@@ -10,6 +10,7 @@ use \Catalyst\Database\QueryAddition\{JoinClause, WhereClause};
 use \Catalyst\Database\{AbstractDatabaseModel, Column, Tables};
 use \Catalyst\Email\Email;
 use \Catalyst\Images\{Folders, HasImageTrait, Image};
+use Catalyst\Secrets;
 use \Catalyst\Tokens;
 use \Catalyst\Integrations\HasSocialChipsTrait;
 use \Catalyst\Message\MessagableTrait;
@@ -61,20 +62,20 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Check if a user is logged in
-	 * 
+	 *
 	 * @return bool
 	 */
-	public static function isLoggedIn() : bool {
-		return isset($_SESSION) && array_key_exists("user",$_SESSION) && $_SESSION["user"] instanceof self;
+	public static function isLoggedIn(): bool {
+		return isset($_SESSION) && array_key_exists("user", $_SESSION) && $_SESSION["user"] instanceof self;
 	}
 
 	/**
 	 * Check if there is currently a 2FA authentication in progress
-	 * 
+	 *
 	 * @return bool
 	 */
-	public static function isPending2FA() : bool {
-		return array_key_exists("pending_user",$_SESSION) && $_SESSION["pending_user"] instanceof self;
+	public static function isPending2FA(): bool {
+		return array_key_exists("pending_user", $_SESSION) && $_SESSION["pending_user"] instanceof self;
 	}
 
 	/**
@@ -89,12 +90,12 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get the user's permission scope
-	 * 
+	 *
 	 * As of writing, this consists of the following possible values:
 	 * ["all","logged_out","logged_in","artist","not_artist","nsfw"]
 	 * @return string[]
 	 */
-	public static function getPermissionScope() : array {
+	public static function getPermissionScope(): array {
 		if (self::isLoggedIn()) {
 			$perms = ["all", "logged_in"];
 
@@ -109,7 +110,7 @@ class User extends AbstractDatabaseModel {
 			if ($currentUser->isNsfw()) {
 				$perms[] = "nsfw";
 			}
-			
+
 			return $perms;
 		} else {
 			return ["all", "logged_out"];
@@ -118,10 +119,10 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Whether or not the current user can see NSFW
-	 * 
+	 *
 	 * @return bool false if sfw'd
 	 */
-	public static function isCurrentUserNsfw() : bool {
+	public static function isCurrentUserNsfw(): bool {
 		if (!self::isLoggedIn()) {
 			return false;
 		}
@@ -133,11 +134,11 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get an ID if the username exists, and is unsuspended
-	 * 
+	 *
 	 * @param string $username
 	 * @return int -1 if not found
 	 */
-	public static function getIdFromUsername(string $username, bool $allowSuspendedAndDeactivated=false) : int {
+	public static function getIdFromUsername(string $username, bool $allowSuspendedAndDeactivated = false): int {
 		// check regex as not to sodomize the database
 		if (!preg_match("/^([A-Za-z0-9._-]){2,64}$/", $username)) {
 			return -1;
@@ -146,15 +147,15 @@ class User extends AbstractDatabaseModel {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
-		
+
 		$stmt->addColumn(new Column("ID", self::getTable()));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("USERNAME", self::getTable()), "=", $username]);
 		if (!$allowSuspendedAndDeactivated) {
-			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause(WhereClause::AND );
 			$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
-			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause(WhereClause::AND );
 			$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
 		}
 		$stmt->addAdditionalCapability($whereClause);
@@ -170,23 +171,23 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get an ID if the username exists, and is unsuspended
-	 * 
+	 *
 	 * @param string $email
 	 * @return int -1 if not found
 	 */
-	public static function getIdFromEmail(string $email, bool $allowSuspendedAndDeactivated=false) : int {
+	public static function getIdFromEmail(string $email, bool $allowSuspendedAndDeactivated = false): int {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(self::getTable());
-		
+
 		$stmt->addColumn(new Column("ID", self::getTable()));
 
 		$whereClause = new WhereClause();
 		$whereClause->addToClause([new Column("EMAIL", self::getTable()), "=", $email]);
 		if (!$allowSuspendedAndDeactivated) {
-			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause(WhereClause::AND );
 			$whereClause->addToClause([new Column("SUSPENDED", self::getTable()), "=", 0]);
-			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause(WhereClause::AND );
 			$whereClause->addToClause([new Column("DEACTIVATED", self::getTable()), "=", 0]);
 		}
 		$stmt->addAdditionalCapability($whereClause);
@@ -202,10 +203,10 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * From
-	 * 
+	 *
 	 * @return string
 	 */
-	public static function getTable() : string {
+	public static function getTable(): string {
 		return Tables::USERS;
 	}
 
@@ -213,7 +214,7 @@ class User extends AbstractDatabaseModel {
 	 * The folder containing the image
 	 * @return string
 	 */
-	public static function getImageFolder() : string {
+	public static function getImageFolder(): string {
 		return Folders::PROFILE_PHOTO;
 	}
 
@@ -223,7 +224,7 @@ class User extends AbstractDatabaseModel {
 	 * @param string $password to test
 	 * @return bool valid password
 	 */
-	public function verifyPassword(string $password) : bool {
+	public function verifyPassword(string $password): bool {
 		$valid = password_verify($password, $this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"));
 		if ($valid && password_needs_rehash($this->getColumnFromDatabaseOrCache("HASHED_PASSWORD"), Values::PASSWORD_HASH, Values::PASSWORD_OPTIONS)) {
 			$this->setPassword($password);
@@ -237,31 +238,31 @@ class User extends AbstractDatabaseModel {
 	 * @param string $password to test
 	 * @return string new password
 	 */
-	public static function hashPassword(string $password) : string {
+	public static function hashPassword(string $password): string {
 		return password_hash($password, Values::PASSWORD_HASH, Values::PASSWORD_OPTIONS) ?: "COULD NOT HASH PASSWORD";
 	}
 
 	/**
 	 * @param string $password to set
 	 */
-	public function setPassword(string $password) : void {
+	public function setPassword(string $password): void {
 		$this->updateColumnInDatabase("HASHED_PASSWORD", self::hashPassword($password));
 	}
 
 	/**
 	 * Get the token used to verify the User's e-mail address
-	 * 
+	 *
 	 * Will change upon email address change
 	 * @return string
 	 */
-	public function getEmailToken() : string {
+	public function getEmailToken(): string {
 		return $this->getColumnFromDatabaseOrCache("EMAIL_TOKEN");
 	}
 
 	/**
 	 * Send the User a verification e-mail, if their email is not yet verified
 	 */
-	public function sendVerificationEmail() : void {
+	public function sendVerificationEmail(): void {
 		if ($this->isEmailVerified() || is_null($this->getEmail())) { // is_null is really for phpstan, as isEmailVerified has that within
 			return;
 		}
@@ -272,14 +273,14 @@ class User extends AbstractDatabaseModel {
 		if (!preg_match("/^(.*)(EmailVerification|Register|Settings|api).*/", UniversalFunctions::getRequestUrl(), $out)) {
 			throw new LogicException("User::sendVerificationEmail called from an unknown page");
 		}
-		$url = $out[1]."EmailVerification/?token=".$this->getEmailToken();
+		$url = $out[1] . "EmailVerification/?token=" . $this->getEmailToken();
 
 		$subject = "Catalyst - Email verification";
 
 		$htmlEmail = "";
 
 		$htmlEmail .= Email::getEmailHeadHtml($this->getColor());
-		
+
 		$htmlEmail .= '<div';
 		$htmlEmail .= ' class="container"';
 		$htmlEmail .= '>';
@@ -294,79 +295,78 @@ class User extends AbstractDatabaseModel {
 		$htmlEmail .= '>';
 
 		$htmlEmail .= 'Thank you for registering with Catalyst!';
-		
+
 		$htmlEmail .= '</p>';
-		
+
 		$htmlEmail .= '<p';
 		$htmlEmail .= ' class="flow-text">';
-		
+
 		$htmlEmail .= 'Please click the button below to activate your account.';
-		
+
 		$htmlEmail .= '</p>';
-		
+
 		$htmlEmail .= '<div>'; // wrapping in a block
-		
+
 		$htmlEmail .= '<a';
-		$htmlEmail .= ' href="'.$url.'"';
+		$htmlEmail .= ' href="' . $url . '"';
 		$htmlEmail .= ' class="btn"';
 		$htmlEmail .= '>';
-		
+
 		$htmlEmail .= 'Verify';
-		
+
 		$htmlEmail .= '</a>';
-		
+
 		$htmlEmail .= '</div>';
 
 		$htmlEmail .= '<p>';
 
-		
+
 		$htmlEmail .= 'Alternatively, use the token ';
-		
+
 		$htmlEmail .= '<span';
 		$htmlEmail .= ' style="';
 		$htmlEmail .= 'font-weight: 700;';
 		$htmlEmail .= 'font-family: monospace;';
 		$htmlEmail .= '"'; // bold
 		$htmlEmail .= '>';
-		
-		$htmlEmail .= ''.$this->getEmailToken().'';
-		
+
+		$htmlEmail .= '' . $this->getEmailToken() . '';
+
 		$htmlEmail .= '</span>';
-		
+
 		$htmlEmail .= ' to verify your email.';
-		
+
 		$htmlEmail .= '</p>';
-		
+
 		$htmlEmail .= '</div>';
-		
+
 		$htmlEmail .= '</div>';
-		
+
 		$htmlEmail .= '</body>';
-		
+
 		$htmlEmail .= '</html>';
 
 
 		$textEmail = '';
-		$textEmail .= 'Email Verification'."\r\n";
+		$textEmail .= 'Email Verification' . "\r\n";
 		$textEmail .= "\r\n";
-		$textEmail .= 'Thank you for registering with Catalyst!'."\r\n";
-		$textEmail .= 'Please go to the following URL to verify your account:'."\r\n";
-		$textEmail .= $url."\r\n";
-		$textEmail .= "Alternatively, use the token ".$this->getEmailToken().' to verify your email'."\r\n";
+		$textEmail .= 'Thank you for registering with Catalyst!' . "\r\n";
+		$textEmail .= 'Please go to the following URL to verify your account:' . "\r\n";
+		$textEmail .= $url . "\r\n";
+		$textEmail .= "Alternatively, use the token " . $this->getEmailToken() . ' to verify your email' . "\r\n";
 
-		
-		$success = Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Email::NO_REPLY_PASSWORD, Email::NO_REPLY_SMIME_PATH, Email::NO_REPLY_SMIME_PASSWORD);
+		$success = Email::sendEmail([[$this->getEmail(), $this->getNickname()]], $subject, $htmlEmail, $textEmail, Email::NO_REPLY_EMAIL, Secrets::get("NO_REPLY_PASSWORD"));
 
 		$this->setEmailVerificationSendable($success);
 	}
 
 	/**
 	 * If the user was an artist, but hid their page
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function wasArtist() : bool {
-		return $this->getDataFromCallableOrCache("WAS_ARTIST", function() : bool {
+	public function wasArtist(): bool {
+		return $this->getDataFromCallableOrCache("WAS_ARTIST", function (): bool {
 			$stmt = new SelectQuery();
 
 			$stmt->setTable(Artist::getTable());
@@ -375,7 +375,7 @@ class User extends AbstractDatabaseModel {
 
 			$whereClause = new WhereClause();
 			$whereClause->addToClause([new Column("USER_ID", Artist::getTable()), '=', $this->getId()]);
-			$whereClause->addToClause(WhereClause::AND);
+			$whereClause->addToClause(WhereClause::AND );
 			$whereClause->addToClause([new Column("DELETED", Artist::getTable()), '=', 1]);
 			$stmt->addAdditionalCapability($whereClause);
 
@@ -387,11 +387,11 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get the artist page associated with the user
-	 * 
+	 *
 	 * @return null|Artist
 	 */
-	public function getArtistPage() : ?Artist {
-		return $this->getDataFromCallableOrCache("ARTIST_PAGE_OBJ", function() : ?Artist {
+	public function getArtistPage(): ?Artist {
+		return $this->getDataFromCallableOrCache("ARTIST_PAGE_OBJ", function (): ?Artist {
 			if (is_null($this->getArtistPageId())) {
 				return null;
 			} else {
@@ -402,22 +402,22 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get all wishlist items as an array of WishlistItem's
-	 * 
+	 *
 	 * @return WishlistItem[]
 	 */
-	public function getWishlist() : array {
-		return $this->getDataFromCallableOrCache("WISHLIST_OBJS", function() : array {
+	public function getWishlist(): array {
+		return $this->getDataFromCallableOrCache("WISHLIST_OBJS", function (): array {
 			return WishlistItem::getUserWishlist($this);
 		});
 	}
 
 	/**
 	 * Get all wishlist items as an array of CT IDSs
-	 * 
+	 *
 	 * @return int[]
 	 */
-	public function getWishlistCommissionTypeIds() : array {
-		return $this->getDataFromCallableOrCache("WISHLIST_CT_IDS", function() : array {
+	public function getWishlistCommissionTypeIds(): array {
+		return $this->getDataFromCallableOrCache("WISHLIST_CT_IDS", function (): array {
 			$result = [];
 			foreach ($this->getWishlist() as $wishlistItem) {
 				$result[] = $wishlistItem->getCommissionTypeId();
@@ -428,54 +428,54 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get the table used to store a User's social media items
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getSocialChipTable() : string {
+	public function getSocialChipTable(): string {
 		return Tables::USER_SOCIAL_MEDIA;
 	}
 
 	/**
 	 * Get the column which is a foreign key to $this->getId()
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getSocialChipIdColumn() : string {
+	public function getSocialChipIdColumn(): string {
 		return "USER_ID";
 	}
 
 	/**
 	 * Straight out of the HasImageTrait
 	 */
-	public function initializeImage() : void {
+	public function initializeImage(): void {
 		$this->setImage(new Image(self::getImageFolder(), $this->getToken(), $this->getColumnFromDatabaseOrCache("PICTURE_LOC"), $this->getColumnFromDatabaseOrCache("PICTURE_NSFW")));
 	}
 
 	/**
 	 * Part of IsMessagableTrait
-	 * 
+	 *
 	 * @return string URL, relative to ROOTDIR/Message/New/, that can be used for messaging
 	 */
-	public function getMessageUrlPath() : string {
-		return 'User/'.$this->getUsername().'/';
+	public function getMessageUrlPath(): string {
+		return 'User/' . $this->getUsername() . '/';
 	}
 
 	/**
 	 * Get a friendly name for the object, part of IsMessagableTrait
-	 * 
+	 *
 	 * @return string The User's nickname
 	 */
-	public function getFriendlyName() : string {
+	public function getFriendlyName(): string {
 		return $this->getNickname();
 	}
 
 	/**
 	 * Get the HTML for the User's account in the navigation bar
-	 * 
+	 *
 	 * @param int $bar The type of navbar
 	 * @return string HTML
 	 */
-	public function getNavbarDropdown(int $bar) : string {
+	public function getNavbarDropdown(int $bar): string {
 		if ($bar == Navbar::NAVBAR) {
 			$str = "";
 			$str .= $this->getImage()->getStrictCircleHtml(["valign"]); // valign needed to make it play nice
@@ -488,10 +488,10 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Get the HTML for the sidenav header (pfp, username, nick)
-	 * 
+	 *
 	 * @return string HTML
 	 */
-	public function getSidenavHTML() : string {
+	public function getSidenavHTML(): string {
 		$str = "";
 
 		$str .= '<li';
@@ -499,9 +499,9 @@ class User extends AbstractDatabaseModel {
 		$str .= '>';
 
 		$str .= $this->getImage()->getStrictCircleHtml();
-		
+
 		$str .= '<h5>';
-		
+
 		$str .= htmlspecialchars($this->getNickname());
 
 		$str .= '</h5>';
@@ -511,7 +511,7 @@ class User extends AbstractDatabaseModel {
 		$str .= '>';
 
 		$str .= htmlspecialchars($this->getUsername());
-		
+
 		$str .= '</p>';
 
 		$str .= '</li>';
@@ -521,10 +521,10 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Gets HTML for a message which designates a user-only page
-	 * 
+	 *
 	 * @return string
 	 */
-	public static function getNotLoggedInHtml() : string {
+	public static function getNotLoggedInHtml(): string {
 		$str = '';
 
 		$str .= '<div';
@@ -538,13 +538,13 @@ class User extends AbstractDatabaseModel {
 		$str .= 'You must log in to access this page.  ';
 
 		$str .= '<a';
-		$str .= ' href="'.ROOTDIR.'Login"';
+		$str .= ' href="' . ROOTDIR . 'Login"';
 		$str .= '>';
 
 		$str .= 'Login';
 
 		$str .= '</a>';
-		
+
 		$str .= '</p>';
 
 		$str .= '</div>';
@@ -556,7 +556,7 @@ class User extends AbstractDatabaseModel {
 	 * Get deleted values for when a user is delet
 	 * @return array
 	 */
-	public function getDeletedValues() : array {
+	public function getDeletedValues(): array {
 		return [
 			// "FILE_TOKEN" => "", omitted
 			// "USERNAME" => "" omitted
@@ -577,7 +577,7 @@ class User extends AbstractDatabaseModel {
 	/**
 	 * @return array
 	 */
-	public static function getPrefetchColumns() : array {
+	public static function getPrefetchColumns(): array {
 		return [
 			"FILE_TOKEN",
 			"USERNAME",
@@ -606,7 +606,7 @@ class User extends AbstractDatabaseModel {
 	 * @todo archive commissions
 	 * @todo feature board thingies
 	 */
-	public function additionalDeletion() : void {
+	public function additionalDeletion(): void {
 		$removeApiAuthorizationsQuery = new DeleteQuery();
 		$removeApiAuthorizationsQuery->setTable(Tables::API_AUTHORIZATIONS);
 		$whereClause = new WhereClause();
@@ -625,11 +625,11 @@ class User extends AbstractDatabaseModel {
 			$this->getArtistPage()->delete();
 		}
 
-		foreach(Character::getCharactersFromUser($this) as $character) {
+		foreach (Character::getCharactersFromUser($this) as $character) {
 			$character->delete();
 		}
 
-		foreach(WishlistItem::getUserWishlist($this) as $wishlistItem) {
+		foreach (WishlistItem::getUserWishlist($this) as $wishlistItem) {
 			$wishlistItem->delete();
 		}
 	}
@@ -640,7 +640,7 @@ class User extends AbstractDatabaseModel {
 	 * @param array $values
 	 * @return self
 	 */
-	public static function create(array $values) : User {
+	public static function create(array $values): User {
 		// per array_merge docs:
 		// If the input arrays have the same string keys, then the latter value
 		//  for that key will overwrite the previous one
@@ -682,19 +682,19 @@ class User extends AbstractDatabaseModel {
 
 	/**
 	 * Determine if the user is an artist
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function isArtist() : bool {
+	public function isArtist(): bool {
 		return !is_null($this->getArtistPageId());
 	}
 
 	/**
 	 * Get whether or not the user has TOTP authentication enables
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function isTotpEnabled() : bool {
+	public function isTotpEnabled(): bool {
 		return !is_null($this->getTotpKey());
 	}
 
@@ -704,7 +704,7 @@ class User extends AbstractDatabaseModel {
 	 * 	"Name" => ["COLUMN_NAME", function($value) {return $out;}, function($newValue) {return $out;}]
 	 * @return array
 	 */
-	public static function getModifiableProperties() : array {
+	public static function getModifiableProperties(): array {
 		return [
 			"ApprovedBetaTester" => ["APPROVED_BETA_TESTER", "boolval", null],
 			"Token" => ["FILE_TOKEN", null, null],

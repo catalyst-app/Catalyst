@@ -1,4 +1,5 @@
 <?php
+use Catalyst\Secrets;
 
 if (php_sapi_name() !== 'cli') {
 	die("No");
@@ -8,12 +9,12 @@ if (php_sapi_name() !== 'cli') {
 define("ROOTDIR", "/var/www/beta.catalystapp.co/");
 define("REAL_ROOTDIR", "/var/www/beta.catalystapp.co/");
 
-require_once REAL_ROOTDIR."src/php/initializer.php";
+require_once REAL_ROOTDIR . "src/php/initializer.php";
 use \Catalyst\Database\{Column, Tables};
 use \Catalyst\Database\Query\{SelectQuery, TruncateQuery};
 use \Catalyst\Email\Email;
 
-define("SLEEP_TIME", 15*60); // 15 minutes
+define("SLEEP_TIME", 15 * 60); // 15 minutes
 
 $fullLog = [];
 $logStart = date("r");
@@ -24,40 +25,38 @@ $cyclesInLog = 0;
  *
  * @param string $in data
  */
-function logLine(string $in, bool $forceSend=false) : void {
+function logLine(string $in, bool $forceSend = false): void {
 	global $fullLog;
 	global $logStart;
 	global $cyclesInLog;
 
 	$fullLog[] = $in;
 	if ($forceSend || count($fullLog) > 1000) {
-		$fullLog[] = "Maximum memory usage: ".memory_get_usage();
+		$fullLog[] = "Maximum memory usage: " . memory_get_usage();
 
 		Email::sendEmail(
-			[["error_logs@catalystapp.co","Error Log"]],
-			"Thumbnailer log from ".$logStart." to ".date("r"),
-			'<pre>'.htmlspecialchars(implode("\n", $fullLog)).'</pre>',
+			[["error_logs@catalystapp.co", "Error Log"]],
+			"Thumbnailer log from " . $logStart . " to " . date("r"),
+			'<pre>' . htmlspecialchars(implode("\n", $fullLog)) . '</pre>',
 			implode("\n", $fullLog),
 			Email::ERROR_LOG_EMAIL,
-			Email::ERROR_LOG_PASSWORD,
-			Email::ERROR_LOG_SMIME_PATH,
-			Email::ERROR_LOG_SMIME_PASSWORD
+			Secrets::get("ERROR_LOG_PASSWORD")
 		);
 
 		$fullLog = [];
 		$logStart = date("r");
 		$cyclesInLog = 0;
 	}
-	echo $in."\n";
+	echo $in . "\n";
 }
 
-register_shutdown_function(function() : void {
+register_shutdown_function(function (): void {
 	logLine("Shutting down...", true);
 });
 
 logLine("Starting background thumbnailer process");
 
-chdir(REAL_ROOTDIR."scripts");
+chdir(REAL_ROOTDIR . "scripts");
 
 // running as service so we needn't worry about exceptions
 //   (not that we would have any because i program good)
@@ -76,7 +75,7 @@ while (true) {
 
 	$images = $stmt->getResult();
 
-	logLine("Got ".count($images)." images that are pending thumbnailification.");
+	logLine("Got " . count($images) . " images that are pending thumbnailification.");
 
 	logLine("Aggregating by folder...");
 
@@ -86,35 +85,35 @@ while (true) {
 		if (!array_key_exists($image["FOLDER"], $byFolder)) {
 			$byFolder[$image["FOLDER"]] = [];
 		}
-		$byFolder[$image["FOLDER"]][] = $image["TOKEN"].$image["PATH"];
+		$byFolder[$image["FOLDER"]][] = $image["TOKEN"] . $image["PATH"];
 	}
 
-	logLine("Aggregated into ".count($byFolder)." folders: ".implode(" ", array_keys($byFolder)));
+	logLine("Aggregated into " . count($byFolder) . " folders: " . implode(" ", array_keys($byFolder)));
 
 	foreach ($byFolder as $folder => $images) {
-		logLine("Processing folder ".$folder);
+		logLine("Processing folder " . $folder);
 
 		foreach ($images as $image) {
-			if (!file_exists(REAL_ROOTDIR.$folder."/".$image)) {
+			if (!file_exists(REAL_ROOTDIR . $folder . "/" . $image)) {
 				logLine("Image does not exist on disk.  Skipping");
 				continue;
 			}
 
-			logLine("Thumbnailifying ".$image." (".$folder.DIRECTORY_SEPARATOR.$image.")");
+			logLine("Thumbnailifying " . $image . " (" . $folder . DIRECTORY_SEPARATOR . $image . ")");
 
-			$command = "/usr/bin/bash catalyst-thumbnail-generator ".escapeshellarg(REAL_ROOTDIR.$folder."/".$image);
+			$command = "/usr/bin/bash catalyst-thumbnail-generator " . escapeshellarg(REAL_ROOTDIR . $folder . "/" . $image);
 
-			logLine("exec: ".$command);
-			
+			logLine("exec: " . $command);
+
 			$output = [];
 			$return = 0;
 
 			exec($command, $output, $return);
 
-			logLine("Return code: ".$return);
+			logLine("Return code: " . $return);
 
 			foreach ($output as $line) {
-				logLine("Output: ".$line);
+				logLine("Output: " . $line);
 			}
 		}
 	}
@@ -127,12 +126,12 @@ while (true) {
 
 	$stmt->execute();
 
-	logLine("Sleeping ".SLEEP_TIME." seconds (".number_format(SLEEP_TIME/60, 2)." minutes)");
+	logLine("Sleeping " . SLEEP_TIME . " seconds (" . number_format(SLEEP_TIME / 60, 2) . " minutes)");
 	sleep(SLEEP_TIME);
 
 	$cyclesInLog++;
 
-	if ($cyclesInLog >= ((3600*6)/SLEEP_TIME)) { // 6 hours
+	if ($cyclesInLog >= ((3600 * 6) / SLEEP_TIME)) { // 6 hours
 		$cyclesInLog = 0;
 		logLine("Flushing log...", true);
 	}

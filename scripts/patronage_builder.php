@@ -32,9 +32,7 @@ function logStr(string $message, bool $forceSend = false): void {
 			'<pre>' . htmlspecialchars(implode("\n", $fullLog)) . '</pre>',
 			implode("\n", $fullLog),
 			Email::ERROR_LOG_EMAIL,
-			Email::ERROR_LOG_PASSWORD,
-			Email::ERROR_LOG_SMIME_PATH,
-			Email::ERROR_LOG_SMIME_PASSWORD
+			Secrets::get("ERROR_LOG_PASSWORD")
 		);
 
 		$fullLog = [];

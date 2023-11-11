@@ -13,17 +13,9 @@ use \Catalyst\Secrets;
  */
 class Email {
 	public const NO_REPLY_EMAIL = ["no-reply@catalystapp.co", "Catalyst No-Reply"];
-	public const NO_REPLY_PASSWORD = Secrets::get("NO_REPLY_PASSWORD");
-	public const NO_REPLY_SMIME_PATH = null;
-	public const NO_REPLY_SMIME_PASSWORD = null;
 
 	// used for logging errors
 	public const ERROR_LOG_EMAIL = ["error_logs@catalystapp.co", "Catalyst Error Logging"];
-	public const ERROR_LOG_PASSWORD = Secrets::get("ERROR_LOG_PASSWORD");
-	public const ERROR_LOG_SMIME_PATH = null;
-	public const ERROR_LOG_SMIME_PASSWORD = null;
-
-	public const EMAIL_SMTP = [Secrets::get("SMTP_SERVER"), (int) Secrets::get("SMTP_PORT"), "tls"];
 
 	/**
 	 * Get <head> to go with a HTML e-mail
@@ -87,16 +79,16 @@ class Email {
 		$str .= '}';
 
 		/*
-					// LISTS
-					$str .= 'ul:not(.browser-default){';
-						$str .= 'padding-left:0;';
-						$str .= 'list-style-type:none;';
-					$str .= '}';
+										// LISTS
+										$str .= 'ul:not(.browser-default){';
+											$str .= 'padding-left:0;';
+											$str .= 'list-style-type:none;';
+										$str .= '}';
 
-					$str .= 'ul:not(.browser-default) > li{';
-						$str .= 'list-style-type:none;';
-					$str .= '}';
-					*/
+										$str .= 'ul:not(.browser-default) > li{';
+											$str .= 'list-style-type:none;';
+										$str .= '}';
+										*/
 
 		// CONTAINER
 		$str .= '.container{';
@@ -124,19 +116,19 @@ class Email {
 		$str .= '}';
 
 		/*
-					// no-pad sections?
-					$str .= '.section.no-pad{';
-						$str .= 'padding:0;';
-					$str .= '}';
+										// no-pad sections?
+										$str .= '.section.no-pad{';
+											$str .= 'padding:0;';
+										$str .= '}';
 
-					$str .= '.section.no-pad-bot{';
-						$str .= 'padding-bottom:0;';
-					$str .= '}';
+										$str .= '.section.no-pad-bot{';
+											$str .= 'padding-bottom:0;';
+										$str .= '}';
 
-					$str .= '.section.no-pad-top{';
-						$str .= 'padding-top:0;';
-					$str .= '}';
-					*/
+										$str .= '.section.no-pad-top{';
+											$str .= 'padding-top:0;';
+										$str .= '}';
+										*/
 
 		// row and column basics
 		$str .= '.container .row{';
@@ -243,130 +235,130 @@ class Email {
 		$str .= '}';
 
 		/*
-					// small column offset defintions
-					$str .= '.row .col.offset-s1{';
-						$str .= 'margin-left:8.3333333333%;';
-					$str .= '}';
+										// small column offset defintions
+										$str .= '.row .col.offset-s1{';
+											$str .= 'margin-left:8.3333333333%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s2{';
-						$str .= 'margin-left:16.6666666667%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s2{';
+											$str .= 'margin-left:16.6666666667%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s3{';
-						$str .= 'margin-left:25%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s3{';
+											$str .= 'margin-left:25%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s4{';
-						$str .= 'margin-left:33.3333333333%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s4{';
+											$str .= 'margin-left:33.3333333333%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s5{';
-						$str .= 'margin-left:41.6666666667%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s5{';
+											$str .= 'margin-left:41.6666666667%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s6{';
-						$str .= 'margin-left:50%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s6{';
+											$str .= 'margin-left:50%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s7{';
-						$str .= 'margin-left:58.3333333333%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s7{';
+											$str .= 'margin-left:58.3333333333%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s8{';
-						$str .= 'margin-left:66.6666666667%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s8{';
+											$str .= 'margin-left:66.6666666667%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s9{';
-						$str .= 'margin-left:75%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s9{';
+											$str .= 'margin-left:75%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s10{';
-						$str .= 'margin-left:83.3333333333%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s10{';
+											$str .= 'margin-left:83.3333333333%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s11{';
-						$str .= 'margin-left:91.6666666667%;';
-					$str .= '}';
+										$str .= '.row .col.offset-s11{';
+											$str .= 'margin-left:91.6666666667%;';
+										$str .= '}';
 
-					$str .= '.row .col.offset-s12{';
-						$str .= 'margin-left:100%;';
-					$str .= '}';
-					*/
+										$str .= '.row .col.offset-s12{';
+											$str .= 'margin-left:100%;';
+										$str .= '}';
+										*/
 
 		/*
-					// concrete column push/pull definitions
-					$str .= '.row .col.pull-s1{';
-						$str .= 'right:8.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.push-s1{';
-						$str .= 'left:8.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s2{';
-						$str .= 'right:16.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.push-s2{';
-						$str .= 'left:16.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s3{';
-						$str .= 'right:25%;';
-					$str .= '}';
-					$str .= '.row .col.push-s3{';
-						$str .= 'left:25%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s4{';
-						$str .= 'right:33.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.push-s4{';
-						$str .= 'left:33.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s5{';
-						$str .= 'right:41.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.push-s5{';
-						$str .= 'left:41.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s6{';
-						$str .= 'right:50%;';
-					$str .= '}.row .col.push-s6{';
-						$str .= 'left:50%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s7{';
-						$str .= 'right:58.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.push-s7{';
-						$str .= 'left:58.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s8{';
-						$str .= 'right:66.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.push-s8{';
-						$str .= 'left:66.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s9{';
-						$str .= 'right:75%;';
-					$str .= '}';
-					$str .= '.row .col.push-s9{';
-						$str .= 'left:75%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s10{';
-						$str .= 'right:83.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.push-s10{';
-						$str .= 'left:83.3333333333%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s11{';
-						$str .= 'right:91.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.push-s11{';
-						$str .= 'left:91.6666666667%;';
-					$str .= '}';
-					$str .= '.row .col.pull-s12{';
-						$str .= 'right:100%;';
-					$str .= '}';
-					$str .= '.row .col.push-s12{';
-						$str .= 'left:100%;';
-					$str .= '}';
-					*/
+										// concrete column push/pull definitions
+										$str .= '.row .col.pull-s1{';
+											$str .= 'right:8.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.push-s1{';
+											$str .= 'left:8.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s2{';
+											$str .= 'right:16.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.push-s2{';
+											$str .= 'left:16.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s3{';
+											$str .= 'right:25%;';
+										$str .= '}';
+										$str .= '.row .col.push-s3{';
+											$str .= 'left:25%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s4{';
+											$str .= 'right:33.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.push-s4{';
+											$str .= 'left:33.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s5{';
+											$str .= 'right:41.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.push-s5{';
+											$str .= 'left:41.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s6{';
+											$str .= 'right:50%;';
+										$str .= '}.row .col.push-s6{';
+											$str .= 'left:50%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s7{';
+											$str .= 'right:58.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.push-s7{';
+											$str .= 'left:58.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s8{';
+											$str .= 'right:66.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.push-s8{';
+											$str .= 'left:66.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s9{';
+											$str .= 'right:75%;';
+										$str .= '}';
+										$str .= '.row .col.push-s9{';
+											$str .= 'left:75%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s10{';
+											$str .= 'right:83.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.push-s10{';
+											$str .= 'left:83.3333333333%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s11{';
+											$str .= 'right:91.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.push-s11{';
+											$str .= 'left:91.6666666667%;';
+										$str .= '}';
+										$str .= '.row .col.pull-s12{';
+											$str .= 'right:100%;';
+										$str .= '}';
+										$str .= '.row .col.push-s12{';
+											$str .= 'left:100%;';
+										$str .= '}';
+										*/
 
 
 		// base medium column defintions
@@ -445,131 +437,131 @@ class Email {
 		$str .= '}';
 
 		/*
-					 // medium column offset defintions
-					 $str .= '.row .col.offset-m1{';
-						 $str .= 'margin-left:8.3333333333%;';
-					 $str .= '}';
+										 // medium column offset defintions
+										 $str .= '.row .col.offset-m1{';
+											 $str .= 'margin-left:8.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m2{';
-						 $str .= 'margin-left:16.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m2{';
+											 $str .= 'margin-left:16.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m3{';
-						 $str .= 'margin-left:25%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m3{';
+											 $str .= 'margin-left:25%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m4{';
-						 $str .= 'margin-left:33.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m4{';
+											 $str .= 'margin-left:33.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m5{';
-						 $str .= 'margin-left:41.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m5{';
+											 $str .= 'margin-left:41.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m6{';
-						 $str .= 'margin-left:50%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m6{';
+											 $str .= 'margin-left:50%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m7{';
-						 $str .= 'margin-left:58.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m7{';
+											 $str .= 'margin-left:58.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m8{';
-						 $str .= 'margin-left:66.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m8{';
+											 $str .= 'margin-left:66.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m9{';
-						 $str .= 'margin-left:75%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m9{';
+											 $str .= 'margin-left:75%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m10{';
-						 $str .= 'margin-left:83.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m10{';
+											 $str .= 'margin-left:83.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m11{';
-						 $str .= 'margin-left:91.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-m11{';
+											 $str .= 'margin-left:91.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-m12{';
-						 $str .= 'margin-left:100%;';
-					 $str .= '}';
-					 */
+										 $str .= '.row .col.offset-m12{';
+											 $str .= 'margin-left:100%;';
+										 $str .= '}';
+										 */
 
 		/*
-					 // medium push/pull column definitions
-					 $str .= '.row .col.pull-m1{';
-						 $str .= 'right:8.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m1{';
-						 $str .= 'left:8.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m2{';
-						 $str .= 'right:16.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m2{';
-						 $str .= 'left:16.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m3{';
-						 $str .= 'right:25%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m3{';
-						 $str .= 'left:25%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m4{';
-						 $str .= 'right:33.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m4{';
-						 $str .= 'left:33.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m5{';
-						 $str .= 'right:41.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m5{';
-						 $str .= 'left:41.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m6{';
-						 $str .= 'right:50%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m6{';
-						 $str .= 'left:50%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m7{';
-						 $str .= 'right:58.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m7{';
-						 $str .= 'left:58.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m8{';
-						 $str .= 'right:66.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m8{';
-						 $str .= 'left:66.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m9{';
-						 $str .= 'right:75%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m9{';
-						 $str .= 'left:75%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m10{';
-						 $str .= 'right:83.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m10{';
-						 $str .= 'left:83.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m11{';
-						 $str .= 'right:91.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m11{';
-						 $str .= 'left:91.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-m12{';
-						 $str .= 'right:100%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-m12{';
-						 $str .= 'left:100%;';
-					 $str .= '}';
-					 */
+										 // medium push/pull column definitions
+										 $str .= '.row .col.pull-m1{';
+											 $str .= 'right:8.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m1{';
+											 $str .= 'left:8.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m2{';
+											 $str .= 'right:16.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m2{';
+											 $str .= 'left:16.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m3{';
+											 $str .= 'right:25%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m3{';
+											 $str .= 'left:25%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m4{';
+											 $str .= 'right:33.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m4{';
+											 $str .= 'left:33.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m5{';
+											 $str .= 'right:41.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m5{';
+											 $str .= 'left:41.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m6{';
+											 $str .= 'right:50%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m6{';
+											 $str .= 'left:50%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m7{';
+											 $str .= 'right:58.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m7{';
+											 $str .= 'left:58.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m8{';
+											 $str .= 'right:66.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m8{';
+											 $str .= 'left:66.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m9{';
+											 $str .= 'right:75%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m9{';
+											 $str .= 'left:75%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m10{';
+											 $str .= 'right:83.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m10{';
+											 $str .= 'left:83.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m11{';
+											 $str .= 'right:91.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m11{';
+											 $str .= 'left:91.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-m12{';
+											 $str .= 'right:100%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-m12{';
+											 $str .= 'left:100%;';
+										 $str .= '}';
+										 */
 		$str .= '}';
 
 		$str .= '@media only screen and (min-width:993px){';
@@ -648,325 +640,325 @@ class Email {
 		$str .= '}';
 
 		/*
-					 // large column offset definitions
-					 $str .= '.row .col.offset-l1{';
-						 $str .= 'margin-left:8.3333333333%;';
-					 $str .= '}';
+										 // large column offset definitions
+										 $str .= '.row .col.offset-l1{';
+											 $str .= 'margin-left:8.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l2{';
-						 $str .= 'margin-left:16.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l2{';
+											 $str .= 'margin-left:16.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l3{';
-						 $str .= 'margin-left:25%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l3{';
+											 $str .= 'margin-left:25%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l4{';
-						 $str .= 'margin-left:33.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l4{';
+											 $str .= 'margin-left:33.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l5{';
-						 $str .= 'margin-left:41.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l5{';
+											 $str .= 'margin-left:41.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l6{';
-						 $str .= 'margin-left:50%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l6{';
+											 $str .= 'margin-left:50%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l7{';
-						 $str .= 'margin-left:58.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l7{';
+											 $str .= 'margin-left:58.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l8{';
-						 $str .= 'margin-left:66.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l8{';
+											 $str .= 'margin-left:66.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l9{';
-						 $str .= 'margin-left:75%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l9{';
+											 $str .= 'margin-left:75%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l10{';
-						 $str .= 'margin-left:83.3333333333%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l10{';
+											 $str .= 'margin-left:83.3333333333%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l11{';
-						 $str .= 'margin-left:91.6666666667%;';
-					 $str .= '}';
+										 $str .= '.row .col.offset-l11{';
+											 $str .= 'margin-left:91.6666666667%;';
+										 $str .= '}';
 
-					 $str .= '.row .col.offset-l12{';
-						 $str .= 'margin-left:100%;';
-					 $str .= '}';
-					 */
+										 $str .= '.row .col.offset-l12{';
+											 $str .= 'margin-left:100%;';
+										 $str .= '}';
+										 */
 
 		/*
-					 // large column push/pull definitions
-					 $str .= '.row .col.pull-l1{';
-						 $str .= 'right:8.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l1{';
-						 $str .= 'left:8.3333333333%;}';
-					 $str .= '.row .col.pull-l2{';
-						 $str .= 'right:16.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l2{';
-						 $str .= 'left:16.6666666667%;}';
-					 $str .= '.row .col.pull-l3{';
-						 $str .= 'right:25%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l3{';
-						 $str .= 'left:25%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-l4{';
-						 $str .= 'right:33.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l4{';
-						 $str .= 'left:33.3333333333%;}';
-					 $str .= '.row .col.pull-l5{';
-						 $str .= 'right:41.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l5{';
-						 $str .= 'left:41.6666666667%;}';
-					 $str .= '.row .col.pull-l6{';
-						 $str .= 'right:50%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l6{';
-						 $str .= 'left:50%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-l7{';
-						 $str .= 'right:58.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l7{';
-						 $str .= 'left:58.3333333333%;}';
-					 $str .= '.row .col.pull-l8{';
-						 $str .= 'right:66.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l8{';
-						 $str .= 'left:66.6666666667%;}';
-					 $str .= '.row .col.pull-l9{';
-						 $str .= 'right:75%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l9{';
-						 $str .= 'left:75%;';
-					 $str .= '}';
-					 $str .= '.row .col.pull-l10{';
-						 $str .= 'right:83.3333333333%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l10{';
-						 $str .= 'left:83.3333333333%;}';
-					 $str .= '.row .col.pull-l11{';
-						 $str .= 'right:91.6666666667%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l11{';
-						 $str .= 'left:91.6666666667%;}';
-					 $str .= '.row .col.pull-l12{';
-						 $str .= 'right:100%;';
-					 $str .= '}';
-					 $str .= '.row .col.push-l12{';
-						 $str .= 'left:100%;';
-					 $str .= '}';
-					 */
+										 // large column push/pull definitions
+										 $str .= '.row .col.pull-l1{';
+											 $str .= 'right:8.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l1{';
+											 $str .= 'left:8.3333333333%;}';
+										 $str .= '.row .col.pull-l2{';
+											 $str .= 'right:16.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l2{';
+											 $str .= 'left:16.6666666667%;}';
+										 $str .= '.row .col.pull-l3{';
+											 $str .= 'right:25%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l3{';
+											 $str .= 'left:25%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-l4{';
+											 $str .= 'right:33.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l4{';
+											 $str .= 'left:33.3333333333%;}';
+										 $str .= '.row .col.pull-l5{';
+											 $str .= 'right:41.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l5{';
+											 $str .= 'left:41.6666666667%;}';
+										 $str .= '.row .col.pull-l6{';
+											 $str .= 'right:50%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l6{';
+											 $str .= 'left:50%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-l7{';
+											 $str .= 'right:58.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l7{';
+											 $str .= 'left:58.3333333333%;}';
+										 $str .= '.row .col.pull-l8{';
+											 $str .= 'right:66.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l8{';
+											 $str .= 'left:66.6666666667%;}';
+										 $str .= '.row .col.pull-l9{';
+											 $str .= 'right:75%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l9{';
+											 $str .= 'left:75%;';
+										 $str .= '}';
+										 $str .= '.row .col.pull-l10{';
+											 $str .= 'right:83.3333333333%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l10{';
+											 $str .= 'left:83.3333333333%;}';
+										 $str .= '.row .col.pull-l11{';
+											 $str .= 'right:91.6666666667%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l11{';
+											 $str .= 'left:91.6666666667%;}';
+										 $str .= '.row .col.pull-l12{';
+											 $str .= 'right:100%;';
+										 $str .= '}';
+										 $str .= '.row .col.push-l12{';
+											 $str .= 'left:100%;';
+										 $str .= '}';
+										 */
 		$str .= '}';
 
 		/*
-					$str .= '@media only screen and (min-width:1201px){';
-						// extra large column definitions
-						$str .= '.row .col.xl1{';
-							$str .= 'width:8.3333333333%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl2{';
-							$str .= 'width:16.6666666667%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl3';
-							$str .= '{width:25%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl4{';
-							$str .= 'width:33.3333333333%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl5{';
-							$str .= 'width:41.6666666667%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl6';
-							$str .= '{width:50%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl7{';
-							$str .= 'width:58.3333333333%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl8{';
-							$str .= 'width:66.6666666667%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl9';
-							$str .= '{width:75%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl10{';
-							$str .= 'width:83.3333333333%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl11{';
-							$str .= 'width:91.6666666667%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
-						$str .= '.row .col.xl12';
-							$str .= '{width:100%;';
-							$str .= 'margin-left:auto;';
-							$str .= 'left:auto;';
-							$str .= 'right:auto;';
-						$str .= '}';
+										$str .= '@media only screen and (min-width:1201px){';
+											// extra large column definitions
+											$str .= '.row .col.xl1{';
+												$str .= 'width:8.3333333333%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl2{';
+												$str .= 'width:16.6666666667%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl3';
+												$str .= '{width:25%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl4{';
+												$str .= 'width:33.3333333333%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl5{';
+												$str .= 'width:41.6666666667%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl6';
+												$str .= '{width:50%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl7{';
+												$str .= 'width:58.3333333333%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl8{';
+												$str .= 'width:66.6666666667%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl9';
+												$str .= '{width:75%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl10{';
+												$str .= 'width:83.3333333333%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl11{';
+												$str .= 'width:91.6666666667%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
+											$str .= '.row .col.xl12';
+												$str .= '{width:100%;';
+												$str .= 'margin-left:auto;';
+												$str .= 'left:auto;';
+												$str .= 'right:auto;';
+											$str .= '}';
 
-						// extra large column offset definitions
-						$str .= '.row .col.offset-xl1{';
-							$str .= 'margin-left:8.3333333333%;';
-						$str .= '}';
+											// extra large column offset definitions
+											$str .= '.row .col.offset-xl1{';
+												$str .= 'margin-left:8.3333333333%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl2{';
-							$str .= 'margin-left:16.6666666667%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl2{';
+												$str .= 'margin-left:16.6666666667%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl3{';
-							$str .= 'margin-left:25%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl3{';
+												$str .= 'margin-left:25%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl4{';
-							$str .= 'margin-left:33.3333333333%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl4{';
+												$str .= 'margin-left:33.3333333333%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl5{';
-							$str .= 'margin-left:41.6666666667%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl5{';
+												$str .= 'margin-left:41.6666666667%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl6{';
-							$str .= 'margin-left:50%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl6{';
+												$str .= 'margin-left:50%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl7{';
-							$str .= 'margin-left:58.3333333333%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl7{';
+												$str .= 'margin-left:58.3333333333%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl8{';
-							$str .= 'margin-left:66.6666666667%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl8{';
+												$str .= 'margin-left:66.6666666667%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl9{';
-							$str .= 'margin-left:75%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl9{';
+												$str .= 'margin-left:75%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl10{';
-							$str .= 'margin-left:83.3333333333%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl10{';
+												$str .= 'margin-left:83.3333333333%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl11{';
-							$str .= 'margin-left:91.6666666667%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl11{';
+												$str .= 'margin-left:91.6666666667%;';
+											$str .= '}';
 
-						$str .= '.row .col.offset-xl12{';
-							$str .= 'margin-left:100%;';
-						$str .= '}';
+											$str .= '.row .col.offset-xl12{';
+												$str .= 'margin-left:100%;';
+											$str .= '}';
 
-						// extra large column push/pull definitions
-						$str .= '.row .col.pull-xl1{';
-							$str .= 'right:8.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl1{';
-							$str .= 'left:8.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl2{';
-							$str .= 'right:16.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl2{';
-							$str .= 'left:16.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl3{';
-							$str .= 'right:25%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl3{';
-							$str .= 'left:25%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl4{';
-							$str .= 'right:33.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl4{';
-							$str .= 'left:33.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl5{';
-							$str .= 'right:41.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl5{';
-							$str .= 'left:41.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl6{';
-							$str .= 'right:50%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl6{';
-							$str .= 'left:50%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl7{';
-							$str .= 'right:58.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl7{';
-							$str .= 'left:58.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl8{';
-							$str .= 'right:66.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl8{';
-							$str .= 'left:66.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl9{';
-							$str .= 'right:75%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl9{';
-							$str .= 'left:75%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl10{';
-							$str .= 'right:83.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl10{';
-							$str .= 'left:83.3333333333%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl11{';
-							$str .= 'right:91.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl11{';
-							$str .= 'left:91.6666666667%;';
-						$str .= '}';
-						$str .= '.row .col.pull-xl12{';
-							$str .= 'right:100%;';
-						$str .= '}';
-						$str .= '.row .col.push-xl12{';
-							$str .= 'left:100%;';
-						$str .= '}';
-					$str .= '}';
-					*/
+											// extra large column push/pull definitions
+											$str .= '.row .col.pull-xl1{';
+												$str .= 'right:8.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl1{';
+												$str .= 'left:8.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl2{';
+												$str .= 'right:16.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl2{';
+												$str .= 'left:16.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl3{';
+												$str .= 'right:25%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl3{';
+												$str .= 'left:25%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl4{';
+												$str .= 'right:33.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl4{';
+												$str .= 'left:33.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl5{';
+												$str .= 'right:41.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl5{';
+												$str .= 'left:41.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl6{';
+												$str .= 'right:50%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl6{';
+												$str .= 'left:50%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl7{';
+												$str .= 'right:58.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl7{';
+												$str .= 'left:58.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl8{';
+												$str .= 'right:66.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl8{';
+												$str .= 'left:66.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl9{';
+												$str .= 'right:75%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl9{';
+												$str .= 'left:75%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl10{';
+												$str .= 'right:83.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl10{';
+												$str .= 'left:83.3333333333%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl11{';
+												$str .= 'right:91.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl11{';
+												$str .= 'left:91.6666666667%;';
+											$str .= '}';
+											$str .= '.row .col.pull-xl12{';
+												$str .= 'right:100%;';
+											$str .= '}';
+											$str .= '.row .col.push-xl12{';
+												$str .= 'left:100%;';
+											$str .= '}';
+										$str .= '}';
+										*/
 
 		// basic font stuff
 		$str .= 'html{';
@@ -1251,155 +1243,155 @@ class Email {
 		$str .= 'display:block;';
 		$str .= '}';
 		/*
-					// FABs
-					$str .= '.fixed-action-btn{';
-						$str .= 'position:fixed;';
-						$str .= 'right:23px;';
-						$str .= 'bottom:23px;';
-						$str .= 'padding-top:15px;';
-						$str .= 'margin-bottom:0;';
-						$str .= 'z-index:997;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.active ul{';
-						$str .= 'visibility:visible;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.horizontal{';
-						$str .= 'padding:0 0 0 15px;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.horizontal ul{';
-						$str .= 'text-align:right;';
-						$str .= 'right:64px;';
-						$str .= 'top:50%;';
-						$str .= '-webkit-transform:translateY(-50%);';
-						$str .= 'transform:translateY(-50%);';
-						$str .= 'height:100%;';
-						$str .= 'left:auto;';
-						$str .= 'width:500px;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.horizontal ul li{';
-						$str .= 'display:inline-block;';
-						$str .= 'margin:15px 15px 0 0';
-					$str .= '}';
+										// FABs
+										$str .= '.fixed-action-btn{';
+											$str .= 'position:fixed;';
+											$str .= 'right:23px;';
+											$str .= 'bottom:23px;';
+											$str .= 'padding-top:15px;';
+											$str .= 'margin-bottom:0;';
+											$str .= 'z-index:997;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.active ul{';
+											$str .= 'visibility:visible;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.horizontal{';
+											$str .= 'padding:0 0 0 15px;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.horizontal ul{';
+											$str .= 'text-align:right;';
+											$str .= 'right:64px;';
+											$str .= 'top:50%;';
+											$str .= '-webkit-transform:translateY(-50%);';
+											$str .= 'transform:translateY(-50%);';
+											$str .= 'height:100%;';
+											$str .= 'left:auto;';
+											$str .= 'width:500px;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.horizontal ul li{';
+											$str .= 'display:inline-block;';
+											$str .= 'margin:15px 15px 0 0';
+										$str .= '}';
 
-					$str .= ".fixed-action-btn.toolbar{';
-						$str .= 'padding:0;';
-						$str .= 'height:56px;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.toolbar.active > a i{';
-						$str .= 'opacity:0;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.toolbar ul{';
-						$str .= 'display:-webkit-box;';
-						$str .= 'display:-webkit-flex;';
-						$str .= 'display:-ms-flexbox;';
-						$str .= 'display:flex;';
-						$str .= 'top:0;';
-						$str .= 'bottom:0;';
-						$str .= 'z-index:1;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.toolbar ul li{';
-						$str .= '-webkit-box-flex:1;';
-						$str .= '-webkit-flex:1;';
-						$str .= '-ms-flex:1;';
-						$str .= 'flex:1;';
-						$str .= 'display:inline-block;';
-						$str .= 'margin:0;';
-						$str .= 'height:100%;';
-						$str .= '-webkit-transition:none;';
-						$str .= 'transition:none;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.toolbar ul li a{';
-						$str .= 'display:block;';
-						$str .= 'overflow:hidden;';
-						$str .= 'position:relative;';
-						$str .= 'width:100%;';
-						$str .= 'height:100%;';
-						$str .= 'background-color:transparent;';
-						$str .= '-webkit-box-shadow:none;';
-						$str .= 'box-shadow:none;';
-						$str .= 'color:#fff;';
-						$str .= 'line-height:56px;';
-						$str .= 'z-index:1;';
-					$str .= '}';
-					$str .= '.fixed-action-btn.toolbar ul li a i{';
-						$str .= 'line-height:inherit;';
-					$str .= '}';
-					$str .= '.fixed-action-btn ul{';
-						$str .= 'left:0;';
-						$str .= 'right:0;';
-						$str .= 'text-align:center;';
-						$str .= 'position:absolute;';
-						$str .= 'bottom:64px;';
-						$str .= 'margin:0;';
-						$str .= 'visibility:hidden;';
-					$str .= '}';
-					$str .= '.fixed-action-btn ul li{';
-						$str .= 'margin-bottom:15px;';
-					$str .= '}';
-					$str .= '.fixed-action-btn ul a.btn-floating{';
-						$str .= 'opacity:0;';
-					$str .= '}';
-					$str .= '.fixed-action-btn .fab-backdrop{';
-						$str .= 'position:absolute;';
-						$str .= 'top:0;';
-						$str .= 'left:0;';
-						$str .= 'z-index:-1;';
-						$str .= 'width:40px;';
-						$str .= 'height:40px;';
-						$str .= 'border-radius:50%;';
-						$str .= '-webkit-transform:scale(0);';
-						$str .= 'transform:scale(0);';
-					$str .= '}';
-					$str .= '.btn-floating{';
-						$str .= 'display:inline-block;';
-						$str .= 'color:#fff;';
-						$str .= 'position:relative;';
-						$str .= 'overflow:hidden;';
-						$str .= 'z-index:1;';
-						$str .= 'width:40px;';
-						$str .= 'height:40px;';
-						$str .= 'line-height:40px;';
-						$str .= 'padding:0;';
-						$str .= 'border-radius:50%;';
-						$str .= '-webkit-transition:.3s;';
-						$str .= 'transition:.3s;';
-						$str .= 'cursor:pointer;';
-						$str .= 'vertical-align:middle;';
-					$str .= '}';
-					$str .= '.btn-floating:before{';
-						$str .= 'border-radius:0;';
-					$str .= '}';
-					$str .= '.btn-floating.btn-large{';
-						$str .= 'width:56px;';
-						$str .= 'height:56px;';
-					$str .= '}';
-					$str .= '.btn-floating.btn-large.halfway-fab{';
-						$str .= 'bottom:-28px;';
-					$str .= '}';
-					$str .= '.btn-floating.btn-large i{';
-						$str .= 'line-height:56px;';
-					$str .= '}';
-					$str .= '.btn-floating.halfway-fab{';
-						$str .= 'position:absolute;';
-						$str .= 'right:24px;';
-						$str .= 'bottom:-20px;';
-					$str .= '}';
-					$str .= '.btn-floating.halfway-fab.left{';
-						$str .= 'right:auto;';
-						$str .= 'left:24px;';
-					$str .= '}';
-					$str .= '.btn-floating i{';
-						$str .= 'width:inherit;';
-						$str .= 'display:inline-block;';
-						$str .= 'text-align:center;';
-						$str .= 'color:#fff;';
-						$str .= 'font-size:1.6rem;';
-						$str .= 'line-height:40px;';
-					$str .= '}';
-					$str .= 'button.btn-floating{';
-						$str .= 'border:none;';
-					$str .= '}';
-					*/
+										$str .= ".fixed-action-btn.toolbar{';
+											$str .= 'padding:0;';
+											$str .= 'height:56px;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.toolbar.active > a i{';
+											$str .= 'opacity:0;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.toolbar ul{';
+											$str .= 'display:-webkit-box;';
+											$str .= 'display:-webkit-flex;';
+											$str .= 'display:-ms-flexbox;';
+											$str .= 'display:flex;';
+											$str .= 'top:0;';
+											$str .= 'bottom:0;';
+											$str .= 'z-index:1;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.toolbar ul li{';
+											$str .= '-webkit-box-flex:1;';
+											$str .= '-webkit-flex:1;';
+											$str .= '-ms-flex:1;';
+											$str .= 'flex:1;';
+											$str .= 'display:inline-block;';
+											$str .= 'margin:0;';
+											$str .= 'height:100%;';
+											$str .= '-webkit-transition:none;';
+											$str .= 'transition:none;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.toolbar ul li a{';
+											$str .= 'display:block;';
+											$str .= 'overflow:hidden;';
+											$str .= 'position:relative;';
+											$str .= 'width:100%;';
+											$str .= 'height:100%;';
+											$str .= 'background-color:transparent;';
+											$str .= '-webkit-box-shadow:none;';
+											$str .= 'box-shadow:none;';
+											$str .= 'color:#fff;';
+											$str .= 'line-height:56px;';
+											$str .= 'z-index:1;';
+										$str .= '}';
+										$str .= '.fixed-action-btn.toolbar ul li a i{';
+											$str .= 'line-height:inherit;';
+										$str .= '}';
+										$str .= '.fixed-action-btn ul{';
+											$str .= 'left:0;';
+											$str .= 'right:0;';
+											$str .= 'text-align:center;';
+											$str .= 'position:absolute;';
+											$str .= 'bottom:64px;';
+											$str .= 'margin:0;';
+											$str .= 'visibility:hidden;';
+										$str .= '}';
+										$str .= '.fixed-action-btn ul li{';
+											$str .= 'margin-bottom:15px;';
+										$str .= '}';
+										$str .= '.fixed-action-btn ul a.btn-floating{';
+											$str .= 'opacity:0;';
+										$str .= '}';
+										$str .= '.fixed-action-btn .fab-backdrop{';
+											$str .= 'position:absolute;';
+											$str .= 'top:0;';
+											$str .= 'left:0;';
+											$str .= 'z-index:-1;';
+											$str .= 'width:40px;';
+											$str .= 'height:40px;';
+											$str .= 'border-radius:50%;';
+											$str .= '-webkit-transform:scale(0);';
+											$str .= 'transform:scale(0);';
+										$str .= '}';
+										$str .= '.btn-floating{';
+											$str .= 'display:inline-block;';
+											$str .= 'color:#fff;';
+											$str .= 'position:relative;';
+											$str .= 'overflow:hidden;';
+											$str .= 'z-index:1;';
+											$str .= 'width:40px;';
+											$str .= 'height:40px;';
+											$str .= 'line-height:40px;';
+											$str .= 'padding:0;';
+											$str .= 'border-radius:50%;';
+											$str .= '-webkit-transition:.3s;';
+											$str .= 'transition:.3s;';
+											$str .= 'cursor:pointer;';
+											$str .= 'vertical-align:middle;';
+										$str .= '}';
+										$str .= '.btn-floating:before{';
+											$str .= 'border-radius:0;';
+										$str .= '}';
+										$str .= '.btn-floating.btn-large{';
+											$str .= 'width:56px;';
+											$str .= 'height:56px;';
+										$str .= '}';
+										$str .= '.btn-floating.btn-large.halfway-fab{';
+											$str .= 'bottom:-28px;';
+										$str .= '}';
+										$str .= '.btn-floating.btn-large i{';
+											$str .= 'line-height:56px;';
+										$str .= '}';
+										$str .= '.btn-floating.halfway-fab{';
+											$str .= 'position:absolute;';
+											$str .= 'right:24px;';
+											$str .= 'bottom:-20px;';
+										$str .= '}';
+										$str .= '.btn-floating.halfway-fab.left{';
+											$str .= 'right:auto;';
+											$str .= 'left:24px;';
+										$str .= '}';
+										$str .= '.btn-floating i{';
+											$str .= 'width:inherit;';
+											$str .= 'display:inline-block;';
+											$str .= 'text-align:center;';
+											$str .= 'color:#fff;';
+											$str .= 'font-size:1.6rem;';
+											$str .= 'line-height:40px;';
+										$str .= '}';
+										$str .= 'button.btn-floating{';
+											$str .= 'border:none;';
+										$str .= '}';
+										*/
 
 		// show-on and hide-on and stuff
 		$str .= '@media only screen and (max-width: 600px) {';
@@ -1567,21 +1559,19 @@ class Email {
 	 * @param string $textMessage Message in text format for older clients/viewers
 	 * @param array $email E-mail to send from, [username, name]
 	 * @param string $pass Password for the email
-	 * @param string|null $smimePath PEM path to the certificate to be used to sign this email, null for no signature
-	 * @param string|null $smimePassword Password for the PEM certificate, null for no signature
 	 * @param mixed[] $smtp STMP settings, [host,port,protocol]
 	 * @param bool $copyToSent Copy to SENT folder or not
 	 */
-	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass, ?string $smimePath = null, ?string $smimePassword = null, array $smtp = self::EMAIL_SMTP, bool $copyToSent = true): bool {
+	public static function sendEmail(array $recipients, string $subject, string $message, string $textMessage, array $email, string $pass): bool {
 		$mail = new Mailer(false);
 		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
-		$mail->Host = $smtp[0];
+		$mail->Host = Secrets::get("SMTP_SERVER");
 		$mail->SMTPAuth = true;
 		$mail->Username = $email[0];
 		$mail->Password = $pass;
-		$mail->SMTPSecure = $smtp[2];
-		$mail->Port = $smtp[1];
+		$mail->SMTPSecure = "tls";
+		$mail->Port = (int) Secrets::get("SMTP_PORT");
 
 		$mail->CharSet = 'utf-8';
 
@@ -1605,12 +1595,6 @@ class Email {
 		$mail->Subject = $subject;
 		$mail->Body = $message;
 		$mail->AltBody = $textMessage;
-
-		if (!is_null($smimePath) && !is_null($smimePassword) && file_exists($smimePath)) {
-			$mail->sign($smimePath, $smimePath, $smimePassword);
-		} elseif (!is_null($smimePath)) {
-			trigger_error("SMIME key " . $smimePath . " was passed to Email::sendEmail but does not actually exist", E_USER_NOTICE);
-		}
 
 		if ($mail->send()) {
 			return true;
