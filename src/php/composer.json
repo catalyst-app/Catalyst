@@ -1,16 +1,9 @@
 {
-    "require": {
-        "phpmailer/phpmailer": "*",
-        "pguardiario/phpuri": "*",
-        "whichbrowser/parser": "*",
-        "ralouphie/getallheaders": "*"
-    },
-    "require-dev": {
-        "phpstan/phpstan": "*",
-        "slam/phpstan-extensions": "*",
-        "mrclay/minify": "*",
-        "phan/phan": "*",
-        "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan-deprecation-rules": "^0.11.2"
-    }
+  "require": {
+    "phpmailer/phpmailer": "*",
+    "pguardiario/phpuri": "*"
+  },
+  "require-dev": {
+    "mrclay/minify": "*"
+  }
 }
