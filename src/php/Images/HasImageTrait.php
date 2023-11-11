@@ -12,28 +12,28 @@ trait HasImageTrait {
 	 * The object's image
 	 * @var null|Image
 	 */
-	protected $image=null;
+	protected $image = null;
 
 	/**
 	 * Get the image's folder
 	 */
-	abstract public function getImageFolder() : string;
+	abstract public static function getImageFolder(): string;
 
 	/**
 	 * Initialize the image
 	 */
-	abstract public function initializeImage() : void;
+	abstract public function initializeImage(): void;
 
 	/**
 	 * Get the object's Image
-	 * 
+	 *
 	 * @return Image
 	 */
-	public function getImage() : Image {
+	public function getImage(): Image {
 		if (is_null($this->image)) {
 			$this->initializeImage();
 			if (is_null($this->image)) {
-				throw new Exception("Image  for ".__CLASS__." is not properly initializing");
+				throw new Exception("Image  for " . __CLASS__ . " is not properly initializing");
 			}
 		}
 		return $this->image;
@@ -41,10 +41,10 @@ trait HasImageTrait {
 
 	/**
 	 * Set the object's image
-	 * 
+	 *
 	 * @param Image $image
 	 */
-	public function setImage(Image $image) : void {
+	public function setImage(Image $image): void {
 		$this->image = $image;
 	}
 }

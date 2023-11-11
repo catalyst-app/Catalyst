@@ -28,16 +28,16 @@ class DBImage extends Image {
 	 * ID of the image in an image table
 	 * @var int
 	 */
-	protected $id=0;
+	protected $id = 0;
 	/**
 	 * Table the image is in
 	 * @var string
 	 */
-	protected $table="";
+	protected $table = "";
 	/**
 	 * Columns settable and gettable by this
 	 */
-	protected $columns=[];
+	protected $columns = [];
 
 	/**
 	 * Used to cache pending updates so we can update multiple columns at once
@@ -63,7 +63,7 @@ class DBImage extends Image {
 
 	/**
 	 * Create a new object to represent an image
-	 * 
+	 *
 	 * @param int $id
 	 * @param int $parentId
 	 * @param array $dbInfo
@@ -76,7 +76,7 @@ class DBImage extends Image {
 	 * @param int $sort
 	 * @param bool $pendingInsertion If the image needs to be inserted into DB
 	 */
-	public function __construct(int $id=0, int $parentId=0, array $dbInfo, string $folder, string $fileToken, ?string $path=null, bool $nsfw=false, string $caption="", string $captionInfo="", int $sort=0, bool $pendingInsertion=false) {
+	public function __construct(int $id, int $parentId, array $dbInfo, string $folder, string $fileToken, ?string $path = null, bool $nsfw = false, string $caption = "", string $captionInfo = "", int $sort = 0, bool $pendingInsertion = false) {
 		$this->setId($id);
 		$this->setTable($dbInfo["table"]);
 		$this->setColumns([
@@ -105,7 +105,7 @@ class DBImage extends Image {
 				"value" => $sort,
 			],
 		]);
-		parent::__construct($folder, $fileToken, $path, $nsfw, trim($caption.($captionInfo ? ("\n".$dbInfo["captionDelimiter"].$captionInfo) : '')));
+		parent::__construct($folder, $fileToken, $path, $nsfw, trim($caption . ($captionInfo ? ("\n" . $dbInfo["captionDelimiter"] . $captionInfo) : '')));
 		if ($pendingInsertion) {
 			self::$pendingInsertions[] = $this;
 		}
@@ -114,7 +114,7 @@ class DBImage extends Image {
 	/**
 	 * @return int
 	 */
-	public function getId() : int {
+	public function getId(): int {
 		return $this->id;
 	}
 
@@ -122,35 +122,35 @@ class DBImage extends Image {
 	 * We provide a public setter as this isn't a direct reflection of the DB
 	 * @param int $id
 	 */
-	public function setId(int $id) : void {
+	public function setId(int $id): void {
 		$this->id = $id;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getTable() : string {
+	public function getTable(): string {
 		return $this->table;
 	}
 
 	/**
 	 * @param string $table
 	 */
-	public function setTable(string $table) : void {
+	public function setTable(string $table): void {
 		$this->table = $table;
 	}
 
 	/**
 	 * @return array
 	 */
-	protected function getColumns() : array {
+	protected function getColumns(): array {
 		return $this->columns;
 	}
 
 	/**
 	 * @param array $columns
 	 */
-	protected function setColumns(array $columns) : void {
+	protected function setColumns(array $columns): void {
 		$this->columns = $columns;
 	}
 
@@ -163,33 +163,33 @@ class DBImage extends Image {
 			$type = "get";
 			$name = substr($name, 3);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "is") === 0) {
 			$type = "is";
 			$name = substr($name, 2);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "set") === 0) {
 			$type = "set";
 			$name = substr($name, 3);
 			if (count($arguments) !== 1) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 1.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 1.");
 			}
 		} else {
-			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+			throw new BadMethodCallException($name . " is not a method of " . __CLASS__);
 		}
 
 		if (!array_key_exists($name, $this->getColumns())) {
-			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+			throw new BadMethodCallException($name . " is not a method of " . __CLASS__);
 		}
 
 		$prop = $this->getColumns()[$name];
 
 		if ($type == "get" || $type == "is") {
 			if ($type == "is") {
-				return (bool)$prop["value"];
+				return (bool) $prop["value"];
 			}
 			return $prop["value"];
 		} else {
@@ -209,7 +209,7 @@ class DBImage extends Image {
 	/**
 	 * Delete the image from disk (won't work for default) and mark it to be deleted in DB
 	 */
-	public function delete() : void {
+	public function delete(): void {
 		parent::delete();
 
 		if (empty($this->getTable()) || $this->getId() == 0) {
@@ -226,7 +226,7 @@ class DBImage extends Image {
 	/**
 	 * Used by shutdown function to save to database
 	 */
-	public static function writeAllChanges() : void {
+	public static function writeAllChanges(): void {
 		self::writeAllInsertions();
 		self::writeAllUpdates();
 		self::writeAllDeletions();
@@ -235,7 +235,7 @@ class DBImage extends Image {
 	/**
 	 * Writes all database updates
 	 */
-	public static function writeAllInsertions() : void {
+	public static function writeAllInsertions(): void {
 		if (empty(self::$pendingInsertions)) {
 			return;
 		}
@@ -274,7 +274,7 @@ class DBImage extends Image {
 	/**
 	 * Writes all database updates
 	 */
-	public static function writeAllUpdates() : void {
+	public static function writeAllUpdates(): void {
 		if (empty(self::$objectsPendingUpdates)) {
 			return;
 		}
@@ -287,7 +287,7 @@ class DBImage extends Image {
 	/**
 	 * Write the database updates for this class
 	 */
-	public function writeUpdates() : void {
+	public function writeUpdates(): void {
 		if (empty($this->pendingUpdates)) {
 			return;
 		}
@@ -318,7 +318,7 @@ class DBImage extends Image {
 	/**
 	 * Write the queued deletions to DB
 	 */
-	public static function writeAllDeletions() : void {
+	public static function writeAllDeletions(): void {
 		if (empty(self::$toDelete)) {
 			return;
 		}
