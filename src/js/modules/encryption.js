@@ -2,7 +2,7 @@
 use \Catalyst\Secrets;
 ?>
 window.encryption = new JSEncrypt();
-window.encryption.setPublicKey(<?= json_encode(Secrets::RSA_PUBLIC) ?>);
+window.encryption.setPublicKey(<?= json_encode(Secrets::getRsaPublic()) ?>);
 
 window.dec2hex = function(i) {
 	return (i + 0x100).toString(16).substr(-2).toLowerCase();

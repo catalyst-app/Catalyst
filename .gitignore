@@ -1,7 +1,5 @@
 src/php/vendor
 
-src/php/Secrets.php
-
 external_assets/profile_pictures/*
 !external_assets/profile_pictures/default.png
 !external_assets/profile_pictures/default.svg

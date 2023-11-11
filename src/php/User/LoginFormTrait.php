@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
-use \Catalyst\Form\Field\{AutocompleteValues,TextField,PasswordField,CaptchaField};
+use \Catalyst\Form\Field\{AutocompleteValues, TextField, PasswordField, CaptchaField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -14,11 +14,11 @@ use \Catalyst\Secrets;
 trait LoginFormTrait {
 	/**
 	 * Login form
-	 * 
+	 *
 	 * See /Login for form usage
 	 * @return Form Form for attempting a login
 	 */
-	public static function getLoginForm() : Form {
+	public static function getLoginForm(): Form {
 		$form = new Form();
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
@@ -56,8 +56,8 @@ trait LoginFormTrait {
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
-		$captchaField->setSiteKey("6LfGBUEUAAAAAIC4spvBe8kIKhQlU_JsAVuTfnid");
-		$captchaField->setSecretKey(Secrets::LOGIN_CAPTCHA_SECRET);
+		$captchaField->setSiteKey(Secrets::get("LOGIN_CAPTCHA_SITE"));
+		$captchaField->setSecretKey(Secrets::get("LOGIN_CAPTCHA_SECRET"));
 		$form->addField($captchaField);
 
 		return $form;

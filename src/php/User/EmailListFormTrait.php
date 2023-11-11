@@ -4,7 +4,7 @@ namespace Catalyst\User;
 
 use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\AutoClosingModalCompletionAction;
-use \Catalyst\Form\Field\{AutocompleteValues,CaptchaField,CheckboxField,EmailField,TextField};
+use \Catalyst\Form\Field\{AutocompleteValues, CaptchaField, CheckboxField, EmailField, TextField};
 use \Catalyst\Form\Form;
 use \Catalyst\Secrets;
 
@@ -15,11 +15,11 @@ trait EmailListFormTrait {
 
 	/**
 	 * Get the form used to add a user to the mailing list.
-	 * 
+	 *
 	 * See /About for form usage
 	 * @return Form Form for adding a user to the mailing list
 	 */
-	public static function getEmailListAdditionForm() : Form {
+	public static function getEmailListAdditionForm(): Form {
 		$form = new Form();
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
@@ -57,8 +57,8 @@ trait EmailListFormTrait {
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
-		$captchaField->setSiteKey("6LdaGlcUAAAAAE0HWwoFT4Y81ifwLV6nCsvQobk4");
-		$captchaField->setSecretKey(Secrets::EMAIL_LIST_CAPTCHA_SECRET);
+		$captchaField->setSiteKey(Secrets::get("EMAIL_LIST_CAPTCHA_SITE"));
+		$captchaField->setSecretKey(Secrets::get("EMAIL_LIST_CAPTCHA_SECRET"));
 		$form->addField($captchaField);
 
 		return $form;

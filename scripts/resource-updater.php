@@ -7,7 +7,7 @@ if (php_sapi_name() !== 'cli') {
 define("ROOTDIR", "../");
 define("REAL_ROOTDIR", "../");
 
-require_once REAL_ROOTDIR."src/php/initializer.php";
+require_once REAL_ROOTDIR . "src/php/initializer.php";
 use \Catalyst\API\Endpoint;
 use \Catalyst\Email\Email;
 use \Catalyst\Secrets;
@@ -17,18 +17,18 @@ Endpoint::init(true, Endpoint::AUTH_REQUIRE_NONE);
 
 $fullLog = [];
 
-function logStr(string $message, bool $forceSend=false) : void {
+function logStr(string $message, bool $forceSend = false): void {
 	global $fullLog;
 
-	echo ($fullLog[] = $message)."\n";
+	echo ($fullLog[] = $message) . "\n";
 
 	if ($forceSend) {
-		$fullLog[] = "Maximum memory usage: ".memory_get_usage();
+		$fullLog[] = "Maximum memory usage: " . memory_get_usage();
 
 		Email::sendEmail(
-			[["error_logs@catalystapp.co","Error Log"]],
+			[["error_logs@catalystapp.co", "Error Log"]],
 			"Resource updating log",
-			'<pre>'.htmlspecialchars(implode("\n", $fullLog)).'</pre>',
+			'<pre>' . htmlspecialchars(implode("\n", $fullLog)) . '</pre>',
 			implode("\n", $fullLog),
 			Email::ERROR_LOG_EMAIL,
 			Email::ERROR_LOG_PASSWORD,
@@ -42,10 +42,10 @@ function logStr(string $message, bool $forceSend=false) : void {
 	}
 }
 
-function githubApiRequest(string $endpoint, array $additionalHttpContext=[]) : array {
-	$url = "https://api.github.com/".ltrim($endpoint, "/");
-	
-	logStr("Pulling ".$url);
+function githubApiRequest(string $endpoint, array $additionalHttpContext = []): array {
+	$url = "https://api.github.com/" . ltrim($endpoint, "/");
+
+	logStr("Pulling " . $url);
 
 	$data = file_get_contents(
 		$url,
@@ -76,7 +76,7 @@ function githubApiRequest(string $endpoint, array $additionalHttpContext=[]) : a
 // 	$a = explode(".", extractVersionNumber($a));
 // 	$b = explode(".", extractVersionNumber($b));
 //
-// 	for ($i=0; $i < max(count($a), count($b)); $i++) { 
+// 	for ($i=0; $i < max(count($a), count($b)); $i++) {
 // 		if ($i >= count($a)) {
 // 			return 1; // account for 1.0rc1 < 1.0
 // 		} elseif ($i >= count($b)) {
@@ -89,9 +89,9 @@ function githubApiRequest(string $endpoint, array $additionalHttpContext=[]) : a
 // 	return 0;
 // }
 
-if (!is_dir(REAL_ROOTDIR."scripts/tmp/")) {
+if (!is_dir(REAL_ROOTDIR . "scripts/tmp/")) {
 	logStr("Creating scripts/tmp");
-	if (!mkdir(REAL_ROOTDIR."scripts/tmp/")) {
+	if (!mkdir(REAL_ROOTDIR . "scripts/tmp/")) {
 		throw new Exception("Unable to create scripts/tmp");
 	}
 }
@@ -103,80 +103,80 @@ foreach ($resources as $resource) {
 		continue;
 	}
 
-	$dir = "scripts/tmp/".$resource->getGithubRepoName();
-	if (!is_dir(REAL_ROOTDIR.$dir)) {
-		logStr("Creating ".$dir);
-		if (!mkdir(REAL_ROOTDIR.$dir, 0777, true)) {
-			trigger_error("Unable to create ".$dir, E_USER_NOTICE);
+	$dir = "scripts/tmp/" . $resource->getGithubRepoName();
+	if (!is_dir(REAL_ROOTDIR . $dir)) {
+		logStr("Creating " . $dir);
+		if (!mkdir(REAL_ROOTDIR . $dir, 0777, true)) {
+			trigger_error("Unable to create " . $dir, E_USER_NOTICE);
 			continue;
 		}
 
-		$cmd = "git clone ".escapeshellarg("git@github.com:".$resource->getGithubRepoName())." ".escapeshellarg(REAL_ROOTDIR.$dir);
+		$cmd = "git clone " . escapeshellarg("git@github.com:" . $resource->getGithubRepoName()) . " " . escapeshellarg(REAL_ROOTDIR . $dir);
 		$output = [];
 		$return = 0;
 
-		logStr("Executing ".$cmd);
+		logStr("Executing " . $cmd);
 		exec($cmd, $output, $return);
-		
-		logStr("Return code: ".$return);
+
+		logStr("Return code: " . $return);
 		array_map("logStr", $output);
 
 		if ($return) {
-			trigger_error("Unable to clone ".$resource->getGithubRepoName(), E_USER_NOTICE);
+			trigger_error("Unable to clone " . $resource->getGithubRepoName(), E_USER_NOTICE);
 			continue;
 		}
 	}
 
-	logStr("Pulling ".$resource->getGithubRepoName());
+	logStr("Pulling " . $resource->getGithubRepoName());
 
-	$cmd = "git ".escapeshellarg("--work-tree=".REAL_ROOTDIR.$dir)." ".escapeshellarg("--git-dir=".REAL_ROOTDIR.$dir."/.git")." pull";
+	$cmd = "git " . escapeshellarg("--work-tree=" . REAL_ROOTDIR . $dir) . " " . escapeshellarg("--git-dir=" . REAL_ROOTDIR . $dir . "/.git") . " pull";
 	$output = [];
 	$return = 0;
 
-	logStr("Executing ".$cmd);
+	logStr("Executing " . $cmd);
 	exec($cmd, $output, $return);
-		
-	logStr("Return code: ".$return);
+
+	logStr("Return code: " . $return);
 	array_map("logStr", $output);
 
 	if ($return) {
-		trigger_error("Unable to pull ".$resource->getGithubRepoName(), E_USER_NOTICE);
+		trigger_error("Unable to pull " . $resource->getGithubRepoName(), E_USER_NOTICE);
 		continue;
 	}
 
 	logStr("Getting commit history");
 
-	$cmd = "git ".escapeshellarg("--work-tree=".REAL_ROOTDIR.$dir)." ".escapeshellarg("--git-dir=".REAL_ROOTDIR.$dir."/.git")." log --pretty=oneline".($resource->getLatestSource() == "TAG" ? " --no-walk --tags" : "");
+	$cmd = "git " . escapeshellarg("--work-tree=" . REAL_ROOTDIR . $dir) . " " . escapeshellarg("--git-dir=" . REAL_ROOTDIR . $dir . "/.git") . " log --pretty=oneline" . ($resource->getLatestSource() == "TAG" ? " --no-walk --tags" : "");
 	$output = [];
 	$return = 0;
 
-	logStr("Executing ".$cmd);
+	logStr("Executing " . $cmd);
 	exec($cmd, $output, $return);
-		
-	logStr("Return code: ".$return);
+
+	logStr("Return code: " . $return);
 	array_map("logStr", $output);
 
-	logStr("Got ".count($output)." commits");
+	logStr("Got " . count($output) . " commits");
 	$numberOutdated = count($output);
-	for ($i=0; $i < count($output); $i++) { 
+	for ($i = 0; $i < count($output); $i++) {
 		if (strpos($output[$i], $resource->getCurrentVersion()) !== false) {
 			$numberOutdated = $i;
 			break;
 		}
 	}
 
-	logStr("We are ".$numberOutdated." version(s) behind");
-	
+	logStr("We are " . $numberOutdated . " version(s) behind");
+
 	$resource->setLatestVersion(substr($output[0], 0, 40));
 	if ($i) {
 		logStr("Complaining to Discord");
-		file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BACKUP_WEBHOOK_TOKEN, false, stream_context_create([
+		file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BACKUP_WEBHOOK_TOKEN"), false, stream_context_create([
 			"http" => [
 				"method" => "POST",
 				"ignore_errors" => true,
 				"header" => "Content-Type: application/x-www-form-urlencoded",
 				"content" => json_encode([
-					"content" => $resource->getName()." is out of date",
+					"content" => $resource->getName() . " is out of date",
 					"embeds" => [
 						[
 							"title" => "Out of date",
@@ -207,19 +207,19 @@ foreach ($resources as $resource) {
 	}
 }
 
-$cmd = "composer ".escapeshellarg("--working-dir=".REAL_ROOTDIR."src")." outdated --direct";
+$cmd = "composer " . escapeshellarg("--working-dir=" . REAL_ROOTDIR . "src") . " outdated --direct";
 $output = [];
 $return = 0;
 
-logStr("Executing ".$cmd);
+logStr("Executing " . $cmd);
 exec($cmd, $output, $return);
-	
-logStr("Return code: ".$return);
+
+logStr("Return code: " . $return);
 array_map("logStr", $output);
 
 if (!empty(array_filter($output))) {
 	logStr("Complaining to discord about composer");
-	file_get_contents("https://discordapp.com/api/webhooks/".Secrets::DISCORD_BACKUP_WEBHOOK_TOKEN, false, stream_context_create([
+	file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BACKUP_WEBHOOK_TOKEN"), false, stream_context_create([
 		"http" => [
 			"method" => "POST",
 			"ignore_errors" => true,

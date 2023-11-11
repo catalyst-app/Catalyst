@@ -5,7 +5,6 @@ define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR . "src/php/initializer.php";
 use \Catalyst\Page\{UniversalFunctions, Values};
-use \Catalyst\Images\Image;
 use \Catalyst\User\User;
 
 define("PAGE_KEYWORD", "Unimplemented");

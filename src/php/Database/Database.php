@@ -8,7 +8,7 @@ use \PDO;
 
 /**
  * Contains the database handler and DB connection info
- * 
+ *
  * Is only used for that, nothing else.  Constants are for connection info, public because may be used elsewhere
  */
 class Database {
@@ -18,12 +18,12 @@ class Database {
 	public const DB_NAME = "catalyst";
 	public const DB_USER = "catalyst";
 	// this is already public in Secrets so
-	public const DB_PASSWORD = Secrets::DB_PASSWORD;
+	public const DB_PASSWORD = Secrets::get("DB_PASSWORD");
 
 	/**
 	 * Contains the PDO instance for our database
 	 * Should be accessed through ::getDbh so we can make sure its initialized
-	 * 
+	 *
 	 * @var PDO
 	 */
 	protected static $dbh;
@@ -31,7 +31,7 @@ class Database {
 	/**
 	 * Initializes database handler
 	 */
-	protected static function init() : void {
+	protected static function init(): void {
 		// don't reinitialize
 		if (self::$dbh instanceof PDO) {
 			return;
@@ -52,11 +52,11 @@ class Database {
 	 *
 	 * @return string
 	 */
-	public static function getDataSourceName() : string {
-		return self::DB_DRIVER.":".
-			"host=".self::DB_SERVER.";".
-			"port=".self::DB_PORT.";".
-			"dbname=".self::DB_NAME.";".
+	public static function getDataSourceName(): string {
+		return self::DB_DRIVER . ":" .
+			"host=" . self::DB_SERVER . ";" .
+			"port=" . self::DB_PORT . ";" .
+			"dbname=" . self::DB_NAME . ";" .
 			"charset=utf8mb4";
 	}
 
@@ -65,28 +65,28 @@ class Database {
 	 *
 	 * @return array
 	 */
-	public static function getPdoAttributes() : array {
+	public static function getPdoAttributes(): array {
 		return [
-			// properly raise errors
+				// properly raise errors
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-			// return as column => value,
+				// return as column => value,
 			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 		];
 	}
 
 	/**
 	 * Get the database handler
-	 * 
+	 *
 	 * @return \PDO database handler
 	 */
-	public static function getDbh() : PDO {
+	public static function getDbh(): PDO {
 		if (!(self::$dbh instanceof PDO)) {
 			self::init();
 		}
 		return self::$dbh;
 	}
 
-	public static function getTotalQueryTime() : float {
+	public static function getTotalQueryTime(): float {
 		$stmt = self::getDbh()->query("show profiles");
 		if ($stmt === false) {
 			throw new Exception("Unable to calculate SQL debug information.");

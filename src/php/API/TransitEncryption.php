@@ -24,7 +24,7 @@ class TransitEncryption {
 		if (!is_null(self::$private)) {
 			return self::$private;
 		}
-		return self::$private = openssl_pkey_get_private(Secrets::RSA_PRIVATE);
+		return self::$private = openssl_pkey_get_private(Secrets::getRsaPrivate());
 	}
 
 	/**
@@ -35,7 +35,7 @@ class TransitEncryption {
 	 * @return string
 	 * @throws InvalidArgumentException $in is not decodable using the system's key
 	 */
-	public static function decryptRsa(string $in, bool $b64=true) : string {
+	public static function decryptRsa(string $in, bool $b64 = true): string {
 		$out = null;
 		if ($b64) {
 			$in = base64_decode($in);
@@ -61,13 +61,13 @@ class TransitEncryption {
 	 * @throws InvalidArgumentException Key(s) is/are not decodable using the system's key
 	 * @throws InvalidArgumentException JSON is invalid/not to spec
 	 */
-	public static function decryptAes(string $json) : string {
+	public static function decryptAes(string $json): string {
 		$json = json_decode($json, true);
 
 		if (!is_array($json)) {
 			throw new InvalidArgumentException("Invalid JSON");
 		}
-		
+
 		foreach (["aesKey", "aesIv", "cipherText"] as $prop) {
 			if (!array_key_exists($prop, $json) || !is_string($json[$prop])) {
 				throw new InvalidArgumentException("Invalid JSON");

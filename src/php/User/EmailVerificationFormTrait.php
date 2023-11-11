@@ -6,7 +6,7 @@ use \Catalyst\API\ErrorCodes;
 use \Catalyst\Form\CompletionAction\ConcreteRedirectCompletionAction;
 use \Catalyst\Form\Field\{AutocompleteValues, CaptchaField, StaticHTMLField, TextField};
 use \Catalyst\Form\Form;
-use \Catalyst\{Secrets,Tokens};
+use \Catalyst\{Secrets, Tokens};
 
 /**
  * Rmail verification form
@@ -14,11 +14,11 @@ use \Catalyst\{Secrets,Tokens};
 trait EmailVerificationFormTrait {
 	/**
 	 * Verifies an email address token
-	 * 
+	 *
 	 * See /EmailVerification
 	 * @return Form Form for verifying a new email
 	 */
-	public static function getEmailVerificationForm() : Form {
+	public static function getEmailVerificationForm(): Form {
 		$form = new Form();
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
@@ -35,9 +35,9 @@ trait EmailVerificationFormTrait {
 		$tokenField->setDistinguisher("token");
 		$tokenField->setLabel("Token");
 		$tokenField->setRequired(true);
-		if (!defined("NO_SESSION") && 
-		  array_key_exists("email_token", $_SESSION) && 
-		  preg_match('/'.Tokens::EMAIL_VERIFICATION_TOKEN_REGEX.'/', $_SESSION["email_token"])) {
+		if (!defined("NO_SESSION") &&
+			array_key_exists("email_token", $_SESSION) &&
+			preg_match('/' . Tokens::EMAIL_VERIFICATION_TOKEN_REGEX . '/', $_SESSION["email_token"])) {
 			$tokenField->setPrefilledValue($_SESSION["email_token"]);
 			$tokenField->setHelperText("This field was populated with the link from your e-mail!");
 		}
@@ -51,8 +51,8 @@ trait EmailVerificationFormTrait {
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
-		$captchaField->setSiteKey("6LdGBEEUAAAAAMHsFHz4BRvEnIq1NMuuU_Keo7nn");
-		$captchaField->setSecretKey(Secrets::EMAIL_VERIFICATION_CAPTCHA_SECRET);
+		$captchaField->setSiteKey(Secrets::get("EMAIL_VERIFICATION_CAPTCHA_SITE"));
+		$captchaField->setSecretKey(Secrets::get("EMAIL_VERIFICATION_CAPTCHA_SECRET"));
 		$form->addField($captchaField);
 
 		return $form;

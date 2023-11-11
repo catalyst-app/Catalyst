@@ -14,11 +14,11 @@ use \Catalyst\Secrets;
 trait RegisterFormTrait {
 	/**
 	 * Register form
-	 * 
+	 *
 	 * See /Register for form usage
 	 * @return Form Form for registering a new user
 	 */
-	public static function getRegisterForm() : Form {
+	public static function getRegisterForm(): Form {
 		$form = new Form();
 
 		$form->setDistinguisher(self::getDistinguisherFromFunctionName(__FUNCTION__)); // get-dash-case from camelCase
@@ -91,7 +91,7 @@ trait RegisterFormTrait {
 
 		$nsfwProfilePictureField = new CheckboxField();
 		$nsfwProfilePictureField->setDistinguisher("profile-picture-is-nsfw");
-		$nsfwProfilePictureField->setLabel("My profile picture is [explicit or mature](".ROOTDIR."FAQ/#explicit)");
+		$nsfwProfilePictureField->setLabel("My profile picture is [explicit or mature](" . ROOTDIR . "FAQ/#explicit)");
 		$nsfwProfilePictureField->setRequired(false);
 		$form->addField($nsfwProfilePictureField);
 
@@ -109,7 +109,7 @@ trait RegisterFormTrait {
 
 		$tosAcceptanceField = new CheckboxField();
 		$tosAcceptanceField->setDistinguisher("tos-acceptance");
-		$tosAcceptanceField->setLabel('I accept the [terms of service]('.ROOTDIR.'Help/TOS) and I agree to and understand the [privacy policy]('.ROOTDIR.'Help/Privacy)');
+		$tosAcceptanceField->setLabel('I accept the [terms of service](' . ROOTDIR . 'Help/TOS) and I agree to and understand the [privacy policy](' . ROOTDIR . 'Help/Privacy)');
 		$tosAcceptanceField->setRequired(true);
 		$form->addField($tosAcceptanceField);
 
@@ -128,8 +128,8 @@ trait RegisterFormTrait {
 		$captchaField = new CaptchaField();
 		$captchaField->setDistinguisher("captcha");
 		$captchaField->setRequired(true);
-		$captchaField->setSiteKey("6Lf7A0EUAAAAAM7naF_3NGWGVAxMUK-qPQABEdAl");
-		$captchaField->setSecretKey(Secrets::REGISTER_CAPTCHA_SECRET);
+		$captchaField->setSiteKey(Secrets::get("REGISTER_CAPTCHA_SITE"));
+		$captchaField->setSecretKey(Secrets::get("REGISTER_CAPTCHA_SECRET"));
 		$form->addField($captchaField);
 
 		return $form;
