@@ -5,8 +5,8 @@ namespace Catalyst;
 class Secrets {
 	public static function get(string $key): string {
 		// fetch from env
-		if (isset($_ENV[$key])) {
-			return $_ENV[$key];
+		if (getenv($key) !== false) {
+			return getenv($key);
 		}
 		throw new \LogicException("Unknown secret $key!");
 	}

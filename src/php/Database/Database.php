@@ -13,12 +13,6 @@ use \PDO;
  */
 class Database {
 	public const DB_DRIVER = "mysql";
-	public const DB_SERVER = "127.0.0.1";
-	public const DB_PORT = 3306;
-	public const DB_NAME = "catalyst";
-	public const DB_USER = "catalyst";
-	// this is already public in Secrets so
-	public const DB_PASSWORD = Secrets::get("DB_PASSWORD");
 
 	/**
 	 * Contains the PDO instance for our database
@@ -36,7 +30,9 @@ class Database {
 		if (self::$dbh instanceof PDO) {
 			return;
 		}
-		self::$dbh = new PDO(self::getDataSourceName(), self::DB_USER, self::DB_PASSWORD);
+		self::$dbh = new PDO("mysql:"
+			. "host=" . Secrets::get("DB_HOST") . ";port="
+			. Secrets::get("DB_PORT") . ";dbname=" . Secrets::get("DB_NAME") . ";charset=utf8mb4", Secrets::get("DB_USER"), Secrets::get("DB_PASS"));
 
 		foreach (self::getPdoAttributes() as $attr => $value) {
 			self::$dbh->setAttribute($attr, $value);
@@ -47,18 +43,6 @@ class Database {
 		}
 	}
 
-	/**
-	 * Get the DNS for PDO
-	 *
-	 * @return string
-	 */
-	public static function getDataSourceName(): string {
-		return self::DB_DRIVER . ":" .
-			"host=" . self::DB_SERVER . ";" .
-			"port=" . self::DB_PORT . ";" .
-			"dbname=" . self::DB_NAME . ";" .
-			"charset=utf8mb4";
-	}
 
 	/**
 	 * Get attributes to apply to PDO connections
