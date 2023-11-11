@@ -1,5 +1,0 @@
-#!/bin/bash
-
-mkdir -p $BACKUP_DIR"img/"$2
-rsync -avz --exclude '*_thumb.*' $1/* $BACKUP_DIR"img/"$2
-exit $?
