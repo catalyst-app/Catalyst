@@ -2,18 +2,16 @@
 
 namespace Catalyst\Database;
 
+use \BadMethodCallException;
 use \Catalyst\Database\Query\{SelectQuery, UpdateQuery};
 use \Catalyst\Database\QueryAddition\WhereClause;
-use \Catalyst\Images\{HasImageSetTrait, HasImageTrait};
-use \BadMethodCallException;
-use \Closure;
 use \InvalidArgumentException;
 use \Serializable;
 
 /**
- * Used by database models that need to get stuff 
+ * Used by database models that need to get stuff
  */
-abstract class AbstractDatabaseModel implements Serializable {
+abstract class AbstractDatabaseModel {
 	/**
 	 * The user's ID in the database
 	 * @var int
@@ -45,9 +43,9 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 * @param array $cache Prefilled cache
 	 * @param bool $prefetch If to prefetch data from DB
 	 */
-	public function __construct(int $id, array $cache=[], bool $prefetch=true) {
+	public function __construct(int $id, array $cache = [], bool $prefetch = true) {
 		$this->id = $id;
-		
+
 		if (!array_key_exists(static::class, self::$cache)) {
 			self::$cache[static::class] = [];
 		}
@@ -55,7 +53,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 			if ($prefetch) {
 				$row = self::getInitialData($id);
 				if ($row === false) {
-					throw new InvalidArgumentException("ID ".$id." does not exist in table ".static::getTable().".");
+					throw new InvalidArgumentException("ID " . $id . " does not exist in table " . static::getTable() . ".");
 				}
 				self::$cache[static::class][$this->id] = $row;
 			} else {
@@ -67,13 +65,13 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 	/**
 	 * Check if a given ID exists in the database.  If so, get prefilled data
-	 * 
+	 *
 	 * @param int $id
 	 * @return false|array
 	 */
 	public static function getInitialData(int $id) {
 		$stmt = new SelectQuery();
-		
+
 		$stmt->setTable(static::getTable());
 
 		$columns = static::getPrefetchColumns();
@@ -100,27 +98,27 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * Get list of columns to prefetch
 	 */
-	abstract public static function getPrefetchColumns() : array;
+	abstract public static function getPrefetchColumns(): array;
 
 	/**
 	 * Get the table in which the object's data is stored in
-	 * 
+	 *
 	 * @return string table name
 	 */
-	abstract public static function getTable() : string;
+	abstract public static function getTable(): string;
 
 	/**
 	 * Get the class' ID
-	 * 
+	 *
 	 * @return int
 	 */
-	public function getId() : int {
+	public function getId(): int {
 		return $this->id;
 	}
 
 	/**
 	 * Returns the column's value from the database
-	 * 
+	 *
 	 * @param string $column Column to get
 	 * @return mixed
 	 */
@@ -142,7 +140,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 	/**
 	 * Returns the column's value from the database
-	 * 
+	 *
 	 * @param string $column Column to get
 	 * @return mixed
 	 */
@@ -155,10 +153,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 	/**
 	 * Prefetch database columns we know we will be using
-	 * 
+	 *
 	 * @param string[] $columns Columns to get
 	 */
-	protected function prefetchColumns(array $columns) : void {
+	protected function prefetchColumns(array $columns): void {
 		$stmt = new SelectQuery();
 
 		$stmt->setTable(static::getTable());
@@ -181,7 +179,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 	/**
 	 * Returns the key's value from cache, or stores value based on callable
-	 * 
+	 *
 	 * @param string $key cache key
 	 * @param callable $callable
 	 * @return mixed
@@ -195,10 +193,10 @@ abstract class AbstractDatabaseModel implements Serializable {
 
 	/**
 	 * Remove a selected item from the internal cache
-	 * 
+	 *
 	 * @param string|null $toClear the item to remove, or null for all
 	 */
-	public function _clearCache(?string $toClear=null) : void {
+	public function _clearCache(?string $toClear = null): void {
 		$this->writeUpdates();
 		if (is_null($toClear)) {
 			self::$cache[static::class][$this->id] = [];
@@ -210,7 +208,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * Updates a column in the database
 	 */
-	protected function updateColumnInDatabase(string $column, $value, bool $writeImmediately=false) : void {
+	protected function updateColumnInDatabase(string $column, $value, bool $writeImmediately = false): void {
 		if ($writeImmediately) {
 			$stmt = new UpdateQuery();
 
@@ -238,7 +236,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * Write updates to the database
 	 */
-	public function writeUpdates() : void {
+	public function writeUpdates(): void {
 		if (empty($this->pendingUpdates)) {
 			return;
 		}
@@ -264,49 +262,43 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * Write the updates of all models pending updates
 	 */
-	public static function writeAllUpdates() : void {
+	public static function writeAllUpdates(): void {
 		foreach (self::$objectsPendingUpdates as $obj) {
 			$obj->writeUpdates();
 		}
 	}
 
-	/**
-	 * Requirements from Serializable interface, gets a string representation of the User
-	 * 
-	 * Currently, this is the ID.  If this is changed, some form of versioning/verification will be needed
-	 * @return string
-	 */
-	public function serialize() : string {
-		return serialize($this->id);
+	public function __serialize(): array {
+		return ["id" => $this->id];
 	}
 
 	/**
 	 * Unserialize the User object, called upon session loading
-	 * 
+	 *
 	 * @param string $data Serialized data
 	 */
-	public function unserialize($data) : void {
-		$id = unserialize($data);
+	public function __unserialize(array $data): void {
+		$id = $data["id"];
 
-		if (!is_numeric($id) || (int)$id != $id) {
+		if (!is_numeric($id) || (int) $id != $id) {
 			throw new InvalidArgumentException("Invalid serialized data");
 		}
-		
-		$this->id = (int)$id;
+
+		$this->id = (int) $id;
 
 		$row = self::getInitialData($this->id);
 
 		if ($row === false) {
-			throw new InvalidArgumentException("ID ".$this->id." does not exist in table ".static::getTable().".");
+			throw new InvalidArgumentException("ID " . $this->id . " does not exist in table " . static::getTable() . ".");
 		}
-		
+
 		if (!array_key_exists(static::class, self::$cache)) {
 			self::$cache[static::class] = [];
 		}
 		if (!array_key_exists($this->id, self::$cache[static::class])) {
 			self::$cache[static::class][$this->id] = $row;
 		}
-		
+
 		self::$cache[static::class][$this->id] = array_merge(self::$cache[static::class][$this->id], $row); // latter overwrites previous
 
 		$this->unserializeVerification();
@@ -315,7 +307,8 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * @throws InvalidArgumentException if there is an error
 	 */
-	protected function unserializeVerification() {}
+	protected function unserializeVerification() {
+	}
 
 	/**
 	 * Create a new object, CHECKS SHOULD BE MADE BY CLIENT
@@ -330,12 +323,12 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * @return array
 	 */
-	abstract public function getDeletedValues() : array;
+	abstract public function getDeletedValues(): array;
 
 	/**
 	 * Deletes the item (deletes images, deletes cache, fills row with deleted values)
 	 */
-	public function delete() : void {
+	public function delete(): void {
 		$this->additionalDeletion();
 
 		$this->_clearCache();
@@ -372,7 +365,8 @@ abstract class AbstractDatabaseModel implements Serializable {
 	/**
 	 * Can be overriden to allow for additional action to occur upon deletion
 	 */
-	protected function additionalDeletion() : void {}
+	protected function additionalDeletion(): void {
+	}
 
 	/**
 	 * Return an array of format
@@ -384,7 +378,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * @return array
 	 */
-	protected abstract static function getModifiableProperties() : array;
+	protected abstract static function getModifiableProperties(): array;
 
 	/**
 	 * dynamic getters and setters uwu
@@ -395,26 +389,26 @@ abstract class AbstractDatabaseModel implements Serializable {
 			$type = "get";
 			$name = substr($name, 3);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "is") === 0) {
 			$type = "is";
 			$name = substr($name, 2);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "set") === 0) {
 			$type = "set";
 			$name = substr($name, 3);
 			if (count($arguments) !== 1) {
-				throw new BadMethodCallException("Invalid number of parameters passed to ".__CLASS__."::".$name." - recieved ".count($arguments)." but expected 1.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 1.");
 			}
 		} else {
-			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+			throw new BadMethodCallException($name . " is not a method of " . __CLASS__);
 		}
 
 		if (!array_key_exists($name, static::getModifiableProperties())) {
-			throw new BadMethodCallException($name." is not a method of ".__CLASS__);
+			throw new BadMethodCallException($name . " is not a method of " . __CLASS__);
 		}
 
 		$methodDefinition = static::getModifiableProperties()[$name];
@@ -422,13 +416,13 @@ abstract class AbstractDatabaseModel implements Serializable {
 		if ($type == "get" || $type == "is") {
 			if (is_null($methodDefinition[1])) {
 				if ($type == "is") {
-					return (bool)$this->getColumnFromDatabaseOrCache($methodDefinition[0]);
+					return (bool) $this->getColumnFromDatabaseOrCache($methodDefinition[0]);
 				}
 				return $this->getColumnFromDatabaseOrCache($methodDefinition[0]);
 			} else {
-				return $this->getDataFromCallableOrCache("_custom_hander_".$methodDefinition[0], function() use ($type, $methodDefinition) {
+				return $this->getDataFromCallableOrCache("_custom_hander_" . $methodDefinition[0], function () use ($type, $methodDefinition) {
 					if ($type == "is") {
-						return (bool)call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
+						return (bool) call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
 					}
 					return call_user_func($methodDefinition[1], $this->getColumnFromDatabaseOrCache($methodDefinition[0]));
 				});
@@ -453,12 +447,12 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * Intended to be used in order to compare
 	 */
-	public function getSerializedStringFromModifiableProperties(array $properties) : string {
+	public function getSerializedStringFromModifiableProperties(array $properties): string {
 		$values = [];
 
 		foreach ($properties as $property) {
 			/** @var callable */
-			$func = [$this, "get".$property];
+			$func = [$this, "get" . $property];
 			$values[$property] = call_user_func($func);
 		}
 
@@ -470,7 +464,7 @@ abstract class AbstractDatabaseModel implements Serializable {
 	 *
 	 * @return string
 	 */
-	public function __toString() : string {
-		return get_class($this)."|".$this->getId();
+	public function __toString(): string {
+		return get_class($this) . "|" . $this->getId();
 	}
 }
