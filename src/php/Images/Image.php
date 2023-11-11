@@ -41,7 +41,7 @@ class Image {
 	 * Get the name of the file, if this image is the DIRECT result of an upload (from ::upload or ::uploadMultiple)
 	 * @var string
 	 */
-	protected $uploadName='';
+	protected $uploadName = '';
 
 	/**
 	 * Stores list of images to add to the thumbnailing queue on shutdown
@@ -51,7 +51,7 @@ class Image {
 
 	/**
 	 * Maximum size an image can be if it is pixel art
-	 * 
+	 *
 	 * _before any pixel artists yell at me_, I am NOT transforming the image
 	 * This is used to change browser rendering so it doesn't antialias
 	 */
@@ -59,20 +59,20 @@ class Image {
 
 	/**
 	 * Lenth of token used for midsection
-	 * 
+	 *
 	 * Changing this will require updating max length in database
 	 */
 	public const FILE_DISTINGUISHER_LENGTH = 10;
 
 	/**
 	 * Create a new object to represent an image
-	 * 
+	 *
 	 * @param string $folder Folder in which the image is contained
 	 * @param string $fileToken The parent object's file token
 	 * @param string|null $path The path to the image, or null if default
 	 * @param bool $nsfw If the image is mature or explicit
 	 */
-	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw=false, string $caption="") {
+	public function __construct(string $folder, string $fileToken, ?string $path, bool $nsfw = false, string $caption = "") {
 		if ($path == "default.png") {
 			$path = null; // BC
 		}
@@ -86,81 +86,81 @@ class Image {
 	/**
 	 * @return string
 	 */
-	public function getFolder() : string {
+	public function getFolder(): string {
 		return $this->folder;
 	}
 
 	/**
 	 * @param string $folder
 	 */
-	public function setFolder(string $folder) : void {
+	public function setFolder(string $folder): void {
 		$this->folder = $folder;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getToken() : string {
+	public function getToken(): string {
 		return $this->fileToken;
 	}
 
 	/**
 	 * @param string $fileToken
 	 */
-	public function setFileToken(string $fileToken) : void {
+	public function setFileToken(string $fileToken): void {
 		$this->fileToken = $fileToken;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getPath() : ?string {
+	public function getPath(): ?string {
 		return $this->path;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isNsfw() : bool {
+	public function isNsfw(): bool {
 		return $this->nsfw;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getCaption() : string {
+	public function getCaption(): string {
 		return $this->caption;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getUploadName() : string {
+	public function getUploadName(): string {
 		return $this->uploadName;
 	}
 
 	/**
 	 * @param string $uploadName
 	 */
-	protected function setUploadName(string $uploadName) : void {
+	protected function setUploadName(string $uploadName): void {
 		$this->uploadName = $uploadName;
 	}
 
 	/**
 	 * If the image is a default image
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function isDefault() : bool {
+	public function isDefault(): bool {
 		return is_null($this->getPath());
 	}
 
 	/**
 	 * Get the path to the image.  Uses ROOTDIR, not REAL_ROOTDIR
-	 * 
+	 *
 	 * @return string[][] Path to the image, as [type,path], last type most legacy
 	 */
-	public function getFullPaths() : array {
+	public function getFullPaths(): array {
 		if ($this->isNsfw() && !User::isCurrentUserNsfw()) {
 			return $this->getNsfwImagePaths();
 		}
@@ -169,14 +169,14 @@ class Image {
 		}
 		if (is_null($this->getPath())) {
 			return [
-				["image/svg+xml", ROOTDIR.$this->getFolder()."/"."default.svg"],
-				["image/webp", ROOTDIR.$this->getFolder()."/"."default.webp"],
-				["image/png", ROOTDIR.$this->getFolder()."/"."default.png"],
+				["image/svg+xml", ROOTDIR . $this->getFolder() . "/" . "default.svg"],
+				["image/webp", ROOTDIR . $this->getFolder() . "/" . "default.webp"],
+				["image/png", ROOTDIR . $this->getFolder() . "/" . "default.png"],
 			];
 		} else {
 			$result = [];
 			foreach ($this->getFilesystemPaths() as $path) {
-				$result[] = [$path[0], preg_replace('/'.preg_quote(REAL_ROOTDIR, '/').'/', ROOTDIR, $path[1], 1).""];
+				$result[] = [$path[0], preg_replace('/' . preg_quote(REAL_ROOTDIR, '/') . '/', ROOTDIR, $path[1], 1) . ""];
 			}
 			return $result;
 		}
@@ -184,24 +184,24 @@ class Image {
 
 	/**
 	 * Get the path to the fallback image.
-	 * 
+	 *
 	 * @return string Path to the fallback image
 	 */
-	public function getFullPath() : string {
+	public function getFullPath(): string {
 		$paths = array_values($this->getFullPaths());
-		return $paths[count($paths)-1][1];
+		return $paths[count($paths) - 1][1];
 	}
 
 	/**
 	 * Get the filesystem's path to the image (REAL_ROOTDIR, not ROOTDIR)
-	 * 
+	 *
 	 * @return string[][] FS paths to the image, as [type,path], last type most legacy
 	 */
-	public function getFilesystemPaths() : array {
+	public function getFilesystemPaths(): array {
 		if (is_null($this->getPath())) {
-			$path = REAL_ROOTDIR.$this->getFolder()."/"."default.png";
+			$path = REAL_ROOTDIR . $this->getFolder() . "/" . "default.png";
 		} else {
-			$path = REAL_ROOTDIR.$this->getFolder()."/".$this->getToken().$this->getPath();
+			$path = REAL_ROOTDIR . $this->getFolder() . "/" . $this->getToken() . $this->getPath();
 		}
 		// prevent warnings and shit
 		if (file_exists($path)) {
@@ -212,25 +212,25 @@ class Image {
 				];
 			} else {
 				$pathrev = strrev($path);
-				$pathbase = substr($pathrev, strpos($pathrev, ".")+1);
+				$pathbase = substr($pathrev, strpos($pathrev, ".") + 1);
 
 				if ($this->getFolder() == Folders::PLACEHOLDERS ||
-						$this->getFolder() == Folders::ABOUT_ICONS ||
-						$this->getFolder() == Folders::LOGO_WHITE ||
-						$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
+					$this->getFolder() == Folders::ABOUT_ICONS ||
+					$this->getFolder() == Folders::LOGO_WHITE ||
+					$this->getFolder() == Folders::INTEGRATION_ICONS) { // we're an SVG!
 					$result = [
-						["image/svg+xml", strrev("gvs.".$pathbase)],
-						["image/webp", strrev("pbew.".$pathbase)],
+						["image/svg+xml", strrev("gvs." . $pathbase)],
+						["image/webp", strrev("pbew." . $pathbase)],
 						[$mime, $path],
 					];
-					usort($result, function($a, $b) : int {
+					usort($result, function ($a, $b): int {
 						return filesize($a[1]) <=> filesize($b[1]);
 					});
 					return $result;
 				} else {
 					$result = [
-						["image/webp", strrev("pbew.bmuht_".$pathbase)],
-						["image/jpeg", strrev("gpj.bmuht_".$pathbase)],
+						["image/webp", strrev("pbew.bmuht_" . $pathbase)],
+						["image/jpeg", strrev("gpj.bmuht_" . $pathbase)],
 						[$mime, $path],
 					];
 
@@ -242,7 +242,7 @@ class Image {
 					if (!file_exists($result[1][1])) {
 						unset($result[1]);
 					}
-					usort($result, function($a, $b) : int {
+					usort($result, function ($a, $b): int {
 						return filesize($a[1]) <=> filesize($b[1]);
 					});
 					return $result;
@@ -255,49 +255,49 @@ class Image {
 
 	/**
 	 * Get the path to the [NSFW] notice
-	 * 
+	 *
 	 * @return string[][]
 	 */
-	public static function getNsfwImagePaths() : array {
+	public static function getNsfwImagePaths(): array {
 		return [
-			["image/svg+xml", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.svg'],
-			["image/webp", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.webp'],
-			["image/png", ROOTDIR.Folders::PLACEHOLDERS.'/nsfw.png'],
+			["image/svg+xml", ROOTDIR . Folders::PLACEHOLDERS . '/nsfw.svg'],
+			["image/webp", ROOTDIR . Folders::PLACEHOLDERS . '/nsfw.webp'],
+			["image/png", ROOTDIR . Folders::PLACEHOLDERS . '/nsfw.png'],
 		];
 	}
 
 	/**
 	 * Get the path to the image not found notice
-	 * 
+	 *
 	 * @return string[][]
 	 */
-	public static function getNotFoundPaths() : array {
+	public static function getNotFoundPaths(): array {
 		return [
-			["image/svg+xml", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.svg'],
-			["image/webp", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.webp'],
-			["image/png", ROOTDIR.Folders::PLACEHOLDERS.'/not_found.png'],
+			["image/svg+xml", ROOTDIR . Folders::PLACEHOLDERS . '/not_found.svg'],
+			["image/webp", ROOTDIR . Folders::PLACEHOLDERS . '/not_found.webp'],
+			["image/png", ROOTDIR . Folders::PLACEHOLDERS . '/not_found.png'],
 		];
 	}
 
 	/**
 	 * Get the FS path to the image not found notice
-	 * 
+	 *
 	 * @return string[][]
 	 */
-	public static function getNotFoundFilesystemPaths() : array {
+	public static function getNotFoundFilesystemPaths(): array {
 		return [
-			["image/svg+xml", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.svg'],
-			["image/webp", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.webp'],
-			["image/png", REAL_ROOTDIR.Folders::PLACEHOLDERS.'/not_found.png'],
+			["image/svg+xml", REAL_ROOTDIR . Folders::PLACEHOLDERS . '/not_found.svg'],
+			["image/webp", REAL_ROOTDIR . Folders::PLACEHOLDERS . '/not_found.webp'],
+			["image/png", REAL_ROOTDIR . Folders::PLACEHOLDERS . '/not_found.png'],
 		];
 	}
 
 	/**
 	 * Determine if the image is pixel art
-	 * 
+	 *
 	 * @return bool If the image is pixel art
 	 */
-	public function isPixelArt() : bool {
+	public function isPixelArt(): bool {
 		$img = $this->getFilesystemPaths()[0];
 		if (strpos($img[1], "_thumb") !== false && $img[0] !== "image/gif") {
 			// if its a thumbnail then it must NOT be pixel art, unless its a GIF, then we need to continue logic
@@ -315,13 +315,13 @@ class Image {
 
 	/**
 	 * Get the image's HTML as a strict circle
-	 * 
+	 *
 	 * @param string[] $additionalClasses Classes to add to the div
 	 * @param string[] $additionalStyles Styles to add to the div
 	 * @param string[] $additionalAttributes Attributes to add to the div
 	 * @return string HTML div.img-strict-circle representing the image
 	 */
-	public function getStrictCircleHtml(array $additionalClasses=[], array $additionalStyles=[], array $additionalAttributes=[]) : string {
+	public function getStrictCircleHtml(array $additionalClasses = [], array $additionalStyles = [], array $additionalAttributes = []): string {
 		$str = '';
 
 		$paths = $this->getFullPaths();
@@ -336,22 +336,22 @@ class Image {
 			$str .= " render-pixelated";
 		}
 		foreach (array_unique($additionalClasses) as $class) {
-			$str .= " ".htmlspecialchars($class);
+			$str .= " " . htmlspecialchars($class);
 		}
 		$str .= '"';
 		$str .= ' style="';
 		foreach ($additionalStyles as $key => $value) {
-			$str .= htmlspecialchars($key).":".htmlspecialchars($value).";";
+			$str .= htmlspecialchars($key) . ":" . htmlspecialchars($value) . ";";
 		}
 
-		$str .= 'background-image: url('.htmlspecialchars('"'.$paths[0][1].'"').');';
-		
+		$str .= 'background-image: url(' . htmlspecialchars('"' . $paths[0][1] . '"') . ');';
+
 		$str .= '"';
 
-		$str .= ' data-fallback-src="'.htmlspecialchars($paths[min(count($paths)-1, 1)][1]).'"';
+		$str .= ' data-fallback-src="' . htmlspecialchars($paths[min(count($paths) - 1, 1)][1]) . '"';
 
 		foreach ($additionalAttributes as $key => $value) {
-			$str .= ' '.htmlspecialchars($key).'="'.htmlspecialchars($value).'"';
+			$str .= ' ' . htmlspecialchars($key) . '="' . htmlspecialchars($value) . '"';
 		}
 		$str .= '></div>';
 		return $str;
@@ -359,11 +359,11 @@ class Image {
 
 	/**
 	 * Get the image as a <picture> element
-	 * 
+	 *
 	 * @param string[] $additionalClasses Classes to add to the tag
 	 * @return string HTML picture representing the image
 	 */
-	public function getImgElementHtml(array $additionalClasses=[]) : string {
+	public function getImgElementHtml(array $additionalClasses = []): string {
 		if ($this->isPixelArt()) {
 			$additionalClasses[] = "render-pixelated";
 		}
@@ -374,7 +374,7 @@ class Image {
 
 		$str .= '<picture';
 		if (count($additionalClasses)) {
-		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
+			$str .= ' class="' . htmlspecialchars(implode(" ", $additionalClasses)) . '"';
 		}
 		$str .= '>';
 
@@ -382,35 +382,35 @@ class Image {
 
 		foreach ($paths as $path) {
 			$str .= '<source';
-			$str .= ' srcset="'.htmlspecialchars($path[1]).'"';
-			$str .= ' type="'.htmlspecialchars($path[0]).'"';
+			$str .= ' srcset="' . htmlspecialchars($path[1]) . '"';
+			$str .= ' type="' . htmlspecialchars($path[0]) . '"';
 			if (Controller::isDevelMode() && file_exists($path[1])) { // file_exists because rel paths
-				$str .= ' data-size="'.filesize($path[1]).'"';
+				$str .= ' data-size="' . filesize($path[1]) . '"';
 			}
 			$str .= '>';
 		}
 
 		$paths = array_values($paths);
-		$fallbackPath = $paths[count($paths)-1];
-		
+		$fallbackPath = $paths[count($paths) - 1];
+
 		$str .= '<img'; // fallback for shit browsers >:/
-		$str .= ' src="'.htmlspecialchars($fallbackPath[1]).'"';
-		$str .= ' alt="'.htmlspecialchars($this->getFolder()).' path"';
+		$str .= ' src="' . htmlspecialchars($fallbackPath[1]) . '"';
+		$str .= ' alt="' . htmlspecialchars($this->getFolder()) . ' path"';
 		if (count($additionalClasses)) {
-		 	$str .= ' class="'.htmlspecialchars(implode(" ", $additionalClasses)).'"';
+			$str .= ' class="' . htmlspecialchars(implode(" ", $additionalClasses)) . '"';
 		}
 		$str .= ' />';
 
 		$str .= '</picture>';
-		
+
 		return $str;
 	}
 
 	/**
 	 * Render an image card with given parameters
-	 * 
+	 *
 	 * Makes use of getCardFromRawHtml
-	 * 
+	 *
 	 * @param string $title Card title
 	 * @param string|null $caption Card caption, will use getCaption() if null
 	 * @param bool $link If the card should link to something
@@ -419,7 +419,7 @@ class Image {
 	 * @param bool $sendNsfw If there should be anything returned if the card is nsfw
 	 * @return string the card html
 	 */
-	public function getCard(string $title="", ?string $caption=null, bool $link=false, ?string $linkPath=null, array $ribbon=[], bool $sendNsfw=false) : string {
+	public function getCard(string $title = "", ?string $caption = null, bool $link = false, ?string $linkPath = null, array $ribbon = [], bool $sendNsfw = false): string {
 		$html = '';
 
 		if (is_null($caption)) {
@@ -450,7 +450,7 @@ class Image {
 		if (count($ribbon) == 2) {
 			$ribbonHtml .= '<div';
 			$ribbonHtml .= ' class="ribbon"';
-			$ribbonHtml .= ' style="background-color: #'.$ribbon[0].'"';
+			$ribbonHtml .= ' style="background-color: #' . $ribbon[0] . '"';
 			$ribbonHtml .= '>';
 			$ribbonHtml .= htmlspecialchars($ribbon[1]);
 			$ribbonHtml .= '</div>';
@@ -461,14 +461,14 @@ class Image {
 
 	/**
 	 * Render an image card with raw HTML
-	 * 
+	 *
 	 * @param string $html HTML to use for the card
 	 * @param bool $link If the card should be a link or not
 	 * @param string|null $linkPath Null if the card should link to the image (default), or a link to link to
 	 * @param bool $sendNsfw If the card should still return html if the item is NSFW
 	 * @return string Card html
 	 */
-	public function getCardFromRawHtml(string $html, bool $link=false, ?string $linkPath=null, string $preHtml="", bool $sendNsfw=false) : string {
+	public function getCardFromRawHtml(string $html, bool $link = false, ?string $linkPath = null, string $preHtml = "", bool $sendNsfw = false): string {
 		if ($this->isNsfw() && !$sendNsfw && !User::isCurrentUserNsfw()) {
 			return '';
 		}
@@ -478,9 +478,9 @@ class Image {
 			$str .= '<a';
 			if (is_null($linkPath)) {
 				$str .= ' target="_blank"';
-				$str .= ' href="'.htmlspecialchars($this->getFullPath()).'"';
+				$str .= ' href="' . htmlspecialchars($this->getFullPath()) . '"';
 			} else {
-				$str .= ' href="'.htmlspecialchars($linkPath).'"';
+				$str .= ' href="' . htmlspecialchars($linkPath) . '"';
 			}
 		} else {
 			$str .= '<div';
@@ -503,7 +503,7 @@ class Image {
 			$str .= $html;
 			$str .= '</div>';
 		}
-		
+
 		if ($link) {
 			$str .= '</a>';
 		} else {
@@ -516,7 +516,7 @@ class Image {
 	/**
 	 * Delete the image from disk (won't work for default)
 	 */
-	public function delete() : void {
+	public function delete(): void {
 		if (!is_null($this->getPath())) {
 			if ($this->getFilesystemPaths() != self::getNotFoundFilesystemPaths()) { // image not found
 				foreach ($this->getFilesystemPaths() as $fsPath) {
@@ -534,15 +534,15 @@ class Image {
 	/**
 	 * Write the pending operation queues (currently only thumbnailing)
 	 */
-	public static function writePendingOperationQueues() : void {
+	public static function writePendingOperationQueues(): void {
 		self::writeThumbnailQueue();
 	}
 
 	/**
 	 * Write the thumbnail queue to database to be processed later by a job
 	 */
-	public static function writeThumbnailQueue() : void {
-		self::$pendingThumbnailQueue = array_filter(self::$pendingThumbnailQueue, function(self $in) : bool {
+	public static function writeThumbnailQueue(): void {
+		self::$pendingThumbnailQueue = array_filter(self::$pendingThumbnailQueue, function (self $in): bool {
 			return !is_null($in->getPath());
 		});
 
@@ -570,7 +570,7 @@ class Image {
 	/**
 	 * Inserts the image into the queue to be thumbnailed
 	 */
-	public function queueForThumbnailing() : void {
+	public function queueForThumbnailing(): void {
 		if ($this->getFilesystemPaths() == $this->getNotFoundFilesystemPaths() || is_null($this->getPath())) {
 			return;
 		}
@@ -580,14 +580,14 @@ class Image {
 
 	/**
 	 * Upload an image to the server with the given parameters
-	 * 
+	 *
 	 * @param null|array $image An uploaded image object, from the $_FILES array
 	 * @param string $folder Folder to place the uploaded image
 	 * @param string $fileToken Token to use for the new image
 	 * @return null|self The newly uploaded image, or null on failure
 	 */
-	public static function upload(?array $image, string $folder, string $fileToken) : ?self {
-		if (is_null($image) || !array_key_exists("error",$image) || $image["error"] !== 0) {
+	public static function upload(?array $image, string $folder, string $fileToken): ?self {
+		if (is_null($image) || !array_key_exists("error", $image) || $image["error"] !== 0) {
 			return null;
 		}
 
@@ -597,17 +597,17 @@ class Image {
 			return null;
 		}
 
-		$suffix = ".".MIMEType::getExtensionFromMime($mime);
+		$suffix = "." . MIMEType::getExtensionFromMime($mime);
 
 		$middle = Tokens::generateToken(self::FILE_DISTINGUISHER_LENGTH);
 
-		while (file_exists(REAL_ROOTDIR.$folder."/".$fileToken.$middle.$suffix)) {
+		while (file_exists(REAL_ROOTDIR . $folder . "/" . $fileToken . $middle . $suffix)) {
 			$middle = Tokens::generateToken(self::FILE_DISTINGUISHER_LENGTH);
 		}
 
-		move_uploaded_file($image["tmp_name"], REAL_ROOTDIR.$folder."/".$fileToken.$middle.$suffix);
+		move_uploaded_file($image["tmp_name"], REAL_ROOTDIR . $folder . "/" . $fileToken . $middle . $suffix);
 
-		$obj = new self($folder, $fileToken, $middle.$suffix);
+		$obj = new self($folder, $fileToken, $middle . $suffix);
 		$obj->setUploadName($image["name"]);
 
 		$obj->queueForThumbnailing();
@@ -617,14 +617,14 @@ class Image {
 
 	/**
 	 * Upload a set of images to the server with the given parameters
-	 * 
+	 *
 	 * @param array[] $images An uploaded images object, from the $_FILES array, should have multiple
 	 * @param string $folder Folder to place the uploaded image
 	 * @param string $fileToken Token to use for the new image
 	 * @return self[] The newly uploaded image, or null on failure
 	 */
-	public static function uploadMultiple(array $images, string $folder, string $fileToken) : array {
-		if (!array_key_exists("error",$images) || !is_array($images["error"])) {
+	public static function uploadMultiple(array $images, string $folder, string $fileToken): array {
+		if (!array_key_exists("error", $images) || !is_array($images["error"])) {
 			$upload = self::upload($images, $folder, $fileToken);
 			if (is_null($upload)) {
 				return [];
@@ -635,7 +635,7 @@ class Image {
 
 		$arr = [];
 
-		for ($i=0; $i < count($images["error"]); $i++) { 
+		for ($i = 0; $i < count($images["error"]); $i++) {
 			$image = [];
 			foreach ($images as $key => $value) {
 				$image[$key] = $value[$i];
@@ -648,54 +648,19 @@ class Image {
 
 	/**
 	 * Get the image for a new {item}
-	 * 
+	 *
 	 * @return self
 	 */
-	public static function getNewItemImage() : self {
+	public static function getNewItemImage(): self {
 		return new self(Folders::PLACEHOLDERS, "", "new.png", false);
 	}
 
 	/**
 	 * Get the main logo
-	 * 
+	 *
 	 * @return self
 	 */
-	public static function getLogoImage() : self {
+	public static function getLogoImage(): self {
 		return new self(Folders::LOGO_WHITE, "", "logo.png", false);
-	}
-
-	/**
-	 * Get the images of fauxil and lykai for the unimplemented page
-	 * 
-	 * @return self[]
-	 */
-	public static function getUnimplementedImages() : array {
-		$images = [
-			"computer",
-			"e621",
-			"game",
-			"ok",
-			"original",
-			"other",
-			"so",
-		];
-		$fauxImage = $images[array_rand($images)];
-		if ($fauxImage == "e621") {
-			$fauxImage .= "_".random_int(1, 3);
-		}
-		if ($fauxImage == "other") {
-			$lykaiImage = "other";
-		} else {
-			do {
-				$lykaiImage = $images[array_rand($images)];
-			} while ($lykaiImage == "other"); // only show other if both are other
-			if ($lykaiImage == "e621") {
-				$lykaiImage .= "_".random_int(1, 3);
-			}
-		}
-		return [
-			new self(Folders::UNIMPLEMENTED_MEMES_FAUXIL, $fauxImage, ".png", false),
-			new self(Folders::UNIMPLEMENTED_MEMES_LYKAI, $lykaiImage, ".png", false),
-		];
 	}
 }
