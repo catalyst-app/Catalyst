@@ -7,22 +7,27 @@ use \Catalyst\Artist\{
 	CreateArtistPageFormTrait,
 	EditArtistPageFormTrait,
 	DeleteArtistPageFormTrait,
-	UndeleteArtistPageFormTrait};
+	UndeleteArtistPageFormTrait
+};
 use \Catalyst\Character\{
 	Character,
 	DeleteCharacterFormTrait,
 	EditCharacterFormTrait,
-	NewCharacterFormTrait};
+	NewCharacterFormTrait
+};
 use \Catalyst\CommissionType\{
 	DeleteCommissionTypeFormTrait,
 	EditCommissionTypeFormTrait,
-	NewCommissionTypeFormTrait};
+	NewCommissionTypeFormTrait
+};
 use \Catalyst\Form\{
 	Form,
-	TestFormTrait};
+	TestFormTrait
+};
 use \Catalyst\Integrations\{
 	SocialMedia,
-	SocialMediaAdditionFormsTrait};
+	SocialMediaAdditionFormsTrait
+};
 use \Catalyst\User\{
 	DeactivateFormTrait,
 	EmailListFormTrait,
@@ -31,33 +36,34 @@ use \Catalyst\User\{
 	RegisterFormTrait,
 	SettingsFormTrait,
 	TOTPLoginFormTrait,
-	User};
+	User
+};
 use \Exception;
 use \ReflectionClass;
 
 /**
  * Simply a repository of forms for the site.
- * 
- * Methods should not be defomed in this file, but in traits which are used here
+ *
+ * Methods should not be defined in this file, but in traits which are used here
  * @deprecated
  */
 class FormRepository {
 	/**
 	 * Get a distinguisher from __FUNCTION__ (convert to dash case and remove get)
-	 * 
+	 *
 	 * I like this method as it ensures unique names (you can't redefine a function!)
 	 * (ok lets be honest this is php you can fucking redefine constants but whatever)
-	 * 
+	 *
 	 * @param string $in Function name to get a distinguisher from
 	 * @return string Dash-case formatted distinguisher
 	 */
-	public static function getDistinguisherFromFunctionName(string $in) : string {
+	public static function getDistinguisherFromFunctionName(string $in): string {
 		// remove get
 		$withoutGet = preg_replace('/^get/', '', $in);
 		// convert to dash-case
-		$toDashCase = preg_replace('/([a-z])([A-Z])/', '\1-\2', $withoutGet."");
+		$toDashCase = preg_replace('/([a-z])([A-Z])/', '\1-\2', $withoutGet . "");
 		// force lowercase
-		return strtolower($toDashCase."");
+		return strtolower($toDashCase . "");
 	}
 
 	use EmailListFormTrait;
@@ -89,7 +95,7 @@ class FormRepository {
 	 * Get all Forms functions defined in the repository
 	 * @return Form[] All forms in the repository
 	 */
-	public static function getAllForms() : array {
+	public static function getAllForms(): array {
 		$reflectedClass = new ReflectionClass(__CLASS__);
 		$classMethods = $reflectedClass->getMethods();
 
@@ -102,7 +108,7 @@ class FormRepository {
 		foreach ($classMethods as $method) {
 			$returnType = $method->getReturnType();
 			if (is_null($returnType)) {
-				throw new Exception("Unable to aggregate ".$method." in FormRepository");
+				throw new Exception("Unable to aggregate " . $method . " in FormRepository");
 			}
 			if ($returnType->getName() == Form::class) {
 				/** @var callable */
