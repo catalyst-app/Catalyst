@@ -168,7 +168,7 @@ foreach ($resources as $resource) {
 	$resource->setLatestVersion(substr($output[0], 0, 40));
 	if ($i) {
 		logStr("Complaining to Discord");
-		file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BACKUP_WEBHOOK_TOKEN"), false, stream_context_create([
+		file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BUG_WEBHOOK_TOKEN"), false, stream_context_create([
 			"http" => [
 				"method" => "POST",
 				"ignore_errors" => true,
@@ -217,7 +217,7 @@ array_map("logStr", $output);
 
 if (!empty(array_filter($output))) {
 	logStr("Complaining to discord about composer");
-	file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BACKUP_WEBHOOK_TOKEN"), false, stream_context_create([
+	file_get_contents("https://discordapp.com/api/webhooks/" . Secrets::get("DISCORD_BUG_WEBHOOK_TOKEN"), false, stream_context_create([
 		"http" => [
 			"method" => "POST",
 			"ignore_errors" => true,

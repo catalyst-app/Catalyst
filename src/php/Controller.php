@@ -9,11 +9,9 @@ use \Catalyst\HTTPCode;
 use \Catalyst\Images\{DBImage, Image};
 use \Catalyst\Page\{UniversalFunctions, Values};
 use \Exception;
-use \LogicException;
 use \PDO;
 use \ReflectionClass;
 use \Throwable;
-use \WhichBrowser\Parser;
 
 /**
  * Generic controller which handles things like error logging, autoloading, etc.
@@ -109,23 +107,20 @@ class Controller {
 	 */
 	public static function sendErrorNotice(string $subj, string $errco, int $errno, string $errstr, string $errfile, int $errline, string $trackingId): void {
 		ob_start();
-		$destinations = [];
-		if (!array_key_exists("SERVER_NAME", $_SERVER) || $_SERVER["SERVER_NAME"] == "localhost") { // default to local reporting
-			$destinations = ["discord", "email", "telegram"];
-		} else {
-			$destinations = ["discord", "email", "telegram"];
+		$destinations = ["email"];
+
+		if (Secrets::isset("DISCORD_BUG_WEBHOOK_TOKEN")) {
+			$destinations[] = "discord";
+		}
+		if (Secrets::isset("TELEGRAM_TOKEN")) {
+			$destinations[] = "telegram";
 		}
 
 		$ua = "unknown";
 		if (php_sapi_name() == "cli") {
 			$ua = "CLI";
 		} else {
-			$ua = [new Parser(getallheaders()), new Parser(getallheaders(), ['detectBots' => false])];
-			if ($ua[0]->toString() == $ua[1]->toString()) {
-				$ua = $ua[0]->toString();
-			} else {
-				$ua = $ua[0]->toString() . " (pretending to be " . $ua[1]->toString() . ")";
-			}
+			$ua = getallheaders()["User-Agent"] ?? "unknown";
 		}
 
 		if (in_array("email", $destinations)) {
@@ -478,7 +473,7 @@ class Controller {
 	 * Check that Secrets exists and contains what it should
 	 */
 	public static function verifySecretsIntegrity(): void {
-		foreach (["DB_PASSWORD", "NO_REPLY_PASSWORD", "ERROR_LOG_PASSWORD", "LOGIN_CAPTCHA_SECRET", "REGISTER_CAPTCHA_SECRET", "EMAIL_VERIFICATION_CAPTCHA_SECRET", "EMAIL_LIST_CAPTCHA_SECRET", "DISCORD_BACKUP_WEBHOOK_TOKEN", "PATREON_CLIENT_SECRET", "PATREON_ACCESS_TOKEN", "DISCORD_BUG_WEBHOOK_TOKEN", "TELEGRAM_TOKEN", "TELEGRAM_CHAT", "EMAIL_LIST_CAPTCHA_SITE", "EMAIL_VERIFICATION_CAPTCHA_SITE", "LOGIN_CAPTCHA_SITE", "REGISTER_CAPTCHA_SITE", "SMTP_SERVER", "SMTP_PORT"] as $key) {
+		foreach (["DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASS", "NO_REPLY_PASSWORD", "ERROR_LOG_PASSWORD", "LOGIN_CAPTCHA_SECRET", "REGISTER_CAPTCHA_SECRET", "EMAIL_VERIFICATION_CAPTCHA_SECRET", "EMAIL_LIST_CAPTCHA_SECRET", "EMAIL_LIST_CAPTCHA_SITE", "EMAIL_VERIFICATION_CAPTCHA_SITE", "LOGIN_CAPTCHA_SITE", "REGISTER_CAPTCHA_SITE", "SMTP_SERVER", "SMTP_PORT"] as $key) {
 			Secrets::get($key);
 		}
 

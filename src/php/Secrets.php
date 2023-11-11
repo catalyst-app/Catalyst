@@ -11,6 +11,10 @@ class Secrets {
 		throw new \LogicException("Unknown secret $key!");
 	}
 
+	public static function isset(string $key): bool {
+		return getenv($key) !== false;
+	}
+
 	public static function getRsaPublic(): string {
 		return file_get_contents(REAL_ROOTDIR . "keys/key.pub");
 	}
