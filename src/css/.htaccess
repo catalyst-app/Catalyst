@@ -1,6 +1,0 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^color-([a-z0-9]{6}).css$ color.css?hex=$1 [NC,L]
-
-Header always set Content-Type text/css

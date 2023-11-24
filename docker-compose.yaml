@@ -1,0 +1,14 @@
+services:
+  catl:
+    image: catl
+    container_name: catl
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./keys:/var/www/catalyst/keys"
+      - "./external_assets:/var/www/catalyst/external_assets"
+    environment:
+      - DB_HOST=100.118.210.80
+      - DB_USER=postgres
+      - DB_PASS=postgres
+#    entrypoint: /bin/sh

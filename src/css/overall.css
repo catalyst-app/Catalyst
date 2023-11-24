@@ -1,7 +1,3 @@
-<?php
-header("Content-Type: text/css; charset=UTF-8", true);
-header("Cache-Control: max-age=259200", true); // 3 days
-?>
 html, body {
 	font-display: swap;
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
