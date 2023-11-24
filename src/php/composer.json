@@ -1,7 +1,6 @@
 {
   "require": {
-    "phpmailer/phpmailer": "*",
-    "pguardiario/phpuri": "*"
+    "phpmailer/phpmailer": "*"
   },
   "require-dev": {
     "mrclay/minify": "*"

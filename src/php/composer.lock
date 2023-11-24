@@ -4,36 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a34de737d893fe0f88a8c05bbe6a4a6",
+    "content-hash": "d5c0d0891852c77f66018c3c4adab373",
     "packages": [
-        {
-            "name": "pguardiario/phpuri",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/monkeysuffrage/phpuri.git",
-                "reference": "ad0a5ec033fe616cfef55578b9c7f2458be8fbfc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/monkeysuffrage/phpuri/zipball/ad0a5ec033fe616cfef55578b9c7f2458be8fbfc",
-                "reference": "ad0a5ec033fe616cfef55578b9c7f2458be8fbfc",
-                "shasum": ""
-            },
-            "type": "project",
-            "autoload": {
-                "files": [
-                    "phpuri.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "A php library for converting relative urls to absolute.",
-            "support": {
-                "issues": "https://github.com/monkeysuffrage/phpuri/issues",
-                "source": "https://github.com/monkeysuffrage/phpuri/tree/1.0.0"
-            },
-            "time": "2015-05-24T09:13:17+00:00"
-        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.8.1",
