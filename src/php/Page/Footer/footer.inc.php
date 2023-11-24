@@ -14,11 +14,7 @@ use \Catalyst\Page\{Resource, UniversalFunctions};
 					View our <a href="<?= ROOTDIR ?>Help/ToS">Terms of Service</a> or <a href="<?= ROOTDIR ?>Help/Privacy">Privacy Policy</a>
 				</p>
 				<p>
-					Version: <?= Controller::getVersion() ?> (<?= Controller::getCommit() ?>)
-					<?php if (Controller::isDevelMode()): ?>
-						<?php chdir(realpath(REAL_ROOTDIR)); // reset dir for proper git usage ?>
-						<?= htmlspecialchars(`git log -1 --pretty="%B by %cN %cr"`) ?>
-					<?php endif; ?>
+					Version: rip
 				</p>
 				<?php if (Controller::isDevelMode()): ?>
 					<p>

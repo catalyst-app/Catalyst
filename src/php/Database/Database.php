@@ -30,8 +30,7 @@ class Database {
 		if (self::$dbh instanceof PDO) {
 			return;
 		}
-		self::$dbh = new PDO("mysql:"
-			. "host=" . Secrets::get("DB_HOST") . ";port="
+		self::$dbh = new PDO("mysql:host=" . Secrets::get("DB_HOST") . ";port="
 			. Secrets::get("DB_PORT") . ";dbname=" . Secrets::get("DB_NAME") . ";charset=utf8mb4", Secrets::get("DB_USER"), Secrets::get("DB_PASS"));
 
 		foreach (self::getPdoAttributes() as $attr => $value) {
