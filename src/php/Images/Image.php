@@ -169,14 +169,14 @@ class Image {
 		}
 		if (is_null($this->getPath())) {
 			return [
-				["image/svg+xml", ROOTDIR . $this->getFolder() . "/" . "default.svg"],
-				["image/webp", ROOTDIR . $this->getFolder() . "/" . "default.webp"],
-				["image/png", ROOTDIR . $this->getFolder() . "/" . "default.png"],
+				["image/svg+xml", "/" . $this->getFolder() . "/" . "default.svg"],
+				["image/webp", "/" . $this->getFolder() . "/" . "default.webp"],
+				["image/png", "/" . $this->getFolder() . "/" . "default.png"],
 			];
 		} else {
 			$result = [];
 			foreach ($this->getFilesystemPaths() as $path) {
-				$result[] = [$path[0], preg_replace('/' . preg_quote(REAL_ROOTDIR, '/') . '/', ROOTDIR, $path[1], 1) . ""];
+				$result[] = [$path[0], preg_replace('/' . preg_quote(REAL_ROOTDIR, '/') . '/', "/", $path[1], 1) . ""];
 			}
 			return $result;
 		}

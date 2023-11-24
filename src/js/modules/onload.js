@@ -229,16 +229,6 @@ var humanFileSize = function(size) {
 
 		/* ABOUT PAGE INTERACTIVE TERMS */
 		<?php require_once __DIR__.DIRECTORY_SEPARATOR.'about_page_interactive_terms.js'; ?>
-
-		if (window.devMode) {
-			$(document).on("click", ".brand-logo", function(e) {
-				e.preventDefault();
-
-				$("head").append($("<link></link>").attr("rel", "stylesheet").attr("href", $("html").attr("data-rootdir")+"css/color-"+prompt("Input color: ")+".css?"+Date.now()));
-
-				return false;
-			});
-		}
 	});
 })(jQuery);
 

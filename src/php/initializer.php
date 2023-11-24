@@ -41,15 +41,13 @@ if (!session_id() && !defined("NO_SESSION")) {
 	ini_set("session.gc_maxlifetime", 24*60*60);
 	ini_set("session.cookie_lifetime", 24*60*60);
 	ini_set("session.cookie_httponly", true);
-	if (array_key_exists("SERVER_NAME", $_SERVER) && $_SERVER["SERVER_NAME"] != "localhost") {
-		ini_set("session.cookie_secure", true);
-	}
+	ini_set("session.cookie_secure", false);
 	session_start([
 		"name" => "catalyst",
 		"gc_maxlifetime" => 24*60*60,
 		"cookie_lifetime" => 24*60*60,
 		"cookie_httponly" => true,
-		"cookie_secure" => array_key_exists("SERVER_NAME", $_SERVER) && $_SERVER["SERVER_NAME"] != "localhost",
+		"cookie_secure" => false,
 	]);
 }
 
