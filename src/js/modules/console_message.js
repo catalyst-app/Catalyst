@@ -1,21 +1,6 @@
-<?php
-header("Content-Type: application/javascript; charset=UTF-8", true);
-
-define("ROOTDIR", "../../../");
-define("REAL_ROOTDIR", "../../../");
-
-define("NO_SESSION", true);
-
-require_once REAL_ROOTDIR."src/php/initializer.php";
-
-use \Catalyst\Controller;
-?>
-// dont tell toish but i actually kinda like JS
-// its neat and fairly powerful, plus the community seems really neat
-// but dont you dare try to run it on the server
 console.log("'''''''''''''''''''''''''''''''';''''';'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("'''''''''''''''''''''''''''',,',:0Od;':,''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
-console.log("''''''''''''''''''''''''',0MMMMMMMMMMW0:''''''''''''v<?= Controller::getVersion() ?> (<?= Controller::getCommit() ?>)<?= str_repeat("'", 37-strlen(Controller::getVersion())) ?>");
+console.log("''''''''''''''''''''''''',0MMMMMMMMMMW0:''''''''''''rip'''''''''''''''''''''''''''''''''''''''''''''");
 console.log("'''''''''''''''''''''',oOWMMMMMMMMMMMMMWkl'';;,'''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("''''''''''''''''''''cOMMMMMMMMMMMMMMMMMMMM0',,''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("''''''''''''''''''lKMMMMMMMMMMMMMMMMMMMMMMk',,''''''''''''''''''''''''''''''''''''''''''''''''''''''");
@@ -44,9 +29,4 @@ console.log("'''''''''''''''''''''cxXMMMMMMMMMMMMMMMXkc'''',;::;''''''''''''''''
 console.log("'''''''''''''''''''''''',:loxxkkkxxdl:,'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
 console.log("'''''''''''''''''''''' *notices you looking in the console* OwO what's this? '''''''''''''''''''''''");
-console.log("'''''''''''''''''''''''''' Do you like to code?  Want to talk about code? ''''''''''''''''''''''''''");
-console.log("'''''''''''''''''''''''' Join us at discord.gg/EECUcnT or t.me/catalystapp '''''''''''''''''''''''''");
-console.log("''''''''''''''''''''' We're also open source! github.com/catalyst-app/Catalyst '''''''''''''''''''''");
 console.log("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
-
-window.log("console_message", "main - Message displayed");
