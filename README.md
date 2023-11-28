@@ -1,85 +1,60 @@
 # Catalyst - Facilitating Commissions
 
-# Table of Contents
-
-- [Introduction](#introduction)
-  - [Short Blurb](#short-blurb)
-  - [Mission](#mission)
-  - [What Sets us Apart](#what-sets-us-apart)
-- [How you can Help](#how-you-can-help)
-- [Roadmap](#roadmap)
-- [Known Bugs](#known-bugs)
-- [Feature List](#feature-list)
-- [Basic Features](#basic-features)
-- [Additional Features](#additional-features)
-- [Potential Optimizations](#potential-optimizations)
-- [Contact Me](#contact-me)
-- [Special Thanks](#special-thanks)
-
-# Introduction
-
-## Short Blurb
-
 Catalyst served to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more.
 
-## What Sets us Apart
+Unfortunately, we have decided to shut down the project.  Hopefully someone else will revolutionize this space in the future!
 
-We are aware that there are many current and planned competitors to us.  However, we plan to provide an excellent service in a way no one else does with some of the following features:
+Thanks to everyone who helped; we had a good run.
 
-* Easy to search system
-* Responsive, mobile-friendly interface
-* Messages on various events such as opening of commissions
-* Message delivery to E-Mail
-* **No social media aspect** - this allows for us to focus on what matters and cut the crap
-* Easy integration with other social networks
-* Character management
-* No fees
-* And much more!
+## Running Locally
 
-# How you can Help
+Since this project is open-source, you are welcome to fork this project and run it locally for yourself.  However, please be aware that the ecosystem is quite complex and we provide no warranty nor maintenance.
 
-Follow us!  I ask for help often in the Discord and Telegram!
+We provide a Docker image for running the project locally.  To build it, use the following:
 
-- Discord: https://discord.gg/EECUcnT
-- Telegram: https://t.me/catalystapp and https://t.me/catalystapp_announcements
-- Twitter: https://twitter.com/catalystapp_co
-- Patreon: https://patreon.com/catalyst
-- Ko-Fi: https://ko-fi.com/catalystapp
-- Instagram: https://instagram.com/catalyst.app
-- DeviantArt: https://catalystapp.deviantart.com/
-- Weasyl: https://weasyl.com/~catalystapp/
-- Fur Affinity: http://furaffinity.net/user/catalystapp
-- FurryNetwork: https://beta.furrynetwork.com/catalyst/
-- Google Plus: https://plus.google.com/102762464787584663279
-- Reddit: https://reddit.com/user/catalystapp
-- Tumblr: https://catalystapp-co.tumblr.com/
-- Facebook: https://facebook.com/catalystapp.co
-- GitHub: https://github.com/catalyst-app/Catalyst
-- Email: catalyst@catalystapp.co
+```sh
+docker build -t catalyst .
+```
 
-# Feature List
+This container exposes port `8080` and requires a few volumes:
 
-* Easy to find artists and their listings
-* Artist and user profiles will contain social media information, including streaming indication
-* Searchable artist profiles with simple formatting (colors, markdown)
-* Examples!  Lots of examples for you to gaze upon before you commission!
-* Reviews - commissioners can leave an anonymous rating/comment
-  * Additionally, you can view recent commissioners and contact them to ask about their experience
-* Characters
-  * Easily create a profile for your character full of art, refs, bio, etc and share it with an artist!
-* Commission management - easily keep track of commissions and their status, possibly with trello integration
-* Intuitive, simple design which is fully mobile-friendly!
-* Strong security - two factor authentication and constant verifications site-wide
+- `/var/www/catalyst/keys`
+  - You must generate a RSA private and public keypair using the following:
+        ```sh
+        openssl genrsa -des3 -out key.pem 4096 # any password will do
+        openssl rsa -in key.pem -out private.pem -outform PEM
+        openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+        ```
 
-# Known Bugs
-# Basic Feature List
-# Additional Features
+  - Then, place the private key, including the `------BEGIN...` and `END`, in a file `key.pem`;
+  - Finally, place the contents of public.pem, **without** the `------BEGIN...` and `END`, into `key.pub`
 
-See our [Trello](https://trello.com/b/X37KEv4A/catalyst) for a general idea!  However, we now use [Conveyor](https://conveyor.com) for real management so the Trello may be inconsistent, inaccurate, or otherwise outdated.
+Finally, there are **many** environment variables:
 
-# Developer Notes
+- Database configuration:
+  - `DB_HOST` default `mariadb`
+  - `DB_PORT` default `3306`
+  - `DB_USER` default `mariadb`
+  - `DB_PASS` default `mariadb`
+  - `DB_NAME` default `catalyst`
+- Communication:
+  - `NO_REPLY_PASSWORD` is the password for email `no-reply@catalystapp.co` (hardcoded in `Email` class)
+  - `SMTP_SERVER` default localhost
+  - `SMTP_PORT` default 1234
+- CAPTCHAs
+  - All of these will not have any effect unless the site is moved out of development mode, which is currently not supported.
+  - These are only kept for legacy reasons. All CAPTCHAs shown will say "for development only" and not provide any protection.
+  - `EMAIL_LIST_CAPTCHA_SITE`, `EMAIL_LIST_CAPTCHA_SECRET`
+  - `EMAIL_VERIFICATION_CAPTCHA_SITE`, `EMAIL_VERIFICATION_CAPTCHA_SECRET`
+  - `LOGIN_CAPTCHA_SITE`, `LOGIN_CAPTCHA_SECRET`
+  - `REGISTER_CAPTCHA_SITE`, `REGISTER_CAPTCHA_SECRET`
+- Error logging
+  - `ERROR_LOG_PASSWORD` is the password for email `error_logs@catalystapp.co` (hardcoded in `Email` class)
+  - `DISCORD_BUG_WEBHOOK_TOKEN` allows sending error messages to Discord, should be format `channel-id/token`
+  - `TELEGRAM_CHAT` and `TELEGRAM_TOKEN` allows sending error messages to Telegram; should be a chat ID and a bot token respectively
 
-This project adheres to PSR-1 and PSR-2 with the following exceptions:
-- Indentation is a tab, not spaces,
-- Opening braces go on the same line, and
-- Closure `function` keywords must not have a space following them.
+For simplicity, we provide a starter `docker-compose.yaml` which will startup a database.  For this, you should only need to set environment variables `MARIADB_ROOT_PASSWORD` and `DB_PASSWORD`, both of which can be random values.
+
+Please note that no SSL or security is provided in this docker compose configuration; **you must use a reverse proxy** like Traefik to provide SSL and other important features.  Additionally, this configuration exposes port 8081 as a database management interface; **you must not expose this port to the internet**.
+
+If you want to use the Docker compose file with local development, set the image name to be the same as the one you built with `docker build`.
