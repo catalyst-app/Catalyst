@@ -58,3 +58,12 @@ For simplicity, we provide a starter `docker-compose.yaml` which will startup a 
 Please note that no SSL or security is provided in this docker compose configuration; **you must use a reverse proxy** like Traefik to provide SSL and other important features.  Additionally, this configuration exposes port 8081 as a database management interface; **you must not expose this port to the internet**.
 
 If you want to use the Docker compose file with local development, set the image name to be the same as the one you built with `docker build`.
+
+We provide two prebuilt packages:
+- `ghcr.io/catalyst-app/catalyst:master`, everything in the project, as abandoned
+
+Also, the following are not supported (although this is an incomplete list):
+- thumbnail generation for uploaded images
+- patreon integration for the about page
+- external resource auto-updating
+- production bundling/minification
