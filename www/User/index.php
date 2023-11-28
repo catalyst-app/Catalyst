@@ -1,6 +1,6 @@
 <?php
 
-define("ROOTDIR", "../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
+define("ROOTDIR", "/");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."src/php/initializer.php";
@@ -63,13 +63,6 @@ echo UniversalFunctions::createHeading("User Profile");
 							<?php else: ?>
 								<br>
 							<?php endif; ?>
-							<?php if (!is_null($user->getArtistPage())): ?>
-								<p class="flow-text no-margin"><?= htmlspecialchars($user->getNickname()) ?> takes commissions: <a href="<?= ROOTDIR."Artist/".$user->getArtistPage()->getUrl() ?>"><?= htmlspecialchars($user->getArtistPage()->getName()) ?></a></p>
-							<?php endif; ?>
-
-							<br>
-
-							<?= $user->getMessageButton() ?>
 
 							<br>
 
@@ -95,65 +88,6 @@ echo UniversalFunctions::createHeading("User Profile");
 				?>
 				<?php if (count($cards) === 0): ?>
 					<p class="flow-text">This user has no public characters</p>
-				<?php else: ?>
-					<div class="horizontal-scrollable-container row">
-						<?= implode("", $cards) ?>
-					</div>
-				<?php endif; ?>
-			</div>
-			<div class="divider"></div>
-			<div class="divider"></div>
-			<div class="section">
-				<h4>Wishlist</h4>
-				<?php
-				$ids = $user->getWishlistCommissionTypeIds();
-				$commissionTypes = [];
-				foreach ($ids as $id) {
-					$commissionTypes[] = new CommissionType($id);
-				}
-				$commissionTypes = array_filter($commissionTypes, function(CommissionType $type) : bool {
-					// if it shouldn't be visible, don't show it (wishlist can contain these)
-					if (!$type->isVisible()) {
-						return false;
-					}
-
-					if (User::isCurrentUserNsfw()) {
-						return true;
-					}
-
-					// if known SAFE then leave in
-					if (in_array("SAFE", $type->getAttributes())) {
-						return true;
-					}
-					// if NOT SFW and mature or explicit, say no
-					if (in_array("MATURE", $type->getAttributes()) || in_array("EXPLICIT", $type->getAttributes())) {
-						return false;
-					}
-
-					// not explicitly marked any way
-					return true;
-				});
-				$commissionTypes = array_unique($commissionTypes);
-				$cards = [];
-				foreach ($commissionTypes as $type) {
-					$cards[] = '<div class="col s8 m4 l3">'.$type->getImage()->getCard(
-						$type->getName()." by ".$type->getArtistPage()->getName(), 
-						$type->getBlurb(), 
-						true, 
-						ROOTDIR."Artist/".$type->getArtistPage()->getUrl()."/#ct-".$type->getToken(), 
-						[
-							$type->getArtistPage()->getColor(),
-							(
-								$type->isAcceptingCommissions() ||
-								$type->isAcceptingTrades() || 
-								$type->isAcceptingRequests() 
-							) ? $type->getBaseCost() : "CLOSED",
-						]
-					).'</div>';
-				}
-				?>
-				<?php if (count($cards) === 0): ?>
-					<p class="flow-text">This user has not added anything to their wishlist!</p>
 				<?php else: ?>
 					<div class="horizontal-scrollable-container row">
 						<?= implode("", $cards) ?>

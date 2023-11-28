@@ -69,3 +69,4 @@ Also, the following are not supported (although this is an incomplete list):
 - external resource auto-updating
 - production bundling/minification
 - catl.st image shortener
+- many Apache-based htaccess configuration/rewrites
