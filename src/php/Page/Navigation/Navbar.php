@@ -38,32 +38,32 @@ class Navbar {
 		/** @var array[array[string|callable,int,string|null,string,int[,string]]] */
 		$items = [
 			"all" => [
-				["Home", self::NAME, "home", ROOTDIR, self::NORMAL_LINK],
-				["Browse", self::NAME, "browse", ROOTDIR."Browse", self::NORMAL_LINK],
+				// ["Home", self::NAME, "home", ROOTDIR, self::NORMAL_LINK],
+				// ["Browse", self::NAME, "browse", ROOTDIR."Browse", self::NORMAL_LINK],
 				["About", self::NAME, "about", ROOTDIR."About", self::DROPDOWN_PARENT, "about-dropdown"],
 					["About Us", self::NAME, null, ROOTDIR."About", self::DROPDOWN_CHILD],
-					["Blog", self::NAME, null, ROOTDIR."Blog", self::DROPDOWN_CHILD],
-					["Help Center", self::NAME, null, ROOTDIR."Help", self::DROPDOWN_CHILD],
-					["Feature Board", self::NAME, null, ROOTDIR."FeatureBoard", self::DROPDOWN_CHILD],
-					["Developer Docs", self::NAME, null, ROOTDIR."Help/API", self::DROPDOWN_CHILD],
+					// ["Blog", self::NAME, null, ROOTDIR."Blog", self::DROPDOWN_CHILD],
+					// ["Help Center", self::NAME, null, ROOTDIR."Help", self::DROPDOWN_CHILD],
+					// ["Feature Board", self::NAME, null, ROOTDIR."FeatureBoard", self::DROPDOWN_CHILD],
+					// ["Developer Docs", self::NAME, null, ROOTDIR."Help/API", self::DROPDOWN_CHILD],
 					["Terms of Service", self::NAME, null, ROOTDIR."Help/ToS", self::DROPDOWN_CHILD],
 				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
 			],
-			"not_artist" => [
-				["Artist", self::NAME, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
-					["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
-				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
-			],
-			"artist" => [
-				[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
-				["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_CHILD],
-				["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
-				["Commission Types", self::NAME, null, ROOTDIR."Artist/CommissionTypes", self::DROPDOWN_CHILD],
-				[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
-			],
-			"nsfw" => [
-				// may be used for sfw toggle later
-			],
+			// "not_artist" => [
+			// 	["Artist", self::NAME, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+			// 		["Create Page", self::NAME, null, ROOTDIR."Artist/New/", self::DROPDOWN_CHILD],
+			// 	[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
+			// ],
+			// "artist" => [
+			// 	[[($isLoggedIn ? $_SESSION["user"]->getArtistPage() : null), "getNavbarDropdown"], self::CALLABLE, "artist", ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_PARENT, "artist-dropdown"],
+			// 	["My Page", self::NAME, null, ROOTDIR."Artist/".($isLoggedIn ? ($_SESSION["user"]->getArtistPage() ? $_SESSION["user"]->getArtistPage()->getUrl() : "") : null), self::DROPDOWN_CHILD],
+			// 	["Edit Page", self::NAME, null, ROOTDIR."Artist/Edit", self::DROPDOWN_CHILD],
+			// 	["Commission Types", self::NAME, null, ROOTDIR."Artist/CommissionTypes", self::DROPDOWN_CHILD],
+			// 	[null, self::NAME, null, null, self::PSUEDO_DROPDOWN_END],
+			// ],
+			// "nsfw" => [
+			// 	// may be used for sfw toggle later
+			// ],
 			"logged_in" => [
 				[[($isLoggedIn ? $_SESSION["user"] : null), "getNavbarDropdown"], self::CALLABLE, "user", ROOTDIR."Dashboard", self::DROPDOWN_PARENT, "user-dropdown"],
 					["Dashboard", self::NAME, null, ROOTDIR."Dashboard", self::DROPDOWN_CHILD],
@@ -75,7 +75,7 @@ class Navbar {
 			],
 			"logged_out" => [
 				["Login", self::NAME, "login", ROOTDIR."Login", self::NORMAL_LINK],
-				["Register", self::NAME, "register", ROOTDIR."Register", self::NORMAL_LINK],
+				// ["Register", self::NAME, "register", ROOTDIR."Register", self::NORMAL_LINK],
 			],
 		];
 
