@@ -1,5 +1,5 @@
 window.addSocialMediaChip = function(data) {
-	window.log(<?= json_encode(basename(__FILE__)) ?>, "addSocialMediaChip - new social media chip recieved from upstream, adding");
+	window.log(<?= json_encode(basename(__FILE__)) ?>, "addSocialMediaChip - new social media chip received from upstream, adding");
 	$(".modal").modal("close");
 	$(".social-chips > div").append($(data.html).html());
 }
@@ -64,7 +64,7 @@ if ($('.social-chips-editable.social-chips > div').length) {
 		for (var i = 0; i < $(".social-chips .chip:not(.draggable-mirror):visible").length; i++) {
 			result.push($($(".social-chips .chip:not(.draggable-mirror):visible")[i]).attr("data-id"));
 		}
-		
+
 		window.log(<?= json_encode(basename(__FILE__)) ?>, "sortable:stop - aggregating chip order, saving to server ("+JSON.stringify(result)+")");
 
 		var data = new FormData();

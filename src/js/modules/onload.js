@@ -42,7 +42,7 @@ U+FEFF  ZERO WIDTH NO-BREAK SPACE   foo﻿bar, size: no width (the character is 
 */
 
 ?>
-// ~))))'> 
+// ~))))'>
 //
 // What's this, a possum in the JavaScript?
 // Impossumible!
@@ -207,13 +207,13 @@ var humanFileSize = function(size) {
 		/* FORM SUBMISSION KEYS */
 		$(document).on("keydown", function(event) {
 			if (event.which === 8 && $("form").length != 0 && $(event.target).parents("form").length == 0) {
-				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown - recieved a backspace event, however there are (unfocused) forms on the page.  Suppressing...");
+				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown - received a backspace event, however there are (unfocused) forms on the page.  Suppressing...");
 				event.preventDefault();
 			}
 		});
 		$(document).on("keydown", "textarea", function(e) {
 			if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.metaKey)) {
-				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown in textarea - ctrl+enter recieved, attempting form submission");
+				window.log(<?= json_encode(basename(__FILE__)) ?>, ".on keydown in textarea - ctrl+enter received, attempting form submission");
 				$(document.activeElement.form).submit();
 			}
 		});

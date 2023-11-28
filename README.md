@@ -20,7 +20,7 @@
 
 ## Short Blurb
 
-Catalyst serves to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, recieve and track commissions, and much more.
+Catalyst served to facilitate the process of commissioning through a simple, unified, and mobile-friendly way for artists to easily list their prices, receive and track commissions, and much more.
 
 ## What Sets us Apart
 

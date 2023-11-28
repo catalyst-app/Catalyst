@@ -163,19 +163,19 @@ class DBImage extends Image {
 			$type = "get";
 			$name = substr($name, 3);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - received " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "is") === 0) {
 			$type = "is";
 			$name = substr($name, 2);
 			if (count($arguments) !== 0) {
-				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 0.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - received " . count($arguments) . " but expected 0.");
 			}
 		} elseif (strpos($name, "set") === 0) {
 			$type = "set";
 			$name = substr($name, 3);
 			if (count($arguments) !== 1) {
-				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - recieved " . count($arguments) . " but expected 1.");
+				throw new BadMethodCallException("Invalid number of parameters passed to " . __CLASS__ . "::" . $name . " - received " . count($arguments) . " but expected 1.");
 			}
 		} else {
 			throw new BadMethodCallException($name . " is not a method of " . __CLASS__);

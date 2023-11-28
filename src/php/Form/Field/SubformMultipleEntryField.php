@@ -30,7 +30,7 @@ class SubformMultipleEntryField extends AbstractField {
 	 *
 	 * Each AbstractField as defined in $fields which will be inserted through string-substitution:
 	 * "{distinguisher}" to htmlspecialchars($value)
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $displayHtml = '';
@@ -42,35 +42,35 @@ class SubformMultipleEntryField extends AbstractField {
 
 	/**
 	 * Get the fields used by the SubformMultipleEntryField
-	 * 
+	 *
 	 * @return AbstractField[]
 	 */
-	public function getFields() : array {
+	public function getFields(): array {
 		return $this->fields;
 	}
 
 	/**
 	 * Add a field to the list of ones which will be used
-	 * 
+	 *
 	 * @param AbstractField $field
 	 */
-	public function addField(AbstractField $field) : void {
+	public function addField(AbstractField $field): void {
 		$this->fields[] = $field;
 	}
 
 	/**
 	 * Empty the array of fields used by the SubformMultipleEntryField
 	 */
-	public function emptyFields() : void {
+	public function emptyFields(): void {
 		$this->fields = [];
 	}
 
 	/**
 	 * Get the HTML used to display each item
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getDisplayHtml() : string {
+	public function getDisplayHtml(): string {
 		return $this->displayHtml;
 	}
 
@@ -80,16 +80,16 @@ class SubformMultipleEntryField extends AbstractField {
 	 * @see $this->displayHtml how this HTML should be formatted
 	 * @param string $html
 	 */
-	public function setDisplayHtml(string $html) : void {
+	public function setDisplayHtml(string $html): void {
 		$this->displayHtml = $html;
 	}
 
 	/**
 	 * Get the classes added to the addition button
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getAdditionButtonClasses() : string {
+	public function getAdditionButtonClasses(): string {
 		return $this->additionButtonClasses;
 	}
 
@@ -98,16 +98,16 @@ class SubformMultipleEntryField extends AbstractField {
 	 *
 	 * @param string $additionButtonClasses
 	 */
-	public function setAdditionButtonClasses(string $additionButtonClasses) : void {
+	public function setAdditionButtonClasses(string $additionButtonClasses): void {
 		$this->additionButtonClasses = $additionButtonClasses;
 	}
 
 	/**
 	 * Return the field's HTML input
-	 * 
+	 *
 	 * @return string The HTML to display
 	 */
-	public function getHtml() : string {
+	public function getHtml(): string {
 		$str = '';
 
 		$str .= '<p';
@@ -121,16 +121,16 @@ class SubformMultipleEntryField extends AbstractField {
 
 		$str .= '<div';
 		$str .= ' class="subform-entry-container col s12"';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'"';
+		$str .= ' id="' . htmlspecialchars($this->getId()) . '"';
 		$str .= '>';
 
 		if ($this->isFieldPrefilled()) {
 			foreach ($this->getPrefilledValue() as $entry) {
 				$html = $this->getDisplayHtml();
-				$html = str_replace('data-data=""', 'data-data="'.htmlspecialchars(json_encode($entry)."").'"', $html);
+				$html = str_replace('data-data=""', 'data-data="' . htmlspecialchars(json_encode($entry) . "") . '"', $html);
 				$html = str_replace('{uniq}', htmlspecialchars(bin2hex(random_bytes(6))), $html);
 				foreach ($entry as $key => $value) {
-					$html = str_replace('{'.$key.'}', htmlspecialchars($value), $html);
+					$html = str_replace('{' . $key . '}', htmlspecialchars($value), $html);
 				}
 				$str .= $html;
 			}
@@ -139,7 +139,7 @@ class SubformMultipleEntryField extends AbstractField {
 		$str .= '</div>';
 
 		$str .= '<div';
-		$str .= ' id="'.htmlspecialchars($this->getId()).'-subform"';
+		$str .= ' id="' . htmlspecialchars($this->getId()) . '-subform"';
 		$str .= ' class="subform-form-container"';
 		$str .= '>';
 
@@ -150,11 +150,11 @@ class SubformMultipleEntryField extends AbstractField {
 
 		$str .= '<button';
 		$str .= ' type="button"';
-		$str .= ' class="btn subform-add-btn waves-effect waves-light '.htmlspecialchars($this->getAdditionButtonClasses()).'"';
+		$str .= ' class="btn subform-add-btn waves-effect waves-light ' . htmlspecialchars($this->getAdditionButtonClasses()) . '"';
 		$str .= '>';
 
 		$str .= "add";
-		
+
 		$str .= '</button>';
 
 		$str .= '</div>';
@@ -164,31 +164,31 @@ class SubformMultipleEntryField extends AbstractField {
 
 	/**
 	 * Full JS validation code, including if statement and all
-	 * 
+	 *
 	 * @return string The JS to validate the field
 	 */
-	public function getJsValidator() : string {
+	public function getJsValidator(): string {
 		return '';
 	}
 
 	/**
 	 * Return JS code to store the field's value in $formDataName
-	 * 
+	 *
 	 * @param string $formDataName The name of the FormData variable
 	 * @return string Code to use to store field in $formDataName
 	 */
-	public function getJsAggregator(string $formDataName) : string {
+	public function getJsAggregator(string $formDataName): string {
 		$str = '';
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating ").'+$('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).').length+'.json_encode(" entries of data").');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - aggregating ") . '+$(' . json_encode('#' . $this->getId()) . ').find(' . json_encode("." . self::ENTRY_ITEM) . ').length+' . json_encode(" entries of data") . ');';
 
-		$str .= 'var entries = $('.json_encode('#'.$this->getId()).').find('.json_encode(".".self::ENTRY_ITEM).');';
+		$str .= 'var entries = $(' . json_encode('#' . $this->getId()) . ').find(' . json_encode("." . self::ENTRY_ITEM) . ');';
 		$str .= 'var entry = 0;';
 		$str .= 'for (var i=0; i<entries.length; i++) {';
 
 		$str .= "entry = entries[i];";
 
-		$str .= $formDataName.'.append('.json_encode($this->getDistinguisher().'[]').', $(entry).attr("data-data"));';
+		$str .= $formDataName . '.append(' . json_encode($this->getDistinguisher() . '[]') . ', $(entry).attr("data-data"));';
 
 		$str .= '}';
 
@@ -197,40 +197,40 @@ class SubformMultipleEntryField extends AbstractField {
 
 	/**
 	 * Return JS code which should be added in the main onload closure
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getJsOnload() : string {
+	public function getJsOnload(): string {
 		$str = '';
 
-		$str .= '$(document).on("keypress", '.json_encode('#'.$this->getId().'-subform').', function(e) {';
+		$str .= '$(document).on("keypress", ' . json_encode('#' . $this->getId() . '-subform') . ', function(e) {';
 		$str .= 'if (e.keyCode == 13) {';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - enter recieved, handling and suppressing").');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - enter received, handling and suppressing") . ');';
 		$str .= 'e.preventDefault && e.preventDefault();';
 		$str .= 'e.stopPropogation && e.stopPropogation();';
 		$str .= 'e.stopImmediatePropogation && e.stopImmediatePropogation();';
-		$str .= '$('.json_encode('#'.$this->getId().'-subform'.' button').').trigger("click");';
+		$str .= '$(' . json_encode('#' . $this->getId() . '-subform' . ' button') . ').trigger("click");';
 		$str .= '}';
 		$str .= '});';
 
-		$str .= '$(document).on("click", '.json_encode('#'.$this->getId().'-subform'.' button').', function(e) {';
-		
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - subform addition button clicked, verifying fields").');';
+		$str .= '$(document).on("click", ' . json_encode('#' . $this->getId() . '-subform' . ' button') . ', function(e) {';
+
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - subform addition button clicked, verifying fields") . ');';
 
 		foreach ($this->getFields() as $field) {
 			$field->setForm($this->getForm());
 			$str .= $field->getJsValidator();
 		}
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - aggregating fields into psuedoAggregator").');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - aggregating fields into psuedoAggregator") . ');';
 
 		$str .= 'var psuedoAggregator = new FormData();';
 		foreach ($this->getFields() as $field) {
 			$str .= $field->getJsAggregator("psuedoAggregator");
 		}
 
-		$str .= 'var htmlToAdd = '.json_encode($this->getDisplayHtml()).';';
-		
+		$str .= 'var htmlToAdd = ' . json_encode($this->getDisplayHtml()) . ';';
+
 		$str .= 'var serializedData = {};';
 
 		$str .= 'var iterator = psuedoAggregator.entries();';
@@ -240,23 +240,23 @@ class SubformMultipleEntryField extends AbstractField {
 
 		$str .= 'serializedData[item.value[0]] = item.value[1];';
 		$str .= 'htmlToAdd = htmlToAdd.replace("{"+item.value[0]+"}", $("<div></div>").text(item.value[1]).html());';
-		
+
 		$str .= 'item = iterator.next();';
 		$str .= '}';
 
 		$str .= 'htmlToAdd = $(htmlToAdd);';
 		$str .= 'htmlToAdd.attr("data-data", JSON.stringify(serializedData));';
 
-		$str .= '$('.json_encode("#".$this->getId()).').append(htmlToAdd);';
+		$str .= '$(' . json_encode("#" . $this->getId()) . ').append(htmlToAdd);';
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - appending generated HTML").');';
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - rendering markdown").');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - appending generated HTML") . ');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - rendering markdown") . ');';
 
-		$str .= '$('.json_encode("#".$this->getId()).').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
+		$str .= '$(' . json_encode("#" . $this->getId()) . ').find(".raw-markdown").each(function() {renderMarkdownArea(this);});';
 
-		$str .= 'window.log('.json_encode(basename(__CLASS__)).', '.json_encode($this->getId()." - reseting form").');';
+		$str .= 'window.log(' . json_encode(basename(__CLASS__)) . ', ' . json_encode($this->getId() . " - reseting form") . ');';
 
-		$str .= '$('.json_encode('#'.$this->getId().'-subform').').find(":input").val("");';
+		$str .= '$(' . json_encode('#' . $this->getId() . '-subform') . ').find(":input").val("");';
 
 		$str .= '});';
 
@@ -265,10 +265,10 @@ class SubformMultipleEntryField extends AbstractField {
 
 	/**
 	 * Check the field's forms on the servers side
-	 * 
+	 *
 	 * @param array $requestArr Array to find the form data in
 	 */
-	public function checkServerSide(?array &$requestArr=null) : void {
+	public function checkServerSide(?array &$requestArr = null): void {
 		if (is_null($requestArr)) {
 			if ($this->getForm()->getMethod() == Form::POST) {
 				$requestArr = &$_POST;
