@@ -34,7 +34,13 @@ FROM base AS with-deps
 
   COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-  USER nobody
+  # We require UID 1000. Don't love this, but here we are.
+  RUN adduser -D -u 1000 --ingroup www-data www-data
+
+  # Make sure files/folders needed by the processes are accessable when they run under the nobody user
+  RUN chown -R www-data.www-data /var/www/html /run /var/lib/nginx /var/log/nginx
+
+  USER www-data
 
   # db
   ENV DB_HOST=mariadb
@@ -65,3 +71,5 @@ FROM base AS with-deps
   ENV TELEGRAM_CHAT=
 
   EXPOSE 8080
+
+  CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
