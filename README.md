@@ -61,6 +61,7 @@ If you want to use the Docker compose file with local development, set the image
 
 We provide two prebuilt packages:
 - `ghcr.io/catalyst-app/catalyst:master`, everything in the project, as abandoned
+- `ghcr.io/catalyst-app/catalyst:limited`, a very limited version that only allows character updates/viewing on existing users. This is being hosted for a longer period to give a chance for users to migrate away from the platform.
 
 Also, the following are not supported (although this is an incomplete list):
 - thumbnail generation for uploaded images
