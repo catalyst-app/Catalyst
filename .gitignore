@@ -44,4 +44,8 @@ scripts/tmp
 src/js/dist
 src/css/overall.min.css
 .DS_Store
+
 keys
+catalyst-keys
+catalyst-database
+catalyst-data

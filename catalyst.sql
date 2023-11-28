@@ -1291,7 +1291,7 @@ ALTER TABLE `pending_thumbnail_queue`
 -- AUTO_INCREMENT for table `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  CHANGE `ID` `ID` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 --
 -- AUTO_INCREMENT for table `staff`

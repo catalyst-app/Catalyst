@@ -53,7 +53,7 @@ Finally, there are **many** environment variables:
   - `DISCORD_BUG_WEBHOOK_TOKEN` allows sending error messages to Discord, should be format `channel-id/token`
   - `TELEGRAM_CHAT` and `TELEGRAM_TOKEN` allows sending error messages to Telegram; should be a chat ID and a bot token respectively
 
-For simplicity, we provide a starter `docker-compose.yaml` which will startup a database.  For this, you should only need to set environment variables `MARIADB_ROOT_PASSWORD` and `DB_PASSWORD`, both of which can be random values.
+For simplicity, we provide a starter `docker-compose.yaml` which will startup a database.  For this, you should only need to set environment variables `MARIADB_ROOT_PASSWORD` and `DB_PASSWORD`, both of which can be random values.  You will also need to provide `./catalyst-keys` (as described above) and `./catalyst-data` (mirroring `external_assets` in the repository).
 
 Please note that no SSL or security is provided in this docker compose configuration; **you must use a reverse proxy** like Traefik to provide SSL and other important features.  Additionally, this configuration exposes port 8081 as a database management interface; **you must not expose this port to the internet**.
 
@@ -67,3 +67,4 @@ Also, the following are not supported (although this is an incomplete list):
 - patreon integration for the about page
 - external resource auto-updating
 - production bundling/minification
+- catl.st image shortener

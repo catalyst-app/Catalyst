@@ -5,8 +5,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./catalyst-keys:/var/www/catalyst/keys"
-      - "./catalyst-data:/var/www/catalyst/external_assets"
+      - "./keys:/var/www/catalyst/keys"
+      - "./external_assets:/var/www/catalyst/external_assets"
     environment:
       - DB_HOST=mariadb
       - DB_USER=catalyst
