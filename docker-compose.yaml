@@ -7,7 +7,6 @@ services:
     volumes:
       - "./keys:/var/www/catalyst/keys"
       - "./external_assets:/var/www/catalyst/external_assets"
-      - "./www:/var/www/catalyst/www"
     environment:
       - DB_HOST=mariadb
       - DB_USER=catalyst
