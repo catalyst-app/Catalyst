@@ -1,2 +1,0 @@
-ErrorDocument 403 '{ "error": true, "http_code": 404, "error_location": "_endpoint", "message": "endpointNotFound", "data": []}'
-ErrorDocument 404 '{ "error": true, "http_code": 404, "error_location": "_endpoint", "message": "endpointNotFound", "data": []}'

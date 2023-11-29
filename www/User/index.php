@@ -1,6 +1,6 @@
 <?php
 
-define("ROOTDIR", "../".((isset($_GET["levels"]) && $_GET["levels"] == "/") ? "../" : ""));
+define("ROOTDIR", "/");
 define("REAL_ROOTDIR", "../../");
 
 require_once REAL_ROOTDIR."src/php/initializer.php";
@@ -101,7 +101,6 @@ echo UniversalFunctions::createHeading("User Profile");
 					</div>
 				<?php endif; ?>
 			</div>
-			<div class="divider"></div>
 			<div class="divider"></div>
 			<div class="section">
 				<h4>Wishlist</h4>

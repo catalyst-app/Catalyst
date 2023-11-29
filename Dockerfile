@@ -8,8 +8,8 @@ FROM trafex/php-nginx:latest AS base
 
   RUN sed -i '/\[www\]/a security.limit_extensions=.php .js .css' ${PHP_INI_DIR}/php-fpm.d/www.conf
 
-  RUN sed -i 's/upload_max_filesize\s*=.*/upload_max_filesize=10M/' ${PHP_INI_DIR}/php.ini
-  RUN sed -i 's/post_max_size\s*=.*/post_max_size=10M/' ${PHP_INI_DIR}/php.ini
+  RUN sed -i 's/upload_max_filesize\s*=.*/upload_max_filesize=25M/' ${PHP_INI_DIR}/php.ini
+  RUN sed -i 's/post_max_size\s*=.*/post_max_size=25M/' ${PHP_INI_DIR}/php.ini
   RUN sed -i 's/max_input_vars\s*=.*/max_input_vars=1000000/' ${PHP_INI_DIR}/php.ini
   RUN sed -i 's/max_file_uploads\s*=.*/max_file_uploads=1000000/' ${PHP_INI_DIR}/php.ini
 
