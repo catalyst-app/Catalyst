@@ -1,42 +1,44 @@
 services:
   catalyst:
-    image: ghcr.io/catalyst-app/catalyst:master
+    image: catl
     container_name: catalyst
     ports:
       - "8080:8080"
     volumes:
       - "./keys:/var/www/catalyst/keys"
       - "./external_assets:/var/www/catalyst/external_assets"
+      - "./www:/var/www/catalyst/www"
     environment:
-      - DB_HOST=mariadb
-      - DB_USER=catalyst
-      - DB_PASS=${DB_PASSWORD}
+      - DB_HOST=100.118.210.80
+      - DB_USER=postgres
+      - DB_PASS=postgres
 
-  mariadb:
-    container_name: mariadb
-    image: mariadb:latest
-    restart: always
-    volumes:
-      - "./catalyst-database:/var/lib/mysql"
-      - "./catalyst.sql:/docker-entrypoint-initdb.d/init.sql"
-    environment:
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-      - MARIADB_DATABASE=catalyst
-      - MARIADB_USER=catalyst
-      - MARIADB_PASSWORD=${DB_PASSWORD}
-      - MARIADB_AUTO_UPGRADE=1
 
-  adminer-maria:
-    container_name: adminer-maria
-    image: michalhosna/adminer
-    restart: unless-stopped
-    environment:
-      - ADMINER_DRIVER=server
-      - ADMINER_SERVER=mariadb
-      - ADMINER_USERNAME=root
-      - ADMINER_PASSWORD=${MARIADB_ROOT_PASSWORD}
-      - ADMINER_DB=mysql
-      - ADMINER_AUTOLOGIN=1
-      - ADMINER_NAME=[PROD] [MariaDB] Adminer
-    ports:
-      - 8081:8080
+  # mariadb:
+  #   container_name: mariadb
+  #   image: mariadb:latest
+  #   restart: always
+  #   volumes:
+  #     - "./catalyst-database:/var/lib/mysql"
+  #     - "./catalyst.sql:/docker-entrypoint-initdb.d/init.sql"
+  #   environment:
+  #     - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+  #     - MARIADB_DATABASE=catalyst
+  #     - MARIADB_USER=catalyst
+  #     - MARIADB_PASSWORD=${DB_PASSWORD}
+  #     - MARIADB_AUTO_UPGRADE=1
+
+  # adminer-maria:
+  #   container_name: adminer-maria
+  #   image: michalhosna/adminer
+  #   restart: unless-stopped
+  #   environment:
+  #     - ADMINER_DRIVER=server
+  #     - ADMINER_SERVER=mariadb
+  #     - ADMINER_USERNAME=root
+  #     - ADMINER_PASSWORD=${MARIADB_ROOT_PASSWORD}
+  #     - ADMINER_DB=mysql
+  #     - ADMINER_AUTOLOGIN=1
+  #     - ADMINER_NAME=[PROD] [MariaDB] Adminer
+  #   ports:
+  #     - 8081:8080
