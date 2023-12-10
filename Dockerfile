@@ -1,4 +1,4 @@
-FROM trafex/php-nginx:latest AS base
+FROM ghcr.io/ncovercash/docker-php-nginx:latest AS base
 
   WORKDIR /var/www/catalyst
 
