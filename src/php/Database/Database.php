@@ -31,7 +31,7 @@ class Database {
 			return;
 		}
 		self::$dbh = new PDO("mysql:host=" . Secrets::get("DB_HOST") . ";port="
-			. Secrets::get("DB_PORT") . ";dbname=" . Secrets::get("DB_NAME") . ";charset=utf8mb4", Secrets::get("DB_USER"), Secrets::get("DB_PASS"));
+			. Secrets::get("DB_PORT") . ";dbname=" . Secrets::get("DB_NAME"), Secrets::get("DB_USER"), Secrets::get("DB_PASS"));
 
 		foreach (self::getPdoAttributes() as $attr => $value) {
 			self::$dbh->setAttribute($attr, $value);
